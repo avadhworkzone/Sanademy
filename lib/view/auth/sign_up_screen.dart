@@ -32,11 +32,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
               // createAccountController.isAllFieldInput();
             },
           ),
+          SizedBox(height: 30,),
 InkWell(
     onTap: (){
       Get.updateLocale(Locale('en_US'));
     },
     child: Text('english')),
+SizedBox(height: 30,),
 InkWell(
     onTap: (){
       Get.updateLocale(Locale('ckb_KU'));

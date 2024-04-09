@@ -4,6 +4,7 @@ import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_imgae_assets.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/view/auth/sign_up_screen.dart';
+import 'package:sanademy/view/bottombar/bottom_bar.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 5),() => Get.to(()=> const SignUpScreen()));
+    Future.delayed(const Duration(seconds: 5),() => Get.to(()=> const BottomBar()));
     // TODO: implement initState
     super.initState();
   }

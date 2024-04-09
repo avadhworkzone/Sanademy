@@ -78,6 +78,10 @@ http_parser
 2.12
 file:///Users/techcureindia/.pub-cache/hosted/pub.dev/http_parser-4.0.2/
 file:///Users/techcureindia/.pub-cache/hosted/pub.dev/http_parser-4.0.2/lib/
+intl
+2.12
+file:///Users/techcureindia/.pub-cache/hosted/pub.dev/intl-0.18.1/
+file:///Users/techcureindia/.pub-cache/hosted/pub.dev/intl-0.18.1/lib/
 js
 2.19
 file:///Users/techcureindia/.pub-cache/hosted/pub.dev/js-0.6.7/
@@ -218,6 +222,10 @@ flutter
 3.2
 file:///Users/techcureindia/Downloads/flutter3.16.6/packages/flutter/
 file:///Users/techcureindia/Downloads/flutter3.16.6/packages/flutter/lib/
+flutter_localizations
+3.2
+file:///Users/techcureindia/Downloads/flutter3.16.6/packages/flutter_localizations/
+file:///Users/techcureindia/Downloads/flutter3.16.6/packages/flutter_localizations/lib/
 flutter_test
 3.2
 file:///Users/techcureindia/Downloads/flutter3.16.6/packages/flutter_test/
