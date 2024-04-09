@@ -4,6 +4,7 @@ class AppImageAssets {
 
   /// image
   static const String splashImage = '${AppConstants.baseImageAssetsPath}splashIcon.png';
+  static const String sanademaylogo = '${AppConstants.baseImageAssetsPath}sanademaylogo.png';
 
   /// icons
   static const String homeIcon = '${AppConstants.baseIconAssetsPath}homeIcon.svg';

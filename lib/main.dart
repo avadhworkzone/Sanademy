@@ -14,6 +14,8 @@ import 'package:sanademy/utils/app_theme.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/view/splashScreen/splash_screen.dart';
 
+import 'view_model/auth_controller/sign_up_controller.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -75,6 +77,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   final connectivityViewModel = Get.put(ConnectivityViewModel());
+
+  SignUpController signUpController = Get.put(SignUpController());
 }
 
 /// Create main app view builder
