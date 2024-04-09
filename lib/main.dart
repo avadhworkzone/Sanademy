@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -11,11 +10,10 @@ import 'package:sanademy/utils/app_class.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_theme.dart';
-import 'package:sanademy/utils/shared_preference_utils.dart';
+import 'package:sanademy/view/homeScreen/home_screen.dart';
 import 'package:sanademy/view/splashScreen/splash_screen.dart';
 import 'package:sanademy/view_model/otp_controller.dart';
 
-import 'view_model/sign_up_controller.dart';
 import 'view_model/sign_up_controller.dart';
 
 
@@ -74,7 +72,7 @@ class _MyAppState extends State<MyApp> {
          ),
          home: Obx(
                  () => connectivityViewModel.isOnline!=null?connectivityViewModel.isOnline!.value?
-         const SplashScreen():const Text('No Internet'):const SizedBox()),
+         const HomeScreen():const Text('No Internet'):const SizedBox()),
        );
      },
     );

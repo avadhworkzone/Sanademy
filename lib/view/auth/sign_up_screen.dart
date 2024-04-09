@@ -28,7 +28,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: commonAppBar(AppStrings.titleTxt),
+      appBar: commonAppBar(titleTxt: AppStrings.titleTxt),
       body: Padding(
         padding: EdgeInsets.only(left: 20.w, top: 30.h),
         child: Form(
@@ -65,7 +65,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     hintText: AppStrings.enterYourName,
                     pIcon: Icon(Icons.account_circle, size: 30.h),
                     validationType: ValidationTypeEnum.name,
-                    borderColor: AppColors.black,
+                    borderColor: AppColors.black.withOpacity(0.10),
                   ),
                 ),
                 SizedBox(
@@ -96,11 +96,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide:
-                              const BorderSide(color: AppColors.black)),
-                          focusedBorder: const OutlineInputBorder(
+                               BorderSide(color: AppColors.black.withOpacity(0.10),)),
+                          focusedBorder:  OutlineInputBorder(
                             borderSide: BorderSide(
                                 width:  1.0,
-                                color: AppColors.black),
+                                color: AppColors.black.withOpacity(0.10),),
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                           disabledBorder: const OutlineInputBorder(
@@ -109,10 +109,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 color: AppColors.black),
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
-                          enabledBorder: const OutlineInputBorder(
+                          enabledBorder:  OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                             borderSide: BorderSide(
-                              color:  AppColors.black,
+                              color:  AppColors.black.withOpacity(0.10),
                               width: 1.0,
                             ),
                           ),
@@ -159,16 +159,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           fontFamily: AppConstants.quicksand,
                           fontWeight: FontWeight.normal,
                         ),
-                        errorBorder:  const OutlineInputBorder(
+                        errorBorder:   OutlineInputBorder(
                             borderSide: BorderSide(color: AppColors.red)),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide:
-                            const BorderSide(color: AppColors.black)),
-                        focusedBorder: const OutlineInputBorder(
+                             BorderSide(color: AppColors.black.withOpacity(0.10),)),
+                        focusedBorder:  OutlineInputBorder(
                           borderSide: BorderSide(
                               width:  1.0,
-                              color: AppColors.black),
+                              color: AppColors.black.withOpacity(0.10),),
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         disabledBorder: const OutlineInputBorder(
@@ -177,10 +177,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               color: AppColors.black),
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
-                        enabledBorder: const OutlineInputBorder(
+                        enabledBorder:  OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           borderSide: BorderSide(
-                            color:  AppColors.black,
+                            color:  AppColors.black.withOpacity(0.10),
                             width: 1.0,
                           ),
                         ),

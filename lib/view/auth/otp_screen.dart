@@ -5,12 +5,12 @@ import 'package:pinput/pinput.dart';
 import 'package:sanademy/commonWidget/common_appbar.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
+import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/view_model/otp_controller.dart';
 import 'package:sanademy/view_model/sign_up_controller.dart';
 
-import '../../utils/app_colors.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
@@ -26,7 +26,7 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: commonAppBar(AppStrings.titleTxt),
+      appBar: commonAppBar(titleTxt: AppStrings.titleTxt),
       body: Padding(
         padding: EdgeInsets.only(top: 30.h),
         child: Form(

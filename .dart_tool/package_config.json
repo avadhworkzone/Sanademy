@@ -92,12 +92,6 @@
       "languageVersion": "2.19"
     },
     {
-      "name": "flutter_localizations",
-      "rootUri": "file:///Users/techcureindia/Downloads/flutter3.16.6/packages/flutter_localizations",
-      "packageUri": "lib/",
-      "languageVersion": "3.2"
-    },
-    {
       "name": "flutter_screenutil",
       "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/flutter_screenutil-5.9.0",
       "packageUri": "lib/",
@@ -142,12 +136,6 @@
     {
       "name": "http_parser",
       "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/http_parser-4.0.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "intl",
-      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/intl-0.18.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -254,6 +242,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "pinput",
+      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/pinput-4.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
       "name": "platform",
       "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/platform-3.1.4",
       "packageUri": "lib/",
@@ -270,6 +264,12 @@
       "rootUri": "file:///Users/techcureindia/Downloads/flutter3.16.6/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
       "languageVersion": "3.2"
+    },
+    {
+      "name": "smart_auth",
+      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/smart_auth-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
     },
     {
       "name": "source_span",
@@ -312,6 +312,12 @@
       "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/typed_data-1.3.2",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "universal_platform",
+      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/universal_platform-1.0.0+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "vector_graphics",
@@ -368,7 +374,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-04-09T11:18:02.330098Z",
+  "generated": "2024-04-09T13:04:17.555321Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }

@@ -52,9 +52,13 @@ body: Column(children: [
       regularExpression: RegularExpressionUtils.alphabetPattern,
       hintText: AppStrings.searchHere.tr,
       isValidate: true,
+      hintTextColor: AppColors.white,
       borderColor: AppColors.primaryColor,
         fillColor: AppColors.white.withOpacity(0.20),
-      pIcon: LocalAssets(imagePath: AppImageAssets.searchIcon),
+      pIcon: Padding(
+        padding:  EdgeInsets.all( 15.w),
+        child: LocalAssets(imagePath: AppImageAssets.searchIcon,),
+      ),
       onChange: (firstNameData) {
         // createAccountController.isAllFieldInput();
       },
