@@ -4,15 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sanademy/commonWidget/loading_spinner.dart';
+import 'package:sanademy/localization/translations.dart';
 import 'package:sanademy/networks/services/connectivity_service.dart';
 import 'package:sanademy/utils/app_class.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_theme.dart';
-import 'package:sanademy/utils/language.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/view/splashScreen/splash_screen.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 
 
@@ -55,17 +54,8 @@ class _MyAppState extends State<MyApp> {
              scaffoldBackgroundColor: AppColors.white, pageTransitionsTheme: const PageTransitionsTheme()),
          transitionDuration: const Duration(milliseconds: 100),
          translations: Translation(),
-         locale: Locale(SharedPreferenceUtils.getLangCode(),
-             SharedPreferenceUtils.getLanguageDes()),
-         fallbackLocale: const Locale('en'),
-         localizationsDelegates: const [
-           GlobalMaterialLocalizations.delegate,
-           GlobalWidgetsLocalizations.delegate,
-           GlobalCupertinoLocalizations.delegate,
-         ],
-         supportedLocales: const [
-           Locale('en'),
-         ],
+         locale: const Locale('en_US'),
+         fallbackLocale: const Locale('en_US'),
          builder: (context, widget) => ColoredBox(
            color: AppColors.white,
            child: NotificationListener<OverscrollIndicatorNotification>(
