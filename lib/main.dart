@@ -12,8 +12,9 @@ import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_theme.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/view/splashScreen/splash_screen.dart';
+import 'package:sanademy/view_model/otp_controller.dart';
 
-import 'view_model/auth_controller/sign_up_controller.dart';
+import 'view_model/sign_up_controller.dart';
 
 
 
@@ -79,6 +80,7 @@ class _MyAppState extends State<MyApp> {
   final connectivityViewModel = Get.put(ConnectivityViewModel());
 
   SignUpController signUpController = Get.put(SignUpController());
+  OtpController otpController = Get.put(OtpController());
 }
 
 /// Create main app view builder

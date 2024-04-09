@@ -11,7 +11,7 @@ import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_enum.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/regex.dart';
-import 'package:sanademy/view_model/auth_controller/sign_up_controller.dart';
+import 'package:sanademy/view_model/sign_up_controller.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -23,6 +23,7 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   SignUpController signUpController = Get.find<SignUpController>();
 
+  FocusNode focusNode = FocusNode();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,13 +73,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Padding(
                     padding: EdgeInsets.only(right: 15.w),
                     child: SizedBox(
-                      height: 50.h,
                       child: TextFormField(
                         onTap: () => signUpController.selectDate(context),
                         readOnly: true,
                         validator: ValidationMethod.validateDate,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         controller: signUpController.dateController,
                         decoration: InputDecoration(
+                          contentPadding:
+                              EdgeInsets.symmetric(horizontal: 15.w, vertical: 12.h),
                           hintText: AppStrings.dateFormat,
                             hintStyle: TextStyle(
                               color: AppColors.black12,
@@ -88,7 +91,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           prefixIcon:  Icon(Icons.calendar_month,size: 30.h),
                           errorBorder:  const OutlineInputBorder(
-                            borderSide: BorderSide(color: AppColors.black)),
+                            borderSide: BorderSide(color: AppColors.red)),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide:
@@ -133,11 +136,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Padding(
                   padding: EdgeInsets.only(right: 15.w),
                   child: SizedBox(
-                    height: 70.h,
+                    height: 75.h,
                     child: IntlPhoneField(
+                      focusNode: focusNode,
                       controller: signUpController.phoneController,
-                      validator: ValidationMethod.validatePhone,
+                      // validator: (val){
+                      //   print('val${val}');
+                      //   if(val.toString().isEmpty || val == null){
+                      //     return "Please enter ";
+                      //   }
+                      //   return null;
+                      // },
+                          //(val)=> ValidationMethod.validatePhone(val),
                       decoration: InputDecoration(
+                        contentPadding:
+                        EdgeInsets.symmetric(horizontal: 15.w, vertical: 12.h),
                         hintText: AppStrings.enterYourPhoneNumber,
                         hintStyle: TextStyle(
                           color: AppColors.black12,
@@ -146,7 +159,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           fontWeight: FontWeight.normal,
                         ),
                         errorBorder:  const OutlineInputBorder(
-                            borderSide: BorderSide(color: AppColors.black)),
+                            borderSide: BorderSide(color: AppColors.red)),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide:

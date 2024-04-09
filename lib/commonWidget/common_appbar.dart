@@ -13,19 +13,17 @@ AppBar commonAppBar(String titleTxt){
     backgroundColor: AppColors.primaryColor,
     automaticallyImplyLeading: false,
     centerTitle: true,
-    title: Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 80.w),
-      child: Row(
-        children: [
-           LocalAssets(imagePath: AppImageAssets.sanademaylogo,width: 35.52.w,height: 28.2.h,),
-          SizedBox(width: 10.w,),
-          CustomText(
-              titleTxt,
-            color: AppColors.white,
-            fontSize: 22.sp,
-          ),
-        ],
-      ),
+    title: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+         LocalAssets(imagePath: AppImageAssets.sanademaylogo,width: 35.52.w,height: 28.2.h,),
+        SizedBox(width: 10.w,),
+        CustomText(
+            titleTxt,
+          color: AppColors.white,
+          fontSize: 22.sp,
+        ),
+      ],
     ),
     bottom: PreferredSize(preferredSize: Size(Get.width, 20.h), child: SizedBox()),
   );

@@ -1,0 +1,1 @@
+ F:\\madvise_github\\Sanademy\\.dart_tool\\flutter_build\\ffbc420006c591d32007fbf3b6b0c6b0\\native_assets.yaml: 
