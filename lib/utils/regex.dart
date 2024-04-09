@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:sanademy/utils/app_string.dart';
 
 class RegularExpressionUtils {
@@ -77,7 +78,7 @@ class ValidationMethod {
   }
 
   static String? validateDate(value) {
-    if (value == null) {
+    if (value == null || value.isEmpty) {
       return AppStrings.dateIsRequired;
     }
     return null;
