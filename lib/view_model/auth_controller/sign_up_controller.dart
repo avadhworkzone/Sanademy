@@ -9,6 +9,7 @@ class SignUpController extends GetxController{
   TextEditingController phoneController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   DateTime selectedDate = DateTime.now();
+ bool isValidate = true;
 
   Future<void> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
