@@ -4,6 +4,7 @@ import 'package:sanademy/utils/app_string.dart';
 class RegularExpressionUtils {
 
   static String alphabetPattern = "[a-zA-Z]";
+  static String text = "^[a-zA-Z ]*\$";
 
 
   /// capitalCase is used for one capital character is requiter in string
@@ -12,7 +13,6 @@ class RegularExpressionUtils {
   /// smallCase is used for one small character is requiter in string
   var smallCase = RegExp(r'[a-z]');
 
-  static final text = RegExp("^[a-zA-Z ]*\$");
 
   /// atLeastOneNumber is used for one number is requiter in string
   var atLeastOneNumber = RegExp(r'[0-9]');
@@ -65,4 +65,30 @@ class ValidationMethod {
 
     return null;
   }
+
+  static String? validateName(value) {
+    bool regex = RegExp(RegularExpressionUtils.text).hasMatch(value);
+    if (value == null) {
+      return AppStrings.nameIsRequired;
+    }else if (!regex) {
+      return AppStrings.nameIsRequired;
+    }
+    return null;
+  }
+
+  static String? validateDate(value) {
+    if (value == null) {
+      return AppStrings.dateIsRequired;
+    }
+    return null;
+  }
+
+  static String? validatePhone(value) {
+    if (value == null) {
+      return AppStrings.numberIsRequired;
+    }
+    return null;
+  }
+
+
 }

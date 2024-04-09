@@ -109,7 +109,8 @@ class CommonTextField extends StatelessWidget {
               ? validationMessage ?? '* Required'
               : validationType == ValidationTypeEnum.email
               ? ValidationMethod.validateEmail(value)
-              : null;
+              : validationType == ValidationTypeEnum.name
+              ? ValidationMethod.validateName(value) :null;
         },
         textInputAction:
         maxLine == 4 ? TextInputAction.none : TextInputAction.done,
@@ -123,23 +124,23 @@ class CommonTextField extends StatelessWidget {
           errorBorder:  OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.black.withOpacity(0.10))),
           border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(3),
+              borderRadius: BorderRadius.circular(10),
               borderSide:
               BorderSide(color: borderColor ?? AppColors.black.withOpacity(0.10))),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
                 width: borderWidth ?? 1.0,
                 color: borderColor ?? AppColors.black.withOpacity(0.10)),
-            borderRadius: const BorderRadius.all(Radius.circular(3)),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
           disabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
                 width: borderWidth ?? 1.0,
                 color: borderColor ?? AppColors.black.withOpacity(0.10)),
-            borderRadius: const BorderRadius.all(Radius.circular(3)),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(Radius.circular(3)),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
             borderSide: BorderSide(
               color: borderColor ?? AppColors.black.withOpacity(0.10),
               width: borderWidth ?? 1.0,
