@@ -152,6 +152,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "intl_phone_field",
+      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/intl_phone_field-3.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "js",
       "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/js-0.6.7",
       "packageUri": "lib/",
@@ -184,6 +190,12 @@
     {
       "name": "nm",
       "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/nm-0.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "octo_image",
+      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/octo_image-2.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -356,7 +368,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-04-09T07:37:04.125932Z",
+  "generated": "2024-04-09T11:18:02.330098Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }

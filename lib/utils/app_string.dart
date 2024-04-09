@@ -16,6 +16,9 @@ class AppStrings {
   static String myCertificate = 'My Certificates';
   static String notification = 'Notifications';
 
+  /// home screen
+  static String searchHere = 'Search Here';
+
   ///APP ERROR MESSAGE
   static String emailIsRequired = "emailIsRequired";
   static String nameIsRequired = "emailIsRequired";

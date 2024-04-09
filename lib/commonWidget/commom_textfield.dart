@@ -37,6 +37,7 @@ class CommonTextField extends StatelessWidget {
   final VoidCallback? onTap;
   final Color? borderColor;
   final Color? hintTextColor;
+  final Color? fillColor;
   final double? borderWidth;
   final FontWeight? hintFontWeight;
   final EdgeInsetsGeometry? contentPadding;
@@ -69,6 +70,7 @@ class CommonTextField extends StatelessWidget {
     this.onTap,
     this.borderColor,
     this.hintTextColor,
+    this.fillColor,
     this.borderWidth,
     this.hintFontWeight,
     this.contentPadding,
@@ -118,6 +120,8 @@ class CommonTextField extends StatelessWidget {
         cursorColor: AppColors.black,
         decoration: InputDecoration(
           isDense: true,
+          fillColor: fillColor??AppColors.white,
+          filled: true,
           contentPadding: contentPadding ??
               EdgeInsets.symmetric(horizontal: 15.w, vertical: 17.h),
           hintText: hintText!,

@@ -14,7 +14,7 @@ import 'package:sanademy/utils/app_theme.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/view/splashScreen/splash_screen.dart';
 
-import 'view_model/auth_controller/sign_up_controller.dart';
+import 'view_model/sign_up_controller.dart';
 
 
 Future<void> main() async {
@@ -50,6 +50,7 @@ class _MyAppState extends State<MyApp> {
       designSize: AppTheme.designSize,
      builder: (context, child) {
        return GetMaterialApp(
+         // textDirection: TextDirection.rtl,
          enableLog: true,
          debugShowCheckedModeBanner: false,
          theme: ThemeData(fontFamily: AppConstants.quicksand, useMaterial3: true,

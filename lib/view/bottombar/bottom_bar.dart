@@ -6,7 +6,8 @@ import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_imgae_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
-import 'package:sanademy/viewModel/bottom_bar_view_model.dart';
+import 'package:sanademy/view/homeScreen/home_screen.dart';
+import 'package:sanademy/view_model/bottom_bar_view_model.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -19,10 +20,18 @@ class _BottomBarState extends State<BottomBar> {
 
   BottomBarViewModel bottomBarViewModel = Get.put(BottomBarViewModel());
 
+  List screenList = [
+    HomeScreen(),
+    HomeScreen(),
+    HomeScreen(),
+    HomeScreen(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: false,
+      body: screenList[bottomBarViewModel.selectedBottomIndex.value],
       bottomNavigationBar: Obx(() {
         return Container(
           // padding: Platform.isIOS
@@ -49,7 +58,7 @@ class _BottomBarState extends State<BottomBar> {
               navItem(
                   index: 1,
                   icon: AppImageAssets.myProgress,
-                  selectedIcon: AppImageAssets.myProgress,
+                  selectedIcon: AppImageAssets.selectedProgressIcon,
                   title: AppStrings.myProgress),
               navItem(
                   index: 2,
