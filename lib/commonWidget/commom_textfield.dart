@@ -126,9 +126,9 @@ class CommonTextField extends StatelessWidget {
               EdgeInsets.symmetric(horizontal: 15.w, vertical: 17.h),
           hintText: hintText!,
           errorBorder:  OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.black.withOpacity(0.10))),
+              borderSide: BorderSide(color: AppColors.red)),
           border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(10.r),
               borderSide:
               BorderSide(color: borderColor ?? AppColors.black.withOpacity(0.10))),
           focusedBorder: OutlineInputBorder(

@@ -9,8 +9,6 @@ environment:
   sdk: '>=3.2.3 <4.0.0'
 
 dependencies:
-  flutter_localizations:
-    sdk: flutter
   flutter:
     sdk: flutter
 
@@ -23,6 +21,7 @@ dependencies:
   get_storage: ^2.1.1
   intl_phone_field: ^3.2.0
   octo_image: ^2.0.0
+  pinput: ^4.0.0
 
 dev_dependencies:
   flutter_test:

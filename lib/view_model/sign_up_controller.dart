@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sanademy/view/auth/otp_screen.dart';
 
-class SignUpController extends GetxController{
-
-
+class SignUpController extends GetxController {
   TextEditingController nameController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   DateTime selectedDate = DateTime.now();
- bool isValidate = true;
+  bool isValidate = true;
 
   Future<void> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -24,10 +23,14 @@ class SignUpController extends GetxController{
     }
   }
 
-  void submitOnTap(){
-    if(formKey.currentState!.validate()){
-      print("move Otp Page===========>");
+  void submitOnTap() {
+    if (formKey.currentState!.validate() && phoneController.text.isNotEmpty) {
+      Get.to(const OtpScreen());
+      nameController.clear();
+      dateController.clear();
+      phoneController.clear();
+    }else{
+      Get.snackbar("Error!!", "Please Enter Mobile Number");
     }
   }
-
 }
