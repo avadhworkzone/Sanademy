@@ -1,8 +1,5 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:sanademy/view/auth/otp_screen.dart';
 
 class SignUpViewModel extends GetxController {
@@ -26,17 +23,15 @@ class SignUpViewModel extends GetxController {
     }
   }
 
-  void intlPhoneFiledOnChange(val){
+  void intlPhoneFiledOnChange(val) {
     update();
   }
 
   void submitOnTap() {
     isValidate.value = true;
-    if (formKey.value.currentState!.validate() && phoneController.value.text.isNotEmpty) {
+    if (formKey.value.currentState!.validate() &&
+        phoneController.value.text.isNotEmpty) {
       Get.to(const OtpScreen());
-      nameController.value.clear();
-      dateController.value.clear();
-      phoneController.value.clear();
     }
     update();
   }

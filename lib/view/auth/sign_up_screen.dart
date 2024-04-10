@@ -38,7 +38,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               children: [
                 CustomText(
                   AppStrings.register,
-                  fontSize: 22.sp,
+                  fontSize: 20.sp,
                   color: AppColors.black0E,
                   fontWeight: FontWeight.w700,
                 ),
@@ -47,7 +47,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 CustomText(
                   AppStrings.registerYourAccount,
-                  fontSize: 15.sp,
+                  fontSize: 14.sp,
                   color: AppColors.black0E,
                   fontWeight: FontWeight.w400,
                 ),
@@ -61,6 +61,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     validator: ValidationMethod.validateName,
                     regularExpression: RegularExpressionUtils.text,
                     hintText: AppStrings.enterYourName,
+                    hintFontWeight: FontWeight.w400,
                     pIcon: Icon(Icons.account_circle_rounded, size: 30.h),
                     validationType: ValidationTypeEnum.name,
                     borderColor: AppColors.black.withOpacity(0.10),
@@ -86,7 +87,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             color: AppColors.black12,
                             fontSize: 14.sp,
                             fontFamily: AppConstants.quicksand,
-                            fontWeight: FontWeight.normal,
+                            fontWeight: FontWeight.w400,
                           ),
                           prefixIcon:
                               Icon(Icons.calendar_month_rounded, size: 30.h),
@@ -143,7 +144,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             color: AppColors.black12,
                             fontSize: 14.sp,
                             fontFamily: AppConstants.quicksand,
-                            fontWeight: FontWeight.normal,
+                            fontWeight: FontWeight.w400,
                           ),
                           errorText: (signUpController.isValidate.value == true && signUpController.phoneController.value.text.isEmpty)
                               ? '* Required'
@@ -196,9 +197,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   padding: EdgeInsets.only(right: 15.w),
                   child: CustomBtn(
                     onTap: () => signUpController.submitOnTap(),
-                    fontSize: 18.sp,
+                    fontSize: 14.sp,
                     radius: 10.r,
                     title: AppStrings.submit,
+                    fontWeight: FontWeight.w700,
                   ),
                 )
               ],

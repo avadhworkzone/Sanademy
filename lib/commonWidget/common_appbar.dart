@@ -27,8 +27,8 @@ AppBar commonAppBar(
       children: [
         LocalAssets(
           imagePath: AppImageAssets.sanademaylogo,
-          width: 35.52.w,
-          height: 28.2.h,
+          width: 33.52.w,
+          height: 27.2.h,
         ),
         SizedBox(
           width: 10.w,
@@ -36,7 +36,8 @@ AppBar commonAppBar(
         CustomText(
           titleTxt,
           color: AppColors.white,
-          fontSize: 22.sp,
+          fontWeight: FontWeight.w500,
+          fontSize: 20.sp,
         ),
       ],
     ),

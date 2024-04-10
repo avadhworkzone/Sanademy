@@ -39,8 +39,8 @@ class _OtpScreenState extends State<OtpScreen> {
                   padding: EdgeInsets.only(left: 20.w),
                   child: CustomText(
                     AppStrings.otpTxt,
-                    fontSize: 22.sp,
-                    color: AppColors.black0E,
+                    fontSize: 20.sp,
+                    color: AppColors.black12,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -51,8 +51,8 @@ class _OtpScreenState extends State<OtpScreen> {
                   padding: EdgeInsets.only(left: 20.w),
                   child: CustomText(
                     AppStrings.enterOtpTxt,
-                    fontSize: 15.sp,
-                    color: AppColors.black0E,
+                    fontSize: 14.sp,
+                    color: AppColors.black12,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -67,8 +67,8 @@ class _OtpScreenState extends State<OtpScreen> {
                       children: [
                         CustomText(
                           signUpController.phoneController.value.text,
-                          fontSize: 15.sp,
-                          color: AppColors.black,
+                          fontSize: 14.sp,
+                          color: AppColors.black12,
                           fontWeight: FontWeight.w700,
                         ),
                         SizedBox(
@@ -77,7 +77,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         CustomText(
                           AppStrings.enterFourDigitOtp,
                           fontSize: 15.sp,
-                          color: AppColors.black,
+                          color: AppColors.black12,
                           fontWeight: FontWeight.w400,
                         ),
                         SizedBox(
@@ -104,16 +104,16 @@ class _OtpScreenState extends State<OtpScreen> {
                         RichText(text: TextSpan(
                           text: AppStrings.didNotGetOtp,
                           style: TextStyle(
-                            fontWeight:FontWeight.w400,
-                            fontSize: 15.sp,
-                            color: AppColors.black,
+                            fontWeight:FontWeight.w600,
+                            fontSize: 14.sp,
+                            color: AppColors.black12,
                           ),
                           children: [
                             TextSpan(
                               text: AppStrings.resendOtp,
                               style: TextStyle(
                                 fontWeight:FontWeight.w600,
-                                fontSize: 15.sp,
+                                fontSize: 14.sp,
                                 color: AppColors.primaryColor,
                               ),
                             )
@@ -126,11 +126,11 @@ class _OtpScreenState extends State<OtpScreen> {
                           padding: EdgeInsets.only(left: 15.w,right: 15.w),
                           child: CustomBtn(
                             onTap: ()=> otpController.verifyOnTap(),
-                            fontSize: 18.sp,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w700,
                             radius: 10.r,
                             title: AppStrings.verify,
                             bgColor: AppColors.primaryColor,
-                           // borderColor: AppColors.primaryColor,
                             textColor: AppColors.white,
                           ),
                         ),
@@ -141,7 +141,8 @@ class _OtpScreenState extends State<OtpScreen> {
                           padding: EdgeInsets.only(left: 15.w,right: 15.w),
                           child: CustomBtn(
                             onTap: ()=> otpController.goBackOnTap(),
-                            fontSize: 18.sp,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w700,
                             radius: 10.r,
                             bgColor: AppColors.white,
                             borderColor: AppColors.primaryColor,
