@@ -8,6 +8,8 @@ import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/regex.dart';
+import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view/bottombar/bottom_bar.dart';
 import 'package:sanademy/view_model/otp_view_model.dart';
 import 'package:sanademy/view_model/sign_up_view_model.dart';
 
@@ -32,129 +34,106 @@ class _OtpScreenState extends State<OtpScreen> {
         child: Form(
           key: otpController.formKey.value,
           child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 20.w),
-                  child: CustomText(
-                    AppStrings.otpTxt,
-                    fontSize: 20.sp,
-                    color: AppColors.black12,
-                    fontWeight: FontWeight.w700,
+            child: Center(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 22.w),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: CustomText(
+                        AppStrings.otpTxt,
+                        fontSize: 20.sp,
+                        color: AppColors.black12,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 20.w),
-                  child: CustomText(
+                SizeConfig.sH10,
+                  CustomText(
                     AppStrings.enterOtpTxt,
                     fontSize: 14.sp,
                     color: AppColors.black12,
                     fontWeight: FontWeight.w400,
                   ),
-                ),
-                SizedBox(
-                  height: 30.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Column(
+                  SizeConfig.sH30,
+                  CustomText(
+                    signUpController.phoneController.value.text,
+                    fontSize: 14.sp,
+                    color: AppColors.black12,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  SizeConfig.sH10,
+                  CustomText(
+                    AppStrings.enterFourDigitOtp,
+                    fontSize: 15.sp,
+                    color: AppColors.black12,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  SizeConfig.sH15,
+                  Pinput(
+                    validator: (val) => ValidationMethod.validateOtp(val),
+                    controller: otpController.pinPutController.value,
+                    length: 4,
+                    showCursor: true,
+                    keyboardType: TextInputType.number,
+                    defaultPinTheme: PinTheme(
+                        height: 50.h,
+                        width: 50.w,
+                        textStyle: TextStyle(fontSize: 15.sp),
+                        decoration: BoxDecoration(
+                            color: AppColors.pinputColor,
+                            borderRadius: BorderRadius.circular(10.r))),
+                    onChanged: (val) {},
+                  ),
+                  SizeConfig.sH15,
+                  RichText(text: TextSpan(
+                      text: AppStrings.didNotGetOtp,
+                      style: TextStyle(
+                        fontWeight:FontWeight.w600,
+                        fontSize: 14.sp,
+                        color: AppColors.black12,
+                      ),
                       children: [
-                        CustomText(
-                          signUpController.phoneController.value.text,
-                          fontSize: 14.sp,
-                          color: AppColors.black12,
-                          fontWeight: FontWeight.w700,
-                        ),
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                        CustomText(
-                          AppStrings.enterFourDigitOtp,
-                          fontSize: 15.sp,
-                          color: AppColors.black12,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        Pinput(
-                          validator: (val) => ValidationMethod.validateOtp(val),
-                           controller: otpController.pinPutController.value,
-                          length: 4,
-                          showCursor: true,
-                          keyboardType: TextInputType.number,
-                          defaultPinTheme: PinTheme(
-                              height: 50.h,
-                              width: 50.w,
-                              textStyle: TextStyle(fontSize: 15.sp),
-                              decoration: BoxDecoration(
-                                  color: AppColors.pinputColor,
-                                  borderRadius: BorderRadius.circular(10.r))),
-                          onChanged: (val) {},
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        RichText(text: TextSpan(
-                          text: AppStrings.didNotGetOtp,
+                        TextSpan(
+                          text: AppStrings.resendOtp,
                           style: TextStyle(
                             fontWeight:FontWeight.w600,
                             fontSize: 14.sp,
-                            color: AppColors.black12,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: AppStrings.resendOtp,
-                              style: TextStyle(
-                                fontWeight:FontWeight.w600,
-                                fontSize: 14.sp,
-                                color: AppColors.primaryColor,
-                              ),
-                            )
-                          ]
-                        )),
-                        SizedBox(
-                          height: 30.h,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 15.w,right: 15.w),
-                          child: CustomBtn(
-                            onTap: ()=> otpController.verifyOnTap(),
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w700,
-                            radius: 10.r,
-                            title: AppStrings.verify,
-                            bgColor: AppColors.primaryColor,
-                            textColor: AppColors.white,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20.h,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 15.w,right: 15.w),
-                          child: CustomBtn(
-                            onTap: ()=> otpController.goBackOnTap(),
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w700,
-                            radius: 10.r,
-                            bgColor: AppColors.white,
-                            borderColor: AppColors.primaryColor,
-                            title: AppStrings.goBack,
-                            textColor: AppColors.primaryColor,
+                            color: AppColors.primaryColor,
                           ),
                         )
-                      ],
-                    )
-                  ],
-                )
-              ],
+                      ]
+                  )),
+                  SizeConfig.sH30,
+                  CustomBtn(
+                    onTap: () {
+                      if(otpController.formKey.value.currentState!.validate()){
+                        Get.to(()=>const BottomBar());
+                      }
+                    },
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w700,
+                    radius: 10.r,
+                    title: AppStrings.verify,
+                    bgColor: AppColors.primaryColor,
+                    textColor: AppColors.white,
+                  ),
+                  SizeConfig.sH20,
+                  CustomBtn(
+                    onTap: (){
+                      Get.back();
+                    },
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w700,
+                    radius: 10.r,
+                    bgColor: AppColors.white,
+                    borderColor: AppColors.primaryColor,
+                    title: AppStrings.goBack,
+                    textColor: AppColors.primaryColor,
+                  )
+                ],
+              ),
             ),
           ),
         ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sanademy/view/auth/otp_screen.dart';
 
 class SignUpViewModel extends GetxController {
   Rx<TextEditingController> nameController = TextEditingController().obs;
@@ -17,22 +16,11 @@ class SignUpViewModel extends GetxController {
       firstDate: DateTime(1950, 8),
       lastDate: DateTime.now(),
     );
-    if (picked != null && picked != selectedDate) {
+    if (picked != null && picked != selectedDate.value) {
       String date = "${picked.month}/${picked.day}/${picked.year}";
       dateController.value.text = date;
     }
   }
 
-  void intlPhoneFiledOnChange(val) {
-    update();
-  }
 
-  void submitOnTap() {
-    isValidate.value = true;
-    if (formKey.value.currentState!.validate() &&
-        phoneController.value.text.isNotEmpty) {
-      Get.to(const OtpScreen());
-    }
-    update();
-  }
 }

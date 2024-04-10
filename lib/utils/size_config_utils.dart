@@ -4,21 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class SizeConfig {
   /// HEIGHT
   // ignore: prefer_const_constructors
-  static Widget sH05 = SizedBox(
-    height: 0.5.h,
-  );
 
-  static Widget sH015 = SizedBox(
-    height: 1.5.h,
-  );
-  static Widget sH1 = SizedBox(
-    height: 1.h,
-  );
+
 
   static Widget sH2 = SizedBox(
-    height: 2.h,
-  );
-  static Widget sH025 = SizedBox(
     height: 2.h,
   );
 
@@ -61,6 +50,15 @@ class SizeConfig {
   static Widget sH17 = SizedBox(
     height: 17.h,
   );
+  static Widget sH20 = SizedBox(
+    height: 20.h,
+  );
+  static Widget sH25 = SizedBox(
+    height: 25.h,
+  );
+  static Widget sH30 = SizedBox(
+    height: 30.h,
+  );
 
   /// WIDTH
   // ignore: prefer_const_constructors
@@ -91,4 +89,5 @@ class SizeConfig {
   static Widget sw60 = SizedBox(
     width: 60.w,
   );
+
 }
