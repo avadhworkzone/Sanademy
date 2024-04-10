@@ -22,6 +22,7 @@ dependencies:
   intl_phone_field: ^3.2.0
   octo_image: ^2.0.0
   pinput: ^4.0.0
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:

@@ -12,7 +12,8 @@ import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_enum.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/regex.dart';
-import 'package:sanademy/view_model/sign_up_controller.dart';
+import 'package:sanademy/view_model/sign_up_view_model.dart';
+
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

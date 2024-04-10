@@ -20,6 +20,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "carousel_slider",
+      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/carousel_slider-4.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "characters",
       "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/characters-1.3.0",
       "packageUri": "lib/",
@@ -374,7 +380,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-04-09T13:04:17.555321Z",
+  "generated": "2024-04-10T05:32:37.774104Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }

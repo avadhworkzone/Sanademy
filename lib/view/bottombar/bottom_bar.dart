@@ -34,11 +34,7 @@ class _BottomBarState extends State<BottomBar> {
       body: screenList[bottomBarViewModel.selectedBottomIndex.value],
       bottomNavigationBar: Obx(() {
         return Container(
-          // padding: Platform.isIOS
-          //     ? EdgeInsets.only(right: 5.w, left: 5.w, bottom: 7.w)
-          //     : EdgeInsets.only(right: 5.w, left: 5.w, bottom: 2.w),
           padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 12.w),
-          // height: Platform.isIOS ? 20.w : 15.w,
           width: Get.width,
           decoration: BoxDecoration(color: AppColors.white, boxShadow: [
             BoxShadow(
@@ -89,22 +85,6 @@ class _BottomBarState extends State<BottomBar> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
 
-          // Container(
-          //   height: 1.5.w,
-          //   width: 10.w,
-          //   decoration: BoxDecoration(
-          //       color:
-          //       // bottomViewModel.selectedBottomIndex == index
-          //       //     ? ColorUtils.redColor
-          //       //     :
-          //       Colors.white,
-          //       borderRadius:
-          //       BorderRadius.vertical(bottom: Radius.circular(10))),
-          // ),
-          // bottomViewModel.selectedBottomIndex == index
-          //     ? bottomViewModel.activeIconList[index]
-          //     :
-
           LocalAssets(
               imagePath: bottomBarViewModel.selectedBottomIndex.value == index
                   ? selectedIcon
@@ -112,7 +92,7 @@ class _BottomBarState extends State<BottomBar> {
 
           CustomText(
             title,
-            color: AppColors.black0E.withOpacity(0.30),
+            color: bottomBarViewModel.selectedBottomIndex.value == index?AppColors.color9D:AppColors.black0E.withOpacity(0.30),
             fontWeight: FontWeight.w600,
             fontSize: 12.sp,
           ),

@@ -8,8 +8,9 @@ import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/regex.dart';
-import 'package:sanademy/view_model/otp_controller.dart';
-import 'package:sanademy/view_model/sign_up_controller.dart';
+import 'package:sanademy/view_model/otp_view_model.dart';
+import 'package:sanademy/view_model/sign_up_view_model.dart';
+
 
 
 class OtpScreen extends StatefulWidget {

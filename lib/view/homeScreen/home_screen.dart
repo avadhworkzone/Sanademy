@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,8 @@ import 'package:sanademy/utils/app_imgae_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/regex.dart';
+import 'package:sanademy/view_model/home_screen_view_model.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,7 +21,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final searchController = TextEditingController();
+
+  HomeScreenViewModel homeScreenViewModel = Get.put(HomeScreenViewModel());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,14 +58,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     imgUrl:
                         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s')),
           )),
-      body: Column(
+      body: Stack(
+        alignment: Alignment.center,
         children: [
           Container(
+            height: 250.h,
+            margin: EdgeInsets.only(bottom: 80.h),
             color: AppColors.primaryColor,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.w),
+              padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 10.w),
               child: CommonTextField(
-                textEditController: searchController,
+                textEditController: homeScreenViewModel.searchController.value,
                 regularExpression: RegularExpressionUtils.alphabetPattern,
                 hintText: AppStrings.searchHere.tr,
                 isValidate: true,
@@ -68,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 borderColor: AppColors.primaryColor,
                 fillColor: AppColors.white.withOpacity(0.20),
                 pIcon: Padding(
-                  padding: EdgeInsets.all(15.w),
+                  padding: EdgeInsets.only(left:15.w,top: 15.w,bottom: 15.w,right: 7.w),
                   child: LocalAssets(
                     imagePath: AppImageAssets.searchIcon,
                   ),
@@ -79,8 +87,74 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
+      Positioned(
+        bottom: 0,
+        child: Stack(
+          children: [
+            SizedBox(
+              height: 150.w,
+              width: 350.w,
+              child: PageView.builder(
+                itemCount: _images.length,
+                onPageChanged: (index) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
+                itemBuilder: (BuildContext context, int index) {
+                  return ClipRRect(
+                    borderRadius:  BorderRadius.circular(20),
+                    child: Image.network(
+                      _images[index],
+                      fit: BoxFit.cover,
+                    ),
+                  );
+                },
+              ),
+            ),
+            Positioned(
+              left: 10,
+              bottom: 15,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: _buildIndicators(),
+              ),
+            ),
+          ],
+        ),
+      ),
         ],
       ),
     );
   }
+
+
+  final List<String> _images = [
+    "https://via.placeholder.com/300",
+    "https://via.placeholder.com/300",
+    "https://via.placeholder.com/300",
+    "https://via.placeholder.com/300"
+  ];
+
+  int _currentIndex = 0;
+  List<Widget> _buildIndicators() {
+    List<Widget> indicators = [];
+    for (int i = 0; i < _images.length; i++) {
+      indicators.add(_buildIndicator(i == _currentIndex));
+    }
+    return indicators;
+  }
+
+  Widget _buildIndicator(bool isActive) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 5.0),
+      height: 8.0,
+      width: isActive?20:8.0,
+      decoration: BoxDecoration(
+        color: isActive ? Colors.white : Colors.grey,
+        borderRadius: BorderRadius.circular(4.0),
+      ),
+    );
+  }
 }
+
