@@ -5,6 +5,7 @@ class AppImageAssets {
   /// image
   static const String splashImage = '${AppConstants.baseImageAssetsPath}splashIcon.png';
   static const String sanademaylogo = '${AppConstants.baseImageAssetsPath}sanademaylogo.png';
+  static const String noInternet = '${AppConstants.baseImageAssetsPath}noInternet.png';
 
   /// icons==========================
 

@@ -10,6 +10,7 @@ import 'package:sanademy/utils/app_class.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_theme.dart';
+import 'package:sanademy/view/general/no_internet_screen.dart';
 import 'package:sanademy/view/homeScreen/home_screen.dart';
 import 'package:sanademy/view/splashScreen/splash_screen.dart';
 import 'package:sanademy/view_model/otp_controller.dart';
@@ -72,7 +73,7 @@ class _MyAppState extends State<MyApp> {
          ),
          home: Obx(
                  () => connectivityViewModel.isOnline!=null?connectivityViewModel.isOnline!.value?
-         const HomeScreen():const Text('No Internet'):const SizedBox()),
+         const SplashScreen():const NoInterNetScreen():const SizedBox()),
        );
      },
     );
