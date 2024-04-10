@@ -18,6 +18,7 @@ import 'package:sanademy/view_model/sign_up_view_model.dart';
 
 
 
+import 'package:sanademy/view/bottombar/bottom_bar.dart';
 import 'package:sanademy/view/homeScreen/home_screen.dart';
 import 'package:sanademy/view/splashScreen/splash_screen.dart';
 import 'package:sanademy/view_model/otp_view_model.dart';

@@ -7,6 +7,7 @@ import 'package:sanademy/utils/app_imgae_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/view/homeScreen/home_screen.dart';
+import 'package:sanademy/view/my_progress_screen/my_progress_screen.dart';
 import 'package:sanademy/view_model/bottom_bar_view_model.dart';
 
 class BottomBar extends StatefulWidget {
@@ -20,20 +21,16 @@ class _BottomBarState extends State<BottomBar> {
 
   BottomBarViewModel bottomBarViewModel = Get.put(BottomBarViewModel());
 
-  List screenList = [
-    HomeScreen(),
-    HomeScreen(),
-    HomeScreen(),
-    HomeScreen(),
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: false,
-      body: screenList[bottomBarViewModel.selectedBottomIndex.value],
-      bottomNavigationBar: Obx(() {
-        return Container(
+    return Obx(
+      () =>  Scaffold(
+        extendBody: false,
+        body: bottomBarViewModel.screenList[bottomBarViewModel.selectedBottomIndex.value],
+        bottomNavigationBar: Container(
+          // padding: Platform.isIOS
+          //     ? EdgeInsets.only(right: 5.w, left: 5.w, bottom: 7.w)
+          //     : EdgeInsets.only(right: 5.w, left: 5.w, bottom: 2.w),
           padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 12.w),
           width: Get.width,
           decoration: BoxDecoration(color: AppColors.white, boxShadow: [
@@ -68,8 +65,8 @@ class _BottomBarState extends State<BottomBar> {
                   title: AppStrings.notification),
             ],
           ),
-        );
-      }),
+        ),
+      ),
     );
   }
 

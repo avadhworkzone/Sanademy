@@ -28,6 +28,8 @@ class AppImageAssets {
   static const String categoryIcon = '${AppConstants.baseIconAssetsPath}categoryIcon.svg';
 
 
+  /// my progress screen
+  static String myProgressBgImg1 = '${AppConstants.baseIconAssetsPath}myProgressBgImg1.png';
   ///NO FOUND IMAGES
 
 }

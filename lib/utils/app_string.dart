@@ -26,6 +26,9 @@ class AppStrings {
   /// home screen
   static String searchHere = 'Search Here';
 
+  /// my progress screen
+  static String progressIntroductionTxt = 'In this page, you can see all your enrolled courses and the progress that you made in each one of them.';
+
   ///APP ERROR MESSAGE
   static String emailIsRequired = "email is required";
   static String nameIsRequired = "* Required";
