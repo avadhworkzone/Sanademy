@@ -12,11 +12,8 @@ import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_theme.dart';
 import 'package:sanademy/view/homeScreen/home_screen.dart';
 import 'package:sanademy/view/splashScreen/splash_screen.dart';
-import 'package:sanademy/view_model/otp_controller.dart';
-
-import 'view_model/sign_up_controller.dart';
-
-
+import 'package:sanademy/view_model/otp_view_model.dart';
+import 'view_model/sign_up_view_model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,11 +22,11 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  runApp( MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
-   MyApp({super.key});
+  MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -49,39 +46,44 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: AppTheme.designSize,
-     builder: (context, child) {
-       return GetMaterialApp(
-         // textDirection: TextDirection.rtl,
-         enableLog: true,
-         debugShowCheckedModeBanner: false,
-         theme: ThemeData(fontFamily: AppConstants.quicksand, useMaterial3: true,
-             scaffoldBackgroundColor: AppColors.white, pageTransitionsTheme: const PageTransitionsTheme()),
-         transitionDuration: const Duration(milliseconds: 100),
-         translations: Translation(),
-         locale: const Locale('en_US'),
-         fallbackLocale: const Locale('en_US'),
-         builder: (context, widget) => ColoredBox(
-           color: AppColors.white,
-           child: NotificationListener<OverscrollIndicatorNotification>(
-             onNotification: (OverscrollIndicatorNotification overscroll) {
-               overscroll.disallowIndicator();
-               return true;
-             },
-             child: MediaQuery(data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)), child: getMainAppViewBuilder(context, widget)),
-           ),
-         ),
-         home: Obx(
-                 () => connectivityViewModel.isOnline!=null?connectivityViewModel.isOnline!.value?
-         const HomeScreen():const Text('No Internet'):const SizedBox()),
-       );
-     },
+      builder: (context, child) {
+        return GetMaterialApp(
+          // textDirection: TextDirection.rtl,
+          enableLog: true,
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+              fontFamily: AppConstants.quicksand,
+              useMaterial3: true,
+              scaffoldBackgroundColor: AppColors.white,
+              pageTransitionsTheme: const PageTransitionsTheme()),
+          transitionDuration: const Duration(milliseconds: 100),
+          translations: Translation(),
+          locale: const Locale('en_US'),
+          fallbackLocale: const Locale('en_US'),
+          builder: (context, widget) => ColoredBox(
+            color: AppColors.white,
+            child: NotificationListener<OverscrollIndicatorNotification>(
+              onNotification: (OverscrollIndicatorNotification overscroll) {
+                overscroll.disallowIndicator();
+                return true;
+              },
+              child: MediaQuery(
+                  data: MediaQuery.of(context)
+                      .copyWith(textScaler: const TextScaler.linear(1.0)),
+                  child: getMainAppViewBuilder(context, widget)),
+            ),
+          ),
+          home: Obx(() => connectivityViewModel.isOnline != null
+              ? connectivityViewModel.isOnline!.value
+                  ? const SplashScreen()
+                  : const Text('No Internet')
+              : const SizedBox()),
+        );
+      },
     );
   }
 
   final connectivityViewModel = Get.put(ConnectivityViewModel());
-
-  SignUpController signUpController = Get.put(SignUpController());
-  OtpController otpController = Get.put(OtpController());
 }
 
 /// Create main app view builder
