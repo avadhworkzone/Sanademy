@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/commom_textstyle.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
+import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/regex.dart';
 
 import '../utils/app_enum.dart';
@@ -95,7 +96,7 @@ class CommonTextField extends StatelessWidget {
             : TextCapitalization.sentences,
         inputFormatters: [
           LengthLimitingTextInputFormatter(inputLength),
-          FilteringTextInputFormatter.allow(RegExp(regularExpression)),
+          FilteringTextInputFormatter.allow(RegExp(regularExpression.tr)),
           NoLeadingSpaceFormatter(),
         ],
         obscureText: validationType == ValidationTypeEnum.password
@@ -108,7 +109,7 @@ class CommonTextField extends StatelessWidget {
           return isValidate == false
               ? null
               : value!.isEmpty
-              ? validationMessage ?? '* Required'
+              ? validationMessage?.tr ?? AppStrings.isRequired.tr
               : validationType == ValidationTypeEnum.email
               ? ValidationMethod.validateEmail(value)
               : validationType == ValidationTypeEnum.name
@@ -124,7 +125,7 @@ class CommonTextField extends StatelessWidget {
           filled: true,
           contentPadding: contentPadding ??
               EdgeInsets.symmetric(horizontal: 15.w, vertical: 17.h),
-          hintText: hintText!,
+          hintText: hintText!.tr,
           errorBorder:  OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.red),borderRadius: BorderRadius.circular(10.r)),
           border: OutlineInputBorder(
@@ -152,7 +153,7 @@ class CommonTextField extends StatelessWidget {
           ),
           prefixIcon: pIcon,
           suffixIcon: sIcon,
-          counterText: '',
+          counterText: ''.tr,
           // filled: true,
           // fillColor: ColorUtils.greyE7,
           labelStyle: TextStyle(

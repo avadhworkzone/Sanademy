@@ -41,7 +41,7 @@ class NoLeadingSpaceFormatter extends TextInputFormatter {
       final String trimedText = newValue.text.trimLeft();
 
       return TextEditingValue(
-        text: trimedText,
+        text: trimedText.tr,
         selection: TextSelection(
           baseOffset: trimedText.length,
           extentOffset: trimedText.length,
@@ -59,9 +59,9 @@ class ValidationMethod {
   static String? validateEmail(value) {
     bool regex = RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$').hasMatch(value);
     if (value == null) {
-      return AppStrings.emailIsRequired;
+      return AppStrings.emailIsRequired.tr;
     } else if (regex == false) {
-      return AppStrings.emailIsRequired;
+      return AppStrings.emailIsRequired.tr;
     }
 
     return null;
@@ -70,32 +70,32 @@ class ValidationMethod {
   static String? validateName(value) {
     bool regex = RegExp(RegularExpressionUtils.text).hasMatch(value);
     if (value == null) {
-      return AppStrings.nameIsRequired;
+      return AppStrings.isRequired.tr;
     }else if (!regex) {
-      return AppStrings.nameIsRequired;
+      return AppStrings.isRequired.tr;
     }
     return null;
   }
 
   static String? validateDate(value) {
     if (value == null || value.isEmpty) {
-      return AppStrings.dateIsRequired;
+      return AppStrings.isRequired.tr;
     }
     return null;
   }
 
   static String? validatePhone(value) {
     if (value == null || value.isEmpty) {
-      return AppStrings.numberIsRequired;
+      return AppStrings.isRequired.tr;
     }
     return null;
   }
 
   static String? validateOtp(value){
     if(value.isEmpty || value == null){
-      return AppStrings.pleaseEnterOtp;
+      return AppStrings.pleaseEnterOtp.tr;
     }if(value.length < 4){
-      return AppStrings.pleaseEnterValidOtp;
+      return AppStrings.pleaseEnterValidOtp.tr;
     }
     return null;
   }

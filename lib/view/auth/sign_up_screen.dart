@@ -72,7 +72,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(
                         horizontal: 15.w, vertical: 12.h),
-                    hintText: AppStrings.dateFormat,
+                    hintText: AppStrings.dateFormat.tr,
                     hintStyle: TextStyle(
                       color: AppColors.black12,
                       fontSize: 14.sp,
@@ -128,7 +128,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.symmetric(
                             horizontal: 15.w, vertical: 12.h),
-                        hintText: AppStrings.enterYourPhoneNumber,
+                        hintText: AppStrings.enterYourPhoneNumber.tr,
                         hintStyle: TextStyle(
                           color: AppColors.black12,
                           fontSize: 14.sp,
@@ -136,7 +136,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           fontWeight: FontWeight.w400,
                         ),
                         errorText: (signUpController.isValidate.value == true && signUpController.phoneController.value.text.isEmpty)
-                            ? '* Required'
+                            ? '* Required'.tr
                             : null,
                         errorBorder: (signUpController.isValidate.value == true && signUpController.phoneController.value.text.isEmpty)
                             ? OutlineInputBorder(

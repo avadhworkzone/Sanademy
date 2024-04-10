@@ -58,7 +58,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   ),
                   SizeConfig.sH30,
                   CustomText(
-                    signUpController.phoneController.value.text,
+                    signUpController.phoneController.value.text.tr,
                     fontSize: 14.sp,
                     color: AppColors.black12,
                     fontWeight: FontWeight.w700,
@@ -88,7 +88,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   ),
                   SizeConfig.sH15,
                   RichText(text: TextSpan(
-                      text: AppStrings.didNotGetOtp,
+                      text: AppStrings.didNotGetOtp.tr,
                       style: TextStyle(
                         fontWeight:FontWeight.w600,
                         fontSize: 14.sp,
@@ -96,7 +96,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       ),
                       children: [
                         TextSpan(
-                          text: AppStrings.resendOtp,
+                          text: AppStrings.resendOtp.tr,
                           style: TextStyle(
                             fontWeight:FontWeight.w600,
                             fontSize: 14.sp,

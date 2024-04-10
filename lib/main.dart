@@ -13,16 +13,7 @@ import 'package:sanademy/utils/app_theme.dart';
 import 'package:sanademy/view/auth/sign_up_screen.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
 import 'package:sanademy/view/general/no_internet_screen.dart';
-import 'package:sanademy/view_model/otp_view_model.dart';
-import 'package:sanademy/view_model/sign_up_view_model.dart';
-
-
-
-import 'package:sanademy/view/bottombar/bottom_bar.dart';
-import 'package:sanademy/view/homeScreen/home_screen.dart';
 import 'package:sanademy/view/splashScreen/splash_screen.dart';
-import 'package:sanademy/view_model/otp_view_model.dart';
-import 'view_model/sign_up_view_model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,32 +46,40 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: AppTheme.designSize,
-     builder: (context, child) {
-       return GetMaterialApp(
-         // textDirection: TextDirection.rtl,
-         enableLog: true,
-         debugShowCheckedModeBanner: false,
-         theme: ThemeData(fontFamily: AppConstants.quicksand, useMaterial3: true,
-             scaffoldBackgroundColor: AppColors.white, pageTransitionsTheme: const PageTransitionsTheme()),
-         transitionDuration: const Duration(milliseconds: 100),
-         translations: Translation(),
-         locale: const Locale('en_US'),
-         fallbackLocale: const Locale('en_US'),
-         builder: (context, widget) => ColoredBox(
-           color: AppColors.white,
-           child: NotificationListener<OverscrollIndicatorNotification>(
-             onNotification: (OverscrollIndicatorNotification overscroll) {
-               overscroll.disallowIndicator();
-               return true;
-             },
-             child: MediaQuery(data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)), child: getMainAppViewBuilder(context, widget)),
-           ),
-         ),
-         home: Obx(
-                 () => connectivityViewModel.isOnline!=null?connectivityViewModel.isOnline!.value?
-         const SignUpScreen():const NoInterNetScreen():const SizedBox()),
-       );
-     },
+      builder: (context, child) {
+        return GetMaterialApp(
+          // textDirection: TextDirection.rtl,
+          enableLog: true,
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+              fontFamily: AppConstants.quicksand,
+              useMaterial3: true,
+              scaffoldBackgroundColor: AppColors.white,
+              pageTransitionsTheme: const PageTransitionsTheme()),
+          transitionDuration: const Duration(milliseconds: 100),
+          translations: Translation(),
+          locale: const Locale('en_US'),
+          fallbackLocale: const Locale('en_US'),
+          builder: (context, widget) => ColoredBox(
+            color: AppColors.white,
+            child: NotificationListener<OverscrollIndicatorNotification>(
+              onNotification: (OverscrollIndicatorNotification overscroll) {
+                overscroll.disallowIndicator();
+                return true;
+              },
+              child: MediaQuery(
+                  data: MediaQuery.of(context)
+                      .copyWith(textScaler: const TextScaler.linear(1.0)),
+                  child: getMainAppViewBuilder(context, widget)),
+            ),
+          ),
+          home: Obx(() => connectivityViewModel.isOnline != null
+              ? connectivityViewModel.isOnline!.value
+                  ? const SplashScreen()
+                  : const NoInterNetScreen()
+              : const SizedBox()),
+        );
+      },
     );
   }
 

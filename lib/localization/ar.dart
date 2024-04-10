@@ -1,0 +1,41 @@
+
+import 'package:sanademy/utils/app_string.dart';
+
+Map<String, String> ar = {
+
+  /// create account screen
+  AppStrings.enterYourName: 'ناوت چی یە؟',
+  AppStrings.titleTxt: 'أكاديمية سناء',
+  AppStrings.register: 'يسجل',
+  AppStrings.registerYourAccount: 'سجل حسابك وابدأ رحلتك التعليمية!',
+  AppStrings.dateFormat: 'سمم/ي ي/س س س س',
+  AppStrings.enterYourPhoneNumber: 'أدخل رقم هاتفك',
+  AppStrings.submit: 'يُقدِّم',
+  AppStrings.otpTxt: 'التحقق من OTP',
+  AppStrings.enterOtpTxt: 'الرجاء إدخال رمز التحقق المرسل إلى رقمك',
+  AppStrings.enterFourDigitOtp: 'أدخل كلمة مرور لمرة واحدة (OTP) مكونة من 4 أرقام',
+  AppStrings.didNotGetOtp: 'لم تحصل على OTP؟',
+  AppStrings.resendOtp: 'إعادة إرسال كلمة المرور لمرة واحدة',
+  AppStrings.verify: 'يؤكد',
+  AppStrings.goBack: 'عُد',
+
+
+  /// bottom bar
+  AppStrings.home: "بيت",
+  AppStrings.myProgress: "تقدمي",
+  AppStrings.myCertificate: "شهاداتي",
+  AppStrings.notification: "إشعارات",
+
+  /// home screen
+  AppStrings.searchHere: "ابحث هنا",
+  AppStrings.categories: "فئات",
+
+  /// my progress screen
+  AppStrings.progressIntroductionTxt: "في هذه الصفحة، يمكنك رؤية جميع الدورات التي قمت بالتسجيل فيها والتقدم الذي أحرزته في كل منها.",
+
+
+  ///APP ERROR MESSAGE
+  AppStrings.isRequired: '* مطلوب',
+  AppStrings.pleaseEnterOtp: 'الرجاء إدخال كلمة المرور',
+  AppStrings.pleaseEnterValidOtp: 'الرجاء إدخال كلمة مرور صالحة',
+};

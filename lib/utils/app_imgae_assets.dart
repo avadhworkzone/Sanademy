@@ -24,6 +24,7 @@ class AppImageAssets {
 
   static String searchIcon = "${AppConstants.baseIconAssetsPath}searchIcon.svg";
 
+
   /// home screen
   static const String categoryIcon = '${AppConstants.baseIconAssetsPath}categoryIcon.svg';
 

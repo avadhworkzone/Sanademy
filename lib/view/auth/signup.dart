@@ -41,9 +41,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
           SizedBox(height: 30,),
           InkWell(
               onTap: (){
-                Get.updateLocale(Locale('ckb_KU'));
+                Get.updateLocale(Locale('ar'));
               },
-              child: Text('kurdish')),
+              child: Text('arabian')),
 
         ],
       ),
