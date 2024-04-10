@@ -12,7 +12,6 @@ import 'package:sanademy/view_model/otp_view_model.dart';
 import 'package:sanademy/view_model/sign_up_view_model.dart';
 
 
-
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
 
@@ -21,8 +20,8 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
-  SignUpController signUpController = Get.find<SignUpController>();
-  OtpController otpController = Get.find<OtpController>();
+  OtpController otpController = Get.put(OtpController());
+  SignUpViewModel signUpController = Get.find<SignUpViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,7 @@ class _OtpScreenState extends State<OtpScreen> {
       body: Padding(
         padding: EdgeInsets.only(top: 30.h),
         child: Form(
-          key: otpController.formKey,
+          key: otpController.formKey.value,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,8 +39,8 @@ class _OtpScreenState extends State<OtpScreen> {
                   padding: EdgeInsets.only(left: 20.w),
                   child: CustomText(
                     AppStrings.otpTxt,
-                    fontSize: 22.sp,
-                    color: AppColors.black,
+                    fontSize: 20.sp,
+                    color: AppColors.black12,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -52,8 +51,8 @@ class _OtpScreenState extends State<OtpScreen> {
                   padding: EdgeInsets.only(left: 20.w),
                   child: CustomText(
                     AppStrings.enterOtpTxt,
-                    fontSize: 15.sp,
-                    color: AppColors.black,
+                    fontSize: 14.sp,
+                    color: AppColors.black12,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -67,9 +66,9 @@ class _OtpScreenState extends State<OtpScreen> {
                     Column(
                       children: [
                         CustomText(
-                          signUpController.phoneController.text,
-                          fontSize: 15.sp,
-                          color: AppColors.black,
+                          signUpController.phoneController.value.text,
+                          fontSize: 14.sp,
+                          color: AppColors.black12,
                           fontWeight: FontWeight.w700,
                         ),
                         SizedBox(
@@ -78,7 +77,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         CustomText(
                           AppStrings.enterFourDigitOtp,
                           fontSize: 15.sp,
-                          color: AppColors.black,
+                          color: AppColors.black12,
                           fontWeight: FontWeight.w400,
                         ),
                         SizedBox(
@@ -86,7 +85,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         ),
                         Pinput(
                           validator: (val) => ValidationMethod.validateOtp(val),
-                           controller: otpController.pinPutController,
+                           controller: otpController.pinPutController.value,
                           length: 4,
                           showCursor: true,
                           keyboardType: TextInputType.number,
@@ -105,16 +104,16 @@ class _OtpScreenState extends State<OtpScreen> {
                         RichText(text: TextSpan(
                           text: AppStrings.didNotGetOtp,
                           style: TextStyle(
-                            fontWeight:FontWeight.w400,
-                            fontSize: 15.sp,
-                            color: AppColors.black,
+                            fontWeight:FontWeight.w600,
+                            fontSize: 14.sp,
+                            color: AppColors.black12,
                           ),
                           children: [
                             TextSpan(
                               text: AppStrings.resendOtp,
                               style: TextStyle(
                                 fontWeight:FontWeight.w600,
-                                fontSize: 15.sp,
+                                fontSize: 14.sp,
                                 color: AppColors.primaryColor,
                               ),
                             )
@@ -123,42 +122,33 @@ class _OtpScreenState extends State<OtpScreen> {
                         SizedBox(
                           height: 30.h,
                         ),
-                        GetBuilder<OtpController>(
-                          id: 'IsTap',
-                          builder: (context) {
-                            return Padding(
-                              padding: EdgeInsets.only(left: 15.w,right: 15.w),
-                              child: CustomBtn(
-                                onTap: ()=> otpController.verifyOnTap(),
-                                fontSize: 18.sp,
-                                radius: 10.r,
-                                title: AppStrings.verify,
-                                bgColor: AppColors.primaryColor,
-                               // borderColor: AppColors.primaryColor,
-                                textColor: AppColors.white,
-                              ),
-                            );
-                          }
+                        Padding(
+                          padding: EdgeInsets.only(left: 15.w,right: 15.w),
+                          child: CustomBtn(
+                            onTap: ()=> otpController.verifyOnTap(),
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w700,
+                            radius: 10.r,
+                            title: AppStrings.verify,
+                            bgColor: AppColors.primaryColor,
+                            textColor: AppColors.white,
+                          ),
                         ),
                         SizedBox(
                           height: 20.h,
                         ),
-                        GetBuilder<OtpController>(
-                          id: 'IsTap',
-                          builder: (context) {
-                            return Padding(
-                              padding: EdgeInsets.only(left: 15.w,right: 15.w),
-                              child: CustomBtn(
-                                onTap: ()=> otpController.goBackOnTap(),
-                                fontSize: 18.sp,
-                                radius: 10.r,
-                                bgColor: AppColors.white,
-                                borderColor: AppColors.primaryColor,
-                                title: AppStrings.goBack,
-                                textColor: AppColors.primaryColor,
-                              ),
-                            );
-                          }
+                        Padding(
+                          padding: EdgeInsets.only(left: 15.w,right: 15.w),
+                          child: CustomBtn(
+                            onTap: ()=> otpController.goBackOnTap(),
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w700,
+                            radius: 10.r,
+                            bgColor: AppColors.white,
+                            borderColor: AppColors.primaryColor,
+                            title: AppStrings.goBack,
+                            textColor: AppColors.primaryColor,
+                          ),
                         )
                       ],
                     )

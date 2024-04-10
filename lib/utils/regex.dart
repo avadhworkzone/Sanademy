@@ -85,7 +85,6 @@ class ValidationMethod {
   }
 
   static String? validatePhone(value) {
-    print("sdasdas=====>$value");
     if (value == null || value.isEmpty) {
       return AppStrings.numberIsRequired;
     }

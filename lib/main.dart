@@ -17,6 +17,10 @@ import 'package:sanademy/view_model/sign_up_view_model.dart';
 
 
 
+import 'package:sanademy/view/homeScreen/home_screen.dart';
+import 'package:sanademy/view/splashScreen/splash_screen.dart';
+import 'package:sanademy/view_model/otp_view_model.dart';
+import 'view_model/sign_up_view_model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,11 +29,11 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  runApp( MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
-   MyApp({super.key});
+  MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -79,9 +83,6 @@ class _MyAppState extends State<MyApp> {
   }
 
   final connectivityViewModel = Get.put(ConnectivityViewModel());
-
-  SignUpController signUpController = Get.put(SignUpController());
-  OtpController otpController = Get.put(OtpController());
 }
 
 /// Create main app view builder
