@@ -5,8 +5,6 @@ class SizeConfig {
   /// HEIGHT
   // ignore: prefer_const_constructors
 
-
-
   static Widget sH2 = SizedBox(
     height: 2.h,
   );
@@ -83,11 +81,13 @@ class SizeConfig {
   static Widget sW10 = SizedBox(
     width: 10.w,
   );
+  static Widget sW20 = SizedBox(
+    width: 20.w,
+  );
   static Widget sw65 = SizedBox(
     width: 65.w,
   );
   static Widget sw60 = SizedBox(
     width: 60.w,
   );
-
 }

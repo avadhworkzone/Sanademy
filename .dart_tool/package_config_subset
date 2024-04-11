@@ -82,6 +82,10 @@ http_parser
 2.12
 file:///Users/techcureindia/.pub-cache/hosted/pub.dev/http_parser-4.0.2/
 file:///Users/techcureindia/.pub-cache/hosted/pub.dev/http_parser-4.0.2/lib/
+intl
+3.0
+file:///Users/techcureindia/.pub-cache/hosted/pub.dev/intl-0.19.0/
+file:///Users/techcureindia/.pub-cache/hosted/pub.dev/intl-0.19.0/lib/
 intl_phone_field
 2.12
 file:///Users/techcureindia/.pub-cache/hosted/pub.dev/intl_phone_field-3.2.0/
@@ -182,6 +186,14 @@ string_scanner
 2.18
 file:///Users/techcureindia/.pub-cache/hosted/pub.dev/string_scanner-1.2.0/
 file:///Users/techcureindia/.pub-cache/hosted/pub.dev/string_scanner-1.2.0/lib/
+syncfusion_flutter_core
+2.17
+file:///Users/techcureindia/.pub-cache/hosted/pub.dev/syncfusion_flutter_core-25.1.39/
+file:///Users/techcureindia/.pub-cache/hosted/pub.dev/syncfusion_flutter_core-25.1.39/lib/
+syncfusion_flutter_sliders
+2.17
+file:///Users/techcureindia/.pub-cache/hosted/pub.dev/syncfusion_flutter_sliders-25.1.39/
+file:///Users/techcureindia/.pub-cache/hosted/pub.dev/syncfusion_flutter_sliders-25.1.39/lib/
 term_glyph
 2.12
 file:///Users/techcureindia/.pub-cache/hosted/pub.dev/term_glyph-1.2.1/

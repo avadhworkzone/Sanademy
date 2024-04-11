@@ -5,6 +5,7 @@ import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_imgae_assets.dart';
 import 'package:sanademy/utils/local_assets.dart';
+import 'package:sanademy/utils/size_config_utils.dart';
 
 AppBar commonAppBar(
     {required String titleTxt,
@@ -45,5 +46,56 @@ AppBar commonAppBar(
         ? null
         : PreferredSize(
             preferredSize: Size(Get.width, 20.h), child: SizedBox()),
+  );
+}
+
+commonBackArrowAppBar({
+  required String titleTxt,
+  String? actionTitle,
+  bool leadingWidget = true,
+  bool actionWidget = true,
+}) {
+  return Padding(
+    padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.w),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        leadingWidget == true
+            ? Container(
+                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
+                decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                          color: AppColors.black.withOpacity(0.10),
+                          blurRadius: 20)
+                    ],
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.circular(17)),
+                child: const Icon(
+                  Icons.arrow_back,
+                  color: AppColors.black0E,
+                ),
+              )
+            : SizedBox(
+                width: 50.w,
+              ),
+        CustomText(
+          titleTxt,
+          color: AppColors.black0E,
+          fontWeight: FontWeight.w700,
+          fontSize: 20.sp,
+        ),
+        actionWidget == true
+            ? CustomText(
+                actionTitle ?? '',
+                color: AppColors.color8B,
+                fontWeight: FontWeight.w500,
+              )
+            : SizedBox(
+                width: 50.w,
+              )
+      ],
+    ),
   );
 }

@@ -6,8 +6,6 @@ import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_imgae_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
-import 'package:sanademy/view/homeScreen/home_screen.dart';
-import 'package:sanademy/view/my_progress_screen/my_progress_screen.dart';
 import 'package:sanademy/view_model/bottom_bar_view_model.dart';
 
 class BottomBar extends StatefulWidget {
