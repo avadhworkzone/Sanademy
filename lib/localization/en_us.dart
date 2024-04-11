@@ -28,6 +28,8 @@ Map<String, String> en = {
   /// home screen
   AppStrings.searchHere: "Search Here",
   AppStrings.categories: "Categories",
+  AppStrings.recommended: "Recommended",
+  AppStrings.viewAll: "View All",
 
   /// my progress screen
   AppStrings.progressIntroductionTxt: "In this page, you can see all your enrolled courses and the progress that you made in each one of them.",

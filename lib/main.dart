@@ -47,6 +47,7 @@ class _MyAppState extends State<MyApp> {
       designSize: AppTheme.designSize,
       builder: (context, child) {
         return DevicePreview(
+          enabled: false,
           builder: (context) =>  GetMaterialApp(
             // textDirection: TextDirection.rtl,
             enableLog: true,
