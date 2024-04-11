@@ -8,11 +8,11 @@ import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/regex.dart';
+import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
 import 'package:sanademy/view_model/otp_view_model.dart';
 import 'package:sanademy/view_model/sign_up_view_model.dart';
-
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
@@ -49,7 +49,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       ),
                     ),
                   ),
-                SizeConfig.sH10,
+                  SizeConfig.sH10,
                   CustomText(
                     AppStrings.enterOtpTxt,
                     fontSize: 14.sp,
@@ -87,29 +87,31 @@ class _OtpScreenState extends State<OtpScreen> {
                     onChanged: (val) {},
                   ),
                   SizeConfig.sH15,
-                  RichText(text: TextSpan(
-                      text: AppStrings.didNotGetOtp.tr,
-                      style: TextStyle(
-                        fontWeight:FontWeight.w600,
-                        fontSize: 14.sp,
-                        color: AppColors.black12,
-                      ),
-                      children: [
+                  RichText(
+                      text: TextSpan(
+                          text: AppStrings.didNotGetOtp.tr,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14.sp,
+                            color: AppColors.black12,
+                          ),
+                          children: [
                         TextSpan(
                           text: AppStrings.resendOtp.tr,
                           style: TextStyle(
-                            fontWeight:FontWeight.w600,
+                            fontWeight: FontWeight.w600,
                             fontSize: 14.sp,
                             color: AppColors.primaryColor,
                           ),
                         )
-                      ]
-                  )),
+                      ])),
                   SizeConfig.sH30,
                   CustomBtn(
-                    onTap: () {
-                      if(otpController.formKey.value.currentState!.validate()){
-                        Get.to(()=>const BottomBar());
+                    onTap: () async {
+                      if (otpController.formKey.value.currentState!
+                          .validate()) {
+                        await SharedPreferenceUtils.setIsLogin(true);
+                        Get.to(() => const BottomBar());
                       }
                     },
                     fontSize: 14.sp,
@@ -121,7 +123,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   ),
                   SizeConfig.sH20,
                   CustomBtn(
-                    onTap: (){
+                    onTap: () {
                       Get.back();
                     },
                     fontSize: 14.sp,

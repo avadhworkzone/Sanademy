@@ -10,8 +10,10 @@ import 'package:sanademy/utils/app_class.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_theme.dart';
+import 'package:sanademy/view/bottombar/bottom_bar.dart';
 import 'package:sanademy/view/examScreen/exam_screen.dart';
 import 'package:sanademy/view/general/no_internet_screen.dart';
+import 'package:sanademy/view/splashScreen/splash_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -73,7 +75,7 @@ class _MyAppState extends State<MyApp> {
           ),
           home: Obx(() => connectivityViewModel.isOnline != null
               ? connectivityViewModel.isOnline!.value
-                  ? const ExamScreen()
+                  ? const SplashScreen()
                   : const NoInterNetScreen()
               : const SizedBox()),
         );

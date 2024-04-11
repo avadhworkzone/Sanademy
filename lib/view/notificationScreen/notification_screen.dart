@@ -45,12 +45,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           Column(
                             children: [
                               CircleAvatar(
-                                radius: 25.w,
+                                radius: 20.w,
                                 backgroundColor: AppColors.colorA8,
                                 child: LocalAssets(
                                     imagePath: index.isOdd
                                         ? AppImageAssets.updateIcon
-                                        : AppImageAssets.alertIcon),
+                                        : AppImageAssets.alertIcon,
+                                    height: 20.w),
                               )
                             ],
                           ),

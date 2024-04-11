@@ -17,13 +17,13 @@ class AppImageAssets {
   static const String myProgress =
       '${AppConstants.baseIconAssetsPath}myProgressIcon.svg';
   static const String myCertificate =
-      '${AppConstants.baseIconAssetsPath}myCertificateIcon.svg';
+      '${AppConstants.baseIconAssetsPath}Vector.svg';
   static const String notification =
       '${AppConstants.baseIconAssetsPath}notificationIcon.svg';
   static const String selectedHomeIcon =
       '${AppConstants.baseIconAssetsPath}selectedHomeIcon.svg';
   static const String selectedCertificateIcon =
-      '${AppConstants.baseIconAssetsPath}selectedCertificateIcon.svg';
+      '${AppConstants.baseIconAssetsPath}Vector (1).svg';
   static const String selectedNotificationIcon =
       '${AppConstants.baseIconAssetsPath}selectedNotificationIcon.svg';
   static const String selectedProgressIcon =

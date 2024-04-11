@@ -16,15 +16,15 @@ class BottomBar extends StatefulWidget {
 }
 
 class _BottomBarState extends State<BottomBar> {
-
   BottomBarViewModel bottomBarViewModel = Get.put(BottomBarViewModel());
 
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () =>  Scaffold(
+      () => Scaffold(
         extendBody: false,
-        body: bottomBarViewModel.screenList[bottomBarViewModel.selectedBottomIndex.value],
+        body: bottomBarViewModel
+            .screenList[bottomBarViewModel.selectedBottomIndex.value],
         bottomNavigationBar: Container(
           // padding: Platform.isIOS
           //     ? EdgeInsets.only(right: 5.w, left: 5.w, bottom: 7.w)
@@ -69,29 +69,34 @@ class _BottomBarState extends State<BottomBar> {
   }
 
   Widget navItem(
-      {required int index, required String icon, required String selectedIcon, required String title}) {
+      {required int index,
+      required String icon,
+      required String selectedIcon,
+      required String title}) {
     return InkWell(
       onTap: () {
-          bottomBarViewModel.selectedBottomIndex.value = index;
+        bottomBarViewModel.selectedBottomIndex.value = index;
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-
           LocalAssets(
-              imagePath: bottomBarViewModel.selectedBottomIndex.value == index
-                  ? selectedIcon
-                  : icon, height: 30.w),
-
+            imagePath: bottomBarViewModel.selectedBottomIndex.value == index
+                ? selectedIcon
+                : icon,
+            height: 25.w,
+            width: 25.w,
+          ),
           CustomText(
             title,
-            color: bottomBarViewModel.selectedBottomIndex.value == index?AppColors.color9D:AppColors.black0E.withOpacity(0.30),
+            color: bottomBarViewModel.selectedBottomIndex.value == index
+                ? AppColors.color9D
+                : AppColors.black0E.withOpacity(0.30),
             fontWeight: FontWeight.w600,
             fontSize: 12.sp,
           ),
-
         ],
       ),
     );
