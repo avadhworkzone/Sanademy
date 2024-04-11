@@ -36,6 +36,9 @@ class AppStrings {
   static String requirements = 'Requirements';
   static String whatWillYouLearn = 'What will you learn?';
   static String whoThisCourseIsFor = 'Who this course is for?';
+  static String getMoreCertificate = 'Get More Certificates';
+  static String downloadPDF = 'Download PDF';
+  static String requestHartCopy = 'Request Hard Copy';
 
   /// my progress screen
   static String progressIntroductionTxt = 'In this page, you can see all your enrolled courses and the progress that you made in each one of them.';
