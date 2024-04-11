@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,8 +12,6 @@ import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_theme.dart';
 import 'package:sanademy/view/examScreen/exam_screen.dart';
 import 'package:sanademy/view/general/no_internet_screen.dart';
-import 'package:sanademy/view/myProgressScreen/my_progress_screen.dart';
-import 'package:sanademy/view/notificationScreen/notification_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
