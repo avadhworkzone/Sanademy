@@ -39,6 +39,9 @@ Map<String, String> ar = {
   AppStrings.requirements: "متطلبات",
   AppStrings.whatWillYouLearn: "ما سوف تتعلم؟",
   AppStrings.whoThisCourseIsFor: "لمن هذه الدورة؟",
+  AppStrings.getMoreCertificate: "احصل على المزيد من الشهادات",
+  AppStrings.downloadPDF: "تحميل PDF",
+  AppStrings.requestHartCopy: "طلب نسخة ورقية",
 
   /// my progress screen
   AppStrings.progressIntroductionTxt: "في هذه الصفحة، يمكنك رؤية جميع الدورات التي قمت بالتسجيل فيها والتقدم الذي أحرزته في كل منها.",

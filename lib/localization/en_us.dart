@@ -38,6 +38,9 @@ Map<String, String> en = {
   AppStrings.requirements: "Requirements",
   AppStrings.whatWillYouLearn: "What will you learn?",
   AppStrings.whoThisCourseIsFor: "Who this course is for?",
+  AppStrings.getMoreCertificate: "Get More Certificates",
+  AppStrings.downloadPDF: "Download PDF",
+  AppStrings.requestHartCopy: "Request Hard Copy",
 
 
   /// my progress screen
