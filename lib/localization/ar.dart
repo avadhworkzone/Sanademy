@@ -32,6 +32,14 @@ Map<String, String> ar = {
   AppStrings.recommended: "مُستَحسَن",
   AppStrings.viewAll: "عرض الكل",
 
+  /// sub screen of home screen
+  AppStrings.mathematics: "الرياضيات",
+  AppStrings.enrollNow: "تسجيل الآن",
+  AppStrings.description: "وصف",
+  AppStrings.requirements: "متطلبات",
+  AppStrings.whatWillYouLearn: "ما سوف تتعلم؟",
+  AppStrings.whoThisCourseIsFor: "لمن هذه الدورة؟",
+
   /// my progress screen
   AppStrings.progressIntroductionTxt: "في هذه الصفحة، يمكنك رؤية جميع الدورات التي قمت بالتسجيل فيها والتقدم الذي أحرزته في كل منها.",
 
