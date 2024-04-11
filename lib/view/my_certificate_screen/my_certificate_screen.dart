@@ -38,7 +38,7 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                 itemBuilder: (context, index) => Padding(
                   padding: EdgeInsets.only(bottom: 15.h),
                   child: Container(
-                    height: 234.6.h,
+                    height: 200.6.h,
                     width: 390.w,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.r),
