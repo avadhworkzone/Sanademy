@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,11 +21,11 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -45,37 +46,39 @@ class _MyAppState extends State<MyApp> {
     return ScreenUtilInit(
       designSize: AppTheme.designSize,
       builder: (context, child) {
-        return GetMaterialApp(
-          // textDirection: TextDirection.rtl,
-          enableLog: true,
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-              fontFamily: AppConstants.quicksand,
-              useMaterial3: true,
-              scaffoldBackgroundColor: AppColors.white,
-              pageTransitionsTheme: const PageTransitionsTheme()),
-          transitionDuration: const Duration(milliseconds: 100),
-          translations: Translation(),
-          locale: const Locale('en_US'),
-          fallbackLocale: const Locale('en_US'),
-          builder: (context, widget) => ColoredBox(
-            color: AppColors.white,
-            child: NotificationListener<OverscrollIndicatorNotification>(
-              onNotification: (OverscrollIndicatorNotification overscroll) {
-                overscroll.disallowIndicator();
-                return true;
-              },
-              child: MediaQuery(
-                  data: MediaQuery.of(context)
-                      .copyWith(textScaler: const TextScaler.linear(1.0)),
-                  child: getMainAppViewBuilder(context, widget)),
+        return DevicePreview(
+          builder: (context) =>  GetMaterialApp(
+            // textDirection: TextDirection.rtl,
+            enableLog: true,
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+                fontFamily: AppConstants.quicksand,
+                useMaterial3: true,
+                scaffoldBackgroundColor: AppColors.white,
+                pageTransitionsTheme: const PageTransitionsTheme()),
+            transitionDuration: const Duration(milliseconds: 100),
+            translations: Translation(),
+            locale: const Locale('en_US'),
+            fallbackLocale: const Locale('en_US'),
+            builder: (context, widget) => ColoredBox(
+              color: AppColors.white,
+              child: NotificationListener<OverscrollIndicatorNotification>(
+                onNotification: (OverscrollIndicatorNotification overscroll) {
+                  overscroll.disallowIndicator();
+                  return true;
+                },
+                child: MediaQuery(
+                    data: MediaQuery.of(context)
+                        .copyWith(textScaler: const TextScaler.linear(1.0)),
+                    child: getMainAppViewBuilder(context, widget)),
+              ),
             ),
+            home: Obx(() => connectivityViewModel.isOnline != null
+                ? connectivityViewModel.isOnline!.value
+                    ? const SplashScreen()
+                    : const NoInterNetScreen()
+                : const SizedBox()),
           ),
-          home: Obx(() => connectivityViewModel.isOnline != null
-              ? connectivityViewModel.isOnline!.value
-                  ? const SplashScreen()
-                  : const NoInterNetScreen()
-              : const SizedBox()),
         );
       },
     );
