@@ -10,9 +10,7 @@ class AppColors {
   static const Color pinputColor = Color(0xffF2F2F2);
   static const Color black0E = Color(0xff0E0E0E);
   static const Color color9D = Color(0xff23899D);
-  static const Color pagViewGradient1 = Color(0xff7751FA);
-  static const Color pagViewGradient2 = Color(0xff3F249B);
-
+  static const Color viewAllColor = Color(0xff108D8B);
 
 
   static const Color whiteShadeF8 = Color(0xffF6F8F8);

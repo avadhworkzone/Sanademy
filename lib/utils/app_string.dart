@@ -25,8 +25,9 @@ class AppStrings {
 
   /// home screen
   static String searchHere = 'Search Here';
-  static String pageViewQuestion = 'What would you like to learn today?';
   static String categories = 'Categories';
+  static String recommended = 'Recommended';
+  static String viewAll = 'View All';
 
   /// my progress screen
   static String progressIntroductionTxt = 'In this page, you can see all your enrolled courses and the progress that you made in each one of them.';

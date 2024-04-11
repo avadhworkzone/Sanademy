@@ -57,134 +57,202 @@ class _HomeScreenState extends State<HomeScreen> {
                     imgUrl:
                         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s')),
           )),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              Container(
-                height: 190.h,
-                margin: EdgeInsets.only(bottom: 80.h),
-                color: AppColors.primaryColor,
-                child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 13.w, vertical: 10.w),
-                  child: CommonTextField(
-                    textEditController:
-                        homeScreenViewModel.searchController.value,
-                    regularExpression: RegularExpressionUtils.alphabetPattern,
-                    hintText: AppStrings.searchHere.tr,
-                    isValidate: true,
-                    hintTextColor: AppColors.white,
-                    borderColor: AppColors.primaryColor,
-                    fillColor: AppColors.white.withOpacity(0.20),
-                    pIcon: Padding(
-                      padding: EdgeInsets.only(
-                          left: 15.w, top: 15.w, bottom: 15.w, right: 7.w),
-                      child: LocalAssets(
-                        imagePath: AppImageAssets.searchIcon,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  height: 190.h,
+                  margin: EdgeInsets.only(bottom: 80.h),
+                  color: AppColors.primaryColor,
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 13.w, vertical: 10.w),
+                    child: CommonTextField(
+                      textEditController:
+                          homeScreenViewModel.searchController.value,
+                      regularExpression: RegularExpressionUtils.alphabetPattern,
+                      hintText: AppStrings.searchHere.tr,
+                      isValidate: true,
+                      hintTextColor: AppColors.white,
+                      borderColor: AppColors.primaryColor,
+                      fillColor: AppColors.white.withOpacity(0.20),
+                      pIcon: Padding(
+                        padding: EdgeInsets.only(
+                            left: 15.w, top: 15.w, bottom: 15.w, right: 7.w),
+                        child: LocalAssets(
+                          imagePath: AppImageAssets.searchIcon,
+                        ),
                       ),
+                      onChange: (firstNameData) {
+                        // createAccountController.isAllFieldInput();
+                      },
                     ),
-                    onChange: (firstNameData) {
-                      // createAccountController.isAllFieldInput();
-                    },
                   ),
                 ),
-              ),
-              Positioned(
-                bottom: 20,
-                child: Stack(
-                  children: [
-                    SizedBox(
-                      height: 150.w,
-                      width: 380.w,
-                      child: PageView.builder(
-                        itemCount: _images.length,
-                        onPageChanged: (index) {
-                          setState(() {
-                            _currentIndex = index;
-                          });
-                        },
-                        itemBuilder: (BuildContext context, int index) {
-                          return Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 5.w),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Image.network(
-                                _images[index],
-                                fit: BoxFit.cover,
+                Positioned(
+                  bottom: 20,
+                  child: Stack(
+                    children: [
+                      SizedBox(
+                        height: 150.w,
+                        width: 380.w,
+                        child: PageView.builder(
+                          itemCount: _images.length,
+                          onPageChanged: (index) {
+                            setState(() {
+                              _currentIndex = index;
+                            });
+                          },
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 5.w),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Image.network(
+                                  _images[index],
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            ),
-                          );
-                        },
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                    Positioned(
-                      left: 10,
-                      bottom: 15,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: _buildIndicators(),
+                      Positioned(
+                        left: 10,
+                        bottom: 15,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: _buildIndicators(),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: CustomText(
-              AppStrings.categories,
-              fontWeight: FontWeight.w700,
-              fontSize: 20.sp,
-              color: AppColors.black0E,
+              ],
             ),
-          ),
-          SizeConfig.sH15,
-          SizedBox(
-            width: Get.width,
-            height: 40.h,
-            child: Padding(
-              padding:  EdgeInsets.only(left: 15.w),
-              child: ListView.builder(
-                itemCount: _categoriesList.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 5.w),
-                  child: Container(
-                    width: 139.w,
-                    height: 40.h,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.r),
-                      color: _categoriesList[index]['color']
-                    ),
-                    child: Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: 10.w),
-                      child: Row(
-                        children: [
-                          Icon(_categoriesList[index]['Icon'],size: 20.h,color: AppColors.white,),
-                         /* Image.network(
-                            _categoriesList[index]['Icon'],
-                            fit: BoxFit.cover,
-                          ),*/
-                           SizeConfig.sW10,
-                          CustomText(
-                            _categoriesList[index]['title'],
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.white,
-                          )
-                        ],
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: CustomText(
+                AppStrings.categories,
+                fontWeight: FontWeight.w700,
+                fontSize: 20.sp,
+                color: AppColors.black0E,
+              ),
+            ),
+            SizeConfig.sH15,
+            SizedBox(
+              width: Get.width,
+              height: 40.h,
+              child: Padding(
+                padding: EdgeInsets.only(left: 15.w),
+                child: ListView.builder(
+                  itemCount: _categoriesList.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) => Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 5.w),
+                    child: Container(
+                      width: 139.w,
+                      height: 40.h,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.r),
+                          color: _categoriesList[index]['color']),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        child: Row(
+                          children: [
+                            Icon(
+                              _categoriesList[index]['Icon'],
+                              size: 20.h,
+                              color: AppColors.white,
+                            ),
+                            /* Image.network(
+                              _categoriesList[index]['Icon'],
+                              fit: BoxFit.cover,
+                            ),*/
+                            SizeConfig.sW10,
+                            CustomText(
+                              _categoriesList[index]['title'],
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.white,
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-          )
-        ],
+            SizeConfig.sH25,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Row(
+                children: [
+                  CustomText(
+                    AppStrings.recommended,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20.sp,
+                    color: AppColors.black0E,
+                  ),
+                  const Spacer(),
+                  TextButton(
+                    onPressed: () {},
+                    child: CustomText(
+                      AppStrings.viewAll,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 13.sp,
+                      color: AppColors.viewAllColor,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: SizedBox(
+                height: 234.6.h,
+                child: ListView.builder(
+                  itemCount: 2,
+                  itemBuilder: (context, index) => Padding(
+                    padding: EdgeInsets.only(bottom: 15.h),
+                    child: Container(
+                      height: 234.6.h,
+                      width: 390.w,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20.r),
+                      ),
+                      child: Padding(
+                        padding:  EdgeInsets.symmetric(horizontal: 20.w,vertical: 30.h),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomText(
+                              "",
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.black0E,
+                            ),
+                            CustomText(
+                              "Exploring the Beauty of Mathematical Structures",
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.black0E,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -196,25 +264,34 @@ class _HomeScreenState extends State<HomeScreen> {
     "https://t3.ftcdn.net/jpg/03/46/60/00/360_F_346600043_sz6HF3HBXBBSwKLaJ3B7R9PWuFsHTLRB.jpg",
   ];
 
-  List<Map<String, dynamic>> _categoriesList = [
+  final List<Map<String, dynamic>> _categoriesList = [
     {
       'Icon': Icons.calculate_outlined,
-         // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdiA84YFxMVbMQyDPQ8-YLpyyvPXX75lQpdDm6SML0va5Qw7fCm046Hzu5eHsa1PbZLTk&usqp=CAU",
+      // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdiA84YFxMVbMQyDPQ8-YLpyyvPXX75lQpdDm6SML0va5Qw7fCm046Hzu5eHsa1PbZLTk&usqp=CAU",
       'title': 'Mathematics',
       'color': AppColors.primaryColor,
     },
     {
-      'Icon':Icons.language,
-        //  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4FRrhI0Cg69MEC53yw1Q7X5oEyqR8apZY1Pf-r4AVZA&s",
+      'Icon': Icons.language,
+      //  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4FRrhI0Cg69MEC53yw1Q7X5oEyqR8apZY1Pf-r4AVZA&s",
       'title': 'Language',
-      'color': AppColors.pagViewGradient2,
+      'color': AppColors.red,
     },
     {
-      'Icon':Icons.color_lens_outlined,
-         // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBVmxXi3m-Oj3WDPGz1UkrbHL9h0ggjH9TVa-HKl0O_g&s",
+      'Icon': Icons.color_lens_outlined,
+      // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBVmxXi3m-Oj3WDPGz1UkrbHL9h0ggjH9TVa-HKl0O_g&s",
       'title': 'Arts',
       'color': AppColors.color9D,
     }
+  ];
+
+  final List<Map<String,dynamic>> _recommendedList  = [
+    {
+      'titleTxt': 'Exploring the Beauty of Mathematical Structures',
+      'lectures' :'12',
+      'time': '7 hours 40 minutes',
+      'color' :  Colors.green,
+    },
   ];
   int _currentIndex = 0;
 

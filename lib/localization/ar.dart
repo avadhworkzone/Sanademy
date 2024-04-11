@@ -29,6 +29,8 @@ Map<String, String> ar = {
   /// home screen
   AppStrings.searchHere: "ابحث هنا",
   AppStrings.categories: "فئات",
+  AppStrings.recommended: "مُستَحسَن",
+  AppStrings.viewAll: "عرض الكل",
 
   /// my progress screen
   AppStrings.progressIntroductionTxt: "في هذه الصفحة، يمكنك رؤية جميع الدورات التي قمت بالتسجيل فيها والتقدم الذي أحرزته في كل منها.",
