@@ -100,9 +100,9 @@ class SizeConfig {
     width: 50.w,
   );
 
-  static Widget sW20 = SizedBox(
-    width: 20.w,
-  );
+  // static Widget sW20 = SizedBox(
+  //   width: 20.w,
+  // );
   static Widget sW65 = SizedBox(
     width: 65.w,
   );

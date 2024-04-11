@@ -3,7 +3,6 @@ import 'package:sanademy/view/homeScreen/home_screen.dart';
 import 'package:sanademy/view/myProgressScreen/my_progress_screen.dart';
 import 'package:sanademy/view/notificationScreen/notification_screen.dart';
 import 'package:sanademy/view/my_certificate_screen/my_certificate_screen.dart';
-import 'package:sanademy/view/my_progress_screen/my_progress_screen.dart';
 
 class BottomBarViewModel extends GetxController {
   Rx<int> selectedBottomIndex = 0.obs;
@@ -13,6 +12,5 @@ class BottomBarViewModel extends GetxController {
     MyProgressScreen(),
     MyCertificateScreen(),
     NotificationScreen(),
-
   ].obs;
 }

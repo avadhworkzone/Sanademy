@@ -53,6 +53,11 @@ class AppStrings {
   static String examsScreenTxt =
       'In this page, you can test your knowledge in each field, and possibly receive the certificate.';
 
+  /// certificate screen
+  static String certificate = 'My Certificates';
+  static String certificateScreenTxt =
+      'In this page, you can see all your certificates for completing each course, or passing the test in that field.';
+
   ///APP ERROR MESSAGE
   static String emailIsRequired = "email is required";
   static String isRequired = "* Required";
