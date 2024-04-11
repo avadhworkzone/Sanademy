@@ -21,7 +21,7 @@ Map<String, String> ar = {
 
 
   /// bottom bar
-  AppStrings.home: "بيت",
+  AppStrings.home: "بيت", 
   AppStrings.myProgress: "تقدمي",
   AppStrings.myCertificate: "شهاداتي",
   AppStrings.notification: "إشعارات",
