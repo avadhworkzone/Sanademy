@@ -10,10 +10,15 @@ AppBar commonAppBar(
     {required String titleTxt,
     Widget? leadingWidget,
     Widget? actionWidget,
+    Widget? sizedBox,
     double? leadingWidth,
+      Color? textColor,
+      FontWeight? textFontWeight,
+      Color? appBarBackgroundColor,
+
     PreferredSizeWidget? bottom}) {
   return AppBar(
-    backgroundColor: AppColors.primaryColor,
+    backgroundColor: appBarBackgroundColor??AppColors.primaryColor,
     automaticallyImplyLeading: false,
     centerTitle: true,
     elevation: 0.0,
@@ -25,7 +30,7 @@ AppBar commonAppBar(
     title: Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        LocalAssets(
+        sizedBox ??LocalAssets(
           imagePath: AppImageAssets.sanademaylogo,
           width: 33.52.w,
           height: 27.2.h,
@@ -35,8 +40,8 @@ AppBar commonAppBar(
         ),
         CustomText(
           titleTxt,
-          color: AppColors.white,
-          fontWeight: FontWeight.w500,
+          color: textColor??AppColors.white,
+          fontWeight: textFontWeight??FontWeight.w500,
           fontSize: 20.sp,
         ),
       ],

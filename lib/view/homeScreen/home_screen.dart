@@ -11,6 +11,7 @@ import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view/homeScreen/sub_screens/mathematics_screen.dart';
 import 'package:sanademy/view_model/home_screen_view_model.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -76,7 +77,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           homeScreenViewModel.searchController.value,
                       regularExpression: RegularExpressionUtils.alphabetPattern,
                       hintText: AppStrings.searchHere.tr,
-                      isValidate: true,
+                      style: const TextStyle(color: AppColors.white),
+                      cursorColor: AppColors.white,
+                      isValidate: false,
                       hintTextColor: AppColors.white,
                       borderColor: AppColors.primaryColor,
                       fillColor: AppColors.white.withOpacity(0.20),
@@ -173,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               _categoriesList[index]['Icon'],
                               fit: BoxFit.cover,
                             ),*/
-                            SizeConfig.sW10,
+                            SizeConfig.sW5,
                             CustomText(
                               _categoriesList[index]['title'],
                               fontSize: 13.sp,
@@ -217,34 +220,108 @@ class _HomeScreenState extends State<HomeScreen> {
               child: SizedBox(
                 height: 234.6.h,
                 child: ListView.builder(
-                  itemCount: 2,
+                  itemCount: _recommendedList.length,
                   itemBuilder: (context, index) => Padding(
                     padding: EdgeInsets.only(bottom: 15.h),
-                    child: Container(
-                      height: 234.6.h,
-                      width: 390.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.r),
-                      ),
-                      child: Padding(
-                        padding:  EdgeInsets.symmetric(horizontal: 20.w,vertical: 30.h),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CustomText(
-                              "",
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.black0E,
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(MathematicsScreen());
+                      },
+                      child: Stack(
+                        children: [
+                          Container(
+                            height: 234.6.h,
+                            width: 390.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20.r),
+                                color: _recommendedList[index]['color']),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20.w, vertical: 30.h),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width: 278.19.w,
+                                    child: CustomText(
+                                      _recommendedList[index]['titleTxt'],
+                                      fontSize: 20.sp,
+                                      fontWeight: FontWeight.w700,
+                                      color: AppColors.black0E,
+                                    ),
+                                  ),
+                                  SizeConfig.sH8,
+                                  CustomText(
+                                    _recommendedList[index]['lectures'],
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColors.black0E,
+                                  ),
+                                  SizeConfig.sH4,
+                                  CustomText(
+                                    _recommendedList[index]['time'],
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColors.black0E,
+                                  ),
+                                  SizeConfig.sH8,
+                                  Container(
+                                      height: 50.h,
+                                      width: 137.39.w,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(12.r),
+                                        color: Colors.greenAccent,
+                                      ),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 17.r,
+                                            backgroundImage: const NetworkImage(
+                                                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s'),
+                                          ),
+                                          SizeConfig.sW10,
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 7.h),
+                                            child: Column(
+                                              children: [
+                                                CustomText(
+                                                  'Instructor',
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 12.sp,
+                                                  color: AppColors.black0E,
+                                                ),
+                                                SizeConfig.sH3,
+                                                CustomText(
+                                                  'John Doe',
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 12.sp,
+                                                  color: AppColors.black0E,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ))
+                                ],
+                              ),
                             ),
-                            CustomText(
-                              "Exploring the Beauty of Mathematical Structures",
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.black0E,
-                            )
-                          ],
-                        ),
+                          ),
+                          Positioned(
+                            bottom: 0.h,
+                            right: 0.w,
+                            child: LocalAssets(
+                              imagePath: AppImageAssets.teacherImg,
+                              width: 160.02.w,
+                              height: 214.8.h,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -285,12 +362,18 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   ];
 
-  final List<Map<String,dynamic>> _recommendedList  = [
+  final List<Map<String, dynamic>> _recommendedList = [
     {
       'titleTxt': 'Exploring the Beauty of Mathematical Structures',
-      'lectures' :'12',
+      'lectures': '12 lectures',
       'time': '7 hours 40 minutes',
-      'color' :  Colors.green,
+      'color': Colors.green,
+    },
+    {
+      'titleTxt': 'Exploring the Beauty of Mathematical Structures',
+      'lectures': '14 lectures',
+      'time': '8 hours 30 minutes',
+      'color': Colors.green.shade400,
     },
   ];
   int _currentIndex = 0;
@@ -305,7 +388,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildIndicator(bool isActive) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 5.0),
+      margin: const EdgeInsets.symmetric(horizontal: 5.0),
       height: 8.0,
       width: isActive ? 20 : 8.0,
       decoration: BoxDecoration(

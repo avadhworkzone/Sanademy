@@ -43,6 +43,8 @@ class CommonTextField extends StatelessWidget {
   final FontWeight? hintFontWeight;
   final EdgeInsetsGeometry? contentPadding;
   final String? Function(String?)? validator;
+  final TextStyle? style;
+  final Color? cursorColor;
 
   const CommonTextField({
     super.key,
@@ -74,7 +76,7 @@ class CommonTextField extends StatelessWidget {
     this.fillColor,
     this.borderWidth,
     this.hintFontWeight,
-    this.contentPadding,
+    this.contentPadding, this.style, this.cursorColor,
   });
 
   /// PLEASE IMPORT GET X PACKAGE
@@ -85,10 +87,10 @@ class CommonTextField extends StatelessWidget {
       child: TextFormField(
         controller: textEditController,
         maxLength: maxLength,
-        style: underLineBorder!
+        style: style ,/*?? underLineBorder!
             ? CustomTextStyle.textStyleInputField
             .copyWith(color: AppColors.black)
-            : CustomTextStyle.textStyleInputField,
+            : CustomTextStyle.textStyleInputField,*/
         keyboardType: keyBoardType ?? TextInputType.text,
         maxLines: maxLine ?? 1,
         textCapitalization: isCapitalize!
@@ -118,7 +120,7 @@ class CommonTextField extends StatelessWidget {
         textInputAction:
         maxLine == 4 ? TextInputAction.none : TextInputAction.done,
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        cursorColor: AppColors.black,
+        cursorColor: cursorColor??AppColors.black,
         decoration: InputDecoration(
           isDense: true,
           fillColor: fillColor??AppColors.white,

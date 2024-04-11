@@ -31,6 +31,15 @@ Map<String, String> en = {
   AppStrings.recommended: "Recommended",
   AppStrings.viewAll: "View All",
 
+  /// sub screen of home screen
+  AppStrings.mathematics: "Mathematics",
+  AppStrings.enrollNow: "Enroll Now",
+  AppStrings.description: "Description",
+  AppStrings.requirements: "Requirements",
+  AppStrings.whatWillYouLearn: "What will you learn?",
+  AppStrings.whoThisCourseIsFor: "Who this course is for?",
+
+
   /// my progress screen
   AppStrings.progressIntroductionTxt: "In this page, you can see all your enrolled courses and the progress that you made in each one of them.",
 

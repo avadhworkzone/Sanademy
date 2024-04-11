@@ -29,6 +29,14 @@ class AppStrings {
   static String recommended = 'Recommended';
   static String viewAll = 'View All';
 
+  /// sub screen of home screen
+  static String mathematics = 'Mathematics';
+  static String enrollNow = 'Enroll Now';
+  static String description = 'Description';
+  static String requirements = 'Requirements';
+  static String whatWillYouLearn = 'What will you learn?';
+  static String whoThisCourseIsFor = 'Who this course is for?';
+
   /// my progress screen
   static String progressIntroductionTxt = 'In this page, you can see all your enrolled courses and the progress that you made in each one of them.';
 
