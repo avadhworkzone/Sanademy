@@ -45,6 +45,12 @@ Map<String, String> en = {
   AppStrings.requestHartCopy: "Request Hard Copy",
   AppStrings.enrollSuccessfully: "Enrolled Successfully!",
   AppStrings.enrollSuccessfullyTxt: "You Have successfully enrolled in “Fundamentals of mathematics”",
+  AppStrings.instructor: "Instructor",
+  AppStrings.yourExperience: "Years of experience: ",
+  AppStrings.expertIn: "Expert in: ",
+  AppStrings.noOfStudents: "No. of students: ",
+  AppStrings.noOfCourses: "No. of courses: ",
+  AppStrings.courseContent: "No. of courses: ",
 
 
   /// Menu Screen

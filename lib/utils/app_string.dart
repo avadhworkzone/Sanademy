@@ -47,6 +47,12 @@ class AppStrings {
   static String requestHartCopy = 'Request Hard Copy';
   static String enrollSuccessfully = 'Enrolled Successfully!';
   static String enrollSuccessfullyTxt = 'You Have successfully enrolled in';
+  static String instructor = 'Instructor';
+  static String yourExperience = 'Years of experience: ';
+  static String expertIn = 'Expert in: ';
+  static String noOfStudents = 'No. of students: ';
+  static String noOfCourses = 'No. of courses: ';
+  static String courseContent = 'Course Content';
 
   /// Menu Screen
   static String currentBalance = 'Current Balance';

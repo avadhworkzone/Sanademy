@@ -46,6 +46,12 @@ Map<String, String> ar = {
   AppStrings.requestHartCopy: "طلب نسخة ورقية",
   AppStrings.enrollSuccessfully: "تم التسجيل بنجاح!",
   AppStrings.enrollSuccessfullyTxt: 'لقد قمت بالتسجيل بنجاح في "أساسيات الرياضيات"',
+  AppStrings.instructor: 'مدرب',
+  AppStrings.yourExperience: 'سنوات من الخبرة:',
+  AppStrings.expertIn: 'خبير في:',
+  AppStrings.noOfStudents: 'خبير في:',
+  AppStrings.noOfCourses: 'عدد الدورات:',
+  AppStrings.courseContent: 'محتوى الدورة',
 
   /// Menu Screen
   AppStrings.currentBalance: 'الرصيد الحالي',
