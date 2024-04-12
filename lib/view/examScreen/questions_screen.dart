@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view/examScreen/congratulations_screen.dart';
 
 class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({super.key});
@@ -23,7 +25,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
           child: Column(
             children: [
               CustomBtn(
-                onTap: () {},
+                onTap: () {
+                  Get.to(() => const CongratulationsScreen());
+                },
                 title: AppStrings.finishExam,
                 bgColor: AppColors.white,
                 borderColor: AppColors.primaryColor,
@@ -86,10 +90,30 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                 color: AppColors.black,
                 fontWeight: FontWeight.w700,
               ),
-              ListView.builder(
-                itemBuilder: (context, index) {
-                  return Container();
-                },
+              SizeConfig.sH10,
+              Expanded(
+                child: ListView.builder(
+                  itemCount: 4,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20.w, vertical: 20.w),
+                      margin: EdgeInsets.symmetric(vertical: 10.w),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: AppColors.greyEE),
+                          color: AppColors.greyFD,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: const Row(
+                        children: [
+                          CustomText(
+                            '13 square units',
+                            fontWeight: FontWeight.w500,
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                ),
               )
             ],
           ),

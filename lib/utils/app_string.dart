@@ -86,6 +86,19 @@ class AppStrings {
   /// questions screen
   static String finishExam = 'Finish Exam';
 
+  ///
+  static String congratulations = "Congratulations!";
+  static String yourScore = "Your Score";
+  static String yourTime = "Your Time";
+  static String yourAnswers = "Your Answers";
+  static String viewSolution = "View Solution";
+  static String percentage = "Percentage";
+  static String result = "Result";
+  static String pass = "Pass";
+  static String continues = "Continue";
+  static String youHaveCompletedMathematicsMasteryTest =
+      "You have completed Mathematics Mastery test";
+
   ///APP ERROR MESSAGE
   static String emailIsRequired = "email is required";
   static String isRequired = "* Required";
