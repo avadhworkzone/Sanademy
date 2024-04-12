@@ -46,7 +46,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             children: [
                               CircleAvatar(
                                 radius: 20.w,
-                                backgroundColor: AppColors.colorA8,
+                                backgroundColor: AppColors.primaryColor,
                                 child: LocalAssets(
                                     imagePath: index.isOdd
                                         ? AppImageAssets.updateIcon

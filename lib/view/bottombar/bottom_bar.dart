@@ -38,6 +38,7 @@ class _BottomBarState extends State<BottomBar> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              ///
               navItem(
                   index: 0,
                   icon: AppImageAssets.homeIcon,

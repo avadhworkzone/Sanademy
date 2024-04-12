@@ -1,8 +1,6 @@
-
 import 'package:sanademy/utils/app_string.dart';
 
 Map<String, String> ar = {
-
   /// create account screen
   AppStrings.enterYourName: 'ناوت چی یە؟',
   AppStrings.titleTxt: 'أكاديمية سناء',
@@ -13,15 +11,15 @@ Map<String, String> ar = {
   AppStrings.submit: 'يُقدِّم',
   AppStrings.otpTxt: 'التحقق من OTP',
   AppStrings.enterOtpTxt: 'الرجاء إدخال رمز التحقق المرسل إلى رقمك',
-  AppStrings.enterFourDigitOtp: 'أدخل كلمة مرور لمرة واحدة (OTP) مكونة من 4 أرقام',
+  AppStrings.enterFourDigitOtp:
+      'أدخل كلمة مرور لمرة واحدة (OTP) مكونة من 4 أرقام',
   AppStrings.didNotGetOtp: 'لم تحصل على OTP؟',
   AppStrings.resendOtp: 'إعادة إرسال كلمة المرور لمرة واحدة',
   AppStrings.verify: 'يؤكد',
   AppStrings.goBack: 'عُد',
 
-
   /// bottom bar
-  AppStrings.home: "بيت", 
+  AppStrings.home: "بيت",
   AppStrings.myProgress: "تقدمي",
   AppStrings.myCertificate: "شهاداتي",
   AppStrings.notification: "إشعارات",
@@ -44,8 +42,15 @@ Map<String, String> ar = {
   AppStrings.requestHartCopy: "طلب نسخة ورقية",
 
   /// my progress screen
-  AppStrings.progressIntroductionTxt: "في هذه الصفحة، يمكنك رؤية جميع الدورات التي قمت بالتسجيل فيها والتقدم الذي أحرزته في كل منها.",
+  AppStrings.progressIntroductionTxt:
+      "في هذه الصفحة، يمكنك رؤية جميع الدورات التي قمت بالتسجيل فيها والتقدم الذي أحرزته في كل منها.",
 
+  /// my certificate screen
+  AppStrings.certificateScreenTxt:
+      "في هذه الصفحة، يمكنك رؤية جميع الشهادات الخاصة بك لإكمال كل دورة، أو اجتياز الاختبار في هذا المجال.",
+
+  /// notification screen
+  AppStrings.clearAll: "امسح الكل",
 
   ///APP ERROR MESSAGE
   AppStrings.isRequired: '* مطلوب',

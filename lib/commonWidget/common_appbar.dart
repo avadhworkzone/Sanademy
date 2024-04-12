@@ -92,14 +92,14 @@ commonBackArrowAppBar({
                 width: 50.w,
               ),
         CustomText(
-          titleTxt,
+          titleTxt.tr,
           color: AppColors.black0E,
           fontWeight: FontWeight.w700,
           fontSize: 20.sp,
         ),
         actionWidget == true
             ? CustomText(
-                actionTitle ?? '',
+                actionTitle?.tr ?? '',
                 color: AppColors.color8B,
                 fontWeight: FontWeight.w500,
               )

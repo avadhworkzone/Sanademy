@@ -154,33 +154,39 @@ class _OtpScreenState extends State<OtpScreen> {
                       ],
                     ),
                     SizeConfig.sH30,
-                    CustomBtn(
-                      onTap: () async {
-                        if (otpViewModel.formKey.value.currentState!
-                            .validate()) {
-                          await SharedPreferenceUtils.setIsLogin(true);
-                          Get.to(() => const BottomBar());
-                        }
-                      },
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w700,
-                      radius: 10.r,
-                      title: AppStrings.verify,
-                      bgColor: AppColors.primaryColor,
-                      textColor: AppColors.white,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 22.w),
+                      child: CustomBtn(
+                        onTap: () async {
+                          if (otpViewModel.formKey.value.currentState!
+                              .validate()) {
+                            await SharedPreferenceUtils.setIsLogin(true);
+                            Get.to(() => const BottomBar());
+                          }
+                        },
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w700,
+                        radius: 10.r,
+                        title: AppStrings.verify,
+                        bgColor: AppColors.primaryColor,
+                        textColor: AppColors.white,
+                      ),
                     ),
                     SizeConfig.sH20,
-                    CustomBtn(
-                      onTap: () {
-                        Get.back();
-                      },
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w700,
-                      radius: 10.r,
-                      bgColor: AppColors.white,
-                      borderColor: AppColors.primaryColor,
-                      title: AppStrings.goBack,
-                      textColor: AppColors.primaryColor,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 22.w),
+                      child: CustomBtn(
+                        onTap: () {
+                          Get.back();
+                        },
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w700,
+                        radius: 10.r,
+                        bgColor: AppColors.white,
+                        borderColor: AppColors.primaryColor,
+                        title: AppStrings.goBack,
+                        textColor: AppColors.primaryColor,
+                      ),
                     )
                   ],
                 );
