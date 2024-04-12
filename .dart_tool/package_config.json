@@ -159,9 +159,9 @@
     },
     {
       "name": "intl",
-      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/intl-0.19.0",
+      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/intl-0.18.1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "2.12"
     },
     {
       "name": "intl_phone_field",
@@ -440,7 +440,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-04-11T12:32:43.840921Z",
+  "generated": "2024-04-12T07:31:12.800309Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }

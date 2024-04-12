@@ -26,9 +26,6 @@ class _BottomBarState extends State<BottomBar> {
         body: bottomBarViewModel
             .screenList[bottomBarViewModel.selectedBottomIndex.value],
         bottomNavigationBar: Container(
-          // padding: Platform.isIOS
-          //     ? EdgeInsets.only(right: 5.w, left: 5.w, bottom: 7.w)
-          //     : EdgeInsets.only(right: 5.w, left: 5.w, bottom: 2.w),
           padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 12.w),
           width: Get.width,
           decoration: BoxDecoration(color: AppColors.white, boxShadow: [

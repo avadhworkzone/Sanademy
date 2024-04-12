@@ -1,5 +1,6 @@
 class AppStrings {
-  /// create account screen
+  /// CREATE ACCOUNT SCREEN
+
   static String enterYourName = 'Enter your name';
   static String titleTxt = "Sana Academy";
   static String register = 'Register';
@@ -8,6 +9,9 @@ class AppStrings {
   static String dateFormat = 'mm/dd/yyyy';
   static String enterYourPhoneNumber = 'Enter your phone number';
   static String submit = 'Submit';
+
+  /// OTP SCREEN
+
   static String otpTxt = 'OTP Verification';
   static String enterOtpTxt =
       'Please enter the verification code sent to your number';

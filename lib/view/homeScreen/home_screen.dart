@@ -11,6 +11,7 @@ import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view/homeScreen/common_home_widget.dart';
 import 'package:sanademy/view/homeScreen/sub_screens/mathematics_screen.dart';
 import 'package:sanademy/view_model/home_screen_view_model.dart';
 
@@ -58,278 +59,186 @@ class _HomeScreenState extends State<HomeScreen> {
                     imgUrl:
                         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s')),
           )),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  height: 190.h,
-                  margin: EdgeInsets.only(bottom: 80.h),
-                  color: AppColors.primaryColor,
-                  child: Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 13.w, vertical: 10.w),
-                    child: CommonTextField(
-                      textEditController:
-                          homeScreenViewModel.searchController.value,
-                      regularExpression: RegularExpressionUtils.alphabetPattern,
-                      hintText: AppStrings.searchHere.tr,
-                      style: const TextStyle(color: AppColors.white),
-                      cursorColor: AppColors.white,
-                      isValidate: false,
-                      hintTextColor: AppColors.white,
-                      borderColor: AppColors.primaryColor,
-                      fillColor: AppColors.white.withOpacity(0.20),
-                      pIcon: Padding(
-                        padding: EdgeInsets.only(
-                            left: 15.w, top: 15.w, bottom: 15.w, right: 7.w),
-                        child: LocalAssets(
-                          imagePath: AppImageAssets.searchIcon,
-                        ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          /// TOP VIEW
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                height: 180.h,
+                margin: EdgeInsets.only(bottom: 80.h),
+                color: AppColors.primaryColor,
+                child: Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 13.w, vertical: 10.w),
+                  child: CommonTextField(
+                    textEditController:
+                        homeScreenViewModel.searchController.value,
+                    regularExpression: RegularExpressionUtils.alphabetPattern,
+                    hintText: AppStrings.searchHere.tr,
+                    style: const TextStyle(color: AppColors.white),
+                    cursorColor: AppColors.white,
+                    isValidate: false,
+                    hintTextColor: AppColors.white,
+                    borderColor: AppColors.primaryColor,
+                    fillColor: AppColors.white.withOpacity(0.20),
+                    pIcon: Padding(
+                      padding: EdgeInsets.only(
+                          left: 15.w, top: 15.w, bottom: 15.w, right: 7.w),
+                      child: LocalAssets(
+                        imagePath: AppImageAssets.searchIcon,
                       ),
-                      onChange: (firstNameData) {
-                        // createAccountController.isAllFieldInput();
-                      },
                     ),
+                    onChange: (firstNameData) {
+                      // createAccountController.isAllFieldInput();
+                    },
                   ),
                 ),
-                Positioned(
-                  bottom: 20,
-                  child: Stack(
-                    children: [
-                      SizedBox(
-                        height: 150.w,
-                        width: 380.w,
-                        child: PageView.builder(
-                          itemCount: _images.length,
-                          onPageChanged: (index) {
-                            setState(() {
-                              _currentIndex = index;
-                            });
-                          },
-                          itemBuilder: (BuildContext context, int index) {
-                            return Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 5.w),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Image.network(
-                                  _images[index],
-                                  fit: BoxFit.cover,
-                                ),
+              ),
+              Positioned(
+                bottom: 20,
+                child: Stack(
+                  children: [
+                    SizedBox(
+                      height: 150.w,
+                      width: 380.w,
+                      child: PageView.builder(
+                        itemCount: _images.length,
+                        onPageChanged: (index) {
+                          setState(() {
+                            _currentIndex = index;
+                          });
+                        },
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 5.w),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.network(
+                                _images[index],
+                                fit: BoxFit.cover,
                               ),
-                            );
-                          },
-                        ),
-                      ),
-                      Positioned(
-                        left: 10,
-                        bottom: 15,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: _buildIndicators(),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: CustomText(
-                AppStrings.categories,
-                fontWeight: FontWeight.w700,
-                fontSize: 20.sp,
-                color: AppColors.black0E,
-              ),
-            ),
-            SizeConfig.sH15,
-            SizedBox(
-              width: Get.width,
-              height: 40.h,
-              child: Padding(
-                padding: EdgeInsets.only(left: 15.w),
-                child: ListView.builder(
-                  itemCount: _categoriesList.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 5.w),
-                    child: Container(
-                      width: 139.w,
-                      height: 40.h,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.r),
-                          color: _categoriesList[index]['color']),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10.w),
-                        child: Row(
-                          children: [
-                            Icon(
-                              _categoriesList[index]['Icon'],
-                              size: 20.h,
-                              color: AppColors.white,
                             ),
-                            /* Image.network(
-                              _categoriesList[index]['Icon'],
-                              fit: BoxFit.cover,
-                            ),*/
-                            SizeConfig.sW5,
-                            CustomText(
-                              _categoriesList[index]['title'],
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.white,
-                            )
-                          ],
-                        ),
+                          );
+                        },
                       ),
                     ),
-                  ),
+                    Positioned(
+                      left: 10,
+                      bottom: 15,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: _buildIndicators(),
+                      ),
+                    ),
+                  ],
                 ),
               ),
+            ],
+          ),
+
+          /// CATEGORIES VIEW
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: CustomText(
+              AppStrings.categories,
+              fontWeight: FontWeight.w700,
+              fontSize: 20.sp,
+              color: AppColors.black0E,
             ),
-            SizeConfig.sH25,
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: Row(
-                children: [
-                  CustomText(
-                    AppStrings.recommended,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 20.sp,
-                    color: AppColors.black0E,
-                  ),
-                  const Spacer(),
-                  TextButton(
-                    onPressed: () {},
-                    child: CustomText(
-                      AppStrings.viewAll,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 13.sp,
-                      color: AppColors.viewAllColor,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: SizedBox(
-                height: 234.6.h,
-                child: ListView.builder(
-                  itemCount: _recommendedList.length,
-                  itemBuilder: (context, index) => Padding(
-                    padding: EdgeInsets.only(bottom: 15.h),
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.to(MathematicsScreen());
-                      },
-                      child: Stack(
+          ),
+          SizeConfig.sH15,
+          SizedBox(
+            width: Get.width,
+            height: 40.h,
+            child: Padding(
+              padding: EdgeInsets.only(left: 15.w),
+              child: ListView.builder(
+                itemCount: _categoriesList.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) => Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5.w),
+                  child: Container(
+                    width: 139.w,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.r),
+                        color: _categoriesList[index]['color']),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10.w),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            height: 234.6.h,
-                            width: 390.w,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20.r),
-                                color: _recommendedList[index]['color']),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20.w, vertical: 30.h),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    width: 278.19.w,
-                                    child: CustomText(
-                                      _recommendedList[index]['titleTxt'],
-                                      fontSize: 20.sp,
-                                      fontWeight: FontWeight.w700,
-                                      color: AppColors.black0E,
-                                    ),
-                                  ),
-                                  SizeConfig.sH8,
-                                  CustomText(
-                                    _recommendedList[index]['lectures'],
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: AppColors.black0E,
-                                  ),
-                                  SizeConfig.sH4,
-                                  CustomText(
-                                    _recommendedList[index]['time'],
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: AppColors.black0E,
-                                  ),
-                                  SizeConfig.sH8,
-                                  Container(
-                                      height: 50.h,
-                                      width: 137.39.w,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(12.r),
-                                        color: Colors.greenAccent,
-                                      ),
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          CircleAvatar(
-                                            radius: 17.r,
-                                            backgroundImage: const NetworkImage(
-                                                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s'),
-                                          ),
-                                          SizeConfig.sW10,
-                                          Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 7.h),
-                                            child: Column(
-                                              children: [
-                                                CustomText(
-                                                  'Instructor',
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 12.sp,
-                                                  color: AppColors.black0E,
-                                                ),
-                                                SizeConfig.sH3,
-                                                CustomText(
-                                                  'John Doe',
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 12.sp,
-                                                  color: AppColors.black0E,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ))
-                                ],
-                              ),
-                            ),
+                          Icon(
+                            _categoriesList[index]['Icon'],
+                            size: 20.h,
+                            color: AppColors.white,
                           ),
-                          Positioned(
-                            bottom: 0.h,
-                            right: 0.w,
-                            child: LocalAssets(
-                              imagePath: AppImageAssets.teacherImg,
-                              width: 160.02.w,
-                              height: 214.8.h,
-                            ),
-                          ),
+                          /* Image.network(
+                            _categoriesList[index]['Icon'],
+                            fit: BoxFit.cover,
+                          ),*/
+                          SizeConfig.sW5,
+                          CustomText(
+                            _categoriesList[index]['title'],
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.white,
+                          )
                         ],
                       ),
                     ),
                   ),
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          ),
+          SizeConfig.sH15,
+
+          /// RECOMMENDED
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Row(
+              children: [
+                CustomText(
+                  AppStrings.recommended,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 20.sp,
+                  color: AppColors.black0E,
+                ),
+                const Spacer(),
+                TextButton(
+                  onPressed: () {},
+                  child: CustomText(
+                    AppStrings.viewAll,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 13.sp,
+                    color: AppColors.viewAllColor,
+                  ),
+                )
+              ],
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: ListView.builder(
+                itemCount: _recommendedList.length,
+                itemBuilder: (context, index) => Padding(
+                  padding: EdgeInsets.only(bottom: 15.h),
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.to(() => const MathematicsScreen());
+                    },
+                    child: CommonContainerWidget(
+                        listData: _recommendedList[index]),
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

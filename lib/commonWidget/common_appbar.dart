@@ -13,13 +13,12 @@ AppBar commonAppBar(
     Widget? actionWidget,
     Widget? sizedBox,
     double? leadingWidth,
-      Color? textColor,
-      FontWeight? textFontWeight,
-      Color? appBarBackgroundColor,
-
+    Color? textColor,
+    FontWeight? textFontWeight,
+    Color? appBarBackgroundColor,
     PreferredSizeWidget? bottom}) {
   return AppBar(
-    backgroundColor: appBarBackgroundColor??AppColors.primaryColor,
+    backgroundColor: appBarBackgroundColor ?? AppColors.primaryColor,
     automaticallyImplyLeading: false,
     centerTitle: true,
     elevation: 0.0,
@@ -31,18 +30,19 @@ AppBar commonAppBar(
     title: Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        sizedBox ??LocalAssets(
-          imagePath: AppImageAssets.sanademaylogo,
-          width: 33.52.w,
-          height: 27.2.h,
-        ),
+        sizedBox ??
+            LocalAssets(
+              imagePath: AppImageAssets.sanademaylogo,
+              width: 33.52.w,
+              height: 27.2.h,
+            ),
         SizedBox(
           width: 10.w,
         ),
         CustomText(
           titleTxt,
-          color: textColor??AppColors.white,
-          fontWeight: textFontWeight??FontWeight.w500,
+          color: textColor ?? AppColors.white,
+          fontWeight: textFontWeight ?? FontWeight.w500,
           fontSize: 20.sp,
         ),
       ],
@@ -67,19 +67,25 @@ commonBackArrowAppBar({
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         leadingWidget == true
-            ? Container(
-                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                          color: AppColors.black.withOpacity(0.10),
-                          blurRadius: 20)
-                    ],
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.circular(17)),
-                child: const Icon(
-                  Icons.arrow_back,
-                  color: AppColors.black0E,
+            ? InkWell(
+                onTap: () {
+                  Get.back();
+                },
+                child: Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
+                  decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            color: AppColors.black.withOpacity(0.10),
+                            blurRadius: 20)
+                      ],
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(17)),
+                  child: const Icon(
+                    Icons.arrow_back,
+                    color: AppColors.black0E,
+                  ),
                 ),
               )
             : SizedBox(

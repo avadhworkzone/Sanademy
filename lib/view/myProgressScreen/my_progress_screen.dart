@@ -17,89 +17,91 @@ class MyProgressScreen extends StatefulWidget {
 class _MyProgressScreenState extends State<MyProgressScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 63.h),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CustomText(
-              AppStrings.myProgress,
-              fontSize: 20.sp,
-              fontWeight: FontWeight.w700,
-              color: AppColors.black0E,
-            ),
-            SizeConfig.sH25,
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.w),
-              child: SizedBox(
+    return SafeArea(
+      child: Material(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CustomText(
+                AppStrings.myProgress,
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w700,
+                color: AppColors.black0E,
+              ),
+              SizeConfig.sH25,
+              SizedBox(
                 child: CustomText(
                   AppStrings.progressIntroductionTxt,
                   color: AppColors.black0E.withOpacity(0.8),
                 ),
               ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 3,
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.w),
-                    margin: EdgeInsets.symmetric(horizontal: 15.w,vertical: 10.w),
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            colorFilter: ColorFilter.mode(
-                                Colors.black.withOpacity(0.60),
-                                BlendMode.srcOver),
-                            filterQuality: FilterQuality.low,
-                            image: const NetworkImage(
-                              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWpCP7MLNqspI1pA3XAurJiFdi2_t3ekbU0A&s',
-                            )),
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Column(
-                      children: [
-                        CustomText(
-                          'Exploring the Beauty of Mathematical Structures',
-                          color: AppColors.white,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w700,
-                        ),
-                        SliderTheme(
-                          data: SliderTheme.of(context).copyWith(
-                            trackHeight: 12.w,
-                            thumbColor: AppColors.primaryColor,
-                            activeTrackColor: AppColors.white,
-                            inactiveTrackColor:
-                                AppColors.white.withOpacity(0.60),
-                            thumbShape: CustomSliderThumbShape(
-                              color1: AppColors.white, // First color
-                              color2: AppColors.primaryColor, // Second color
+              SizeConfig.sH10,
+              Expanded(
+                child: ListView.builder(
+                  itemCount: 3,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 15.w, vertical: 20.w),
+                      margin: EdgeInsets.symmetric(vertical: 10.w),
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              colorFilter: ColorFilter.mode(
+                                  AppColors.black.withOpacity(0.6),
+                                  BlendMode.srcOver),
+                              filterQuality: FilterQuality.low,
+                              image: const NetworkImage(
+                                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWpCP7MLNqspI1pA3XAurJiFdi2_t3ekbU0A&s',
+                              )),
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Column(
+                        children: [
+                          CustomText(
+                            'Exploring the Beauty of Mathematical Structures',
+                            color: AppColors.white,
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w700,
+                          ),
+                          SliderTheme(
+                            data: SliderTheme.of(context).copyWith(
+                              trackHeight: 12.w,
+                              thumbColor: AppColors.primaryColor,
+                              activeTrackColor: AppColors.white,
+                              inactiveTrackColor:
+                                  AppColors.white.withOpacity(0.60),
+                              thumbShape: CustomSliderThumbShape(
+                                color1: AppColors.white, // First color
+                                color2: AppColors.primaryColor, // Second color
+                              ),
+                              trackShape: CustomTrackShape(),
                             ),
-                            trackShape: CustomTrackShape(),
+                            child: Slider(
+                              value: 50000.0,
+                              min: 1000.0,
+                              max: 100000.0,
+                              onChanged: (double newValue) {},
+                            ),
                           ),
-                          child: Slider(
-                            value: 50000.0,
-                            min: 1000.0,
-                            max: 100000.0,
-                            onChanged: (double newValue) {},
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CustomText('6 hours completed',color: AppColors.white,fontSize: 12.sp),
-                            CustomText('5 hours remaining',color: AppColors.white,fontSize: 12.sp),
-                          ],
-                        )
-                      ],
-                    ),
-                  );
-                },
-              ),
-            )
-          ],
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomText('6 hours completed',
+                                  color: AppColors.white, fontSize: 12.sp),
+                              CustomText('5 hours remaining',
+                                  color: AppColors.white, fontSize: 12.sp),
+                            ],
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -110,12 +112,13 @@ class CustomTrackShape extends RoundedRectSliderTrackShape {
   @override
   Rect getPreferredRect(
       {required RenderBox parentBox,
-        Offset offset = Offset.zero,
-        required SliderThemeData sliderTheme,
-        bool isEnabled = false,
-        bool isDiscrete = false}) {
+      Offset offset = Offset.zero,
+      required SliderThemeData sliderTheme,
+      bool isEnabled = false,
+      bool isDiscrete = false}) {
     final double trackHeight = sliderTheme.trackHeight!;
-    final double trackLeft = offset.dx + 2.0; // Adjust the left padding as desired
+    final double trackLeft =
+        offset.dx + 2.0; // Adjust the left padding as desired
     final double trackTop =
         offset.dy + (parentBox.size.height - trackHeight) / 2;
     final double trackWidth =

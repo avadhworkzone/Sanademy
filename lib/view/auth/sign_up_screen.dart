@@ -23,16 +23,16 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  SignUpViewModel signUpController = Get.put(SignUpViewModel());
+  SignUpViewModel signUpViewModel = Get.put(SignUpViewModel());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: commonAppBar(titleTxt: AppStrings.titleTxt),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 30.w),
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.w),
         child: Form(
-          key: signUpController.formKey.value,
+          key: signUpViewModel.formKey.value,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -52,8 +52,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   fontWeight: FontWeight.w400,
                 ),
                 SizeConfig.sH25,
+
+                /// NAME TEXT FIELD
                 CommonTextField(
-                  textEditController: signUpController.nameController.value,
+                  textEditController: signUpViewModel.nameController.value,
                   validator: ValidationMethod.validateName,
                   regularExpression: RegularExpressionUtils.text,
                   hintText: AppStrings.enterYourName,
@@ -63,15 +65,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   borderColor: AppColors.black.withOpacity(0.10),
                 ),
                 SizeConfig.sH20,
+
+                /// DATE TEXT FIELD
                 TextFormField(
-                  onTap: () => signUpController.selectDate(context),
+                  onTap: () => signUpViewModel.selectDate(context),
                   readOnly: true,
                   validator: ValidationMethod.validateDate,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  controller: signUpController.dateController.value,
+                  controller: signUpViewModel.dateController.value,
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(
-                        horizontal: 15.w, vertical: 12.h),
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 15.w, vertical: 12.h),
                     hintText: AppStrings.dateFormat.tr,
                     hintStyle: TextStyle(
                       color: AppColors.black12,
@@ -79,11 +83,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       fontFamily: AppConstants.quicksand,
                       fontWeight: FontWeight.w400,
                     ),
-                    prefixIcon:
-                        Icon(Icons.calendar_month_rounded, size: 30.h),
+                    prefixIcon: Icon(Icons.calendar_month_rounded, size: 30.h),
                     errorBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: AppColors.red),
+                        borderSide: const BorderSide(color: AppColors.red),
                         borderRadius: BorderRadius.circular(10.r)),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -95,8 +97,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         width: 1.0,
                         color: AppColors.black.withOpacity(0.10),
                       ),
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(10)),
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
                     ),
                     disabledBorder: const OutlineInputBorder(
                       borderSide:
@@ -104,8 +105,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(10)),
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
                       borderSide: BorderSide(
                         color: AppColors.black.withOpacity(0.10),
                         width: 1.0,
@@ -114,15 +114,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 SizeConfig.sH25,
+
+                /// PHONE NUMBER TEXT FIELD
                 Obx(
                   () => SizedBox(
                     height: 75.h,
                     child: IntlPhoneField(
-                      controller: signUpController.phoneController.value,
+                      controller: signUpViewModel.phoneController.value,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      onChanged: (val){
-                        if(val.toString().isNotEmpty){
-                          signUpController.isValidate.value=false;
+                      onChanged: (val) {
+                        if (val.toString().isNotEmpty) {
+                          signUpViewModel.isValidate.value = false;
                         }
                       },
                       decoration: InputDecoration(
@@ -135,19 +137,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           fontFamily: AppConstants.quicksand,
                           fontWeight: FontWeight.w400,
                         ),
-                        errorText: (signUpController.isValidate.value == true && signUpController.phoneController.value.text.isEmpty)
+                        errorText: (signUpViewModel.isValidate.value == true &&
+                                signUpViewModel
+                                    .phoneController.value.text.isEmpty)
                             ? '* Required'.tr
                             : null,
-                        errorBorder: (signUpController.isValidate.value == true && signUpController.phoneController.value.text.isEmpty)
-                            ? OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: AppColors.red),
-                                borderRadius: BorderRadius.circular(10.r))
-                            : OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: AppColors.black.withOpacity(0.10),
-                                )),
+                        errorBorder:
+                            (signUpViewModel.isValidate.value == true &&
+                                    signUpViewModel
+                                        .phoneController.value.text.isEmpty)
+                                ? OutlineInputBorder(
+                                    borderSide:
+                                        const BorderSide(color: AppColors.red),
+                                    borderRadius: BorderRadius.circular(10.r))
+                                : OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                      color: AppColors.black.withOpacity(0.10),
+                                    )),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide(
@@ -178,15 +185,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 30.h,
-                ),
+                SizeConfig.sH30,
+
+                /// SUBMIT BUTTON
                 CustomBtn(
                   onTap: () {
-                    signUpController.isValidate.value = true;
-                    if (signUpController.formKey.value.currentState!.validate() &&
-                        signUpController.phoneController.value.text.isNotEmpty) {
-                      Get.to(const OtpScreen());
+                    signUpViewModel.isValidate.value = true;
+                    if (signUpViewModel.formKey.value.currentState!
+                            .validate() &&
+                        signUpViewModel.phoneController.value.text.isNotEmpty) {
+                      Get.to(() => const OtpScreen());
                     }
                   },
                   fontSize: 14.sp,

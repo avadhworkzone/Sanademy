@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignUpViewModel extends GetxController {
+  /// TEXT EDITING CONTROLLER
+
   Rx<TextEditingController> nameController = TextEditingController().obs;
   Rx<TextEditingController> dateController = TextEditingController().obs;
   Rx<TextEditingController> phoneController = TextEditingController().obs;
@@ -9,6 +11,7 @@ class SignUpViewModel extends GetxController {
   Rx<DateTime> selectedDate = DateTime.now().obs;
   RxBool isValidate = false.obs;
 
+  /// DATE PICKER
   Future<void> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -21,6 +24,4 @@ class SignUpViewModel extends GetxController {
       dateController.value.text = date;
     }
   }
-
-
 }

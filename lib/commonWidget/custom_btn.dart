@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -22,7 +21,21 @@ class CustomBtn extends StatelessWidget {
   final FontWeight? fontWeight;
 
   // ignore: use_key_in_widget_constructors
-  const CustomBtn({required this.onTap, required this.title, this.radius, this.fontWeight, this.borderColor, this.height, this.width, this.fontSize, this.bgColor, this.textColor, this.leading, this.withIcon = false, this.iconPath, this.isDownloadFile = false});
+  const CustomBtn(
+      {required this.onTap,
+      required this.title,
+      this.radius,
+      this.fontWeight,
+      this.borderColor,
+      this.height,
+      this.width,
+      this.fontSize,
+      this.bgColor,
+      this.textColor,
+      this.leading,
+      this.withIcon = false,
+      this.iconPath,
+      this.isDownloadFile = false});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +43,7 @@ class CustomBtn extends StatelessWidget {
       color: Colors.transparent,
       child: Ink(
         height: height ?? 50.h,
-        width: width ?? 364.w,
+        width: width ?? Get.width,
         decoration: BoxDecoration(
           color: bgColor ?? AppColors.primaryColor,
           border: Border.all(color: borderColor ?? Colors.transparent),
