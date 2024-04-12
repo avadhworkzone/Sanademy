@@ -55,7 +55,6 @@ class AppStrings {
   static String firstIraqiBank = 'First Iraqi Bank';
   static String mobileBalance = 'Mobile Balance';
   static String creditCard = 'Credit Card';
-  static String notifications = 'Notifications';
   static String contactUs = 'Contact Us';
   static String aboutUs = 'About Us';
   static String logOut = 'Logout';

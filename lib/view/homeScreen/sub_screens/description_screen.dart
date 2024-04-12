@@ -45,7 +45,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           InkWell(
                               onTap: () {
                                 setState(() {
-                                  descriptionViewModel.onTouch = true;
+                                  descriptionViewModel.onTouch.value = true;
                                 });
                                 if (descriptionViewModel
                                     .videoPlayerController.value.isPlaying) {
@@ -59,7 +59,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                 Future.delayed(
                                   const Duration(seconds: 2),
                                   () => setState(() {
-                                    descriptionViewModel.onTouch = false;
+                                    descriptionViewModel.onTouch.value = false;
                                   }),
                                 );
                               },
