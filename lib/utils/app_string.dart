@@ -35,6 +35,8 @@ class AppStrings {
 
   /// sub screen of home screen
   static String mathematics = 'Mathematics';
+
+  ///  Description Screen
   static String enrollNow = 'Enroll Now';
   static String description = 'Description';
   static String requirements = 'Requirements';
@@ -43,6 +45,20 @@ class AppStrings {
   static String getMoreCertificate = 'Get More Certificates';
   static String downloadPDF = 'Download PDF';
   static String requestHartCopy = 'Request Hard Copy';
+  static String enrollSuccessfully = 'Enrolled Successfully!';
+  static String enrollSuccessfullyTxt = 'You Have successfully enrolled in';
+
+  /// Menu Screen
+  static String currentBalance = 'Current Balance';
+  static String topUpYourBalance = 'Top up your balance';
+  static String fastPay = 'Fast Pay';
+  static String firstIraqiBank = 'First Iraqi Bank';
+  static String mobileBalance = 'Mobile Balance';
+  static String creditCard = 'Credit Card';
+  static String notifications = 'Notifications';
+  static String contactUs = 'Contact Us';
+  static String aboutUs = 'About Us';
+  static String logOut = 'Logout';
 
   /// my progress screen
   static String progressIntroductionTxt =

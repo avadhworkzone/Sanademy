@@ -33,6 +33,8 @@ Map<String, String> en = {
 
   /// sub screen of home screen
   AppStrings.mathematics: "Mathematics",
+
+  /// Description Screen
   AppStrings.enrollNow: "Enroll Now",
   AppStrings.description: "Description",
   AppStrings.requirements: "Requirements",
@@ -41,7 +43,21 @@ Map<String, String> en = {
   AppStrings.getMoreCertificate: "Get More Certificates",
   AppStrings.downloadPDF: "Download PDF",
   AppStrings.requestHartCopy: "Request Hard Copy",
+  AppStrings.enrollSuccessfully: "Enrolled Successfully!",
+  AppStrings.enrollSuccessfullyTxt: "You Have successfully enrolled in “Fundamentals of mathematics”",
 
+
+  /// Menu Screen
+  AppStrings.currentBalance : 'Current Balance',
+  AppStrings.topUpYourBalance : 'Top up your balance',
+  AppStrings.fastPay : 'Fast Pay',
+  AppStrings.firstIraqiBank : 'First Iraqi Bank',
+  AppStrings.mobileBalance : 'Mobile Balance',
+  AppStrings.creditCard : 'Credit Card',
+  AppStrings.notifications : 'Notifications',
+  AppStrings.contactUs : 'Contact Us',
+  AppStrings.aboutUs : 'About Us',
+  AppStrings.logOut : 'Logout',
 
   /// my progress screen
   AppStrings.progressIntroductionTxt: "In this page, you can see all your enrolled courses and the progress that you made in each one of them.",

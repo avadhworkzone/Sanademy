@@ -34,6 +34,8 @@ Map<String, String> ar = {
 
   /// sub screen of home screen
   AppStrings.mathematics: "الرياضيات",
+
+  /// Description Screen
   AppStrings.enrollNow: "تسجيل الآن",
   AppStrings.description: "وصف",
   AppStrings.requirements: "متطلبات",
@@ -42,6 +44,20 @@ Map<String, String> ar = {
   AppStrings.getMoreCertificate: "احصل على المزيد من الشهادات",
   AppStrings.downloadPDF: "تحميل PDF",
   AppStrings.requestHartCopy: "طلب نسخة ورقية",
+  AppStrings.enrollSuccessfully: "تم التسجيل بنجاح!",
+  AppStrings.enrollSuccessfullyTxt: 'لقد قمت بالتسجيل بنجاح في "أساسيات الرياضيات"',
+
+  /// Menu Screen
+  AppStrings.currentBalance: 'الرصيد الحالي',
+  AppStrings.topUpYourBalance: 'قم بتعبئة رصيدك',
+  AppStrings.fastPay: 'الدفع السريع',
+  AppStrings.firstIraqiBank: 'البنك العراقي الأول',
+  AppStrings.mobileBalance: 'رصيد الجوال',
+  AppStrings.creditCard: 'بطاقة إئتمان',
+  AppStrings.notifications: 'إشعارات',
+  AppStrings.contactUs: 'اتصل بنا',
+  AppStrings.aboutUs: 'معلومات عنا',
+  AppStrings.logOut: 'تسجيل خروج',
 
   /// my progress screen
   AppStrings.progressIntroductionTxt: "في هذه الصفحة، يمكنك رؤية جميع الدورات التي قمت بالتسجيل فيها والتقدم الذي أحرزته في كل منها.",

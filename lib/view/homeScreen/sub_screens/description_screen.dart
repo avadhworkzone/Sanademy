@@ -20,6 +20,7 @@ class DescriptionScreen extends StatefulWidget {
 
 class _DescriptionScreenState extends State<DescriptionScreen> {
   DescriptionViewModel descriptionViewModel = Get.put(DescriptionViewModel());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

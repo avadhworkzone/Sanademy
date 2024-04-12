@@ -13,6 +13,7 @@ import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/homeScreen/common_home_widget.dart';
 import 'package:sanademy/view/homeScreen/sub_screens/mathematics_screen.dart';
+import 'package:sanademy/view/menu_screen/menu_screen.dart';
 import 'package:sanademy/view_model/home_screen_view_model.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,10 +25,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   HomeScreenViewModel homeScreenViewModel = Get.put(HomeScreenViewModel());
+  final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _drawerKey,
+      drawer: Drawer(child: MenuScreen()),
       appBar: commonAppBar(
           titleTxt: AppStrings.titleTxt.tr,
           leadingWidth: 80.w,
@@ -36,14 +40,21 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 width: 8.w,
               ),
-              Container(
-                margin: EdgeInsets.all(8.w),
-                padding: EdgeInsets.all(10.w),
-                decoration: BoxDecoration(
-                    color: AppColors.white.withOpacity(0.20),
-                    borderRadius: BorderRadius.circular(15)),
-                child: const LocalAssets(
-                  imagePath: AppImageAssets.categoryIcon,
+              GestureDetector(
+                onTap: (){
+                  setState(() {
+                    _drawerKey.currentState?.openDrawer();
+                  });
+                },
+                child: Container(
+                  margin: EdgeInsets.all(8.w),
+                  padding: EdgeInsets.all(10.w),
+                  decoration: BoxDecoration(
+                      color: AppColors.white.withOpacity(0.20),
+                      borderRadius: BorderRadius.circular(15)),
+                  child: const LocalAssets(
+                    imagePath: AppImageAssets.categoryIcon,
+                  ),
                 ),
               ),
             ],
