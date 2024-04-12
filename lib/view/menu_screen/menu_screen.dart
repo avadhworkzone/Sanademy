@@ -97,38 +97,6 @@ class _MenuScreenState extends State<MenuScreen> {
                         title: null,
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w700,
-                        bgColor: AppColors.white,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black26,
-                              offset: Offset(0, 1),
-                              blurRadius: 4.0)
-                        ],
-                        widget: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            LocalAssets(
-                              imagePath: AppImageAssets.visaIcn,
-                              height: 30.h,
-                              width: 50.w,
-                            ),
-                            SizeConfig.sW5,
-                            CustomText(
-                              AppStrings.creditCard,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 15.sp,
-                              color: AppColors.black02,
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizeConfig.sH12,
-                      CustomBtn(
-                        onTap: () {},
-                        title: null,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w700,
                         bgColor: AppColors.firstIraqiBankColor,
                         widget: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -181,7 +149,38 @@ class _MenuScreenState extends State<MenuScreen> {
                           ],
                         ),
                       ),
-                      SizeConfig.sH20,
+                      SizeConfig.sH12,
+                      CustomBtn(
+                        onTap: () {},
+                        title: null,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w700,
+                        bgColor: AppColors.white,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black26,
+                              offset: Offset(0, 1),
+                              blurRadius: 4.0)
+                        ],
+                        widget: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            LocalAssets(
+                              imagePath: AppImageAssets.visaIcn,
+                              height: 30.h,
+                              width: 50.w,
+                            ),
+                            SizeConfig.sW5,
+                            CustomText(
+                              AppStrings.creditCard,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 15.sp,
+                              color: AppColors.black02,
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 )),
@@ -199,7 +198,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          index == 3
+                          index == 2
                               ? InkWell(
                                   onTap: () {},
                                   child: CustomText(
@@ -215,7 +214,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                   fontSize: 15.sp,
                                   color: AppColors.black13,
                                 ),
-                          index == 3
+                          index == 2
                               ? SizedBox()
                               : Icon(
                                   Icons.arrow_forward_ios,
@@ -224,7 +223,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         ],
                       ),
                     ),
-                    index == 3
+                    index == 2
                         ? SizedBox()
                         : Divider(
                             color: AppColors.black.withOpacity(0.2),

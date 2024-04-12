@@ -144,6 +144,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                 LocalAssets(
                                   imagePath:
                                       AppImageAssets.enrollSuccessfullyImg,
+                                  height: 150.h,
+                                  width: 150.w,
                                 ),
                                 CustomText(
                                   AppStrings.enrollSuccessfully,

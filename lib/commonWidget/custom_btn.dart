@@ -29,7 +29,7 @@ class CustomBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
-      child: Ink(
+      child: Container(
         height: height ?? 50.h,
         width: width ?? Get.width,
         decoration: BoxDecoration(
