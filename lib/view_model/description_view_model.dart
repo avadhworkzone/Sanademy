@@ -5,12 +5,18 @@ class DescriptionViewModel extends GetxController{
 
   late VideoPlayerController videoPlayerController;
 
-  bool onTouch = false;
-  
+  RxBool onTouch = false.obs;
+  RxBool isLoader = true.obs;
+
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      isLoader.value = false;
+    });
+
     videoPlayerController = VideoPlayerController.networkUrl(
       Uri.parse(
           'https://cdn.create.vista.com/api/media/medium/502694658/stock-video-dolly-out-shot-woman-short-red-hair-standing-blackboard-teaching?token='),
@@ -21,7 +27,7 @@ class DescriptionViewModel extends GetxController{
     });
     videoPlayerController.setLooping(true);
     videoPlayerController.pause();
-    onTouch=true;
+    onTouch.value=true;
 
     videoPlayerController.initialize();
   }

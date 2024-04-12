@@ -19,23 +19,11 @@ class CustomBtn extends StatelessWidget {
   final bool? withIcon;
   final String? iconPath;
   final FontWeight? fontWeight;
+  final Widget? widget;
+  final List<BoxShadow>? boxShadow;
 
   // ignore: use_key_in_widget_constructors
-  const CustomBtn(
-      {required this.onTap,
-      required this.title,
-      this.radius,
-      this.fontWeight,
-      this.borderColor,
-      this.height,
-      this.width,
-      this.fontSize,
-      this.bgColor,
-      this.textColor,
-      this.leading,
-      this.withIcon = false,
-      this.iconPath,
-      this.isDownloadFile = false});
+  const CustomBtn({required this.onTap, required this.title, this.radius, this.fontWeight, this.borderColor, this.height, this.width, this.fontSize, this.bgColor, this.textColor, this.leading, this.withIcon = false, this.iconPath, this.isDownloadFile = false, this.widget, this.boxShadow});
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +36,11 @@ class CustomBtn extends StatelessWidget {
           color: bgColor ?? AppColors.primaryColor,
           border: Border.all(color: borderColor ?? Colors.transparent),
           borderRadius: BorderRadius.circular(radius ?? 5),
+          boxShadow: boxShadow,
         ),
-        child: InkWell(
+        child: widget ?? InkWell(
           onTap: onTap,
-          borderRadius: BorderRadius.circular(radius ?? 3),
+          borderRadius: BorderRadius.circular(radius ?? 5),
           child: Center(
             child: CustomText(
               title!.tr,

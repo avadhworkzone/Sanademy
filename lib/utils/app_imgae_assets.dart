@@ -42,16 +42,22 @@ class AppImageAssets {
       '${AppConstants.baseIconAssetsPath}update.svg';
 
   /// sub screen of home screen
-  static String teacherImg =
-      "${AppConstants.baseImageAssetsPath}teacherImg.png";
-  static String bookIcn = "${AppConstants.baseIconAssetsPath}bookIcn.svg";
-  static String languageIcn =
-      "${AppConstants.baseIconAssetsPath}languageIcn.svg";
-  static String educationIcn =
-      "${AppConstants.baseIconAssetsPath}educationIcn.svg";
-  static String certificates =
-      "${AppConstants.baseIconAssetsPath}certificates.svg";
-  static String taskIcn = "${AppConstants.baseIconAssetsPath}taskIcn.svg";
+   static String teacherImg = "${AppConstants.baseImageAssetsPath}teacherImg.png";
+
+   /// Description Screen
+   static String bookIcn = "${AppConstants.baseIconAssetsPath}bookIcn.svg";
+   static String languageIcn = "${AppConstants.baseIconAssetsPath}languageIcn.svg";
+   static String educationIcn = "${AppConstants.baseIconAssetsPath}educationIcn.svg";
+   static String certificates = "${AppConstants.baseIconAssetsPath}certificates.svg";
+   static String taskIcn = "${AppConstants.baseIconAssetsPath}taskIcn.svg";
+   static String enrollSuccessfullyImg = "${AppConstants.baseImageAssetsPath}enrollSuccessfullyImg.png";
+
+   /// Menu Screen
+   static String fastPayImg = "${AppConstants.baseImageAssetsPath}fastPayImg.png";
+   static String firstIraqiBankImg = "${AppConstants.baseImageAssetsPath}firstIraqiBankImg.png";
+   static String mobileBalanceIcn = "${AppConstants.baseImageAssetsPath}mobileBalanceIcn.png";
+   static String visaIcn = "${AppConstants.baseImageAssetsPath}visaIcn.png";
+
 
   /// my progress screen
   static String myProgressBgImg1 =
