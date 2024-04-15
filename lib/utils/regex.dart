@@ -7,6 +7,8 @@ class RegularExpressionUtils {
   static String alphabetPattern = "[a-zA-Z]";
   static String text = "^[a-zA-Z ]*\$";
 
+  static String address = r"^[a-zA-Z0-9\s,-]+$";
+
 
   /// capitalCase is used for one capital character is requiter in string
   var capitalCase = RegExp(r'[A-Z]');
@@ -96,6 +98,16 @@ class ValidationMethod {
       return AppStrings.pleaseEnterOtp.tr;
     }if(value.length < 4){
       return AppStrings.pleaseEnterValidOtp.tr;
+    }
+    return null;
+  }
+
+  static String? validateAddress(value) {
+    bool regex = RegExp(RegularExpressionUtils.address).hasMatch(value);
+    if (value == null) {
+      return AppStrings.isRequired.tr;
+    }else if (!regex) {
+      return AppStrings.isRequired.tr;
     }
     return null;
   }

@@ -20,6 +20,6 @@ class AppColors {
   static const Color black02 = Color(0xff021317);
   static const Color pinkEE = Color(0xffEE3264);
   static const Color firstIraqiBankColor = Color(0xff11998F);
-
+  static const Color black1D = Color(0xff1D1D1D);
   static const Color whiteShadeF8 = Color(0xffF6F8F8);
 }

@@ -63,7 +63,24 @@ Map<String, String> en = {
   AppStrings.notifications : 'Notifications',
   AppStrings.contactUs : 'Contact Us',
   AppStrings.aboutUs : 'About Us',
+  AppStrings.ourMission : 'Our Mission',
+  AppStrings.ourVision : 'Our Vision',
   AppStrings.logOut : 'Logout',
+
+  /// Contact Us Screen
+  AppStrings.getInTouch : 'Get In Touch',
+  AppStrings.location : 'Get In Touch',
+  AppStrings.phoneNumber : 'Phone Number',
+  AppStrings.emailAddress : 'Email Address',
+  AppStrings.writeUsDirectly : 'Write Us Directly',
+  AppStrings.writeMessage : 'Write Message',
+  AppStrings.about : 'About',
+
+  /// Profile Screen
+  AppStrings.save : 'Save',
+  AppStrings.enterAddress : 'Enter your address',
+  AppStrings.connectWithFaceBook : 'Connect With Facebook',
+  AppStrings.connectWithInstagram : 'Connect With Instagram',
 
   /// my progress screen
   AppStrings.progressIntroductionTxt: "In this page, you can see all your enrolled courses and the progress that you made in each one of them.",

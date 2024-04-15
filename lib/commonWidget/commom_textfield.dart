@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sanademy/commonWidget/commom_textstyle.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/regex.dart';
 
 import '../utils/app_enum.dart';
-
 
 typedef OnChangeString = void Function(String value);
 
@@ -76,7 +74,9 @@ class CommonTextField extends StatelessWidget {
     this.fillColor,
     this.borderWidth,
     this.hintFontWeight,
-    this.contentPadding, this.style, this.cursorColor,
+    this.contentPadding,
+    this.style,
+    this.cursorColor,
   });
 
   /// PLEASE IMPORT GET X PACKAGE
@@ -87,7 +87,8 @@ class CommonTextField extends StatelessWidget {
       child: TextFormField(
         controller: textEditController,
         maxLength: maxLength,
-        style: style ,/*?? underLineBorder!
+        style: style,
+        /*?? underLineBorder!
             ? CustomTextStyle.textStyleInputField
             .copyWith(color: AppColors.black)
             : CustomTextStyle.textStyleInputField,*/
@@ -111,29 +112,33 @@ class CommonTextField extends StatelessWidget {
           return isValidate == false
               ? null
               : value!.isEmpty
-              ? validationMessage?.tr ?? AppStrings.isRequired.tr
-              : validationType == ValidationTypeEnum.email
-              ? ValidationMethod.validateEmail(value)
-              : validationType == ValidationTypeEnum.name
-              ? ValidationMethod.validateName(value) :null;
+                  ? validationMessage?.tr ?? AppStrings.isRequired.tr
+                  : validationType == ValidationTypeEnum.email
+                      ? ValidationMethod.validateEmail(value)
+                      : validationType == ValidationTypeEnum.name
+                          ? ValidationMethod.validateName(value)
+                          : validationType == ValidationTypeEnum.address
+                              ? ValidationMethod.validateAddress(value)
+                              : null;
         },
         textInputAction:
-        maxLine == 4 ? TextInputAction.none : TextInputAction.done,
+            maxLine == 4 ? TextInputAction.none : TextInputAction.done,
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        cursorColor: cursorColor??AppColors.black,
+        cursorColor: cursorColor ?? AppColors.black,
         decoration: InputDecoration(
           isDense: true,
-          fillColor: fillColor??AppColors.white,
+          fillColor: fillColor ?? AppColors.white,
           filled: true,
           contentPadding: contentPadding ??
               EdgeInsets.symmetric(horizontal: 15.w, vertical: 17.h),
           hintText: hintText!.tr,
-          errorBorder:  OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.red),borderRadius: BorderRadius.circular(10.r)),
+          errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.red),
+              borderRadius: BorderRadius.circular(10.r)),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
-              borderSide:
-              BorderSide(color: borderColor ?? AppColors.black.withOpacity(0.10))),
+              borderSide: BorderSide(
+                  color: borderColor ?? AppColors.black.withOpacity(0.10))),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
                 width: borderWidth ?? 1.0,

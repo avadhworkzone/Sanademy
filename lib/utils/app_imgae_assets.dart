@@ -58,6 +58,14 @@ class AppImageAssets {
    static String mobileBalanceIcn = "${AppConstants.baseImageAssetsPath}mobileBalanceIcn.png";
    static String visaIcn = "${AppConstants.baseImageAssetsPath}visaIcn.png";
 
+   /// Profile screen
+  static String facebookIcn = "${AppConstants.baseIconAssetsPath}facebookIcn.svg";
+  static String instagramIcn = "${AppConstants.baseIconAssetsPath}instagramIcn.svg";
+
+   /// Contact Us
+  static String locationIcn =  "${AppConstants.baseImageAssetsPath}locationIcn.png";
+  static String phoneNumberImg =  "${AppConstants.baseImageAssetsPath}phoneNumberImg.png";
+  static String emailAddressImg =  "${AppConstants.baseImageAssetsPath}emailAddressImg.png";
 
   /// my progress screen
   static String myProgressBgImg1 =

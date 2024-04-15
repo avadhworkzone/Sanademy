@@ -63,7 +63,26 @@ class AppStrings {
   static String creditCard = 'Credit Card';
   static String contactUs = 'Contact Us';
   static String aboutUs = 'About Us';
+  static String ourMission = 'Our Mission';
+  static String ourVision = 'Our Vision';
   static String logOut = 'Logout';
+
+
+  /// Contact Us Screen
+  static String getInTouch = 'Get In Touch';
+  static String location = 'Location';
+  static String phoneNumber = 'Phone Number';
+  static String emailAddress = 'Email Address';
+  static String writeUsDirectly = 'Write Us Directly';
+  static String writeMessage = 'Write Message';
+  static String about = 'About';
+
+  /// Profile Screen
+  static String save = 'Save';
+  static String profile = 'Profile';
+  static String enterAddress = 'Enter your address';
+  static String connectWithFaceBook = 'Connect With Facebook';
+  static String connectWithInstagram = 'Connect With Instagram';
 
   /// my progress screen
   static String progressIntroductionTxt =

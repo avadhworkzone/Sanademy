@@ -63,7 +63,24 @@ Map<String, String> ar = {
   AppStrings.notifications: 'إشعارات',
   AppStrings.contactUs: 'اتصل بنا',
   AppStrings.aboutUs: 'معلومات عنا',
+  AppStrings.ourMission: 'مهمتنا',
+  AppStrings.ourVision: 'رؤيتنا',
   AppStrings.logOut: 'تسجيل خروج',
+
+  /// Contact Us Screen
+  AppStrings.getInTouch: 'ابقى على تواصل',
+  AppStrings.location: 'موقع',
+  AppStrings.phoneNumber: 'رقم التليفون',
+  AppStrings.emailAddress: 'عنوان البريد الإلكتروني',
+  AppStrings.writeUsDirectly: 'اكتب لنا مباشرة',
+  AppStrings.writeMessage: 'اكتب رسالة',
+  AppStrings.about: 'عن',
+
+  /// Profile Screen
+  AppStrings.save: 'يحفظ',
+  AppStrings.enterAddress: 'أدخل عنوانك',
+  AppStrings.connectWithFaceBook: 'تواصل مع الفيسبوك',
+  AppStrings.connectWithInstagram: 'تواصل مع إنستغرام',
 
   /// my progress screen
   AppStrings.progressIntroductionTxt: "في هذه الصفحة، يمكنك رؤية جميع الدورات التي قمت بالتسجيل فيها والتقدم الذي أحرزته في كل منها.",
