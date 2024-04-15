@@ -14,6 +14,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "audio_waveforms",
+      "rootUri": "file:///C:/Users/Admin/AppData/Local/Pub/Cache/hosted/pub.dev/audio_waveforms-1.0.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "boolean_selector",
       "rootUri": "file:///C:/Users/Admin/AppData/Local/Pub/Cache/hosted/pub.dev/boolean_selector-2.1.1",
       "packageUri": "lib/",
@@ -440,7 +446,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-04-15T05:53:07.718347Z",
+  "generated": "2024-04-15T09:04:25.298042Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }
