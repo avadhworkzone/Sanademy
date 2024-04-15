@@ -75,7 +75,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   controller: signUpViewModel.dateController.value,
                   decoration: InputDecoration(
                     contentPadding:
-                        EdgeInsets.symmetric(horizontal: 15.w, vertical: 12.h),
+                        EdgeInsets.symmetric(horizontal: 15.w, vertical: 17.h),
                     hintText: AppStrings.dateFormat.tr,
                     hintStyle: TextStyle(
                       color: AppColors.black12,
@@ -118,7 +118,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 /// PHONE NUMBER TEXT FIELD
                 Obx(
                   () => SizedBox(
-                    height: 75.h,
                     child: IntlPhoneField(
                       controller: signUpViewModel.phoneController.value,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -128,8 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         }
                       },
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 15.w, vertical: 12.h),
+                        contentPadding:   EdgeInsets.symmetric(horizontal: 15.w, vertical: 17.h),
                         hintText: AppStrings.enterYourPhoneNumber.tr,
                         hintStyle: TextStyle(
                           color: AppColors.black12,

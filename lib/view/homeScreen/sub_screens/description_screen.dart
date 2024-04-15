@@ -117,7 +117,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           Get.back();
                         },
                         child: Container(
-                          margin: EdgeInsets.only(left: 10.w, top: 10.w),
+                          margin: EdgeInsets.only(left: 10.w, top: 10.w,right: 10.w),
                           padding: EdgeInsets.symmetric(
                               horizontal: 10.w, vertical: 10.w),
                           decoration: BoxDecoration(
@@ -462,7 +462,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                             tilePadding: EdgeInsets.only(left: 5.w),
                             // childrenPadding: EdgeInsets.only(left: 20.w),
                             title: CustomText(
-                              AppStrings.whatWillYouLearn,
+                              AppStrings.whoThisCourseIsFor,
                               fontSize: 20.sp,
                               fontWeight: FontWeight.w700,
                               color: AppColors.black0E,
@@ -531,11 +531,20 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           child: ExpansionTile(
                               tilePadding: EdgeInsets.symmetric(
                                   horizontal: 5.w, vertical: 10.h),
+                             collapsedShape:ContinuousRectangleBorder(
+                                 side: BorderSide(color: Colors.transparent),
+                                 borderRadius: BorderRadius.all(Radius.circular(20))
+                             ),
+                             /* shape:  ContinuousRectangleBorder(
+                                side: BorderSide(color: Colors.transparent),
+                                  borderRadius: BorderRadius.all(Radius.circular(20))
+                              ),*/
                               // childrenPadding: EdgeInsets.only(left: 20.w),
                               title: Row(
                                 children: [
                                   CircleAvatar(
                                     radius: 40.r,
+                                    backgroundImage: NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s'),
                                   ),
                                   SizeConfig.sW5,
                                   Column(

@@ -35,6 +35,7 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
               regularExpression: RegularExpressionUtils.alphabetPattern,
               hintText: AppStrings.searchHere.tr,
               style: const TextStyle(color: AppColors.white),
+              underLineBorder: false,
               cursorColor: AppColors.white,
               isValidate: false,
               hintTextColor: AppColors.white,

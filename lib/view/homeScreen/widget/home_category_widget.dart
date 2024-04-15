@@ -72,6 +72,7 @@ class _HomeCategoryWidgetState extends State<HomeCategoryWidget> {
                           fontSize: 13.sp,
                           fontWeight: FontWeight.w500,
                           color: AppColors.white,
+                          overflow: TextOverflow.ellipsis,
                         )
                       ],
                     ),
