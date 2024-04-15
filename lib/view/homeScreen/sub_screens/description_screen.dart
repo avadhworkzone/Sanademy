@@ -22,6 +22,12 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   DescriptionViewModel descriptionViewModel = Get.put(DescriptionViewModel());
 
   @override
+  void dispose() {
+    descriptionViewModel.videoPlayerController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Material(
@@ -52,10 +58,11 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                       .videoPlayerController),
                                   InkWell(
                                       onTap: () {
-                                        setState(() {
-                                          descriptionViewModel.onTouch.value =
-                                              true;
-                                        });
+                                        descriptionViewModel.onTouch.value =
+                                            true;
+                                        print(
+                                            'descriptionViewModel.onTouch.value===> ${descriptionViewModel.onTouch.value}');
+
                                         if (descriptionViewModel
                                             .videoPlayerController
                                             .value
@@ -70,14 +77,13 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                               .play();
                                         }
                                         Future.delayed(
-                                          const Duration(seconds: 2),
-                                          () => setState(() {
-                                            descriptionViewModel.onTouch.value =
-                                                false;
-                                          }),
+                                          const Duration(seconds: 10),
+                                          () => descriptionViewModel
+                                              .onTouch.value = false,
                                         );
                                       },
-                                      child: descriptionViewModel.onTouch ==
+                                      child: descriptionViewModel
+                                                      .onTouch.value ==
                                                   true &&
                                               descriptionViewModel
                                                       .videoPlayerController

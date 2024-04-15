@@ -40,9 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  setState(() {
-                    _drawerKey.currentState?.openDrawer();
-                  });
+                  _drawerKey.currentState?.openDrawer();
                 },
                 child: Container(
                   margin: EdgeInsets.all(8.w),
@@ -58,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           actionWidget: GestureDetector(
-            onTap: (){
+            onTap: () {
               Get.to(const ProfileScreen());
             },
             child: Container(

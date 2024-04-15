@@ -194,23 +194,19 @@ class _MenuScreenState extends State<MenuScreen> {
               itemBuilder: (context, index) {
                 return Column(
                   children: [
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
-                      child: InkWell(
-                      onTap: (){
-                        setState(() {
-                          if(index == 0){
-                            Get.to(const ContactUsScreen());
-                          }else if(index == 1){
-                            Get.to(const AboutUsScreen());
-                          }else{
-                            print('Logout');
-                          }
-                        });
-                      //  Get.to(const AboutUsScreen());
-
+                    InkWell(
+                      onTap: () {
+                        if (index == 0) {
+                          Get.to(const ContactUsScreen());
+                        } else if (index == 1) {
+                          Get.to(const AboutUsScreen());
+                        } else {
+                          print('Logout');
+                        }
                       },
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.w, vertical: 8.h),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

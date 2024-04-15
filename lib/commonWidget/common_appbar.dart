@@ -7,12 +7,12 @@ import 'package:sanademy/utils/app_imgae_assets.dart';
 import 'package:sanademy/utils/local_assets.dart';
 
 AppBar commonAppBar(
-    { String? titleTxt,
+    {String? titleTxt,
     Widget? leadingWidget,
     Widget? actionWidget,
     Widget? titleWidget,
     Widget? sizedBox,
-      bool? centerTitle,
+    bool? centerTitle,
     double? leadingWidth,
     Color? textColor,
     FontWeight? textFontWeight,
@@ -21,33 +21,34 @@ AppBar commonAppBar(
   return AppBar(
     backgroundColor: appBarBackgroundColor ?? AppColors.primaryColor,
     automaticallyImplyLeading: false,
-    centerTitle: centerTitle??true,
+    centerTitle: centerTitle ?? true,
     elevation: 0.0,
     bottomOpacity: 0.0,
     scrolledUnderElevation: 0,
     leading: leadingWidget ?? const SizedBox(),
     leadingWidth: leadingWidth ?? 0.w,
     actions: [actionWidget ?? const SizedBox(), SizedBox(width: 8.w)],
-    title: titleWidget??Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        sizedBox ??
-            LocalAssets(
-              imagePath: AppImageAssets.sanademaylogo,
-              width: 33.52.w,
-              height: 27.2.h,
+    title: titleWidget ??
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            sizedBox ??
+                LocalAssets(
+                  imagePath: AppImageAssets.sanademaylogo,
+                  width: 33.52.w,
+                  height: 27.2.h,
+                ),
+            SizedBox(
+              width: 10.w,
             ),
-        SizedBox(
-          width: 10.w,
+            CustomText(
+              titleTxt!,
+              color: textColor ?? AppColors.white,
+              fontWeight: textFontWeight ?? FontWeight.w500,
+              fontSize: 20.sp,
+            ),
+          ],
         ),
-        CustomText(
-          titleTxt!,
-          color: textColor ?? AppColors.white,
-          fontWeight: textFontWeight ?? FontWeight.w500,
-          fontSize: 20.sp,
-        ),
-      ],
-    ),
     bottom: bottom == null
         ? null
         : PreferredSize(
@@ -68,7 +69,9 @@ commonBackArrowAppBar({
   double? actionFontSize,
 }) {
   return Padding(
-    padding: EdgeInsets.symmetric(horizontal: horizontalPadding??20.w, vertical: verticalPadding??20.w),
+    padding: EdgeInsets.symmetric(
+        horizontal: horizontalPadding ?? 20.w,
+        vertical: verticalPadding ?? 20.w),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -102,13 +105,13 @@ commonBackArrowAppBar({
               ),
         CustomText(
           titleTxt.tr,
-          color: titleWidgetColor??AppColors.black0E,
+          color: titleWidgetColor ?? AppColors.black0E,
           fontWeight: FontWeight.w700,
           fontSize: 20.sp,
         ),
         actionWidget == true
             ? CustomText(
-                actionTitle.tr ?? '',
+                actionTitle?.tr ?? '',
                 color: actionWidgetColor ?? AppColors.color8B,
                 fontWeight: actionWidgetFontWeight ?? FontWeight.w500,
                 fontSize: actionFontSize,
