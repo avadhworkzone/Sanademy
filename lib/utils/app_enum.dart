@@ -1,4 +1,4 @@
-enum ValidationTypeEnum { password, email, pNumber, name }
+enum ValidationTypeEnum { password, email, pNumber, name,address }
 
 ///API TYPES
 enum APIType { aPost, aGet, aDelete, aPut }

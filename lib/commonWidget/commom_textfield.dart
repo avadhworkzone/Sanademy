@@ -9,6 +9,7 @@ import 'package:sanademy/utils/regex.dart';
 
 import '../utils/app_enum.dart';
 
+
 typedef OnChangeString = void Function(String value);
 
 class CommonTextField extends StatelessWidget {
@@ -87,8 +88,7 @@ class CommonTextField extends StatelessWidget {
       child: TextFormField(
         controller: textEditController,
         maxLength: maxLength,
-        style: style,
-        /*?? underLineBorder!
+        style: style ,/*?? underLineBorder!
             ? CustomTextStyle.textStyleInputField
             .copyWith(color: AppColors.black)
             : CustomTextStyle.textStyleInputField,*/
@@ -117,7 +117,9 @@ class CommonTextField extends StatelessWidget {
                       ? ValidationMethod.validateEmail(value)
                       : validationType == ValidationTypeEnum.name
                           ? ValidationMethod.validateName(value)
-                          : null;
+                          : validationType == ValidationTypeEnum.address
+                              ? ValidationMethod.validateAddress(value)
+                              : null;
         },
         textInputAction:
             maxLine == 4 ? TextInputAction.none : TextInputAction.done,

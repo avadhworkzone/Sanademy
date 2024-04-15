@@ -8,6 +8,8 @@ import 'package:sanademy/utils/app_imgae_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view/menu_screen/about_us_screen.dart';
+import 'package:sanademy/view/menu_screen/contact_us_screen.dart';
 import 'package:sanademy/view_model/menu_screen_view_model.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -124,8 +126,8 @@ class _MenuScreenState extends State<MenuScreen> {
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w700,
                         bgColor: AppColors.white,
-                        boxShadow: const [
-                          BoxShadow(
+                        boxShadow: [
+                          const BoxShadow(
                               color: Colors.black26,
                               offset: Offset(0, 1),
                               blurRadius: 4.0)
@@ -195,32 +197,47 @@ class _MenuScreenState extends State<MenuScreen> {
                     Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          index == 2
-                              ? InkWell(
-                                  onTap: () {},
-                                  child: CustomText(
+                      child: InkWell(
+                      onTap: (){
+                        setState(() {
+                          if(index == 0){
+                            Get.to(const ContactUsScreen());
+                          }else if(index == 1){
+                            Get.to(const AboutUsScreen());
+                          }else{
+                            print('Logout');
+                          }
+                        });
+                      //  Get.to(const AboutUsScreen());
+
+                      },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            index == 2
+                                ? InkWell(
+                                    onTap: () {},
+                                    child: CustomText(
+                                      menuScreenViewModel.drawerData[index],
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: AppColors.red90,
+                                    ),
+                                  )
+                                : CustomText(
                                     menuScreenViewModel.drawerData[index],
-                                    fontSize: 15.sp,
                                     fontWeight: FontWeight.w500,
-                                    color: AppColors.red90,
+                                    fontSize: 15.sp,
+                                    color: AppColors.black13,
                                   ),
-                                )
-                              : CustomText(
-                                  menuScreenViewModel.drawerData[index],
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 15.sp,
-                                  color: AppColors.black13,
-                                ),
-                          index == 2
-                              ? const SizedBox()
-                              : const Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 15,
-                                ),
-                        ],
+                            index == 2
+                                ? const SizedBox()
+                                : const Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 15,
+                                  ),
+                          ],
+                        ),
                       ),
                     ),
                     index == 2

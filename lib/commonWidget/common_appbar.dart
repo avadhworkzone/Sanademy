@@ -7,10 +7,12 @@ import 'package:sanademy/utils/app_imgae_assets.dart';
 import 'package:sanademy/utils/local_assets.dart';
 
 AppBar commonAppBar(
-    {required String titleTxt,
+    { String? titleTxt,
     Widget? leadingWidget,
     Widget? actionWidget,
+    Widget? titleWidget,
     Widget? sizedBox,
+      bool? centerTitle,
     double? leadingWidth,
     Color? textColor,
     FontWeight? textFontWeight,
@@ -19,14 +21,14 @@ AppBar commonAppBar(
   return AppBar(
     backgroundColor: appBarBackgroundColor ?? AppColors.primaryColor,
     automaticallyImplyLeading: false,
-    centerTitle: true,
+    centerTitle: centerTitle??true,
     elevation: 0.0,
     bottomOpacity: 0.0,
     scrolledUnderElevation: 0,
     leading: leadingWidget ?? const SizedBox(),
     leadingWidth: leadingWidth ?? 0.w,
     actions: [actionWidget ?? const SizedBox(), SizedBox(width: 8.w)],
-    title: Row(
+    title: titleWidget??Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         sizedBox ??
@@ -39,7 +41,7 @@ AppBar commonAppBar(
           width: 10.w,
         ),
         CustomText(
-          titleTxt,
+          titleTxt!,
           color: textColor ?? AppColors.white,
           fontWeight: textFontWeight ?? FontWeight.w500,
           fontSize: 20.sp,
@@ -58,9 +60,15 @@ commonBackArrowAppBar({
   String? actionTitle,
   bool leadingWidget = true,
   bool actionWidget = true,
+  Color? actionWidgetColor,
+  Color? titleWidgetColor,
+  double? horizontalPadding,
+  double? verticalPadding,
+  FontWeight? actionWidgetFontWeight,
+  double? actionFontSize,
 }) {
   return Padding(
-    padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.w),
+    padding: EdgeInsets.symmetric(horizontal: horizontalPadding??20.w, vertical: verticalPadding??20.w),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -68,8 +76,10 @@ commonBackArrowAppBar({
         leadingWidget == true
             ? InkWell(
                 onTap: () {
+                  FocusManager.instance.primaryFocus?.unfocus();
                   Get.back();
                 },
+                borderRadius: BorderRadius.circular(17.r),
                 child: Container(
                   padding:
                       EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
@@ -92,15 +102,16 @@ commonBackArrowAppBar({
               ),
         CustomText(
           titleTxt.tr,
-          color: AppColors.black0E,
+          color: titleWidgetColor??AppColors.black0E,
           fontWeight: FontWeight.w700,
           fontSize: 20.sp,
         ),
         actionWidget == true
             ? CustomText(
-                actionTitle?.tr ?? '',
-                color: AppColors.color8B,
-                fontWeight: FontWeight.w500,
+                actionTitle.tr ?? '',
+                color: actionWidgetColor ?? AppColors.color8B,
+                fontWeight: actionWidgetFontWeight ?? FontWeight.w500,
+                fontSize: actionFontSize,
               )
             : SizedBox(
                 width: 50.w,
