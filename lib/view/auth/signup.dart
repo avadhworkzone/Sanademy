@@ -12,7 +12,6 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-
   final firstNameController = TextEditingController();
 
   @override
@@ -32,19 +31,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
               // createAccountController.isAllFieldInput();
             },
           ),
-          SizedBox(height: 30,),
+          const SizedBox(
+            height: 30,
+          ),
           InkWell(
-              onTap: (){
-                Get.updateLocale(Locale('en_US'));
+              onTap: () {
+                Get.updateLocale(const Locale('en_US'));
               },
-              child: Text('english')),
-          SizedBox(height: 30,),
+              child: const Text('english')),
+          const SizedBox(
+            height: 30,
+          ),
           InkWell(
-              onTap: (){
-                Get.updateLocale(Locale('ar'));
+              onTap: () {
+                Get.updateLocale(const Locale('ar'));
               },
-              child: Text('arabian')),
-
+              child: const Text('arabian')),
         ],
       ),
     );

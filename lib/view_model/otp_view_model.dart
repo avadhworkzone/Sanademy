@@ -1,9 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:sanademy/view/bottombar/bottom_bar.dart';
 
 class OtpViewModel extends GetxController {
   /// OTP FIELD CONTROLLER
@@ -12,12 +9,12 @@ class OtpViewModel extends GetxController {
 
   ///COUNT DOWN TIMER FOR OTP
   Rx<Timer?>? countdownTimer =
-      Timer.periodic(Duration(seconds: 1), (timer) {}).obs;
-  Rx<Duration> myDuration = Duration(seconds: 60).obs;
+      Timer.periodic(const Duration(seconds: 1), (timer) {}).obs;
+  Rx<Duration> myDuration = const Duration(seconds: 60).obs;
 
   void startTimer() {
     countdownTimer!.value =
-        Timer.periodic(Duration(seconds: 1), (_) => setCountDown());
+        Timer.periodic(const Duration(seconds: 1), (_) => setCountDown());
   }
 
   void stopTimer() {

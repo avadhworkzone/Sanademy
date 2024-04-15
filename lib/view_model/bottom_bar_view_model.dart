@@ -8,9 +8,9 @@ class BottomBarViewModel extends GetxController {
   Rx<int> selectedBottomIndex = 0.obs;
 
   RxList screenList = [
-    HomeScreen(),
-    MyProgressScreen(),
-    MyCertificateScreen(),
-    NotificationScreen(),
+    const HomeScreen(),
+    const MyProgressScreen(),
+    const MyCertificateScreen(),
+    const NotificationScreen(),
   ].obs;
 }

@@ -32,7 +32,7 @@ void showErrorSnackBar(String title, String message) {
     borderRadius: 5,
     snackPosition: SnackPosition.BOTTOM,
     backgroundColor: AppColors.whiteShadeF8,
-    duration: Duration(seconds: 4),
+    duration: const Duration(seconds: 4),
   ));
 }
 
@@ -61,7 +61,7 @@ void showSussesSnackBar(String title, String message) {
     borderRadius: 5,
     snackPosition: SnackPosition.BOTTOM,
     backgroundColor: AppColors.whiteShadeF8,
-    duration: Duration(seconds: 4),
+    duration: const Duration(seconds: 4),
   ));
 }
 

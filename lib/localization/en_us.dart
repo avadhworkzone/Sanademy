@@ -44,8 +44,8 @@ Map<String, String> en = {
   AppStrings.downloadPDF: "Download PDF",
   AppStrings.requestHartCopy: "Request Hard Copy",
   AppStrings.enrollSuccessfully: "Enrolled Successfully!",
-  AppStrings.enrollSuccessfullyTxt:
-      "You Have successfully enrolled in “Fundamentals of mathematics”",
+  AppStrings.enrollSuccessfullyTxt: 'You Have successfully enrolled in ',
+  AppStrings.fundamentalTxt: '“Fundamentals of mathematics”',
   AppStrings.instructor: "Instructor",
   AppStrings.yourExperience: "Years of experience: ",
   AppStrings.expertIn: "Expert in: ",

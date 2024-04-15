@@ -35,7 +35,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                     () => SizedBox(
                       height: Get.width * 0.7,
                       width: Get.width,
-                      child: descriptionViewModel.isLoader == true
+                      child: descriptionViewModel.isLoader.value == true
                           ? Center(
                               child: SizedBox(
                                   height: 50.h,
@@ -89,7 +89,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                               size: 50,
                                               color: Colors.white,
                                             )
-                                          : descriptionViewModel.onTouch ==
+                                          : descriptionViewModel
+                                                          .onTouch.value ==
                                                       true &&
                                                   descriptionViewModel
                                                           .videoPlayerController
@@ -137,9 +138,11 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                         insetPadding: EdgeInsets.symmetric(horizontal: 25.w),
                         children: [
                           Padding(
-                            padding: EdgeInsets.symmetric(vertical: 30.h,horizontal: 20.w),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 30.h, horizontal: 20.w),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 LocalAssets(
                                   imagePath:
@@ -154,12 +157,30 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                   color: AppColors.black0E,
                                 ),
                                 SizeConfig.sH16,
-                                CustomText(
-                                  AppStrings.enrollSuccessfullyTxt, fontSize: 15.sp,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColors.black0E,
-
-                                ),
+                                RichText(
+                                    textAlign: TextAlign.center,
+                                    text: TextSpan(
+                                        text:
+                                            AppStrings.enrollSuccessfullyTxt.tr,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 14.sp,
+                                            color: AppColors.black0E),
+                                        children: [
+                                          TextSpan(
+                                            text: AppStrings.fundamentalTxt.tr,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 14.sp,
+                                                color: AppColors.black0E),
+                                          )
+                                        ])),
+                                // CustomText(
+                                //   AppStrings.enrollSuccessfullyTxt,
+                                //   fontSize: 15.sp,
+                                //   fontWeight: FontWeight.w400,
+                                //   color: AppColors.black0E,
+                                // ),
                               ],
                             ),
                           )

@@ -46,7 +46,8 @@ class AppStrings {
   static String downloadPDF = 'Download PDF';
   static String requestHartCopy = 'Request Hard Copy';
   static String enrollSuccessfully = 'Enrolled Successfully!';
-  static String enrollSuccessfullyTxt = 'You Have successfully enrolled in';
+  static String enrollSuccessfullyTxt = 'You Have successfully enrolled in ';
+  static String fundamentalTxt = '“Fundamentals of mathematics”';
   static String instructor = 'Instructor';
   static String yourExperience = 'Years of experience: ';
   static String expertIn = 'Expert in: ';
@@ -85,8 +86,10 @@ class AppStrings {
 
   /// questions screen
   static String finishExam = 'Finish Exam';
+  static String skip = 'Skip';
+  static String next = 'Next';
 
-  ///
+  /// congratulation screen
   static String congratulations = "Congratulations!";
   static String yourScore = "Your Score";
   static String yourTime = "Your Time";

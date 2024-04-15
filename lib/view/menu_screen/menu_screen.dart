@@ -124,7 +124,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w700,
                         bgColor: AppColors.white,
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                               color: Colors.black26,
                               offset: Offset(0, 1),
@@ -156,7 +156,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w700,
                         bgColor: AppColors.white,
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                               color: Colors.black26,
                               offset: Offset(0, 1),
@@ -215,8 +215,8 @@ class _MenuScreenState extends State<MenuScreen> {
                                   color: AppColors.black13,
                                 ),
                           index == 2
-                              ? SizedBox()
-                              : Icon(
+                              ? const SizedBox()
+                              : const Icon(
                                   Icons.arrow_forward_ios,
                                   size: 15,
                                 ),
@@ -224,7 +224,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       ),
                     ),
                     index == 2
-                        ? SizedBox()
+                        ? const SizedBox()
                         : Divider(
                             color: AppColors.black.withOpacity(0.2),
                           ),

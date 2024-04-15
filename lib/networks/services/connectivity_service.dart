@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
+import 'package:sanademy/utils/size_config_utils.dart';
 
 class ConnectivityViewModel extends GetxController {
   ///======================AppVersionRepo View Model=====================
@@ -49,7 +50,8 @@ class ConnectivityViewModel extends GetxController {
   Future<bool> _updateConnectionStatus() async {
     bool? isConnected;
     try {
-      final List<InternetAddress> result = await InternetAddress.lookup('google.com');
+      final List<InternetAddress> result =
+          await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         isConnected = true;
       }
@@ -66,8 +68,9 @@ class ConnectivityViewModel extends GetxController {
           Dialog(
             backgroundColor: Colors.transparent,
             child: Container(
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(20)),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,15 +82,13 @@ class ConnectivityViewModel extends GetxController {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  SizeConfig.sH10,
                   // Image.asset(
                   //   AppImageAssets.noInternet,
                   // ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10.w),
-                    child: CustomText(
+                    child: const CustomText(
                       "Please check your connection again,or connect to wi-fi.",
                       textAlign: TextAlign.center,
                     ),
