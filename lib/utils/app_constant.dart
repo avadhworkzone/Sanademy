@@ -20,7 +20,7 @@ final List<Map<String, dynamic>> categoriesList = [
   {
     'Icon': Icons.calculate_outlined,
     // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdiA84YFxMVbMQyDPQ8-YLpyyvPXX75lQpdDm6SML0va5Qw7fCm046Hzu5eHsa1PbZLTk&usqp=CAU",
-    'title': 'Mathematics',
+    'title': 'Mathematicss',
     'color': AppColors.primaryColor,
   },
   {

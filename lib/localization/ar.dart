@@ -92,6 +92,27 @@ Map<String, String> ar = {
   /// notification screen
   AppStrings.clearAll: "امسح الكل",
 
+  /// exam Screen
+  AppStrings.exams: "الامتحانات",
+  AppStrings.examsScreenTxt: "في هذه الصفحة، يمكنك اختبار معرفتك في كل مجال، وربما الحصول على الشهادة.",
+
+  /// questions screen
+  AppStrings.finishExam: "إنهاء الامتحان",
+  AppStrings.skip: "يتخطى",
+  AppStrings.next: "التالي",
+
+  /// congratulations screen
+  AppStrings.congratulations: "تهانينا!",
+  AppStrings.youHaveCompletedMathematicsMasteryTest: "لقد أكملت اختبار إتقان الرياضيات",
+  AppStrings.yourScore: "درجاتك",
+  AppStrings.yourTime: "وقتك",
+  AppStrings.yourAnswers: "أجوبتك",
+  AppStrings.viewSolution: "عرض الحل",
+  AppStrings.percentage: "نسبة مئوية",
+  AppStrings.result: "نتيجة",
+  AppStrings.continues: "متواصل",
+  AppStrings.pass: "يمر",
+
   ///APP ERROR MESSAGE
   AppStrings.isRequired: '* مطلوب',
   AppStrings.pleaseEnterOtp: 'الرجاء إدخال كلمة المرور',
