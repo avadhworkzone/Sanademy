@@ -24,7 +24,7 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
       alignment: Alignment.center,
       children: [
         Container(
-          height: 180.h,
+          height: 180.w,
           margin: EdgeInsets.only(bottom: 80.h),
           color: AppColors.primaryColor,
           child: Padding(

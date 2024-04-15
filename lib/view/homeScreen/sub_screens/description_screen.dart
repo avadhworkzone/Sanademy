@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
+import 'package:sanademy/commonWidget/network_assets.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_imgae_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
@@ -60,8 +61,6 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                       onTap: () {
                                         descriptionViewModel.onTouch.value =
                                             true;
-                                        print(
-                                            'descriptionViewModel.onTouch.value===> ${descriptionViewModel.onTouch.value}');
 
                                         if (descriptionViewModel
                                             .videoPlayerController
@@ -71,16 +70,17 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                               .videoPlayerController
                                               .pause();
                                         } else {
-                                          // If the video is paused, play it.
                                           descriptionViewModel
                                               .videoPlayerController
                                               .play();
                                         }
+
                                         Future.delayed(
-                                          const Duration(seconds: 10),
+                                          const Duration(seconds: 5),
                                           () => descriptionViewModel
                                               .onTouch.value = false,
                                         );
+                                        setState(() {});
                                       },
                                       child: descriptionViewModel
                                                       .onTouch.value ==
@@ -181,12 +181,6 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                                 color: AppColors.black0E),
                                           )
                                         ])),
-                                // CustomText(
-                                //   AppStrings.enrollSuccessfullyTxt,
-                                //   fontSize: 15.sp,
-                                //   fontWeight: FontWeight.w400,
-                                //   color: AppColors.black0E,
-                                // ),
                               ],
                             ),
                           )
@@ -300,11 +294,6 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                       color: AppColors.black,
                                       size: 20.h,
                                     ),
-                                    // LocalAssets(
-                                    //   imagePath: AppImageAssets.bookIcn,
-                                    //   height: 24.h,
-                                    //   width: 24.w,
-                                    // ),
                                     SizeConfig.sW8,
                                     CustomText(
                                       '7 hours 40 minutes',
@@ -530,14 +519,16 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                               .copyWith(dividerColor: Colors.transparent),
                           child: ExpansionTile(
                               tilePadding: EdgeInsets.symmetric(
-                                  horizontal: 5.w, vertical: 10.h),
+                                  horizontal: 15.w, vertical: 10.h),
                               // childrenPadding: EdgeInsets.only(left: 20.w),
                               title: Row(
                                 children: [
                                   CircleAvatar(
                                     radius: 40.r,
+                                    backgroundImage: const NetworkImage(
+                                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s'),
                                   ),
-                                  SizeConfig.sW5,
+                                  SizeConfig.sW8,
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,

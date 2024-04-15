@@ -1,8 +1,7 @@
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
-class DescriptionViewModel extends GetxController{
-
+class DescriptionViewModel extends GetxController {
   late VideoPlayerController videoPlayerController;
 
   RxBool onTouch = false.obs;
@@ -23,15 +22,15 @@ class DescriptionViewModel extends GetxController{
       videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
     );
 
-    videoPlayerController.addListener(() {
-    });
+    videoPlayerController.addListener(() {});
     videoPlayerController.setLooping(true);
     videoPlayerController.pause();
-    onTouch.value=true;
+    onTouch.value = true;
 
+    print('init onTouch.value ==>> ${onTouch.value}');
     videoPlayerController.initialize();
   }
-  
+
   @override
   void dispose() {
     // TODO: implement dispose

@@ -50,7 +50,8 @@ class _ExamScreenState extends State<ExamScreen> {
                           padding: EdgeInsets.all(20.w),
                           margin: EdgeInsets.symmetric(vertical: 10.w),
                           decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.greyEE),
+                              border: Border.all(
+                                  color: AppColors.greyEE, width: 1.sp),
                               borderRadius: BorderRadius.circular(15),
                               color: AppColors.greyFD),
                           child: Row(
@@ -77,12 +78,14 @@ class _ExamScreenState extends State<ExamScreen> {
                                             AppColors.black0E.withOpacity(0.80),
                                       ),
                                       SizeConfig.sW6,
-                                      CustomText('•',
+                                      const CustomText('•',
                                           fontWeight: FontWeight.w500,
                                           color: AppColors.black0E),
                                       SizeConfig.sW6,
                                       CustomText(
-                                        'Problem Solving Test',
+                                        index.isOdd
+                                            ? 'Listening Test'
+                                            : 'Problem Solving Test',
                                         fontWeight: FontWeight.w500,
                                         color:
                                             AppColors.black0E.withOpacity(0.80),
@@ -96,7 +99,7 @@ class _ExamScreenState extends State<ExamScreen> {
                                   CircleAvatar(
                                     backgroundColor:
                                         AppColors.color8B.withOpacity(0.20),
-                                    child: Icon(Icons.play_arrow,
+                                    child: const Icon(Icons.play_arrow,
                                         color: AppColors.color8B),
                                   )
                                 ],
