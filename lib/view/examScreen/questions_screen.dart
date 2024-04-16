@@ -35,6 +35,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
       'question':
           'If a rectangle has a length of 8 units and a width of 5 units, what is its area?',
       'questionNumber': 1,
+      'questionType': 'options',
       'answer': [
         {
           'id': '1',
@@ -57,6 +58,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     {
       'question': '50 times of 8 is equal to:',
       'questionNumber': 2,
+      'questionType': 'options',
       'answer': [
         {
           'id': '1',
@@ -79,6 +81,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     {
       'question': 'What is the sum of 130+125+191?',
       'questionNumber': 3,
+      'questionType': 'audio',
       'answer': [
         {
           'id': '1',
@@ -101,6 +104,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     {
       'question': 'What is the sum of the angles in a triangle?',
       'questionNumber': 4,
+      'questionType': 'options',
       'answer': [
         {
           'id': '1',
@@ -210,16 +214,20 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                 children: [
                   InkWell(
                     onTap: () {
-                      questionNumber1 -= 1;
-                      indexIs = answer.indexWhere((element) =>
-                          element['questionNumber'] == questionNumber1);
-                      if (indexIs == -1) {
-                        indexIs = 0;
+                      if (questionNumber1 == 1) {
+                      } else {
+                        questionNumber1 -= 1;
+                        indexIs = answer.indexWhere((element) =>
+                            element['questionNumber'] == questionNumber1);
+                        if (indexIs == -1) {
+                          indexIs = 0;
+                        }
+
+                        selectedAnswerIndex = selectedAnswerList.indexWhere(
+                            (element) =>
+                                element['questionNumber'] ==
+                                answer[indexIs]['questionNumber']);
                       }
-                      selectedAnswerIndex = selectedAnswerList.indexWhere(
-                          (element) =>
-                              element['questionNumber'] ==
-                              answer[indexIs]['questionNumber']);
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(
