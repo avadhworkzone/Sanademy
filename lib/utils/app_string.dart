@@ -67,7 +67,8 @@ class AppStrings {
   static String ourMission = 'Our Mission';
   static String ourVision = 'Our Vision';
   static String logOut = 'Logout';
-
+  static String deleteAccount = 'Delete Account';
+  static String logOutTxt = "Are you sure you want to logout?";
 
   /// Contact Us Screen
   static String getInTouch = 'Get In Touch';

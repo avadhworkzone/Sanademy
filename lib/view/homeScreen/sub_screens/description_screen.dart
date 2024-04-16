@@ -76,7 +76,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                         }
 
                                         Future.delayed(
-                                          const Duration(seconds: 5),
+                                          const Duration(seconds: 2),
                                           () => descriptionViewModel
                                               .onTouch.value = false,
                                         );
@@ -117,7 +117,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           Get.back();
                         },
                         child: Container(
-                          margin: EdgeInsets.only(left: 10.w, top: 10.w,right: 10.w),
+                          margin: EdgeInsets.only(
+                              left: 10.w, top: 10.w, right: 10.w),
                           padding: EdgeInsets.symmetric(
                               horizontal: 10.w, vertical: 10.w),
                           decoration: BoxDecoration(
@@ -520,15 +521,15 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           child: ExpansionTile(
                               tilePadding: EdgeInsets.symmetric(
                                   horizontal: 5.w, vertical: 10.h),
-                             collapsedShape:ContinuousRectangleBorder(
-                                 side: BorderSide(color: Colors.transparent),
-                                 borderRadius: BorderRadius.all(Radius.circular(20))
-                             ),
-                             /* shape:  ContinuousRectangleBorder(
+                              collapsedShape: ContinuousRectangleBorder(
+                                  side: BorderSide(color: Colors.transparent),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                              /* shape:  ContinuousRectangleBorder(
                                 side: BorderSide(color: Colors.transparent),
                                   borderRadius: BorderRadius.all(Radius.circular(20))
                               ),*/
-                                  horizontal: 15.w, vertical: 10.h),
+
                               // childrenPadding: EdgeInsets.only(left: 20.w),
                               title: Row(
                                 children: [
@@ -662,15 +663,15 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                       ),
                     ),
                     SizeConfig.sH25,
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.w),
-                      child: CustomText(
-                        AppStrings.courseContent,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20.sp,
-                        color: AppColors.black0E,
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    //   child: CustomText(
+                    //     AppStrings.courseContent,
+                    //     fontWeight: FontWeight.w700,
+                    //     fontSize: 20.sp,
+                    //     color: AppColors.black0E,
+                    //   ),
+                    // ),
                     /* SizeConfig.sH16,
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20.w),

@@ -57,12 +57,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 CommonTextField(
                   textEditController: signUpViewModel.nameController.value,
                   validator: ValidationMethod.validateName,
-                  regularExpression: RegularExpressionUtils.text,
+                  regularExpression:
+                      RegularExpressionUtils.alphabetSpacePattern,
                   hintText: AppStrings.enterYourName,
                   hintFontWeight: FontWeight.w400,
                   pIcon: Icon(Icons.account_circle_rounded, size: 30.h),
                   validationType: ValidationTypeEnum.name,
                   borderColor: AppColors.black.withOpacity(0.10),
+                  style: TextStyle(
+                      fontSize: 14.sp,
+                      color: AppColors.black,
+                      fontFamily: AppConstants.quicksand,
+                      fontWeight: FontWeight.w400),
                 ),
                 SizeConfig.sH20,
 
@@ -72,6 +78,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   readOnly: true,
                   validator: ValidationMethod.validateDate,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
+                  style: TextStyle(
+                      fontSize: 14.sp,
+                      color: AppColors.black,
+                      fontFamily: AppConstants.quicksand,
+                      fontWeight: FontWeight.w400),
                   controller: signUpViewModel.dateController.value,
                   decoration: InputDecoration(
                     contentPadding:
@@ -121,13 +132,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: IntlPhoneField(
                       controller: signUpViewModel.phoneController.value,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
+                      initialCountryCode: 'AE',
+                      onCountryChanged: (value) {
+                        print('value country code ${value.code}');
+                      },
                       onChanged: (val) {
+                        print('val country code ${val.countryCode}');
                         if (val.toString().isNotEmpty) {
                           signUpViewModel.isValidate.value = false;
                         }
                       },
+                      style: TextStyle(
+                        color: AppColors.black,
+                        fontSize: 14.sp,
+                        fontFamily: AppConstants.quicksand,
+                        fontWeight: FontWeight.w400,
+                      ),
                       decoration: InputDecoration(
-                        contentPadding:   EdgeInsets.symmetric(horizontal: 15.w, vertical: 17.h),
+                        contentPadding: EdgeInsets.symmetric(
+                            horizontal: 15.w, vertical: 17.h),
                         hintText: AppStrings.enterYourPhoneNumber.tr,
                         hintStyle: TextStyle(
                           color: AppColors.black12,

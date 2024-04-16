@@ -87,7 +87,8 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 child: CommonTextField(
                   textEditController: contactUsViewModel.nameController.value,
                   validator: ValidationMethod.validateName,
-                  regularExpression: RegularExpressionUtils.text,
+                  regularExpression:
+                      RegularExpressionUtils.alphabetSpacePattern,
                   hintText: AppStrings.enterYourName,
                   hintFontWeight: FontWeight.w400,
                   pIcon: Icon(Icons.account_circle_rounded, size: 30.h),

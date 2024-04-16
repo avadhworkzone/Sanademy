@@ -1,15 +1,20 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
+import 'package:sanademy/utils/app_constant.dart';
+import 'package:sanademy/utils/app_imgae_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
+import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/examScreen/congratulations_screen.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({super.key});
+  QuestionsScreen({super.key, this.examTitle});
+  String? examTitle;
 
   @override
   State<QuestionsScreen> createState() => _QuestionsScreenState();
@@ -18,21 +23,81 @@ class QuestionsScreen extends StatefulWidget {
 class _QuestionsScreenState extends State<QuestionsScreen> {
   int selectedOption = -1;
   String? selectedOptionValue;
+  Timer? timer1;
+  Duration duration = Duration(seconds: 0);
+  String timeIs = DateTime.now().toString();
+  int questionNumber = 1;
 
-  List<Map<String, dynamic>> answer = [
+  List<Map<dynamic, dynamic>> answer = [
     {
-      'id': '1',
-      'title': '13 square units',
+      'question': 'question is a 1',
+      'questionNumber': 1,
+      'answer': [
+        {
+          'id': '1',
+          'title': '13 square units',
+        },
+        {
+          'id': '2',
+          'title': '24 square units',
+        },
+        {
+          'id': '3',
+          'title': '32 square units',
+        }
+      ]
     },
     {
-      'id': '2',
-      'title': '24 square units',
+      'question': 'question is a 2',
+      'questionNumber': 2,
+      'answer': [
+        {
+          'id': '1',
+          'title': '13 square units',
+        },
+        {
+          'id': '2',
+          'title': '24 square units',
+        },
+        {
+          'id': '3',
+          'title': '32 square units',
+        }
+      ]
     },
-    {
-      'id': '3',
-      'title': '32 square units',
-    }
   ];
+
+  @override
+  void initState() {
+    initData();
+    questionShowFilter();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  questionShowFilter() {
+    final data =
+        answer.where((element) => element['questionNumber'] == questionNumber);
+    print('data is a ===-->> ${data}');
+  }
+
+  initData() {
+    timer1 = Timer.periodic(const Duration(seconds: 1), (timer) async {
+      var diffrence = DateTime.now().difference(DateTime.parse(timeIs));
+      if (mounted) {
+        setState(() {
+          duration = Duration(seconds: 700 - diffrence.inSeconds);
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    timer1?.cancel();
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +109,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
             children: [
               CustomBtn(
                 onTap: () {
+                  timer1?.cancel();
                   Get.to(() => const CongratulationsScreen());
                 },
                 title: AppStrings.finishExam,
@@ -54,12 +120,31 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               ),
               SizeConfig.sH15,
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomText(
-                    'Mathematics Mastery',
+                    widget.examTitle ?? '',
                     color: AppColors.black0E,
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w700,
+                  ),
+                  Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.w),
+                    decoration: BoxDecoration(
+                        color: AppColors.color8B.withOpacity(0.10),
+                        borderRadius: BorderRadius.circular(5.w)),
+                    child: Row(
+                      children: [
+                        const LocalAssets(imagePath: AppImageAssets.clockIcon),
+                        SizeConfig.sW5,
+                        CustomText(
+                          formatDuration(duration.inSeconds),
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),
@@ -109,49 +194,49 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                 fontWeight: FontWeight.w700,
               ),
               SizeConfig.sH10,
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: answer.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
-                    margin: EdgeInsets.symmetric(vertical: 10.w),
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            color: selectedOptionValue == answer[index]['id']
-                                ? AppColors.primaryColor
-                                : AppColors.greyEE),
-                        color: AppColors.greyFD,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Row(
-                      children: [
-                        Transform.scale(
-                          scale: 1.5,
-                          child: Radio<String>(
-                            activeColor: AppColors.primaryColor,
-                            value: selectedOptionValue ?? '',
-                            groupValue: answer[index]['id'],
-                            onChanged: (value) {
-                              setState(() {
-                                selectedOptionValue = answer[index]['id'];
-                                print("Button value: $selectedOptionValue");
-                              });
-                            },
-                          ),
-                        ),
-                        CustomText(
-                          answer[index]['title'],
-                          fontWeight: FontWeight.w500,
-                          color: selectedOptionValue == answer[index]['id']
-                              ? AppColors.primaryColor
-                              : AppColors.black,
-                        )
-                      ],
-                    ),
-                  );
-                },
-              ),
+              // ListView.builder(
+              //   shrinkWrap: true,
+              //   itemCount: answer.length,
+              //   itemBuilder: (context, index) {
+              //     return Container(
+              //       padding:
+              //           EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
+              //       margin: EdgeInsets.symmetric(vertical: 10.w),
+              //       decoration: BoxDecoration(
+              //           border: Border.all(
+              //               color: selectedOptionValue == answer[index]['id']
+              //                   ? AppColors.primaryColor
+              //                   : AppColors.greyEE),
+              //           color: AppColors.greyFD,
+              //           borderRadius: BorderRadius.circular(10)),
+              //       child: Row(
+              //         children: [
+              //           Transform.scale(
+              //             scale: 1.5,
+              //             child: Radio<String>(
+              //               activeColor: AppColors.primaryColor,
+              //               value: selectedOptionValue ?? '',
+              //               groupValue: answer[index]['id'],
+              //               onChanged: (value) {
+              //                 setState(() {
+              //                   selectedOptionValue = answer[index]['id'];
+              //                   print("Button value: $selectedOptionValue");
+              //                 });
+              //               },
+              //             ),
+              //           ),
+              //           CustomText(
+              //             answer[index]['title'],
+              //             fontWeight: FontWeight.w500,
+              //             color: selectedOptionValue == answer[index]['id']
+              //                 ? AppColors.primaryColor
+              //                 : AppColors.black,
+              //           )
+              //         ],
+              //       ),
+              //     );
+              //   },
+              // ),
               SizeConfig.sH10,
               Row(
                 children: [

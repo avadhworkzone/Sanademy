@@ -31,18 +31,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: commonAppBar(
-        titleWidget: commonBackArrowAppBar(
-          titleTxt: AppStrings.profile,
-          titleWidgetColor: AppColors.white,
-          actionWidget: true,
-          horizontalPadding: 5.w,
-          actionTitle: AppStrings.save,
-          actionWidgetColor: AppColors.white,
-          actionWidgetFontWeight: FontWeight.w600,
-          actionFontSize: 15.sp,
-        ),
-        centerTitle: false
-      ),
+          titleWidget: commonBackArrowAppBar(
+            titleTxt: AppStrings.profile,
+            titleWidgetColor: AppColors.white,
+            actionWidget: true,
+            horizontalPadding: 5.w,
+            actionTitle: AppStrings.save,
+            actionWidgetColor: AppColors.white,
+            actionWidgetFontWeight: FontWeight.w600,
+            actionFontSize: 15.sp,
+          ),
+          centerTitle: false),
       body: Column(
         children: [
           Stack(
@@ -80,7 +79,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ],
           ),
           SizeConfig.sH30,
-      
           Expanded(
             child: SingleChildScrollView(
               child: Column(
@@ -89,9 +87,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
                     child: CommonTextField(
-                      textEditController: profileScreenViewModel.nameController.value,
+                      textEditController:
+                          profileScreenViewModel.nameController.value,
                       validator: ValidationMethod.validateName,
-                      regularExpression: RegularExpressionUtils.text,
+                      regularExpression:
+                          RegularExpressionUtils.alphabetSpacePattern,
                       hintText: AppStrings.enterYourName,
                       hintFontWeight: FontWeight.w400,
                       pIcon: Icon(Icons.account_circle_rounded, size: 30.h),
@@ -100,7 +100,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   SizeConfig.sH16,
-            
+
                   /// DATE TEXT FIELD
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -111,8 +111,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       controller: profileScreenViewModel.dateController.value,
                       decoration: InputDecoration(
-                        contentPadding:
-                        EdgeInsets.symmetric(horizontal: 15.w, vertical: 16.h),
+                        contentPadding: EdgeInsets.symmetric(
+                            horizontal: 15.w, vertical: 16.h),
                         filled: true,
                         fillColor: AppColors.white,
                         hintText: AppStrings.dateFormat.tr,
@@ -122,7 +122,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           fontFamily: AppConstants.quicksand,
                           fontWeight: FontWeight.w400,
                         ),
-                        prefixIcon: Icon(Icons.calendar_month_rounded, size: 30.h),
+                        prefixIcon:
+                            Icon(Icons.calendar_month_rounded, size: 30.h),
                         errorBorder: OutlineInputBorder(
                             borderSide: const BorderSide(color: AppColors.red),
                             borderRadius: BorderRadius.circular(10.r)),
@@ -136,14 +137,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             width: 1.0,
                             color: AppColors.black.withOpacity(0.10),
                           ),
-                          borderRadius: const BorderRadius.all(Radius.circular(10)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
                         ),
                         disabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(width: 1.0, color: AppColors.black),
+                          borderSide:
+                              BorderSide(width: 1.0, color: AppColors.black),
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(Radius.circular(10)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
                           borderSide: BorderSide(
                             color: AppColors.black.withOpacity(0.10),
                             width: 1.0,
@@ -153,13 +157,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   SizeConfig.sH16,
-            
+
                   /// PHONE NUMBER TEXTFIELD
                   Obx(
-                        () => Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                    () => Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20.w, vertical: 10.h),
                       child: IntlPhoneField(
-                        controller: profileScreenViewModel.phoneController.value,
+                        controller:
+                            profileScreenViewModel.phoneController.value,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         onChanged: (val) {
                           if (val.toString().isNotEmpty) {
@@ -169,8 +175,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         decoration: InputDecoration(
                           fillColor: AppColors.white,
                           filled: true,
-                          contentPadding:
-                          EdgeInsets.symmetric(horizontal: 15.w, vertical: 17.h),
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 15.w, vertical: 17.h),
                           hintText: AppStrings.enterYourPhoneNumber.tr,
                           hintStyle: TextStyle(
                             color: AppColors.black12,
@@ -178,24 +184,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             fontFamily: AppConstants.quicksand,
                             fontWeight: FontWeight.w400,
                           ),
-                          errorText:
-                          (profileScreenViewModel.isValidate.value == true &&
-                              profileScreenViewModel
-                                  .phoneController.value.text.isEmpty)
+                          errorText: (profileScreenViewModel.isValidate.value ==
+                                      true &&
+                                  profileScreenViewModel
+                                      .phoneController.value.text.isEmpty)
                               ? '* Required'.tr
                               : null,
-                          errorBorder: (profileScreenViewModel.isValidate.value ==
-                              true &&
-                              profileScreenViewModel
-                                  .phoneController.value.text.isEmpty)
+                          errorBorder: (profileScreenViewModel
+                                          .isValidate.value ==
+                                      true &&
+                                  profileScreenViewModel
+                                      .phoneController.value.text.isEmpty)
                               ? OutlineInputBorder(
-                              borderSide: const BorderSide(color: AppColors.red),
-                              borderRadius: BorderRadius.circular(10.r))
+                                  borderSide:
+                                      const BorderSide(color: AppColors.red),
+                                  borderRadius: BorderRadius.circular(10.r))
                               : OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(
-                                color: AppColors.black.withOpacity(0.10),
-                              )),
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: AppColors.black.withOpacity(0.10),
+                                  )),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide(
@@ -206,15 +214,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               width: 1.0,
                               color: AppColors.black.withOpacity(0.10),
                             ),
-                            borderRadius: const BorderRadius.all(Radius.circular(10)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
                           ),
                           disabledBorder: const OutlineInputBorder(
                             borderSide:
-                            BorderSide(width: 1.0, color: AppColors.black),
+                                BorderSide(width: 1.0, color: AppColors.black),
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius: const BorderRadius.all(Radius.circular(10)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
                             borderSide: BorderSide(
                               color: AppColors.black.withOpacity(0.10),
                               width: 1.0,
@@ -224,13 +234,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                   ),
-            
+
                   /// Address TextFiled
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
                     child: CommonTextField(
                       textEditController:
-                      profileScreenViewModel.addressController.value,
+                          profileScreenViewModel.addressController.value,
                       validator: ValidationMethod.validateAddress,
                       regularExpression: RegularExpressionUtils.address,
                       hintText: AppStrings.enterAddress,
@@ -315,7 +325,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
           )
-         
         ],
       ),
     );

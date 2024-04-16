@@ -44,7 +44,11 @@ class _ExamScreenState extends State<ExamScreen> {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
-                          Get.to(() => const QuestionsScreen());
+                          Get.to(() => QuestionsScreen(
+                                examTitle: index.isOdd
+                                    ? 'Language Lab'
+                                    : 'Mathematics Mastery',
+                              ));
                         },
                         child: Container(
                           padding: EdgeInsets.all(20.w),

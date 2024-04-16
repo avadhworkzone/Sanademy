@@ -16,6 +16,7 @@ final List<String> images = [
   "https://img.freepik.com/free-psd/e-learning-landing-page-template_23-2149113642.jpg?size=626&ext=jpg&ga=GA1.1.632798143.1705363200&semt=ais",
   "https://t3.ftcdn.net/jpg/03/46/60/00/360_F_346600043_sz6HF3HBXBBSwKLaJ3B7R9PWuFsHTLRB.jpg",
 ];
+
 final List<Map<String, dynamic>> categoriesList = [
   {
     'Icon': Icons.calculate_outlined,
@@ -51,58 +52,40 @@ final List<Map<String, dynamic>> recommendedList = [
     'color': Colors.green.shade400,
   },
 ];
-// class DummyData {
-//   static List<DashBoardServiceModel> dashBoardServiceList = [
-//     DashBoardServiceModel(iconPath: AppIconAssets.bookService, title: AppStrings.inStoreServices, bgColor: AppColors.cream),
-//     DashBoardServiceModel(iconPath: AppIconAssets.doorstepService, title: AppStrings.doorstepService, bgColor: AppColors.coffeeLight),
-//     DashBoardServiceModel(iconPath: AppIconAssets.pickupDropService, title: AppStrings.pickupDropService, bgColor: AppColors.pinkLight),
-//     DashBoardServiceModel(iconPath: AppIconAssets.customService, title: AppStrings.customService, bgColor: AppColors.purpleLight),
-//     // DashBoardServiceModel(
-//     //     iconPath: AppIconAssets.engineWork,
-//     //     title: AppStrings.engineWork,
-//     //     bgColor: AppColors.greyLight),
-//     // DashBoardServiceModel(
-//     //     iconPath: AppIconAssets.electricalRepairs,
-//     //     title: AppStrings.electricalRepairs,
-//     //     bgColor: AppColors.greenLight),
-//     // DashBoardServiceModel(
-//     //     iconPath: AppIconAssets.supportAssistance,
-//     //     title: AppStrings.supportAssistance,
-//     //     bgColor: AppColors.greenLight),
-//     // DashBoardServiceModel(
-//     //     iconPath: AppIconAssets.expertMechanics,
-//     //     title: AppStrings.expertMechanics,
-//     //     bgColor: AppColors.greenLight),
-//   ];
-//
-//   ///new home screen
-//   static List<DashBoardServiceModel> dashBoardNewServiceList = [
-//     DashBoardServiceModel(iconPath: AppIconAssets.listOfMechanics, title: AppStrings.listOfMechanics, bgColor: AppColors.cream),
-//     DashBoardServiceModel(iconPath: AppIconAssets.paymentHistory, title: AppStrings.paymentHistory, bgColor: AppColors.coffeeLight),
-//     DashBoardServiceModel(iconPath: AppIconAssets.supportRequest, title: AppStrings.supportRequest, bgColor: AppColors.pinkLight),
-//     DashBoardServiceModel(iconPath: AppIconAssets.jobCard, title: AppStrings.jobCard, bgColor: AppColors.purpleLight),
-//   ];
-//
-//   ///workshop screen
-//   static List<WorkshopServiceModel> workshopGarageList = [
-//     WorkshopServiceModel(iconPath: AppImageAssets.dummyGarage, title: 'Auto King Workshop', subTitle: 'Rome, NY 13440', km: '4.5', rate: '4.6'),
-//     WorkshopServiceModel(iconPath: AppImageAssets.dummyGarage, title: 'Adonz Automative', subTitle: 'Rome, NY 13440', km: '2.3', rate: '4.3'),
-//     WorkshopServiceModel(iconPath: AppImageAssets.dummyGarage, title: 'Latha Arts workshop', subTitle: 'Rome, NY 13440', km: '3.6', rate: '4.4'),
-//     WorkshopServiceModel(iconPath: AppImageAssets.dummyGarage, title: 'Motospot Workshop', subTitle: 'Rome, NY 13440', km: '1.5', rate: '4.1'),
-//     WorkshopServiceModel(iconPath: AppImageAssets.dummyGarage, title: 'Auto King Workshop', subTitle: 'Rome, NY 13440', km: '7.5', rate: '3.6'),
-//     WorkshopServiceModel(iconPath: AppImageAssets.dummyGarage, title: 'Adonz Automative', subTitle: 'Rome, NY 13440', km: '6.5', rate: '2.5'),
-//   ];
-//
-//   static List<String> dashboardNewAddOnServices = [
-//     AppStrings.syntheticOil,
-//     AppStrings.oilChange,
-//     AppStrings.filterChange,
-//     AppStrings.shellOil,
-//     AppStrings.mirrorChanges,
-//     AppStrings.shockerChecking,
-//     AppStrings.dentRepair,
-//   ];
-// }
+
+String formatDuration(int second) {
+  final ms = second * 1000;
+
+  int seconds = ms ~/ 1000;
+  final int hours = seconds ~/ 3600;
+  seconds = seconds % 3600;
+  final minutes = seconds ~/ 60;
+  seconds = seconds % 60;
+
+  final hoursString = hours >= 10
+      ? '$hours'
+      : hours == 0
+          ? '00'
+          : '0$hours';
+
+  final minutesString = minutes >= 10
+      ? '$minutes'
+      : minutes == 0
+          ? '00'
+          : '0$minutes';
+
+  final secondsString = seconds >= 10
+      ? '$seconds'
+      : seconds == 0
+          ? '00'
+          : '0$seconds';
+
+  final formattedTime =
+// '${hoursString == '00' ? '' : '$hoursString:'}$minutesString:$secondsString';
+      '$hoursString:$minutesString:$secondsString';
+
+  return formattedTime;
+}
 
 class DashBoardServiceModel {
   final String iconPath;

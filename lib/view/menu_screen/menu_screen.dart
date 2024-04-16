@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:sanademy/commonWidget/commonDialog/log_out_dialog.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_imgae_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
+import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view/auth/sign_up_screen.dart';
 import 'package:sanademy/view/menu_screen/about_us_screen.dart';
 import 'package:sanademy/view/menu_screen/contact_us_screen.dart';
 import 'package:sanademy/view_model/menu_screen_view_model.dart';
@@ -192,19 +195,19 @@ class _MenuScreenState extends State<MenuScreen> {
           child: ListView.builder(
               itemCount: menuScreenViewModel.drawerData.length,
               itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        if (index == 0) {
-                          Get.to(const ContactUsScreen());
-                        } else if (index == 1) {
-                          Get.to(const AboutUsScreen());
-                        } else {
-                          print('Logout');
-                        }
-                      },
-                      child: Padding(
+                return InkWell(
+                  onTap: () async {
+                    if (index == 0) {
+                      Get.to(const ContactUsScreen());
+                    } else if (index == 1) {
+                      Get.to(const AboutUsScreen());
+                    } else {
+                      logoutDialog(context);
+                    }
+                  },
+                  child: Column(
+                    children: [
+                      Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: 20.w, vertical: 8.h),
                         child: Row(
@@ -235,13 +238,13 @@ class _MenuScreenState extends State<MenuScreen> {
                           ],
                         ),
                       ),
-                    ),
-                    index == 2
-                        ? const SizedBox()
-                        : Divider(
-                            color: AppColors.black.withOpacity(0.2),
-                          ),
-                  ],
+                      index == 2
+                          ? const SizedBox()
+                          : Divider(
+                              color: AppColors.black.withOpacity(0.2),
+                            ),
+                    ],
+                  ),
                 );
               }),
         ),

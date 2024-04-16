@@ -34,7 +34,7 @@ class HomeRecommendedWidget extends StatelessWidget {
                     AppStrings.viewAll,
                     fontWeight: FontWeight.w600,
                     fontSize: 13.sp,
-                    color: AppColors.viewAllColor,
+                    color: AppColors.color8B,
                   ),
                 )
               ],
