@@ -6,6 +6,7 @@ import 'package:sanademy/utils/app_colors.dart';
 class AppConstants {
   static const String baseImageAssetsPath = "assets/images/";
   static const String baseIconAssetsPath = "assets/icons/";
+  static const String baseAudioAssetsPath = "assets/audio/";
 
   static const String quicksand = "Quicksand";
 }
