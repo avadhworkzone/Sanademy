@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:octo_image/octo_image.dart';
-import 'package:sanademy/utils/app_imgae_assets.dart';
+import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/local_assets.dart';
 
 class NetWorkOcToAssets extends StatelessWidget {

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
-import 'package:sanademy/utils/app_imgae_assets.dart';
+import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/local_assets.dart';
 
 AppBar commonAppBar(
@@ -67,6 +67,7 @@ commonBackArrowAppBar({
   double? verticalPadding,
   FontWeight? actionWidgetFontWeight,
   double? actionFontSize,
+  void Function()? actionTextOnTap,
 }) {
   return Padding(
     padding: EdgeInsets.symmetric(
@@ -110,11 +111,14 @@ commonBackArrowAppBar({
           fontSize: 20.sp,
         ),
         actionWidget == true
-            ? CustomText(
-                actionTitle?.tr ?? '',
-                color: actionWidgetColor ?? AppColors.color8B,
-                fontWeight: actionWidgetFontWeight ?? FontWeight.w500,
-                fontSize: actionFontSize,
+            ? InkWell(
+                onTap: actionTextOnTap,
+                child: CustomText(
+                  actionTitle?.tr ?? '',
+                  color: actionWidgetColor ?? AppColors.color8B,
+                  fontWeight: actionWidgetFontWeight ?? FontWeight.w500,
+                  fontSize: actionFontSize,
+                ),
               )
             : SizedBox(
                 width: 50.w,
