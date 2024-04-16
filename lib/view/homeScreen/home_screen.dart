@@ -23,12 +23,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   HomeScreenViewModel homeScreenViewModel = Get.put(HomeScreenViewModel());
-  final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _drawerKey,
+      key: homeScreenViewModel.homeDrawerKey,
       drawer: const Drawer(child: MenuScreen()),
       appBar: commonAppBar(
           titleTxt: AppStrings.titleTxt.tr,
@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  _drawerKey.currentState?.openDrawer();
+                  homeScreenViewModel.homeDrawerKey.currentState?.openDrawer();
                 },
                 child: Container(
                   margin: EdgeInsets.all(8.w),
@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
           )),
       body: const Column(
         children: [
-          /// CAROSAL SLIDER VIEW....
+          /// CAROUSAL SLIDER VIEW....
           HomeSliderWidget(),
 
           /// CATEGORIES VIEW

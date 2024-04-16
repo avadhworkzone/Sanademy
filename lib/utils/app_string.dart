@@ -21,6 +21,13 @@ class AppStrings {
   static String verify = 'Verify';
   static String goBack = 'Go back';
 
+  /// Login Screen
+  ///
+  static String alreadyHaveAccount = "Already have an account?";
+  static String signIn = "Sign In";
+  static String notHaveAccount = "Don't have an Account?";
+  static String signUp = "Sign Up";
+
   /// bottom bar
   static String home = 'Home';
   static String myProgress = 'My Progress';

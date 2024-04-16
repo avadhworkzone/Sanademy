@@ -34,13 +34,18 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
                   Get.find<HomeScreenViewModel>().searchController.value,
               regularExpression: RegularExpressionUtils.alphabetPattern,
               hintText: AppStrings.searchHere.tr,
-              style: const TextStyle(color: AppColors.white),
-              underLineBorder: false,
+              style: TextStyle(
+                  fontSize: 14.sp,
+                  color: AppColors.white,
+                  fontFamily: AppConstants.quicksand,
+                  fontWeight: FontWeight.w400),
               cursorColor: AppColors.white,
               isValidate: false,
+              underLineBorder: false,
               hintTextColor: AppColors.white,
               borderColor: AppColors.primaryColor,
               fillColor: AppColors.white.withOpacity(0.20),
+
               pIcon: Padding(
                 padding: EdgeInsets.only(
                     left: 15.w, top: 15.w, bottom: 15.w, right: 7.w),

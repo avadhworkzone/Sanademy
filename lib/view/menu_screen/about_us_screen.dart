@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/common_appbar.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/menu_screen/common_about_us_widget.dart';
+import 'package:sanademy/view/menu_screen/contact_us_screen.dart';
 
 class AboutUsScreen extends StatefulWidget {
   const AboutUsScreen({super.key});
@@ -45,7 +47,9 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: CustomBtn(
-                onTap: () {},
+                onTap: () {
+                  Get.to(const ContactUsScreen());
+                },
                 title: AppStrings.contactUs,
                 fontWeight: FontWeight.w600,
                 fontSize: 14.sp,

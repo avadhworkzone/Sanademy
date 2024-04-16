@@ -107,6 +107,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         validator: ValidationMethod.validateDate,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         controller: profileScreenViewModel.dateController.value,
+                        style: TextStyle(
+                                fontSize: 14.sp,
+                                color: AppColors.black,
+                                fontFamily: AppConstants.quicksand,
+                                fontWeight: FontWeight.w400),
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 15.w, vertical: 16.h),
@@ -169,6 +174,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               profileScreenViewModel.isValidate.value = false;
                             }
                           },
+                          style: TextStyle(
+                              fontSize: 14.sp,
+                              color: AppColors.black,
+                              fontFamily: AppConstants.quicksand,
+                              fontWeight: FontWeight.w400),
                           decoration: InputDecoration(
                             fillColor: AppColors.white,
                             filled: true,
