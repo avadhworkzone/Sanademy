@@ -9,7 +9,6 @@ import 'package:sanademy/utils/regex.dart';
 
 import '../utils/app_enum.dart';
 
-
 typedef OnChangeString = void Function(String value);
 
 class CommonTextField extends StatelessWidget {
@@ -88,7 +87,13 @@ class CommonTextField extends StatelessWidget {
       child: TextFormField(
         controller: textEditController,
         maxLength: maxLength,
-        style: style ,/*?? underLineBorder!
+        style: style ??
+            TextStyle(
+                fontSize: 14.sp,
+                color: AppColors.black,
+                fontFamily: AppConstants.quicksand,
+                fontWeight: FontWeight.w400),
+        /*?? underLineBorder!
             ? CustomTextStyle.textStyleInputField
             .copyWith(color: AppColors.black)
             : CustomTextStyle.textStyleInputField,*/

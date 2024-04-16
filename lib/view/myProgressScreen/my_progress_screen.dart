@@ -71,8 +71,8 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                               inactiveTrackColor:
                                   AppColors.white.withOpacity(0.60),
                               thumbShape: CustomSliderThumbShape(
-                                color1: AppColors.white, // First color
-                                color2: AppColors.primaryColor, // Second color
+                                color1: AppColors.white,
+                                color2: AppColors.primaryColor,
                               ),
                               trackShape: CustomTrackShape(),
                             ),
@@ -116,11 +116,11 @@ class CustomTrackShape extends RoundedRectSliderTrackShape {
       bool isDiscrete = false}) {
     final double trackHeight = sliderTheme.trackHeight!;
     final double trackLeft =
-        offset.dx + 2.0; // Adjust the left padding as desired
+        offset.dx + 2.0;
     final double trackTop =
         offset.dy + (parentBox.size.height - trackHeight) / 2;
     final double trackWidth =
-        parentBox.size.width - 5.0; // Adjust the width as desired
+        parentBox.size.width - 5.0;
 
     return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
   }
@@ -134,7 +134,7 @@ class CustomSliderThumbShape extends SliderComponentShape {
 
   @override
   Size getPreferredSize(bool isEnabled, bool isDiscrete) {
-    return Size(20.w, 40.w); // Adjust the size of the thumb as needed
+    return Size(20.w, 40.w);
   }
 
   @override
@@ -156,7 +156,7 @@ class CustomSliderThumbShape extends SliderComponentShape {
 
     final Paint paint = Paint()..color = color1;
 
-    final double radius = 13.0.w; // Adjust the radius as needed
+    final double radius = 13.0.w;
 
     final Path thumbPath = Path()
       ..addOval(Rect.fromCircle(center: center, radius: radius));

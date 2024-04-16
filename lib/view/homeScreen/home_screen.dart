@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
           )),
       body: const Column(
         children: [
-          /// CAROSAL SLIDER VIEW....
+          /// CAROUSAL SLIDER VIEW....
           HomeSliderWidget(),
 
           /// CATEGORIES VIEW

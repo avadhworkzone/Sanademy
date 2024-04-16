@@ -110,6 +110,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         contactUsViewModel.isValidate.value = false;
                       }
                     },
+                    style: TextStyle(
+                        fontSize: 14.sp,
+                        color: AppColors.white,
+                        fontFamily: AppConstants.quicksand,
+                        fontWeight: FontWeight.w400),
                     decoration: InputDecoration(
                       fillColor: AppColors.white,
                       filled: true,
@@ -185,6 +190,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         contactUsViewModel.isValidate.value = false;
                       }
                     },
+                    style: TextStyle(
+                        fontSize: 14.sp,
+                        color: AppColors.white,
+                        fontFamily: AppConstants.quicksand,
+                        fontWeight: FontWeight.w400),
                     decoration: InputDecoration(
                       fillColor: AppColors.white,
                       filled: true,
