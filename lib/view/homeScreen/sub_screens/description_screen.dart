@@ -654,7 +654,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                         fontWeight: FontWeight.w400,
                                         fontSize: 14.sp,
                                         color: AppColors.black0E,
-                                      )
+                                      ),
+                                      SizeConfig.sH15,
                                     ],
                                   ),
                                 )
