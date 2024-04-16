@@ -201,9 +201,9 @@ class _MenuScreenState extends State<MenuScreen> {
                       Get.to(const ContactUsScreen());
                     } else if (index == 1) {
                       Get.to(const AboutUsScreen());
-                    } else {
+                    } else if (index == 2) {
                       logoutDialog(context);
-                    }
+                    } else {}
                   },
                   child: Column(
                     children: [
@@ -213,7 +213,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            index == 2
+                            index == 2 || index == 3
                                 ? InkWell(
                                     onTap: () {},
                                     child: CustomText(
@@ -229,7 +229,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                     fontSize: 15.sp,
                                     color: AppColors.black13,
                                   ),
-                            index == 2
+                            index == 2 || index == 3
                                 ? const SizedBox()
                                 : const Icon(
                                     Icons.arrow_forward_ios,
@@ -238,7 +238,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           ],
                         ),
                       ),
-                      index == 2
+                      index == 3
                           ? const SizedBox()
                           : Divider(
                               color: AppColors.black.withOpacity(0.2),

@@ -6,6 +6,6 @@ class MenuScreenViewModel extends GetxController {
     AppStrings.contactUs,
     AppStrings.aboutUs,
     AppStrings.logOut,
-    AppStrings.logOut,
+    AppStrings.deleteAccount,
   ].obs;
 }
