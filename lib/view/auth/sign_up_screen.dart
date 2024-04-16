@@ -133,11 +133,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       controller: signUpViewModel.phoneController.value,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       initialCountryCode: 'AE',
-                      onCountryChanged: (value) {
-                        print('value country code ${value.code}');
-                      },
+                      keyboardType: TextInputType.number,
+                      onCountryChanged: (value) {},
                       onChanged: (val) {
-                        print('val country code ${val.countryCode}');
                         if (val.toString().isNotEmpty) {
                           signUpViewModel.isValidate.value = false;
                         }
