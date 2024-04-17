@@ -67,12 +67,14 @@ class _HomeCategoryWidgetState extends State<HomeCategoryWidget> {
                             fit: BoxFit.cover,
                           ),*/
                         SizeConfig.sW5,
-                        CustomText(
-                          categoriesList[index]['title'],
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.white,
-                          overflow: TextOverflow.ellipsis,
+                        Flexible(
+                          child: CustomText(
+                            categoriesList[index]['title'],
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.white,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         )
                       ],
                     ),

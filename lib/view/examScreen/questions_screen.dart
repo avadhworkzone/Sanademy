@@ -148,7 +148,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
       var diffrence = DateTime.now().difference(DateTime.parse(timeIs));
       if (mounted) {
         setState(() {
-          duration = Duration(seconds: 700 - diffrence.inSeconds);
+          duration = Duration(seconds: diffrence.inSeconds);
         });
       }
     });

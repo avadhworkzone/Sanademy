@@ -82,7 +82,7 @@ class _MyAppState extends State<MyApp> {
             home: Obx(() => connectivityViewModel.isOnline != null
                 ? connectivityViewModel.isOnline!.value
                     // ? const SplashScreen()
-                    ? QuestionsScreen()
+                    ? const BottomBar()
                     : const NoInterNetScreen()
                 : const SizedBox()),
           );

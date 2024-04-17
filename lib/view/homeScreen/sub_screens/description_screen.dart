@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -521,16 +523,10 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           child: ExpansionTile(
                               tilePadding: EdgeInsets.symmetric(
                                   horizontal: 5.w, vertical: 10.h),
-                              collapsedShape: ContinuousRectangleBorder(
+                              collapsedShape: const ContinuousRectangleBorder(
                                   side: BorderSide(color: Colors.transparent),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20))),
-                              /* shape:  ContinuousRectangleBorder(
-                                side: BorderSide(color: Colors.transparent),
-                                  borderRadius: BorderRadius.all(Radius.circular(20))
-                              ),*/
-
-                              // childrenPadding: EdgeInsets.only(left: 20.w),
                               title: Row(
                                 children: [
                                   CircleAvatar(

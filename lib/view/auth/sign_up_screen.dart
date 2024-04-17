@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -131,14 +132,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Obx(
                   () => SizedBox(
                     child: IntlPhoneField(
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       controller: signUpViewModel.phoneController.value,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      initialCountryCode: 'AE',
+                      keyboardType: TextInputType.number,
+                      initialCountryCode: 'IQ',
                       onCountryChanged: (value) {
-                        print('value country code ${value.code}');
+                        print('country change ==> ${value.code}');
                       },
                       onChanged: (val) {
-                        print('val country code ${val.countryCode}');
                         if (val.toString().isNotEmpty) {
                           signUpViewModel.isValidate.value = false;
                         }
