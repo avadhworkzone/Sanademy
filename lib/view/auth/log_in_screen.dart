@@ -27,8 +27,14 @@ class LogInScreen extends StatefulWidget {
 class _LogInScreenState extends State<LogInScreen> {
   SignUpViewModel signUpViewModel = Get.put(SignUpViewModel());
   OtpViewModel otpViewModel = Get.put(OtpViewModel());
-
   RxBool showContainer = false.obs;
+
+  @override
+  void dispose() {
+    otpViewModel.stopTimer();
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,11 +64,8 @@ class _LogInScreenState extends State<LogInScreen> {
                       child: IntlPhoneField(
                         controller: signUpViewModel.phoneController.value,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
-                        onCountryChanged: (value) {
-                          print('value country code ${value.code}');
-                        },
+                        initialCountryCode: 'AE',
                         onChanged: (val) {
-                          print('val country code ${val.countryCode}');
                           if (val.toString().isNotEmpty) {
                             signUpViewModel.isValidate.value = false;
                           }
@@ -184,7 +187,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                 fontWeight: FontWeight.w600,
                                 color: AppColors.black12,
                               ),
-
+                              SizeConfig.sW5,
                               /// resend button
                               InkWell(
                                 onTap: () {
@@ -244,8 +247,8 @@ class _LogInScreenState extends State<LogInScreen> {
                                     .validate() &&
                                 signUpViewModel
                                     .phoneController.value.text.isNotEmpty) {
-                              // Get.to(() => const OtpScreen());
                               showContainer.value = true;
+                              otpViewModel.startTimer();
                             }
                           },
                           fontSize: 14.sp,
@@ -269,10 +272,11 @@ class _LogInScreenState extends State<LogInScreen> {
                               CustomText(
                                 AppStrings.notHaveAccount,
                               ),
+                              SizeConfig.sW5,
                               CustomText(
                                 AppStrings.signUp,
-                                color: AppColors.color9D,
-                                fontWeight: FontWeight.bold,
+                                color: AppColors.primaryColor,
+                                fontWeight: FontWeight.w600,
                               ),
                             ],
                           ),

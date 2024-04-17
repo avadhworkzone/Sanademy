@@ -52,6 +52,11 @@ Map<String, String> ar = {
   AppStrings.noOfCourses: 'عدد الدورات:',
   AppStrings.courseContent: 'محتوى الدورة',
 
+  /// payment option dialog
+  AppStrings.paymentOption: 'خيارات الدفع',
+  AppStrings.youCantPayThisPrice: 'لا يمكنك دفع هذا الثمن؟',
+  AppStrings.sendMsgOnWhatsApp: 'أرسل لنا رسالة على الواتساب',
+
   /// Menu Screen
   AppStrings.currentBalance: 'الرصيد الحالي',
   AppStrings.topUpYourBalance: 'قم بتعبئة رصيدك',

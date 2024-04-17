@@ -6,6 +6,7 @@ import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/view/homeScreen/sub_screens/categories_screen.dart';
+import 'package:sanademy/view/homeScreen/sub_screens/description_screen.dart';
 import 'package:sanademy/view/homeScreen/widget/common_recommended_container_widget.dart';
 
 class HomeRecommendedWidget extends StatelessWidget {
@@ -49,7 +50,7 @@ class HomeRecommendedWidget extends StatelessWidget {
                   padding: EdgeInsets.only(bottom: 15.h),
                   child: GestureDetector(
                     onTap: () {
-                      Get.to(() => const CategoriesScreen());
+                      Get.to(() => const DescriptionScreen());
                     },
                     child:
                         CommonContainerWidget(listData: recommendedList[index]),

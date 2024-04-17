@@ -50,7 +50,12 @@ Map<String, String> en = {
   AppStrings.expertIn: "Expert in: ",
   AppStrings.noOfStudents: "No. of students: ",
   AppStrings.noOfCourses: "No. of courses: ",
-  AppStrings.courseContent: "No. of courses: ",
+  AppStrings.courseContent: "Course Content",
+
+  /// payment option dialog
+  AppStrings.paymentOption: "Payment Options",
+  AppStrings.youCantPayThisPrice: "You Can’t pay this price? ",
+  AppStrings.sendMsgOnWhatsApp: "Send us message on WhatsApp",
 
   /// Menu Screen
   AppStrings.currentBalance : 'Current Balance',

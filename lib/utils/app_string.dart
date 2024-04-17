@@ -62,6 +62,11 @@ class AppStrings {
   static String noOfCourses = 'No. of courses: ';
   static String courseContent = 'Course Content';
 
+  /// payment option dialog
+  static String paymentOption = 'Payment Options';
+  static String youCantPayThisPrice = 'You Can’t pay this price?';
+  static String sendMsgOnWhatsApp = 'Send us message on WhatsApp';
+
   /// Menu Screen
   static String currentBalance = 'Current Balance';
   static String topUpYourBalance = 'Top up your balance';

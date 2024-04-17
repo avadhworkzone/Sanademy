@@ -13,7 +13,6 @@ import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
-import 'package:sanademy/view/homeScreen/home_screen.dart';
 import 'package:sanademy/view/menu_screen/common_contact_us_widget.dart';
 import 'package:sanademy/view_model/contact_us_view_model.dart';
 
@@ -105,6 +104,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                   child: IntlPhoneField(
                     controller: contactUsViewModel.phoneController.value,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
+                    initialCountryCode: 'AE',
                     onChanged: (val) {
                       if (val.toString().isNotEmpty) {
                         contactUsViewModel.isValidate.value = false;
@@ -112,7 +112,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     },
                     style: TextStyle(
                         fontSize: 14.sp,
-                        color: AppColors.white,
+                        color: AppColors.black,
                         fontFamily: AppConstants.quicksand,
                         fontWeight: FontWeight.w400),
                     decoration: InputDecoration(
@@ -192,7 +192,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     },
                     style: TextStyle(
                         fontSize: 14.sp,
-                        color: AppColors.white,
+                        color: AppColors.black,
                         fontFamily: AppConstants.quicksand,
                         fontWeight: FontWeight.w400),
                     decoration: InputDecoration(
@@ -208,23 +208,23 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         fontWeight: FontWeight.w400,
                       ),
                       errorText: (contactUsViewModel.isValidate.value == true &&
-                          contactUsViewModel
-                              .messageController.value.text.isEmpty)
+                              contactUsViewModel
+                                  .messageController.value.text.isEmpty)
                           ? '* Required'.tr
                           : null,
                       errorBorder:
-                      (contactUsViewModel.isValidate.value == true &&
-                          contactUsViewModel
-                              .messageController.value.text.isEmpty)
-                          ? OutlineInputBorder(
-                          borderSide:
-                          const BorderSide(color: AppColors.red),
-                          borderRadius: BorderRadius.circular(10.r))
-                          : OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: AppColors.black.withOpacity(0.10),
-                          )),
+                          (contactUsViewModel.isValidate.value == true &&
+                                  contactUsViewModel
+                                      .messageController.value.text.isEmpty)
+                              ? OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: AppColors.red),
+                                  borderRadius: BorderRadius.circular(10.r))
+                              : OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: AppColors.black.withOpacity(0.10),
+                                  )),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
@@ -236,16 +236,16 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                           color: AppColors.black.withOpacity(0.10),
                         ),
                         borderRadius:
-                        const BorderRadius.all(Radius.circular(10)),
+                            const BorderRadius.all(Radius.circular(10)),
                       ),
                       disabledBorder: const OutlineInputBorder(
                         borderSide:
-                        BorderSide(width: 1.0, color: AppColors.black),
+                            BorderSide(width: 1.0, color: AppColors.black),
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius:
-                        const BorderRadius.all(Radius.circular(10)),
+                            const BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
                           color: AppColors.black.withOpacity(0.10),
                           width: 1.0,
