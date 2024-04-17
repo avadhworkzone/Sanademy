@@ -14,7 +14,6 @@ import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
-import 'package:sanademy/view/homeScreen/home_screen.dart';
 import 'package:sanademy/view_model/profile_screen_view_model.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -68,7 +67,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.r),
                     border: Border.all(color: AppColors.white, width: 4.w),
-                    image: DecorationImage(
+                    image: const DecorationImage(
                         image: NetworkImage(
                             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s'),
                         fit: BoxFit.cover)),
@@ -98,6 +97,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     SizeConfig.sH16,
+
                     /// DATE TEXT FIELD
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -108,10 +108,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         controller: profileScreenViewModel.dateController.value,
                         style: TextStyle(
-                                fontSize: 14.sp,
-                                color: AppColors.black,
-                                fontFamily: AppConstants.quicksand,
-                                fontWeight: FontWeight.w400),
+                            fontSize: 14.sp,
+                            color: AppColors.black,
+                            fontFamily: AppConstants.quicksand,
+                            fontWeight: FontWeight.w400),
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 15.w, vertical: 16.h),
@@ -160,11 +160,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     SizeConfig.sH16,
+
                     /// PHONE NUMBER TEXTFIELD
                     Obx(
                       () => Padding(
                         padding: EdgeInsets.symmetric(
-                            horizontal: 20.w,),
+                          horizontal: 20.w,
+                        ),
                         child: IntlPhoneField(
                           controller:
                               profileScreenViewModel.phoneController.value,
@@ -244,6 +246,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     SizeConfig.sH10,
+
                     /// Address TextFiled
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20.w),

@@ -42,7 +42,7 @@ class _ExamScreenState extends State<ExamScreen> {
                     itemCount: 2,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return InkWell(
+                      return GestureDetector(
                         onTap: () {
                           Get.to(() => QuestionsScreen(
                                 examTitle: index.isOdd

@@ -52,6 +52,11 @@ Map<String, String> en = {
   AppStrings.noOfCourses: "No. of courses: ",
   AppStrings.courseContent: "No. of courses: ",
 
+  /// payment option dialog
+  AppStrings.paymentOption: "Payment Options",
+  AppStrings.youCantPayThisPrice: "You Can’t pay this price? ",
+  AppStrings.sendMsgOnWhatsApp: "Send us message on WhatsApp",
+
   /// Menu Screen
   AppStrings.currentBalance : 'Current Balance',
   AppStrings.topUpYourBalance : 'Top up your balance',

@@ -6,6 +6,7 @@ import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view/homeScreen/sub_screens/categories_screen.dart';
 
 class HomeCategoryWidget extends StatefulWidget {
   const HomeCategoryWidget({super.key});
@@ -45,36 +46,41 @@ class _HomeCategoryWidgetState extends State<HomeCategoryWidget> {
             child: ListView.builder(
               itemCount: categoriesList.length,
               scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5.w),
-                child: Container(
-                  width: 139.w,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.r),
-                      color: categoriesList[index]['color']),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10.w),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          categoriesList[index]['Icon'],
-                          size: 20.h,
-                          color: AppColors.white,
-                        ),
-                        /* Image.network(
-                            _categoriesList[index]['Icon'],
-                            fit: BoxFit.cover,
-                          ),*/
-                        SizeConfig.sW5,
-                        CustomText(
-                          categoriesList[index]['title'],
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.white,
-                          overflow: TextOverflow.ellipsis,
-                        )
-                      ],
+              itemBuilder: (context, index) => GestureDetector(
+                onTap: () {
+                  Get.to(() => const CategoriesScreen());
+                },
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5.w),
+                  child: Container(
+                    width: 139.w,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.r),
+                        color: categoriesList[index]['color']),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10.w),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            categoriesList[index]['Icon'],
+                            size: 20.h,
+                            color: AppColors.white,
+                          ),
+                          /* Image.network(
+                              _categoriesList[index]['Icon'],
+                              fit: BoxFit.cover,
+                            ),*/
+                          SizeConfig.sW5,
+                          CustomText(
+                            categoriesList[index]['title'],
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.white,
+                            overflow: TextOverflow.ellipsis,
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),

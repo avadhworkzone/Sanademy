@@ -59,7 +59,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   textEditController: signUpViewModel.nameController.value,
                   validator: ValidationMethod.validateName,
                   regularExpression:
-                      RegularExpressionUtils.alphabetSpacePattern,
+                  RegularExpressionUtils.alphabetSpacePattern,
                   hintText: AppStrings.enterYourName,
                   hintFontWeight: FontWeight.w400,
                   pIcon: Icon(Icons.account_circle_rounded, size: 30.h),
@@ -134,11 +134,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       controller: signUpViewModel.phoneController.value,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       initialCountryCode: 'AE',
-                      onCountryChanged: (value) {
-                        print('value country code ${value.code}');
-                      },
                       onChanged: (val) {
-                        print('val country code ${val.countryCode}');
                         if (val.toString().isNotEmpty) {
                           signUpViewModel.isValidate.value = false;
                         }
@@ -240,10 +236,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             CustomText(
                               AppStrings.alreadyHaveAccount,
                             ),
+                            SizeConfig.sW5,
                             CustomText(
                               AppStrings.signIn,
-                              color: AppColors.color9D,
-                              fontWeight: FontWeight.bold,
+                              color: AppColors.primaryColor,
+                              fontWeight: FontWeight.w600,
                             ),
                           ],
                         ),

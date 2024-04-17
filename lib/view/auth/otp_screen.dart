@@ -124,7 +124,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           fontWeight: FontWeight.w600,
                           color: AppColors.black12,
                         ),
-
+                        SizeConfig.sW5,
                         /// resend button
                         InkWell(
                           onTap: () {

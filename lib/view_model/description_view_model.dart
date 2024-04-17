@@ -6,6 +6,7 @@ class DescriptionViewModel extends GetxController {
 
   RxBool onTouch = false.obs;
   RxBool isLoader = true.obs;
+  RxBool isPaySuccessfully = false.obs;
 
   @override
   void onInit() {

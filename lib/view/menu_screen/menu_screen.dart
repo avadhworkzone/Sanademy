@@ -195,7 +195,7 @@ class _MenuScreenState extends State<MenuScreen> {
           child: ListView.builder(
               itemCount: menuScreenViewModel.drawerData.length,
               itemBuilder: (context, index) {
-                return InkWell(
+                return GestureDetector(
                   onTap: () async {
                     if (index == 0) {
                       Get.to(const ContactUsScreen());
@@ -214,15 +214,12 @@ class _MenuScreenState extends State<MenuScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             index == 2 || index == 3
-                                ? InkWell(
-                                    onTap: () {},
-                                    child: CustomText(
-                                      menuScreenViewModel.drawerData[index],
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: AppColors.red90,
-                                    ),
-                                  )
+                                ? CustomText(
+                                  menuScreenViewModel.drawerData[index],
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.red90,
+                                )
                                 : CustomText(
                                     menuScreenViewModel.drawerData[index],
                                     fontWeight: FontWeight.w500,

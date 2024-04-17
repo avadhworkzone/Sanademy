@@ -26,7 +26,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   int selectedOption = -1;
   String? selectedOptionValue;
   Timer? timer1;
-  Duration duration = Duration(seconds: 0);
+  Duration duration = const Duration(seconds: 0);
   String timeIs = DateTime.now().toString();
   int questionNumber1 = 1;
   int indexIs = -1;
@@ -215,6 +215,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               Row(
                 children: [
                   InkWell(
+                    borderRadius: BorderRadius.circular(18.r),
                     onTap: () {
                       if (questionNumber1 == 1) {
                       } else {
@@ -232,7 +233,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                           horizontal: 13.w, vertical: 13.w),
                       decoration: BoxDecoration(
                           color: AppColors.primaryColor,
-                          borderRadius: BorderRadius.circular(18)),
+                          borderRadius: BorderRadius.circular(18.r)),
                       child: const Icon(
                         Icons.arrow_back,
                         color: AppColors.white,
@@ -253,6 +254,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                   ),
                   SizeConfig.sW15,
                   InkWell(
+                    borderRadius: BorderRadius.circular(18.r),
                     onTap: () {
                       questionNumber1 += 1;
                       if (questionNumber1 >= answer.length + 1) {
@@ -271,7 +273,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                           horizontal: 13.w, vertical: 13.w),
                       decoration: BoxDecoration(
                           color: AppColors.primaryColor,
-                          borderRadius: BorderRadius.circular(18)),
+                          borderRadius: BorderRadius.circular(18.r)),
                       child: const Icon(
                         Icons.arrow_forward,
                         color: AppColors.white,

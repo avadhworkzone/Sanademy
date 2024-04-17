@@ -111,7 +111,7 @@ commonBackArrowAppBar({
           fontSize: 20.sp,
         ),
         actionWidget == true
-            ? InkWell(
+            ? GestureDetector(
                 onTap: actionTextOnTap,
                 child: CustomText(
                   actionTitle?.tr ?? '',
