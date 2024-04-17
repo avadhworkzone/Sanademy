@@ -73,6 +73,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           fontFamily: AppConstants.quicksand,
                           fontWeight: FontWeight.w400,
                         ),
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 15.w, vertical: 17.h),
@@ -254,7 +255,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         ),
                   SizeConfig.sH30,
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
                         padding: EdgeInsets.all(2.w),

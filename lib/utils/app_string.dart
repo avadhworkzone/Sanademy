@@ -129,6 +129,9 @@ class AppStrings {
   static String youHaveCompletedMathematicsMasteryTest =
       "You have completed Mathematics Mastery test";
 
+  /// solution screen
+  static String solution = 'Solutions';
+
   ///APP ERROR MESSAGE
   static String emailIsRequired = "email is required";
   static String isRequired = "* Required";

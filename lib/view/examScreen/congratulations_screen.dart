@@ -8,6 +8,7 @@ import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view/examScreen/solutions_screen.dart';
 
 class CongratulationsScreen extends StatefulWidget {
   const CongratulationsScreen({Key? key}) : super(key: key);
@@ -127,7 +128,9 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8.2.w),
                       child: CustomBtn(
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(() => const SolutionsScreen());
+                        },
                         height: 55.h,
                         textColor: AppColors.primaryColor,
                         title: AppStrings.viewSolution,

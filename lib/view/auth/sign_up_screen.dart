@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -60,7 +59,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   textEditController: signUpViewModel.nameController.value,
                   validator: ValidationMethod.validateName,
                   regularExpression:
-                  RegularExpressionUtils.alphabetSpacePattern,
+                      RegularExpressionUtils.alphabetSpacePattern,
                   hintText: AppStrings.enterYourName,
                   hintFontWeight: FontWeight.w400,
                   pIcon: Icon(Icons.account_circle_rounded, size: 30.h),
@@ -88,7 +87,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   controller: signUpViewModel.dateController.value,
                   decoration: InputDecoration(
                     contentPadding:
-                    EdgeInsets.symmetric(horizontal: 15.w, vertical: 17.h),
+                        EdgeInsets.symmetric(horizontal: 15.w, vertical: 17.h),
                     hintText: AppStrings.dateFormat.tr,
                     hintStyle: TextStyle(
                       color: AppColors.black12,
@@ -114,7 +113,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     disabledBorder: const OutlineInputBorder(
                       borderSide:
-                      BorderSide(width: 1.0, color: AppColors.black),
+                          BorderSide(width: 1.0, color: AppColors.black),
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
                     enabledBorder: OutlineInputBorder(
@@ -130,7 +129,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 /// PHONE NUMBER TEXT FIELD
                 Obx(
-                      () => SizedBox(
+                  () => SizedBox(
                     child: IntlPhoneField(
                       controller: signUpViewModel.phoneController.value,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -161,23 +160,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           fontWeight: FontWeight.w400,
                         ),
                         errorText: (signUpViewModel.isValidate.value == true &&
-                            signUpViewModel
-                                .phoneController.value.text.isEmpty)
+                                signUpViewModel
+                                    .phoneController.value.text.isEmpty)
                             ? '* Required'.tr
                             : null,
                         errorBorder:
-                        (signUpViewModel.isValidate.value == true &&
-                            signUpViewModel
-                                .phoneController.value.text.isEmpty)
-                            ? OutlineInputBorder(
-                            borderSide:
-                            const BorderSide(color: AppColors.red),
-                            borderRadius: BorderRadius.circular(10.r))
-                            : OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                              color: AppColors.black.withOpacity(0.10),
-                            )),
+                            (signUpViewModel.isValidate.value == true &&
+                                    signUpViewModel
+                                        .phoneController.value.text.isEmpty)
+                                ? OutlineInputBorder(
+                                    borderSide:
+                                        const BorderSide(color: AppColors.red),
+                                    borderRadius: BorderRadius.circular(10.r))
+                                : OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                      color: AppColors.black.withOpacity(0.10),
+                                    )),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide(
@@ -189,16 +188,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             color: AppColors.black.withOpacity(0.10),
                           ),
                           borderRadius:
-                          const BorderRadius.all(Radius.circular(10)),
+                              const BorderRadius.all(Radius.circular(10)),
                         ),
                         disabledBorder: const OutlineInputBorder(
                           borderSide:
-                          BorderSide(width: 1.0, color: AppColors.black),
+                              BorderSide(width: 1.0, color: AppColors.black),
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius:
-                          const BorderRadius.all(Radius.circular(10)),
+                              const BorderRadius.all(Radius.circular(10)),
                           borderSide: BorderSide(
                             color: AppColors.black.withOpacity(0.10),
                             width: 1.0,
@@ -215,7 +214,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   onTap: () {
                     signUpViewModel.isValidate.value = true;
                     if (signUpViewModel.formKey.value.currentState!
-                        .validate() &&
+                            .validate() &&
                         signUpViewModel.phoneController.value.text.isNotEmpty) {
                       Get.to(() => const OtpScreen());
                     }
@@ -227,7 +226,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 SizeConfig.sH30,
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
                       padding: EdgeInsets.all(2.w),

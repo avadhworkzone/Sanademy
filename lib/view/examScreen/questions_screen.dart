@@ -7,6 +7,7 @@ import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
+import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
@@ -220,10 +221,6 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                         questionNumber1 -= 1;
                         indexIs = answer.indexWhere((element) =>
                             element['questionNumber'] == questionNumber1);
-                        if (indexIs == -1) {
-                          indexIs = 0;
-                        }
-
                         selectedAnswerIndex = selectedAnswerList.indexWhere(
                             (element) =>
                                 element['questionNumber'] ==
@@ -258,14 +255,15 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                   InkWell(
                     onTap: () {
                       questionNumber1 += 1;
-                      indexIs = answer.indexWhere((element) =>
-                          element['questionNumber'] == questionNumber1);
-                      selectedAnswerIndex = selectedAnswerList.indexWhere(
-                          (element) =>
-                              element['questionNumber'] ==
-                              answer[indexIs]['questionNumber']);
-                      if (indexIs == -1) {
+                      if (questionNumber1 >= answer.length + 1) {
                         Get.off(() => const CongratulationsScreen());
+                      } else {
+                        indexIs = answer.indexWhere((element) =>
+                            element['questionNumber'] == questionNumber1);
+                        selectedAnswerIndex = selectedAnswerList.indexWhere(
+                            (element) =>
+                                element['questionNumber'] ==
+                                answer[indexIs]['questionNumber']);
                       }
                     },
                     child: Container(
@@ -393,10 +391,15 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                     child: CustomBtn(
                       onTap: () {
                         questionNumber1 += 1;
-                        indexIs = answer.indexWhere((element) =>
-                            element['questionNumber'] == questionNumber1);
-                        if (indexIs == -1) {
+                        if (questionNumber1 >= answer.length + 1) {
                           Get.off(() => const CongratulationsScreen());
+                        } else {
+                          indexIs = answer.indexWhere((element) =>
+                              element['questionNumber'] == questionNumber1);
+                          selectedAnswerIndex = selectedAnswerList.indexWhere(
+                              (element) =>
+                                  element['questionNumber'] ==
+                                  answer[indexIs]['questionNumber']);
                         }
                       },
                       title: AppStrings.skip,
@@ -411,12 +414,15 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                     child: CustomBtn(
                       onTap: () {
                         questionNumber1 += 1;
-                        indexIs = answer.indexWhere((element) =>
-                            element['questionNumber'] == questionNumber1);
-
-                        // selectedOptionValue = '';
-                        if (indexIs == -1) {
+                        if (questionNumber1 >= answer.length + 1) {
                           Get.off(() => const CongratulationsScreen());
+                        } else {
+                          indexIs = answer.indexWhere((element) =>
+                              element['questionNumber'] == questionNumber1);
+                          selectedAnswerIndex = selectedAnswerList.indexWhere(
+                              (element) =>
+                                  element['questionNumber'] ==
+                                  answer[indexIs]['questionNumber']);
                         }
                       },
                       title: AppStrings.next,
