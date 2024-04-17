@@ -139,7 +139,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                 child: CustomBtn(
                   onTap: () {
                     /// payment Option dialog
-                  showDialog(
+                    showDialog(
                       context: context,
                       builder: (context) => SimpleDialog(
                           insetPadding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -318,7 +318,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                   SizeConfig.sH25,
                                   CustomBtn(
                                       onTap: () {
-                                        descriptionViewModel.isPaySuccessfully.value = true;
+                                        descriptionViewModel
+                                            .isPaySuccessfully.value = true;
                                       },
                                       title: AppStrings.sendMsgOnWhatsApp)
                                 ],
@@ -327,8 +328,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           ]),
                     );
 
-                  /// Enrollment successfully dialog
-                      /*showDialog(
+                    /// Enrollment successfully dialog
+                    /*showDialog(
                         context: context,
                         builder: (context) => SimpleDialog(
                           insetPadding: EdgeInsets.symmetric(horizontal: 25.w),
@@ -378,7 +379,6 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           ],
                         ),
                       );*/
-
                   },
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w700,
@@ -706,61 +706,50 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                   blurRadius: 4.0)
                             ],
                             borderRadius: BorderRadius.circular(20.r)),
-                        child: Theme(
-                          data: Theme.of(context)
-                              .copyWith(dividerColor: Colors.transparent),
-                          child: ExpansionTile(
-                              tilePadding: EdgeInsets.symmetric(
-                                  horizontal: 5.w, vertical: 10.h),
-                              collapsedShape: const ContinuousRectangleBorder(
-                                  side: BorderSide(color: Colors.transparent),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20))),
-                              /* shape:  ContinuousRectangleBorder(
-                                side: BorderSide(color: Colors.transparent),
-                                  borderRadius: BorderRadius.all(Radius.circular(20))
-                              ),*/
-
-                              // childrenPadding: EdgeInsets.only(left: 20.w),
-                              title: Row(
+                        child: Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: 10.h),
+                          child: Theme(
+                            data: Theme.of(context)
+                                .copyWith(dividerColor: Colors.transparent),
+                            child: ExpansionTile(
+                                tilePadding: EdgeInsets.symmetric(
+                                    horizontal: 5.w, vertical: 10.h),
+                                title: Row(
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 40.r,
+                                      backgroundImage: const NetworkImage(
+                                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s'),
+                                    ),
+                                    SizeConfig.sW8,
+                                    Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        CustomText(
+                                          'Maryam',
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 15.sp,
+                                          color: AppColors.black,
+                                        ),
+                                        CustomText(
+                                          'Senior Mathematician',
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 15.sp,
+                                          color: AppColors.black,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                                 children: [
-                                  CircleAvatar(
-                                    radius: 40.r,
-                                    backgroundImage: const NetworkImage(
-                                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s'),
-                                  ),
-                                  SizeConfig.sW8,
                                   Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      CustomText(
-                                        'Maryam',
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 15.sp,
-                                        color: AppColors.black,
-                                      ),
-                                      CustomText(
-                                        'Senior Mathematician',
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 15.sp,
-                                        color: AppColors.black,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              children: [
-                                Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 15.w),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     children: [
                                       Divider(
-                                        color:
-                                            AppColors.black0E.withOpacity(0.2),
+                                        color: AppColors.black0E
+                                            .withOpacity(0.2),
                                       ),
                                       SizeConfig.sH20,
                                       RichText(
@@ -775,7 +764,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                               TextSpan(
                                                   text: '10',
                                                   style: TextStyle(
-                                                    fontWeight: FontWeight.w400,
+                                                    fontWeight:
+                                                    FontWeight.w400,
                                                     fontSize: 14.sp,
                                                     color: AppColors.black0E,
                                                   ))
@@ -793,9 +783,10 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                             children: [
                                               TextSpan(
                                                   text:
-                                                      'Social media management, graphic design',
+                                                  'Social media management, graphic design',
                                                   style: TextStyle(
-                                                    fontWeight: FontWeight.w400,
+                                                    fontWeight:
+                                                    FontWeight.w400,
                                                     fontSize: 14.sp,
                                                     color: AppColors.black0E,
                                                   ))
@@ -814,7 +805,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                               TextSpan(
                                                   text: '124',
                                                   style: TextStyle(
-                                                    fontWeight: FontWeight.w400,
+                                                    fontWeight:
+                                                    FontWeight.w400,
                                                     fontSize: 14.sp,
                                                     color: AppColors.black0E,
                                                   ))
@@ -833,7 +825,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                               TextSpan(
                                                   text: '3',
                                                   style: TextStyle(
-                                                    fontWeight: FontWeight.w400,
+                                                    fontWeight:
+                                                    FontWeight.w400,
                                                     fontSize: 14.sp,
                                                     color: AppColors.black0E,
                                                   ))
@@ -848,177 +841,107 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                       ),
                                       SizeConfig.sH15,
                                     ],
-                                  ),
-                                )
-                              ]),
+                                  )
+                                ]),
+                          ),
                         ),
                       ),
                     ),
                     SizeConfig.sH25,
-                    // Padding(
-                    //   padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    //   child: CustomText(
-                    //     AppStrings.courseContent,
-                    //     fontWeight: FontWeight.w700,
-                    //     fontSize: 20.sp,
-                    //     color: AppColors.black0E,
-                    //   ),
-                    // ),
-                    /* SizeConfig.sH16,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
+                      child: CustomText(
+                        AppStrings.courseContent,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20.sp,
+                        color: AppColors.black0E,
+                      ),
+                    ),
+                    SizeConfig.sH16,
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20.w),
                       child: Container(
                         decoration: BoxDecoration(
-                            color: AppColors.white,
-                            boxShadow: const [
-                              BoxShadow(
-                                  color: Colors.black26,
-                                  offset: Offset(0, 1),
-                                  blurRadius: 4.0)
-                            ],
-                            borderRadius: BorderRadius.circular(20.r)),
-                        child: ListView.builder(itemCount: 4,itemBuilder: (context, index) {
-                          return Column(
-                            children: [Theme(
-                              data: Theme.of(context)
-                                  .copyWith(dividerColor: Colors.transparent),
-                              child: ExpansionTile(
-                                tilePadding: EdgeInsets.symmetric(
-                                    horizontal: 5.w, vertical: 10.h),
-                                // childrenPadding: EdgeInsets.only(left: 20.w),
-                                title: Row(
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                          color: AppColors.white,
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.black26,
+                              offset: Offset(0, 1),
+                              blurRadius: 4.0,
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: courseList.length,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 20.w),
+                              child: Column(
+                                children: [
+                                  Theme(
+                                    data: Theme.of(context).copyWith(
+                                        dividerColor: Colors.transparent),
+                                    child: ExpansionTile(
+                                      tilePadding: const EdgeInsets.symmetric(
+                                          horizontal: 5, vertical: 10),
+                                      title: Row(
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              CustomText(
+                                                courseList[index].title,
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 15,
+                                                color: AppColors.black,
+                                              ),
+                                              CustomText(
+                                                courseList[index].duration,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 15,
+                                                color: AppColors.black,
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                       children: [
-                                        CustomText(
-                                          'Introduction to Mathematics',
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 15.sp,
-                                          color: AppColors.black,
-                                        ),
-                                        CustomText(
-                                          '3 Lectures • 20 mins',
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 15.sp,
-                                          color: AppColors.black,
-                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            CustomText(
+                                              courseList[index].subTitle,
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.w700,
+                                              color: AppColors.black0E,
+                                            ),
+                                            CustomText(
+                                              '• ${courseList[index].description}',
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 14.sp,
+                                              color: AppColors.black0E,
+                                            )
+                                          ],
+                                        )
                                       ],
                                     ),
-                                  ],
-                                ),
-                                */
-                    /*  children: [
-                              Padding(
-                                padding:
-                                EdgeInsets.symmetric(horizontal: 15.w),
-                                child: Column(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                                  children: [
+                                  ),
+                                  if (index != courseList.length - 1)
                                     Divider(
-                                      color:
-                                      AppColors.black0E.withOpacity(0.2),
+                                      color: AppColors.black0E.withOpacity(0.2),
                                     ),
-                                    SizeConfig.sH20,
-                                    RichText(
-                                      text: TextSpan(
-                                          text: AppStrings.yourExperience,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 14.sp,
-                                            color: AppColors.black0E,
-                                          ),
-                                          children: [
-                                            TextSpan(
-                                                text: '10',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 14.sp,
-                                                  color: AppColors.black0E,
-                                                ))
-                                          ]),
-                                    ),
-                                    SizeConfig.sH10,
-                                    RichText(
-                                      text: TextSpan(
-                                          text: AppStrings.expertIn,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 14.sp,
-                                            color: AppColors.black0E,
-                                          ),
-                                          children: [
-                                            TextSpan(
-                                                text:
-                                                'Social media management, graphic design',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 14.sp,
-                                                  color: AppColors.black0E,
-                                                ))
-                                          ]),
-                                    ),
-                                    SizeConfig.sH10,
-                                    RichText(
-                                      text: TextSpan(
-                                          text: AppStrings.noOfStudents,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 14.sp,
-                                            color: AppColors.black0E,
-                                          ),
-                                          children: [
-                                            TextSpan(
-                                                text: '124',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 14.sp,
-                                                  color: AppColors.black0E,
-                                                ))
-                                          ]),
-                                    ),
-                                    SizeConfig.sH10,
-                                    RichText(
-                                      text: TextSpan(
-                                          text: AppStrings.noOfCourses,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 14.sp,
-                                            color: AppColors.black0E,
-                                          ),
-                                          children: [
-                                            TextSpan(
-                                                text: '3',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 14.sp,
-                                                  color: AppColors.black0E,
-                                                ))
-                                          ]),
-                                    ),
-                                    SizeConfig.sH10,
-                                    CustomText(
-                                      'Lorem ipsum dolor sit amet consectetur. Integer non facilisis non dignissim eget. Enim odio auctor convallis mauris rhoncus nisl. Senectus tincidunt aliquam vitae enim id. Leo praesent id at dignissim. Non tincidunt varius pellentesque pretium elit. Eu urna ligula augue arcu etiam odio hendrerit. Dignissim libero leo orci.',
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 14.sp,
-                                      color: AppColors.black0E,
-                                    )
-                                  ],
-                                ),
-                              )
-                            ]*/
-                    /*
+                                ],
                               ),
-                            ),
-                              Divider(
-                                color: AppColors.black0E.withOpacity(0.2),
-                              ),],
-                          );
-                        }),
+                            );
+                          },
+                        ),
                       ),
-                    ),*/
+                    )
                   ],
                 ),
               )
@@ -1035,4 +958,41 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
     'requirements3',
     'requirements4',
   ];
+
+  final List<CourseData> courseList = [
+    CourseData(
+      title: 'Introduction to Mathematics',
+      duration: '3 Lectures • 20 mins',
+      subTitle: 'What you’ll learn',
+      description: 'Lorem ipsum dolor sit amet consectetur. ',
+    ),
+    CourseData(
+      title: 'Introduction to Mathematics',
+      duration: '3 Lectures • 20 mins',
+      subTitle: 'What you’ll learn',
+      description: 'Lorem ipsum dolor sit amet consectetur.',
+    ),
+    CourseData(
+      title: 'Introduction to Mathematics',
+      duration: '3 Lectures • 20 mins',
+      subTitle: 'What you’ll learn',
+      description:
+          'Lorem ipsum dolor sit amet consectetur. Integer non facilisis...',
+    ),
+    // Add more CourseData objects as needed
+  ];
+}
+
+class CourseData {
+  final String title;
+  final String subTitle;
+  final String duration;
+  final String description;
+
+  CourseData({
+    required this.title,
+    required this.subTitle,
+    required this.duration,
+    required this.description,
+  });
 }

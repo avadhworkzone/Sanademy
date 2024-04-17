@@ -50,7 +50,7 @@ Map<String, String> en = {
   AppStrings.expertIn: "Expert in: ",
   AppStrings.noOfStudents: "No. of students: ",
   AppStrings.noOfCourses: "No. of courses: ",
-  AppStrings.courseContent: "No. of courses: ",
+  AppStrings.courseContent: "Course Content",
 
   /// payment option dialog
   AppStrings.paymentOption: "Payment Options",
