@@ -6,6 +6,7 @@ import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
+import 'package:sanademy/view/general/connectivity_wrapper.dart';
 import 'package:sanademy/view_model/bottom_bar_view_model.dart';
 
 class BottomBar extends StatefulWidget {
@@ -38,7 +39,6 @@ class _BottomBarState extends State<BottomBar> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-
               navItem(
                   index: 0,
                   icon: AppImageAssets.homeIcon,

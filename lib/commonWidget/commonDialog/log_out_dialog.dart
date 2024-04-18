@@ -29,11 +29,10 @@ void logoutDialog(BuildContext context) {
               children: [
                 Expanded(
                   child: CustomBtn(
-                    // width: 20.w,
                     borderColor: AppColors.primaryColor,
                     bgColor: AppColors.white,
                     textColor: AppColors.primaryColor,
-                    title: 'Yes',
+                    title: AppStrings.yes,
                     onTap: () async {
                       await logout();
                     },
@@ -44,12 +43,11 @@ void logoutDialog(BuildContext context) {
                 ),
                 Expanded(
                   child: CustomBtn(
-                    // width: 20.w,
                     height: 50.h,
                     onTap: () {
                       Get.back();
                     },
-                    title: 'No',
+                    title: AppStrings.no,
                   ),
                 ),
               ],

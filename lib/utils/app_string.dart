@@ -22,7 +22,7 @@ class AppStrings {
   static String goBack = 'Go back';
 
   /// Login Screen
-  ///
+
   static String alreadyHaveAccount = "Already have an account?";
   static String signIn = "Sign In";
   static String notHaveAccount = "Don't have an Account?";
@@ -81,6 +81,8 @@ class AppStrings {
   static String logOut = 'Logout';
   static String deleteAccount = 'Delete Account';
   static String logOutTxt = "Are you sure you want to logout?";
+  static String yes = "Yes";
+  static String no = "No";
 
   /// Contact Us Screen
   static String getInTouch = 'Get In Touch';
@@ -120,6 +122,7 @@ class AppStrings {
   static String finishExam = 'Finish Exam';
   static String skip = 'Skip';
   static String next = 'Next';
+  static String writeHere = 'Write here....';
 
   /// congratulation screen
   static String congratulations = "Congratulations!";

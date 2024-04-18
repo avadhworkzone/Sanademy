@@ -29,7 +29,8 @@ class SignUpViewModel extends GetxController {
             ),
             child: child!,
           );
-        });
+        }
+        );
 
     if (picked != null && picked != selectedDate.value) {
       String date = "${picked.month}/${picked.day}/${picked.year}";

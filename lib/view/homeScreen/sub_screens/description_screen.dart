@@ -139,7 +139,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                 child: CustomBtn(
                   onTap: () {
                     /// payment Option dialog
-                    showDialog(
+                      showDialog(
                       context: context,
                       builder: (context) => SimpleDialog(
                           insetPadding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -165,7 +165,6 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                   ),
                                   SizeConfig.sH30,
                                   Row(
-                                    //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       CustomBtn(
                                         onTap: () {},
@@ -707,7 +706,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                             ],
                             borderRadius: BorderRadius.circular(20.r)),
                         child: Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 10.h),
+                          padding: EdgeInsets.symmetric(horizontal: 10.h),
                           child: Theme(
                             data: Theme.of(context)
                                 .copyWith(dividerColor: Colors.transparent),
@@ -724,7 +723,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                     SizeConfig.sW8,
                                     Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                       children: [
                                         CustomText(
                                           'Maryam',
@@ -745,11 +744,11 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                 children: [
                                   Column(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Divider(
-                                        color: AppColors.black0E
-                                            .withOpacity(0.2),
+                                        color:
+                                            AppColors.black0E.withOpacity(0.2),
                                       ),
                                       SizeConfig.sH20,
                                       RichText(
@@ -764,8 +763,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                               TextSpan(
                                                   text: '10',
                                                   style: TextStyle(
-                                                    fontWeight:
-                                                    FontWeight.w400,
+                                                    fontWeight: FontWeight.w400,
                                                     fontSize: 14.sp,
                                                     color: AppColors.black0E,
                                                   ))
@@ -783,10 +781,9 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                             children: [
                                               TextSpan(
                                                   text:
-                                                  'Social media management, graphic design',
+                                                      'Social media management, graphic design',
                                                   style: TextStyle(
-                                                    fontWeight:
-                                                    FontWeight.w400,
+                                                    fontWeight: FontWeight.w400,
                                                     fontSize: 14.sp,
                                                     color: AppColors.black0E,
                                                   ))
@@ -805,8 +802,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                               TextSpan(
                                                   text: '124',
                                                   style: TextStyle(
-                                                    fontWeight:
-                                                    FontWeight.w400,
+                                                    fontWeight: FontWeight.w400,
                                                     fontSize: 14.sp,
                                                     color: AppColors.black0E,
                                                   ))
@@ -825,8 +821,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                               TextSpan(
                                                   text: '3',
                                                   style: TextStyle(
-                                                    fontWeight:
-                                                    FontWeight.w400,
+                                                    fontWeight: FontWeight.w400,
                                                     fontSize: 14.sp,
                                                     color: AppColors.black0E,
                                                   ))
@@ -976,10 +971,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
       title: 'Introduction to Mathematics',
       duration: '3 Lectures • 20 mins',
       subTitle: 'What you’ll learn',
-      description:
-          'Lorem ipsum dolor sit amet consectetur. Integer non facilisis...',
+      description: 'Lorem ipsum dolor sit amet consectetur. ',
     ),
-    // Add more CourseData objects as needed
   ];
 }
 

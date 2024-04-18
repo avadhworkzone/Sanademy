@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sanademy/utils/app_colors.dart';
 
 class ProfileScreenViewModel extends GetxController{
 
@@ -18,6 +19,17 @@ class ProfileScreenViewModel extends GetxController{
       initialDate: selectedDate.value,
       firstDate: DateTime(1950, 8),
       lastDate: DateTime.now(),
+        builder: (BuildContext context, Widget? child) {
+          return Theme(
+            data: ThemeData.light().copyWith(
+              colorScheme:
+              const ColorScheme.light(primary: AppColors.primaryColor),
+              buttonTheme:
+              const ButtonThemeData(textTheme: ButtonTextTheme.primary),
+            ),
+            child: child!,
+          );
+        }
     );
     if (picked != null && picked != selectedDate.value) {
       String date = "${picked.month}/${picked.day}/${picked.year}";

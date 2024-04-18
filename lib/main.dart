@@ -13,8 +13,10 @@ import 'package:sanademy/utils/app_theme.dart';
 import 'package:sanademy/view/audio_wave_form.dart';
 import 'package:sanademy/view/auth/sign_up_screen.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
+import 'package:sanademy/view/download_pdf_demo.dart';
 import 'package:sanademy/view/examScreen/questions_screen.dart';
 import 'package:sanademy/view/general/no_internet_screen.dart';
+import 'package:sanademy/view/general/connectivity_wrapper.dart';
 import 'package:sanademy/view/splashScreen/splash_screen.dart';
 
 Future<void> main() async {
@@ -35,7 +37,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // This widget is the root of your application.
 
   @override
   void initState() {
@@ -64,7 +65,7 @@ class _MyAppState extends State<MyApp> {
                 pageTransitionsTheme: const PageTransitionsTheme()),
             transitionDuration: const Duration(milliseconds: 100),
             translations: Translation(),
-            locale: const Locale('en_US'),
+            locale: const Locale('ar'),
             fallbackLocale: const Locale('en_US'),
             builder: (context, widget) => ColoredBox(
               color: AppColors.white,
@@ -79,12 +80,12 @@ class _MyAppState extends State<MyApp> {
                     child: getMainAppViewBuilder(context, widget)),
               ),
             ),
-            home: Obx(() => connectivityViewModel.isOnline != null
+            home: const ConnectivityWrapper(child: BottomBar())
+            /* Obx(() => connectivityViewModel.isOnline != null
                 ? connectivityViewModel.isOnline!.value
-                    ? const SplashScreen()
-                   //  ? const BottomBar()
+                    ? const BottomBar()
                     : const NoInterNetScreen()
-                : const SizedBox()),
+                : const SizedBox()),*/
           );
         },
       ),

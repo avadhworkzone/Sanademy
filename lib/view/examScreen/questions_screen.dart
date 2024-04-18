@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -7,7 +8,6 @@ import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
-import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
@@ -16,6 +16,7 @@ import 'package:sanademy/view/examScreen/congratulations_screen.dart';
 
 class QuestionsScreen extends StatefulWidget {
   QuestionsScreen({super.key, this.examTitle});
+
   String? examTitle;
 
   @override
@@ -157,7 +158,6 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   @override
   void dispose() {
     timer1?.cancel();
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -424,6 +424,13 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                           selectedAnswerIndex = selectedAnswerList.indexWhere(
                               (element) =>
                                   element['questionNumber'] ==
+
+
+
+
+
+
+
                                   answer[indexIs]['questionNumber']);
                         }
                       },

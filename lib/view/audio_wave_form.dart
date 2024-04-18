@@ -4,9 +4,11 @@ import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
+import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 
 class AudioWaveForm extends StatefulWidget {
@@ -69,10 +71,9 @@ class _AudioWaveFormState extends State<AudioWaveForm> {
                 return null;
               },
               decoration: InputDecoration(
-                hintText: 'Write here....',
+                hintText: AppStrings.writeHere.tr,
                 hintStyle: TextStyle(
                   fontSize: 14.sp,
-                  // fontWeight: FontWeightClass.regular,
                   color: AppColors.black.withOpacity(0.8),
                   fontWeight: FontWeight.w500,
                   fontFamily: AppConstants.quicksand,
@@ -93,8 +94,6 @@ class _AudioWaveFormState extends State<AudioWaveForm> {
                     EdgeInsets.only(left: 10.w, top: 10.h, bottom: 10.h),
               ),
               keyboardType: TextInputType.multiline,
-              // textAlign: TextAlign
-              //     .center, // Center align the hint text
             ),
           ),
         ],
@@ -141,7 +140,6 @@ class _WaveBubbleState extends State<WaveBubble> {
   }
 
   void _preparePlayer() async {
-    // Opening file from assets folder
     if (widget.index != null) {
       file = File('${widget.appDirectory.path}/audio${widget.index}.mp3');
       await file?.writeAsBytes(
@@ -176,7 +174,7 @@ class _WaveBubbleState extends State<WaveBubble> {
                 if (!controller.playerState.isStopped)
                   CircleAvatar(
                     radius: 25,
-                    backgroundColor: Color(0xff1FA7A8),
+                    backgroundColor: const Color(0xff1FA7A8),
                     child: IconButton(
                       onPressed: () async {
                         controller.playerState.isPlaying
@@ -192,8 +190,6 @@ class _WaveBubbleState extends State<WaveBubble> {
                         size: 30,
                       ),
                       color: Colors.white,
-                      /* splashColor: Colors.transparent,
-                      highlightColor: Colors.transparent,*/
                     ),
                   ),
                 const SizedBox(

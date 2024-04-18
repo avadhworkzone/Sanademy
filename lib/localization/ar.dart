@@ -70,6 +70,10 @@ Map<String, String> ar = {
   AppStrings.ourMission: 'مهمتنا',
   AppStrings.ourVision: 'رؤيتنا',
   AppStrings.logOut: 'تسجيل خروج',
+  AppStrings.deleteAccount: 'حذف الحساب',
+  AppStrings.logOutTxt: 'هل أنت متأكد أنك تريد تسجيل الخروج؟"',
+  AppStrings.yes: 'نعم',
+  AppStrings.no: 'لا',
 
   /// Contact Us Screen
   AppStrings.getInTouch: 'ابقى على تواصل',
@@ -105,6 +109,7 @@ Map<String, String> ar = {
   AppStrings.finishExam: "إنهاء الامتحان",
   AppStrings.skip: "يتخطى",
   AppStrings.next: "التالي",
+  AppStrings.writeHere: "اكتب هنا....",
 
   /// congratulations screen
   AppStrings.congratulations: "تهانينا!",

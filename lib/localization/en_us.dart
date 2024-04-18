@@ -70,6 +70,10 @@ Map<String, String> en = {
   AppStrings.ourMission : 'Our Mission',
   AppStrings.ourVision : 'Our Vision',
   AppStrings.logOut : 'Logout',
+  AppStrings.deleteAccount : 'Delete Account',
+  AppStrings.logOutTxt : 'Are you sure you want to logout?"',
+  AppStrings.yes : 'Yes',
+  AppStrings.no : 'No',
 
   /// Contact Us Screen
   AppStrings.getInTouch : 'Get In Touch',
@@ -99,6 +103,17 @@ Map<String, String> en = {
   /// exam screen
   AppStrings.exams: "Exams",
   AppStrings.examsScreenTxt: 'In this page, you can test your knowledge in each field, and possibly receive the certificate.',
+
+
+  /// questions screen
+  AppStrings.finishExam: "Finish Exam",
+  AppStrings.skip: "Skip",
+  AppStrings.next: "Next",
+  AppStrings.writeHere: "Write here....",
+
+  /// congratulation screen
+  AppStrings.congratulations: "Congratulations!",
+  AppStrings.youHaveCompletedMathematicsMasteryTest: "You have completed Mathematics Mastery test",
   AppStrings.yourScore: "Your Score",
   AppStrings.yourTime: "Your Time",
   AppStrings.yourAnswers: "Your Answers",
@@ -107,16 +122,6 @@ Map<String, String> en = {
   AppStrings.result: "Result",
   AppStrings.continues: "Continues",
   AppStrings.pass: "Pass",
-
-  /// questions screen
-  AppStrings.finishExam: "Finish Exam",
-  AppStrings.skip: "Skip",
-  AppStrings.next: "Next",
-
-  /// congratulation screen
-  AppStrings.congratulations: "Congratulations!",
-  AppStrings.youHaveCompletedMathematicsMasteryTest: "You have completed Mathematics Mastery test",
-
 
 ///APP ERROR MESSAGE
   AppStrings.isRequired: '* Required',
