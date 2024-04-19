@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
                 pageTransitionsTheme: const PageTransitionsTheme()),
             transitionDuration: const Duration(milliseconds: 100),
             translations: Translation(),
-            locale: const Locale('ar'),
+            locale: const Locale('en_US'),
             fallbackLocale: const Locale('en_US'),
             builder: (context, widget) => ColoredBox(
               color: AppColors.white,
@@ -83,7 +83,8 @@ class _MyAppState extends State<MyApp> {
             home: const ConnectivityWrapper(child: BottomBar())
             /* Obx(() => connectivityViewModel.isOnline != null
                 ? connectivityViewModel.isOnline!.value
-                    ? const BottomBar()
+                    ? const SplashScreen()
+                    // ? const BottomBar()
                     : const NoInterNetScreen()
                 : const SizedBox()),*/
           );

@@ -129,7 +129,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
                       padding: EdgeInsets.symmetric(horizontal: 8.2.w),
                       child: CustomBtn(
                         onTap: () {
-                          Get.to(() => const SolutionsScreen());
+                          // Get.to(() => const SolutionsScreen());
                         },
                         height: 55.h,
                         textColor: AppColors.primaryColor,

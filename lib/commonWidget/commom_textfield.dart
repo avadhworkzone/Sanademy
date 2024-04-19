@@ -43,6 +43,7 @@ class CommonTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextStyle? style;
   final Color? cursorColor;
+  final TextInputAction? textInputAction;
 
   const CommonTextField({
     super.key,
@@ -77,6 +78,7 @@ class CommonTextField extends StatelessWidget {
     this.contentPadding,
     this.style,
     this.cursorColor,
+    this.textInputAction,
   });
 
   /// PLEASE IMPORT GET X PACKAGE
@@ -126,8 +128,7 @@ class CommonTextField extends StatelessWidget {
                               ? ValidationMethod.validateAddress(value)
                               : null;
         },
-        textInputAction:
-            maxLine == 4 ? TextInputAction.none : TextInputAction.done,
+        textInputAction: textInputAction,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         cursorColor: cursorColor ?? AppColors.black,
         decoration: InputDecoration(

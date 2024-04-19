@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -102,9 +103,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                   padding:
                       EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                   child: IntlPhoneField(
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     controller: contactUsViewModel.phoneController.value,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    initialCountryCode: 'AE',
+                    keyboardType: TextInputType.number,
+                    initialCountryCode: 'IQ',
                     onChanged: (val) {
                       if (val.toString().isNotEmpty) {
                         contactUsViewModel.isValidate.value = false;

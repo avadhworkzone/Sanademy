@@ -7,6 +7,8 @@ import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
+import 'package:sanademy/utils/shared_preference_utils.dart';
+import 'package:sanademy/view/auth/sign_up_screen.dart';
 import 'package:sanademy/view/homeScreen/widget/home_category_widget.dart';
 import 'package:sanademy/view/homeScreen/widget/home_recomand_widget.dart';
 import 'package:sanademy/view/homeScreen/widget/home_slider_widget.dart';
@@ -23,12 +25,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   HomeScreenViewModel homeScreenViewModel = Get.put(HomeScreenViewModel());
-
+  GlobalKey<ScaffoldState> homeDrawerKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: homeScreenViewModel.homeDrawerKey,
+      key: homeDrawerKey,
       drawer: const Drawer(child: MenuScreen()),
       appBar: commonAppBar(
           titleTxt: AppStrings.titleTxt.tr,
@@ -40,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  homeScreenViewModel.homeDrawerKey.currentState?.openDrawer();
+                  homeDrawerKey.currentState?.openDrawer();
                 },
                 child: Container(
                   margin: EdgeInsets.all(8.w),
@@ -57,7 +59,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           actionWidget: GestureDetector(
             onTap: () {
-              Get.to(const ProfileScreen());
+              SharedPreferenceUtils.getIsLogin() == true
+                  ? Get.to(const ProfileScreen())
+                  : Get.to(() => const SignUpScreen());
             },
             child: Container(
               margin: EdgeInsets.all(7.w),

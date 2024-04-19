@@ -13,6 +13,7 @@ import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/audio_wave_form.dart';
 import 'package:sanademy/view/examScreen/congratulations_screen.dart';
+import 'package:sanademy/view_model/question_answer_view_model.dart';
 
 class QuestionsScreen extends StatefulWidget {
   QuestionsScreen({super.key, this.examTitle});
@@ -32,6 +33,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   int questionNumber1 = 1;
   int indexIs = -1;
   int selectedAnswerIndex = -1;
+  QuestionsAnswerViewModel questionsAnswerViewModel = Get.find();
 
   List<Map<dynamic, dynamic>> answer = [
     {
@@ -149,7 +151,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
       var diffrence = DateTime.now().difference(DateTime.parse(timeIs));
       if (mounted) {
         setState(() {
-          duration = Duration(seconds: 700 - diffrence.inSeconds);
+          duration = Duration(seconds: diffrence.inSeconds);
         });
       }
     });
@@ -258,6 +260,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                     onTap: () {
                       questionNumber1 += 1;
                       if (questionNumber1 >= answer.length + 1) {
+                        questionsAnswerViewModel.commentController.value
+                            .clear();
                         Get.off(() => const CongratulationsScreen());
                       } else {
                         indexIs = answer.indexWhere((element) =>
@@ -394,6 +398,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                       onTap: () {
                         questionNumber1 += 1;
                         if (questionNumber1 >= answer.length + 1) {
+                          questionsAnswerViewModel.commentController.value
+                              .clear();
                           Get.off(() => const CongratulationsScreen());
                         } else {
                           indexIs = answer.indexWhere((element) =>
@@ -417,6 +423,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                       onTap: () {
                         questionNumber1 += 1;
                         if (questionNumber1 >= answer.length + 1) {
+                          questionsAnswerViewModel.commentController.value
+                              .clear();
                           Get.off(() => const CongratulationsScreen());
                         } else {
                           indexIs = answer.indexWhere((element) =>

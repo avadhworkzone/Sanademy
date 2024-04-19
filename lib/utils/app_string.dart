@@ -140,6 +140,11 @@ class AppStrings {
   /// solution screen
   static String solution = 'Solutions';
 
+  /// payment success dialog
+  static String thankYouTxt =
+      'Thank you for your interest in participating in “Course Name” this course is priced at';
+  static String thankYouTxt2 = 'you can make the payment through below options';
+
   ///APP ERROR MESSAGE
   static String emailIsRequired = "email is required";
   static String isRequired = "* Required";

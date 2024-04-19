@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -14,6 +15,7 @@ import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/auth/log_in_screen.dart';
 import 'package:sanademy/view/auth/otp_screen.dart';
+import 'package:sanademy/view_model/sign_in_view_model.dart';
 import 'package:sanademy/view_model/sign_up_view_model.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -25,6 +27,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   SignUpViewModel signUpViewModel = Get.put(SignUpViewModel());
+  SignInViewModel signInViewModel = Get.put(SignInViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.w),
         child: Form(
-          key: signUpViewModel.formKey.value,
+          key: signUpViewModel.signUpFormKey.value,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -56,10 +59,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 /// NAME TEXT FIELD
                 CommonTextField(
+                  textInputAction: TextInputAction.next,
                   textEditController: signUpViewModel.nameController.value,
                   validator: ValidationMethod.validateName,
                   regularExpression:
-                  RegularExpressionUtils.alphabetSpacePattern,
+                      RegularExpressionUtils.alphabetSpacePattern,
                   hintText: AppStrings.enterYourName,
                   hintFontWeight: FontWeight.w400,
                   pIcon: Icon(Icons.account_circle_rounded, size: 30.h),
@@ -75,6 +79,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 /// DATE TEXT FIELD
                 TextFormField(
+                  textInputAction: TextInputAction.next,
                   onTap: () => signUpViewModel.selectDate(context),
                   readOnly: true,
                   validator: ValidationMethod.validateDate,
@@ -131,12 +136,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Obx(
                   () => SizedBox(
                     child: IntlPhoneField(
-                      controller: signUpViewModel.phoneController.value,
+                      textInputAction: TextInputAction.done,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      controller: signUpViewModel.signUpPhoneController.value,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      initialCountryCode: 'AE',
+                      keyboardType: TextInputType.number,
+                      initialCountryCode: 'IQ',
                       onChanged: (val) {
                         if (val.toString().isNotEmpty) {
-                          signUpViewModel.isValidate.value = false;
+                          signUpViewModel.signUpIsValidate.value = false;
                         }
                       },
                       style: TextStyle(
@@ -155,15 +163,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           fontFamily: AppConstants.quicksand,
                           fontWeight: FontWeight.w400,
                         ),
-                        errorText: (signUpViewModel.isValidate.value == true &&
-                                signUpViewModel
-                                    .phoneController.value.text.isEmpty)
-                            ? '* Required'.tr
-                            : null,
+                        errorText:
+                            (signUpViewModel.signUpIsValidate.value == true &&
+                                    signUpViewModel.signUpPhoneController.value
+                                        .text.isEmpty)
+                                ? '* Required'.tr
+                                : null,
                         errorBorder:
-                            (signUpViewModel.isValidate.value == true &&
-                                    signUpViewModel
-                                        .phoneController.value.text.isEmpty)
+                            (signUpViewModel.signUpIsValidate.value == true &&
+                                    signUpViewModel.signUpPhoneController.value
+                                        .text.isEmpty)
                                 ? OutlineInputBorder(
                                     borderSide:
                                         const BorderSide(color: AppColors.red),
@@ -208,10 +217,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 /// SUBMIT BUTTON
                 CustomBtn(
                   onTap: () {
-                    signUpViewModel.isValidate.value = true;
-                    if (signUpViewModel.formKey.value.currentState!
+                    signUpViewModel.signUpIsValidate.value = true;
+                    if (signUpViewModel.signUpFormKey.value.currentState!
                             .validate() &&
-                        signUpViewModel.phoneController.value.text.isNotEmpty) {
+                        signUpViewModel
+                            .signUpPhoneController.value.text.isNotEmpty) {
                       Get.to(() => const OtpScreen());
                     }
                   },
@@ -228,6 +238,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       padding: EdgeInsets.all(2.w),
                       child: GestureDetector(
                         onTap: () {
+                          signUpViewModel.nameController.value.clear();
+                          signUpViewModel.dateController.value.clear();
+                          signUpViewModel.signUpPhoneController.value.clear();
+                          signUpViewModel.signUpIsValidate.value = false;
                           Get.offAll(() => const LogInScreen());
                         },
                         child: Row(
