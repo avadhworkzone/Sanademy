@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sanademy/commonWidget/commonDialog/log_out_dialog.dart';
+import 'package:sanademy/view/dialog/log_out_dialog.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
-import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
-import 'package:sanademy/view/auth/sign_up_screen.dart';
 import 'package:sanademy/view/menu_screen/about_us_screen.dart';
 import 'package:sanademy/view/menu_screen/contact_us_screen.dart';
 import 'package:sanademy/view_model/menu_screen_view_model.dart';
@@ -129,8 +127,8 @@ class _MenuScreenState extends State<MenuScreen> {
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w700,
                         bgColor: AppColors.white,
-                        boxShadow: [
-                          const BoxShadow(
+                        boxShadow: const [
+                          BoxShadow(
                               color: Colors.black26,
                               offset: Offset(0, 1),
                               blurRadius: 4.0)
@@ -215,11 +213,11 @@ class _MenuScreenState extends State<MenuScreen> {
                           children: [
                             index == 2 || index == 3
                                 ? CustomText(
-                                  menuScreenViewModel.drawerData[index],
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.red90,
-                                )
+                                    menuScreenViewModel.drawerData[index],
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColors.red90,
+                                  )
                                 : CustomText(
                                     menuScreenViewModel.drawerData[index],
                                     fontWeight: FontWeight.w500,

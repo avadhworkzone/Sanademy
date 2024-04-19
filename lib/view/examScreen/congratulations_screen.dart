@@ -8,7 +8,6 @@ import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
-import 'package:sanademy/view/examScreen/solutions_screen.dart';
 
 class CongratulationsScreen extends StatefulWidget {
   const CongratulationsScreen({Key? key}) : super(key: key);

@@ -5,7 +5,6 @@ import 'package:sanademy/commonWidget/progrss_dialog.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_utils.dart';
 import 'package:sanademy/utils/logger_utils.dart';
-
 import 'api_urls.dart';
 import 'response_model.dart';
 
@@ -51,7 +50,12 @@ class ApiBaseHelper {
         InterceptorsWrapper(
           onRequest: (RequestOptions options, handler) {
             if (showProgressDialog) ProgressDialog.showProgressDialog(true);
-            Logger.printLog(tag: '|---------------> ${options.method} JSON METHOD <---------------|\n\n REQUEST_URL :', printLog: '\n ${options.uri} \n\n REQUEST_HEADER : ${options.headers}  \n\n REQUEST_DATA : ${options.data.toString()}', logIcon: Logger.info);
+            Logger.printLog(
+                tag:
+                    '|---------------> ${options.method} JSON METHOD <---------------|\n\n REQUEST_URL :',
+                printLog:
+                    '\n ${options.uri} \n\n REQUEST_HEADER : ${options.headers}  \n\n REQUEST_DATA : ${options.data.toString()}',
+                logIcon: Logger.info);
             // ignore: void_checks
             return requestInterceptor(options, handler);
           },
@@ -61,10 +65,14 @@ class ApiBaseHelper {
             showProgressDialog = true;
 
             if (response.statusCode! >= 100 && response.statusCode! <= 199) {
-              Logger.printLog(tag: 'WARNING CODE ${response.statusCode} : ', printLog: response.data.toString(), logIcon: Logger.warning);
+              Logger.printLog(
+                  tag: 'WARNING CODE ${response.statusCode} : ',
+                  printLog: response.data.toString(),
+                  logIcon: Logger.warning);
             } else {
               // Logger.printLog(tag: 'SUCCESS CODE ${response.statusCode} : ', printLog: response.data.toString(), logIcon: Logger.success);
-              logs('SUCCESS CODE ${response.statusCode} :  ${response.data.toString()}');
+              logs(
+                  'SUCCESS CODE ${response.statusCode} :  ${response.data.toString()}');
             }
 
             /// change after upgrade
@@ -85,7 +93,8 @@ class ApiBaseHelper {
       );
   }
 
-  static dynamic requestInterceptor(RequestOptions options, RequestInterceptorHandler handler) async {
+  static dynamic requestInterceptor(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     // Get your JWT token
 
     // TODO DK CHANGES (ADD CONDITION WHEN TOKEN IS STORE)
@@ -220,7 +229,8 @@ class ApiBaseHelper {
     Function(DioExceptions dioExceptions) onError,
     Function(ResponseModel res) onSuccess,
   ) {
-    var successModel = ResponseModel(statusCode: response.statusCode, response: response);
+    var successModel =
+        ResponseModel(statusCode: response.statusCode, response: response);
     onSuccess(successModel);
     return successModel;
   }
@@ -232,12 +242,15 @@ class ApiBaseHelper {
   ) {
     switch (e.type) {
       case DioExceptionType.badResponse:
-        var errorModel = ResponseModel(statusCode: e.response!.statusCode, response: e.response);
+        var errorModel = ResponseModel(
+            statusCode: e.response!.statusCode, response: e.response);
         onSuccess(errorModel);
-        return ResponseModel(statusCode: e.response!.statusCode, response: e.response);
+        return ResponseModel(
+            statusCode: e.response!.statusCode, response: e.response);
       default:
         onError(DioExceptions.fromDioError(e));
-        Utils.validationCheck(message: DioExceptions.fromDioError(e).message, isError: true);
+        Utils.validationCheck(
+            message: DioExceptions.fromDioError(e).message, isError: true);
         throw DioExceptions.fromDioError(e).message!;
     }
   }
@@ -261,7 +274,8 @@ class DioExceptions implements Exception {
         message = "Receive timeout in connection with API server";
         break;
       case DioExceptionType.badResponse:
-        message = _handleResponseError(dioError.response!.statusCode!, dioError.response!.data);
+        message = _handleResponseError(
+            dioError.response!.statusCode!, dioError.response!.data);
         break;
       case DioException.sendTimeout:
         message = "Send timeout in connection with API server";

@@ -17,7 +17,6 @@ import 'package:sanademy/view/auth/sign_up_screen.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
 import 'package:sanademy/view_model/otp_view_model.dart';
 import 'package:sanademy/view_model/sign_in_view_model.dart';
-import 'package:sanademy/view_model/sign_up_view_model.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});

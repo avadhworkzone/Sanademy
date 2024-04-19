@@ -5,7 +5,6 @@ import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_string.dart';
-import 'package:sanademy/view/homeScreen/sub_screens/categories_screen.dart';
 import 'package:sanademy/view/homeScreen/sub_screens/description_screen.dart';
 import 'package:sanademy/view/homeScreen/widget/common_recommended_container_widget.dart';
 

@@ -4,10 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
+import 'package:sanademy/utils/app_enum.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/regex.dart';
-
-import '../utils/app_enum.dart';
 
 typedef OnChangeString = void Function(String value);
 

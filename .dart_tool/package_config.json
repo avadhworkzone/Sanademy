@@ -50,6 +50,30 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "connectivity",
+      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/connectivity-3.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "connectivity_for_web",
+      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/connectivity_for_web-0.4.0+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "connectivity_macos",
+      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/connectivity_macos-0.2.1+2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "connectivity_platform_interface",
+      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/connectivity_platform_interface-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "connectivity_plus",
       "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/connectivity_plus-5.0.2",
       "packageUri": "lib/",
@@ -102,6 +126,12 @@
       "rootUri": "file:///Users/techcureindia/Downloads/flutter3.16.6/packages/flutter",
       "packageUri": "lib/",
       "languageVersion": "3.2"
+    },
+    {
+      "name": "flutter_file_downloader",
+      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/flutter_file_downloader-1.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
     },
     {
       "name": "flutter_lints",
@@ -446,7 +476,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-04-17T11:40:31.616420Z",
+  "generated": "2024-04-19T04:45:39.016671Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }

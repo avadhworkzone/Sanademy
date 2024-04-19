@@ -1,5 +1,4 @@
 import 'dart:core';
-
 import 'package:flutter/material.dart';
 import 'package:sanademy/utils/app_colors.dart';
 
@@ -83,7 +82,7 @@ String formatDuration(int second) {
 
   final formattedTime =
 // '${hoursString == '00' ? '' : '$hoursString:'}$minutesString:$secondsString';
-      '$hoursString:$minutesString:$secondsString';
+      '$minutesString:$secondsString';
 
   return formattedTime;
 }

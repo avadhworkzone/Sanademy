@@ -4,8 +4,6 @@ import 'package:sanademy/commonWidget/common_appbar.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/local_assets.dart';
-import 'package:sanademy/utils/shared_preference_utils.dart';
-import 'package:sanademy/view/auth/sign_up_screen.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
 
 class SplashScreen extends StatefulWidget {

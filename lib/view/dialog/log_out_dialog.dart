@@ -5,7 +5,6 @@ import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_string.dart';
-import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/view/auth/sign_up_screen.dart';
 

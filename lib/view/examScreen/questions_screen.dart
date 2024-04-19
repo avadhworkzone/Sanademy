@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -33,7 +32,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   int questionNumber1 = 1;
   int indexIs = -1;
   int selectedAnswerIndex = -1;
-  QuestionsAnswerViewModel questionsAnswerViewModel = Get.find();
+  QuestionsAnswerViewModel questionsAnswerViewModel =
+      Get.put(QuestionsAnswerViewModel());
+  // QuestionsAnswerViewModel questionsAnswerViewModel = Get.find();
 
   List<Map<dynamic, dynamic>> answer = [
     {
@@ -304,84 +305,157 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                           itemCount: answer[indexIs]['answer'].length,
                           itemBuilder: (context, answerIndex) {
                             final data = answer[indexIs]['answer'];
-                            return Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10.w, vertical: 10.w),
-                              margin: EdgeInsets.symmetric(vertical: 10.w),
-                              decoration: BoxDecoration(
-                                  border: Border.all(
+                            return GestureDetector(
+                              onTap: () {
+                                print('GestureDetector ma call thay che');
+                                setState(() {
+                                  selectedOptionValue = data[answerIndex]['id'];
+                                  bool alreadyExists = selectedAnswerList.any(
+                                      (data) =>
+                                          data['questionNumber'] ==
+                                          answer[indexIs]['questionNumber']);
+
+                                  if (!alreadyExists) {
+                                    print('===== aama jay che =====');
+                                    selectedAnswerList.add({
+                                      'questionNumber': answer[indexIs]
+                                          ['questionNumber'],
+                                      'answerId': data[answerIndex]['id']
+                                    });
+                                  } else {
+                                    final updateDataIndex =
+                                        selectedAnswerList.where((element) =>
+                                            element['questionNumber'] ==
+                                            answer[indexIs]['questionNumber']);
+                                    if (updateDataIndex.isNotEmpty) {
+                                      var itemToUpdate = updateDataIndex.first;
+                                      itemToUpdate["answerId"] =
+                                          data[answerIndex]['id'];
+                                    }
+                                  }
+                                  print(
+                                      'selectedAnswerList ---===> ${selectedAnswerList}');
+                                  selectedAnswerIndex =
+                                      selectedAnswerList.indexWhere((element) =>
+                                          element['answerId'] ==
+                                          selectedOptionValue);
+                                });
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10.w, vertical: 10.w),
+                                margin: EdgeInsets.symmetric(vertical: 10.w),
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: selectedAnswerList.every(
+                                                (element) =>
+                                                    element['questionNumber'] !=
+                                                    answer[indexIs]
+                                                        ['questionNumber'])
+                                            ? AppColors.greyEE
+                                            : selectedAnswerIndex == -1
+                                                ? AppColors.greyEE
+                                                : selectedAnswerList[
+                                                                selectedAnswerIndex]
+                                                            ['answerId'] ==
+                                                        data[answerIndex]['id']
+                                                    ? AppColors.primaryColor
+                                                    : AppColors.greyEE),
+                                    color: AppColors.greyFD,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Row(
+                                  children: [
+                                    Transform.scale(
+                                      scale: 1.5,
+                                      child: Radio<String>(
+                                        activeColor: AppColors.primaryColor,
+                                        value: selectedAnswerList.every(
+                                                (element) =>
+                                                    element['questionNumber'] !=
+                                                    answer[indexIs]
+                                                        ['questionNumber'])
+                                            ? ''
+                                            : selectedAnswerIndex == -1
+                                                ? ''
+                                                : selectedAnswerList[
+                                                        selectedAnswerIndex]
+                                                    ['answerId'],
+
+                                        ///selectedOptionValue ?? '',
+                                        groupValue: data[answerIndex]['id'],
+                                        onChanged: (value) {
+                                          setState(() {
+                                            selectedOptionValue =
+                                                data[answerIndex]['id'];
+                                            bool alreadyExists =
+                                                selectedAnswerList.any((data) =>
+                                                    data['questionNumber'] ==
+                                                    answer[indexIs]
+                                                        ['questionNumber']);
+                                            if (!alreadyExists) {
+                                              print('===== aama jay che =====');
+                                              selectedAnswerList.add({
+                                                'questionNumber':
+                                                    answer[indexIs]
+                                                        ['questionNumber'],
+                                                'answerId': data[answerIndex]
+                                                    ['id']
+                                              });
+                                            } else {
+                                              final updateDataIndex =
+                                                  selectedAnswerList.where(
+                                                      (element) =>
+                                                          element[
+                                                              'questionNumber'] ==
+                                                          answer[indexIs][
+                                                              'questionNumber']);
+                                              if (updateDataIndex.isNotEmpty) {
+                                                var itemToUpdate =
+                                                    updateDataIndex.first;
+                                                itemToUpdate["answerId"] =
+                                                    data[answerIndex]['id'];
+                                              }
+                                            }
+                                            // selectedAnswerList.add({
+                                            //   'questionNumber': answer[indexIs]
+                                            //       ['questionNumber'],
+                                            //   'answerId': data[answerIndex]
+                                            //       ['id']
+                                            // });
+
+                                            selectedAnswerIndex =
+                                                selectedAnswerList
+                                                    .indexWhere((element) =>
+                                                        element['answerId'] ==
+                                                        selectedOptionValue);
+                                            print(
+                                                'selectedAnswerIndex is $selectedAnswerIndex');
+                                            print(
+                                                'selectedAnswerIndex is ${selectedAnswerList}');
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                    CustomText(
+                                      data[answerIndex]['title'],
+                                      fontWeight: FontWeight.w500,
                                       color: selectedAnswerList.every(
                                               (element) =>
                                                   element['questionNumber'] !=
                                                   answer[indexIs]
                                                       ['questionNumber'])
-                                          ? AppColors.greyEE
+                                          ? AppColors.black
                                           : selectedAnswerIndex == -1
-                                              ? AppColors.greyEE
+                                              ? AppColors.black
                                               : selectedAnswerList[
                                                               selectedAnswerIndex]
                                                           ['answerId'] ==
                                                       data[answerIndex]['id']
                                                   ? AppColors.primaryColor
-                                                  : AppColors.greyEE),
-                                  color: AppColors.greyFD,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Row(
-                                children: [
-                                  Transform.scale(
-                                    scale: 1.5,
-                                    child: Radio<String>(
-                                      activeColor: AppColors.primaryColor,
-                                      value: selectedAnswerList.every(
-                                              (element) =>
-                                                  element['questionNumber'] !=
-                                                  answer[indexIs]
-                                                      ['questionNumber'])
-                                          ? ''
-                                          : selectedAnswerIndex == -1
-                                              ? ''
-                                              : selectedAnswerList[
-                                                      selectedAnswerIndex]
-                                                  ['answerId'],
-
-                                      ///selectedOptionValue ?? '',
-                                      groupValue: data[answerIndex]['id'],
-                                      onChanged: (value) {
-                                        setState(() {
-                                          selectedOptionValue =
-                                              data[answerIndex]['id'];
-                                          selectedAnswerList.add({
-                                            'questionNumber': answer[indexIs]
-                                                ['questionNumber'],
-                                            'answerId': data[answerIndex]['id']
-                                          });
-
-                                          selectedAnswerIndex =
-                                              selectedAnswerList.indexWhere(
-                                                  (element) =>
-                                                      element['answerId'] ==
-                                                      selectedOptionValue);
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                  CustomText(
-                                    data[answerIndex]['title'],
-                                    fontWeight: FontWeight.w500,
-                                    color: selectedAnswerList.every((element) =>
-                                            element['questionNumber'] !=
-                                            answer[indexIs]['questionNumber'])
-                                        ? AppColors.black
-                                        : selectedAnswerIndex == -1
-                                            ? AppColors.black
-                                            : selectedAnswerList[
-                                                            selectedAnswerIndex]
-                                                        ['answerId'] ==
-                                                    data[answerIndex]['id']
-                                                ? AppColors.primaryColor
-                                                : AppColors.black,
-                                  )
-                                ],
+                                                  : AppColors.black,
+                                    )
+                                  ],
+                                ),
                               ),
                             );
                           },

@@ -1,6 +1,4 @@
-
 import 'dart:async';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +24,8 @@ class _ConnectivityWrapperState extends State<ConnectivityWrapper> {
   void initState() {
     super.initState();
     _connectivity = Connectivity();
-    _connectivitySubscription = _connectivity.onConnectivityChanged.listen((result) {
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen((result) {
       setState(() {
         _isConnected = result != ConnectivityResult.none;
         if (_isConnected) {
@@ -41,7 +40,6 @@ class _ConnectivityWrapperState extends State<ConnectivityWrapper> {
     });
   }
 
-
   @override
   void dispose() {
     _connectivitySubscription.cancel();
@@ -54,23 +52,23 @@ class _ConnectivityWrapperState extends State<ConnectivityWrapper> {
       _isDialogShown = true;
       WidgetsBinding.instance.addPostFrameCallback((_) {
         showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return  AlertDialog(
-              content: SizedBox(
-                height: 300.h,
-                  child: Center(child: LocalAssets(imagePath: AppImageAssets.noInternet))),
-            );
-          },
-          barrierDismissible: false
-        );
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                content: SizedBox(
+                    height: 300.h,
+                    child: Center(
+                        child:
+                            LocalAssets(imagePath: AppImageAssets.noInternet))),
+              );
+            },
+            barrierDismissible: false);
       });
     }
 
     return widget.child;
   }
 }
-
 
 /*
 
@@ -113,7 +111,7 @@ class _ConnectivityWrapperState extends State<ConnectivityWrapper> {
         child: Text('OK'),
       ),
     );
-  }*//*
+  }*/ /*
 
 
   @override
@@ -126,7 +124,7 @@ class _ConnectivityWrapperState extends State<ConnectivityWrapper> {
 */
 /*    WidgetsBinding.instance.addPostFrameCallback((_) {
       showNoInternetDialog();
-    });*//*
+    });*/ /*
 
   }
 
