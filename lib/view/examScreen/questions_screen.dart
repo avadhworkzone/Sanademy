@@ -432,13 +432,6 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                           selectedAnswerIndex = selectedAnswerList.indexWhere(
                               (element) =>
                                   element['questionNumber'] ==
-
-
-
-
-
-
-
                                   answer[indexIs]['questionNumber']);
                         }
                       },
