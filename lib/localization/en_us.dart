@@ -18,6 +18,13 @@ Map<String, String> en = {
   AppStrings.verify: "Verify",
   AppStrings.goBack: "Go back",
 
+  /// Login Screen
+  AppStrings.alreadyHaveAccount: "Already have an account?",
+  AppStrings.signIn: "Sign In",
+  AppStrings.notHaveAccount: "Don't have an Account?",
+  AppStrings.signUp: "Sign Up",
+
+
   /// bottom bar
   AppStrings.home: "Home",
   AppStrings.myProgress: "My Progress",

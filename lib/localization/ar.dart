@@ -18,6 +18,13 @@ Map<String, String> ar = {
   AppStrings.verify: 'يؤكد',
   AppStrings.goBack: 'عُد',
 
+  /// Login Screen
+  AppStrings.alreadyHaveAccount: 'هل لديك حساب؟',
+  AppStrings.signIn: "تسجيل الدخول",
+  AppStrings.notHaveAccount: "ليس لديك حساب؟",
+  AppStrings.signUp: "اشتراك",
+
+
   /// bottom bar
   AppStrings.home: "بيت",
   AppStrings.myProgress: "تقدمي",

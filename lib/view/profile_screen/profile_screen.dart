@@ -7,6 +7,7 @@ import 'package:sanademy/commonWidget/commom_textfield.dart';
 import 'package:sanademy/commonWidget/common_appbar.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
+import 'package:sanademy/commonWidget/network_assets.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_enum.dart';
@@ -66,12 +67,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 height: 120.h,
                 width: 120.w,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    border: Border.all(color: AppColors.white, width: 4.w),
-                    image: const DecorationImage(
-                        image: NetworkImage(
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s'),
-                        fit: BoxFit.cover)),
+                  borderRadius: BorderRadius.circular(10.r),
+                  border: Border.all(color: AppColors.white, width: 4.w),
+                ),
+                child: const NetWorkOcToAssets(
+                  imgUrl:
+                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s',
+                  boxFit: BoxFit.cover,
+                ),
               )
             ],
           ),

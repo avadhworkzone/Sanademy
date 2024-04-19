@@ -27,9 +27,10 @@ dependencies:
   video_player: ^2.8.5
   audio_waveforms: ^1.0.5
   path_provider: ^2.0.11
-  #flutter_pdfview: ^1.0.4
   flutter_file_downloader: ^1.2.1
   connectivity: ^3.0.6
+  flutter_alarm_clock: ^0.1.1
+  android_alarm_manager:
 
 dev_dependencies:
   flutter_test:

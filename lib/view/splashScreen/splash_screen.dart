@@ -5,6 +5,7 @@ import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
+import 'package:sanademy/view/general/connectivity_wrapper.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -21,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
         () =>
             // SharedPreferenceUtils.getIsLogin() == true
             //     ?
-            Get.offAll(() => const BottomBar())
+            Get.offAll(() => ConnectivityWrapper(child: const BottomBar()))
         // : Get.offAll(() => const SignUpScreen())
         );
     // TODO: implement initState
