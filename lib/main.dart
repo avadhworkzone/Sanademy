@@ -10,13 +10,6 @@ import 'package:sanademy/utils/app_class.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_theme.dart';
-import 'package:sanademy/view/audio_wave_form.dart';
-import 'package:sanademy/view/auth/sign_up_screen.dart';
-import 'package:sanademy/view/bottombar/bottom_bar.dart';
-import 'package:sanademy/view/download_pdf_demo.dart';
-import 'package:sanademy/view/examScreen/questions_screen.dart';
-import 'package:sanademy/view/general/no_internet_screen.dart';
-import 'package:sanademy/view/general/connectivity_wrapper.dart';
 import 'package:sanademy/view/splashScreen/splash_screen.dart';
 
 Future<void> main() async {
@@ -37,7 +30,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     connectivityViewModel.startMonitoring();
@@ -60,7 +52,6 @@ class _MyAppState extends State<MyApp> {
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
                 fontFamily: AppConstants.quicksand,
-                // useMaterial3: true,
                 scaffoldBackgroundColor: AppColors.white,
                 pageTransitionsTheme: const PageTransitionsTheme()),
             transitionDuration: const Duration(milliseconds: 100),
@@ -80,8 +71,8 @@ class _MyAppState extends State<MyApp> {
                     child: getMainAppViewBuilder(context, widget)),
               ),
             ),
-            home: const ConnectivityWrapper(child: BottomBar())
-            /* Obx(() => connectivityViewModel.isOnline != null
+            home: const SplashScreen(),
+            /*Obx(() => connectivityViewModel.isOnline != null
                 ? connectivityViewModel.isOnline!.value
                     ? const SplashScreen()
                     // ? const BottomBar()

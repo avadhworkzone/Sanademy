@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
+import 'package:sanademy/commonWidget/network_assets.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/local_assets.dart';
@@ -28,8 +29,6 @@ class CommonContainerWidget extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
-                // mainAxisAlignment:
-                //     MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: Column(
@@ -63,8 +62,6 @@ class CommonContainerWidget extends StatelessWidget {
                         ),
                         SizeConfig.sH8,
                         Container(
-                            // height: 50.h,
-                            // width: 137.39.w,
                             padding: EdgeInsets.symmetric(
                                 horizontal: 25.w, vertical: 2.w),
                             decoration: BoxDecoration(
@@ -76,10 +73,20 @@ class CommonContainerWidget extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                CircleAvatar(
-                                  radius: 17.r,
-                                  backgroundImage: const NetworkImage(
-                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s'),
+                                Container(
+                                  height: 35.h,
+                                  width: 35.h,
+                                  decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(35),
+                                    child: const NetWorkOcToAssets(
+                                      imgUrl:
+                                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s',
+                                      boxFit: BoxFit.contain,
+                                    ),
+                                  ),
                                 ),
                                 SizeConfig.sW10,
                                 Padding(

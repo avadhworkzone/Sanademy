@@ -1,6 +1,6 @@
 class AppStrings {
-  /// CREATE ACCOUNT SCREEN
 
+  /// CREATE ACCOUNT SCREEN
   static String enterYourName = 'Enter your name';
   static String titleTxt = "Sana Academy";
   static String register = 'Register';
@@ -11,7 +11,6 @@ class AppStrings {
   static String submit = 'Submit';
 
   /// OTP SCREEN
-
   static String otpTxt = 'OTP Verification';
   static String enterOtpTxt =
       'Please enter the verification code sent to your number';
@@ -22,7 +21,6 @@ class AppStrings {
   static String goBack = 'Go back';
 
   /// Login Screen
-
   static String alreadyHaveAccount = "Already have an account?";
   static String signIn = "Sign In";
   static String notHaveAccount = "Don't have an Account?";

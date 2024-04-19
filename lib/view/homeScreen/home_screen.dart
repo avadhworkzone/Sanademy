@@ -64,13 +64,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   : Get.to(() => const SignUpScreen());
             },
             child: Container(
+              height: 50.h,
+              width: 50.w,
               margin: EdgeInsets.all(7.w),
               decoration: BoxDecoration(
                   color: AppColors.white.withOpacity(0.20),
                   borderRadius: BorderRadius.circular(15)),
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
-                  child: const NetWorkOcToAssets(
+                    child:  NetWorkOcToAssets(
                       imgUrl:
                           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s')),
             ),

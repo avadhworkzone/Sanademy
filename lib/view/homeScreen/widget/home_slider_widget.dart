@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/commom_textfield.dart';
+import 'package:sanademy/commonWidget/network_assets.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
@@ -78,10 +79,7 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
                       padding: EdgeInsets.symmetric(horizontal: 5.w),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
-                        child: Image.network(
-                          images[index],
-                          fit: BoxFit.cover,
-                        ),
+                        child: NetWorkOcToAssets(imgUrl: images[index],boxFit:BoxFit.cover,)
                       ),
                     );
                   },
