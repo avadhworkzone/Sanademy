@@ -4,10 +4,12 @@ import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view_model/question_answer_view_model.dart';
 
 class AudioWaveForm extends StatefulWidget {
   const AudioWaveForm({super.key});
@@ -17,9 +19,9 @@ class AudioWaveForm extends StatefulWidget {
 }
 
 class _AudioWaveFormState extends State<AudioWaveForm> {
+  QuestionsAnswerViewModel questionsAnswerViewModel = Get.find();
   late Directory appDirectory;
   bool _isLoading = true;
-  TextEditingController commentController = TextEditingController();
 
   @override
   void initState() {
@@ -60,7 +62,8 @@ class _AudioWaveFormState extends State<AudioWaveForm> {
               borderRadius: BorderRadius.circular(30),
             ),
             child: TextFormField(
-              controller: commentController,
+              controller: questionsAnswerViewModel.commentController.value,
+              cursorColor: AppColors.primaryColor, showCursor: true,
               maxLines: 10,
               validator: (value) {
                 if (value == null || value.trim().isEmpty) {

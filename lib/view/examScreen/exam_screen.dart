@@ -7,6 +7,7 @@ import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/examScreen/questions_screen.dart';
+import 'package:sanademy/view_model/question_answer_view_model.dart';
 
 class ExamScreen extends StatefulWidget {
   const ExamScreen({super.key});
@@ -16,6 +17,8 @@ class ExamScreen extends StatefulWidget {
 }
 
 class _ExamScreenState extends State<ExamScreen> {
+  QuestionsAnswerViewModel questionsAnswerViewModel =
+      Get.put(QuestionsAnswerViewModel());
   @override
   Widget build(BuildContext context) {
     return SafeArea(

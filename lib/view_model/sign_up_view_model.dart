@@ -7,10 +7,10 @@ class SignUpViewModel extends GetxController {
 
   Rx<TextEditingController> nameController = TextEditingController().obs;
   Rx<TextEditingController> dateController = TextEditingController().obs;
-  Rx<TextEditingController> phoneController = TextEditingController().obs;
-  final Rx<GlobalKey<FormState>> formKey = GlobalKey<FormState>().obs;
+  Rx<TextEditingController> signUpPhoneController = TextEditingController().obs;
+  final Rx<GlobalKey<FormState>> signUpFormKey = GlobalKey<FormState>().obs;
   Rx<DateTime> selectedDate = DateTime.now().obs;
-  RxBool isValidate = false.obs;
+  RxBool signUpIsValidate = false.obs;
 
   /// DATE PICKER
   Future<void> selectDate(BuildContext context) async {

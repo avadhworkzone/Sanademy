@@ -10,10 +10,6 @@ import 'package:sanademy/utils/app_class.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_theme.dart';
-import 'package:sanademy/view/audio_wave_form.dart';
-import 'package:sanademy/view/auth/sign_up_screen.dart';
-import 'package:sanademy/view/bottombar/bottom_bar.dart';
-import 'package:sanademy/view/examScreen/questions_screen.dart';
 import 'package:sanademy/view/general/no_internet_screen.dart';
 import 'package:sanademy/view/splashScreen/splash_screen.dart';
 
@@ -82,7 +78,7 @@ class _MyAppState extends State<MyApp> {
             home: Obx(() => connectivityViewModel.isOnline != null
                 ? connectivityViewModel.isOnline!.value
                     ? const SplashScreen()
-                   //  ? const BottomBar()
+                    // ? const BottomBar()
                     : const NoInterNetScreen()
                 : const SizedBox()),
           );

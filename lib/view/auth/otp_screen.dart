@@ -74,7 +74,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     ),
                     SizeConfig.sH30,
                     CustomText(
-                      signUpController.phoneController.value.text.tr,
+                      signUpController.signUpPhoneController.value.text.tr,
                       fontSize: 14.sp,
                       color: AppColors.black12,
                       fontWeight: FontWeight.w700,
@@ -125,32 +125,29 @@ class _OtpScreenState extends State<OtpScreen> {
                           color: AppColors.black12,
                         ),
                         SizeConfig.sW5,
+
                         /// resend button
-                        InkWell(
-                          onTap: () {
-                            if (int.parse(otpViewModel
+                        int.parse(otpViewModel
                                     .strDigits(otpViewModel
                                         .myDuration.value.inSeconds
                                         .remainder(60))
                                     .value) >
-                                0) {
-                            } else {
-                              otpViewModel.resetTimer();
-                            }
-                          },
-                          child: CustomText(
-                            AppStrings.resendOtp.tr,
-                            fontWeight: FontWeight.w600,
-                            color: int.parse(otpViewModel
-                                        .strDigits(otpViewModel
-                                            .myDuration.value.inSeconds
-                                            .remainder(60))
-                                        .value) >
-                                    0
-                                ? AppColors.primaryColor.withOpacity(0.4)
-                                : AppColors.primaryColor,
-                          ),
-                        ),
+                                0
+                            ? CustomText(
+                                AppStrings.resendOtp.tr,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.primaryColor.withOpacity(0.4),
+                              )
+                            : InkWell(
+                                onTap: () {
+                                  otpViewModel.resetTimer();
+                                },
+                                child: CustomText(
+                                  AppStrings.resendOtp.tr,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.primaryColor,
+                                ),
+                              ),
                       ],
                     ),
                     SizeConfig.sH30,

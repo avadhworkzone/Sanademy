@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -15,6 +16,7 @@ import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/auth/sign_up_screen.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
 import 'package:sanademy/view_model/otp_view_model.dart';
+import 'package:sanademy/view_model/sign_in_view_model.dart';
 import 'package:sanademy/view_model/sign_up_view_model.dart';
 
 class LogInScreen extends StatefulWidget {
@@ -25,9 +27,8 @@ class LogInScreen extends StatefulWidget {
 }
 
 class _LogInScreenState extends State<LogInScreen> {
-  SignUpViewModel signUpViewModel = Get.put(SignUpViewModel());
+  SignInViewModel signInViewModel = Get.find();
   OtpViewModel otpViewModel = Get.put(OtpViewModel());
-  RxBool showContainer = false.obs;
 
   @override
   void dispose() {
@@ -43,7 +44,7 @@ class _LogInScreenState extends State<LogInScreen> {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.w),
         child: Form(
-          key: signUpViewModel.formKey.value,
+          key: signInViewModel.signInFormKey.value,
           child: SingleChildScrollView(
             child: Obx(() {
               return Column(
@@ -62,16 +63,24 @@ class _LogInScreenState extends State<LogInScreen> {
                   Obx(
                     () => SizedBox(
                       child: IntlPhoneField(
-                        controller: signUpViewModel.phoneController.value,
+                        readOnly: signInViewModel.showContainer.value == true
+                            ? true
+                            : false,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        controller: signInViewModel.signInPhoneController.value,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
-                        initialCountryCode: 'AE',
+                        initialCountryCode: 'IQ',
                         onChanged: (val) {
                           if (val.toString().isNotEmpty) {
-                            signUpViewModel.isValidate.value = false;
+                            signInViewModel.signInIsValidate.value = false;
                           }
                         },
                         style: TextStyle(
-                          color: AppColors.black,
+                          color: signInViewModel.showContainer.value == true
+                              ? AppColors.black.withOpacity(0.4)
+                              : AppColors.black,
                           fontSize: 14.sp,
                           fontFamily: AppConstants.quicksand,
                           fontWeight: FontWeight.w400,
@@ -88,15 +97,16 @@ class _LogInScreenState extends State<LogInScreen> {
                             fontWeight: FontWeight.w400,
                           ),
                           errorText:
-                              (signUpViewModel.isValidate.value == true &&
-                                      signUpViewModel
-                                          .phoneController.value.text.isEmpty)
+                              (signInViewModel.signInIsValidate.value == true &&
+                                      signInViewModel.signInPhoneController
+                                          .value.text.isEmpty)
                                   ? '* Required'.tr
                                   : null,
-                          errorBorder: (signUpViewModel.isValidate.value ==
+                          errorBorder: (signInViewModel
+                                          .signInIsValidate.value ==
                                       true &&
-                                  signUpViewModel
-                                      .phoneController.value.text.isEmpty)
+                                  signInViewModel
+                                      .signInPhoneController.value.text.isEmpty)
                               ? OutlineInputBorder(
                                   borderSide:
                                       const BorderSide(color: AppColors.red),
@@ -138,7 +148,7 @@ class _LogInScreenState extends State<LogInScreen> {
                   ),
                   SizeConfig.sH30,
                   Visibility(
-                      visible: showContainer.value,
+                      visible: signInViewModel.showContainer.value,
                       child: Column(
                         children: [
                           CustomText(
@@ -188,32 +198,28 @@ class _LogInScreenState extends State<LogInScreen> {
                                 color: AppColors.black12,
                               ),
                               SizeConfig.sW5,
+
                               /// resend button
-                              InkWell(
-                                onTap: () {
-                                  if (int.parse(otpViewModel
+                              int.parse(otpViewModel
                                           .strDigits(otpViewModel
                                               .myDuration.value.inSeconds
                                               .remainder(60))
                                           .value) >
-                                      0) {
-                                  } else {
-                                    otpViewModel.resetTimer();
-                                  }
-                                },
-                                child: CustomText(
-                                  AppStrings.resendOtp.tr,
-                                  fontWeight: FontWeight.w600,
-                                  color: int.parse(otpViewModel
-                                              .strDigits(otpViewModel
-                                                  .myDuration.value.inSeconds
-                                                  .remainder(60))
-                                              .value) >
-                                          0
-                                      ? AppColors.primaryColor.withOpacity(0.4)
-                                      : AppColors.primaryColor,
-                                ),
-                              ),
+                                      0
+                                  ? CustomText(AppStrings.resendOtp.tr,
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.primaryColor
+                                          .withOpacity(0.4))
+                                  : InkWell(
+                                      onTap: () {
+                                        otpViewModel.resetTimer();
+                                      },
+                                      child: CustomText(
+                                        AppStrings.resendOtp.tr,
+                                        fontWeight: FontWeight.w600,
+                                        color: AppColors.primaryColor,
+                                      ),
+                                    ),
                             ],
                           ),
                           SizeConfig.sH30,
@@ -221,12 +227,13 @@ class _LogInScreenState extends State<LogInScreen> {
                       )),
 
                   /// SUBMIT BUTTON
-                  showContainer.value == true
+                  signInViewModel.showContainer.value == true
                       ? Padding(
                           padding: EdgeInsets.symmetric(horizontal: 22.w),
                           child: CustomBtn(
                             onTap: () async {
-                              if (signUpViewModel.formKey.value.currentState!
+                              if (signInViewModel
+                                  .signInFormKey.value.currentState!
                                   .validate()) {
                                 await SharedPreferenceUtils.setIsLogin(true);
                                 Get.offAll(() => const BottomBar());
@@ -242,12 +249,14 @@ class _LogInScreenState extends State<LogInScreen> {
                         )
                       : CustomBtn(
                           onTap: () {
-                            signUpViewModel.isValidate.value = true;
-                            if (signUpViewModel.formKey.value.currentState!
+                            signInViewModel.signInIsValidate.value = true;
+                            if (signInViewModel
+                                    .signInFormKey.value.currentState!
                                     .validate() &&
-                                signUpViewModel
-                                    .phoneController.value.text.isNotEmpty) {
-                              showContainer.value = true;
+                                signInViewModel.signInPhoneController.value.text
+                                    .isNotEmpty) {
+                              signInViewModel.showContainer.value = true;
+                              FocusScope.of(context).requestFocus(FocusNode());
                               otpViewModel.startTimer();
                             }
                           },
@@ -264,6 +273,9 @@ class _LogInScreenState extends State<LogInScreen> {
                         padding: EdgeInsets.all(2.w),
                         child: GestureDetector(
                           onTap: () {
+                            signInViewModel.signInPhoneController.value.clear();
+                            signInViewModel.signInIsValidate.value = false;
+                            signInViewModel.showContainer.value = false;
                             Get.offAll(() => const SignUpScreen());
                           },
                           child: Row(
