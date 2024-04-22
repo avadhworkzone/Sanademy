@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
         () =>
             // SharedPreferenceUtils.getIsLogin() == true
             //     ?
-            Get.offAll(() => ConnectivityWrapper(child: const BottomBar()))
+            Get.offAll(() => const ConnectivityWrapper(child: BottomBar()))
         // : Get.offAll(() => const SignUpScreen())
         );
     // TODO: implement initState

@@ -16,7 +16,6 @@ import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/auth/log_in_screen.dart';
 import 'package:sanademy/view/auth/otp_screen.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
-import 'package:sanademy/view_model/bottom_bar_view_model.dart';
 import 'package:sanademy/view_model/sign_in_view_model.dart';
 import 'package:sanademy/view_model/sign_up_view_model.dart';
 
@@ -82,6 +81,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         fontFamily: AppConstants.quicksand,
                         fontWeight: FontWeight.w400),
                   ),
+
                   SizeConfig.sH20,
 
                   /// DATE TEXT FIELD

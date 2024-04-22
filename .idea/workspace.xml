@@ -5,6 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83c49ef8-8fc9-48dc-9daa-57274fc03aea" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/ae3dd7d7f985b468cce7ac3a1c98a2d8/.filecache" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/ae3dd7d7f985b468cce7ac3a1c98a2d8/.filecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/ae3dd7d7f985b468cce7ac3a1c98a2d8/aot_android_asset_bundle.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/ae3dd7d7f985b468cce7ac3a1c98a2d8/aot_android_asset_bundle.stamp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/ae3dd7d7f985b468cce7ac3a1c98a2d8/app.dill" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/ae3dd7d7f985b468cce7ac3a1c98a2d8/app.dill" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/ae3dd7d7f985b468cce7ac3a1c98a2d8/arm64-v8a/app.so" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/ae3dd7d7f985b468cce7ac3a1c98a2d8/arm64-v8a/app.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/ae3dd7d7f985b468cce7ac3a1c98a2d8/armeabi-v7a/app.so" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/ae3dd7d7f985b468cce7ac3a1c98a2d8/armeabi-v7a/app.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/ae3dd7d7f985b468cce7ac3a1c98a2d8/flutter_assets.d" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/ae3dd7d7f985b468cce7ac3a1c98a2d8/flutter_assets.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/ae3dd7d7f985b468cce7ac3a1c98a2d8/kernel_snapshot.d" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/ae3dd7d7f985b468cce7ac3a1c98a2d8/kernel_snapshot.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/ae3dd7d7f985b468cce7ac3a1c98a2d8/kernel_snapshot.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/ae3dd7d7f985b468cce7ac3a1c98a2d8/kernel_snapshot.stamp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/ae3dd7d7f985b468cce7ac3a1c98a2d8/x86_64/app.so" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/ae3dd7d7f985b468cce7ac3a1c98a2d8/x86_64/app.so" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/cb7cee1fb3b7e02067cad3e2738d7ac6/.filecache" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/cb7cee1fb3b7e02067cad3e2738d7ac6/.filecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/cb7cee1fb3b7e02067cad3e2738d7ac6/app.dill" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/cb7cee1fb3b7e02067cad3e2738d7ac6/app.dill" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/cb7cee1fb3b7e02067cad3e2738d7ac6/debug_android_application.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/cb7cee1fb3b7e02067cad3e2738d7ac6/debug_android_application.stamp" afterDir="false" />
@@ -12,32 +21,19 @@
       <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/cb7cee1fb3b7e02067cad3e2738d7ac6/kernel_snapshot.d" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/cb7cee1fb3b7e02067cad3e2738d7ac6/kernel_snapshot.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/cb7cee1fb3b7e02067cad3e2738d7ac6/kernel_snapshot.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/cb7cee1fb3b7e02067cad3e2738d7ac6/kernel_snapshot.stamp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/commonWidget/commom_textfield.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commonWidget/commom_textfield.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/commonWidget/commonDialog/log_out_dialog.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/dialog/log_out_dialog.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/commonWidget/loading_spinner.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commonWidget/loading_spinner.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/networks/api_base_helper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/networks/api_base_helper.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/app_constant.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_constant.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/app_snackbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_snackbar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/auth/log_in_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/auth/log_in_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/view/auth/sign_up_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/auth/sign_up_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/bottombar/bottom_bar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/bottombar/bottom_bar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/download_pdf_demo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/download_pdf_demo.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/examScreen/congratulations_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/examScreen/congratulations_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/view/examScreen/questions_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/examScreen/questions_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/general/connectivity_wrapper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/general/connectivity_wrapper.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/general/no_internet_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/general/no_internet_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/homeScreen/widget/home_recomand_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/homeScreen/widget/home_recomand_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/menu_screen/menu_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/menu_screen/menu_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/homeScreen/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/homeScreen/home_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/view/splashScreen/splash_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/splashScreen/splash_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view_model/contact_us_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view_model/contact_us_view_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows/flutter/ephemeral/.plugin_symlinks/connectivity_plus" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/ephemeral/.plugin_symlinks/connectivity_plus" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows/flutter/ephemeral/.plugin_symlinks/smart_auth" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/ephemeral/.plugin_symlinks/smart_auth" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -32,9 +32,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   int questionNumber1 = 1;
   int indexIs = -1;
   int selectedAnswerIndex = -1;
-  QuestionsAnswerViewModel questionsAnswerViewModel =
-      Get.put(QuestionsAnswerViewModel());
-  // QuestionsAnswerViewModel questionsAnswerViewModel = Get.find();
+
+  QuestionsAnswerViewModel questionsAnswerViewModel = Get.find();
 
   List<Map<dynamic, dynamic>> answer = [
     {

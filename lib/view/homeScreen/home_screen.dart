@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(15)),
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
-                    child:  NetWorkOcToAssets(
+                    child:  const NetWorkOcToAssets(
                       imgUrl:
                           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s')),
             ),
