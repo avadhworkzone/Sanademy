@@ -249,7 +249,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         await signUpViewModel.registerViewModel(
                           step: 1,
                         );
-                        Get.to(() => const OtpScreen());
+                        // Get.to(() => const OtpScreen());
                       }
                     },
                     fontSize: 14.sp,

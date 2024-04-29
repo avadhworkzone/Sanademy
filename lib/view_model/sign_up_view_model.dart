@@ -80,11 +80,12 @@ class SignUpViewModel extends GetxController {
         RegisterResModel registerResModel =
             registerResModelFromJson(response.response.toString());
         userOtp.value = registerResModel.data!.otp ?? 0;
+
         if (registerResModel.data?.token != null) {
           showSussesSnackBar('', "SUCCESS");
-          Get.to(() => const OtpScreen());
+          // Get.to(() => const OtpScreen());
         } else {
-          showErrorSnackBar(AppStrings.error, "ERROR");
+          // showErrorSnackBar(AppStrings.error, "ERROR");
         }
       }
     }
