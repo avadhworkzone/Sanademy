@@ -24,7 +24,6 @@ Map<String, String> ar = {
   AppStrings.notHaveAccount: "ليس لديك حساب؟",
   AppStrings.signUp: "اشتراك",
 
-
   /// bottom bar
   AppStrings.home: "بيت",
   AppStrings.myProgress: "تقدمي",
@@ -110,7 +109,8 @@ Map<String, String> ar = {
 
   /// exam Screen
   AppStrings.exams: "الامتحانات",
-  AppStrings.examsScreenTxt: "في هذه الصفحة، يمكنك اختبار معرفتك في كل مجال، وربما الحصول على الشهادة.",
+  AppStrings.examsScreenTxt:
+      "في هذه الصفحة، يمكنك اختبار معرفتك في كل مجال، وربما الحصول على الشهادة.",
 
   /// questions screen
   AppStrings.finishExam: "إنهاء الامتحان",
@@ -120,7 +120,8 @@ Map<String, String> ar = {
 
   /// congratulations screen
   AppStrings.congratulations: "تهانينا!",
-  AppStrings.youHaveCompletedMathematicsMasteryTest: "لقد أكملت اختبار إتقان الرياضيات",
+  AppStrings.youHaveCompletedMathematicsMasteryTest:
+      "لقد أكملت اختبار إتقان الرياضيات",
   AppStrings.yourScore: "درجاتك",
   AppStrings.yourTime: "وقتك",
   AppStrings.yourAnswers: "أجوبتك",
@@ -134,4 +135,11 @@ Map<String, String> ar = {
   AppStrings.isRequired: '* مطلوب',
   AppStrings.pleaseEnterOtp: 'الرجاء إدخال كلمة المرور',
   AppStrings.pleaseEnterValidOtp: 'الرجاء إدخال كلمة مرور صالحة',
+
+  ///k-dev Registration
+  AppStrings.name: 'اسم',
+  AppStrings.nameIsRequired: 'مطلوب اسم',
+  AppStrings.error: 'خطأ',
+  AppStrings.userCreatedSuccessfully: "تم إنشاء المستخدم بنجاح",
+  AppStrings.otpMismatch: "عدم تطابق OTP",
 };

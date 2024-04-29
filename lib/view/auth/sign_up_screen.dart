@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,7 +30,14 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   SignUpViewModel signUpViewModel = Get.put(SignUpViewModel());
-  SignInViewModel signInViewModel = Get.put(SignInViewModel());
+  // SignInViewModel signInViewModel = Get.put(SignInViewModel());
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    signUpViewModel.countryCode.value = '964';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +90,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         fontFamily: AppConstants.quicksand,
                         fontWeight: FontWeight.w400),
                   ),
-
                   SizeConfig.sH20,
 
                   /// DATE TEXT FIELD
@@ -154,6 +162,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         keyboardType: TextInputType.number,
                         initialCountryCode: 'IQ',
+                        onCountryChanged: (country) {
+                          signUpViewModel.countryCode.value = country.dialCode;
+                        },
                         onChanged: (val) {
                           if (val.toString().isNotEmpty) {
                             signUpViewModel.signUpIsValidate.value = false;
@@ -229,12 +240,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                   /// SUBMIT BUTTON
                   CustomBtn(
-                    onTap: () {
+                    onTap: () async {
                       signUpViewModel.signUpIsValidate.value = true;
                       if (signUpViewModel.signUpFormKey.value.currentState!
                               .validate() &&
                           signUpViewModel
                               .signUpPhoneController.value.text.isNotEmpty) {
+                        await signUpViewModel.registerViewModel(
+                          step: 1,
+                        );
                         Get.to(() => const OtpScreen());
                       }
                     },
@@ -244,6 +258,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     fontWeight: FontWeight.w700,
                   ),
                   SizeConfig.sH30,
+
+                  ///
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

@@ -6,6 +6,7 @@ import 'package:sanademy/commonWidget/common_appbar.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
+import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
@@ -29,14 +30,12 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   void initState() {
     otpViewModel.startTimer();
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   void dispose() {
     otpViewModel.stopTimer();
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -80,6 +79,15 @@ class _OtpScreenState extends State<OtpScreen> {
                       fontWeight: FontWeight.w700,
                     ),
                     SizeConfig.sH10,
+                    signUpController.userOtp.value != 0
+                        ? CustomText(
+                            "Your Otp is: ${signUpController.userOtp.value.toString()}",
+                            fontSize: 14.sp,
+                            color: AppColors.black12,
+                            fontWeight: FontWeight.w700,
+                          )
+                        : SizeConfig.sH2,
+                    SizeConfig.sH10,
                     CustomText(
                       AppStrings.enterFourDigitOtp,
                       fontSize: 15.sp,
@@ -92,7 +100,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     Pinput(
                       validator: (val) => ValidationMethod.validateOtp(val),
                       controller: otpViewModel.pinPutController.value,
-                      length: 4,
+                      length: 6,
                       showCursor: true,
                       keyboardType: TextInputType.number,
                       defaultPinTheme: PinTheme(
@@ -154,18 +162,40 @@ class _OtpScreenState extends State<OtpScreen> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 22.w),
                       child: CustomBtn(
-                        onTap: () async {
-                          if (otpViewModel.formKey.value.currentState!
-                              .validate()) {
-                            await SharedPreferenceUtils.setIsLogin(true);
-                            Get.to(() => const BottomBar());
-                          }
-                        },
+                        onTap: otpViewModel.pinPutController.value.text.length <
+                                6
+                            ? null
+                            : () async {
+                                if (otpViewModel.formKey.value.currentState!
+                                    .validate()) {
+                                  if (signUpController.userOtp.value != 0) {
+                                    if (signUpController.userOtp.value ==
+                                        int.parse(otpViewModel
+                                            .pinPutController.value.text)) {
+                                      await SharedPreferenceUtils.setIsLogin(
+                                          true);
+                                      showSussesSnackBar(
+                                          AppStrings.userCreatedSuccessfully,
+                                          "SUCCESS");
+                                      await signUpController.registerViewModel(
+                                        step: 2,
+                                      );
+                                      Get.offAll(() => const BottomBar());
+                                    } else {
+                                      showErrorSnackBar(
+                                          AppStrings.otpMismatch, "ERROR");
+                                    }
+                                  }
+                                }
+                              },
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w700,
                         radius: 10.r,
                         title: AppStrings.verify,
-                        bgColor: AppColors.primaryColor,
+                        bgColor:
+                            otpViewModel.pinPutController.value.text.length < 6
+                                ? AppColors.primaryColor.withOpacity(0.5)
+                                : AppColors.primaryColor,
                         textColor: AppColors.white,
                       ),
                     ),

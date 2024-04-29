@@ -3,6 +3,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sanademy/utils/app_colors.dart';
 
 class ProgressDialog {
   static var isOpen = false;
@@ -22,7 +23,7 @@ class ProgressDialog {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CircularProgressIndicator(
-                color: Colors.yellow,
+                color: AppColors.primaryColor,
               )
             ],
           ),

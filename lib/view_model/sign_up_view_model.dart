@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sanademy/networks/api_base_helper.dart';
+import 'package:sanademy/networks/api_keys.dart';
+import 'package:sanademy/networks/model/register_res_model.dart';
+import 'package:sanademy/networks/services/apiService/sign_up_service.dart';
 import 'package:sanademy/utils/app_colors.dart';
+import 'package:sanademy/utils/app_snackbar.dart';
+import 'package:sanademy/utils/app_string.dart';
+import 'package:sanademy/view/auth/otp_screen.dart';
+import 'package:intl/intl.dart';
 
 class SignUpViewModel extends GetxController {
   /// TEXT EDITING CONTROLLER
@@ -11,6 +19,8 @@ class SignUpViewModel extends GetxController {
   final Rx<GlobalKey<FormState>> signUpFormKey = GlobalKey<FormState>().obs;
   Rx<DateTime> selectedDate = DateTime.now().obs;
   RxBool signUpIsValidate = false.obs;
+  RxString countryCode = ''.obs;
+  RxInt userOtp = 0.obs;
 
   /// DATE PICKER
   Future<void> selectDate(BuildContext context) async {
@@ -29,12 +39,54 @@ class SignUpViewModel extends GetxController {
             ),
             child: child!,
           );
-        }
-        );
+        });
 
     if (picked != null && picked != selectedDate.value) {
       String date = "${picked.month}/${picked.day}/${picked.year}";
       dateController.value.text = date;
+    }
+  }
+
+  String formatDate(String dateString) {
+    List<String> dateComponents = dateString.split('/');
+    int day = int.parse(dateComponents[1]);
+    int month = int.parse(dateComponents[0]);
+    int year = int.parse(dateComponents[2]);
+    return '$year-${month.toString().padLeft(2, '0')}-${day.toString().padLeft(2, '0')}';
+  }
+
+  ///Register API CALLING AND VALIDATION....
+  Future<void> registerViewModel({
+    required num step,
+  }) async {
+    if (nameController.value.text.isEmpty) {
+      showErrorSnackBar(AppStrings.name, AppStrings.nameIsRequired);
+    } else {
+      unFocus();
+
+      ///new....
+      Map<String, String> queryParams = {
+        ApiKeys.name: nameController.value.text.trim(),
+        ApiKeys.dateOfBirth: formatDate(dateController.value.text),
+        ApiKeys.phoneCode: "+${countryCode.value}",
+        ApiKeys.phoneNumber: signUpPhoneController.value.text,
+        ApiKeys.step: step.toString(),
+      };
+
+      final response =
+          await SignUpService().registrationRepo(mapData: queryParams);
+
+      if (checkStatusCode(response!.statusCode ?? 0)) {
+        RegisterResModel registerResModel =
+            registerResModelFromJson(response.response.toString());
+        userOtp.value = registerResModel.data!.otp ?? 0;
+        if (registerResModel.data?.token != null) {
+          showSussesSnackBar('', "SUCCESS");
+          Get.to(() => const OtpScreen());
+        } else {
+          showErrorSnackBar(AppStrings.error, "ERROR");
+        }
+      }
     }
   }
 }

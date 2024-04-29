@@ -1,7 +1,7 @@
 class AppStrings {
-
   /// CREATE ACCOUNT SCREEN
   static String enterYourName = 'Enter your name';
+
   static String titleTxt = "Sana Academy";
   static String register = 'Register';
   static String registerYourAccount =
@@ -148,4 +148,11 @@ class AppStrings {
   static String isRequired = "* Required";
   static String pleaseEnterOtp = "Please Enter Otp";
   static String pleaseEnterValidOtp = "Please Enter Valid OTP";
+
+  ///Registration
+  static String name = 'Name';
+  static String nameIsRequired = 'Name is required';
+  static String error = 'Error';
+  static String userCreatedSuccessfully = 'User Created Successfully';
+  static String otpMismatch = 'Otp Mismatch';
 }
