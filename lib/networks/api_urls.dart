@@ -1,9 +1,9 @@
 class ApiUrls {
   /// ----------------- BASE URL START -----------------------
-  // static const String baseURL = 'https://reqres.in';
-  static const String baseURL =
-      'https://codeyesinfotech.com/sana_academy/public/api/';
-
+  ///DEV BASE URL....
+  static const String baseURL = 'https://reqres.in';
+  ///
+  ///
   static Map<String, String> getHeaders() {
     final headers = {
       'headers': {'Authorization': 'Bearer ABCD'},
@@ -13,7 +13,6 @@ class ApiUrls {
   }
 
   /// ----------------- BASE URL END -----------------------
-  static const String logIn = 'login';
-  static const String userList = 'api/users?page=2';
-  static const String register = 'register';
+  static const String logIn = '/api/login';
+  static const String userList = '/api/users?page=2';
 }

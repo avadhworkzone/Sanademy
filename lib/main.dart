@@ -77,7 +77,7 @@ class _MyAppState extends State<MyApp> {
                             child: getMainAppViewBuilder(context, widget)),
                       ),
                     ),
-                home: SplashScreen()
+                home: const ConnectivityWrapper(child: SplashScreen())
                 /* Obx(() => connectivityViewModel.isOnline != null
                   ? connectivityViewModel.isOnline!.value
                       ? const SplashScreen()
