@@ -278,6 +278,8 @@ class _LogInScreenState extends State<LogInScreen> {
                                 otpViewModel.startTimer();
                               }
                             },
+
+                            ///
                             fontSize: 14.sp,
                             radius: 10.r,
                             title: AppStrings.submit,

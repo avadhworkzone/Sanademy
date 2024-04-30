@@ -36,54 +36,54 @@ String dataToJson(Data data) => json.encode(data.toJson());
 
 class Data {
   Data({
-    // this.id,
-    // this.name,
-    // this.dateOfBirth,
+    this.id,
+    this.name,
+    this.dateOfBirth,
     this.otp,
-    // this.phoneCode,
-    // this.phoneNumber,
-    // this.emailVerifiedAt,
-    // this.createdAt,
-    // this.updatedAt,
+    this.phoneCode,
+    this.phoneNumber,
+    this.emailVerifiedAt,
+    this.createdAt,
+    this.updatedAt,
     this.token,
   });
 
   Data.fromJson(dynamic json) {
-    // id = json['id'];
-    // name = json['name'];
-    // dateOfBirth = json['date_of_birth'];
+    id = json['id'];
+    name = json['name'];
+    dateOfBirth = json['date_of_birth'];
     otp = json['otp'];
-    // phoneCode = json['phone_code'];
-    // phoneNumber = json['phone_number'];
-    // emailVerifiedAt = json['email_verified_at'];
-    // createdAt = json['created_at'];
-    // updatedAt = json['updated_at'];
+    phoneCode = json['phone_code'];
+    phoneNumber = json['phone_number'];
+    emailVerifiedAt = json['email_verified_at'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
     token = json['token'];
   }
-  // var id;
-  // var name;
-  // var dateOfBirth;
+  num? id;
+  String? name;
+  String? dateOfBirth;
 
   ///Only if step 1 pass in api
-  var otp;
-  // var phoneCode;
-  // var phoneNumber;
-  // dynamic emailVerifiedAt;
-  // var createdAt;
-  // var updatedAt;
-  var token;
+  int? otp;
+  String? phoneCode;
+  String? phoneNumber;
+  dynamic emailVerifiedAt;
+  String? createdAt;
+  String? updatedAt;
+  String? token;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    // map['id'] = id;
-    // map['name'] = name;
-    // map['date_of_birth'] = dateOfBirth;
+    map['id'] = id;
+    map['name'] = name;
+    map['date_of_birth'] = dateOfBirth;
     map['otp'] = otp;
-    // map['phone_code'] = phoneCode;
-    // map['phone_number'] = phoneNumber;
-    // map['email_verified_at'] = emailVerifiedAt;
-    // map['created_at'] = createdAt;
-    // map['updated_at'] = updatedAt;
+    map['phone_code'] = phoneCode;
+    map['phone_number'] = phoneNumber;
+    map['email_verified_at'] = emailVerifiedAt;
+    map['created_at'] = createdAt;
+    map['updated_at'] = updatedAt;
     map['token'] = token;
     return map;
   }

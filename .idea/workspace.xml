@@ -5,34 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83c49ef8-8fc9-48dc-9daa-57274fc03aea" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/networks/model/login_res_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/networks/model/register_res_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/networks/services/apiService/sign_up_service.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/commonWidget/progrss_dialog.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commonWidget/progrss_dialog.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/localization/ar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/localization/ar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/localization/en_us.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/localization/en_us.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/networks/api_keys.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/networks/api_keys.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/networks/api_urls.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/networks/api_urls.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/networks/services/apiService/auth_api_service.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/networks/services/apiService/bottom_api_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/networks/services/apiService/sign_in_service.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/app_string.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_string.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/networks/model/login_res_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/networks/model/login_res_model.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/view/auth/log_in_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/auth/log_in_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/auth/otp_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/auth/otp_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/auth/sign_up_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/auth/sign_up_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/auth/signup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/auth/signup.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view_model/sign_in_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view_model/sign_in_view_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view_model/sign_up_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view_model/sign_up_view_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/ephemeral/.plugin_symlinks/connectivity_plus" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/ephemeral/.plugin_symlinks/connectivity_plus" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/ephemeral/.plugin_symlinks/smart_auth" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/ephemeral/.plugin_symlinks/smart_auth" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
