@@ -6,7 +6,9 @@ import 'package:sanademy/networks/model/login_res_model.dart';
 import 'package:sanademy/networks/services/apiService/sign_in_service.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_string.dart';
+import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/view/auth/otp_screen.dart';
+import 'package:sanademy/view/bottombar/bottom_bar.dart';
 
 class SignInViewModel extends GetxController {
   Rx<TextEditingController> signInPhoneController = TextEditingController().obs;
@@ -36,12 +38,26 @@ class SignInViewModel extends GetxController {
       LoginResModel loginResModel =
           loginResModelFromJson(response.response.toString());
       // countryLoginCode.value = loginResModel.data!.otp ?? 0;
-      if (loginResModel.data?.token != null) {
-        showSussesSnackBar('', "SUCCESS");
-        Get.to(() => const OtpScreen());
+      if (loginResModel.success == true) {
+        if (loginResModel.data != null) {
+          userLoginOtp.value = loginResModel.data!.otp ?? 0;
+          showSussesSnackBar('', loginResModel.message ?? 'SUCCESS');
+
+          if(step == 1){
+            showContainer.value = true;
+          }else{
+            if(loginResModel.data?.token != null && loginResModel.data?.token.isNotEmpty){
+             await SharedPreferenceUtils.setToken(loginResModel.data?.token);
+            }
+            Get.offAll(() => const BottomBar());
+          }
+        }
       } else {
-        showErrorSnackBar(AppStrings.error, "ERROR");
+        showSussesSnackBar('', loginResModel.message ?? 'ERROR');
       }
+
     }
+
   }
+
 }

@@ -39,4 +39,7 @@ class OtpViewModel extends GetxController {
   }
 
   Rx<String> strDigits(int n) => n.toString().padLeft(2, '0').obs;
+
 }
+
+

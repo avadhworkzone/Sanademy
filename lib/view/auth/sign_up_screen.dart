@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,6 +11,7 @@ import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_enum.dart';
+import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
@@ -246,10 +246,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               .validate() &&
                           signUpViewModel
                               .signUpPhoneController.value.text.isNotEmpty) {
+
+                        /// CALL API FOR SEND OTP
                         await signUpViewModel.registerViewModel(
                           step: 1,
                         );
-                        Get.to(() => const OtpScreen());
                       }
                     },
                     fontSize: 14.sp,

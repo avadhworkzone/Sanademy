@@ -5,6 +5,7 @@ import 'package:sanademy/commonWidget/progrss_dialog.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_utils.dart';
 import 'package:sanademy/utils/logger_utils.dart';
+import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'api_urls.dart';
 import 'response_model.dart';
 
@@ -26,6 +27,10 @@ class ApiBaseHelper {
     connectTimeout: const Duration(seconds: 45),
     receiveTimeout: const Duration(seconds: 45),
     sendTimeout: const Duration(seconds: 45),
+      headers:  {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${SharedPreferenceUtils.getToken()}'
+      },
   );
 
   static Dio createDio() {

@@ -7,6 +7,7 @@ class SharedPreferenceUtils {
   static String langCode = 'langCode';
   static String langCodeId = 'langCodeId';
   static String isLogin = 'isLogin';
+  static String token = "token";
 
   /// LANGUAGE CODE
   static Future setLanguageDes(String value) async {
@@ -38,4 +39,13 @@ class SharedPreferenceUtils {
   static Future<void> clearPreference() async {
     await getStorage.erase();
   }
+
+  ///token
+  static Future setToken(String value) async {
+    await getStorage.write(token, value);
+  }
+
+  static String getToken() {
+    return getStorage.read(token)??"";
+    }
 }

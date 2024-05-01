@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,16 +9,17 @@ import 'package:sanademy/commonWidget/commom_textfield.dart';
 import 'package:sanademy/commonWidget/common_appbar.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
-import 'package:sanademy/commonWidget/network_assets.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_enum.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
+import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view_model/profile_screen_view_model.dart';
+import 'package:sanademy/view_model/sign_up_view_model.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -28,9 +31,18 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   ProfileScreenViewModel profileScreenViewModel =
       Get.put(ProfileScreenViewModel());
+  SignUpViewModel signUpViewModel = Get.put(SignUpViewModel());
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    profileScreenViewModel.getProfileList();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    logs('profileScreenViewModel.imgFile.value====${profileScreenViewModel.imgFile.value}');
     return Scaffold(
       appBar: commonAppBar(
           titleWidget: commonBackArrowAppBar(
@@ -63,19 +75,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 margin: EdgeInsets.only(bottom: 60.h),
                 color: AppColors.primaryColor,
               ),
-              Container(
-                height: 120.h,
-                width: 120.w,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
-                  border: Border.all(color: AppColors.white, width: 4.w),
-                ),
-                child: const NetWorkOcToAssets(
-                  imgUrl:
-                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s',
-                  boxFit: BoxFit.cover,
-                ),
-              )
+              Obx(
+                () => GestureDetector(
+                    onTap: () => showBottomSheet(context),
+                    child: Container(
+                        height: 120.h,
+                        width: 120.w,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.r),
+                          border: Border.all(color: AppColors.white, width: 4.w),
+                        ),
+                        child: Image(
+                          image: (profileScreenViewModel.imgFile.value.path.isNotEmpty)
+                              ? FileImage(profileScreenViewModel.imgFile.value) as ImageProvider
+                              : const NetworkImage(
+                                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s'),
+                          fit: BoxFit.cover,
+                        )
+
+                        /* NetWorkOcToAssets(
+                        imgUrl: profileScreenViewModel.pickImage.value,
+                        boxFit: BoxFit.cover,
+                      ),*/
+                        ),
+                  ),
+              ),
             ],
           ),
           SizeConfig.sH30,
@@ -178,7 +202,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ],
                           controller:
                               profileScreenViewModel.phoneController.value,
-                          initialCountryCode: 'IQ',
+                          initialCountryCode: 'IN'/*profileScreenViewModel.countryCode.value*/,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           onChanged: (val) {
                             if (val.toString().isNotEmpty) {
@@ -350,5 +374,76 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ],
       ),
     );
+  }
+
+  /// bottom sheet for picking a profile picture for user
+
+  void showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+        builder: (_) {
+          return ListView(
+            shrinkWrap: true,
+            padding: EdgeInsets.only(
+                top: Get.height * .03, bottom: Get.height * .05),
+            children: [
+              /// pick profile picture label
+              const Text('Pick Profile Picture',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+              SizedBox(height: Get.height * .02),
+
+              /// Buttons
+              Padding(
+                padding: EdgeInsets.only(left: 20.w),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.camera_alt_outlined,
+                          size: 30,
+                        ),
+                        SizeConfig.sW10,
+                        InkWell(
+                          onTap: () =>
+                              profileScreenViewModel.pickImageFromGallery(),
+                          child: CustomText(
+                            AppStrings.pickFromGallery,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15.sp,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizeConfig.sH20,
+                    Row(
+                      children: [
+                        LocalAssets(
+                          imagePath: AppImageAssets.galleryImg,
+                          height: 30.h,
+                          width: 30.w,
+                        ),
+                        SizeConfig.sW15,
+                        InkWell(
+                          onTap: () =>
+                              profileScreenViewModel.pickImageFromCamera(),
+                          child: CustomText(
+                            AppStrings.pickFromCamera,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15.sp,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        });
   }
 }

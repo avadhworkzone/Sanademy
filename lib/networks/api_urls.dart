@@ -1,18 +1,26 @@
+import 'package:sanademy/utils/shared_preference_utils.dart';
+
 class ApiUrls {
   /// ----------------- BASE URL START -----------------------
-  ///DEV BASE URL....
-  static const String baseURL = 'https://reqres.in';
-  ///
-  ///
+  // static const String baseURL = 'https://reqres.in';
+  static const String baseURL =
+      'https://codeyesinfotech.com/sana_academy/public/api/';
+
   static Map<String, String> getHeaders() {
     final headers = {
-      'headers': {'Authorization': 'Bearer ABCD'},
+      'headers': {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${SharedPreferenceUtils.getToken()}'
+      },
     };
 
     return headers['headers']!;
   }
 
   /// ----------------- BASE URL END -----------------------
-  static const String logIn = '/api/login';
-  static const String userList = '/api/users?page=2';
+  static const String logIn = 'login';
+  static const String userList = 'api/users?page=2';
+  static const String register='register';
+  static const String getProfile='get_profile';
+  static const String updateProfile='update_profile';
 }
