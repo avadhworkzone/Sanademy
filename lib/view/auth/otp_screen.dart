@@ -148,6 +148,7 @@ class _OtpScreenState extends State<OtpScreen> {
                               )
                             : InkWell(
                                 onTap: () {
+
                                   otpViewModel.resetTimer();
                                 },
                                 child: CustomText(
@@ -169,21 +170,16 @@ class _OtpScreenState extends State<OtpScreen> {
                                 if (otpViewModel.formKey.value.currentState!
                                     .validate()) {
                                   if (signUpController.userOtp.value != 0) {
-                                    if (signUpController.userOtp.value ==
-                                        int.parse(otpViewModel
-                                            .pinPutController.value.text)) {
-                                      await SharedPreferenceUtils.setIsLogin(
-                                          true);
-                                      showSussesSnackBar(
-                                          AppStrings.userCreatedSuccessfully,
-                                          "SUCCESS");
+                                    if (signUpController.userOtp.value.toString() ==
+                                        otpViewModel
+                                            .pinPutController.value.text) {
+                                      await SharedPreferenceUtils.setIsLogin(true);
                                       await signUpController.registerViewModel(
                                         step: 2,
                                       );
-                                      Get.offAll(() => const BottomBar());
                                     } else {
                                       showErrorSnackBar(
-                                          AppStrings.otpMismatch, "ERROR");
+                                          '', AppStrings.otpMismatch);
                                     }
                                   }
                                 }

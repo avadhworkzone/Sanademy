@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/view/dialog/log_out_dialog.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
@@ -211,9 +212,12 @@ class _MenuScreenState extends State<MenuScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+
+                            /// FOR SHOW LOGOUT AND DELETE BUTTON
                             index == 2 || index == 3
                                 ? CustomText(
-                                    menuScreenViewModel.drawerData[index],
+                              SharedPreferenceUtils.getIsLogin() == true?
+                              menuScreenViewModel.drawerData[index]:'',
                                     fontSize: 15.sp,
                                     fontWeight: FontWeight.w500,
                                     color: AppColors.red90,
@@ -233,9 +237,10 @@ class _MenuScreenState extends State<MenuScreen> {
                           ],
                         ),
                       ),
+                      /// if user log in than show extra divider for login and delete option
                       index == 3
                           ? const SizedBox()
-                          : Divider(
+                          : index==2&& SharedPreferenceUtils.getIsLogin() == false?const SizedBox():Divider(
                               color: AppColors.black.withOpacity(0.2),
                             ),
                     ],
