@@ -92,7 +92,6 @@ class SignUpViewModel extends GetxController {
             }else{
               if(registerResModel.data!.token != null ){
                 await SharedPreferenceUtils.setToken(registerResModel.data!.token ?? '');
-                print('get token =====<.> ${SharedPreferenceUtils.getToken()}');
                 Get.offAll(() => const BottomBar());
               }
             }
