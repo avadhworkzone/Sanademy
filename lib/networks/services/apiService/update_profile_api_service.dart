@@ -5,7 +5,8 @@ import 'package:sanademy/networks/response_model.dart';
 import 'package:sanademy/utils/app_utils.dart';
 
 class UpdateProfileService {
-  Future<ResponseModel> updateProfileService({required Map<String, dynamic> mapData}) {
+  Future<ResponseModel> updateProfileRepo(
+      {required Map<String, dynamic> mapData}) {
     final response = ApiBaseHelper().postHTTP(
       ApiUrls.updateProfile,
       params: mapData,

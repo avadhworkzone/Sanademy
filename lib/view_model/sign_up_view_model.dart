@@ -49,7 +49,7 @@ class SignUpViewModel extends GetxController {
       dateController.value.text = date;
     }
   }
-
+ /// FOR FORMATTED DATE
   String formatDate(String dateString) {
     List<String> dateComponents = dateString.split('/');
     int day = int.parse(dateComponents[1]);
@@ -62,12 +62,7 @@ class SignUpViewModel extends GetxController {
   Future<void> registerViewModel({
     required num step,
   }) async {
-    if (nameController.value.text.isEmpty) {
-      showErrorSnackBar(AppStrings.name, AppStrings.nameIsRequired);
-      return;
-    } else {
       unFocus();
-
       ///new....
       Map<String, dynamic> queryParams = {
         ApiKeys.name: nameController.value.text.trim(),
@@ -98,7 +93,6 @@ class SignUpViewModel extends GetxController {
           }
         } else {
           showSussesSnackBar('', registerResModel.message ?? 'ERROR');
-        }
       }
     }
   }

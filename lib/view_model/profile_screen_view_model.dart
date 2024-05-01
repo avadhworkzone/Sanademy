@@ -1,12 +1,13 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:sanademy/networks/api_base_helper.dart';
+import 'package:sanademy/networks/api_keys.dart';
 import 'package:sanademy/networks/model/get_profile_res_model.dart';
 import 'package:sanademy/networks/services/apiService/profile_api_service.dart';
+import 'package:sanademy/networks/services/apiService/update_profile_api_service.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/enum_utils.dart';
@@ -99,9 +100,26 @@ class ProfileScreenViewModel extends GetxController {
     }
   }
 
+  /// FOR FORMATTED DATE
+  String formatDate(String dateString) {
+    List<String> dateComponents = dateString.split('/');
+    int day = int.parse(dateComponents[1]);
+    int month = int.parse(dateComponents[0]);
+    int year = int.parse(dateComponents[2]);
+    return '$year-${month.toString().padLeft(2, '0')}-${day.toString().padLeft(2, '0')}';
+  }
   /// CALL API FOR UPDATE PROFILE
   void updateProfile(){
-
-  }
-
+    unFocus();
+    /// FOR PASS BODY
+    Map<String, dynamic> queryParams = {
+      ApiKeys.name: nameController.value.text.trim(),
+      ApiKeys.dateOfBirth: formatDate(dateController.value.text),
+      ApiKeys.phoneCode: "+${countryCode.value}",
+      ApiKeys.phoneNumber: phoneController.value.text,
+    };
+  final response = UpdateProfileService().updateProfileRepo(mapData: queryParams);
+    // if (checkStatusCode(response!.statusCode ?? 0)) {}
+  // print(response);
+}
 }

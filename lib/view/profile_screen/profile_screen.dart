@@ -57,7 +57,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       .validate() &&
                   profileScreenViewModel
                       .phoneController.value.text.isNotEmpty) {
-                Get.back();
+                profileScreenViewModel.updateProfile();
+                // Get.back();
               }
             },
             actionWidgetColor: AppColors.white,
@@ -289,9 +290,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         validator: ValidationMethod.validateAddress,
                         regularExpression: RegularExpressionUtils.address,
                         hintText: AppStrings.enterAddress,
+                        isValidate: false,
                         hintFontWeight: FontWeight.w400,
                         pIcon: Icon(Icons.location_on_sharp, size: 30.h),
-                        validationType: ValidationTypeEnum.address,
+                        // validationType: ValidationTypeEnum.address,
                         borderColor: AppColors.black.withOpacity(0.10),
                       ),
                     ),
