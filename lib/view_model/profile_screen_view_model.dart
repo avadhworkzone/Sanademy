@@ -77,6 +77,7 @@ class ProfileScreenViewModel extends GetxController {
     }
   }
 
+  /// CAll API FOR GET AND SHOW DATA
   Future<void> getProfileList() async {
     final response = await ProfileService().profileRepo();
     if (checkStatusCode(response!.statusCode ?? 0)) {
@@ -97,4 +98,10 @@ class ProfileScreenViewModel extends GetxController {
       }
     }
   }
+
+  /// CALL API FOR UPDATE PROFILE
+  void updateProfile(){
+
+  }
+
 }
