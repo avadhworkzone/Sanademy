@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart' hide Response;
@@ -6,6 +9,7 @@ import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_utils.dart';
 import 'package:sanademy/utils/logger_utils.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
+
 import 'api_urls.dart';
 import 'response_model.dart';
 
@@ -27,13 +31,16 @@ class ApiBaseHelper {
     connectTimeout: const Duration(seconds: 45),
     receiveTimeout: const Duration(seconds: 45),
     sendTimeout: const Duration(seconds: 45),
-      headers:  {
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ${SharedPreferenceUtils.getToken()}'
-      },
+    // headers: {
+    //   'Accept': 'application/json',
+    //   'Authorization':
+    //       'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGEzNjg1ODU1NGVhY2MzMGY1NjA2NzNkODk0NDI0MDRhOWI4MzI5NDNjNWFiZTNlY2ZhYTZkOTY0NmQyMmJiNmE2MGUzNzg3MmMxNGJkOGQiLCJpYXQiOjE3MTQ2Mjc2ODYuNzEzMjgxLCJuYmYiOjE3MTQ2Mjc2ODYuNzEzMjgzLCJleHAiOjE3NDYxNjM2ODYuNzEyMDg3LCJzdWIiOiI0OSIsInNjb3BlcyI6W119.IbNgYm0HbR9FdD6ZAXoJWVEnYSSbdnyvejliREGjaK2c8hydpyziWQeS5dT9LHrK1zc5Pjvy8FAM-jg-8aYosc40MDituljfIwrTNGFq_cewlRIiawtSJTX7ZAgp2zBq9aA6ZOmBGVs-CXdyTaPJ1UgpERm627WHYX9CUPG2_0Gg_t3CxhHl-aTw3KTO4sYZveOOvIAcvL0c9AEQpkkP_pAmORxE_Kjy3fvZLfZxaztApQy3BYO4uF6ToCvePAU5XiTj8RgP0zV9jcFFn284ldU9Wvy2Joa1dVKpbBffKIkwFRdk8vqnTu1zYPTf46TvA9u2dWqFSaRReFDgRHhogwlWQcRXcE-NMGGMxb2tdGsbiXxHiRpqX7bIdTZWWQgLdG6LGBSDNo4NMQczFTjgIi5ZZWovJUJ7opLnrliBnid65W5_PGMaqT0kGwksTg0fdfA3X6GcTHgduSb6O-DRzqtoz2RQJrpqox3XCFlgeMziiWBIFgBlUz7GxSjyeiR-KyuScwLfmyU8SPgRDHdd2QNctvyl7rMWTYe0vQ7MR3J-Iz7MUH3_KaRteLfS3iQ0SeskRXLBy3XOw9IjKhD2qJgF0FYXiw1eibhquadg1UT1mx5yokdRuPHGlkj8N9gG20_nn7y5kQaGjWNc8ASJw04Y08SWt1SfkPm6KGqOWJk'
+    // },
   );
 
   static Dio createDio() {
+    logs(
+        'SharedPreferenceUtils.getToken()===${SharedPreferenceUtils.getToken()}');
     return Dio(opts);
   }
 
@@ -113,6 +120,20 @@ class ApiBaseHelper {
   static final dio = createDio();
   static final baseAPI = addInterceptors(dio);
 
+  static Map<String, String> getHeaders() {
+    final token = SharedPreferenceUtils.getToken();
+    Map<String, String> header = {};
+    header.addAll({
+      'Accept': 'application/json',
+    });
+    if (token.isNotEmpty) {
+      header.addAll(
+          {'Authorization': 'Bearer ${SharedPreferenceUtils.getToken()}'});
+    }
+log("HEADER :==>${jsonEncode(header)}");
+    return header;
+  }
+
   Future<ResponseModel> postHTTP(
     String url, {
     dynamic params,
@@ -126,6 +147,7 @@ class ApiBaseHelper {
       Response response = await baseAPI.post(
         url,
         data: params,
+        options: Options(headers: getHeaders()),
         onSendProgress: onSendProgress,
       );
 
@@ -184,7 +206,9 @@ class ApiBaseHelper {
   }) async {
     try {
       showProgressDialog = showProgress;
-      Response response = await baseAPI.get(url, queryParameters: params);
+      Response response = await baseAPI.get(url, queryParameters: params,
+        options: Options(headers: getHeaders()),
+      );
 
       return handleResponse(response, onError!, onSuccess!);
     } on DioException catch (e) {

@@ -79,9 +79,9 @@ class _OtpScreenState extends State<OtpScreen> {
                       fontWeight: FontWeight.w700,
                     ),
                     SizeConfig.sH10,
-                    signUpController.userOtp.value != 0
+                    signUpController.signUpUserOtp.value != 0
                         ? CustomText(
-                            "Your Otp is: ${signUpController.userOtp.value.toString()}",
+                            "Your Otp is: ${signUpController.signUpUserOtp.value.toString()}",
                             fontSize: 14.sp,
                             color: AppColors.black12,
                             fontWeight: FontWeight.w700,
@@ -169,8 +169,8 @@ class _OtpScreenState extends State<OtpScreen> {
                             : () async {
                                 if (otpViewModel.formKey.value.currentState!
                                     .validate()) {
-                                  if (signUpController.userOtp.value != 0) {
-                                    if (signUpController.userOtp.value.toString() ==
+                                  if (signUpController.signUpUserOtp.value != 0) {
+                                    if (signUpController.signUpUserOtp.value.toString() ==
                                         otpViewModel
                                             .pinPutController.value.text) {
                                       await SharedPreferenceUtils.setIsLogin(true);

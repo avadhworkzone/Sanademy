@@ -14,22 +14,21 @@ import 'package:sanademy/view/bottombar/bottom_bar.dart';
 class SignUpViewModel extends GetxController {
   /// TEXT EDITING CONTROLLER
 
-  Rx<TextEditingController> nameController = TextEditingController().obs;
-  Rx<TextEditingController> dateController = TextEditingController().obs;
+  Rx<TextEditingController> signUpNameController = TextEditingController().obs;
+  Rx<TextEditingController> signUpDateController = TextEditingController().obs;
   Rx<TextEditingController> signUpPhoneController = TextEditingController().obs;
   final Rx<GlobalKey<FormState>> signUpFormKey = GlobalKey<FormState>().obs;
-  Rx<DateTime> selectedDate = DateTime.now().obs;
+  Rx<DateTime> signUpSelectedDate = DateTime.now().obs;
   RxBool signUpIsValidate = false.obs;
-  RxString countryCode = ''.obs;
-
-  // RxString userOtp = ''.obs;
-  RxInt userOtp = 0.obs;
+  RxString signUpPhoneCode = '964'.obs;
+  RxString signUpCountryCode = 'IQ'.obs;
+  RxInt signUpUserOtp = 0.obs;
 
   /// DATE PICKER
   Future<void> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
-        initialDate: selectedDate.value,
+        initialDate: signUpSelectedDate.value,
         firstDate: DateTime(1950, 8),
         lastDate: DateTime.now(),
         builder: (BuildContext context, Widget? child) {
@@ -44,9 +43,9 @@ class SignUpViewModel extends GetxController {
           );
         });
 
-    if (picked != null && picked != selectedDate.value) {
+    if (picked != null && picked != signUpSelectedDate.value) {
       String date = "${picked.month}/${picked.day}/${picked.year}";
-      dateController.value.text = date;
+      signUpDateController.value.text = date;
     }
   }
  /// FOR FORMATTED DATE
@@ -65,11 +64,12 @@ class SignUpViewModel extends GetxController {
       unFocus();
       ///new....
       Map<String, dynamic> queryParams = {
-        ApiKeys.name: nameController.value.text.trim(),
-        ApiKeys.dateOfBirth: formatDate(dateController.value.text),
-        ApiKeys.phoneCode: "+${countryCode.value}",
+        ApiKeys.name: signUpNameController.value.text.trim(),
+        ApiKeys.dateOfBirth: formatDate(signUpDateController.value.text),
+        ApiKeys.phoneCode: "+${signUpPhoneCode.value}",
         ApiKeys.phoneNumber: signUpPhoneController.value.text,
         ApiKeys.step: step.toString(),
+        ApiKeys.countryCode: signUpCountryCode.value,
       };
 
       final response =
@@ -80,7 +80,7 @@ class SignUpViewModel extends GetxController {
             registerResModelFromJson(response.response.toString());
         if (registerResModel.success!) {
           if (registerResModel.data != null) {
-            userOtp.value = registerResModel.data!.otp ?? 0;
+            signUpUserOtp.value = registerResModel.data!.otp ?? 0;
             await showSussesSnackBar('', registerResModel.message ?? 'SUCCESS');
             if(step == 1){
               Get.to(() => const OtpScreen());

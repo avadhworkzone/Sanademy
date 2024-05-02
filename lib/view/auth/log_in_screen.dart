@@ -32,11 +32,11 @@ class _LogInScreenState extends State<LogInScreen> {
   SignInViewModel signInViewModel = Get.put(SignInViewModel());
   SignUpViewModel signUpController = Get.find<SignUpViewModel>();
   OtpViewModel otpViewModel = Get.put(OtpViewModel());
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    signInViewModel.countryLoginCode.value = '964';
   }
 
   @override
@@ -89,8 +89,8 @@ class _LogInScreenState extends State<LogInScreen> {
                             }
                           },
                           onCountryChanged: (country) {
-                            signInViewModel.countryLoginCode.value =
-                                country.dialCode;
+                            signInViewModel.phoneLoginCode.value = country.dialCode;
+                            signInViewModel.countryLoginCode.value = country.code;
                           },
                           style: TextStyle(
                             color: signInViewModel.showContainer.value == true

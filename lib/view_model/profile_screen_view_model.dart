@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -21,7 +22,6 @@ class ProfileScreenViewModel extends GetxController {
   Rx<DateTime> selectedDate = DateTime.now().obs;
   RxBool isValidate = false.obs;
   Rx<ResponseStatus> responseStatus = ResponseStatus.INITIAL.obs;
-  ImagePicker picker = ImagePicker();
   Rx<File> imgFile = File('').obs;
   RxString phoneCode = ''.obs;
   RxString countryCode = ''.obs;
@@ -79,7 +79,7 @@ class ProfileScreenViewModel extends GetxController {
   }
 
   /// CAll API FOR GET AND SHOW DATA
-  Future<void> getProfileList() async {
+  Future<void> getProfileData() async {
     final response = await ProfileService().profileRepo();
     if (checkStatusCode(response!.statusCode ?? 0)) {
       GetProfileResModel getProfileResModel =
@@ -87,11 +87,14 @@ class ProfileScreenViewModel extends GetxController {
       if (getProfileResModel.data != null) {
         nameController.value.text = getProfileResModel.data!.name ?? '';
         phoneController.value.text = getProfileResModel.data!.phoneNumber ?? '';
-        dateController.value.text = DateFormat('MM-dd-yyyy').format(DateTime.parse(getProfileResModel.data!.dateOfBirth.toString()));
-        phoneCode.value = getProfileResModel.data?.phoneCode ?? '';
-        countryCode.value = phoneCode.value.replaceAll('+', '');
-        print('phoneCode.value==>${getProfileResModel.data?.phoneCode}');
-        print('phoneCode.value==>${countryCode..value}');
+        dateController.value.text = DateFormat('MM-dd-yyyy').format(
+            DateTime.parse(getProfileResModel.data!.dateOfBirth.toString()));
+        addressController.value.text = getProfileResModel.data!.address ?? '';
+      //  imgFile.value = (getProfileResModel.data!.image ?? '') as File;
+        phoneCode.value='';
+        phoneCode.value = getProfileResModel.data!.phoneCode ?? '';
+        countryCode.value='';
+        countryCode.value = getProfileResModel.data!.countryCode ?? '';
         responseStatus.value = ResponseStatus.Completed;
       } else {
         showErrorSnackBar('', getProfileResModel.message.toString());
@@ -108,18 +111,20 @@ class ProfileScreenViewModel extends GetxController {
     int year = int.parse(dateComponents[2]);
     return '$year-${month.toString().padLeft(2, '0')}-${day.toString().padLeft(2, '0')}';
   }
+
   /// CALL API FOR UPDATE PROFILE
-  void updateProfile(){
+  Future<void> updateProfile() async {
     unFocus();
+
     /// FOR PASS BODY
     Map<String, dynamic> queryParams = {
       ApiKeys.name: nameController.value.text.trim(),
       ApiKeys.dateOfBirth: formatDate(dateController.value.text),
-      ApiKeys.phoneCode: "+${countryCode.value}",
+      ApiKeys.phoneCode: "+${phoneCode.value}",
+      ApiKeys.countryCode: "+${countryCode.value}",
       ApiKeys.phoneNumber: phoneController.value.text,
     };
-  final response = UpdateProfileService().updateProfileRepo(mapData: queryParams);
-    // if (checkStatusCode(response!.statusCode ?? 0)) {}
-  // print(response);
-}
+    final response = await UpdateProfileService().updateProfileRepo(mapData: queryParams);
+    if(checkStatusCode(response!.statusCode ?? 0)){}
+  }
 }

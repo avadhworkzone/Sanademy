@@ -36,7 +36,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    signUpViewModel.countryCode.value = '964';
+    // signUpViewModel.signUpPhoneCode.value = '964';
   }
 
   @override
@@ -75,7 +75,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   /// NAME TEXT FIELD
                   CommonTextField(
                     textInputAction: TextInputAction.next,
-                    textEditController: signUpViewModel.nameController.value,
+                    textEditController: signUpViewModel.signUpNameController.value,
                     validator: ValidationMethod.validateName,
                     regularExpression:
                         RegularExpressionUtils.alphabetSpacePattern,
@@ -104,7 +104,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         color: AppColors.black,
                         fontFamily: AppConstants.quicksand,
                         fontWeight: FontWeight.w400),
-                    controller: signUpViewModel.dateController.value,
+                    controller: signUpViewModel.signUpDateController.value,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(
                           horizontal: 15.w, vertical: 17.h),
@@ -163,7 +163,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         keyboardType: TextInputType.number,
                         initialCountryCode: 'IQ',
                         onCountryChanged: (country) {
-                          signUpViewModel.countryCode.value = country.dialCode;
+                          signUpViewModel.signUpPhoneCode.value = country.dialCode;
+                          signUpViewModel.signUpCountryCode.value = country.code;
                         },
                         onChanged: (val) {
                           if (val.toString().isNotEmpty) {
@@ -268,8 +269,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         padding: EdgeInsets.all(2.w),
                         child: GestureDetector(
                           onTap: () {
-                            signUpViewModel.nameController.value.clear();
-                            signUpViewModel.dateController.value.clear();
+                            signUpViewModel.signUpDateController.value.clear();
                             signUpViewModel.signUpPhoneController.value.clear();
                             signUpViewModel.signUpIsValidate.value = false;
                             Get.to(() => const LogInScreen());

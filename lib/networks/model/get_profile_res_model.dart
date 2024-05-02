@@ -37,7 +37,8 @@ class Data {
       this.name, 
       this.dateOfBirth, 
       this.phoneCode, 
-      this.phoneNumber, 
+      this.countryCode,
+      this.phoneNumber,
       this.address, 
       this.image, 
       this.role, 
@@ -50,6 +51,7 @@ class Data {
     name = json['name'];
     dateOfBirth = json['date_of_birth'];
     phoneCode = json['phone_code'];
+    countryCode = json['country_code'];
     phoneNumber = json['phone_number'];
     address = json['address'];
     image = json['image'];
@@ -62,6 +64,7 @@ class Data {
   String? name;
   String? dateOfBirth;
   String? phoneCode;
+  String? countryCode;
   String? phoneNumber;
   dynamic address;
   String? image;
@@ -76,6 +79,7 @@ class Data {
     map['name'] = name;
     map['date_of_birth'] = dateOfBirth;
     map['phone_code'] = phoneCode;
+    map['country_code'] = countryCode;
     map['phone_number'] = phoneNumber;
     map['address'] = address;
     map['image'] = image;

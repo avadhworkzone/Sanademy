@@ -5,6 +5,7 @@ import 'package:sanademy/commonWidget/common_appbar.dart';
 import 'package:sanademy/commonWidget/network_assets.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
+import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
@@ -59,6 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           actionWidget: GestureDetector(
             onTap: () {
+              logs('token is =====>> ${SharedPreferenceUtils.getToken()}');
               SharedPreferenceUtils.getIsLogin() == true
                   ? Get.to(const ProfileScreen())
                   : Get.to(() => const SignUpScreen());

@@ -15,7 +15,8 @@ class SignInViewModel extends GetxController {
   RxBool showContainer = false.obs;
   final Rx<GlobalKey<FormState>> signInFormKey = GlobalKey<FormState>().obs;
   RxBool signInIsValidate = false.obs;
-  RxString countryLoginCode = ''.obs;
+  RxString countryLoginCode = '964'.obs;
+  RxString phoneLoginCode = 'IQ'.obs;
   RxInt userLoginOtp = 0.obs;
 
   ///LOGIN API CALLING AND VALIDATION....
@@ -23,11 +24,11 @@ class SignInViewModel extends GetxController {
     required num step,
   }) async {
     unFocus();
-    logs('===countryLoginCode====---))))+${countryLoginCode.value}');
 
     ///new....
     Map<String, String> queryParams = {
-      ApiKeys.phoneCode: "+${countryLoginCode.value}",
+      ApiKeys.phoneCode: "+${phoneLoginCode.value}",
+      ApiKeys.countryCode: countryLoginCode.value,
       ApiKeys.phoneNumber: signInPhoneController.value.text,
       ApiKeys.step: step.toString(),
     };
@@ -37,7 +38,6 @@ class SignInViewModel extends GetxController {
     if (checkStatusCode(response!.statusCode ?? 0)) {
       LoginResModel loginResModel =
           loginResModelFromJson(response.response.toString());
-      // countryLoginCode.value = loginResModel.data!.otp ?? 0;
       if (loginResModel.success == true) {
         if (loginResModel.data != null) {
           userLoginOtp.value = loginResModel.data!.otp ?? 0;

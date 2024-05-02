@@ -12,6 +12,7 @@ import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_theme.dart';
 import 'package:sanademy/view/general/connectivity_wrapper.dart';
 import 'package:sanademy/view/splashScreen/splash_screen.dart';
+import 'package:sanademy/view_model/profile_screen_view_model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -92,6 +93,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   final connectivityViewModel = Get.put(ConnectivityViewModel());
+  ProfileScreenViewModel profileScreenViewModel =
+  Get.put(ProfileScreenViewModel());
 }
 
 /// Create main app view builder
