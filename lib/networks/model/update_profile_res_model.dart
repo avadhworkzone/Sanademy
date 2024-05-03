@@ -82,11 +82,13 @@ class Data {
     map['phone_number'] = phoneNumber;
     map['country_code'] = countryCode;
     map['address'] = address;
-    map['image'] = image;
     map['role'] = role;
     map['email_verified_at'] = emailVerifiedAt;
     map['created_at'] = createdAt;
     map['updated_at'] = updatedAt;
+    if (image != null) {
+      map['image'] = image;
+    }
     return map;
   }
 

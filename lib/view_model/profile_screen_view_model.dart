@@ -94,6 +94,7 @@ class ProfileScreenViewModel extends GetxController {
         phoneController.value.text = getProfileResModel.data!.phoneNumber ?? '';
         dateController.value.text = DateFormat('MM-dd-yyyy').format(
             DateTime.parse(getProfileResModel.data!.dateOfBirth.toString()));
+        addressController.value.text = getProfileResModel.data!.address ??'';
         newImage.value=getProfileResModel.data!.image??'';
         phoneCode.value = '';
         phoneCode.value = getProfileResModel.data!.phoneCode ?? '';
@@ -106,7 +107,7 @@ class ProfileScreenViewModel extends GetxController {
       }
     }
   }
-  // final dio.Dio _dio = dio.Dio();
+
 
   /// CALL API FOR UPDATE PROFILE
   Future<void> updateProfile() async {
@@ -118,12 +119,14 @@ class ProfileScreenViewModel extends GetxController {
         : null;
     String formattedDate =
     apiDate != null ? DateFormat('yyyy-MM-dd').format(apiDate):'';
-
-
-    final file = await dio.MultipartFile.fromFile(
-      newImage.value ?? "",
+    dio.MultipartFile? file;
+   if(imgFile.value.path.isNotEmpty){
+   file = await dio.MultipartFile.fromFile(
+      newImage.value,
       filename: newImage.value
-    );
+  );
+}
+
 
     /// FOR PASS BODY
     Map<String, dynamic> queryParams = {
@@ -133,7 +136,7 @@ class ProfileScreenViewModel extends GetxController {
       ApiKeys.countryCode: countryCode.value,
       ApiKeys.phoneNumber: phoneController.value.text,
       ApiKeys.address: addressController.value.text,
-     ApiKeys.image: file,
+      ApiKeys.image: imgFile.value.path.isNotEmpty?file:null,
     //   dio.FormData.fromMap({
     // "file":
     //  dio.MultipartFile.fromFile(newImage.value, ),
@@ -148,9 +151,8 @@ class ProfileScreenViewModel extends GetxController {
       updateProfileResModelFromJson(response.response.toString());
       if (updateProfileResModel.success!) {
         if (updateProfileResModel.data != null) {
-          print('updateProfileResModel.data${updateProfileResModel.data}');
           showSussesSnackBar('', updateProfileResModel.message ?? 'SUCCESS');
-
+          Get.to(HomeScreen());
         }else {
           showSussesSnackBar('', updateProfileResModel.message ?? 'ERROR');
         }

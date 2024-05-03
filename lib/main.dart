@@ -96,8 +96,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   final connectivityViewModel = Get.put(ConnectivityViewModel());
-  ProfileScreenViewModel profileScreenViewModel =
-  Get.put(ProfileScreenViewModel());
+
 }
 
 /// Create main app view builder

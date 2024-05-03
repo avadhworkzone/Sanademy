@@ -27,15 +27,14 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  ProfileScreenViewModel profileScreenViewModel = Get.find();
+  ProfileScreenViewModel profileScreenViewModel =
+  Get.put(ProfileScreenViewModel());
 
   @override
   void initState() {
     // TODO: implement initState
     getUserDataApiCall();
-    print(
-        'profileScreenViewModel.countryCode.value==>${profileScreenViewModel.countryCode.value}');
-    super.initState();
+   super.initState();
   }
 
   getUserDataApiCall() async {
@@ -69,7 +68,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             centerTitle: false),
         body: Obx(() => profileScreenViewModel.responseStatus.value ==
                 ResponseStatus.Error
-            ? Center(
+            ? const Center(
                 child: Text('ERROR'),
               )
             : profileScreenViewModel.responseStatus.value ==
@@ -108,18 +107,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     : NetWorkOcToAssets(
                                         imgUrl: profileScreenViewModel
                                             .newImage.value)
-                                // Image(
-                                //   image: (profileScreenViewModel.imgFile.value.path.isNotEmpty)
-                                //       ? FileImage(profileScreenViewModel.imgFile.value) as ImageProvider
-                                //       : const NetworkImage(
-                                //       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s'),
-                                //   fit: BoxFit.cover,
-                                // )
-
-                                /* NetWorkOcToAssets(
-                        imgUrl: profileScreenViewModel.pickImage.value,
-                        boxFit: BoxFit.cover,
-                      ),*/
+                               /* Image(
+                                  image: (profileScreenViewModel.imgFile.value.path.isNotEmpty)
+                                      ? FileImage(profileScreenViewModel.imgFile.value) as ImageProvider
+                                      : const NetworkImage(
+                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s'),
+                                  fit: BoxFit.cover,
+                                )*/
                                 ),
                           ),
                         ],
