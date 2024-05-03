@@ -1,5 +1,7 @@
+
 import 'dart:io';
 
+import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -7,11 +9,13 @@ import 'package:intl/intl.dart';
 import 'package:sanademy/networks/api_base_helper.dart';
 import 'package:sanademy/networks/api_keys.dart';
 import 'package:sanademy/networks/model/get_profile_res_model.dart';
+import 'package:sanademy/networks/model/update_profile_res_model.dart';
 import 'package:sanademy/networks/services/apiService/profile_api_service.dart';
 import 'package:sanademy/networks/services/apiService/update_profile_api_service.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/enum_utils.dart';
+import 'package:sanademy/view/homeScreen/home_screen.dart';
 
 class ProfileScreenViewModel extends GetxController {
   Rx<TextEditingController> nameController = TextEditingController().obs;
@@ -25,6 +29,7 @@ class ProfileScreenViewModel extends GetxController {
   Rx<File> imgFile = File('').obs;
   RxString phoneCode = ''.obs;
   RxString countryCode = ''.obs;
+  RxString newImage = ''.obs;
 
   /// DATE PICKER
   Future<void> selectDate(BuildContext context) async {
@@ -57,8 +62,8 @@ class ProfileScreenViewModel extends GetxController {
     final pickedFile =
         await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
     if (pickedFile != null) {
-      imgFile.value = File(pickedFile.path);
-
+      newImage.value = pickedFile.path;
+      imgFile.value=File(pickedFile.path);
       /// FOR HIDING BOTTOM SHEET
       Get.back();
     }
@@ -71,8 +76,8 @@ class ProfileScreenViewModel extends GetxController {
     final pickedFile =
         await picker.pickImage(source: ImageSource.camera, imageQuality: 80);
     if (pickedFile != null) {
-      imgFile.value = File(pickedFile.path);
-
+      newImage.value = pickedFile.path;
+      imgFile.value=File(pickedFile.path);
       /// FOR HIDING BOTTOM SHEET
       Get.back();
     }
@@ -89,11 +94,10 @@ class ProfileScreenViewModel extends GetxController {
         phoneController.value.text = getProfileResModel.data!.phoneNumber ?? '';
         dateController.value.text = DateFormat('MM-dd-yyyy').format(
             DateTime.parse(getProfileResModel.data!.dateOfBirth.toString()));
-        addressController.value.text = getProfileResModel.data!.address ?? '';
-      //  imgFile.value = (getProfileResModel.data!.image ?? '') as File;
-        phoneCode.value='';
+        newImage.value=getProfileResModel.data!.image??'';
+        phoneCode.value = '';
         phoneCode.value = getProfileResModel.data!.phoneCode ?? '';
-        countryCode.value='';
+        countryCode.value = '';
         countryCode.value = getProfileResModel.data!.countryCode ?? '';
         responseStatus.value = ResponseStatus.Completed;
       } else {
@@ -102,29 +106,59 @@ class ProfileScreenViewModel extends GetxController {
       }
     }
   }
-
-  /// FOR FORMATTED DATE
-  String formatDate(String dateString) {
-    List<String> dateComponents = dateString.split('/');
-    int day = int.parse(dateComponents[1]);
-    int month = int.parse(dateComponents[0]);
-    int year = int.parse(dateComponents[2]);
-    return '$year-${month.toString().padLeft(2, '0')}-${day.toString().padLeft(2, '0')}';
-  }
+  // final dio.Dio _dio = dio.Dio();
 
   /// CALL API FOR UPDATE PROFILE
   Future<void> updateProfile() async {
     unFocus();
+    String? apiDateString =
+        dateController.value.text;
+    DateTime? apiDate = apiDateString != ''
+        ? DateFormat('MM-dd-yyyy').parse(apiDateString)
+        : null;
+    String formattedDate =
+    apiDate != null ? DateFormat('yyyy-MM-dd').format(apiDate):'';
+
+
+    final file = await dio.MultipartFile.fromFile(
+      newImage.value ?? "",
+      filename: newImage.value
+    );
 
     /// FOR PASS BODY
     Map<String, dynamic> queryParams = {
       ApiKeys.name: nameController.value.text.trim(),
-      ApiKeys.dateOfBirth: formatDate(dateController.value.text),
-      ApiKeys.phoneCode: "+${phoneCode.value}",
-      ApiKeys.countryCode: "+${countryCode.value}",
+      ApiKeys.dateOfBirth: formattedDate,
+      ApiKeys.phoneCode: phoneCode.value,
+      ApiKeys.countryCode: countryCode.value,
       ApiKeys.phoneNumber: phoneController.value.text,
+      ApiKeys.address: addressController.value.text,
+     ApiKeys.image: file,
+    //   dio.FormData.fromMap({
+    // "file":
+    //  dio.MultipartFile.fromFile(newImage.value, ),
+    // })
+      // dio.MultipartFile.fromFile(newImage.value),///File(newImage.value),///imgFile.value,
     };
+
     final response = await UpdateProfileService().updateProfileRepo(mapData: queryParams);
-    if(checkStatusCode(response!.statusCode ?? 0)){}
+
+    if (checkStatusCode(response!.statusCode ?? 0)) {
+      UpdateProfileResModel updateProfileResModel =
+      updateProfileResModelFromJson(response.response.toString());
+      if (updateProfileResModel.success!) {
+        if (updateProfileResModel.data != null) {
+          print('updateProfileResModel.data${updateProfileResModel.data}');
+          showSussesSnackBar('', updateProfileResModel.message ?? 'SUCCESS');
+
+        }else {
+          showSussesSnackBar('', updateProfileResModel.message ?? 'ERROR');
+        }
+      } else {
+        showSussesSnackBar('', updateProfileResModel.message ?? 'ERROR');
+      }
+    }else {
+      showSussesSnackBar('', 'Error updating profile');
+    }
   }
 }

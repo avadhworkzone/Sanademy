@@ -7,7 +7,7 @@ import 'package:sanademy/utils/app_utils.dart';
 class UpdateProfileService {
   Future<ResponseModel?> updateProfileRepo(
       {required Map<String, dynamic> mapData}) async {
-    final response = await ApiBaseHelper().postHTTP(
+    final response = await ApiBaseHelper().postFileUploadHTTP(
       ApiUrls.updateProfile,
       params: mapData,
       onError: (error) {

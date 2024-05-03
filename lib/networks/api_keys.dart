@@ -5,4 +5,6 @@ class ApiKeys {
   static const phoneNumber = 'phone_number';
   static const step = 'step';
   static const countryCode = 'country_code';
+  static const address = 'address';
+  static const image = 'image';
 }
