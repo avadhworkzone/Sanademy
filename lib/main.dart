@@ -10,17 +10,16 @@ import 'package:sanademy/utils/app_class.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_theme.dart';
-import 'package:sanademy/view/general/connectivity_wrapper.dart';
 import 'package:sanademy/view/splashScreen/splash_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  runApp(const MyApp());
   await GetStorage.init();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
