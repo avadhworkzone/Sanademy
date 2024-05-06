@@ -97,6 +97,8 @@ class AppStrings {
   static String enterAddress = 'Enter your address';
   static String connectWithFaceBook = 'Connect With Facebook';
   static String connectWithInstagram = 'Connect With Instagram';
+  static String pickFromGallery = 'Pick From Gallery';
+  static String pickFromCamera = 'Pick From Camera';
 
   /// my progress screen
   static String progressIntroductionTxt =
@@ -154,5 +156,5 @@ class AppStrings {
   static String nameIsRequired = 'Name is required';
   static String error = 'Error';
   static String userCreatedSuccessfully = 'User Created Successfully';
-  static String otpMismatch = 'Otp Mismatch';
+  static String otpMismatch = 'Please enter valid Otp';
 }

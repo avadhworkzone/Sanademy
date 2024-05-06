@@ -35,7 +35,7 @@ void showErrorSnackBar(String title, String message) {
   ));
 }
 
-void showSussesSnackBar(String title, String message) {
+  showSussesSnackBar(String title, String message)  {
   Get.closeAllSnackbars();
   Get.showSnackbar(GetSnackBar(
     titleText: title.isNotEmpty

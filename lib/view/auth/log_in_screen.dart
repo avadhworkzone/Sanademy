@@ -9,6 +9,7 @@ import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
+import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
@@ -18,6 +19,7 @@ import 'package:sanademy/view/auth/sign_up_screen.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
 import 'package:sanademy/view_model/otp_view_model.dart';
 import 'package:sanademy/view_model/sign_in_view_model.dart';
+import 'package:sanademy/view_model/sign_up_view_model.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
@@ -28,12 +30,13 @@ class LogInScreen extends StatefulWidget {
 
 class _LogInScreenState extends State<LogInScreen> {
   SignInViewModel signInViewModel = Get.put(SignInViewModel());
+  SignUpViewModel signUpController = Get.find<SignUpViewModel>();
   OtpViewModel otpViewModel = Get.put(OtpViewModel());
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    signInViewModel.countryLoginCode.value = '964';
   }
 
   @override
@@ -86,8 +89,8 @@ class _LogInScreenState extends State<LogInScreen> {
                             }
                           },
                           onCountryChanged: (country) {
-                            signInViewModel.countryLoginCode.value =
-                                country.dialCode;
+                            signInViewModel.phoneLoginCode.value = country.dialCode;
+                            signInViewModel.countryLoginCode.value = country.code;
                           },
                           style: TextStyle(
                             color: signInViewModel.showContainer.value == true
@@ -172,13 +175,21 @@ class _LogInScreenState extends State<LogInScreen> {
                               fontWeight: FontWeight.w400,
                             ),
                             SizeConfig.sH15,
-
+                            signInViewModel.userLoginOtp.value != 0
+                                ? CustomText(
+                              "Your Otp is: ${signInViewModel.userLoginOtp.value.toString()}",
+                              fontSize: 14.sp,
+                              color: AppColors.black12,
+                              fontWeight: FontWeight.w700,
+                            )
+                                : SizeConfig.sH2,
+                            SizeConfig.sH15,
                             /// otp field
                             Pinput(
                               validator: (val) =>
                                   ValidationMethod.validateOtp(val),
                               controller: otpViewModel.pinPutController.value,
-                              length: 4,
+                              length: 6,
                               showCursor: true,
                               keyboardType: TextInputType.number,
                               defaultPinTheme: PinTheme(
@@ -241,16 +252,19 @@ class _LogInScreenState extends State<LogInScreen> {
                           ],
                         )),
 
-                    /// SUBMIT BUTTON
-                    signInViewModel.showContainer.value == true
-                        ? Padding(
+                    /// SUBMIT AND VERIFY BUTTON
+                    if (signInViewModel.showContainer.value == true) Padding(
                             padding: EdgeInsets.symmetric(horizontal: 22.w),
                             child: CustomBtn(
                               onTap: () async {
-                                if (signInViewModel
-                                    .signInFormKey.value.currentState!
-                                    .validate()) {
-                                  Get.offAll(() => const BottomBar());
+                                if(  signInViewModel.userLoginOtp.value.toString() ==
+                                    otpViewModel.pinPutController.value.text){
+                                  await SharedPreferenceUtils.setIsLogin(true);
+                                  signInViewModel.loginViewModel(step: 2);
+                                  // Get.offAll(() => const BottomBar());
+                                }else{
+                                  showErrorSnackBar(
+                                      '', AppStrings.otpMismatch);
                                 }
                               },
                               fontSize: 14.sp,
@@ -260,8 +274,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               bgColor: AppColors.primaryColor,
                               textColor: AppColors.white,
                             ),
-                          )
-                        : CustomBtn(
+                          ) else CustomBtn(
                             onTap: () async {
                               signInViewModel.signInIsValidate.value = true;
                               if (signInViewModel
@@ -269,12 +282,9 @@ class _LogInScreenState extends State<LogInScreen> {
                                       .validate() &&
                                   signInViewModel.signInPhoneController.value
                                       .text.isNotEmpty) {
-                                signInViewModel.showContainer.value = true;
-
                                 FocusScope.of(context)
                                     .requestFocus(FocusNode());
                                 await signInViewModel.loginViewModel(step: 1);
-                                // Get.to(() => const OtpScreen());
                                 otpViewModel.startTimer();
                               }
                             },

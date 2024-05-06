@@ -40,6 +40,7 @@ class Data {
     this.name,
     this.dateOfBirth,
     this.phoneCode,
+    this.countryCode,
     this.phoneNumber,
     this.updatedAt,
     this.createdAt,
@@ -52,6 +53,7 @@ class Data {
     name = json['name'] ?? '';
     dateOfBirth = json['date_of_birth'];
     phoneCode = json['phone_code'];
+    countryCode = json['country_code'];
     phoneNumber = json['phone_number'];
     updatedAt = json['updated_at'];
     createdAt = json['created_at'];
@@ -62,6 +64,7 @@ class Data {
   String? name;
   String? dateOfBirth;
   String? phoneCode;
+  String? countryCode;
   String? phoneNumber;
   String? updatedAt;
   String? createdAt;
@@ -76,6 +79,7 @@ class Data {
     map['name'] = name;
     map['date_of_birth'] = dateOfBirth;
     map['phone_code'] = phoneCode;
+    map['country_code'] = countryCode;
     map['phone_number'] = phoneNumber;
     map['updated_at'] = updatedAt;
     map['created_at'] = createdAt;

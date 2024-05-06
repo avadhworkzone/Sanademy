@@ -10,7 +10,8 @@ class AppImageAssets {
       '${AppConstants.baseImageAssetsPath}noInternet.png';
 
   /// Audio
-  static const String audio = '${AppConstants.baseAudioAssetsPath}example_assets_audios_audio4.mp3';
+  static const String audio =
+      '${AppConstants.baseAudioAssetsPath}example_assets_audios_audio4.mp3';
 
   /// icons==========================
 
@@ -78,6 +79,8 @@ class AppImageAssets {
       "${AppConstants.baseIconAssetsPath}facebookIcn.svg";
   static String instagramIcn =
       "${AppConstants.baseIconAssetsPath}instagramIcn.svg";
+  static String cameraImg = "${AppConstants.baseImageAssetsPath}cameraImg.jpg";
+  static String galleryImg = "${AppConstants.baseImageAssetsPath}galleryImg.png";
 
   /// Contact Us
   static String locationIcn =

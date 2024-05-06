@@ -85,7 +85,7 @@ Map<String, String> en = {
 
   /// Contact Us Screen
   AppStrings.getInTouch: 'Get In Touch',
-  AppStrings.location: 'Get In Touch',
+  AppStrings.location: 'Location',
   AppStrings.phoneNumber: 'Phone Number',
   AppStrings.emailAddress: 'Email Address',
   AppStrings.writeUsDirectly: 'Write Us Directly',

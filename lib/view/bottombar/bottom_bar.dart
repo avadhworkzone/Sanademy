@@ -27,7 +27,8 @@ class _BottomBarState extends State<BottomBar> {
         bottomNavigationBar: Container(
           padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 12.w),
           width: Get.width,
-          decoration: BoxDecoration(color: AppColors.white, boxShadow: [
+          decoration: BoxDecoration(color: AppColors.white,
+              boxShadow: [
             BoxShadow(
               color: AppColors.black.withOpacity(0.10),
               blurRadius: 0.1,

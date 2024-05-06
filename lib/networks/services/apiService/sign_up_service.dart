@@ -6,7 +6,7 @@ import 'package:sanademy/utils/app_utils.dart';
 
 class SignUpService {
   Future<ResponseModel?> registrationRepo(
-      {required Map<String, String> mapData}) async {
+      {required Map<String, dynamic> mapData}) async {
     final response = await ApiBaseHelper().postHTTP(
       ApiUrls.register,
       params: mapData,

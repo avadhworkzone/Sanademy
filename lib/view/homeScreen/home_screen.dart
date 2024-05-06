@@ -5,6 +5,7 @@ import 'package:sanademy/commonWidget/common_appbar.dart';
 import 'package:sanademy/commonWidget/network_assets.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
+import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
@@ -59,6 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           actionWidget: GestureDetector(
             onTap: () {
+              logs('token is =====>> ${SharedPreferenceUtils.getToken()}');
               SharedPreferenceUtils.getIsLogin() == true
                   ? Get.to(const ProfileScreen())
                   : Get.to(() => const SignUpScreen());
@@ -74,8 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(15),
                     child:  const NetWorkOcToAssets(
                       imgUrl:
-                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s')),
-            ),
+                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s'
+                    ))),
           )),
       body: const Column(
         children: [
