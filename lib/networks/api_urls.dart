@@ -25,4 +25,6 @@ class ApiUrls {
   static const String updateProfile='update_profile';
   static const String aboutUs='about_us';
   static const String getInTouch='get_in_touch';
+  static const String home='home';
+  static const String contact='contact';
 }

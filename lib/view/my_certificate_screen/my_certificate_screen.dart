@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
+import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
@@ -68,7 +69,10 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                           vertical: 20.h, horizontal: 20.w),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.r),
-                          color: myCertificateList[index]['color']),
+                          gradient: LinearGradient(colors: myCertificateList[index]['color']),
+                          image: DecorationImage(
+                              image: AssetImage(AppImageAssets.recommendedBgColor))
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -156,25 +160,20 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
       'titleTxt': 'Exploring the Beauty of Mathematical Structures',
       'lectures': '12 lectures',
       'time': '7 hours 40 minutes',
-      'color': Colors.green,
+      'color': [
+        Color(0xff9BEE42),
+        Color(0xff9BEE42)
+      ],
     },
     {
       'titleTxt': 'Exploring the Beauty of Mathematical Structures',
       'lectures': '14 lectures',
       'time': '8 hours 30 minutes',
-      'color': Colors.orangeAccent.shade200,
+      'color':  [
+        Color(0xffE9984E),
+        Color(0xffDD6E07)
+      ],
     },
-    {
-      'titleTxt': 'Exploring the Beauty of Mathematical Structures',
-      'lectures': '12 lectures',
-      'time': '7 hours 40 minutes',
-      'color': Colors.blue.shade300,
-    },
-    {
-      'titleTxt': 'Exploring the Beauty of Mathematical Structures',
-      'lectures': '14 lectures',
-      'time': '8 hours 30 minutes',
-      'color': Colors.pink.shade200,
-    },
+
   ];
 }

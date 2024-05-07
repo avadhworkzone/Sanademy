@@ -27,6 +27,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   HomeScreenViewModel homeScreenViewModel = Get.put(HomeScreenViewModel());
   GlobalKey<ScaffoldState> homeDrawerKey = GlobalKey();
+  @override
+  void initState() {
+    // TODO: implement initState
+    homeScreenViewModel.categoriesAndBannerData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

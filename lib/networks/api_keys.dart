@@ -7,4 +7,5 @@ class ApiKeys {
   static const countryCode = 'country_code';
   static const address = 'address';
   static const image = 'image';
+  static const message = 'message';
 }

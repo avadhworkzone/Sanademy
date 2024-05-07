@@ -19,90 +19,96 @@ class HomeSliderWidget extends StatefulWidget {
 }
 
 class _HomeSliderWidgetState extends State<HomeSliderWidget> {
+
+  HomeScreenViewModel homeScreenViewModel = Get.find<HomeScreenViewModel>();
+
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Container(
-          height: 180.w,
-          margin: EdgeInsets.only(bottom: 80.h),
-          color: AppColors.primaryColor,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 10.w),
-            child: CommonTextField(
-              textEditController:
-                  Get.find<HomeScreenViewModel>().searchController.value,
-              regularExpression: RegularExpressionUtils.alphabetPattern,
-              hintText: AppStrings.searchHere.tr,
-              style: TextStyle(
-                  fontSize: 14.sp,
-                  color: AppColors.white,
-                  fontFamily: AppConstants.quicksand,
-                  fontWeight: FontWeight.w400),
-              cursorColor: AppColors.white,
-              isValidate: false,
-              underLineBorder: false,
-              hintTextColor: AppColors.white,
-              borderColor: AppColors.primaryColor,
-              fillColor: AppColors.white.withOpacity(0.20),
-
-              pIcon: Padding(
-                padding: EdgeInsets.only(
-                    left: 15.w, top: 15.w, bottom: 15.w, right: 7.w),
-                child: LocalAssets(
-                  imagePath: AppImageAssets.searchIcon,
+    return Obx(
+      () => Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            height: 180.w,
+            margin: EdgeInsets.only(bottom: 80.h),
+            color: AppColors.primaryColor,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 10.w),
+              child: CommonTextField(
+                textEditController:
+                    Get.find<HomeScreenViewModel>().searchController.value,
+                regularExpression: RegularExpressionUtils.alphabetPattern,
+                hintText: AppStrings.searchHere.tr,
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    color: AppColors.white,
+                    fontFamily: AppConstants.quicksand,
+                    fontWeight: FontWeight.w400),
+                cursorColor: AppColors.white,
+                isValidate: false,
+                underLineBorder: false,
+                hintTextColor: AppColors.white,
+                borderColor: AppColors.primaryColor,
+                fillColor: AppColors.white.withOpacity(0.20),
+                pIcon: Padding(
+                  padding: EdgeInsets.only(
+                      left: 15.w, top: 15.w, bottom: 15.w, right: 7.w),
+                  child: LocalAssets(
+                    imagePath: AppImageAssets.searchIcon,
+                  ),
                 ),
+                onChange: (firstNameData) {
+                  // createAccountController.isAllFieldInput();
+                },
               ),
-              onChange: (firstNameData) {
-                // createAccountController.isAllFieldInput();
-              },
             ),
           ),
-        ),
-        Positioned(
-          bottom: 20,
-          child: Stack(
-            children: [
-              SizedBox(
-                height: 150.w,
-                width: 380.w,
-                child: PageView.builder(
-                  itemCount: images.length,
-                  onPageChanged: (index) {
-                    setState(() {
-                      _currentIndex = index;
-                    });
-                  },
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 5.w),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: NetWorkOcToAssets(imgUrl: images[index],boxFit:BoxFit.cover,)
-                      ),
-                    );
-                  },
+          Positioned(
+            bottom: 20,
+            child: Stack(
+              children: [
+                SizedBox(
+                  height: 150.w,
+                  width: 380.w,
+                  child: PageView.builder(
+                    itemCount: homeScreenViewModel.bannerData.length,
+                    onPageChanged: (index) {
+                      setState(() {
+                        _currentIndex = index;
+                      });
+                    },
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5.w),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: NetWorkOcToAssets(
+                              imgUrl: homeScreenViewModel.bannerData[index].image,
+                              boxFit: BoxFit.cover,
+                            )),
+                      );
+                    },
+                  ),
                 ),
-              ),
-              Positioned(
-                left: 10,
-                bottom: 15,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: _buildIndicators(),
+                Positioned(
+                  left: 10,
+                  bottom: 15,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: _buildIndicators(),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
   List<Widget> _buildIndicators() {
     List<Widget> indicators = [];
-    for (int i = 0; i < images.length; i++) {
+    for (int i = 0; i < homeScreenViewModel.bannerData.length; i++) {
       indicators.add(buildIndicator(i == _currentIndex));
     }
     return indicators;

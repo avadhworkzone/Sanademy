@@ -13,7 +13,10 @@ class AppImageAssets {
   static const String audio =
       '${AppConstants.baseAudioAssetsPath}example_assets_audios_audio4.mp3';
 
-  /// icons==========================
+  /// prefix Icons
+  static const String calendarIcon = '${AppConstants.baseIconAssetsPath}calendarIcon.svg';
+  static const String namePrefixIcon = '${AppConstants.baseIconAssetsPath}namePrefixIcon.svg';
+  static const String locationIcon = '${AppConstants.baseIconAssetsPath}locationIcon.svg';
 
   /// bottombar
   static const String homeIcon =
@@ -40,8 +43,11 @@ class AppImageAssets {
   /// home screen
 
   static String searchIcon = "${AppConstants.baseIconAssetsPath}searchIcon.svg";
-  static const String categoryIcon =
-      '${AppConstants.baseIconAssetsPath}categoryIcon.svg';
+  static const String categoryIcon = '${AppConstants.baseIconAssetsPath}categoryIcon.svg';
+  static const String languageImg = '${AppConstants.baseImageAssetsPath}languageImg.png';
+  static const String artsImg = '${AppConstants.baseImageAssetsPath}artsImg.png';
+  static const String mathematicsImg= '${AppConstants.baseImageAssetsPath}mathematicsImg.png';
+  static const String recommendedBgColor= '${AppConstants.baseImageAssetsPath}recommendedBgColor.png';
 
   /// notification screen
   static const String alertIcon =

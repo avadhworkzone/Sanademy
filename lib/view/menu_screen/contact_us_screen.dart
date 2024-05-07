@@ -12,6 +12,7 @@ import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_enum.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
+import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/menu_screen/common_contact_us_widget.dart';
@@ -97,29 +98,35 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: CommonTextField(
-                    textEditController: contactUsViewModel.nameController.value,
+                    textEditController: contactUsViewModel.contactUsNameController.value,
                     validator: ValidationMethod.validateName,
                     regularExpression:
                         RegularExpressionUtils.alphabetSpacePattern,
                     hintText: AppStrings.enterYourName,
                     hintFontWeight: FontWeight.w400,
-                    pIcon: Icon(Icons.account_circle_rounded, size: 30.h),
+                    pIcon:  const Padding(
+                      padding: EdgeInsets.all(12),
+                      child: LocalAssets(imagePath: AppImageAssets.namePrefixIcon,),
+                    ),
                     validationType: ValidationTypeEnum.name,
                     borderColor: AppColors.black.withOpacity(0.10),
                   ),
                 ),
 
                 /// PHONE NUMBER TEXTFIELD
-                Obx(
-                  () => Padding(
+                 Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                     child: IntlPhoneField(
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      controller: contactUsViewModel.phoneController.value,
+                      controller: contactUsViewModel.contactUsPhoneController.value,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       keyboardType: TextInputType.number,
                       initialCountryCode: 'IQ',
+                      onCountryChanged: (country) {
+                        contactUsViewModel.contactUsPhoneCode.value = country.dialCode;
+                        contactUsViewModel.contactUsCountryCode.value = country.code;
+                      },
                       onChanged: (val) {
                         if (val.toString().isNotEmpty) {
                           contactUsViewModel.isValidate.value = false;
@@ -144,13 +151,13 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         ),
                         errorText: (contactUsViewModel.isValidate.value == true &&
                                 contactUsViewModel
-                                    .phoneController.value.text.isEmpty)
+                                    .contactUsPhoneController.value.text.isEmpty)
                             ? '* Required'.tr
                             : null,
                         errorBorder:
                             (contactUsViewModel.isValidate.value == true &&
                                     contactUsViewModel
-                                        .phoneController.value.text.isEmpty)
+                                        .contactUsPhoneController.value.text.isEmpty)
                                 ? OutlineInputBorder(
                                     borderSide:
                                         const BorderSide(color: AppColors.red),
@@ -189,15 +196,13 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       ),
                     ),
                   ),
-                ),
 
                 /// WRITE MESSAGE TEXTFIELD
 
-                Obx(
-                  () => Padding(
+               Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
                     child: TextFormField(
-                      controller: contactUsViewModel.messageController.value,
+                      controller: contactUsViewModel.contactUsMessageController.value,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       maxLines: 5,
                       onChanged: (val) {
@@ -224,13 +229,13 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         ),
                         errorText: (contactUsViewModel.isValidate.value == true &&
                                 contactUsViewModel
-                                    .messageController.value.text.isEmpty)
+                                    .contactUsMessageController.value.text.isEmpty)
                             ? '* Required'.tr
                             : null,
                         errorBorder:
                             (contactUsViewModel.isValidate.value == true &&
                                     contactUsViewModel
-                                        .messageController.value.text.isEmpty)
+                                        .contactUsMessageController.value.text.isEmpty)
                                 ? OutlineInputBorder(
                                     borderSide:
                                         const BorderSide(color: AppColors.red),
@@ -269,7 +274,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       ),
                     ),
                   ),
-                ),
+
 
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
@@ -279,10 +284,10 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       if (contactUsViewModel.formKey.value.currentState!
                               .validate() &&
                           contactUsViewModel
-                              .messageController.value.text.isNotEmpty &&
+                              .contactUsMessageController.value.text.isNotEmpty &&
                           contactUsViewModel
-                              .phoneController.value.text.isNotEmpty) {
-                        Get.back();
+                              .contactUsPhoneController.value.text.isNotEmpty) {
+                        contactUsViewModel.writeUsDirectlyData();
                       }
                     },
                     title: AppStrings.submit,

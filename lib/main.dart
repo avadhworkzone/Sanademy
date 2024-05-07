@@ -10,15 +10,10 @@ import 'package:sanademy/utils/app_class.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_theme.dart';
-import 'package:sanademy/view/general/connectivity_wrapper.dart';
 import 'package:sanademy/view/splashScreen/splash_screen.dart';
-import 'package:sanademy/view_model/profile_screen_view_model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  FlutterError.onError = (FlutterErrorDetails details) {
-    FlutterError.dumpErrorToConsole(details);
-  };
   await GetStorage.init();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -38,7 +33,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     connectivityViewModel.startMonitoring();
-    // TODO: implement initState
     super.initState();
   }
 
@@ -81,7 +75,7 @@ class _MyAppState extends State<MyApp> {
                             child: getMainAppViewBuilder(context, widget)),
                       ),
                     ),
-                home:  SplashScreen()
+                home: SplashScreen()
                 /* Obx(() => connectivityViewModel.isOnline != null
                   ? connectivityViewModel.isOnline!.value
                       ? const SplashScreen()
@@ -96,7 +90,6 @@ class _MyAppState extends State<MyApp> {
   }
 
   final connectivityViewModel = Get.put(ConnectivityViewModel());
-
 }
 
 /// Create main app view builder

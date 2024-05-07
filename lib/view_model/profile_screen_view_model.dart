@@ -137,11 +137,6 @@ class ProfileScreenViewModel extends GetxController {
       ApiKeys.phoneNumber: phoneController.value.text,
       ApiKeys.address: addressController.value.text,
       ApiKeys.image: imgFile.value.path.isNotEmpty?file:null,
-    //   dio.FormData.fromMap({
-    // "file":
-    //  dio.MultipartFile.fromFile(newImage.value, ),
-    // })
-      // dio.MultipartFile.fromFile(newImage.value),///File(newImage.value),///imgFile.value,
     };
 
     final response = await UpdateProfileService().updateProfileRepo(mapData: queryParams);

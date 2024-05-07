@@ -24,7 +24,9 @@ class CommonContainerWidget extends StatelessWidget {
             width: Get.width,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.r),
-                color: listData['color']),
+               gradient: LinearGradient(colors: listData['color'],),
+                image: DecorationImage(
+                    image: AssetImage(AppImageAssets.recommendedBgColor))),
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
               child: Row(
@@ -77,7 +79,7 @@ class CommonContainerWidget extends StatelessWidget {
                                   height: 35.h,
                                   width: 35.h,
                                   decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
+                                    shape: BoxShape.circle,
                                   ),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(35),

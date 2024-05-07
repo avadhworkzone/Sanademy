@@ -107,7 +107,8 @@ class _ExamScreenState extends State<ExamScreen> {
                                     backgroundColor:
                                         AppColors.color8B.withOpacity(0.20),
                                     child: const Icon(Icons.play_arrow,
-                                        color: AppColors.color8B),
+                                        color: AppColors.color8B,
+                                    ),
                                   )
                                 ],
                               )

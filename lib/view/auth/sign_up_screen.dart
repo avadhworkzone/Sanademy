@@ -11,8 +11,10 @@ import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_enum.dart';
+import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_string.dart';
+import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/auth/log_in_screen.dart';
@@ -81,7 +83,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         RegularExpressionUtils.alphabetSpacePattern,
                     hintText: AppStrings.enterYourName,
                     hintFontWeight: FontWeight.w400,
-                    pIcon: Icon(Icons.account_circle_rounded, size: 30.h),
+                    pIcon:  Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: LocalAssets(imagePath: AppImageAssets.namePrefixIcon,boxFix: BoxFit.cover,),
+                    ),
                     validationType: ValidationTypeEnum.name,
                     borderColor: AppColors.black.withOpacity(0.10),
                     style: TextStyle(
@@ -116,7 +121,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         fontWeight: FontWeight.w400,
                       ),
                       prefixIcon:
-                          Icon(Icons.calendar_month_rounded, size: 30.h),
+                          Padding(
+                            padding: const EdgeInsets.all(12),
+                            child: LocalAssets(imagePath: AppImageAssets.calendarIcon,boxFix: BoxFit.cover,),
+                          ),
                       errorBorder: OutlineInputBorder(
                           borderSide: const BorderSide(color: AppColors.red),
                           borderRadius: BorderRadius.circular(10.r)),

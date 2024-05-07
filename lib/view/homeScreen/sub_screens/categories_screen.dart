@@ -52,25 +52,38 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       'titleTxt': 'Exploring the Beauty of Mathematical Structures',
       'lectures': '12 lectures',
       'time': '7 hours 40 minutes',
-      'color': Colors.green,
+      'color': [
+        Color(0xff9BEE42),
+        Color(0xff9BEE42),
+      ],
     },
     {
       'titleTxt': 'Exploring the Beauty of Mathematical Structures',
       'lectures': '14 lectures',
       'time': '8 hours 30 minutes',
-      'color': Colors.orangeAccent.shade200,
+      'color':  [
+        Color(0xffE9984E),
+        Color(0xffDD6E07),
+      ],
     },
     {
       'titleTxt': 'Exploring the Beauty of Mathematical Structures',
       'lectures': '12 lectures',
       'time': '7 hours 40 minutes',
-      'color': Colors.blue.shade300,
+      'color':  [
+        Color(0xff6998F4),
+        Color(0xff3F6EC9
+        ),
+      ],
     },
     {
       'titleTxt': 'Exploring the Beauty of Mathematical Structures',
       'lectures': '14 lectures',
       'time': '8 hours 30 minutes',
-      'color': Colors.pink.shade200,
+      'color':  [
+        Color(0xff9BEE42),
+        Color(0xff9BEE42),
+      ],
     },
   ];
 }

@@ -46,10 +46,13 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                       width: Get.width,
                       child: descriptionViewModel.isLoader.value == true
                           ? Center(
-                              child: SizedBox(
+                              child: Container(
                                   height: 50.h,
                                   width: 50.h,
-                                  child: const CircularProgressIndicator()),
+                                  child: LocalAssets(
+                                    imagePath: AppImageAssets.sanademaylogo,
+                                    imgColor: AppColors.primaryColor,
+                                  )),
                             )
                           : AspectRatio(
                               aspectRatio: descriptionViewModel
