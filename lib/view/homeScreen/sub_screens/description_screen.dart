@@ -640,7 +640,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                               blurRadius: 4.0,
                             ),
                           ],
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(20.r),
                         ),
                         child: ListView.builder(
                           shrinkWrap: true,

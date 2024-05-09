@@ -57,7 +57,6 @@ class ContactUsViewModel extends GetxController {
       WriteUsDirectlyResModel writeUsDirectlyResModel = writeUsDirectlyResModelFromJson(response.response.toString());
       if (writeUsDirectlyResModel.success!) {
         if (writeUsDirectlyResModel.data != null) {
-          print(response);
           await showSussesSnackBar('', writeUsDirectlyResModel.message ?? 'SUCCESS');
           Get.to(HomeScreen());
         }else {

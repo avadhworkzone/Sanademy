@@ -128,9 +128,9 @@ Map<String, String> en = {
   AppStrings.yourTime: "Your Time",
   AppStrings.yourAnswers: "Your Answers",
   AppStrings.viewSolution: "View Solution",
-  AppStrings.percentage: "View Solution",
+  AppStrings.percentage: "Percentage",
   AppStrings.result: "Result",
-  AppStrings.continues: "Continues",
+  AppStrings.continues: "Continue",
   AppStrings.pass: "Pass",
 
   ///APP ERROR MESSAGE

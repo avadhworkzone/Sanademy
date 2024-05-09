@@ -34,8 +34,9 @@ class Data {
   Data({
       this.name, 
       this.phoneCode, 
-      this.phoneNumber, 
-      this.message, 
+      this.countryCode,
+      this.phoneNumber,
+      this.message,
       this.updatedAt, 
       this.createdAt, 
       this.id,});
@@ -43,6 +44,7 @@ class Data {
   Data.fromJson(dynamic json) {
     name = json['name'];
     phoneCode = json['phone_code'];
+    countryCode = json['country_code'];
     phoneNumber = json['phone_number'];
     message = json['message'];
     updatedAt = json['updated_at'];
@@ -51,6 +53,7 @@ class Data {
   }
   String? name;
   String? phoneCode;
+  String? countryCode;
   String? phoneNumber;
   String? message;
   String? updatedAt;
@@ -61,6 +64,7 @@ class Data {
     final map = <String, dynamic>{};
     map['name'] = name;
     map['phone_code'] = phoneCode;
+    map['country_code'] = countryCode;
     map['phone_number'] = phoneNumber;
     map['message'] = message;
     map['updated_at'] = updatedAt;

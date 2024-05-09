@@ -50,8 +50,10 @@ class ProfileScreenViewModel extends GetxController {
           );
         });
     if (picked != null && picked != selectedDate.value) {
-      String date = "${picked.month}/${picked.day}/${picked.year}";
-      dateController.value.text = date;
+      String formattedDate = DateFormat('MM/dd/yyyy').format(picked);
+      dateController.value.text = formattedDate;
+     /* String date = "${picked.month}/${picked.day}/${picked.year}";
+      dateController.value.text = date;*/
     }
   }
 
@@ -92,7 +94,7 @@ class ProfileScreenViewModel extends GetxController {
       if (getProfileResModel.data != null) {
         nameController.value.text = getProfileResModel.data!.name ?? '';
         phoneController.value.text = getProfileResModel.data!.phoneNumber ?? '';
-        dateController.value.text = DateFormat('MM-dd-yyyy').format(
+        dateController.value.text = DateFormat('MM/dd/yyyy').format(
             DateTime.parse(getProfileResModel.data!.dateOfBirth.toString()));
         addressController.value.text = getProfileResModel.data!.address ??'';
         newImage.value=getProfileResModel.data!.image??'';
@@ -115,10 +117,10 @@ class ProfileScreenViewModel extends GetxController {
     String? apiDateString =
         dateController.value.text;
     DateTime? apiDate = apiDateString != ''
-        ? DateFormat('MM-dd-yyyy').parse(apiDateString)
+        ? DateFormat('MM/dd/yyyy').parse(apiDateString)
         : null;
     String formattedDate =
-    apiDate != null ? DateFormat('yyyy-MM-dd').format(apiDate):'';
+    apiDate != null ? DateFormat('yyyy/MM/dd').format(apiDate):'';
     dio.MultipartFile? file;
    if(imgFile.value.path.isNotEmpty){
    file = await dio.MultipartFile.fromFile(

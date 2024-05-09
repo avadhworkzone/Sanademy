@@ -128,7 +128,7 @@ Map<String, String> ar = {
   AppStrings.viewSolution: "عرض الحل",
   AppStrings.percentage: "نسبة مئوية",
   AppStrings.result: "نتيجة",
-  AppStrings.continues: "متواصل",
+  AppStrings.continues: "يكمل",
   AppStrings.pass: "يمر",
 
   ///APP ERROR MESSAGE

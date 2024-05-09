@@ -68,7 +68,7 @@ class CommonContainerWidget extends StatelessWidget {
                                 horizontal: 25.w, vertical: 2.w),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12.r),
-                              color: Colors.greenAccent,
+                              color:  AppColors.black.withOpacity(0.20),
                             ),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,

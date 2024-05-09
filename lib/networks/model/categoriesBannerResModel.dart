@@ -107,6 +107,7 @@ class Categories {
       this.id, 
       this.image, 
       this.name, 
+      this.colorCode, 
       this.createdAt, 
       this.updatedAt,});
 
@@ -114,12 +115,14 @@ class Categories {
     id = json['id'];
     image = json['image'];
     name = json['name'];
+    colorCode = json['color_code'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
   num? id;
   String? image;
   String? name;
+  String? colorCode;
   String? createdAt;
   String? updatedAt;
 
@@ -128,6 +131,7 @@ class Categories {
     map['id'] = id;
     map['image'] = image;
     map['name'] = name;
+    map['color_code'] = colorCode;
     map['created_at'] = createdAt;
     map['updated_at'] = updatedAt;
     return map;

@@ -47,8 +47,13 @@ class _HomeCategoryWidgetState extends State<HomeCategoryWidget> {
               child: ListView.builder(
                 itemCount: homeScreenViewModel.categoriesData.length,
                 scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) =>
-                    GestureDetector(
+                itemBuilder: (context, index) {
+                  final category = homeScreenViewModel.categoriesData[index];
+                  final List<Color> colors = category.colorCode!
+                      .split(',')
+                      .map((color) => Color(int.parse(color, radix: 16)).withOpacity(1.0))
+                      .toList();
+                    return GestureDetector(
                       onTap: () {
                         Get.to(() => const CategoriesScreen());
                       },
@@ -58,9 +63,8 @@ class _HomeCategoryWidgetState extends State<HomeCategoryWidget> {
                           width: 139.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8.r),
-                              color: categoriesList[index]['color'],
                               gradient: LinearGradient(
-                                  colors: gradientColor[index])
+                                  colors: colors )
                           ),
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 10.w),
@@ -90,7 +94,7 @@ class _HomeCategoryWidgetState extends State<HomeCategoryWidget> {
                           ),
                         ),
                       ),
-                    ),
+                    );}
               ),
             ),
           ),
