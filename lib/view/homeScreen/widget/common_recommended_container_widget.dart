@@ -3,15 +3,24 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/commonWidget/network_assets.dart';
+import 'package:sanademy/networks/model/homeResModel.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view_model/home_screen_view_model.dart';
 
-class CommonContainerWidget extends StatelessWidget {
+class CommonContainerWidget extends StatefulWidget {
   const CommonContainerWidget({super.key, required this.listData});
 
-  final listData;
+  final HomeCoursesData listData;
+
+  @override
+  State<CommonContainerWidget> createState() => _CommonContainerWidgetState();
+}
+
+class _CommonContainerWidgetState extends State<CommonContainerWidget> {
+  HomeScreenViewModel homeScreenViewModel = Get.find<HomeScreenViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +29,13 @@ class CommonContainerWidget extends StatelessWidget {
       children: [
         Directionality(
           textDirection: TextDirection.ltr,
-          child: Container(
+          child:
+          Container(
             width: Get.width,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.r),
-               gradient: LinearGradient(colors: listData['color'],),
-                image: DecorationImage(
-                    image: AssetImage(AppImageAssets.recommendedBgColor))),
+                image:  DecorationImage(
+                    image: NetworkImage(widget.listData.banner.toString()),fit: BoxFit.cover)),
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
               child: Row(
@@ -40,7 +49,7 @@ class CommonContainerWidget extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(right: 80.w),
                           child: CustomText(
-                            listData['titleTxt'],
+                            widget.listData.title ?? '',
                             fontSize: 20.sp,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
@@ -50,14 +59,14 @@ class CommonContainerWidget extends StatelessWidget {
                         ),
                         SizeConfig.sH8,
                         CustomText(
-                          listData['lectures'],
+                          '12 Lectures',
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
                           color: AppColors.black0E,
                         ),
                         SizeConfig.sH4,
                         CustomText(
-                          listData['time'],
+                          '${widget.listData.hours} hours ${widget.listData.minutes} minutes',
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
                           color: AppColors.black0E,
@@ -68,7 +77,7 @@ class CommonContainerWidget extends StatelessWidget {
                                 horizontal: 25.w, vertical: 2.w),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12.r),
-                              color:  AppColors.black.withOpacity(0.20),
+                              color: AppColors.black.withOpacity(0.20),
                             ),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,

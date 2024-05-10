@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:dio/dio.dart' as dio;
@@ -15,6 +14,7 @@ import 'package:sanademy/networks/services/apiService/update_profile_api_service
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/enum_utils.dart';
+import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/view/homeScreen/home_screen.dart';
 
 class ProfileScreenViewModel extends GetxController {
@@ -52,7 +52,7 @@ class ProfileScreenViewModel extends GetxController {
     if (picked != null && picked != selectedDate.value) {
       String formattedDate = DateFormat('MM/dd/yyyy').format(picked);
       dateController.value.text = formattedDate;
-     /* String date = "${picked.month}/${picked.day}/${picked.year}";
+      /* String date = "${picked.month}/${picked.day}/${picked.year}";
       dateController.value.text = date;*/
     }
   }
@@ -65,7 +65,8 @@ class ProfileScreenViewModel extends GetxController {
         await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
     if (pickedFile != null) {
       newImage.value = pickedFile.path;
-      imgFile.value=File(pickedFile.path);
+      imgFile.value = File(pickedFile.path);
+
       /// FOR HIDING BOTTOM SHEET
       Get.back();
     }
@@ -79,7 +80,8 @@ class ProfileScreenViewModel extends GetxController {
         await picker.pickImage(source: ImageSource.camera, imageQuality: 80);
     if (pickedFile != null) {
       newImage.value = pickedFile.path;
-      imgFile.value=File(pickedFile.path);
+      imgFile.value = File(pickedFile.path);
+
       /// FOR HIDING BOTTOM SHEET
       Get.back();
     }
@@ -96,8 +98,11 @@ class ProfileScreenViewModel extends GetxController {
         phoneController.value.text = getProfileResModel.data!.phoneNumber ?? '';
         dateController.value.text = DateFormat('MM/dd/yyyy').format(
             DateTime.parse(getProfileResModel.data!.dateOfBirth.toString()));
-        addressController.value.text = getProfileResModel.data!.address ??'';
-        newImage.value=getProfileResModel.data!.image??'';
+        addressController.value.text = getProfileResModel.data!.address ?? '';
+        newImage.value = getProfileResModel.data!.image ?? '';
+       await SharedPreferenceUtils.setImage(newImage.value);
+        logs('SharedPreferenceUtils.getImage()======${SharedPreferenceUtils.getImage()}');
+
         phoneCode.value = '';
         phoneCode.value = getProfileResModel.data!.phoneCode ?? '';
         countryCode.value = '';
@@ -110,25 +115,20 @@ class ProfileScreenViewModel extends GetxController {
     }
   }
 
-
   /// CALL API FOR UPDATE PROFILE
   Future<void> updateProfile() async {
     unFocus();
-    String? apiDateString =
-        dateController.value.text;
+    String? apiDateString = dateController.value.text;
     DateTime? apiDate = apiDateString != ''
         ? DateFormat('MM/dd/yyyy').parse(apiDateString)
         : null;
     String formattedDate =
-    apiDate != null ? DateFormat('yyyy/MM/dd').format(apiDate):'';
+        apiDate != null ? DateFormat('yyyy/MM/dd').format(apiDate) : '';
     dio.MultipartFile? file;
-   if(imgFile.value.path.isNotEmpty){
-   file = await dio.MultipartFile.fromFile(
-      newImage.value,
-      filename: newImage.value
-  );
-}
-
+    if (imgFile.value.path.isNotEmpty) {
+      file = await dio.MultipartFile.fromFile(newImage.value,
+          filename: newImage.value);
+    }
 
     /// FOR PASS BODY
     Map<String, dynamic> queryParams = {
@@ -138,26 +138,28 @@ class ProfileScreenViewModel extends GetxController {
       ApiKeys.countryCode: countryCode.value,
       ApiKeys.phoneNumber: phoneController.value.text,
       ApiKeys.address: addressController.value.text,
-      ApiKeys.image: imgFile.value.path.isNotEmpty?file:null,
+      ApiKeys.image: imgFile.value.path.isNotEmpty ? file : null,
     };
 
-    final response = await UpdateProfileService().updateProfileRepo(mapData: queryParams);
+    final response =
+        await UpdateProfileService().updateProfileRepo(mapData: queryParams);
 
     if (checkStatusCode(response!.statusCode ?? 0)) {
       UpdateProfileResModel updateProfileResModel =
-      updateProfileResModelFromJson(response.response.toString());
+          updateProfileResModelFromJson(response.response.toString());
       if (updateProfileResModel.success!) {
         if (updateProfileResModel.data != null) {
           showSussesSnackBar('', updateProfileResModel.message ?? 'SUCCESS');
-          Get.to(HomeScreen());
-        }else {
-          showSussesSnackBar('', updateProfileResModel.message ?? 'ERROR');
+          SharedPreferenceUtils.setImage(updateProfileResModel.data!.image.toString());
+          Get.to(const HomeScreen());
+        } else {
+          showErrorSnackBar('', updateProfileResModel.message ?? 'ERROR');
         }
       } else {
-        showSussesSnackBar('', updateProfileResModel.message ?? 'ERROR');
+        showErrorSnackBar('', updateProfileResModel.message ?? 'ERROR');
       }
-    }else {
-      showSussesSnackBar('', 'Error updating profile');
+    } else {
+      showErrorSnackBar('', 'Error updating profile');
     }
   }
 }

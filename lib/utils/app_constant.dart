@@ -11,6 +11,7 @@ class AppConstants {
 
   static const String quicksand = "Quicksand";
 }
+/*
 
 final List<String> images = [
   "https://media.istockphoto.com/id/1149476751/vector/online-education-banner.jpg?s=612x612&w=0&k=20&c=P-6QFVRk4UGYTEqAyWWXI5BknkoKX6YxrmCKrPfE2vw=",
@@ -71,6 +72,7 @@ final List<Map<String, dynamic>> recommendedList = [
     'color': [Color(0xff3EC8D2), Color(0xff3EC8D2)],
   },
 ];
+*/
 
 String formatDuration(int second) {
   final ms = second * 1000;

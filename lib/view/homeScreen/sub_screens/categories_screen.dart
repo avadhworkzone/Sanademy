@@ -6,6 +6,7 @@ import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/homeScreen/sub_screens/description_screen.dart';
 import 'package:sanademy/view/homeScreen/widget/common_recommended_container_widget.dart';
+import 'package:sanademy/view_model/home_screen_view_model.dart';
 
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({super.key});
@@ -15,6 +16,8 @@ class CategoriesScreen extends StatefulWidget {
 }
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
+  HomeScreenViewModel homeScreenViewModel = Get.find<HomeScreenViewModel>();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,7 +30,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             Expanded(
               child: ListView.builder(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
-                itemCount: _recommendedList.length,
+                itemCount: homeScreenViewModel.courses.length,
                 itemBuilder: (context, index) => Padding(
                   padding: EdgeInsets.only(bottom: 15.h),
                   child: GestureDetector(
@@ -35,7 +38,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       Get.to(() => const DescriptionScreen());
                     },
                     child: CommonContainerWidget(
-                      listData: _recommendedList[index],
+                      listData: homeScreenViewModel.courses[index],
                     ),
                   ),
                 ),

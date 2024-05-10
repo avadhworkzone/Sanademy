@@ -25,6 +25,7 @@ Map<String, String> en = {
   AppStrings.signIn: "Sign In",
   AppStrings.notHaveAccount: "Don't have an Account?",
   AppStrings.signUp: "Sign Up",
+  AppStrings.changePhoneNumber: "Change phone number",
 
   /// bottom bar
   AppStrings.home: "Home",
@@ -143,5 +144,5 @@ Map<String, String> en = {
   AppStrings.nameIsRequired: "Name is required",
   AppStrings.error: "Error",
   AppStrings.userCreatedSuccessfully: "User Created Successfully",
-  AppStrings.otpMismatch: "Otp Mismatch",
+  AppStrings.otpMismatch: "Please enter valid Otp",
 };

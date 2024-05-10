@@ -28,7 +28,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   ProfileScreenViewModel profileScreenViewModel =
-  Get.put(ProfileScreenViewModel());
+  Get.find<ProfileScreenViewModel>();
 
   @override
   void initState() {
@@ -57,7 +57,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     profileScreenViewModel
                         .phoneController.value.text.isNotEmpty) {
                   profileScreenViewModel.updateProfile();
-                  // Get.back();
                 }
               },
               actionWidgetColor: AppColors.white,
@@ -139,7 +138,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     pIcon:
                                      Padding(
                                        padding: const EdgeInsets.all(12),
-                                       child: LocalAssets(imagePath: AppImageAssets.namePrefixIcon,),
+                                       child: LocalAssets(imagePath: AppImageAssets.userImage,),
                                      ),
                                     validationType: ValidationTypeEnum.name,
                                     borderColor:

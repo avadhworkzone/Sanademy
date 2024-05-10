@@ -28,6 +28,15 @@ class OtpViewModel extends GetxController {
   }
 
   void setCountDown() {
+    int seconds = myDuration.value.inSeconds - 1;
+    if (seconds < 0) {
+      stopTimer();
+    } else {
+      myDuration.value = Duration(seconds: seconds);
+    }
+  }
+
+ /* void setCountDown() {
     Rx<int> reduceSecondsBy = 1.obs;
 
     Rx<int> seconds1 = (myDuration.value.inSeconds - reduceSecondsBy.value).obs;
@@ -36,7 +45,7 @@ class OtpViewModel extends GetxController {
     } else {
       myDuration.value = Duration(seconds: seconds1.value);
     }
-  }
+  }*/
 
   Rx<String> strDigits(int n) => n.toString().padLeft(2, '0').obs;
 

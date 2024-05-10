@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:octo_image/octo_image.dart';
+import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/local_assets.dart';
 
@@ -26,6 +28,7 @@ class NetWorkOcToAssets extends StatelessWidget {
       // },
       errorBuilder: (context, error, stacktrace) => LocalAssets(
         imagePath: AppImageAssets.noImageFound,
+        // imgColor: AppColors.white,
         boxFix: BoxFit.cover,
       ),
     );

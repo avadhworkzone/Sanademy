@@ -15,12 +15,10 @@ class AppImageAssets {
 
   /// prefix Icons
   static const String calendarIcon = '${AppConstants.baseIconAssetsPath}calendarIcon.svg';
-  static const String namePrefixIcon = '${AppConstants.baseIconAssetsPath}namePrefixIcon.svg';
   static const String locationIcon = '${AppConstants.baseIconAssetsPath}locationIcon.svg';
-
+  /// common user Icon
+  static const String userImage = '${AppConstants.baseIconAssetsPath}userImage.svg';
   /// bottombar
-  static const String homeIcon =
-      '${AppConstants.baseIconAssetsPath}homeIcon.svg';
   static const String myProgress =
       '${AppConstants.baseIconAssetsPath}myProgressIcon.svg';
   static const String myCertificate =
@@ -44,10 +42,8 @@ class AppImageAssets {
 
   static String searchIcon = "${AppConstants.baseIconAssetsPath}searchIcon.svg";
   static const String categoryIcon = '${AppConstants.baseIconAssetsPath}categoryIcon.svg';
-  static const String languageImg = '${AppConstants.baseImageAssetsPath}languageImg.png';
-  static const String artsImg = '${AppConstants.baseImageAssetsPath}artsImg.png';
-  static const String mathematicsImg= '${AppConstants.baseImageAssetsPath}mathematicsImg.png';
   static const String recommendedBgColor= '${AppConstants.baseImageAssetsPath}recommendedBgColor.png';
+  static const String profileImage= '${AppConstants.baseImageAssetsPath}profileImage.png';
 
   /// notification screen
   static const String alertIcon =
@@ -85,7 +81,6 @@ class AppImageAssets {
       "${AppConstants.baseIconAssetsPath}facebookIcn.svg";
   static String instagramIcn =
       "${AppConstants.baseIconAssetsPath}instagramIcn.svg";
-  static String cameraImg = "${AppConstants.baseImageAssetsPath}cameraImg.jpg";
   static String galleryImg = "${AppConstants.baseImageAssetsPath}galleryImg.png";
 
   /// Contact Us

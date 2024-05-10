@@ -85,7 +85,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     hintFontWeight: FontWeight.w400,
                     pIcon:  Padding(
                       padding: const EdgeInsets.all(12),
-                      child: LocalAssets(imagePath: AppImageAssets.namePrefixIcon,boxFix: BoxFit.cover,),
+                      child: LocalAssets(imagePath: AppImageAssets.userImage,boxFix: BoxFit.cover,),
                     ),
                     validationType: ValidationTypeEnum.name,
                     borderColor: AppColors.black.withOpacity(0.10),

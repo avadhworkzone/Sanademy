@@ -194,57 +194,49 @@ class _MenuScreenState extends State<MenuScreen> {
           child: ListView.builder(
               itemCount: menuScreenViewModel.drawerData.length,
               itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () async {
-                    if (index == 0) {
-                      Get.to(const ContactUsScreen());
-                    } else if (index == 1) {
-                      Get.to(const AboutUsScreen());
-                    } else if (index == 2) {
-                      logoutDialog(context);
-                    } else {}
-                  },
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 20.w, vertical: 8.h),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-
-                            /// FOR SHOW LOGOUT AND DELETE BUTTON
-                            index == 2 || index == 3
-                                ? CustomText(
-                              SharedPreferenceUtils.getIsLogin() == true?
-                              menuScreenViewModel.drawerData[index]:'',
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: AppColors.red90,
-                                  )
-                                : CustomText(
-                                    menuScreenViewModel.drawerData[index],
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 15.sp,
-                                    color: AppColors.black13,
-                                  ),
-                            index == 2 || index == 3
-                                ? const SizedBox()
-                                : const Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: 15,
-                                  ),
-                          ],
-                        ),
-                      ),
-                      /// if user log in than show extra divider for login and delete option
-                      index == 3
+                return Column(
+                  children: [
+                    ListTile(
+                      onTap: (){
+                        if (index == 0) {
+                          Get.to(const ContactUsScreen());
+                        } else if (index == 1) {
+                          Get.to(const AboutUsScreen());
+                        } else if (index == 2) {
+                          logoutDialog(context);
+                        } else {}
+                      },
+                      title:
+                    /// FOR SHOW LOGOUT AND DELETE BUTTON
+                    index == 2 || index == 3
+                        ? CustomText(
+                      SharedPreferenceUtils.getIsLogin() == true?
+                      menuScreenViewModel.drawerData[index]:'',
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.red90,
+                    )
+                        : CustomText(
+                      menuScreenViewModel.drawerData[index],
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15.sp,
+                      color: AppColors.black13,
+                    ),
+                      trailing:   index == 2 || index == 3
                           ? const SizedBox()
-                          : index==2&& SharedPreferenceUtils.getIsLogin() == false?const SizedBox():Divider(
-                              color: AppColors.black.withOpacity(0.2),
-                            ),
-                    ],
-                  ),
+                          : const Icon(
+                        Icons.arrow_forward_ios,
+                        size: 15,
+                      ),
+                    ),
+                    ///IF USER LOG IN THAN SHOW EXTRA DIVIDER FOR LOGIN AND DELETE OPTION
+                    index == 3
+                        ? const SizedBox()
+                        : index==2&& SharedPreferenceUtils.getIsLogin() == false?const SizedBox():Divider(
+                            color: AppColors.black.withOpacity(0.2),
+                      height: 0.1,
+                          ),
+                  ],
                 );
               }),
         ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/common_appbar.dart';
-import 'package:sanademy/commonWidget/network_assets.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
@@ -16,6 +15,7 @@ import 'package:sanademy/view/homeScreen/widget/home_slider_widget.dart';
 import 'package:sanademy/view/menu_screen/menu_screen.dart';
 import 'package:sanademy/view/profile_screen/profile_screen.dart';
 import 'package:sanademy/view_model/home_screen_view_model.dart';
+import 'package:sanademy/view_model/profile_screen_view_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,12 +26,23 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   HomeScreenViewModel homeScreenViewModel = Get.put(HomeScreenViewModel());
+  ProfileScreenViewModel profileScreenViewModel =
+      Get.put(ProfileScreenViewModel());
   GlobalKey<ScaffoldState> homeDrawerKey = GlobalKey();
+
   @override
   void initState() {
     // TODO: implement initState
-    homeScreenViewModel.categoriesAndBannerData();
+
+    getUserDataApiCall();
     super.initState();
+  }
+
+  getUserDataApiCall() async {
+    await homeScreenViewModel.categoriesAndBannerData();
+    await profileScreenViewModel.getProfileData();
+    logs(
+        'SharedPreferenceUtils.getImage()mmm${SharedPreferenceUtils.getImage()}');
   }
 
   @override
@@ -66,24 +77,30 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           actionWidget: GestureDetector(
             onTap: () {
-              logs('token is =====>> ${SharedPreferenceUtils.getToken()}');
               SharedPreferenceUtils.getIsLogin() == true
                   ? Get.to(const ProfileScreen())
                   : Get.to(() => const SignUpScreen());
             },
             child: Container(
-              height: 50.h,
-              width: 50.w,
-              margin: EdgeInsets.all(7.w),
-              decoration: BoxDecoration(
-                  color: AppColors.white.withOpacity(0.20),
-                  borderRadius: BorderRadius.circular(15)),
-              child: ClipRRect(
+                height: 50.h,
+                width: 50.w,
+                margin: EdgeInsets.all(7.w),
+                decoration: BoxDecoration(
+                    color: AppColors.white.withOpacity(0.20),
+                    borderRadius: BorderRadius.circular(15)),
+                child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
-                    child:  const NetWorkOcToAssets(
-                      imgUrl:
-                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s'
-                    ))),
+                  child: (SharedPreferenceUtils.getImage().isNotEmpty)
+                      ? Image(
+                          image: NetworkImage(SharedPreferenceUtils.getImage()),
+                          fit: BoxFit.cover,
+                        )
+                      : const LocalAssets(
+                          imagePath: AppImageAssets.profileImage),
+                  /*   NetWorkOcToAssets(
+                      imgUrl: SharedPreferenceUtils.getImage(),
+                    )*/
+                )),
           )),
       body: const Column(
         children: [

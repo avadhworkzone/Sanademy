@@ -53,7 +53,7 @@ class SignInViewModel extends GetxController {
           }
         }
       } else {
-        showSussesSnackBar('', loginResModel.message ?? 'ERROR');
+        showErrorSnackBar('', loginResModel.message ?? 'ERROR');
       }
 
     }

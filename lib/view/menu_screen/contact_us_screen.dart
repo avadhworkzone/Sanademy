@@ -106,7 +106,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     hintFontWeight: FontWeight.w400,
                     pIcon:  const Padding(
                       padding: EdgeInsets.all(12),
-                      child: LocalAssets(imagePath: AppImageAssets.namePrefixIcon,),
+                      child: LocalAssets(imagePath: AppImageAssets.userImage,),
                     ),
                     validationType: ValidationTypeEnum.name,
                     borderColor: AppColors.black.withOpacity(0.10),

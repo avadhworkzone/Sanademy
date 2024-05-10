@@ -13,24 +13,25 @@ void showErrorSnackBar(String title, String message) {
         ? CustomText(
             title,
             textAlign: TextAlign.center,
-            color: AppColors.black,
+            color: AppColors.white,
             fontWeight: FontWeight.w600,
           )
         : null,
     messageText: CustomText(
       message,
       textAlign: TextAlign.center,
-      color: AppColors.black,
+      color: AppColors.white,
       fontWeight: FontWeight.w400,
     ),
     padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.h),
+
     margin: EdgeInsets.symmetric(
       horizontal: 15.w,
       vertical: 30.h,
     ),
     borderRadius: 5,
     snackPosition: SnackPosition.BOTTOM,
-    backgroundColor: AppColors.whiteShadeF8,
+    backgroundColor: AppColors.primaryColor,
     duration: const Duration(seconds: 4),
   ));
 }
@@ -42,14 +43,14 @@ void showErrorSnackBar(String title, String message) {
         ? CustomText(
             title,
             textAlign: TextAlign.center,
-            color: AppColors.black,
+            color: AppColors.white,
             fontWeight: FontWeight.w600,
           )
         : null,
     messageText: CustomText(
       message,
       textAlign: TextAlign.center,
-      color: AppColors.black,
+      color: AppColors.white,
       fontWeight: FontWeight.w400,
     ),
     padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.h),
@@ -59,7 +60,7 @@ void showErrorSnackBar(String title, String message) {
     ),
     borderRadius: 5,
     snackPosition: SnackPosition.BOTTOM,
-    backgroundColor: AppColors.whiteShadeF8,
+    backgroundColor: AppColors.primaryColor,
     duration: const Duration(seconds: 4),
   ));
 }

@@ -23,6 +23,7 @@ Map<String, String> ar = {
   AppStrings.signIn: "تسجيل الدخول",
   AppStrings.notHaveAccount: "ليس لديك حساب؟",
   AppStrings.signUp: "اشتراك",
+  AppStrings.changePhoneNumber: "غير رقم الهاتف",
 
   /// bottom bar
   AppStrings.home: "بيت",
@@ -141,5 +142,5 @@ Map<String, String> ar = {
   AppStrings.nameIsRequired: 'مطلوب اسم',
   AppStrings.error: 'خطأ',
   AppStrings.userCreatedSuccessfully: "تم إنشاء المستخدم بنجاح",
-  AppStrings.otpMismatch: "عدم تطابق OTP",
+  AppStrings.otpMismatch: "الرجاء إدخال كلمة مرور صالحة",
 };

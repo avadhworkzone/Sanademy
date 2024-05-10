@@ -25,6 +25,7 @@ class AppStrings {
   static String signIn = "Sign In";
   static String notHaveAccount = "Don't have an Account?";
   static String signUp = "Sign Up";
+  static String changePhoneNumber = "Change phone number";
 
   /// bottom bar
   static String home = 'Home';

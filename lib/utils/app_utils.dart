@@ -40,7 +40,7 @@ class Utils {
       Get.rawSnackbar(
         snackPosition: SnackPosition.BOTTOM,
         duration: const Duration(milliseconds: 3000),
-        backgroundColor: AppColors.whiteShadeF8,
+        backgroundColor: AppColors.primaryColor,
         padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.h),
         margin: EdgeInsets.symmetric(
           horizontal: 15.w,
@@ -58,7 +58,7 @@ class Utils {
                 message ?? 'Empty message',
                 fontSize: 12.sp,
                 textAlign: TextAlign.center,
-                color: AppColors.black,
+                color: AppColors.white,
                 fontWeight: FontWeight.w400,
               ),
             ),
