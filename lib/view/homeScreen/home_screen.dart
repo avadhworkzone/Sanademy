@@ -32,18 +32,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
-
-    getUserDataApiCall();
+     homeScreenViewModel.categoriesAndBannerData();
     super.initState();
   }
 
-  getUserDataApiCall() async {
-    await homeScreenViewModel.categoriesAndBannerData();
-    await profileScreenViewModel.getProfileData();
-    logs(
-        'SharedPreferenceUtils.getImage()mmm${SharedPreferenceUtils.getImage()}');
-  }
+
 
   @override
   Widget build(BuildContext context) {
