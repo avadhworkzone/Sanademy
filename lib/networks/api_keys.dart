@@ -8,4 +8,5 @@ class ApiKeys {
   static const address = 'address';
   static const image = 'image';
   static const message = 'message';
+  static const courseId = 'course_id';
 }

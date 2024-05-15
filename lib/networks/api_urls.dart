@@ -27,4 +27,5 @@ class ApiUrls {
   static const String getInTouch='get_in_touch';
   static const String home='home';
   static const String contact='contact';
+  static const String getExams ='get_exams';
 }
