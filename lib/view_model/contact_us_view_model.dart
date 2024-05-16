@@ -58,7 +58,7 @@ class ContactUsViewModel extends GetxController {
       if (writeUsDirectlyResModel.success!) {
         if (writeUsDirectlyResModel.data != null) {
           await showSussesSnackBar('', writeUsDirectlyResModel.message ?? 'SUCCESS');
-          Get.to(HomeScreen());
+          Get.to(()=>const HomeScreen());
         }else {
           showSussesSnackBar('', writeUsDirectlyResModel.message ?? 'ERROR');
         }

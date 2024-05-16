@@ -28,4 +28,5 @@ class ApiUrls {
   static const String home='home';
   static const String contact='contact';
   static const String getExams ='get_exams';
+  static const String courseDetail ='course_detail';
 }

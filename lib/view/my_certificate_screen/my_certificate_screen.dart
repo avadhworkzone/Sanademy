@@ -71,7 +71,7 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                           borderRadius: BorderRadius.circular(20.r),
                           gradient: LinearGradient(colors: myCertificateList[index]['color']),
                           image: DecorationImage(
-                              image: AssetImage(AppImageAssets.recommendedBgColor))
+                              image: AssetImage(AppImageAssets.recommendedBgImg))
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

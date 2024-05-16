@@ -42,7 +42,7 @@ class AppImageAssets {
 
   static String searchIcon = "${AppConstants.baseIconAssetsPath}searchIcon.svg";
   static const String categoryIcon = '${AppConstants.baseIconAssetsPath}categoryIcon.svg';
-  static const String recommendedBgColor= '${AppConstants.baseImageAssetsPath}recommendedBgColor.png';
+  static const String recommendedBgImg= '${AppConstants.baseImageAssetsPath}recommendedBgImg.png';
   static const String profileImage= '${AppConstants.baseImageAssetsPath}profileImage.png';
 
   /// notification screen

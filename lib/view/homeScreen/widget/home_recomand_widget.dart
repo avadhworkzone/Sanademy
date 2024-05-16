@@ -54,16 +54,22 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: ListView.builder(
                   itemCount: homeScreenViewModel.courses.length,
-                  itemBuilder: (context, index) => Padding(
+                  itemBuilder: (context, index) {
+                    final courses = homeScreenViewModel.courses[index];
+                    final List<Color> colors = courses.colorCode!
+                        .split(',')
+                        .map((color) => Color(int.parse(color, radix: 16)).withOpacity(1.0))
+                        .toList();
+                    return Padding(
                     padding: EdgeInsets.only(bottom: 15.h,top: 10.h),
                     child: GestureDetector(
                       onTap: () {
-                        Get.to(() => const DescriptionScreen());
+                        Get.to(() =>  DescriptionScreen(courseId: homeScreenViewModel.courses[index].id.toString(),));
                       },
                       child:
-                          CommonContainerWidget(listData: homeScreenViewModel.courses[index],),
+                          CommonContainerWidget(listData: homeScreenViewModel.courses[index],color: colors),
                     ),
-                  ),
+                  ); }
                 ),
               ),
             )

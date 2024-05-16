@@ -7,7 +7,6 @@ import 'package:sanademy/networks/model/register_res_model.dart';
 import 'package:sanademy/networks/services/apiService/sign_up_service.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
-import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/view/auth/otp_screen.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/commonWidget/network_assets.dart';
-import 'package:sanademy/networks/model/homeResModel.dart';
+import 'package:sanademy/networks/model/home_res_model.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/local_assets.dart';
@@ -11,10 +11,10 @@ import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view_model/home_screen_view_model.dart';
 
 class CommonContainerWidget extends StatefulWidget {
-  const CommonContainerWidget({super.key, required this.listData});
+  const CommonContainerWidget({super.key, required this.listData, required this.color});
 
-  final HomeCoursesData listData;
-
+  final Courses listData;
+  final List<Color> color;
   @override
   State<CommonContainerWidget> createState() => _CommonContainerWidgetState();
 }
@@ -34,8 +34,10 @@ class _CommonContainerWidgetState extends State<CommonContainerWidget> {
             width: Get.width,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.r),
-                image:  DecorationImage(
-                    image: NetworkImage(widget.listData.banner.toString()),fit: BoxFit.cover)),
+                gradient: LinearGradient(colors: widget.color),
+                image:  const DecorationImage(
+                    image: AssetImage(AppImageAssets.recommendedBgImg),
+                    fit: BoxFit.cover)),
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
               child: Row(
@@ -59,7 +61,7 @@ class _CommonContainerWidgetState extends State<CommonContainerWidget> {
                         ),
                         SizeConfig.sH8,
                         CustomText(
-                          '12 Lectures',
+                          '${widget.listData.numberOfLecture} Lectures',
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
                           color: AppColors.black0E,
@@ -92,9 +94,8 @@ class _CommonContainerWidgetState extends State<CommonContainerWidget> {
                                   ),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(35),
-                                    child: const NetWorkOcToAssets(
-                                      imgUrl:
-                                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s',
+                                    child:  NetWorkOcToAssets(
+                                      imgUrl:widget.listData.teacher!.image!,
                                       boxFit: BoxFit.contain,
                                     ),
                                   ),
@@ -112,7 +113,7 @@ class _CommonContainerWidgetState extends State<CommonContainerWidget> {
                                       ),
                                       SizeConfig.sH3,
                                       CustomText(
-                                        'John Doe',
+                                        widget.listData.teacher!.name!,
                                         fontWeight: FontWeight.w700,
                                         fontSize: 12.sp,
                                         color: AppColors.black0E,

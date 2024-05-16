@@ -279,7 +279,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
                   child: CustomBtn(
-                    onTap: () {
+                    onTap: () async {
                       contactUsViewModel.isValidate.value = true;
                       if (contactUsViewModel.formKey.value.currentState!
                               .validate() &&
@@ -287,7 +287,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                               .contactUsMessageController.value.text.isNotEmpty &&
                           contactUsViewModel
                               .contactUsPhoneController.value.text.isNotEmpty) {
-                        contactUsViewModel.writeUsDirectlyData();
+                       await contactUsViewModel.writeUsDirectlyData();
                       }
                     },
                     title: AppStrings.submit,

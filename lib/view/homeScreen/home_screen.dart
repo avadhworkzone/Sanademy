@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/common_appbar.dart';
+import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_string.dart';
+import 'package:sanademy/utils/enum_utils.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/view/auth/sign_up_screen.dart';
@@ -32,11 +34,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-     homeScreenViewModel.categoriesAndBannerData();
+    apiCall();
     super.initState();
   }
 
-
+  apiCall() async {
+    await homeScreenViewModel.homeViewModel();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +99,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     )*/
                 )),
           )),
-      body: const Column(
+      body: Obx(() =>  homeScreenViewModel.responseStatus.value==ResponseStatus.Error?CustomText('Error',fontSize: 20.sp,):
+      homeScreenViewModel.responseStatus.value==ResponseStatus.Completed?
+      const Column(
         children: [
           /// CAROUSAL SLIDER VIEW....
           HomeSliderWidget(),
@@ -106,7 +112,8 @@ class _HomeScreenState extends State<HomeScreen> {
           /// RECOMMENDED
           HomeRecommendedWidget(),
         ],
-      ),
+      )
+          :const Material(),)
     );
   }
 }

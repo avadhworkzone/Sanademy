@@ -31,17 +31,23 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               child: ListView.builder(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 itemCount: homeScreenViewModel.courses.length,
-                itemBuilder: (context, index) => Padding(
+                itemBuilder: (context, index)  {
+                  final courses = homeScreenViewModel.courses[index];
+                  final List<Color> colors = courses.colorCode!
+                      .split(',')
+                      .map((color) => Color(int.parse(color, radix: 16)).withOpacity(1.0))
+                      .toList();
+                  return Padding(
                   padding: EdgeInsets.only(bottom: 15.h),
                   child: GestureDetector(
                     onTap: () {
-                      Get.to(() => const DescriptionScreen());
+                      Get.to(() =>  DescriptionScreen(courseId: homeScreenViewModel.courses[index].id.toString(),));
                     },
                     child: CommonContainerWidget(
-                      listData: homeScreenViewModel.courses[index],
+                      listData: homeScreenViewModel.courses[index], color: colors,
                     ),
                   ),
-                ),
+                );}
               ),
             )
           ],

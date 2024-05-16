@@ -3,8 +3,8 @@ GetExamResModel getExamResModelFromJson(String str) => GetExamResModel.fromJson(
 String getExamResModelToJson(GetExamResModel data) => json.encode(data.toJson());
 class GetExamResModel {
   GetExamResModel({
-      this.success, 
-      this.data, 
+      this.success,
+      this.data,
       this.message,});
 
   GetExamResModel.fromJson(dynamic json) {
@@ -37,11 +37,11 @@ Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
 class Data {
   Data({
-      this.id, 
-      this.courseId, 
-      this.title, 
-      this.createdAt, 
-      this.updatedAt, 
+      this.id,
+      this.courseId,
+      this.title,
+      this.createdAt,
+      this.updatedAt,
       this.questionsCount,});
 
   Data.fromJson(dynamic json) {
