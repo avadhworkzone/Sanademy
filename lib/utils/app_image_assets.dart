@@ -27,6 +27,8 @@ class AppImageAssets {
       '${AppConstants.baseIconAssetsPath}notificationIcon.svg';
   static const String selectedHomeIcon =
       '${AppConstants.baseIconAssetsPath}selectedHomeIcon.svg';
+  static const String homeIcn =
+      '${AppConstants.baseIconAssetsPath}homeIcn.svg';
   static const String selectedCertificateIcon =
       '${AppConstants.baseIconAssetsPath}Vector (1).svg';
   static const String selectedNotificationIcon =

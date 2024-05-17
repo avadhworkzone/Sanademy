@@ -18,7 +18,7 @@ import 'package:video_player/video_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class DescriptionScreen extends StatefulWidget {
-  const DescriptionScreen({super.key, required this.courseId, required this.description, required this.requirements, required this.whatWillYouLearn, required this.whoThisCourseIsFor, required this.teacherImage, required this.teacherName, required this.videoUrl});
+  const DescriptionScreen({super.key, required this.courseId, required this.description, required this.requirements, required this.whatWillYouLearn, required this.whoThisCourseIsFor, required this.teacherImage, required this.teacherName, required this.videoUrl, required this.instructorDetail});
 
   final String courseId;
   final String description;
@@ -27,6 +27,7 @@ class DescriptionScreen extends StatefulWidget {
   final String whoThisCourseIsFor;
   final String teacherImage;
   final String teacherName;
+  final String instructorDetail;
   final String videoUrl;
 
   @override
@@ -699,13 +700,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                                         ))
                                                   ]),
                                             ),
-                                            SizeConfig.sH10,
-                                            CustomText(
-                                              'Lorem ipsum dolor sit amet consectetur. Integer non facilisis non dignissim eget. Enim odio auctor convallis mauris rhoncus nisl. Senectus tincidunt aliquam vitae enim id. Leo praesent id at dignissim. Non tincidunt varius pellentesque pretium elit. Eu urna ligula augue arcu etiam odio hendrerit. Dignissim libero leo orci.',
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 14.sp,
-                                              color: AppColors.black0E,
-                                            ),
+                                           Html(data: widget.instructorDetail,shrinkWrap: true,),
                                             SizeConfig.sH15,
                                           ],
                                         )

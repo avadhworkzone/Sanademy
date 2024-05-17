@@ -16,12 +16,13 @@ class HomeScreenViewModel extends GetxController {
   RxList<Banners> bannerData = <Banners>[].obs;
   RxList<Courses> courses = <Courses>[].obs;
   Rx<ResponseStatus> responseStatus = ResponseStatus.INITIAL.obs;
+  HomeResModel homeResModel = HomeResModel();
 
   Future<void> homeViewModel() async {
     unFocus();
     final response = await HomeDataService().homeDataRepo();
     if (checkStatusCode(response!.statusCode ?? 0)) {
-      HomeResModel homeResModel =
+       homeResModel =
           homeResModelFromJson(response.response.toString());
       if (homeResModel.success!) {
         if (homeResModel.data != null) {

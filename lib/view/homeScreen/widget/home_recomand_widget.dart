@@ -74,6 +74,7 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                           whoThisCourseIsFor: homeScreenViewModel.courses[index].whoThisCourseIsFor!,
                           teacherName: homeScreenViewModel.courses[index].teacher!.name!,
                           teacherImage: homeScreenViewModel.courses[index].teacher!.image!,
+                        instructorDetail: homeScreenViewModel.courses[index].instructor!,
                         ));
                       },
                       child:

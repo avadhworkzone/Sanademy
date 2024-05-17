@@ -40,7 +40,7 @@ class _BottomBarState extends State<BottomBar> {
             children: [
               navItem(
                   index: 0,
-                  icon: AppImageAssets.userImage,
+                  icon: AppImageAssets.homeIcn,
                   selectedIcon: AppImageAssets.selectedHomeIcon,
                   title: AppStrings.home),
               navItem(

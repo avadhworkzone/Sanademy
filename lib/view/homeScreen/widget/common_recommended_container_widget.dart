@@ -5,6 +5,7 @@ import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/commonWidget/network_assets.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
+import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view_model/home_screen_view_model.dart';
@@ -71,14 +72,14 @@ class _CommonContainerWidgetState extends State<CommonContainerWidget> {
                         ),
                         SizeConfig.sH8,
                         CustomText(
-                          '${widget.numberOfLecture} Lectures',
+                          '${widget.numberOfLecture} ${AppStrings.lectures}',
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
                           color: AppColors.black0E,
                         ),
                         SizeConfig.sH4,
                         CustomText(
-                          '${widget.hours} hours ${widget.minutes} minutes',
+                          '${'${widget.hours} ${AppStrings.hours}'} ${'${widget.minutes} ${AppStrings.minutes}'}',
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
                           color: AppColors.black0E,

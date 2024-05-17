@@ -90,6 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: (SharedPreferenceUtils.getImage().isNotEmpty)
                       ? Image(
                           image: NetworkImage(SharedPreferenceUtils.getImage()),
+                    // NetworkImage(homeScreenViewModel.homeResModel.data!.user!.image!),
                           fit: BoxFit.cover,
                         )
                       : const LocalAssets(

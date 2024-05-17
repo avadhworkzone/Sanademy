@@ -84,7 +84,7 @@ class Data {
 
 Courses coursesFromJson(String str) => Courses.fromJson(json.decode(str));
 String coursesToJson(Courses data) => json.encode(data.toJson());
-class   Courses {
+class Courses {
   Courses({
       this.id, 
       this.categoryId, 

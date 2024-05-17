@@ -1,10 +1,10 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
-import 'package:sanademy/networks/model/get_question_res_model.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
@@ -138,13 +138,14 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   void initState() {
     initData();
     questionShowFilter();
-    questionDetailAPiCall();
+    // questionDetailAPiCall();
     super.initState();
   }
 
   questionDetailAPiCall() async {
-   await  questionsAnswerViewModel.getQuestionsViewModel(examId: "1");
+    await questionsAnswerViewModel.getQuestionsViewModel(examId: "1");
   }
+
   questionShowFilter() {
     indexIs = answer
         .indexWhere((element) => element['questionNumber'] == questionNumber1);
@@ -172,9 +173,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     return SafeArea(
       child: Material(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.w),
-          child:
-             Column(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.w),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomBtn(
@@ -199,14 +199,15 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                       fontWeight: FontWeight.w700,
                     ),
                     Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.w),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20.w, vertical: 10.w),
                       decoration: BoxDecoration(
                           color: AppColors.color8B.withOpacity(0.10),
                           borderRadius: BorderRadius.circular(5.w)),
                       child: Row(
                         children: [
-                          const LocalAssets(imagePath: AppImageAssets.clockIcon),
+                          const LocalAssets(
+                              imagePath: AppImageAssets.clockIcon),
                           SizeConfig.sW5,
                           CustomText(
                             formatDuration(duration.inSeconds),
@@ -299,7 +300,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                           CustomText(
                             indexIs != -1
                                 ? 'Q${answer[indexIs]['questionNumber']}. ${answer[indexIs]['question']}'
-                              : '',
+                                : '',
                             // 'Q${questionsAnswerViewModel.questionsDetail[indexIs].id}. ${questionsAnswerViewModel.questionsDetail[indexIs].title}',
                             color: AppColors.black,
                             fontWeight: FontWeight.w700,
@@ -312,16 +313,15 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                               final data = answer[indexIs]['answer'];
                               return GestureDetector(
                                 onTap: () {
-                                  print('GestureDetector ma call thay che');
                                   setState(() {
-                                    selectedOptionValue = data[answerIndex]['id'];
+                                    selectedOptionValue =
+                                        data[answerIndex]['id'];
                                     bool alreadyExists = selectedAnswerList.any(
                                         (data) =>
                                             data['questionNumber'] ==
                                             answer[indexIs]['questionNumber']);
 
                                     if (!alreadyExists) {
-                                      print('===== aama jay che =====');
                                       selectedAnswerList.add({
                                         'questionNumber': answer[indexIs]
                                             ['questionNumber'],
@@ -331,17 +331,17 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                       final updateDataIndex =
                                           selectedAnswerList.where((element) =>
                                               element['questionNumber'] ==
-                                              answer[indexIs]['questionNumber']);
+                                              answer[indexIs]
+                                                  ['questionNumber']);
                                       if (updateDataIndex.isNotEmpty) {
-                                        var itemToUpdate = updateDataIndex.first;
+                                        var itemToUpdate =
+                                            updateDataIndex.first;
                                         itemToUpdate["answerId"] =
                                             data[answerIndex]['id'];
                                       }
                                     }
-                                    print(
-                                        'selectedAnswerList ---===> ${selectedAnswerList}');
-                                    selectedAnswerIndex =
-                                        selectedAnswerList.indexWhere((element) =>
+                                    selectedAnswerIndex = selectedAnswerList
+                                        .indexWhere((element) =>
                                             element['answerId'] ==
                                             selectedOptionValue);
                                   });
@@ -354,7 +354,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                       border: Border.all(
                                           color: selectedAnswerList.every(
                                                   (element) =>
-                                                      element['questionNumber'] !=
+                                                      element[
+                                                          'questionNumber'] !=
                                                       answer[indexIs]
                                                           ['questionNumber'])
                                               ? AppColors.greyEE
@@ -363,7 +364,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                                   : selectedAnswerList[
                                                                   selectedAnswerIndex]
                                                               ['answerId'] ==
-                                                          data[answerIndex]['id']
+                                                          data[answerIndex]
+                                                              ['id']
                                                       ? AppColors.primaryColor
                                                       : AppColors.greyEE),
                                       color: AppColors.greyFD,
@@ -376,7 +378,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                           activeColor: AppColors.primaryColor,
                                           value: selectedAnswerList.every(
                                                   (element) =>
-                                                      element['questionNumber'] !=
+                                                      element[
+                                                          'questionNumber'] !=
                                                       answer[indexIs]
                                                           ['questionNumber'])
                                               ? ''
@@ -398,7 +401,6 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                                       answer[indexIs]
                                                           ['questionNumber']);
                                               if (!alreadyExists) {
-                                                print('===== aama jay che =====');
                                                 selectedAnswerList.add({
                                                   'questionNumber':
                                                       answer[indexIs]
@@ -414,29 +416,19 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                                                 'questionNumber'] ==
                                                             answer[indexIs][
                                                                 'questionNumber']);
-                                                if (updateDataIndex.isNotEmpty) {
+                                                if (updateDataIndex
+                                                    .isNotEmpty) {
                                                   var itemToUpdate =
                                                       updateDataIndex.first;
                                                   itemToUpdate["answerId"] =
                                                       data[answerIndex]['id'];
                                                 }
                                               }
-                                              // selectedAnswerList.add({
-                                              //   'questionNumber': answer[indexIs]
-                                              //       ['questionNumber'],
-                                              //   'answerId': data[answerIndex]
-                                              //       ['id']
-                                              // });
-
                                               selectedAnswerIndex =
-                                                  selectedAnswerList
-                                                      .indexWhere((element) =>
+                                                  selectedAnswerList.indexWhere(
+                                                      (element) =>
                                                           element['answerId'] ==
                                                           selectedOptionValue);
-                                              print(
-                                                  'selectedAnswerIndex is $selectedAnswerIndex');
-                                              print(
-                                                  'selectedAnswerIndex is ${selectedAnswerList}');
                                             });
                                           },
                                         ),
@@ -524,8 +516,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                   ],
                 ),
               ],
-            )
-        ),
+            )),
       ),
     );
   }

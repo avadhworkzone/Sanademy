@@ -37,8 +37,10 @@ Map<String, String> ar = {
   AppStrings.recommended: "مُستَحسَن",
   AppStrings.viewAll: "عرض الكل",
 
-  /// sub screen of home screen
-  AppStrings.mathematics: "الرياضيات",
+  /// home recommended container
+  AppStrings.lectures: "محاضرات",
+  AppStrings.hours: "ساعات",
+  AppStrings.minutes: "دقائق",
 
   /// Description Screen
   AppStrings.enrollNow: "تسجيل الآن",

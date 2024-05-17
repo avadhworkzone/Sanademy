@@ -34,7 +34,6 @@ class QuestionsAnswerViewModel extends GetxController {
       }else {
         showErrorSnackBar('', getQuestionResModel.message ?? 'Error');
         responseStatus.value = ResponseStatus.Error;
-
       }
     }
   }

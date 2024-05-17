@@ -65,6 +65,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           whoThisCourseIsFor: homeScreenViewModel.categoryWiseCourseList[index].whoThisCourseIsFor!,
                           teacherName: homeScreenViewModel.categoryWiseCourseList[index].teacher!.name!,
                           teacherImage: homeScreenViewModel.categoryWiseCourseList[index].teacher!.image!,
+                          instructorDetail: homeScreenViewModel.categoryWiseCourseList[index].instructor!,
                         ));
                       },
                       child: CommonContainerWidget(

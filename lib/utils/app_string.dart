@@ -39,8 +39,10 @@ class AppStrings {
   static String recommended = 'Recommended';
   static String viewAll = 'View All';
 
-  /// sub screen of home screen
-  static String mathematics = 'Mathematics';
+  /// home recommended Container
+  static String lectures = 'lectures';
+  static String hours = 'hours';
+  static String minutes = 'minutes';
 
   ///  Description Screen
   static String enrollNow = 'Enroll Now';
