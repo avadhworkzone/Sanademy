@@ -5,6 +5,7 @@ import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_string.dart';
+import 'package:sanademy/utils/enum_utils.dart';
 import 'package:sanademy/view/homeScreen/sub_screens/description_screen.dart';
 import 'package:sanademy/view/homeScreen/widget/common_recommended_container_widget.dart';
 import 'package:sanademy/view_model/home_screen_view_model.dart';
@@ -23,7 +24,8 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Obx(
-        () => Column(
+        () => homeScreenViewModel.responseStatus.value ==
+            ResponseStatus.Completed?Column(
           children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -36,7 +38,6 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                     fontSize: 20.sp,
                     color: AppColors.black0E,
                   ),
-                  // const Spacer(),
                   TextButton(
                     onPressed: () {},
                     child: CustomText(
@@ -64,17 +65,34 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                     padding: EdgeInsets.only(bottom: 15.h,top: 10.h),
                     child: GestureDetector(
                       onTap: () {
-                        Get.to(() =>  DescriptionScreen(courseId: homeScreenViewModel.courses[index].id.toString(),));
+                        Get.to(() =>  DescriptionScreen(
+                          courseId: homeScreenViewModel.courses[index].id.toString(),
+                          videoUrl: homeScreenViewModel.courses[index].videoUrl!,
+                          description: homeScreenViewModel.courses[index].description!,
+                          requirements: homeScreenViewModel.courses[index].requirements!,
+                          whatWillYouLearn: homeScreenViewModel.courses[index].whatWillYouLearn!,
+                          whoThisCourseIsFor: homeScreenViewModel.courses[index].whoThisCourseIsFor!,
+                          teacherName: homeScreenViewModel.courses[index].teacher!.name!,
+                          teacherImage: homeScreenViewModel.courses[index].teacher!.image!,
+                        ));
                       },
                       child:
-                          CommonContainerWidget(listData: homeScreenViewModel.courses[index],color: colors),
+                          CommonContainerWidget(
+                              color: colors,
+                            title: homeScreenViewModel.courses[index].title!,
+                            numberOfLecture: homeScreenViewModel.courses[index].numberOfLecture!,
+                            hours: homeScreenViewModel.courses[index].hours!,
+                            minutes: homeScreenViewModel.courses[index].minutes!,
+                            teacherName: homeScreenViewModel.courses[index].teacher!.name!,
+                            teacherImage: homeScreenViewModel.courses[index].teacher!.image!,
+                          ),
                     ),
                   ); }
                 ),
               ),
             )
           ],
-        ),
+        ):const Material(),
       ),
     );
   }

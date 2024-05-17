@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:sanademy/networks/api_base_helper.dart';
 import 'package:sanademy/networks/model/get_about_us_res_model.dart';
-import 'package:sanademy/networks/services/apiService/about_us_service.dart';
+import 'package:sanademy/networks/services/apiService/about_us_api_service.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/enum_utils.dart';
 

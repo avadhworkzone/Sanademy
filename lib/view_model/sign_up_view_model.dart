@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:sanademy/networks/api_base_helper.dart';
 import 'package:sanademy/networks/api_keys.dart';
 import 'package:sanademy/networks/model/register_res_model.dart';
-import 'package:sanademy/networks/services/apiService/sign_up_service.dart';
+import 'package:sanademy/networks/services/apiService/sign_up_api_service.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';

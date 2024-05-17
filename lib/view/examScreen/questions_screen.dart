@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
+import 'package:sanademy/networks/model/get_question_res_model.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
@@ -137,10 +138,13 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   void initState() {
     initData();
     questionShowFilter();
-    // TODO: implement initState
+    questionDetailAPiCall();
     super.initState();
   }
 
+  questionDetailAPiCall() async {
+   await  questionsAnswerViewModel.getQuestionsViewModel(examId: "1");
+  }
   questionShowFilter() {
     indexIs = answer
         .indexWhere((element) => element['questionNumber'] == questionNumber1);
@@ -148,10 +152,10 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
   initData() {
     timer1 = Timer.periodic(const Duration(seconds: 1), (timer) async {
-      var diffrence = DateTime.now().difference(DateTime.parse(timeIs));
+      var difference = DateTime.now().difference(DateTime.parse(timeIs));
       if (mounted) {
         setState(() {
-          duration = Duration(seconds: diffrence.inSeconds);
+          duration = Duration(seconds: difference.inSeconds);
         });
       }
     });
@@ -169,356 +173,358 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
       child: Material(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomBtn(
-                onTap: () {
-                  timer1?.cancel();
-                  Get.to(() => const CongratulationsScreen());
-                },
-                title: AppStrings.finishExam,
-                bgColor: AppColors.white,
-                borderColor: AppColors.primaryColor,
-                textColor: AppColors.primaryColor,
-                radius: 10,
-              ),
-              SizeConfig.sH15,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomText(
-                    widget.examTitle ?? '',
-                    color: AppColors.black0E,
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w700,
-                  ),
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.w),
-                    decoration: BoxDecoration(
-                        color: AppColors.color8B.withOpacity(0.10),
-                        borderRadius: BorderRadius.circular(5.w)),
-                    child: Row(
-                      children: [
-                        const LocalAssets(imagePath: AppImageAssets.clockIcon),
-                        SizeConfig.sW5,
-                        CustomText(
-                          formatDuration(duration.inSeconds),
-                          color: AppColors.primaryColor,
-                          fontWeight: FontWeight.w700,
+          child:
+             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomBtn(
+                  onTap: () {
+                    timer1?.cancel();
+                    Get.to(() => const CongratulationsScreen());
+                  },
+                  title: AppStrings.finishExam,
+                  bgColor: AppColors.white,
+                  borderColor: AppColors.primaryColor,
+                  textColor: AppColors.primaryColor,
+                  radius: 10,
+                ),
+                SizeConfig.sH15,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomText(
+                      widget.examTitle ?? '',
+                      color: AppColors.black0E,
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w700,
+                    ),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.w),
+                      decoration: BoxDecoration(
+                          color: AppColors.color8B.withOpacity(0.10),
+                          borderRadius: BorderRadius.circular(5.w)),
+                      child: Row(
+                        children: [
+                          const LocalAssets(imagePath: AppImageAssets.clockIcon),
+                          SizeConfig.sW5,
+                          CustomText(
+                            formatDuration(duration.inSeconds),
+                            color: AppColors.primaryColor,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                SizeConfig.sH25,
+                Row(
+                  children: [
+                    InkWell(
+                      borderRadius: BorderRadius.circular(18.r),
+                      onTap: () {
+                        if (questionNumber1 == 1) {
+                        } else {
+                          questionNumber1 -= 1;
+                          indexIs = answer.indexWhere((element) =>
+                              element['questionNumber'] == questionNumber1);
+                          selectedAnswerIndex = selectedAnswerList.indexWhere(
+                              (element) =>
+                                  element['questionNumber'] ==
+                                  answer[indexIs]['questionNumber']);
+                        }
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 13.w, vertical: 13.w),
+                        decoration: BoxDecoration(
+                            color: AppColors.primaryColor,
+                            borderRadius: BorderRadius.circular(18.r)),
+                        child: const Icon(
+                          Icons.arrow_back,
+                          color: AppColors.white,
                         ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-              SizeConfig.sH25,
-              Row(
-                children: [
-                  InkWell(
-                    borderRadius: BorderRadius.circular(18.r),
-                    onTap: () {
-                      if (questionNumber1 == 1) {
-                      } else {
-                        questionNumber1 -= 1;
-                        indexIs = answer.indexWhere((element) =>
-                            element['questionNumber'] == questionNumber1);
-                        selectedAnswerIndex = selectedAnswerList.indexWhere(
-                            (element) =>
-                                element['questionNumber'] ==
-                                answer[indexIs]['questionNumber']);
-                      }
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 13.w, vertical: 13.w),
-                      decoration: BoxDecoration(
-                          color: AppColors.primaryColor,
-                          borderRadius: BorderRadius.circular(18.r)),
-                      child: const Icon(
-                        Icons.arrow_back,
-                        color: AppColors.white,
                       ),
                     ),
-                  ),
-                  SizeConfig.sW15,
-                  Expanded(
-                    child: CustomBtn(
-                      onTap: () {},
-                      title:
-                          'Question ${answer[indexIs]['questionNumber']} of ${answer.length}',
-                      textColor: AppColors.primaryColor,
-                      bgColor: AppColors.greyFD,
-                      borderColor: AppColors.primaryColor,
-                      radius: 10,
-                    ),
-                  ),
-                  SizeConfig.sW15,
-                  InkWell(
-                    borderRadius: BorderRadius.circular(18.r),
-                    onTap: () {
-                      questionNumber1 += 1;
-                      if (questionNumber1 >= answer.length + 1) {
-                        questionsAnswerViewModel.commentController.value
-                            .clear();
-                        Get.off(() => const CongratulationsScreen());
-                      } else {
-                        indexIs = answer.indexWhere((element) =>
-                            element['questionNumber'] == questionNumber1);
-                        selectedAnswerIndex = selectedAnswerList.indexWhere(
-                            (element) =>
-                                element['questionNumber'] ==
-                                answer[indexIs]['questionNumber']);
-                      }
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 13.w, vertical: 13.w),
-                      decoration: BoxDecoration(
-                          color: AppColors.primaryColor,
-                          borderRadius: BorderRadius.circular(18.r)),
-                      child: const Icon(
-                        Icons.arrow_forward,
-                        color: AppColors.white,
+                    SizeConfig.sW15,
+                    Expanded(
+                      child: CustomBtn(
+                        onTap: () {},
+                        title:
+                            'Question ${answer[indexIs]['questionNumber']} of ${answer.length}',
+                        textColor: AppColors.primaryColor,
+                        bgColor: AppColors.greyFD,
+                        borderColor: AppColors.primaryColor,
+                        radius: 10,
                       ),
                     ),
-                  ),
-                ],
-              ),
-              SizeConfig.sH25,
-              answer[indexIs]['questionType'] == 'audio'
-                  ? const AudioWaveForm()
-                  : Column(
-                      children: [
-                        CustomText(
-                          indexIs != -1
-                              ? 'Q${answer[indexIs]['questionNumber']}. ${answer[indexIs]['question']}'
+                    SizeConfig.sW15,
+                    InkWell(
+                      borderRadius: BorderRadius.circular(18.r),
+                      onTap: () {
+                        questionNumber1 += 1;
+                        if (questionNumber1 >= answer.length + 1) {
+                          questionsAnswerViewModel.commentController.value
+                              .clear();
+                          Get.off(() => const CongratulationsScreen());
+                        } else {
+                          indexIs = answer.indexWhere((element) =>
+                              element['questionNumber'] == questionNumber1);
+                          selectedAnswerIndex = selectedAnswerList.indexWhere(
+                              (element) =>
+                                  element['questionNumber'] ==
+                                  answer[indexIs]['questionNumber']);
+                        }
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 13.w, vertical: 13.w),
+                        decoration: BoxDecoration(
+                            color: AppColors.primaryColor,
+                            borderRadius: BorderRadius.circular(18.r)),
+                        child: const Icon(
+                          Icons.arrow_forward,
+                          color: AppColors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizeConfig.sH25,
+                answer[indexIs]['questionType'] == 'audio'
+                    ? const AudioWaveForm()
+                    : Column(
+                        children: [
+                          CustomText(
+                            indexIs != -1
+                                ? 'Q${answer[indexIs]['questionNumber']}. ${answer[indexIs]['question']}'
                               : '',
-                          color: AppColors.black,
-                          fontWeight: FontWeight.w700,
-                        ),
-                        SizeConfig.sH10,
-                        ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: answer[indexIs]['answer'].length,
-                          itemBuilder: (context, answerIndex) {
-                            final data = answer[indexIs]['answer'];
-                            return GestureDetector(
-                              onTap: () {
-                                print('GestureDetector ma call thay che');
-                                setState(() {
-                                  selectedOptionValue = data[answerIndex]['id'];
-                                  bool alreadyExists = selectedAnswerList.any(
-                                      (data) =>
-                                          data['questionNumber'] ==
-                                          answer[indexIs]['questionNumber']);
-
-                                  if (!alreadyExists) {
-                                    print('===== aama jay che =====');
-                                    selectedAnswerList.add({
-                                      'questionNumber': answer[indexIs]
-                                          ['questionNumber'],
-                                      'answerId': data[answerIndex]['id']
-                                    });
-                                  } else {
-                                    final updateDataIndex =
-                                        selectedAnswerList.where((element) =>
-                                            element['questionNumber'] ==
+                            // 'Q${questionsAnswerViewModel.questionsDetail[indexIs].id}. ${questionsAnswerViewModel.questionsDetail[indexIs].title}',
+                            color: AppColors.black,
+                            fontWeight: FontWeight.w700,
+                          ),
+                          SizeConfig.sH10,
+                          ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: answer[indexIs]['answer'].length,
+                            itemBuilder: (context, answerIndex) {
+                              final data = answer[indexIs]['answer'];
+                              return GestureDetector(
+                                onTap: () {
+                                  print('GestureDetector ma call thay che');
+                                  setState(() {
+                                    selectedOptionValue = data[answerIndex]['id'];
+                                    bool alreadyExists = selectedAnswerList.any(
+                                        (data) =>
+                                            data['questionNumber'] ==
                                             answer[indexIs]['questionNumber']);
-                                    if (updateDataIndex.isNotEmpty) {
-                                      var itemToUpdate = updateDataIndex.first;
-                                      itemToUpdate["answerId"] =
-                                          data[answerIndex]['id'];
+
+                                    if (!alreadyExists) {
+                                      print('===== aama jay che =====');
+                                      selectedAnswerList.add({
+                                        'questionNumber': answer[indexIs]
+                                            ['questionNumber'],
+                                        'answerId': data[answerIndex]['id']
+                                      });
+                                    } else {
+                                      final updateDataIndex =
+                                          selectedAnswerList.where((element) =>
+                                              element['questionNumber'] ==
+                                              answer[indexIs]['questionNumber']);
+                                      if (updateDataIndex.isNotEmpty) {
+                                        var itemToUpdate = updateDataIndex.first;
+                                        itemToUpdate["answerId"] =
+                                            data[answerIndex]['id'];
+                                      }
                                     }
-                                  }
-                                  print(
-                                      'selectedAnswerList ---===> ${selectedAnswerList}');
-                                  selectedAnswerIndex =
-                                      selectedAnswerList.indexWhere((element) =>
-                                          element['answerId'] ==
-                                          selectedOptionValue);
-                                });
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 10.w, vertical: 10.w),
-                                margin: EdgeInsets.symmetric(vertical: 10.w),
-                                decoration: BoxDecoration(
-                                    border: Border.all(
+                                    print(
+                                        'selectedAnswerList ---===> ${selectedAnswerList}');
+                                    selectedAnswerIndex =
+                                        selectedAnswerList.indexWhere((element) =>
+                                            element['answerId'] ==
+                                            selectedOptionValue);
+                                  });
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10.w, vertical: 10.w),
+                                  margin: EdgeInsets.symmetric(vertical: 10.w),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: selectedAnswerList.every(
+                                                  (element) =>
+                                                      element['questionNumber'] !=
+                                                      answer[indexIs]
+                                                          ['questionNumber'])
+                                              ? AppColors.greyEE
+                                              : selectedAnswerIndex == -1
+                                                  ? AppColors.greyEE
+                                                  : selectedAnswerList[
+                                                                  selectedAnswerIndex]
+                                                              ['answerId'] ==
+                                                          data[answerIndex]['id']
+                                                      ? AppColors.primaryColor
+                                                      : AppColors.greyEE),
+                                      color: AppColors.greyFD,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Row(
+                                    children: [
+                                      Transform.scale(
+                                        scale: 1.5,
+                                        child: Radio<String>(
+                                          activeColor: AppColors.primaryColor,
+                                          value: selectedAnswerList.every(
+                                                  (element) =>
+                                                      element['questionNumber'] !=
+                                                      answer[indexIs]
+                                                          ['questionNumber'])
+                                              ? ''
+                                              : selectedAnswerIndex == -1
+                                                  ? ''
+                                                  : selectedAnswerList[
+                                                          selectedAnswerIndex]
+                                                      ['answerId'],
+
+                                          ///selectedOptionValue ?? '',
+                                          groupValue: data[answerIndex]['id'],
+                                          onChanged: (value) {
+                                            setState(() {
+                                              selectedOptionValue =
+                                                  data[answerIndex]['id'];
+                                              bool alreadyExists =
+                                                  selectedAnswerList.any((data) =>
+                                                      data['questionNumber'] ==
+                                                      answer[indexIs]
+                                                          ['questionNumber']);
+                                              if (!alreadyExists) {
+                                                print('===== aama jay che =====');
+                                                selectedAnswerList.add({
+                                                  'questionNumber':
+                                                      answer[indexIs]
+                                                          ['questionNumber'],
+                                                  'answerId': data[answerIndex]
+                                                      ['id']
+                                                });
+                                              } else {
+                                                final updateDataIndex =
+                                                    selectedAnswerList.where(
+                                                        (element) =>
+                                                            element[
+                                                                'questionNumber'] ==
+                                                            answer[indexIs][
+                                                                'questionNumber']);
+                                                if (updateDataIndex.isNotEmpty) {
+                                                  var itemToUpdate =
+                                                      updateDataIndex.first;
+                                                  itemToUpdate["answerId"] =
+                                                      data[answerIndex]['id'];
+                                                }
+                                              }
+                                              // selectedAnswerList.add({
+                                              //   'questionNumber': answer[indexIs]
+                                              //       ['questionNumber'],
+                                              //   'answerId': data[answerIndex]
+                                              //       ['id']
+                                              // });
+
+                                              selectedAnswerIndex =
+                                                  selectedAnswerList
+                                                      .indexWhere((element) =>
+                                                          element['answerId'] ==
+                                                          selectedOptionValue);
+                                              print(
+                                                  'selectedAnswerIndex is $selectedAnswerIndex');
+                                              print(
+                                                  'selectedAnswerIndex is ${selectedAnswerList}');
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                      CustomText(
+                                        data[answerIndex]['title'],
+                                        fontWeight: FontWeight.w500,
                                         color: selectedAnswerList.every(
                                                 (element) =>
                                                     element['questionNumber'] !=
                                                     answer[indexIs]
                                                         ['questionNumber'])
-                                            ? AppColors.greyEE
+                                            ? AppColors.black
                                             : selectedAnswerIndex == -1
-                                                ? AppColors.greyEE
+                                                ? AppColors.black
                                                 : selectedAnswerList[
                                                                 selectedAnswerIndex]
                                                             ['answerId'] ==
                                                         data[answerIndex]['id']
                                                     ? AppColors.primaryColor
-                                                    : AppColors.greyEE),
-                                    color: AppColors.greyFD,
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Row(
-                                  children: [
-                                    Transform.scale(
-                                      scale: 1.5,
-                                      child: Radio<String>(
-                                        activeColor: AppColors.primaryColor,
-                                        value: selectedAnswerList.every(
-                                                (element) =>
-                                                    element['questionNumber'] !=
-                                                    answer[indexIs]
-                                                        ['questionNumber'])
-                                            ? ''
-                                            : selectedAnswerIndex == -1
-                                                ? ''
-                                                : selectedAnswerList[
-                                                        selectedAnswerIndex]
-                                                    ['answerId'],
-
-                                        ///selectedOptionValue ?? '',
-                                        groupValue: data[answerIndex]['id'],
-                                        onChanged: (value) {
-                                          setState(() {
-                                            selectedOptionValue =
-                                                data[answerIndex]['id'];
-                                            bool alreadyExists =
-                                                selectedAnswerList.any((data) =>
-                                                    data['questionNumber'] ==
-                                                    answer[indexIs]
-                                                        ['questionNumber']);
-                                            if (!alreadyExists) {
-                                              print('===== aama jay che =====');
-                                              selectedAnswerList.add({
-                                                'questionNumber':
-                                                    answer[indexIs]
-                                                        ['questionNumber'],
-                                                'answerId': data[answerIndex]
-                                                    ['id']
-                                              });
-                                            } else {
-                                              final updateDataIndex =
-                                                  selectedAnswerList.where(
-                                                      (element) =>
-                                                          element[
-                                                              'questionNumber'] ==
-                                                          answer[indexIs][
-                                                              'questionNumber']);
-                                              if (updateDataIndex.isNotEmpty) {
-                                                var itemToUpdate =
-                                                    updateDataIndex.first;
-                                                itemToUpdate["answerId"] =
-                                                    data[answerIndex]['id'];
-                                              }
-                                            }
-                                            // selectedAnswerList.add({
-                                            //   'questionNumber': answer[indexIs]
-                                            //       ['questionNumber'],
-                                            //   'answerId': data[answerIndex]
-                                            //       ['id']
-                                            // });
-
-                                            selectedAnswerIndex =
-                                                selectedAnswerList
-                                                    .indexWhere((element) =>
-                                                        element['answerId'] ==
-                                                        selectedOptionValue);
-                                            print(
-                                                'selectedAnswerIndex is $selectedAnswerIndex');
-                                            print(
-                                                'selectedAnswerIndex is ${selectedAnswerList}');
-                                          });
-                                        },
-                                      ),
-                                    ),
-                                    CustomText(
-                                      data[answerIndex]['title'],
-                                      fontWeight: FontWeight.w500,
-                                      color: selectedAnswerList.every(
-                                              (element) =>
-                                                  element['questionNumber'] !=
-                                                  answer[indexIs]
-                                                      ['questionNumber'])
-                                          ? AppColors.black
-                                          : selectedAnswerIndex == -1
-                                              ? AppColors.black
-                                              : selectedAnswerList[
-                                                              selectedAnswerIndex]
-                                                          ['answerId'] ==
-                                                      data[answerIndex]['id']
-                                                  ? AppColors.primaryColor
-                                                  : AppColors.black,
-                                    )
-                                  ],
+                                                    : AppColors.black,
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                answer[indexIs]['questionType'] == 'audio'
+                    ? SizeConfig.sH30
+                    : SizeConfig.sH10,
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomBtn(
+                        onTap: () {
+                          questionNumber1 += 1;
+                          if (questionNumber1 >= answer.length + 1) {
+                            questionsAnswerViewModel.commentController.value
+                                .clear();
+                            Get.off(() => const CongratulationsScreen());
+                          } else {
+                            indexIs = answer.indexWhere((element) =>
+                                element['questionNumber'] == questionNumber1);
+                            selectedAnswerIndex = selectedAnswerList.indexWhere(
+                                (element) =>
+                                    element['questionNumber'] ==
+                                    answer[indexIs]['questionNumber']);
+                          }
+                        },
+                        title: AppStrings.skip,
+                        bgColor: AppColors.white,
+                        borderColor: AppColors.primaryColor,
+                        textColor: AppColors.primaryColor,
+                        radius: 10,
+                      ),
                     ),
-              answer[indexIs]['questionType'] == 'audio'
-                  ? SizeConfig.sH30
-                  : SizeConfig.sH10,
-              Row(
-                children: [
-                  Expanded(
-                    child: CustomBtn(
-                      onTap: () {
-                        questionNumber1 += 1;
-                        if (questionNumber1 >= answer.length + 1) {
-                          questionsAnswerViewModel.commentController.value
-                              .clear();
-                          Get.off(() => const CongratulationsScreen());
-                        } else {
-                          indexIs = answer.indexWhere((element) =>
-                              element['questionNumber'] == questionNumber1);
-                          selectedAnswerIndex = selectedAnswerList.indexWhere(
-                              (element) =>
-                                  element['questionNumber'] ==
-                                  answer[indexIs]['questionNumber']);
-                        }
-                      },
-                      title: AppStrings.skip,
-                      bgColor: AppColors.white,
-                      borderColor: AppColors.primaryColor,
-                      textColor: AppColors.primaryColor,
-                      radius: 10,
+                    SizeConfig.sW15,
+                    Expanded(
+                      child: CustomBtn(
+                        onTap: () {
+                          questionNumber1 += 1;
+                          if (questionNumber1 >= answer.length + 1) {
+                            questionsAnswerViewModel.commentController.value
+                                .clear();
+                            Get.off(() => const CongratulationsScreen());
+                          } else {
+                            indexIs = answer.indexWhere((element) =>
+                                element['questionNumber'] == questionNumber1);
+                            selectedAnswerIndex = selectedAnswerList.indexWhere(
+                                (element) =>
+                                    element['questionNumber'] ==
+                                    answer[indexIs]['questionNumber']);
+                          }
+                        },
+                        title: AppStrings.next,
+                        bgColor: AppColors.primaryColor,
+                        borderColor: AppColors.white,
+                        textColor: AppColors.white,
+                        radius: 10,
+                      ),
                     ),
-                  ),
-                  SizeConfig.sW15,
-                  Expanded(
-                    child: CustomBtn(
-                      onTap: () {
-                        questionNumber1 += 1;
-                        if (questionNumber1 >= answer.length + 1) {
-                          questionsAnswerViewModel.commentController.value
-                              .clear();
-                          Get.off(() => const CongratulationsScreen());
-                        } else {
-                          indexIs = answer.indexWhere((element) =>
-                              element['questionNumber'] == questionNumber1);
-                          selectedAnswerIndex = selectedAnswerList.indexWhere(
-                              (element) =>
-                                  element['questionNumber'] ==
-                                  answer[indexIs]['questionNumber']);
-                        }
-                      },
-                      title: AppStrings.next,
-                      bgColor: AppColors.primaryColor,
-                      borderColor: AppColors.white,
-                      textColor: AppColors.white,
-                      radius: 10,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+                  ],
+                ),
+              ],
+            )
         ),
       ),
     );

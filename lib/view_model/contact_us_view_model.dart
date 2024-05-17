@@ -4,7 +4,7 @@ import 'package:sanademy/networks/api_base_helper.dart';
 import 'package:sanademy/networks/api_keys.dart';
 import 'package:sanademy/networks/model/WriteUsDirectlyResModel.dart';
 import 'package:sanademy/networks/model/get_contact_us_res_model.dart';
-import 'package:sanademy/networks/services/apiService/contact_us_service.dart';
+import 'package:sanademy/networks/services/apiService/contact_us_api_service.dart';
 import 'package:sanademy/networks/services/apiService/write_us_directly_api_service.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/enum_utils.dart';

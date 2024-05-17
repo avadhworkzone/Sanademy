@@ -18,9 +18,16 @@ import 'package:video_player/video_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class DescriptionScreen extends StatefulWidget {
-  DescriptionScreen({super.key, required this.courseId});
+  const DescriptionScreen({super.key, required this.courseId, required this.description, required this.requirements, required this.whatWillYouLearn, required this.whoThisCourseIsFor, required this.teacherImage, required this.teacherName, required this.videoUrl});
 
-  String courseId;
+  final String courseId;
+  final String description;
+  final String requirements;
+  final String whatWillYouLearn;
+  final String whoThisCourseIsFor;
+  final String teacherImage;
+  final String teacherName;
+  final String videoUrl;
 
   @override
   State<DescriptionScreen> createState() => _DescriptionScreenState();
@@ -29,23 +36,27 @@ class DescriptionScreen extends StatefulWidget {
 class _DescriptionScreenState extends State<DescriptionScreen> {
   DescriptionViewModel descriptionViewModel = Get.put(DescriptionViewModel());
 
-  @override
-  void dispose() {
-    descriptionViewModel.videoPlayerController.dispose();
-    super.dispose();
-  }
 
   @override
   void initState() {
     descriptionApiCall();
-    // TODO: implement initState
     super.initState();
   }
 
   descriptionApiCall() async {
     await descriptionViewModel.courseDetailViewModel(courseId: widget.courseId);
     // descriptionViewModel.videoPlayer();
-    descriptionViewModel.youTubPlayer();
+    descriptionViewModel.youtubePlayerController = YoutubePlayerController(
+      initialVideoId: '',
+      flags: const YoutubePlayerFlags(isLive: true,autoPlay: false,),
+    ).obs;
+    descriptionViewModel.youTubPlayer(widget.videoUrl);
+  }
+  @override
+  void dispose() {
+    // descriptionViewModel.videoPlayerController.dispose();
+    descriptionViewModel.youtubePlayerController?.value.dispose();
+    super.dispose();
   }
 
   @override
@@ -73,92 +84,106 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                         imgColor: AppColors.primaryColor,
                                       )),
                                 )
-                              : AspectRatio(
-                            aspectRatio: 16 / 9,
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Container(
-                                  color: AppColors.color9D,
-                                  child: YoutubePlayerBuilder(
-                                    player: YoutubePlayer(
-                                      controller: descriptionViewModel.youtubePlayerController!.value,
-                                      showVideoProgressIndicator: true,
-                                      progressIndicatorColor: Colors.amber,
-                                      progressColors: const ProgressBarColors(
-                                        playedColor: Colors.amber,
-                                        handleColor: Colors.amberAccent,
+                              : Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: Get.width * 0.7,
+                                    width: Get.width,
+                                    child: YoutubePlayerBuilder(
+                                      player: YoutubePlayer(
+                                        controller: descriptionViewModel
+                                            .youtubePlayerController!.value,
+                                        showVideoProgressIndicator: true,
+                                        progressIndicatorColor:
+                                            Colors.amber,
+                                        progressColors:
+                                            const ProgressBarColors(
+                                          playedColor: Colors.amber,
+                                          handleColor: Colors.amberAccent,
+                                        ),
+                                        onReady: () {
+                                          descriptionViewModel
+                                              .youtubePlayerController
+                                              ?.value
+                                              .addListener(() {
+                                            // Update the UI based on the YouTube player state
+                                            descriptionViewModel.onTouch
+                                                .value = descriptionViewModel
+                                                    .youtubePlayerController
+                                                    ?.value
+                                                    .value
+                                                    .isPlaying ??
+                                                false;
+                                          });
+                                        },
                                       ),
-                                      onReady: () {
-                                        descriptionViewModel.youtubePlayerController?.value.addListener(() {
-                                          // Update the UI based on the YouTube player state
-                                          descriptionViewModel.onTouch.value =
-                                              descriptionViewModel.youtubePlayerController?.value.value.isPlaying ?? false;
-                                        });
-                                      },
+                                      builder: (context, player) => player,
                                     ),
-                                    builder: (context, player) => player,
                                   ),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    descriptionViewModel.onTouch.value = true;
+                                  InkWell(
+                                    onTap: () {
+                                      descriptionViewModel.onTouch.value =
+                                          true;
+                                      if (descriptionViewModel
+                                              .youtubePlayerController
+                                              ?.value
+                                              .value
+                                              .isPlaying ??
+                                          false) {
+                                        descriptionViewModel
+                                            .youtubePlayerController?.value
+                                            .pause();
+                                      } else {
+                                        descriptionViewModel
+                                            .youtubePlayerController?.value
+                                            .play();
+                                      }
 
-                                    if (descriptionViewModel.youtubePlayerController?.value.value.isPlaying ?? false) {
-                                      descriptionViewModel.youtubePlayerController?.value.pause();
-                                    } else {
-                                      descriptionViewModel.youtubePlayerController?.value.play();
-                                    }
-
-                                    Future.delayed(
-                                      const Duration(seconds: 2),
-                                          () => descriptionViewModel.onTouch.value = false,
-                                    );
-                                    setState(() {});
-                                  },
-                                  child: descriptionViewModel.onTouch.value &&
-                                      (descriptionViewModel.youtubePlayerController?.value.value.isPlaying ?? false)
-                                      ? const Icon(
-                                    Icons.pause_circle,
-                                    size: 50,
-                                    color: Colors.white,
+                                      Future.delayed(
+                                        const Duration(seconds: 2),
+                                        () => descriptionViewModel
+                                            .onTouch.value = false,
+                                      );
+                                      setState(() {});
+                                    },
+                                    child: descriptionViewModel
+                                                .onTouch.value &&
+                                            (descriptionViewModel
+                                                    .youtubePlayerController
+                                                    ?.value
+                                                    .value
+                                                    .isPlaying ??
+                                                false)
+                                        ? const Icon(
+                                            Icons.pause_circle,
+                                            size: 50,
+                                            color: Colors.white,
+                                          )
+                                        : descriptionViewModel
+                                                    .onTouch.value &&
+                                                !(descriptionViewModel
+                                                        .youtubePlayerController
+                                                        ?.value
+                                                        .value
+                                                        .isPlaying ??
+                                                    true)
+                                            ? const Icon(
+                                                Icons.play_circle,
+                                                size: 50,
+                                                color: Colors.white,
+                                              )
+                                            : Container(),
                                   )
-                                      : descriptionViewModel.onTouch.value &&
-                                      !(descriptionViewModel.youtubePlayerController?.value.value.isPlaying ?? true)
-                                      ? const Icon(
-                                    Icons.play_circle,
-                                    size: 50,
-                                    color: Colors.white,
-                                  )
-                                      : Container(),
-                                )
-                              ],
-                            ),
-                          ),
-                          /*   AspectRatio(
+                                ],
+                              ),
+                           /*  AspectRatio(
                                   aspectRatio: descriptionViewModel
                                       .videoPlayerController.value.aspectRatio,
                                   child: Stack(
                                     alignment: Alignment.center,
                                     children: [
-                                      Container(
-                                        color: AppColors.color9D,
-                                        child: YoutubePlayerBuilder(
-                                          player: YoutubePlayer(
-                                            controller: descriptionViewModel.youtubePlayerController!.value,
-                                            showVideoProgressIndicator: true,
-                                            progressIndicatorColor: Colors.amber,
-                                            progressColors: const ProgressBarColors(
-                                              playedColor: Colors.amber,
-                                              handleColor: Colors.amberAccent,
-                                            ),
-                                            onReady: () {
-                                              descriptionViewModel.youtubePlayerController?.value.addListener(() {});
-                                            },
-                                          ),
-                                          builder: (context, player) => player,
-                                        ),
-                                      ),
+                                      VideoPlayer(descriptionViewModel.videoPlayerController.value as VideoPlayerController),
                                       InkWell(
                                           onTap: () {
                                             descriptionViewModel
@@ -277,9 +302,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 10.w),
                             child: Html(
-                              data: descriptionViewModel
-                                      .courseDetailResModel.data!.description ??
-                                  '',
+                              data: widget.description,
                               shrinkWrap: true,
                             ),
                           ),
@@ -425,11 +448,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                   ),
                                   children: [
                                     Html(
-                                      data: descriptionViewModel
-                                              .courseDetailResModel
-                                              .data!
-                                              .requirements ??
-                                          '',
+                                      data:
+                                              widget.requirements ,
                                       shrinkWrap: true,
                                     )
                                   ]),
@@ -454,14 +474,11 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                   ),
                                   children: [
                                     Html(
-                                      data: descriptionViewModel
-                                              .courseDetailResModel
-                                              .data!
-                                              .whatWillYouLearn ??
-                                          '',
+                                      data: widget.whatWillYouLearn,
                                       shrinkWrap: true,
                                     )
-                                  ] /*List.generate(
+                                  ]
+                                /*List.generate(
                                       requirementsList.length,
                                       (index) => Align(
                                             alignment: Alignment.centerLeft,
@@ -517,11 +534,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                   ),
                                   children: [
                                     Html(
-                                      data: descriptionViewModel
-                                              .courseDetailResModel
-                                              .data!
-                                              .whoThisCourseIsFor ??
-                                          '',
+                                      data: widget.whoThisCourseIsFor,
                                       shrinkWrap: true,
                                     )
                                   ]),
@@ -530,6 +543,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           Divider(
                             color: AppColors.black0E.withOpacity(0.2),
                           ),
+
+                          /// INSTRUCTOR DETAILS
                           SizeConfig.sH25,
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -566,11 +581,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                           CircleAvatar(
                                             radius: 40.r,
                                             backgroundImage: NetworkImage(
-                                                descriptionViewModel
-                                                        .courseDetailResModel
-                                                        .data!
-                                                        .teacher!
-                                                        .image!),
+                                                widget.teacherImage),
                                           ),
                                           SizeConfig.sW8,
                                           Column(
@@ -578,11 +589,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               CustomText(
-                                                descriptionViewModel
-                                                        .courseDetailResModel
-                                                        .data!
-                                                        .teacher!
-                                                        .name!,
+                                               widget.teacherName,
                                                 fontWeight: FontWeight.w700,
                                                 fontSize: 15.sp,
                                                 color: AppColors.black,
@@ -707,6 +714,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                               ),
                             ),
                           ),
+
+                          /// COURSE CONTENT DETAILS
                           SizeConfig.sH25,
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 20.w),

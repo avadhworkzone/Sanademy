@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:sanademy/networks/api_base_helper.dart';
 import 'package:sanademy/networks/api_keys.dart';
 import 'package:sanademy/networks/model/login_res_model.dart';
-import 'package:sanademy/networks/services/apiService/sign_in_service.dart';
+import 'package:sanademy/networks/services/apiService/sign_in_api_service.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';

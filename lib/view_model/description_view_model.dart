@@ -36,18 +36,13 @@ class DescriptionViewModel extends GetxController {
    onTouch.value = true;
 
  }
-  @override
-  void onInit() {
-    super.onInit();
-    // Initialize with a default video ID, replace with a valid ID if necessary
-    youtubePlayerController = YoutubePlayerController(
-      initialVideoId: '',
-      flags: const YoutubePlayerFlags(isLive: true,autoPlay: false,),
-    ).obs;
-  }
 
-  void youTubPlayer() {
-    final videoUrl = courseDetailResModel.data?.videoUrl ?? '';
+
+  void youTubPlayer(String videosUrl) {
+    Future.delayed(const Duration(seconds: 2), () {
+      isLoader.value = false;
+    });
+    final videoUrl = videosUrl;
     final videoId = YoutubePlayer.convertUrlToId(videoUrl);
     if (videoId != null) {
       youtubePlayerController?.value = YoutubePlayerController(
@@ -59,13 +54,6 @@ class DescriptionViewModel extends GetxController {
     }
   }
 
-
-  @override
-  void dispose() {
-    videoPlayerController.dispose();
-    youtubePlayerController?.value.dispose();
-    super.dispose();
-  }
 
   Future<void> courseDetailViewModel({
     required String courseId,

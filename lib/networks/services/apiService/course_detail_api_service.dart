@@ -5,7 +5,6 @@ import 'package:sanademy/networks/response_model.dart';
 import 'package:sanademy/utils/app_utils.dart';
 
 class CourseDetailApiService {
-
   Future<ResponseModel?> courseDetailRepo({required Map<String, dynamic> mapData}) async {
     final response = await ApiBaseHelper().postHTTP(
       ApiUrls.courseDetail,
@@ -29,6 +28,4 @@ class CourseDetailApiService {
     );
     return response;
   }
-
-
 }

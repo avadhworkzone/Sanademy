@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/commonWidget/network_assets.dart';
-import 'package:sanademy/networks/model/home_res_model.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/local_assets.dart';
@@ -11,10 +10,22 @@ import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view_model/home_screen_view_model.dart';
 
 class CommonContainerWidget extends StatefulWidget {
-  const CommonContainerWidget({super.key, required this.listData, required this.color});
+  const CommonContainerWidget(
+      {super.key,
+      required this.color,
+      required this.title,
+      required this.numberOfLecture,
+      required this.hours,
+      required this.minutes, required this.teacherImage, required this.teacherName});
 
-  final Courses listData;
+  final String title;
+  final String numberOfLecture;
+  final String hours;
+  final String minutes;
+  final String teacherImage;
+  final String teacherName;
   final List<Color> color;
+
   @override
   State<CommonContainerWidget> createState() => _CommonContainerWidgetState();
 }
@@ -29,13 +40,12 @@ class _CommonContainerWidgetState extends State<CommonContainerWidget> {
       children: [
         Directionality(
           textDirection: TextDirection.ltr,
-          child:
-          Container(
+          child: Container(
             width: Get.width,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.r),
                 gradient: LinearGradient(colors: widget.color),
-                image:  const DecorationImage(
+                image: const DecorationImage(
                     image: AssetImage(AppImageAssets.recommendedBgImg),
                     fit: BoxFit.cover)),
             child: Padding(
@@ -51,7 +61,7 @@ class _CommonContainerWidgetState extends State<CommonContainerWidget> {
                         Padding(
                           padding: EdgeInsets.only(right: 80.w),
                           child: CustomText(
-                            widget.listData.title ?? '',
+                            widget.title ?? '',
                             fontSize: 20.sp,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
@@ -61,14 +71,14 @@ class _CommonContainerWidgetState extends State<CommonContainerWidget> {
                         ),
                         SizeConfig.sH8,
                         CustomText(
-                          '${widget.listData.numberOfLecture} Lectures',
+                          '${widget.numberOfLecture} Lectures',
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
                           color: AppColors.black0E,
                         ),
                         SizeConfig.sH4,
                         CustomText(
-                          '${widget.listData.hours} hours ${widget.listData.minutes} minutes',
+                          '${widget.hours} hours ${widget.minutes} minutes',
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
                           color: AppColors.black0E,
@@ -94,8 +104,8 @@ class _CommonContainerWidgetState extends State<CommonContainerWidget> {
                                   ),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(35),
-                                    child:  NetWorkOcToAssets(
-                                      imgUrl:widget.listData.teacher!.image!,
+                                    child: NetWorkOcToAssets(
+                                      imgUrl: widget.teacherImage!,
                                       boxFit: BoxFit.contain,
                                     ),
                                   ),
@@ -113,7 +123,7 @@ class _CommonContainerWidgetState extends State<CommonContainerWidget> {
                                       ),
                                       SizeConfig.sH3,
                                       CustomText(
-                                        widget.listData.teacher!.name!,
+                                        widget.teacherName!,
                                         fontWeight: FontWeight.w700,
                                         fontSize: 12.sp,
                                         color: AppColors.black0E,
