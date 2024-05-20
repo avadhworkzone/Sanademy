@@ -1,1 +1,1 @@
-enum ResponseStatus { INITIAL, Error, Completed }
+enum ResponseStatus { INITIAL, Error, Completed, Loading }

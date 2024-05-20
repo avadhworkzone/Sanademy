@@ -15,6 +15,7 @@ class HomeScreenViewModel extends GetxController {
   RxList<Categories> categoriesData = <Categories>[].obs;
   RxList<Banners> bannerData = <Banners>[].obs;
   RxList<Courses> courses = <Courses>[].obs;
+  RxString userImage = ''.obs;
   Rx<ResponseStatus> responseStatus = ResponseStatus.INITIAL.obs;
   HomeResModel homeResModel = HomeResModel();
 
@@ -29,6 +30,7 @@ class HomeScreenViewModel extends GetxController {
           categoriesData.value = homeResModel.data!.categories!;
           bannerData.value = homeResModel.data!.banners!;
           courses.value = homeResModel.data!.courses!;
+          userImage.value = homeResModel.data?.user?.image ?? '';
           responseStatus.value = ResponseStatus.Completed;
         }else{
           showErrorSnackBar('', homeResModel.message ?? 'Error');
@@ -38,6 +40,10 @@ class HomeScreenViewModel extends GetxController {
          showErrorSnackBar('', homeResModel.message ?? 'Error');responseStatus.value = ResponseStatus.Error;
       }
     }
+  }
+
+  void updateUserImage(String newImageUrl) {
+    userImage.value = newImageUrl;
   }
 
   Rx<ResponseStatus> categoryWiseCourseResponseStatus = ResponseStatus.INITIAL.obs;

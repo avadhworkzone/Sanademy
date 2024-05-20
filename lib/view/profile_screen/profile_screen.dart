@@ -27,8 +27,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  ProfileScreenViewModel profileScreenViewModel =
-  Get.find<ProfileScreenViewModel>();
+  ProfileScreenViewModel profileScreenViewModel = Get.put(ProfileScreenViewModel());
 
   @override
   void initState() {

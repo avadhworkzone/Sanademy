@@ -14,11 +14,20 @@ import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/auth/sign_up_screen.dart';
 import 'package:sanademy/view/dialog/payment_option_dialog.dart';
 import 'package:sanademy/view_model/description_view_model.dart';
-import 'package:video_player/video_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class DescriptionScreen extends StatefulWidget {
-  const DescriptionScreen({super.key, required this.courseId, required this.description, required this.requirements, required this.whatWillYouLearn, required this.whoThisCourseIsFor, required this.teacherImage, required this.teacherName, required this.videoUrl, required this.instructorDetail});
+  const DescriptionScreen(
+      {super.key,
+      required this.courseId,
+      required this.description,
+      required this.requirements,
+      required this.whatWillYouLearn,
+      required this.whoThisCourseIsFor,
+      required this.teacherImage,
+      required this.teacherName,
+      required this.videoUrl,
+      required this.instructorDetail});
 
   final String courseId;
   final String description;
@@ -37,7 +46,6 @@ class DescriptionScreen extends StatefulWidget {
 class _DescriptionScreenState extends State<DescriptionScreen> {
   DescriptionViewModel descriptionViewModel = Get.put(DescriptionViewModel());
 
-
   @override
   void initState() {
     descriptionApiCall();
@@ -49,10 +57,14 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
     // descriptionViewModel.videoPlayer();
     descriptionViewModel.youtubePlayerController = YoutubePlayerController(
       initialVideoId: '',
-      flags: const YoutubePlayerFlags(isLive: true,autoPlay: false,),
+      flags: const YoutubePlayerFlags(
+        isLive: true,
+        autoPlay: false,
+      ),
     ).obs;
     descriptionViewModel.youTubPlayer(widget.videoUrl);
   }
+
   @override
   void dispose() {
     // descriptionViewModel.videoPlayerController.dispose();
@@ -85,100 +97,31 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                         imgColor: AppColors.primaryColor,
                                       )),
                                 )
-                              : Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  SizedBox(
-                                    height: Get.width * 0.7,
-                                    width: Get.width,
-                                    child: YoutubePlayerBuilder(
-                                      player: YoutubePlayer(
-                                        controller: descriptionViewModel
-                                            .youtubePlayerController!.value,
-                                        showVideoProgressIndicator: true,
-                                        progressIndicatorColor:
-                                            Colors.amber,
-                                        progressColors:
-                                            const ProgressBarColors(
-                                          playedColor: Colors.amber,
-                                          handleColor: Colors.amberAccent,
-                                        ),
-                                        onReady: () {
-                                          descriptionViewModel
-                                              .youtubePlayerController
-                                              ?.value
-                                              .addListener(() {
-                                            // Update the UI based on the YouTube player state
-                                            descriptionViewModel.onTouch
-                                                .value = descriptionViewModel
-                                                    .youtubePlayerController
-                                                    ?.value
-                                                    .value
-                                                    .isPlaying ??
-                                                false;
-                                          });
-                                        },
-                                      ),
-                                      builder: (context, player) => player,
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      descriptionViewModel.onTouch.value =
-                                          true;
-                                      if (descriptionViewModel
-                                              .youtubePlayerController
-                                              ?.value
-                                              .value
-                                              .isPlaying ??
-                                          false) {
-                                        descriptionViewModel
-                                            .youtubePlayerController?.value
-                                            .pause();
-                                      } else {
-                                        descriptionViewModel
-                                            .youtubePlayerController?.value
-                                            .play();
-                                      }
+                              : SizedBox(
+                                height: Get.width * 0.7,
+                                width: Get.width,
+                                child: YoutubePlayerBuilder(
+                                  player: YoutubePlayer(
+                                    controller: descriptionViewModel
+                                        .youtubePlayerController!.value,
+                                    showVideoProgressIndicator: true,
 
-                                      Future.delayed(
-                                        const Duration(seconds: 2),
-                                        () => descriptionViewModel
-                                            .onTouch.value = false,
-                                      );
-                                      setState(() {});
+                                    onReady: () {
+                                      descriptionViewModel.youtubePlayerController?.value.addListener(() {
+                                        descriptionViewModel.onTouch
+                                            .value = descriptionViewModel
+                                                .youtubePlayerController
+                                                ?.value
+                                                .value
+                                                .isPlaying ??
+                                            false;
+                                      });
                                     },
-                                    child: descriptionViewModel
-                                                .onTouch.value &&
-                                            (descriptionViewModel
-                                                    .youtubePlayerController
-                                                    ?.value
-                                                    .value
-                                                    .isPlaying ??
-                                                false)
-                                        ? const Icon(
-                                            Icons.pause_circle,
-                                            size: 50,
-                                            color: Colors.white,
-                                          )
-                                        : descriptionViewModel
-                                                    .onTouch.value &&
-                                                !(descriptionViewModel
-                                                        .youtubePlayerController
-                                                        ?.value
-                                                        .value
-                                                        .isPlaying ??
-                                                    true)
-                                            ? const Icon(
-                                                Icons.play_circle,
-                                                size: 50,
-                                                color: Colors.white,
-                                              )
-                                            : Container(),
-                                  )
-                                ],
+                                  ),
+                                  builder: (context, player) => player,
+                                ),
                               ),
-                           /*  AspectRatio(
+                          /*  AspectRatio(
                                   aspectRatio: descriptionViewModel
                                       .videoPlayerController.value.aspectRatio,
                                   child: Stack(
@@ -250,7 +193,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 10.w, vertical: 10.w),
                                 decoration: BoxDecoration(
-                                    color: AppColors.whiteF5.withOpacity(0.20),
+                                    color: AppColors.black.withOpacity(0.20),
                                     borderRadius: BorderRadius.circular(17)),
                                 child: const Icon(
                                   Icons.arrow_back,
@@ -449,8 +392,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                   ),
                                   children: [
                                     Html(
-                                      data:
-                                              widget.requirements ,
+                                      data: widget.requirements,
                                       shrinkWrap: true,
                                     )
                                   ]),
@@ -479,7 +421,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                       shrinkWrap: true,
                                     )
                                   ]
-                                /*List.generate(
+                                  /*List.generate(
                                       requirementsList.length,
                                       (index) => Align(
                                             alignment: Alignment.centerLeft,
@@ -590,7 +532,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               CustomText(
-                                               widget.teacherName,
+                                                widget.teacherName,
                                                 fontWeight: FontWeight.w700,
                                                 fontSize: 15.sp,
                                                 color: AppColors.black,
@@ -700,7 +642,10 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                                         ))
                                                   ]),
                                             ),
-                                           Html(data: widget.instructorDetail,shrinkWrap: true,),
+                                            Html(
+                                              data: widget.instructorDetail,
+                                              shrinkWrap: true,
+                                            ),
                                             SizeConfig.sH15,
                                           ],
                                         )

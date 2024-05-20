@@ -17,6 +17,7 @@ class BottomBar extends StatefulWidget {
 
 class _BottomBarState extends State<BottomBar> {
   BottomBarViewModel bottomBarViewModel = Get.put(BottomBarViewModel());
+
   @override
   Widget build(BuildContext context) {
     return Obx(

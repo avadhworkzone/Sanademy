@@ -15,7 +15,9 @@ import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/enum_utils.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
+import 'package:sanademy/view/bottombar/bottom_bar.dart';
 import 'package:sanademy/view/homeScreen/home_screen.dart';
+import 'package:sanademy/view_model/home_screen_view_model.dart';
 
 class ProfileScreenViewModel extends GetxController {
   Rx<TextEditingController> nameController = TextEditingController().obs;
@@ -23,13 +25,15 @@ class ProfileScreenViewModel extends GetxController {
   Rx<TextEditingController> phoneController = TextEditingController().obs;
   Rx<TextEditingController> addressController = TextEditingController().obs;
   final Rx<GlobalKey<FormState>> formKey = GlobalKey<FormState>().obs;
+  Rx<ResponseStatus> responseStatus = ResponseStatus.INITIAL.obs;
+   HomeScreenViewModel homeScreenViewModel = Get.find();
   Rx<DateTime> selectedDate = DateTime.now().obs;
   RxBool isValidate = false.obs;
-  Rx<ResponseStatus> responseStatus = ResponseStatus.INITIAL.obs;
   Rx<File> imgFile = File('').obs;
   RxString phoneCode = ''.obs;
   RxString countryCode = ''.obs;
   RxString newImage = ''.obs;
+
 
   /// DATE PICKER
   Future<void> selectDate(BuildContext context) async {
@@ -150,8 +154,9 @@ class ProfileScreenViewModel extends GetxController {
       if (updateProfileResModel.success!) {
         if (updateProfileResModel.data != null) {
           showSussesSnackBar('', updateProfileResModel.message ?? 'SUCCESS');
-          SharedPreferenceUtils.setImage(updateProfileResModel.data!.image.toString());
-          Get.to(const HomeScreen());
+          // SharedPreferenceUtils.setImage(updateProfileResModel.data!.image.toString());
+          homeScreenViewModel.updateUserImage(updateProfileResModel.data!.image.toString());
+          Get.to(const BottomBar());
         } else {
           showErrorSnackBar('', updateProfileResModel.message ?? 'ERROR');
         }
