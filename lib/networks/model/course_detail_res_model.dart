@@ -9,11 +9,11 @@ class CourseDetailResModel {
 
   CourseDetailResModel.fromJson(dynamic json) {
     success = json['success'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? CourseDetail.fromJson(json['data']) : null;
     message = json['message'];
   }
   bool? success;
-  Data? data;
+  CourseDetail? data;
   String? message;
 
   Map<String, dynamic> toJson() {
@@ -28,10 +28,10 @@ class CourseDetailResModel {
 
 }
 
-Data dataFromJson(String str) => Data.fromJson(json.decode(str));
-String dataToJson(Data data) => json.encode(data.toJson());
-class Data {
-  Data({
+CourseDetail dataFromJson(String str) => CourseDetail.fromJson(json.decode(str));
+String dataToJson(CourseDetail data) => json.encode(data.toJson());
+class CourseDetail {
+  CourseDetail({
       this.id, 
       this.categoryId, 
       this.teacherId, 
@@ -51,10 +51,9 @@ class Data {
       this.updatedAt, 
       this.teacher, 
       this.category, 
-      // this.courseContents,
-  });
+      this.courseContents,});
 
-  Data.fromJson(dynamic json) {
+  CourseDetail.fromJson(dynamic json) {
     id = json['id'];
     categoryId = json['category_id'];
     teacherId = json['teacher_id'];
@@ -74,12 +73,12 @@ class Data {
     updatedAt = json['updated_at'];
     teacher = json['teacher'] != null ? Teacher.fromJson(json['teacher']) : null;
     category = json['category'] != null ? Category.fromJson(json['category']) : null;
-    // if (json['course_contents'] != null) {
-    //   courseContents = [];
-    //   json['course_contents'].forEach((v) {
-    //     courseContents?.add(Dynamic.fromJson(v));
-    //   });
-    // }
+    if (json['course_contents'] != null) {
+      courseContents = [];
+      json['course_contents'].forEach((v) {
+        courseContents?.add(CourseContents.fromJson(v));
+      });
+    }
   }
   num? id;
   num? categoryId;
@@ -100,7 +99,7 @@ class Data {
   String? updatedAt;
   Teacher? teacher;
   Category? category;
-  // List<dynamic>? courseContents;
+  List<CourseContents>? courseContents;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -127,9 +126,56 @@ class Data {
     if (category != null) {
       map['category'] = category?.toJson();
     }
-    // if (courseContents != null) {
-    //   map['course_contents'] = courseContents?.map((v) => v.toJson()).toList();
-    // }
+    if (courseContents != null) {
+      map['course_contents'] = courseContents?.map((v) => v.toJson()).toList();
+    }
+    return map;
+  }
+
+}
+
+CourseContents courseContentsFromJson(String str) => CourseContents.fromJson(json.decode(str));
+String courseContentsToJson(CourseContents data) => json.encode(data.toJson());
+class CourseContents {
+  CourseContents({
+      this.id, 
+      this.courseId, 
+      this.title, 
+      this.numberOfLecture, 
+      this.minutes, 
+      this.description, 
+      this.createdAt, 
+      this.updatedAt,});
+
+  CourseContents.fromJson(dynamic json) {
+    id = json['id'];
+    courseId = json['course_id'];
+    title = json['title'];
+    numberOfLecture = json['number_of_lecture'];
+    minutes = json['minutes'];
+    description = json['description'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+  num? id;
+  num? courseId;
+  String? title;
+  String? numberOfLecture;
+  String? minutes;
+  String? description;
+  String? createdAt;
+  String? updatedAt;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = id;
+    map['course_id'] = courseId;
+    map['title'] = title;
+    map['number_of_lecture'] = numberOfLecture;
+    map['minutes'] = minutes;
+    map['description'] = description;
+    map['created_at'] = createdAt;
+    map['updated_at'] = updatedAt;
     return map;
   }
 

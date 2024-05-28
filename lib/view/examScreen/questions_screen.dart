@@ -12,6 +12,7 @@ import 'package:sanademy/utils/enum_utils.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/audio_wave_form.dart';
+import 'package:sanademy/view/examScreen/congratulations_screen.dart';
 import 'package:sanademy/view_model/question_answer_view_model.dart';
 
 class QuestionsScreen extends StatefulWidget {
@@ -66,9 +67,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
       if (questionsAnswerViewModel.responseStatus.value ==
               ResponseStatus.Loading ||
           questionsAnswerViewModel.responseStatus.value ==
-              ResponseStatus.INITIAL) {
-        return const Center(child: CircularProgressIndicator());
-      }
+              ResponseStatus.INITIAL) {}
       if (questionsAnswerViewModel.responseStatus.value ==
           ResponseStatus.Error) {
         return const Center(child: CustomText("Something went wrong"));
@@ -78,119 +77,122 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
         child: Material(
           child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.w),
-              child: PageView(
-                controller: pageController,
-                children: List.generate(questionsDetail.length, (index) {
-                  final question = questionsDetail[index];
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+              child:Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomBtn(
+                    onTap: () {
+                      timer1?.cancel();
+                      Get.to(() => const CongratulationsScreen());
+                    },
+                    title: AppStrings.finishExam,
+                    bgColor: AppColors.white,
+                    borderColor: AppColors.primaryColor,
+                    textColor: AppColors.primaryColor,
+                    radius: 10,
+                  ),
+                  SizeConfig.sH15,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      CustomBtn(
-                        onTap: () {
-                          // timer1?.cancel();
-                          // Get.to(() => const CongratulationsScreen());
-                        },
-                        title: AppStrings.finishExam,
-                        bgColor: AppColors.white,
-                        borderColor: AppColors.primaryColor,
-                        textColor: AppColors.primaryColor,
-                        radius: 10,
+                      CustomText(
+                        widget.examTitle ?? '',
+                        color: AppColors.black0E,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w700,
                       ),
-                      SizeConfig.sH15,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CustomText(
-                            widget.examTitle ?? '',
-                            color: AppColors.black0E,
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w700,
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 20.w, vertical: 10.w),
-                            decoration: BoxDecoration(
-                                color: AppColors.color8B.withOpacity(0.10),
-                                borderRadius: BorderRadius.circular(5.w)),
-                            child: Row(
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.w, vertical: 10.w),
+                        decoration: BoxDecoration(
+                            color: AppColors.color8B.withOpacity(0.10),
+                            borderRadius: BorderRadius.circular(5.w)),
+                        child: Row(
+                          children: [
+                            const LocalAssets(
+                                imagePath: AppImageAssets.clockIcon),
+                            SizeConfig.sW5,
+                            CustomText(
+                              formatDuration(duration.inSeconds),
+                              color: AppColors.primaryColor,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  SizeConfig.sH25,
+                  Expanded(
+                    child: PageView(
+                      controller: pageController,
+                      children: List.generate(questionsDetail.length, (index) {
+                        final question = questionsDetail[index];
+                        return Column(
+                          children: [
+                            Row(
                               children: [
-                                const LocalAssets(
-                                    imagePath: AppImageAssets.clockIcon),
-                                SizeConfig.sW5,
-                                CustomText(
-                                  formatDuration(duration.inSeconds),
-                                  color: AppColors.primaryColor,
-                                  fontWeight: FontWeight.w700,
+                                InkWell(
+                                  borderRadius: BorderRadius.circular(18.r),
+                                  onTap: () {
+                                    if (index > 0) {
+                                      pageController.previousPage(
+                                          duration: const Duration(milliseconds: 500),
+                                          curve: Curves.ease,);
+                                    }
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 13.w, vertical: 13.w),
+                                    decoration: BoxDecoration(
+                                        color: AppColors.primaryColor,
+                                        borderRadius: BorderRadius.circular(18.r)),
+                                    child: const Icon(
+                                      Icons.arrow_back,
+                                      color: AppColors.white,
+                                    ),
+                                  ),
+                                ),
+                                SizeConfig.sW15,
+                                Expanded(
+                                  child: CustomBtn(
+                                    onTap: () {},
+                                    title:
+                                    'Question ${index + 1} of ${questionsDetail.length}',
+                                    textColor: AppColors.primaryColor,
+                                    bgColor: AppColors.greyFD,
+                                    borderColor: AppColors.primaryColor,
+                                    radius: 10,
+                                  ),
+                                ),
+                                SizeConfig.sW15,
+                                InkWell(
+                                  borderRadius: BorderRadius.circular(18.r),
+                                  onTap: () {
+                                    if (questionsDetail.length - 1 > index) {
+                                      pageController.nextPage(
+                                          duration: const Duration(milliseconds: 500),
+                                          curve: Curves.ease);
+                                    }
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 13.w, vertical: 13.w),
+                                    decoration: BoxDecoration(
+                                        color: AppColors.primaryColor,
+                                        borderRadius: BorderRadius.circular(18.r)),
+                                    child: const Icon(
+                                      Icons.arrow_forward,
+                                      color: AppColors.white,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
-                          )
-                        ],
-                      ),
-                      SizeConfig.sH25,
-                      Row(
-                        children: [
-                          InkWell(
-                            borderRadius: BorderRadius.circular(18.r),
-                            onTap: () {
-                              if (index > 0) {
-                                pageController.previousPage(
-                                    duration: const Duration(milliseconds: 500),
-                                    curve: Curves.ease);
-                              }
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 13.w, vertical: 13.w),
-                              decoration: BoxDecoration(
-                                  color: AppColors.primaryColor,
-                                  borderRadius: BorderRadius.circular(18.r)),
-                              child: const Icon(
-                                Icons.arrow_back,
-                                color: AppColors.white,
-                              ),
-                            ),
-                          ),
-                          SizeConfig.sW15,
-                          Expanded(
-                            child: CustomBtn(
-                              onTap: () {},
-                              title:
-                                  'Question ${index + 1} of ${questionsDetail.length}',
-                              textColor: AppColors.primaryColor,
-                              bgColor: AppColors.greyFD,
-                              borderColor: AppColors.primaryColor,
-                              radius: 10,
-                            ),
-                          ),
-                          SizeConfig.sW15,
-                          InkWell(
-                            borderRadius: BorderRadius.circular(18.r),
-                            onTap: () {
-                              if (questionsDetail.length - 1 > index) {
-                                pageController.nextPage(
-                                    duration: const Duration(milliseconds: 500),
-                                    curve: Curves.ease);
-                              }
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 13.w, vertical: 13.w),
-                              decoration: BoxDecoration(
-                                  color: AppColors.primaryColor,
-                                  borderRadius: BorderRadius.circular(18.r)),
-                              child: const Icon(
-                                Icons.arrow_forward,
-                                color: AppColors.white,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizeConfig.sH25,
-                      question.type == 'audio'
-                          ? const AudioWaveForm()
-                          : Column(
+                            SizeConfig.sH25,
+                            question.type == 'audio'
+                                ? const AudioWaveForm()
+                                : Column(
                               children: [
                                 CustomText(
                                   'Q${index + 1}. ${question.title}',
@@ -204,17 +206,17 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                   itemBuilder: (context, optionIndex) {
                                     final option = question
                                         .toJson()['option_${optionIndex + 1}'];
-
+                    
                                     bool isSelected = false;
-
+                    
                                     final containIndex = selectedAnswerList
                                         .indexWhere((element) =>
-                                            element['questionId'] ==
-                                            question.id);
-
+                                    element['questionId'] ==
+                                        question.id);
+                    
                                     if (containIndex > -1) {
                                       if (selectedAnswerList[containIndex]
-                                              ['option'] ==
+                                      ['option'] ==
                                           option) {
                                         isSelected = true;
                                       }
@@ -228,12 +230,12 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                           });
                                         } else {
                                           selectedAnswerList[containIndex]
-                                              ['option'] = option;
+                                          ['option'] = option;
                                         }
                                       },
                                       child: Container(
                                         padding: EdgeInsets.symmetric(
-                                            horizontal: 10.w, vertical: 10.w),
+                                            horizontal: 10.w, vertical: 15.w),
                                         margin: EdgeInsets.symmetric(
                                             vertical: 10.w),
                                         decoration: BoxDecoration(
@@ -243,7 +245,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                                     : AppColors.greyEE),
                                             color: AppColors.greyFD,
                                             borderRadius:
-                                                BorderRadius.circular(10)),
+                                            BorderRadius.circular(10)),
                                         child: Row(
                                           children: [
                                             Icon(
@@ -270,61 +272,65 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                 ),
                               ],
                             ),
-                      question.type == 'audio'
-                          ? SizeConfig.sH30
-                          : SizeConfig.sH10,
-                      Row(
-                        children: [
-                          Expanded(
-                            child: CustomBtn(
-                              onTap: () {
-                                final containIndex =
-                                    selectedAnswerList.indexWhere((element) =>
-                                        element['questionId'] == question.id);
-                                if (containIndex == -1) {
-                                  selectedAnswerList.add({
-                                    "questionId": question.id,
-                                    "option": "",
-                                  });
-                                }
-                                if (questionsDetail.length - 1 > index) {
-                                  pageController.nextPage(
-                                      duration:
-                                          const Duration(milliseconds: 500),
-                                      curve: Curves.ease);
-                                }
-                              },
-                              title: AppStrings.skip,
-                              bgColor: AppColors.white,
-                              borderColor: AppColors.primaryColor,
-                              textColor: AppColors.primaryColor,
-                              radius: 10,
+                            question.type == 'audio'
+                                ? SizeConfig.sH30
+                                : SizeConfig.sH10,
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: CustomBtn(
+                                    onTap: () {
+                                      final containIndex =
+                                      selectedAnswerList.indexWhere((element) =>
+                                      element['questionId'] == question.id);
+                                      if (containIndex == -1) {
+                                        selectedAnswerList.add({
+                                          "questionId": question.id,
+                                          "option": "",
+                                        });
+                                      }
+                                      if (questionsDetail.length - 1 > index) {
+                                        pageController.nextPage(
+                                            duration:
+                                            const Duration(milliseconds: 500),
+                                            curve: Curves.ease);
+                                      }
+                                    },
+                                    title: AppStrings.skip,
+                                    bgColor: AppColors.white,
+                                    borderColor: AppColors.primaryColor,
+                                    textColor: AppColors.primaryColor,
+                                    radius: 10,
+                                  ),
+                                ),
+                                SizeConfig.sW15,
+                                Expanded(
+                                  child: CustomBtn(
+                                    onTap: () {
+                                      if (questionsDetail.length - 1 > index) {
+                                        pageController.nextPage(
+                                            duration:
+                                            const Duration(milliseconds: 500),
+                                            curve: Curves.ease);
+                                      }
+                                    },
+                                    title: AppStrings.next,
+                                    bgColor: AppColors.primaryColor,
+                                    borderColor: AppColors.white,
+                                    textColor: AppColors.white,
+                                    radius: 10,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                          SizeConfig.sW15,
-                          Expanded(
-                            child: CustomBtn(
-                              onTap: () {
-                                if (questionsDetail.length - 1 > index) {
-                                  pageController.nextPage(
-                                      duration:
-                                          const Duration(milliseconds: 500),
-                                      curve: Curves.ease);
-                                }
-                              },
-                              title: AppStrings.next,
-                              bgColor: AppColors.primaryColor,
-                              borderColor: AppColors.white,
-                              textColor: AppColors.white,
-                              radius: 10,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  );
-                }),
-              )),
+                          ],
+                        );
+                      }),
+                    ),
+                  )
+                ],
+              ),
+          ),
         ),
       );
     });

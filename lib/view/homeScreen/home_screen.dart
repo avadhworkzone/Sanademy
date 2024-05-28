@@ -16,7 +16,6 @@ import 'package:sanademy/view/homeScreen/widget/home_slider_widget.dart';
 import 'package:sanademy/view/menu_screen/menu_screen.dart';
 import 'package:sanademy/view/profile_screen/profile_screen.dart';
 import 'package:sanademy/view_model/home_screen_view_model.dart';
-import 'package:sanademy/view_model/profile_screen_view_model.dart';
 
 /*
 class HomeScreen extends StatefulWidget {
@@ -196,8 +195,34 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            actionWidget: Obx(
-              () => (homeScreenViewModel.responseStatus.value ==
+            actionWidget: Obx(() => GestureDetector(
+                      onTap: () {
+                        SharedPreferenceUtils.getIsLogin() == true
+                            ? Get.to(const ProfileScreen())
+                            : Get.to(() => const SignUpScreen());
+                      },
+                      child: Container(
+                          height: 50.h,
+                          width: 50.w,
+                          margin: EdgeInsets.all(7.w),
+                          decoration: BoxDecoration(
+                              color: AppColors.white.withOpacity(0.20),
+                              borderRadius: BorderRadius.circular(15)),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child:
+                                (homeScreenViewModel.userImage.value.isNotEmpty)
+                                    ? Image(
+                                        image:
+                                            // NetworkImage(SharedPreferenceUtils.getImage()),
+                                            NetworkImage(homeScreenViewModel
+                                                .userImage.value),
+                                        fit: BoxFit.cover,
+                                      )
+                                    : const LocalAssets(
+                                        imagePath: AppImageAssets.profileImage),
+                          )),
+                    ) /*(homeScreenViewModel.responseStatus.value ==
                       ResponseStatus.Completed)
                   ? GestureDetector(
                       onTap: () {
@@ -225,8 +250,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     imagePath: AppImageAssets.profileImage),
                           )),
                     )
-                  : const Material(),
-            )),
+                  : const Material(),*/
+                )),
         body: Obx(
           () => homeScreenViewModel.responseStatus.value == ResponseStatus.Error
               ? CustomText(

@@ -17,27 +17,39 @@ import 'package:sanademy/view_model/description_view_model.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class DescriptionScreen extends StatefulWidget {
-  const DescriptionScreen(
-      {super.key,
-      required this.courseId,
-      required this.description,
-      required this.requirements,
-      required this.whatWillYouLearn,
-      required this.whoThisCourseIsFor,
-      required this.teacherImage,
-      required this.teacherName,
-      required this.videoUrl,
-      required this.instructorDetail});
+  const DescriptionScreen({
+    super.key,
+    required this.courseId,
+    required this.videoUrl,
+    // required this.description,
+    // required this.requirements,
+    // required this.whatWillYouLearn,
+    // required this.whoThisCourseIsFor,
+    // required this.teacherImage,
+    // required this.teacherName,
+    // required this.instructorDetail,
+    // required this.courseContentTitle,
+    // required this.courseContentMinutes,
+    // required this.courseContentLecture,
+    // required this.courseContentDescription,
+    // required this.courseContents,
+  });
 
   final String courseId;
-  final String description;
-  final String requirements;
-  final String whatWillYouLearn;
-  final String whoThisCourseIsFor;
-  final String teacherImage;
-  final String teacherName;
-  final String instructorDetail;
   final String videoUrl;
+
+  // final String description;
+  // final String requirements;
+  // final String whatWillYouLearn;
+  // final String whoThisCourseIsFor;
+  // final String teacherImage;
+  // final String teacherName;
+  // final String instructorDetail;
+  // final List<CourseContents> courseContents;
+  // final String courseContentTitle;
+  // final String courseContentMinutes;
+  // final String courseContentLecture;
+  // final String courseContentDescription;
 
   @override
   State<DescriptionScreen> createState() => _DescriptionScreenState();
@@ -53,8 +65,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   }
 
   descriptionApiCall() async {
-    await descriptionViewModel.courseDetailViewModel(courseId: widget.courseId);
     // descriptionViewModel.videoPlayer();
+    descriptionViewModel.courseDetailViewModel(courseId: widget.courseId);
     descriptionViewModel.youtubePlayerController = YoutubePlayerController(
       initialVideoId: '',
       flags: const YoutubePlayerFlags(
@@ -62,7 +74,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
         autoPlay: false,
       ),
     ).obs;
-    descriptionViewModel.youTubPlayer(widget.videoUrl);
+    descriptionViewModel.youTubPlayer(widget
+        .videoUrl /*descriptionViewModel.courseDetailResModel.data!.videoUrl ?? ''*/);
   }
 
   @override
@@ -76,10 +89,11 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Material(
-        child: SingleChildScrollView(
-          child: Obx(() => descriptionViewModel.responseStatus.value ==
-                  ResponseStatus.Completed
-              ? Column(
+        child: Obx(() => descriptionViewModel
+                    .courseDetailResponseStatus.value ==
+                ResponseStatus.Completed
+            ? SingleChildScrollView(
+                child: Column(
                   children: [
                     /// VIDEO VIEW
                     Stack(
@@ -98,29 +112,30 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                       )),
                                 )
                               : SizedBox(
-                                height: Get.width * 0.7,
-                                width: Get.width,
-                                child: YoutubePlayerBuilder(
-                                  player: YoutubePlayer(
-                                    controller: descriptionViewModel
-                                        .youtubePlayerController!.value,
-                                    showVideoProgressIndicator: true,
-
-                                    onReady: () {
-                                      descriptionViewModel.youtubePlayerController?.value.addListener(() {
-                                        descriptionViewModel.onTouch
-                                            .value = descriptionViewModel
-                                                .youtubePlayerController
-                                                ?.value
-                                                .value
-                                                .isPlaying ??
-                                            false;
-                                      });
-                                    },
+                                  height: Get.width * 0.7,
+                                  width: Get.width,
+                                  child: YoutubePlayerBuilder(
+                                    player: YoutubePlayer(
+                                      controller: descriptionViewModel
+                                          .youtubePlayerController!.value,
+                                      showVideoProgressIndicator: true,
+                                      onReady: () {
+                                        descriptionViewModel
+                                            .youtubePlayerController?.value
+                                            .addListener(() {
+                                          descriptionViewModel.onTouch.value =
+                                              descriptionViewModel
+                                                      .youtubePlayerController
+                                                      ?.value
+                                                      .value
+                                                      .isPlaying ??
+                                                  false;
+                                        });
+                                      },
+                                    ),
+                                    builder: (context, player) => player,
                                   ),
-                                  builder: (context, player) => player,
                                 ),
-                              ),
                           /*  AspectRatio(
                                   aspectRatio: descriptionViewModel
                                       .videoPlayerController.value.aspectRatio,
@@ -246,7 +261,9 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 10.w),
                             child: Html(
-                              data: widget.description,
+                              data: descriptionViewModel
+                                      .courseDetailResModel.data!.description ??
+                                  '',
                               shrinkWrap: true,
                             ),
                           ),
@@ -392,7 +409,11 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                   ),
                                   children: [
                                     Html(
-                                      data: widget.requirements,
+                                      data: descriptionViewModel
+                                              .courseDetailResModel
+                                              .data!
+                                              .requirements ??
+                                          '',
                                       shrinkWrap: true,
                                     )
                                   ]),
@@ -417,44 +438,48 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                   ),
                                   children: [
                                     Html(
-                                      data: widget.whatWillYouLearn,
+                                      data: descriptionViewModel
+                                              .courseDetailResModel
+                                              .data!
+                                              .whatWillYouLearn ??
+                                          '',
                                       shrinkWrap: true,
                                     )
                                   ]
-                                  /*List.generate(
-                                      requirementsList.length,
-                                      (index) => Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: Column(
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 20.w),
-                                                  child: Row(
-                                                    children: [
-                                                      CustomText(
-                                                        "•",
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontSize: 20.sp,
-                                                        color:
-                                                            AppColors.black0E,
-                                                      ),
-                                                      SizeConfig.sW10,
-                                                      CustomText(
-                                                        requirementsList[index],
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontSize: 14.sp,
-                                                        color:
-                                                            AppColors.black0E,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ))*/
+                                  // List.generate(
+                                  //     requirementsList.length,
+                                  //     (index) => Align(
+                                  //           alignment: Alignment.centerLeft,
+                                  //           child: Column(
+                                  //             children: [
+                                  //               Padding(
+                                  //                 padding: EdgeInsets.only(
+                                  //                     left: 20.w),
+                                  //                 child: Row(
+                                  //                   children: [
+                                  //                     CustomText(
+                                  //                       "•",
+                                  //                       fontWeight:
+                                  //                           FontWeight.w400,
+                                  //                       fontSize: 20.sp,
+                                  //                       color:
+                                  //                           AppColors.black0E,
+                                  //                     ),
+                                  //                     SizeConfig.sW10,
+                                  //                     CustomText(
+                                  //                       requirementsList[index],
+                                  //                       fontWeight:
+                                  //                           FontWeight.w400,
+                                  //                       fontSize: 14.sp,
+                                  //                       color:
+                                  //                           AppColors.black0E,
+                                  //                     ),
+                                  //                   ],
+                                  //                 ),
+                                  //               ),
+                                  //             ],
+                                  //           ),
+                                  //         ))
                                   ),
                             ),
                           ),
@@ -477,7 +502,11 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                   ),
                                   children: [
                                     Html(
-                                      data: widget.whoThisCourseIsFor,
+                                      data: descriptionViewModel
+                                              .courseDetailResModel
+                                              .data!
+                                              .whoThisCourseIsFor ??
+                                          '',
                                       shrinkWrap: true,
                                     )
                                   ]),
@@ -524,7 +553,12 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                           CircleAvatar(
                                             radius: 40.r,
                                             backgroundImage: NetworkImage(
-                                                widget.teacherImage),
+                                                descriptionViewModel
+                                                        .courseDetailResModel
+                                                        .data!
+                                                        .teacher!
+                                                        .image ??
+                                                    ''),
                                           ),
                                           SizeConfig.sW8,
                                           Column(
@@ -532,7 +566,12 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               CustomText(
-                                                widget.teacherName,
+                                                descriptionViewModel
+                                                        .courseDetailResModel
+                                                        .data!
+                                                        .teacher!
+                                                        .name ??
+                                                    '',
                                                 fontWeight: FontWeight.w700,
                                                 fontSize: 15.sp,
                                                 color: AppColors.black,
@@ -643,7 +682,11 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                                   ]),
                                             ),
                                             Html(
-                                              data: widget.instructorDetail,
+                                              data: descriptionViewModel
+                                                      .courseDetailResModel
+                                                      .data!
+                                                      .instructor ??
+                                                  '',
                                               shrinkWrap: true,
                                             ),
                                             SizeConfig.sH15,
@@ -683,7 +726,11 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                               ),
                               child: ListView.builder(
                                 shrinkWrap: true,
-                                itemCount: courseList.length,
+                                itemCount: descriptionViewModel
+                                    .courseDetailResModel
+                                    .data!
+                                    .courseContents!
+                                    .length,
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
                                   return Padding(
@@ -706,15 +753,20 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     CustomText(
-                                                      courseList[index].title,
+                                                      descriptionViewModel
+                                                              .courseDetailResModel
+                                                              .data!
+                                                              .courseContents![
+                                                                  index]
+                                                              .title ??
+                                                          '',
                                                       fontWeight:
                                                           FontWeight.w700,
                                                       fontSize: 15,
                                                       color: AppColors.black,
                                                     ),
                                                     CustomText(
-                                                      courseList[index]
-                                                          .duration,
+                                                      "${descriptionViewModel.courseDetailResModel.data!.courseContents![index].numberOfLecture ?? ''} Lectures • ${descriptionViewModel.courseDetailResModel.data!.courseContents![index].minutes ?? ''} mins",
                                                       fontWeight:
                                                           FontWeight.w400,
                                                       fontSize: 15,
@@ -725,28 +777,24 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                               ],
                                             ),
                                             children: [
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  CustomText(
-                                                    courseList[index].subTitle,
-                                                    fontSize: 14.sp,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: AppColors.black0E,
-                                                  ),
-                                                  CustomText(
-                                                    '• ${courseList[index].description}',
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 14.sp,
-                                                    color: AppColors.black0E,
-                                                  )
-                                                ],
+                                              Html(
+                                                data: descriptionViewModel
+                                                    .courseDetailResModel
+                                                    .data!
+                                                    .courseContents![index]
+                                                    .description ?? '',
+                                                shrinkWrap: true,
                                               )
                                             ],
                                           ),
                                         ),
-                                        if (index != courseList.length - 1)
+                                        if (index !=
+                                            descriptionViewModel
+                                                    .courseDetailResModel
+                                                    .data!
+                                                    .courseContents!
+                                                    .length -
+                                                1)
                                           Divider(
                                             color: AppColors.black0E
                                                 .withOpacity(0.2),
@@ -762,40 +810,12 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                       ),
                     )
                   ],
-                )
-              : const Material()),
-        ),
+                ),
+              )
+            : const Material()),
       ),
     );
   }
-
-  List requirementsList = [
-    'requirements1',
-    'requirements2',
-    'requirements3',
-    'requirements4',
-  ];
-
-  final List<CourseData> courseList = [
-    CourseData(
-      title: 'Introduction to Mathematics',
-      duration: '3 Lectures • 20 mins',
-      subTitle: 'What you’ll learn',
-      description: 'Lorem ipsum dolor sit amet consectetur. ',
-    ),
-    CourseData(
-      title: 'Introduction to Mathematics',
-      duration: '3 Lectures • 20 mins',
-      subTitle: 'What you’ll learn',
-      description: 'Lorem ipsum dolor sit amet consectetur.',
-    ),
-    CourseData(
-      title: 'Introduction to Mathematics',
-      duration: '3 Lectures • 20 mins',
-      subTitle: 'What you’ll learn',
-      description: 'Lorem ipsum dolor sit amet consectetur. ',
-    ),
-  ];
 }
 
 class CourseData {

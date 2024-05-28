@@ -10,6 +10,8 @@ import 'package:sanademy/utils/app_class.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_theme.dart';
+import 'package:sanademy/view/download_pdf_demo.dart';
+import 'package:sanademy/view/general/no_internet_screen.dart';
 import 'package:sanademy/view/splashScreen/splash_screen.dart';
 
 Future<void> main() async {
@@ -75,13 +77,12 @@ class _MyAppState extends State<MyApp> {
                             child: getMainAppViewBuilder(context, widget)),
                       ),
                     ),
-                home: SplashScreen()
-                /* Obx(() => connectivityViewModel.isOnline != null
+                home: Obx(() => connectivityViewModel.isOnline != null
                   ? connectivityViewModel.isOnline!.value
                       ? const SplashScreen()
                       // ? const BottomBar()
                       : const NoInterNetScreen()
-                  : const SizedBox()),*/
+                  : const SizedBox()),
                 ),
           );
         },

@@ -14,17 +14,17 @@ class DescriptionViewModel extends GetxController {
   RxBool onTouch = false.obs;
   RxBool isLoader = true.obs;
   RxBool isPaySuccessfully = false.obs;
-  CourseDetailResModel courseDetailResModel = CourseDetailResModel();
+
   Rx<ResponseStatus> responseStatus = ResponseStatus.INITIAL.obs;
   Rx<YoutubePlayerController>? youtubePlayerController;
 
- void videoPlayer()  {
+ void videoPlayer(String videoUrl)  {
    Future.delayed(const Duration(seconds: 2), () {
      isLoader.value = false;
    });
    videoPlayerController =   VideoPlayerController.networkUrl(
      Uri.parse(
-       courseDetailResModel.data!.videoUrl!
+         videoUrl
          // 'https://cdn.create.vista.com/api/media/medium/502694658/stock-video-dolly-out-shot-woman-short-red-hair-standing-blackboard-teaching?token='
      ),
      videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
@@ -36,7 +36,6 @@ class DescriptionViewModel extends GetxController {
    onTouch.value = true;
 
  }
-
 
   void youTubPlayer(String videosUrl) {
     Future.delayed(const Duration(seconds: 2), () {
@@ -54,7 +53,8 @@ class DescriptionViewModel extends GetxController {
     }
   }
 
-
+  CourseDetailResModel courseDetailResModel = CourseDetailResModel();
+  Rx<ResponseStatus> courseDetailResponseStatus = ResponseStatus.INITIAL.obs;
   Future<void> courseDetailViewModel({
     required String courseId,
   }) async {
@@ -62,20 +62,19 @@ class DescriptionViewModel extends GetxController {
     Map<String, String> queryParams = {
       ApiKeys.courseId: courseId.toString(),
     };
-    final response =
-        await CourseDetailApiService().courseDetailRepo(mapData: queryParams);
+    final response = await CourseDetailApiService().courseDetailRepo(mapData: queryParams);
     if (checkStatusCode(response!.statusCode ?? 0)) {
       courseDetailResModel =
           courseDetailResModelFromJson(response.response.toString());
       if (courseDetailResModel.success!) {
         if (courseDetailResModel.data != null) {
-          responseStatus.value = ResponseStatus.Completed;
+          courseDetailResponseStatus.value = ResponseStatus.Completed;
         } else {
           showErrorSnackBar('', courseDetailResModel.message ?? 'Error');
         }
       } else {
         showErrorSnackBar('', courseDetailResModel.message ?? 'Error');
-        responseStatus.value = ResponseStatus.Error;
+        courseDetailResponseStatus.value = ResponseStatus.Error;
       }
     }
   }

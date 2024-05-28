@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/networks/api_base_helper.dart';
 import 'package:sanademy/networks/api_keys.dart';
+import 'package:sanademy/networks/model/course_detail_res_model.dart';
 import 'package:sanademy/networks/model/get_category_by_course_res_model.dart';
 import 'package:sanademy/networks/model/home_res_model.dart';
+import 'package:sanademy/networks/services/apiService/course_detail_api_service.dart';
 import 'package:sanademy/networks/services/apiService/get_course_by_category_api_service.dart';
 import 'package:sanademy/networks/services/apiService/home_data_api_service.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
@@ -12,6 +14,8 @@ import 'package:sanademy/utils/enum_utils.dart';
 
 class HomeScreenViewModel extends GetxController {
   Rx<TextEditingController> searchController = TextEditingController().obs;
+
+  /// Fetch Home Api Data
   RxList<Categories> categoriesData = <Categories>[].obs;
   RxList<Banners> bannerData = <Banners>[].obs;
   RxList<Courses> courses = <Courses>[].obs;
@@ -46,6 +50,36 @@ class HomeScreenViewModel extends GetxController {
     userImage.value = newImageUrl;
   }
 
+  /// Fetch Course Detail Data
+  CourseDetailResModel courseDetailResModel = CourseDetailResModel();
+  Rx<ResponseStatus> courseDetailResponseStatus = ResponseStatus.INITIAL.obs;
+  Future<void> courseDetailViewModel({
+    required String courseId,
+  }) async {
+    unFocus();
+    Map<String, String> queryParams = {
+      ApiKeys.courseId: courseId.toString(),
+    };
+    final response =
+    await CourseDetailApiService().courseDetailRepo(mapData: queryParams);
+    if (checkStatusCode(response!.statusCode ?? 0)) {
+      courseDetailResModel =
+          courseDetailResModelFromJson(response.response.toString());
+      if (courseDetailResModel.success!) {
+        if (courseDetailResModel.data != null) {
+
+          courseDetailResponseStatus.value = ResponseStatus.Completed;
+        } else {
+          showErrorSnackBar('', courseDetailResModel.message ?? 'Error');
+        }
+      } else {
+        showErrorSnackBar('', courseDetailResModel.message ?? 'Error');
+        courseDetailResponseStatus.value = ResponseStatus.Error;
+      }
+    }
+  }
+
+  /// Fetch Category Wise CourseData
   Rx<ResponseStatus> categoryWiseCourseResponseStatus = ResponseStatus.INITIAL.obs;
   RxList<CategoryWiseCourse> categoryWiseCourseList = <CategoryWiseCourse>[].obs;
 
@@ -74,5 +108,6 @@ class HomeScreenViewModel extends GetxController {
       }
     }
   }
+
 
 }
