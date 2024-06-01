@@ -58,7 +58,11 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
       }
     });
   }
-
+  void stopTimer() {
+    if (timer1 != null) {
+      timer1!.cancel();
+    }
+  }
   void jumpToPage(int pageIndex) {
     pageController.jumpToPage(pageIndex);
   }
@@ -202,11 +206,11 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                     }
                                     questionsAnswerViewModel
                                         .saveQuestionsViewModel(
-                                      widget.examTitle,
-                                      examId: widget.examId,
-                                      answers: saveAnswerIdList,
-                                      questionIds: saveQuestionsIdList,
-                                    );
+                                            widget.examTitle,
+                                            examId: widget.examId,
+                                            answers: saveAnswerIdList,
+                                            questionIds: saveQuestionsIdList,
+                                            time: "15:00");
                                   }
                                 },
                                 child: Container(
@@ -367,6 +371,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                               Expanded(
                                 child: CustomBtn(
                                   onTap: () async {
+                                    stopTimer();
+                                    final formattedTime = formatDuration(duration.inSeconds);
                                     if (questionsDetail.length - 1 > index) {
                                       pageController.nextPage(
                                           duration:
@@ -383,20 +389,21 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                         saveAnswerIdList
                                             .add(item['answerId'].toString());
                                       }
-                                      if (kDebugMode) {
+                                      /* if (kDebugMode) {
                                         print(
                                             'saveQuestionsIdList---------->$saveQuestionsIdList');
                                       }
                                       if (kDebugMode) {
                                         print(
                                             'saveAnswerIdList=========>$saveAnswerIdList');
-                                      }
+                                      }*/
                                       questionsAnswerViewModel
                                           .saveQuestionsViewModel(
                                               widget.examTitle,
                                               examId: widget.examId,
                                               answers: saveAnswerIdList,
-                                              questionIds: saveQuestionsIdList);
+                                              questionIds: saveQuestionsIdList,
+                                              time: formattedTime);
                                     }
                                   },
                                   title: AppStrings.next,

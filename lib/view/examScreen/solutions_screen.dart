@@ -11,9 +11,12 @@ import 'package:sanademy/view/audio_wave_form.dart';
 import 'package:sanademy/view_model/question_answer_view_model.dart';
 
 class SolutionsScreen extends StatefulWidget {
-  const SolutionsScreen({super.key, required this.examId, required this.examTitle});
+  const SolutionsScreen(
+      {super.key, required this.examId, required this.examTitle});
+
   final String examId;
   final String examTitle;
+
   @override
   State<SolutionsScreen> createState() => _SolutionsScreenState();
 }
@@ -22,14 +25,17 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
   PageController pageController = PageController();
   QuestionsAnswerViewModel questionsAnswerViewModel = Get.find();
   List<Map<String, dynamic>> selectedAnswerList = [];
+
   @override
   void initState() {
     questionDetailAPiCall();
     super.initState();
   }
+
   questionDetailAPiCall() async {
     await questionsAnswerViewModel.getQuestionsViewModel(examId: widget.examId);
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -45,14 +51,15 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                     AppStrings.solution,
                     color: AppColors.black0E,
                     fontSize: 20.sp,
-                    fontWeight: FontWeight.w700,),
+                    fontWeight: FontWeight.w700,
+                  ),
                   SizeConfig.sH30,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CustomText(
-                        // "Mathematics Mastery",
-                        widget.examTitle ?? '',
+                        "Mathematics Mastery",
+                        // widget.examTitle ?? '',
                         color: AppColors.black0E,
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w700,
@@ -100,7 +107,7 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                   child: CustomBtn(
                                     onTap: () {},
                                     title:
-                                        'Question ${index + 1} of ${questionsDetail.length}',
+                                        '${AppStrings.questions} ${index + 1} ${AppStrings.of} ${questionsDetail.length}',
                                     textColor: AppColors.primaryColor,
                                     bgColor: AppColors.greyFD,
                                     borderColor: AppColors.primaryColor,
@@ -143,7 +150,7 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                               child: Column(
                                 children: [
                                   CustomText(
-                                    'Q${index + 1}. ${question.title}',
+                                    '${AppStrings.q}${index + 1}. ${question.title}',
                                     color: AppColors.black,
                                     fontWeight: FontWeight.w700,
                                   ),

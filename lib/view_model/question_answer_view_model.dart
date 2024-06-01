@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/networks/api_base_helper.dart';
@@ -18,7 +15,10 @@ class QuestionsAnswerViewModel extends GetxController {
   Rx<ResponseStatus> responseStatus = ResponseStatus.INITIAL.obs;
   RxList<QuestionsDetail> questionsDetail = <QuestionsDetail>[].obs;
   GetQuestionResModel getQuestionResModel = GetQuestionResModel();
-  Future<void> getQuestionsViewModel({required String examId,}) async {
+
+  Future<void> getQuestionsViewModel({
+    required String examId,
+  }) async {
     unFocus();
     Map<String, String> queryParams = {
       ApiKeys.examId: examId.toString(),
@@ -26,7 +26,7 @@ class QuestionsAnswerViewModel extends GetxController {
     final response =
         await GetQuestionApiService().getQuestionRepo(mapData: queryParams);
     if (checkStatusCode(response!.statusCode ?? 0)) {
-       getQuestionResModel =
+      getQuestionResModel =
           getQuestionResModelFromJson(response.response.toString());
       if (getQuestionResModel.success!) {
         if (getQuestionResModel.data != null) {
@@ -41,34 +41,40 @@ class QuestionsAnswerViewModel extends GetxController {
       }
     }
   }
+
   Rx<ResponseStatus> saveQuestionsResponseStatus = ResponseStatus.INITIAL.obs;
+
   Future<void> saveQuestionsViewModel(String examTitle,
       {required String examId,
-        required List questionIds,
-        required List answers}) async {
+      required List questionIds,
+      required List answers,
+      required String time}) async {
     unFocus();
     Map<String, dynamic> queryParams = {
       ApiKeys.examId: examId.toString(),
       ApiKeys.questionIds: questionIds,
-      ApiKeys.answers:answers
+      ApiKeys.answers: answers,
+      ApiKeys.time:time
     };
 
-    final response = await SaveQuestionApiService().saveQuestionApiRepo(mapData: queryParams);
+    final response = await SaveQuestionApiService()
+        .saveQuestionApiRepo(mapData: queryParams);
     if (checkStatusCode(response!.statusCode ?? 0)) {
       SaveQuestionsResModel saveQuestionsResModel =
-      saveQuestionsResModelFromJson(response.response.toString());
+          saveQuestionsResModelFromJson(response.response.toString());
       if (saveQuestionsResModel.success!) {
         if (saveQuestionsResModel.data != null) {
+
           saveQuestionsResponseStatus.value = ResponseStatus.Completed;
           showSussesSnackBar('', saveQuestionsResModel.message.toString());
         } else {
           showErrorSnackBar('', saveQuestionsResModel.message ?? 'Error');
         }
-        Get.to(() =>  CongratulationsScreen(
-          examId: examId,
-          examTitle: examTitle,
-        ));
-      }else {
+        Get.to(() => CongratulationsScreen(
+              examId: examId,
+              examTitle: examTitle,
+            ));
+      } else {
         showErrorSnackBar('', saveQuestionsResModel.message ?? 'Error');
         responseStatus.value = ResponseStatus.Error;
       }

@@ -48,7 +48,8 @@ class QuestionsDetail {
       this.correctAns, 
       this.audio, 
       this.createdAt, 
-      this.updatedAt,});
+      this.updatedAt, 
+      this.selectedAnswer,});
 
   QuestionsDetail.fromJson(dynamic json) {
     id = json['id'];
@@ -63,19 +64,21 @@ class QuestionsDetail {
     audio = json['audio'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    selectedAnswer = json['selected_answer'];
   }
   num? id;
   num? examId;
   String? title;
   String? type;
-  String? option1;
-  String? option2;
-  String? option3;
-  String? option4;
+  dynamic option1;
+  dynamic option2;
+  dynamic option3;
+  dynamic option4;
   String? correctAns;
   String? audio;
   String? createdAt;
   String? updatedAt;
+  dynamic selectedAnswer;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -91,6 +94,7 @@ class QuestionsDetail {
     map['audio'] = audio;
     map['created_at'] = createdAt;
     map['updated_at'] = updatedAt;
+    map['selected_answer'] = selectedAnswer;
     return map;
   }
 
