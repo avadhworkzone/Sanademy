@@ -222,7 +222,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     : const LocalAssets(
                                         imagePath: AppImageAssets.profileImage),
                           )),
-                    ) /*(homeScreenViewModel.responseStatus.value ==
+                    )
+                /*(homeScreenViewModel.responseStatus.value ==
                       ResponseStatus.Completed)
                   ? GestureDetector(
                       onTap: () {
@@ -255,7 +256,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Obx(
           () => homeScreenViewModel.responseStatus.value == ResponseStatus.Error
               ? CustomText(
-                  'Error',
+                  AppStrings.error,
                   fontSize: 20.sp,
                 )
               : homeScreenViewModel.responseStatus.value ==

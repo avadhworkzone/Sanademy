@@ -80,8 +80,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         RegularExpressionUtils.alphabetSpacePattern,
                     hintText: AppStrings.enterYourName,
                     hintFontWeight: FontWeight.w400,
-                    pIcon:  Padding(
-                      padding: const EdgeInsets.all(12),
+                    pIcon:  const Padding(
+                      padding: EdgeInsets.all(12),
                       child: LocalAssets(imagePath: AppImageAssets.userImage,boxFix: BoxFit.cover,),
                     ),
                     validationType: ValidationTypeEnum.name,

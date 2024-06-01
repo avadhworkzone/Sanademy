@@ -21,12 +21,14 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
 
   @override
   void initState() {
-    setState(() {
-      isLoading = true;
-    });
-    Future.delayed(const Duration(seconds: 3), () {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       setState(() {
-        isLoading = false;
+        isLoading = true;
+      });
+      Future.delayed(const Duration(seconds: 3), () {
+        setState(() {
+          isLoading = false;
+        });
       });
     });
 

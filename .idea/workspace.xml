@@ -11,12 +11,13 @@
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sa.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/menu_screen/about_us_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/menu_screen/about_us_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/ephemeral/.plugin_symlinks/connectivity_plus" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/ephemeral/.plugin_symlinks/connectivity_plus" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/ephemeral/.plugin_symlinks/file_selector_windows" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/ephemeral/.plugin_symlinks/file_selector_windows" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/ephemeral/.plugin_symlinks/image_picker_windows" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/ephemeral/.plugin_symlinks/image_picker_windows" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/auth/sign_up_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/auth/sign_up_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/homeScreen/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/homeScreen/home_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/homeScreen/sub_screens/description_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/homeScreen/sub_screens/description_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/myProgressScreen/my_progress_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/myProgressScreen/my_progress_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/view_all_screen/view_all_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/view_all_screen/view_all_screen.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
