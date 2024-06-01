@@ -1,6 +1,77 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sanademy/networks/api_base_helper.dart';
+import 'package:sanademy/networks/api_keys.dart';
+import 'package:sanademy/networks/model/get_question_res_model.dart';
+import 'package:sanademy/networks/model/save_questions_res_model.dart';
+import 'package:sanademy/networks/services/apiService/get_question_api_service.dart';
+import 'package:sanademy/networks/services/apiService/save_questions_api_sevice.dart';
+import 'package:sanademy/utils/app_snackbar.dart';
+import 'package:sanademy/utils/enum_utils.dart';
+import 'package:sanademy/view/examScreen/congratulations_screen.dart';
 
 class QuestionsAnswerViewModel extends GetxController {
   Rx<TextEditingController> commentController = TextEditingController().obs;
+  Rx<ResponseStatus> responseStatus = ResponseStatus.INITIAL.obs;
+  RxList<QuestionsDetail> questionsDetail = <QuestionsDetail>[].obs;
+  GetQuestionResModel getQuestionResModel = GetQuestionResModel();
+  Future<void> getQuestionsViewModel({required String examId,}) async {
+    unFocus();
+    Map<String, String> queryParams = {
+      ApiKeys.examId: examId.toString(),
+    };
+    final response =
+        await GetQuestionApiService().getQuestionRepo(mapData: queryParams);
+    if (checkStatusCode(response!.statusCode ?? 0)) {
+       getQuestionResModel =
+          getQuestionResModelFromJson(response.response.toString());
+      if (getQuestionResModel.success!) {
+        if (getQuestionResModel.data != null) {
+          questionsDetail.value = getQuestionResModel.data!;
+          responseStatus.value = ResponseStatus.Completed;
+        } else {
+          showErrorSnackBar('', getQuestionResModel.message ?? 'Error');
+        }
+      } else {
+        showErrorSnackBar('', getQuestionResModel.message ?? 'Error');
+        responseStatus.value = ResponseStatus.Error;
+      }
+    }
+  }
+  Rx<ResponseStatus> saveQuestionsResponseStatus = ResponseStatus.INITIAL.obs;
+  Future<void> saveQuestionsViewModel(String examTitle,
+      {required String examId,
+        required List questionIds,
+        required List answers}) async {
+    unFocus();
+    Map<String, dynamic> queryParams = {
+      ApiKeys.examId: examId.toString(),
+      ApiKeys.questionIds: questionIds,
+      ApiKeys.answers:answers
+    };
+
+    final response = await SaveQuestionApiService().saveQuestionApiRepo(mapData: queryParams);
+    if (checkStatusCode(response!.statusCode ?? 0)) {
+      SaveQuestionsResModel saveQuestionsResModel =
+      saveQuestionsResModelFromJson(response.response.toString());
+      if (saveQuestionsResModel.success!) {
+        if (saveQuestionsResModel.data != null) {
+          saveQuestionsResponseStatus.value = ResponseStatus.Completed;
+          showSussesSnackBar('', saveQuestionsResModel.message.toString());
+        } else {
+          showErrorSnackBar('', saveQuestionsResModel.message ?? 'Error');
+        }
+        Get.to(() =>  CongratulationsScreen(
+          examId: examId,
+          examTitle: examTitle,
+        ));
+      }else {
+        showErrorSnackBar('', saveQuestionsResModel.message ?? 'Error');
+        responseStatus.value = ResponseStatus.Error;
+      }
+    }
+  }
 }

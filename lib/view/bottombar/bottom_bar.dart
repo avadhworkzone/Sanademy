@@ -17,6 +17,7 @@ class BottomBar extends StatefulWidget {
 
 class _BottomBarState extends State<BottomBar> {
   BottomBarViewModel bottomBarViewModel = Get.put(BottomBarViewModel());
+
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -40,7 +41,7 @@ class _BottomBarState extends State<BottomBar> {
             children: [
               navItem(
                   index: 0,
-                  icon: AppImageAssets.homeIcon,
+                  icon: AppImageAssets.homeIcn,
                   selectedIcon: AppImageAssets.selectedHomeIcon,
                   title: AppStrings.home),
               navItem(

@@ -7,4 +7,10 @@ class ApiKeys {
   static const countryCode = 'country_code';
   static const address = 'address';
   static const image = 'image';
+  static const message = 'message';
+  static const courseId = 'course_id';
+  static const categoryId = 'category_id';
+  static const examId = 'exam_id';
+  static const questionIds = 'question_ids';
+  static const answers = 'answers';
 }

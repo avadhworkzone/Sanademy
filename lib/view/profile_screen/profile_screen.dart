@@ -27,12 +27,10 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  ProfileScreenViewModel profileScreenViewModel =
-  Get.put(ProfileScreenViewModel());
+  ProfileScreenViewModel profileScreenViewModel = Get.put(ProfileScreenViewModel());
 
   @override
   void initState() {
-    // TODO: implement initState
     getUserDataApiCall();
    super.initState();
   }
@@ -58,7 +56,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     profileScreenViewModel
                         .phoneController.value.text.isNotEmpty) {
                   profileScreenViewModel.updateProfile();
-                  // Get.back();
                 }
               },
               actionWidgetColor: AppColors.white,
@@ -137,8 +134,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         RegularExpressionUtils.text,
                                     hintText: AppStrings.enterYourName,
                                     hintFontWeight: FontWeight.w400,
-                                    pIcon: Icon(Icons.account_circle_rounded,
-                                        size: 30.h),
+                                    pIcon:
+                                     Padding(
+                                       padding: const EdgeInsets.all(12),
+                                       child: LocalAssets(imagePath: AppImageAssets.userImage,),
+                                     ),
                                     validationType: ValidationTypeEnum.name,
                                     borderColor:
                                         AppColors.black.withOpacity(0.10),
@@ -176,9 +176,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         fontFamily: AppConstants.quicksand,
                                         fontWeight: FontWeight.w400,
                                       ),
-                                      prefixIcon: Icon(
-                                          Icons.calendar_month_rounded,
-                                          size: 30.h),
+                                      prefixIcon:
+                                      const Padding(
+                                        padding: EdgeInsets.all(12),
+                                        child: LocalAssets(imagePath: AppImageAssets.calendarIcon,),
+                                      ),
                                       errorBorder: OutlineInputBorder(
                                           borderSide: const BorderSide(
                                               color: AppColors.red),
@@ -341,6 +343,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     isValidate: false,
                                     hintFontWeight: FontWeight.w400,
                                     pIcon: Icon(Icons.location_on_sharp,
+                                        color: AppColors.black,
                                         size: 30.h),
                                     // validationType: ValidationTypeEnum.address,
                                     borderColor:

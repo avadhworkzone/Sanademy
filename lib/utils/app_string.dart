@@ -25,6 +25,7 @@ class AppStrings {
   static String signIn = "Sign In";
   static String notHaveAccount = "Don't have an Account?";
   static String signUp = "Sign Up";
+  static String changePhoneNumber = "Change phone number";
 
   /// bottom bar
   static String home = 'Home';
@@ -38,8 +39,10 @@ class AppStrings {
   static String recommended = 'Recommended';
   static String viewAll = 'View All';
 
-  /// sub screen of home screen
-  static String mathematics = 'Mathematics';
+  /// home recommended Container
+  static String lectures = 'lectures';
+  static String hours = 'hours';
+  static String minutes = 'minutes';
 
   ///  Description Screen
   static String enrollNow = 'Enroll Now';
@@ -120,6 +123,9 @@ class AppStrings {
 
   /// questions screen
   static String finishExam = 'Finish Exam';
+  static String questions = 'Questions';
+  static String of = 'of';
+  static String q = 'Q';
   static String skip = 'Skip';
   static String next = 'Next';
   static String writeHere = 'Write here....';
@@ -150,6 +156,7 @@ class AppStrings {
   static String isRequired = "* Required";
   static String pleaseEnterOtp = "Please Enter Otp";
   static String pleaseEnterValidOtp = "Please Enter Valid OTP";
+  static String pleaseEnterSomeText = "Please Enter Some Text";
 
   ///Registration
   static String name = 'Name';

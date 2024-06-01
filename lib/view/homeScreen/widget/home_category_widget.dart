@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
+import 'package:sanademy/commonWidget/network_assets.dart';
 import 'package:sanademy/utils/app_colors.dart';
-import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_string.dart';
+import 'package:sanademy/utils/enum_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/homeScreen/sub_screens/categories_screen.dart';
+import 'package:sanademy/view_model/home_screen_view_model.dart';
 
 class HomeCategoryWidget extends StatefulWidget {
   const HomeCategoryWidget({super.key});
@@ -16,12 +18,7 @@ class HomeCategoryWidget extends StatefulWidget {
 }
 
 class _HomeCategoryWidgetState extends State<HomeCategoryWidget> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    /// api calling
-    super.initState();
-  }
+  HomeScreenViewModel homeScreenViewModel = Get.find<HomeScreenViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -38,57 +35,79 @@ class _HomeCategoryWidgetState extends State<HomeCategoryWidget> {
           ),
         ),
         SizeConfig.sH15,
-        SizedBox(
-          width: Get.width,
-          height: 40.h,
-          child: Padding(
-            padding: EdgeInsets.only(left: 15.w),
-            child: ListView.builder(
-              itemCount: categoriesList.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => GestureDetector(
-                onTap: () {
-                  Get.to(() => const CategoriesScreen());
-                },
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5.w),
-                  child: Container(
-                    width: 139.w,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.r),
-                        color: categoriesList[index]['color']),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.w),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            categoriesList[index]['Icon'],
-                            size: 20.h,
-                            color: AppColors.white,
-                          ),
-                          /* Image.network(
-                              _categoriesList[index]['Icon'],
-                              fit: BoxFit.cover,
-                            ),*/
-                          SizeConfig.sW5,
-                          Flexible(
-                            child: CustomText(
-                              categoriesList[index]['title'],
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.white,
-                              overflow: TextOverflow.ellipsis,
+        Obx(
+          () => homeScreenViewModel.responseStatus.value ==
+                  ResponseStatus.Completed
+              ? SizedBox(
+                  width: Get.width,
+                  height: 40.h,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 15.w),
+                    child: ListView.builder(
+                        itemCount: homeScreenViewModel.categoriesData.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          final category =
+                              homeScreenViewModel.categoriesData[index];
+                          final List<Color> colors = category.colorCode!
+                              .split(',')
+                              .map((color) => Color(int.parse(color, radix: 16))
+                                  .withOpacity(1.0))
+                              .toList();
+                          return GestureDetector(
+                            onTap: () {
+                              Get.to(() => CategoriesScreen(
+                                    categoryId: homeScreenViewModel
+                                        .categoriesData[index].id
+                                        .toString(),
+                                    categoryName: homeScreenViewModel
+                                        .categoriesData[index].name
+                                        .toString(),
+                                  ));
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 5.w),
+                              child: Container(
+                                width: 139.w,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    gradient: LinearGradient(colors: colors)),
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 10.w),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        height: 24.h,
+                                        width: 24.w,
+                                        child: NetWorkOcToAssets(
+                                          imgUrl: homeScreenViewModel
+                                              .categoriesData[index].image,
+                                        ),
+                                      ),
+                                      SizeConfig.sW5,
+                                      Flexible(
+                                        child: CustomText(
+                                          homeScreenViewModel
+                                              .categoriesData[index].name
+                                              .toString(),
+                                          fontSize: 13.sp,
+                                          fontWeight: FontWeight.w500,
+                                          color: AppColors.white,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
-                          )
-                        ],
-                      ),
-                    ),
+                          );
+                        }),
                   ),
-                ),
-              ),
-            ),
-          ),
+                )
+              : const Material(),
         ),
         SizeConfig.sH15,
       ],

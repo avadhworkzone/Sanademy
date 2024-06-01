@@ -14,9 +14,7 @@ import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
-import 'package:sanademy/view/auth/otp_screen.dart';
 import 'package:sanademy/view/auth/sign_up_screen.dart';
-import 'package:sanademy/view/bottombar/bottom_bar.dart';
 import 'package:sanademy/view_model/otp_view_model.dart';
 import 'package:sanademy/view_model/sign_in_view_model.dart';
 import 'package:sanademy/view_model/sign_up_view_model.dart';
@@ -33,11 +31,6 @@ class _LogInScreenState extends State<LogInScreen> {
   SignUpViewModel signUpController = Get.find<SignUpViewModel>();
   OtpViewModel otpViewModel = Get.put(OtpViewModel());
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
 
   @override
   void dispose() {
@@ -70,8 +63,7 @@ class _LogInScreenState extends State<LogInScreen> {
                     SizeConfig.sH25,
 
                     /// PHONE NUMBER TEXT FIELD
-                    Obx(
-                      () => SizedBox(
+                     SizedBox(
                         child: IntlPhoneField(
                           readOnly: signInViewModel.showContainer.value == true
                               ? true
@@ -89,8 +81,10 @@ class _LogInScreenState extends State<LogInScreen> {
                             }
                           },
                           onCountryChanged: (country) {
-                            signInViewModel.phoneLoginCode.value = country.dialCode;
-                            signInViewModel.countryLoginCode.value = country.code;
+                            signInViewModel.phoneLoginCode.value =
+                                country.dialCode;
+                            signInViewModel.countryLoginCode.value =
+                                country.code;
                           },
                           style: TextStyle(
                             color: signInViewModel.showContainer.value == true
@@ -162,7 +156,16 @@ class _LogInScreenState extends State<LogInScreen> {
                           ),
                         ),
                       ),
-                    ),
+                    TextButton(
+                        onPressed: () {
+                          signInViewModel.showContainer.value = false;
+                          otpViewModel.stopTimer();
+                        },
+                        child: CustomText(
+                          AppStrings.changePhoneNumber,
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.w600,
+                        )),
                     SizeConfig.sH30,
                     Visibility(
                         visible: signInViewModel.showContainer.value,
@@ -177,13 +180,14 @@ class _LogInScreenState extends State<LogInScreen> {
                             SizeConfig.sH15,
                             signInViewModel.userLoginOtp.value != 0
                                 ? CustomText(
-                              "Your Otp is: ${signInViewModel.userLoginOtp.value.toString()}",
-                              fontSize: 14.sp,
-                              color: AppColors.black12,
-                              fontWeight: FontWeight.w700,
-                            )
+                                    "Your Otp is: ${signInViewModel.userLoginOtp.value.toString()}",
+                                    fontSize: 14.sp,
+                                    color: AppColors.black12,
+                                    fontWeight: FontWeight.w700,
+                                  )
                                 : SizeConfig.sH2,
                             SizeConfig.sH15,
+
                             /// otp field
                             Pinput(
                               validator: (val) =>
@@ -253,46 +257,46 @@ class _LogInScreenState extends State<LogInScreen> {
                         )),
 
                     /// SUBMIT AND VERIFY BUTTON
-                    if (signInViewModel.showContainer.value == true) Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 22.w),
-                            child: CustomBtn(
-                              onTap: () async {
-                                if(  signInViewModel.userLoginOtp.value.toString() ==
-                                    otpViewModel.pinPutController.value.text){
-                                  await SharedPreferenceUtils.setIsLogin(true);
-                                  signInViewModel.loginViewModel(step: 2);
-                                  // Get.offAll(() => const BottomBar());
-                                }else{
-                                  showErrorSnackBar(
-                                      '', AppStrings.otpMismatch);
-                                }
-                              },
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w700,
-                              radius: 10.r,
-                              title: AppStrings.verify,
-                              bgColor: AppColors.primaryColor,
-                              textColor: AppColors.white,
-                            ),
-                          ) else CustomBtn(
-                            onTap: () async {
-                              signInViewModel.signInIsValidate.value = true;
-                              if (signInViewModel
-                                      .signInFormKey.value.currentState!
-                                      .validate() &&
-                                  signInViewModel.signInPhoneController.value
-                                      .text.isNotEmpty) {
-                                FocusScope.of(context)
-                                    .requestFocus(FocusNode());
-                                await signInViewModel.loginViewModel(step: 1);
-                                otpViewModel.startTimer();
-                              }
-                            },
-                            fontSize: 14.sp,
-                            radius: 10.r,
-                            title: AppStrings.submit,
-                            fontWeight: FontWeight.w700,
-                          ),
+                    if (signInViewModel.showContainer.value == true)
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 22.w),
+                        child: CustomBtn(
+                          onTap: () async {
+                            if (signInViewModel.userLoginOtp.value.toString() ==
+                                otpViewModel.pinPutController.value.text) {
+                              await SharedPreferenceUtils.setIsLogin(true);
+                              signInViewModel.loginViewModel(step: 2);
+                              // Get.offAll(() => const BottomBar());
+                            } else {
+                              showErrorSnackBar('', AppStrings.otpMismatch);
+                            }
+                          },
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w700,
+                          radius: 10.r,
+                          title: AppStrings.verify,
+                          bgColor: AppColors.primaryColor,
+                          textColor: AppColors.white,
+                        ),
+                      )
+                    else
+                      CustomBtn(
+                        onTap: () async {
+                          signInViewModel.signInIsValidate.value = true;
+                          if (signInViewModel.signInFormKey.value.currentState!
+                                  .validate() &&
+                              signInViewModel.signInPhoneController.value.text
+                                  .isNotEmpty) {
+                            FocusScope.of(context).requestFocus(FocusNode());
+                            await signInViewModel.loginViewModel(step: 1);
+                            otpViewModel.resetTimer();
+                          }
+                        },
+                        fontSize: 14.sp,
+                        radius: 10.r,
+                        title: AppStrings.submit,
+                        fontWeight: FontWeight.w700,
+                      ),
                     SizeConfig.sH30,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

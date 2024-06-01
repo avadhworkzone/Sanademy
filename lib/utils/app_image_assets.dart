@@ -13,11 +13,12 @@ class AppImageAssets {
   static const String audio =
       '${AppConstants.baseAudioAssetsPath}example_assets_audios_audio4.mp3';
 
-  /// icons==========================
-
+  /// prefix Icons
+  static const String calendarIcon = '${AppConstants.baseIconAssetsPath}calendarIcon.svg';
+  static const String locationIcon = '${AppConstants.baseIconAssetsPath}locationIcon.svg';
+  /// common user Icon
+  static const String userImage = '${AppConstants.baseIconAssetsPath}userImage.svg';
   /// bottombar
-  static const String homeIcon =
-      '${AppConstants.baseIconAssetsPath}homeIcon.svg';
   static const String myProgress =
       '${AppConstants.baseIconAssetsPath}myProgressIcon.svg';
   static const String myCertificate =
@@ -26,6 +27,8 @@ class AppImageAssets {
       '${AppConstants.baseIconAssetsPath}notificationIcon.svg';
   static const String selectedHomeIcon =
       '${AppConstants.baseIconAssetsPath}selectedHomeIcon.svg';
+  static const String homeIcn =
+      '${AppConstants.baseIconAssetsPath}homeIcn.svg';
   static const String selectedCertificateIcon =
       '${AppConstants.baseIconAssetsPath}Vector (1).svg';
   static const String selectedNotificationIcon =
@@ -40,8 +43,9 @@ class AppImageAssets {
   /// home screen
 
   static String searchIcon = "${AppConstants.baseIconAssetsPath}searchIcon.svg";
-  static const String categoryIcon =
-      '${AppConstants.baseIconAssetsPath}categoryIcon.svg';
+  static const String categoryIcon = '${AppConstants.baseIconAssetsPath}categoryIcon.svg';
+  static const String recommendedBgImg= '${AppConstants.baseImageAssetsPath}recommendedBgImg.png';
+  static const String profileImage= '${AppConstants.baseImageAssetsPath}profileImage.png';
 
   /// notification screen
   static const String alertIcon =
@@ -79,7 +83,6 @@ class AppImageAssets {
       "${AppConstants.baseIconAssetsPath}facebookIcn.svg";
   static String instagramIcn =
       "${AppConstants.baseIconAssetsPath}instagramIcn.svg";
-  static String cameraImg = "${AppConstants.baseImageAssetsPath}cameraImg.jpg";
   static String galleryImg = "${AppConstants.baseImageAssetsPath}galleryImg.png";
 
   /// Contact Us

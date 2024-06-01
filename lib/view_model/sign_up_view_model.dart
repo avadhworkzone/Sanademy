@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:sanademy/networks/api_base_helper.dart';
 import 'package:sanademy/networks/api_keys.dart';
 import 'package:sanademy/networks/model/register_res_model.dart';
-import 'package:sanademy/networks/services/apiService/sign_up_service.dart';
+import 'package:sanademy/networks/services/apiService/sign_up_api_service.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
-import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/view/auth/otp_screen.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
@@ -44,8 +44,10 @@ class SignUpViewModel extends GetxController {
         });
 
     if (picked != null && picked != signUpSelectedDate.value) {
-      String date = "${picked.month}/${picked.day}/${picked.year}";
-      signUpDateController.value.text = date;
+      String formattedDate = DateFormat('MM/dd/yyyy').format(picked);
+      signUpDateController.value.text = formattedDate;
+     /* String date = "${picked.month}/${picked.day}/${picked.year}";
+      signUpDateController.value.text = date;*/
     }
   }
  /// FOR FORMATTED DATE

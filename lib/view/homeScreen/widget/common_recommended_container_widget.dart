@@ -5,13 +5,34 @@ import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/commonWidget/network_assets.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
+import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view_model/home_screen_view_model.dart';
 
-class CommonContainerWidget extends StatelessWidget {
-  const CommonContainerWidget({super.key, required this.listData});
+class CommonContainerWidget extends StatefulWidget {
+  const CommonContainerWidget(
+      {super.key,
+      required this.color,
+      required this.title,
+      required this.numberOfLecture,
+      required this.hours,
+      required this.minutes, required this.teacherImage, required this.teacherName});
 
-  final listData;
+  final String title;
+  final String numberOfLecture;
+  final String hours;
+  final String minutes;
+  final String teacherImage;
+  final String teacherName;
+  final List<Color> color;
+
+  @override
+  State<CommonContainerWidget> createState() => _CommonContainerWidgetState();
+}
+
+class _CommonContainerWidgetState extends State<CommonContainerWidget> {
+  HomeScreenViewModel homeScreenViewModel = Get.find<HomeScreenViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +45,10 @@ class CommonContainerWidget extends StatelessWidget {
             width: Get.width,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.r),
-                color: listData['color']),
+                gradient: LinearGradient(colors: widget.color),
+                image: const DecorationImage(
+                    image: AssetImage(AppImageAssets.recommendedBgImg),
+                    fit: BoxFit.cover)),
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
               child: Row(
@@ -38,7 +62,7 @@ class CommonContainerWidget extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(right: 80.w),
                           child: CustomText(
-                            listData['titleTxt'],
+                            widget.title ?? '',
                             fontSize: 20.sp,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
@@ -48,14 +72,14 @@ class CommonContainerWidget extends StatelessWidget {
                         ),
                         SizeConfig.sH8,
                         CustomText(
-                          listData['lectures'],
+                          '${widget.numberOfLecture} ${AppStrings.lectures}',
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
                           color: AppColors.black0E,
                         ),
                         SizeConfig.sH4,
                         CustomText(
-                          listData['time'],
+                          '${'${widget.hours} ${AppStrings.hours}'} ${'${widget.minutes} ${AppStrings.minutes}'}',
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
                           color: AppColors.black0E,
@@ -66,7 +90,7 @@ class CommonContainerWidget extends StatelessWidget {
                                 horizontal: 25.w, vertical: 2.w),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12.r),
-                              color: Colors.greenAccent,
+                              color: AppColors.black.withOpacity(0.20),
                             ),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
@@ -77,13 +101,12 @@ class CommonContainerWidget extends StatelessWidget {
                                   height: 35.h,
                                   width: 35.h,
                                   decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
+                                    shape: BoxShape.circle,
                                   ),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(35),
-                                    child: const NetWorkOcToAssets(
-                                      imgUrl:
-                                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s',
+                                    child: NetWorkOcToAssets(
+                                      imgUrl: widget.teacherImage!,
                                       boxFit: BoxFit.contain,
                                     ),
                                   ),
@@ -101,7 +124,7 @@ class CommonContainerWidget extends StatelessWidget {
                                       ),
                                       SizeConfig.sH3,
                                       CustomText(
-                                        'John Doe',
+                                        widget.teacherName!,
                                         fontWeight: FontWeight.w700,
                                         fontSize: 12.sp,
                                         color: AppColors.black0E,

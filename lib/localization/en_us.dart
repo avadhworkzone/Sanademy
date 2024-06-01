@@ -25,6 +25,7 @@ Map<String, String> en = {
   AppStrings.signIn: "Sign In",
   AppStrings.notHaveAccount: "Don't have an Account?",
   AppStrings.signUp: "Sign Up",
+  AppStrings.changePhoneNumber: "Change phone number",
 
   /// bottom bar
   AppStrings.home: "Home",
@@ -38,8 +39,10 @@ Map<String, String> en = {
   AppStrings.recommended: "Recommended",
   AppStrings.viewAll: "View All",
 
-  /// sub screen of home screen
-  AppStrings.mathematics: "Mathematics",
+  /// home recommended container
+  AppStrings.lectures: "lectures",
+  AppStrings.hours: "hours",
+  AppStrings.minutes: "minutes",
 
   /// Description Screen
   AppStrings.enrollNow: "Enroll Now",
@@ -116,6 +119,10 @@ Map<String, String> en = {
 
   /// questions screen
   AppStrings.finishExam: "Finish Exam",
+  AppStrings.questions: "Questions",
+  AppStrings.of: "of",
+  AppStrings.q: "Q",
+
   AppStrings.skip: "Skip",
   AppStrings.next: "Next",
   AppStrings.writeHere: "Write here....",
@@ -128,20 +135,22 @@ Map<String, String> en = {
   AppStrings.yourTime: "Your Time",
   AppStrings.yourAnswers: "Your Answers",
   AppStrings.viewSolution: "View Solution",
-  AppStrings.percentage: "View Solution",
+  AppStrings.percentage: "Percentage",
   AppStrings.result: "Result",
-  AppStrings.continues: "Continues",
+  AppStrings.continues: "Continue",
   AppStrings.pass: "Pass",
 
   ///APP ERROR MESSAGE
+  AppStrings.emailIsRequired: "email is required",
   AppStrings.isRequired: '* Required',
   AppStrings.pleaseEnterOtp: 'Please Enter Otp',
   AppStrings.pleaseEnterValidOtp: 'Please Enter Valid OTP',
+  AppStrings.pleaseEnterSomeText: "Please Enter Some Text",
 
   ///Registration
   AppStrings.name: "Name",
   AppStrings.nameIsRequired: "Name is required",
   AppStrings.error: "Error",
   AppStrings.userCreatedSuccessfully: "User Created Successfully",
-  AppStrings.otpMismatch: "Otp Mismatch",
+  AppStrings.otpMismatch: "Please enter valid Otp",
 };

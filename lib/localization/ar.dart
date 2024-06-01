@@ -23,6 +23,7 @@ Map<String, String> ar = {
   AppStrings.signIn: "تسجيل الدخول",
   AppStrings.notHaveAccount: "ليس لديك حساب؟",
   AppStrings.signUp: "اشتراك",
+  AppStrings.changePhoneNumber: "غير رقم الهاتف",
 
   /// bottom bar
   AppStrings.home: "بيت",
@@ -36,8 +37,10 @@ Map<String, String> ar = {
   AppStrings.recommended: "مُستَحسَن",
   AppStrings.viewAll: "عرض الكل",
 
-  /// sub screen of home screen
-  AppStrings.mathematics: "الرياضيات",
+  /// home recommended container
+  AppStrings.lectures: "محاضرات",
+  AppStrings.hours: "ساعات",
+  AppStrings.minutes: "دقائق",
 
   /// Description Screen
   AppStrings.enrollNow: "تسجيل الآن",
@@ -114,6 +117,9 @@ Map<String, String> ar = {
 
   /// questions screen
   AppStrings.finishExam: "إنهاء الامتحان",
+  AppStrings.questions:"أسئلة",
+  AppStrings.of:"ل",
+  AppStrings.q:"س",
   AppStrings.skip: "يتخطى",
   AppStrings.next: "التالي",
   AppStrings.writeHere: "اكتب هنا....",
@@ -128,18 +134,20 @@ Map<String, String> ar = {
   AppStrings.viewSolution: "عرض الحل",
   AppStrings.percentage: "نسبة مئوية",
   AppStrings.result: "نتيجة",
-  AppStrings.continues: "متواصل",
+  AppStrings.continues: "يكمل",
   AppStrings.pass: "يمر",
 
   ///APP ERROR MESSAGE
+  AppStrings.emailIsRequired:"البريد الالكتروني مطلوب",
   AppStrings.isRequired: '* مطلوب',
   AppStrings.pleaseEnterOtp: 'الرجاء إدخال كلمة المرور',
   AppStrings.pleaseEnterValidOtp: 'الرجاء إدخال كلمة مرور صالحة',
+  AppStrings.pleaseEnterSomeText: 'الرجاء إدخال بعض النص',
 
   ///k-dev Registration
   AppStrings.name: 'اسم',
   AppStrings.nameIsRequired: 'مطلوب اسم',
   AppStrings.error: 'خطأ',
   AppStrings.userCreatedSuccessfully: "تم إنشاء المستخدم بنجاح",
-  AppStrings.otpMismatch: "عدم تطابق OTP",
+  AppStrings.otpMismatch: "الرجاء إدخال كلمة مرور صالحة",
 };

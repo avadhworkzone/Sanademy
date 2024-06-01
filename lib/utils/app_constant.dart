@@ -1,6 +1,8 @@
 import 'dart:core';
+
 import 'package:flutter/material.dart';
 import 'package:sanademy/utils/app_colors.dart';
+import 'package:sanademy/utils/app_image_assets.dart';
 
 class AppConstants {
   static const String baseImageAssetsPath = "assets/images/";
@@ -9,6 +11,7 @@ class AppConstants {
 
   static const String quicksand = "Quicksand";
 }
+/*
 
 final List<String> images = [
   "https://media.istockphoto.com/id/1149476751/vector/online-education-banner.jpg?s=612x612&w=0&k=20&c=P-6QFVRk4UGYTEqAyWWXI5BknkoKX6YxrmCKrPfE2vw=",
@@ -19,39 +22,57 @@ final List<String> images = [
 
 final List<Map<String, dynamic>> categoriesList = [
   {
-    'Icon': Icons.calculate_outlined,
+    'Icon': AppImageAssets.mathematicsImg,
     // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdiA84YFxMVbMQyDPQ8-YLpyyvPXX75lQpdDm6SML0va5Qw7fCm046Hzu5eHsa1PbZLTk&usqp=CAU",
     'title': 'Mathematics',
     'color': AppColors.primaryColor,
   },
   {
-    'Icon': Icons.language,
+    'Icon': AppImageAssets.languageImg,
     //  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4FRrhI0Cg69MEC53yw1Q7X5oEyqR8apZY1Pf-r4AVZA&s",
     'title': 'Language',
     'color': AppColors.red,
   },
   {
-    'Icon': Icons.color_lens_outlined,
+    'Icon': AppImageAssets.artsImg,
     // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBVmxXi3m-Oj3WDPGz1UkrbHL9h0ggjH9TVa-HKl0O_g&s",
     'title': 'Arts',
     'color': AppColors.color9D,
   }
 ];
 
+List<Color> gradientMathematics = [
+  Color(0xffE9984E),
+  Color(0xffDD6E07),
+];
+
+List<Color> gradientLanguage = [
+  Color(0xffE25D5D),
+  Color(0xffC82929),
+];
+
+List<Color> gradientArts = [
+  Color(0xffA1C144),
+  Color(0xff617A18),
+];
+
+List gradientColor = [gradientMathematics, gradientLanguage, gradientArts];
+
 final List<Map<String, dynamic>> recommendedList = [
   {
     'titleTxt': 'Exploring the Beauty of Mathematical Structures',
     'lectures': '12 lectures',
     'time': '7 hours 40 minutes',
-    'color': Colors.green,
+    'color': [Color(0xff9BEE42), Color(0xff9BEE42)],
   },
   {
     'titleTxt': 'Exploring the Beauty of Mathematical Structures',
     'lectures': '14 lectures',
     'time': '8 hours 30 minutes',
-    'color': Colors.green.shade400,
+    'color': [Color(0xff3EC8D2), Color(0xff3EC8D2)],
   },
 ];
+*/
 
 String formatDuration(int second) {
   final ms = second * 1000;

@@ -42,7 +42,7 @@ AppBar commonAppBar(
               width: 10.w,
             ),
             CustomText(
-              titleTxt!,
+              titleTxt!.tr,
               color: textColor ?? AppColors.white,
               fontWeight: textFontWeight ?? FontWeight.w500,
               fontSize: 20.sp,

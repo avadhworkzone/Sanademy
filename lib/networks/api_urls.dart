@@ -25,4 +25,12 @@ class ApiUrls {
   static const String updateProfile='update_profile';
   static const String aboutUs='about_us';
   static const String getInTouch='get_in_touch';
+  static const String home='home';
+  static const String contact='contact';
+  static const String getExams ='get_exams';
+  static const String courseDetail ='course_detail';
+  static const String getCourseByCategory ='get_course_by_category';
+  static const String getQuestions ='get_questions';
+  static const String examResult ='exam_result';
+  static const String saveQuestionsAnswers ='save_questions_answers';
 }
