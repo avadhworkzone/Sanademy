@@ -11,4 +11,6 @@ class ApiKeys {
   static const courseId = 'course_id';
   static const categoryId = 'category_id';
   static const examId = 'exam_id';
+  static const questionIds = 'question_ids';
+  static const answers = 'answers';
 }

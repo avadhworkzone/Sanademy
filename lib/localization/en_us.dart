@@ -119,6 +119,10 @@ Map<String, String> en = {
 
   /// questions screen
   AppStrings.finishExam: "Finish Exam",
+  AppStrings.questions: "Questions",
+  AppStrings.of: "of",
+  AppStrings.q: "Q",
+
   AppStrings.skip: "Skip",
   AppStrings.next: "Next",
   AppStrings.writeHere: "Write here....",
@@ -137,9 +141,11 @@ Map<String, String> en = {
   AppStrings.pass: "Pass",
 
   ///APP ERROR MESSAGE
+  AppStrings.emailIsRequired: "email is required",
   AppStrings.isRequired: '* Required',
   AppStrings.pleaseEnterOtp: 'Please Enter Otp',
   AppStrings.pleaseEnterValidOtp: 'Please Enter Valid OTP',
+  AppStrings.pleaseEnterSomeText: "Please Enter Some Text",
 
   ///Registration
   AppStrings.name: "Name",

@@ -14,6 +14,7 @@ import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/auth/sign_up_screen.dart';
 import 'package:sanademy/view/dialog/payment_option_dialog.dart';
 import 'package:sanademy/view_model/description_view_model.dart';
+import 'package:sanademy/view_model/home_screen_view_model.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class DescriptionScreen extends StatefulWidget {
@@ -21,35 +22,35 @@ class DescriptionScreen extends StatefulWidget {
     super.key,
     required this.courseId,
     required this.videoUrl,
-    // required this.description,
-    // required this.requirements,
-    // required this.whatWillYouLearn,
-    // required this.whoThisCourseIsFor,
-    // required this.teacherImage,
-    // required this.teacherName,
-    // required this.instructorDetail,
-    // required this.courseContentTitle,
-    // required this.courseContentMinutes,
-    // required this.courseContentLecture,
-    // required this.courseContentDescription,
-    // required this.courseContents,
+  /*  required this.description,
+    required this.requirements,
+    required this.whatWillYouLearn,
+    required this.whoThisCourseIsFor,
+    required this.teacherImage,
+    required this.teacherName,
+    required this.instructorDetail,
+    required this.courseContentTitle,
+    required this.courseContentMinutes,
+    required this.courseContentLecture,
+    required this.courseContentDescription,
+    required this.courseContents,*/
   });
 
   final String courseId;
   final String videoUrl;
-
-  // final String description;
-  // final String requirements;
-  // final String whatWillYouLearn;
-  // final String whoThisCourseIsFor;
-  // final String teacherImage;
-  // final String teacherName;
-  // final String instructorDetail;
-  // final List<CourseContents> courseContents;
-  // final String courseContentTitle;
-  // final String courseContentMinutes;
-  // final String courseContentLecture;
-  // final String courseContentDescription;
+/*
+  final String description;
+  final String requirements;
+  final String whatWillYouLearn;
+  final String whoThisCourseIsFor;
+  final String teacherImage;
+  final String teacherName;
+  final String instructorDetail;
+  final List<CourseContents> courseContents;
+  final String courseContentTitle;
+  final String courseContentMinutes;
+  final String courseContentLecture;
+  final String courseContentDescription;*/
 
   @override
   State<DescriptionScreen> createState() => _DescriptionScreenState();
@@ -74,8 +75,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
         autoPlay: false,
       ),
     ).obs;
-    descriptionViewModel.youTubPlayer(widget
-        .videoUrl /*descriptionViewModel.courseDetailResModel.data!.videoUrl ?? ''*/);
+    descriptionViewModel.youTubPlayer(widget.videoUrl
+      /*descriptionViewModel.courseDetailResModel.data!.videoUrl ?? ''*/);
   }
 
   @override
@@ -261,9 +262,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 10.w),
                             child: Html(
-                              data: descriptionViewModel
-                                      .courseDetailResModel.data!.description ??
-                                  '',
+                              data:
+                              descriptionViewModel.courseDetailResModel.data![0].description ?? '',
                               shrinkWrap: true,
                             ),
                           ),
@@ -285,7 +285,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                           ),
                                           SizeConfig.sW8,
                                           CustomText(
-                                            '12 lectures',
+                                            descriptionViewModel.courseDetailResModel.data![0].numberOfLecture ?? '',
                                             fontWeight: FontWeight.w400,
                                             fontSize: 14.sp,
                                             color: AppColors.black0E,
@@ -343,7 +343,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                           ),
                                           SizeConfig.sW8,
                                           CustomText(
-                                            '7 hours 40 minutes',
+                                            '${ descriptionViewModel.courseDetailResModel.data![0].hours ?? ''} hours ${ descriptionViewModel.courseDetailResModel.data![0].minutes ?? ''} minutes',
                                             fontWeight: FontWeight.w400,
                                             fontSize: 14.sp,
                                             color: AppColors.black0E,
@@ -411,7 +411,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                     Html(
                                       data: descriptionViewModel
                                               .courseDetailResModel
-                                              .data!
+                                              .data![0]
                                               .requirements ??
                                           '',
                                       shrinkWrap: true,
@@ -440,7 +440,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                     Html(
                                       data: descriptionViewModel
                                               .courseDetailResModel
-                                              .data!
+                                              .data![0]
                                               .whatWillYouLearn ??
                                           '',
                                       shrinkWrap: true,
@@ -502,12 +502,10 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                   ),
                                   children: [
                                     Html(
-                                      data: descriptionViewModel
-                                              .courseDetailResModel
-                                              .data!
-                                              .whoThisCourseIsFor ??
-                                          '',
                                       shrinkWrap: true,
+                                      data: descriptionViewModel
+                                              .courseDetailResModel.data!.first.whoThisCourseIsFor ??
+                                          '',
                                     )
                                   ]),
                             ),
@@ -555,20 +553,19 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                             backgroundImage: NetworkImage(
                                                 descriptionViewModel
                                                         .courseDetailResModel
-                                                        .data!
+                                                        .data![0]
                                                         .teacher!
                                                         .image ??
                                                     ''),
                                           ),
                                           SizeConfig.sW8,
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment:  CrossAxisAlignment.start,
                                             children: [
                                               CustomText(
                                                 descriptionViewModel
                                                         .courseDetailResModel
-                                                        .data!
+                                                        .data![0]
                                                         .teacher!
                                                         .name ??
                                                     '',
@@ -595,8 +592,15 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                               color: AppColors.black0E
                                                   .withOpacity(0.2),
                                             ),
-                                            SizeConfig.sH20,
-                                            RichText(
+                                            Html(
+                                              data: descriptionViewModel
+                                                  .courseDetailResModel
+                                                  .data![0]
+                                                  .teacher!.description ??
+                                                  '',
+                                              shrinkWrap: true,
+                                            ),
+                                          /*  RichText(
                                               text: TextSpan(
                                                   text:
                                                       AppStrings.yourExperience,
@@ -684,12 +688,11 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                             Html(
                                               data: descriptionViewModel
                                                       .courseDetailResModel
-                                                      .data!
+                                                      .data![0]
                                                       .instructor ??
                                                   '',
                                               shrinkWrap: true,
-                                            ),
-                                            SizeConfig.sH15,
+                                            ),*/
                                           ],
                                         )
                                       ]),
@@ -728,7 +731,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                 shrinkWrap: true,
                                 itemCount: descriptionViewModel
                                     .courseDetailResModel
-                                    .data!
+                                    .data![0]
                                     .courseContents!
                                     .length,
                                 physics: const NeverScrollableScrollPhysics(),
@@ -755,9 +758,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                                     CustomText(
                                                       descriptionViewModel
                                                               .courseDetailResModel
-                                                              .data!
-                                                              .courseContents![
-                                                                  index]
+                                                              .data![0]
+                                                              .courseContents![index]
                                                               .title ??
                                                           '',
                                                       fontWeight:
@@ -766,7 +768,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                                       color: AppColors.black,
                                                     ),
                                                     CustomText(
-                                                      "${descriptionViewModel.courseDetailResModel.data!.courseContents![index].numberOfLecture ?? ''} Lectures • ${descriptionViewModel.courseDetailResModel.data!.courseContents![index].minutes ?? ''} mins",
+                                                      "${descriptionViewModel.courseDetailResModel.data![0].courseContents![index].numberOfLecture ?? ''} Lectures • ${descriptionViewModel.courseDetailResModel.data![0].courseContents![index].minutes ?? ''} mins",
                                                       fontWeight:
                                                           FontWeight.w400,
                                                       fontSize: 15,
@@ -780,7 +782,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                               Html(
                                                 data: descriptionViewModel
                                                     .courseDetailResModel
-                                                    .data!
+                                                    .data![0]
                                                     .courseContents![index]
                                                     .description ?? '',
                                                 shrinkWrap: true,
@@ -788,13 +790,10 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                             ],
                                           ),
                                         ),
-                                        if (index !=
-                                            descriptionViewModel
+                                        if (index != descriptionViewModel
                                                     .courseDetailResModel
-                                                    .data!
-                                                    .courseContents!
-                                                    .length -
-                                                1)
+                                                    .data![0].courseContents!
+                                                    .length - 1)
                                           Divider(
                                             color: AppColors.black0E
                                                 .withOpacity(0.2),
@@ -818,16 +817,3 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   }
 }
 
-class CourseData {
-  final String title;
-  final String subTitle;
-  final String duration;
-  final String description;
-
-  CourseData({
-    required this.title,
-    required this.subTitle,
-    required this.duration,
-    required this.description,
-  });
-}

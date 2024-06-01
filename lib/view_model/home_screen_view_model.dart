@@ -67,7 +67,6 @@ class HomeScreenViewModel extends GetxController {
           courseDetailResModelFromJson(response.response.toString());
       if (courseDetailResModel.success!) {
         if (courseDetailResModel.data != null) {
-
           courseDetailResponseStatus.value = ResponseStatus.Completed;
         } else {
           showErrorSnackBar('', courseDetailResModel.message ?? 'Error');

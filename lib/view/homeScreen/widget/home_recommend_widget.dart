@@ -7,6 +7,7 @@ import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/enum_utils.dart';
 import 'package:sanademy/view/homeScreen/sub_screens/description_screen.dart';
 import 'package:sanademy/view/homeScreen/widget/common_recommended_container_widget.dart';
+import 'package:sanademy/view/view_all_screen/view_all_screen.dart';
 import 'package:sanademy/view_model/home_screen_view_model.dart';
 
 class HomeRecommendedWidget extends StatefulWidget {
@@ -20,19 +21,13 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
   HomeScreenViewModel homeScreenViewModel = Get.find<HomeScreenViewModel>();
 
   @override
-  void initState() {
-    // TODO: implement initState
-    // homeScreenViewModel.courseDetailViewModel(courseId: homeScreenViewModel.courseDetailResModel.data!.id.toString());
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Obx(
-        () => homeScreenViewModel.responseStatus.value ==
+        () {
+          return homeScreenViewModel.responseStatus.value ==
                 ResponseStatus.Completed
-            ? Column(
+            ?  Column(
                 children: [
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -46,7 +41,9 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                           color: AppColors.black0E,
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(const ViewAllScreen());
+                          },
                           child: CustomText(
                             AppStrings.viewAll,
                             fontWeight: FontWeight.w600,
@@ -74,28 +71,26 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                               padding: EdgeInsets.only(bottom: 15.h, top: 10.h),
                               child: GestureDetector(
                                 onTap: () {
-                                  // homeScreenViewModel.courseDetailViewModel(courseId: homeScreenViewModel.courseDetailResModel.data!.id.toString());
                                   Get.to(() => DescriptionScreen(
                                     courseId: courses.id.toString(),
                                     videoUrl: courses.videoUrl ?? '',
-                                    // description: homeScreenViewModel.courseDetailResModel.data!.description!,
-                                    // requirements: homeScreenViewModel.courseDetailResModel.data!.requirements!,
-                                    // whatWillYouLearn: homeScreenViewModel.courseDetailResModel.data!.whatWillYouLearn!,
-                                    // whoThisCourseIsFor: homeScreenViewModel.courseDetailResModel.data!.whoThisCourseIsFor!,
-                                    // teacherName: homeScreenViewModel.courseDetailResModel.data!.teacher!.name!,
-                                    // teacherImage: homeScreenViewModel.courseDetailResModel.data!.teacher!.image!,
-                                    // instructorDetail: homeScreenViewModel.courseDetailResModel.data!.instructor!,
-                                    // courseContents: homeScreenViewModel.courseDetailResModel.data!.courseContents!,
-                                    // courseContentTitle: homeScreenViewModel.courseDetailResModel.data!.courseContents![index].title!,
-                                    // courseContentLecture: homeScreenViewModel.courseDetailResModel.data!.courseContents![index].numberOfLecture!,
-                                    // courseContentMinutes: homeScreenViewModel.courseDetailResModel.data!.courseContents![index].minutes!,
-                                    // courseContentDescription: homeScreenViewModel.courseDetailResModel.data!.courseContents![index].description!,
+                                   /* description: homeScreenViewModel.courseDetailResModel.data![0].description ?? '',
+                                    requirements: homeScreenViewModel.courseDetailResModel.data![0].requirements ?? '',
+                                    whatWillYouLearn: homeScreenViewModel.courseDetailResModel.data![0].whatWillYouLearn!,
+                                    whoThisCourseIsFor: homeScreenViewModel.courseDetailResModel.data![0].whoThisCourseIsFor!,
+                                    teacherName: homeScreenViewModel.courseDetailResModel.data![0].teacher!.name!,
+                                    teacherImage: homeScreenViewModel.courseDetailResModel.data![0].teacher!.image!,
+                                    instructorDetail: homeScreenViewModel.courseDetailResModel.data![0].instructor!,
+                                    // courseContents: homeScreenViewModel.courseDetailResModel.data![0].courseContents!,
+                                    courseContentTitle: homeScreenViewModel.courseDetailResModel.data![0].courseContents![index].title!,
+                                    courseContentLecture: homeScreenViewModel.courseDetailResModel.data![0].courseContents![index].numberOfLecture!,
+                                    courseContentMinutes: homeScreenViewModel.courseDetailResModel.data![0].courseContents![index].minutes!,
+                                    courseContentDescription: homeScreenViewModel.courseDetailResModel.data![0].courseContents![index].description!,*/
                                   ));
                                 },
                                 child: CommonContainerWidget(
                                   color: colors,
-                                  title:
-                                  courses.title!,
+                                  title: courses.title!,
                                   numberOfLecture: courses.numberOfLecture!,
                                   hours:
                                   courses.hours!,
@@ -110,7 +105,7 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                   )
                 ],
               )
-            : const Material(),
+            : const Material();}
       ),
     );
   }

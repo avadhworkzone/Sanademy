@@ -56,17 +56,17 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     padding: EdgeInsets.only(bottom: 15.h),
                     child: GestureDetector(
                       onTap: () {
-                      /*  Get.to(() =>  DescriptionScreen(
+                        Get.to(() =>  DescriptionScreen(
                           courseId: homeScreenViewModel.categoryWiseCourseList[index].id.toString(),
                           videoUrl: homeScreenViewModel.categoryWiseCourseList[index].videoUrl!,
-                          description: homeScreenViewModel.categoryWiseCourseList[index].description!,
+                         /* description: homeScreenViewModel.categoryWiseCourseList[index].description!,
                           requirements: homeScreenViewModel.categoryWiseCourseList[index].requirements!,
                           whatWillYouLearn: homeScreenViewModel.categoryWiseCourseList[index].whatWillYouLearn!,
                           whoThisCourseIsFor: homeScreenViewModel.categoryWiseCourseList[index].whoThisCourseIsFor!,
                           teacherName: homeScreenViewModel.categoryWiseCourseList[index].teacher!.name!,
                           teacherImage: homeScreenViewModel.categoryWiseCourseList[index].teacher!.image!,
                           instructorDetail: homeScreenViewModel.categoryWiseCourseList[index].instructor!,
-                        ));*/
+                      */  ));
                       },
                       child: CommonContainerWidget(
                       color: colors,

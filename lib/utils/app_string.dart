@@ -123,6 +123,9 @@ class AppStrings {
 
   /// questions screen
   static String finishExam = 'Finish Exam';
+  static String questions = 'Questions';
+  static String of = 'of';
+  static String q = 'Q';
   static String skip = 'Skip';
   static String next = 'Next';
   static String writeHere = 'Write here....';
@@ -153,6 +156,7 @@ class AppStrings {
   static String isRequired = "* Required";
   static String pleaseEnterOtp = "Please Enter Otp";
   static String pleaseEnterValidOtp = "Please Enter Valid OTP";
+  static String pleaseEnterSomeText = "Please Enter Some Text";
 
   ///Registration
   static String name = 'Name';

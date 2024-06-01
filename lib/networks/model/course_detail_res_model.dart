@@ -9,18 +9,23 @@ class CourseDetailResModel {
 
   CourseDetailResModel.fromJson(dynamic json) {
     success = json['success'];
-    data = json['data'] != null ? CourseDetail.fromJson(json['data']) : null;
+    if (json['data'] != null) {
+      data = [];
+      json['data'].forEach((v) {
+        data?.add(Data.fromJson(v));
+      });
+    }
     message = json['message'];
   }
   bool? success;
-  CourseDetail? data;
+  List<Data>? data;
   String? message;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['success'] = success;
     if (data != null) {
-      map['data'] = data?.toJson();
+      map['data'] = data?.map((v) => v.toJson()).toList();
     }
     map['message'] = message;
     return map;
@@ -28,10 +33,10 @@ class CourseDetailResModel {
 
 }
 
-CourseDetail dataFromJson(String str) => CourseDetail.fromJson(json.decode(str));
-String dataToJson(CourseDetail data) => json.encode(data.toJson());
-class CourseDetail {
-  CourseDetail({
+Data dataFromJson(String str) => Data.fromJson(json.decode(str));
+String dataToJson(Data data) => json.encode(data.toJson());
+class Data {
+  Data({
       this.id, 
       this.categoryId, 
       this.teacherId, 
@@ -53,7 +58,7 @@ class CourseDetail {
       this.category, 
       this.courseContents,});
 
-  CourseDetail.fromJson(dynamic json) {
+  Data.fromJson(dynamic json) {
     id = json['id'];
     categoryId = json['category_id'];
     teacherId = json['teacher_id'];
@@ -228,6 +233,7 @@ class Teacher {
       this.name, 
       this.mobileNumber, 
       this.image, 
+      this.description, 
       this.createdAt, 
       this.updatedAt,});
 
@@ -236,6 +242,7 @@ class Teacher {
     name = json['name'];
     mobileNumber = json['mobile_number'];
     image = json['image'];
+    description = json['description'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -243,6 +250,7 @@ class Teacher {
   String? name;
   String? mobileNumber;
   String? image;
+  dynamic description;
   String? createdAt;
   String? updatedAt;
 
@@ -252,6 +260,7 @@ class Teacher {
     map['name'] = name;
     map['mobile_number'] = mobileNumber;
     map['image'] = image;
+    map['description'] = description;
     map['created_at'] = createdAt;
     map['updated_at'] = updatedAt;
     return map;

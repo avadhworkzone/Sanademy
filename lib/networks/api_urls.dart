@@ -31,4 +31,6 @@ class ApiUrls {
   static const String courseDetail ='course_detail';
   static const String getCourseByCategory ='get_course_by_category';
   static const String getQuestions ='get_questions';
+  static const String examResult ='exam_result';
+  static const String saveQuestionsAnswers ='save_questions_answers';
 }

@@ -10,8 +10,6 @@ import 'package:sanademy/view/examScreen/questions_screen.dart';
 import 'package:sanademy/view_model/exam_view_model.dart';
 import 'package:sanademy/view_model/question_answer_view_model.dart';
 
-
-
 class ExamScreen extends StatefulWidget {
   const ExamScreen({super.key});
 
@@ -21,20 +19,21 @@ class ExamScreen extends StatefulWidget {
 
 class _ExamScreenState extends State<ExamScreen> {
   ExamViewModel examViewModel = Get.put(ExamViewModel());
-  QuestionsAnswerViewModel questionsAnswerViewModel = Get.put(QuestionsAnswerViewModel());
+  QuestionsAnswerViewModel questionsAnswerViewModel =
+      Get.put(QuestionsAnswerViewModel());
 
   @override
   void initState() {
-    // TODO: implement initState
     examViewModel.getExamData(courseId: 1);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Material(
         child: Obx(
-          () =>Column(
+          () => Column(
             children: [
               commonBackArrowAppBar(
                   titleTxt: AppStrings.exams,
@@ -59,9 +58,10 @@ class _ExamScreenState extends State<ExamScreen> {
                         return GestureDetector(
                           onTap: () {
                             Get.to(() => QuestionsScreen(
-                                  examTitle: index.isOdd
-                                      ? 'Language Lab'
-                                      : 'Mathematics Mastery',
+                                  examTitle: examViewModel.examData[index].title
+                                      .toString(),
+                                  examId: examViewModel.examData[index].id
+                                      .toString(),
                                 ));
                           },
                           child: Container(
@@ -88,10 +88,10 @@ class _ExamScreenState extends State<ExamScreen> {
                                     Row(
                                       children: [
                                         CustomText(
-                                          '20 Questions',
+                                          '${examViewModel.examData[index].questionsCount} ${AppStrings.questions}',
                                           fontWeight: FontWeight.w500,
-                                          color:
-                                              AppColors.black0E.withOpacity(0.80),
+                                          color: AppColors.black0E
+                                              .withOpacity(0.80),
                                         ),
                                         SizeConfig.sW6,
                                         const CustomText('•',
@@ -99,12 +99,12 @@ class _ExamScreenState extends State<ExamScreen> {
                                             color: AppColors.black0E),
                                         SizeConfig.sW6,
                                         CustomText(
-                                          index.isOdd
-                                              ? 'Listening Test'
-                                              : 'Problem Solving Test',
+                                          examViewModel
+                                                  .examData[index].subTitle ??
+                                              '',
                                           fontWeight: FontWeight.w500,
-                                          color:
-                                              AppColors.black0E.withOpacity(0.80),
+                                          color: AppColors.black0E
+                                              .withOpacity(0.80),
                                         ),
                                       ],
                                     )
@@ -115,8 +115,9 @@ class _ExamScreenState extends State<ExamScreen> {
                                     CircleAvatar(
                                       backgroundColor:
                                           AppColors.color8B.withOpacity(0.20),
-                                      child: const Icon(Icons.play_arrow,
-                                          color: AppColors.color8B,
+                                      child: const Icon(
+                                        Icons.play_arrow,
+                                        color: AppColors.color8B,
                                       ),
                                     )
                                   ],

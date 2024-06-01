@@ -117,6 +117,9 @@ Map<String, String> ar = {
 
   /// questions screen
   AppStrings.finishExam: "إنهاء الامتحان",
+  AppStrings.questions:"أسئلة",
+  AppStrings.of:"ل",
+  AppStrings.q:"س",
   AppStrings.skip: "يتخطى",
   AppStrings.next: "التالي",
   AppStrings.writeHere: "اكتب هنا....",
@@ -135,9 +138,11 @@ Map<String, String> ar = {
   AppStrings.pass: "يمر",
 
   ///APP ERROR MESSAGE
+  AppStrings.emailIsRequired:"البريد الالكتروني مطلوب",
   AppStrings.isRequired: '* مطلوب',
   AppStrings.pleaseEnterOtp: 'الرجاء إدخال كلمة المرور',
   AppStrings.pleaseEnterValidOtp: 'الرجاء إدخال كلمة مرور صالحة',
+  AppStrings.pleaseEnterSomeText: 'الرجاء إدخال بعض النص',
 
   ///k-dev Registration
   AppStrings.name: 'اسم',

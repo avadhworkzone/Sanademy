@@ -3,8 +3,8 @@ GetExamResModel getExamResModelFromJson(String str) => GetExamResModel.fromJson(
 String getExamResModelToJson(GetExamResModel data) => json.encode(data.toJson());
 class GetExamResModel {
   GetExamResModel({
-      this.success,
-      this.data,
+      this.success, 
+      this.data, 
       this.message,});
 
   GetExamResModel.fromJson(dynamic json) {
@@ -37,17 +37,19 @@ Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
 class Data {
   Data({
-      this.id,
-      this.courseId,
-      this.title,
-      this.createdAt,
-      this.updatedAt,
+      this.id, 
+      this.courseId, 
+      this.title, 
+      this.subTitle, 
+      this.createdAt, 
+      this.updatedAt, 
       this.questionsCount,});
 
   Data.fromJson(dynamic json) {
     id = json['id'];
     courseId = json['course_id'];
     title = json['title'];
+    subTitle = json['sub_title'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     questionsCount = json['questions_count'];
@@ -55,6 +57,7 @@ class Data {
   num? id;
   num? courseId;
   String? title;
+  String? subTitle;
   String? createdAt;
   String? updatedAt;
   num? questionsCount;
@@ -64,6 +67,7 @@ class Data {
     map['id'] = id;
     map['course_id'] = courseId;
     map['title'] = title;
+    map['sub_title'] = subTitle;
     map['created_at'] = createdAt;
     map['updated_at'] = updatedAt;
     map['questions_count'] = questionsCount;
