@@ -23,7 +23,6 @@ class OtpScreen extends StatefulWidget {
 
 class _OtpScreenState extends State<OtpScreen> {
   OtpViewModel otpViewModel = Get.put(OtpViewModel());
-
   SignUpViewModel signUpController = Get.find<SignUpViewModel>();
 
   @override

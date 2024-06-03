@@ -74,18 +74,6 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                   Get.to(() => DescriptionScreen(
                                     courseId: courses.id.toString(),
                                     videoUrl: courses.videoUrl ?? '',
-                                   /* description: homeScreenViewModel.courseDetailResModel.data![0].description ?? '',
-                                    requirements: homeScreenViewModel.courseDetailResModel.data![0].requirements ?? '',
-                                    whatWillYouLearn: homeScreenViewModel.courseDetailResModel.data![0].whatWillYouLearn!,
-                                    whoThisCourseIsFor: homeScreenViewModel.courseDetailResModel.data![0].whoThisCourseIsFor!,
-                                    teacherName: homeScreenViewModel.courseDetailResModel.data![0].teacher!.name!,
-                                    teacherImage: homeScreenViewModel.courseDetailResModel.data![0].teacher!.image!,
-                                    instructorDetail: homeScreenViewModel.courseDetailResModel.data![0].instructor!,
-                                    // courseContents: homeScreenViewModel.courseDetailResModel.data![0].courseContents!,
-                                    courseContentTitle: homeScreenViewModel.courseDetailResModel.data![0].courseContents![index].title!,
-                                    courseContentLecture: homeScreenViewModel.courseDetailResModel.data![0].courseContents![index].numberOfLecture!,
-                                    courseContentMinutes: homeScreenViewModel.courseDetailResModel.data![0].courseContents![index].minutes!,
-                                    courseContentDescription: homeScreenViewModel.courseDetailResModel.data![0].courseContents![index].description!,*/
                                   ));
                                 },
                                 child: CommonContainerWidget(

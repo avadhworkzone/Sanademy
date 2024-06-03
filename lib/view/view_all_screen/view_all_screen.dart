@@ -41,18 +41,6 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
                           Get.to(() => DescriptionScreen(
                             courseId: courses.id.toString(),
                             videoUrl: courses.videoUrl ?? '',
-                            // description: homeScreenViewModel.courseDetailResModel.data!.description!,
-                            // requirements: homeScreenViewModel.courseDetailResModel.data!.requirements!,
-                            // whatWillYouLearn: homeScreenViewModel.courseDetailResModel.data!.whatWillYouLearn!,
-                            // whoThisCourseIsFor: homeScreenViewModel.courseDetailResModel.data!.whoThisCourseIsFor!,
-                            // teacherName: homeScreenViewModel.courseDetailResModel.data!.teacher!.name!,
-                            // teacherImage: homeScreenViewModel.courseDetailResModel.data!.teacher!.image!,
-                            // instructorDetail: homeScreenViewModel.courseDetailResModel.data!.instructor!,
-                            // courseContents: homeScreenViewModel.courseDetailResModel.data!.courseContents!,
-                            // courseContentTitle: homeScreenViewModel.courseDetailResModel.data!.courseContents![index].title!,
-                            // courseContentLecture: homeScreenViewModel.courseDetailResModel.data!.courseContents![index].numberOfLecture!,
-                            // courseContentMinutes: homeScreenViewModel.courseDetailResModel.data!.courseContents![index].minutes!,
-                            // courseContentDescription: homeScreenViewModel.courseDetailResModel.data!.courseContents![index].description!,
                           ));
                         },
                         child: CommonContainerWidget(

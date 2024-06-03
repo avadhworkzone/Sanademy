@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,17 +28,11 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
-  PageController pageController = PageController();
-  Timer? timer1;
-  Duration duration = const Duration(seconds: 0);
-  String timeIs = DateTime.now().toString();
   QuestionsAnswerViewModel questionsAnswerViewModel = Get.find();
-
-  List<Map<String, dynamic>> selectedAnswerList = [];
 
   @override
   void initState() {
-    initData();
+    questionsAnswerViewModel.initData(mounted);
     questionDetailAPiCall();
     super.initState();
   }
@@ -48,28 +41,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     await questionsAnswerViewModel.getQuestionsViewModel(examId: widget.examId);
   }
 
-  initData() {
-    timer1 = Timer.periodic(const Duration(seconds: 1), (timer) async {
-      var difference = DateTime.now().difference(DateTime.parse(timeIs));
-      if (mounted) {
-        setState(() {
-          duration = Duration(seconds: difference.inSeconds);
-        });
-      }
-    });
-  }
-  void stopTimer() {
-    if (timer1 != null) {
-      timer1!.cancel();
-    }
-  }
-  void jumpToPage(int pageIndex) {
-    pageController.jumpToPage(pageIndex);
-  }
-
   @override
   void dispose() {
-    timer1?.cancel();
+    questionsAnswerViewModel.timer1?.value.cancel();
     super.dispose();
   }
 
@@ -94,7 +68,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               children: [
                 CustomBtn(
                   onTap: () {
-                    timer1?.cancel();
+                    questionsAnswerViewModel.timer1?.value.cancel();
                     Get.to(() => CongratulationsScreen(
                           examTitle: widget.examTitle,
                         ));
@@ -127,7 +101,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                               imagePath: AppImageAssets.clockIcon),
                           SizeConfig.sW5,
                           CustomText(
-                            formatDuration(duration.inSeconds),
+                            formatDuration(questionsAnswerViewModel.duration.value.inSeconds),
                             color: AppColors.primaryColor,
                             fontWeight: FontWeight.w700,
                           ),
@@ -139,7 +113,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                 SizeConfig.sH25,
                 Expanded(
                   child: PageView(
-                    controller: pageController,
+                    controller: questionsAnswerViewModel.pageController.value,
                     physics: const NeverScrollableScrollPhysics(),
                     children: List.generate(questionsDetail.length, (index) {
                       final question = questionsDetail[index];
@@ -152,7 +126,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                 borderRadius: BorderRadius.circular(18.r),
                                 onTap: () {
                                   if (index > 0) {
-                                    pageController.previousPage(
+                                    questionsAnswerViewModel.pageController.value.previousPage(
                                       duration:
                                           const Duration(milliseconds: 500),
                                       curve: Curves.ease,
@@ -189,7 +163,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                 borderRadius: BorderRadius.circular(18.r),
                                 onTap: () {
                                   if (questionsDetail.length - 1 > index) {
-                                    pageController.nextPage(
+                                    questionsAnswerViewModel.pageController.value.nextPage(
                                         duration:
                                             const Duration(milliseconds: 500),
                                         curve: Curves.ease);
@@ -198,7 +172,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                     /// CALL SAVE QUESTIONS API
                                     List saveQuestionsIdList = [];
                                     List saveAnswerIdList = [];
-                                    for (var item in selectedAnswerList) {
+                                    for (var item in questionsAnswerViewModel.selectedAnswerList) {
                                       saveQuestionsIdList
                                           .add(item['questionId'].toString());
                                       saveAnswerIdList
@@ -252,13 +226,13 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                               'option_${optionIndex + 1}'];
                                           bool isSelected = false;
                                           final containIndex =
-                                              selectedAnswerList.indexWhere(
+                                          questionsAnswerViewModel.selectedAnswerList.indexWhere(
                                                   (element) =>
                                                       element['questionId'] ==
                                                       question.id);
 
                                           if (containIndex > -1) {
-                                            if (selectedAnswerList[containIndex]
+                                            if (questionsAnswerViewModel.selectedAnswerList[containIndex]
                                                     ['option'] ==
                                                 option) {
                                               isSelected = true;
@@ -267,19 +241,19 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                           return GestureDetector(
                                             onTap: () {
                                               if (containIndex == -1) {
-                                                selectedAnswerList.add({
+                                                questionsAnswerViewModel.selectedAnswerList.add({
                                                   "questionId": question.id,
                                                   "option": option,
                                                   "answerId": optionIndex + 1,
                                                 });
                                                 if (kDebugMode) {
                                                   print(
-                                                      'selectedAnswerList<<<$selectedAnswerList>>>>');
+                                                      'questionsAnswerViewModel.selectedAnswerList<<<$questionsAnswerViewModel.selectedAnswerList>>>>');
                                                 }
                                               } else {
-                                                selectedAnswerList[containIndex]
+                                                questionsAnswerViewModel.selectedAnswerList[containIndex]
                                                     ['option'] = option;
-                                                selectedAnswerList[containIndex]
+                                                questionsAnswerViewModel.selectedAnswerList[containIndex]
                                                         ['answerId'] =
                                                     optionIndex + 1;
                                               }
@@ -338,18 +312,18 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                               Expanded(
                                 child: CustomBtn(
                                   onTap: () {
-                                    final containIndex = selectedAnswerList
+                                    final containIndex = questionsAnswerViewModel.selectedAnswerList
                                         .indexWhere((element) =>
                                             element['questionId'] ==
                                             question.id);
                                     if (containIndex == -1) {
-                                      selectedAnswerList.add({
+                                      questionsAnswerViewModel.selectedAnswerList.add({
                                         "questionId": question.id,
                                         "option": "",
                                       });
                                     }
                                     if (questionsDetail.length - 1 > index) {
-                                      pageController.nextPage(
+                                      questionsAnswerViewModel.pageController.value.nextPage(
                                           duration:
                                               const Duration(milliseconds: 500),
                                           curve: Curves.ease);
@@ -371,33 +345,27 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                               Expanded(
                                 child: CustomBtn(
                                   onTap: () async {
-
                                     if (questionsDetail.length - 1 > index) {
-                                      pageController.nextPage(
+                                      questionsAnswerViewModel.pageController.value.nextPage(
                                           duration:
                                               const Duration(milliseconds: 500),
                                           curve: Curves.ease);
-                                    } else if (index ==
-                                        questionsDetail.length - 1) {
-                                      stopTimer();
-                                      final formattedTime = formatDuration(duration.inSeconds);
+                                    } else if (index == questionsDetail.length - 1) {
+                                      questionsAnswerViewModel.stopTimer();
+                                      final formattedTime =
+                                          formatDuration(questionsAnswerViewModel.duration.value.inSeconds);
                                       /// CALL SAVE QUESTIONS API
                                       List saveQuestionsIdList = [];
                                       List saveAnswerIdList = [];
-                                      for (var item in selectedAnswerList) {
+                                      for (var item in questionsAnswerViewModel.selectedAnswerList) {
                                         saveQuestionsIdList
                                             .add(item['questionId'].toString());
                                         saveAnswerIdList
                                             .add(item['answerId'].toString());
                                       }
-                                      /* if (kDebugMode) {
-                                        print(
-                                            'saveQuestionsIdList---------->$saveQuestionsIdList');
-                                      }
-                                      if (kDebugMode) {
-                                        print(
-                                            'saveAnswerIdList=========>$saveAnswerIdList');
-                                      }*/
+                                      saveAnswerIdList.add(
+                                          questionsAnswerViewModel
+                                              .audioAnswerController.value.text);
                                       questionsAnswerViewModel
                                           .saveQuestionsViewModel(
                                               widget.examTitle,

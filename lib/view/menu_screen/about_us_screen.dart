@@ -23,7 +23,6 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     getAboutUsApiCall();
     super.initState();
   }

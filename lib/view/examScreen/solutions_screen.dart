@@ -22,9 +22,7 @@ class SolutionsScreen extends StatefulWidget {
 }
 
 class _SolutionsScreenState extends State<SolutionsScreen> {
-  PageController pageController = PageController();
   QuestionsAnswerViewModel questionsAnswerViewModel = Get.find();
-  List<Map<String, dynamic>> selectedAnswerList = [];
 
   @override
   void initState() {
@@ -69,7 +67,7 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                   SizeConfig.sH25,
                   Expanded(
                     child: PageView(
-                      controller: pageController,
+                      controller: questionsAnswerViewModel.pageController.value,
                       physics: const NeverScrollableScrollPhysics(),
                       children: List.generate(questionsDetail.length, (index) {
                         final question = questionsDetail[index];
@@ -82,7 +80,7 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                   borderRadius: BorderRadius.circular(18.r),
                                   onTap: () {
                                     if (index > 0) {
-                                      pageController.previousPage(
+                                      questionsAnswerViewModel.pageController.value.previousPage(
                                         duration:
                                             const Duration(milliseconds: 500),
                                         curve: Curves.ease,
@@ -119,7 +117,7 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                   borderRadius: BorderRadius.circular(18.r),
                                   onTap: () {
                                     if (questionsDetail.length - 1 > index) {
-                                      pageController.nextPage(
+                                      questionsAnswerViewModel.pageController.value.nextPage(
                                           duration:
                                               const Duration(milliseconds: 500),
                                           curve: Curves.ease);
@@ -159,7 +157,9 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                       ? AudioWaveForm(
                                           videoUrl: questionsDetail[index]
                                               .audio
-                                              .toString())
+                                              .toString(),
+                                          isSolutionScreen: true,
+                                        )
                                       : ListView.builder(
                                           shrinkWrap: true,
                                           itemCount: 4,
@@ -246,18 +246,18 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                 Expanded(
                                   child: CustomBtn(
                                     onTap: () {
-                                      final containIndex = selectedAnswerList
+                                      final containIndex = questionsAnswerViewModel.selectedAnswerList
                                           .indexWhere((element) =>
                                               element['questionId'] ==
                                               question.id);
                                       if (containIndex == -1) {
-                                        selectedAnswerList.add({
+                                        questionsAnswerViewModel.selectedAnswerList.add({
                                           "questionId": question.id,
                                           "option": "",
                                         });
                                       }
                                       if (questionsDetail.length - 1 > index) {
-                                        pageController.nextPage(
+                                        questionsAnswerViewModel.pageController.value.nextPage(
                                             duration: const Duration(
                                                 milliseconds: 500),
                                             curve: Curves.ease);
@@ -278,36 +278,11 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                   child: CustomBtn(
                                     onTap: () async {
                                       if (questionsDetail.length - 1 > index) {
-                                        pageController.nextPage(
+                                        questionsAnswerViewModel.pageController.value.nextPage(
                                             duration: const Duration(
                                                 milliseconds: 500),
                                             curve: Curves.ease);
-                                      } else if (index ==
-                                          questionsDetail.length - 1) {
-                                        /// CALL SAVE QUESTIONS API
-                                        List saveQuestionsIdList = [];
-                                        List saveAnswerIdList = [];
-                                        for (var item in selectedAnswerList) {
-                                          saveQuestionsIdList.add(
-                                              item['questionId'].toString());
-                                          saveAnswerIdList
-                                              .add(item['answerId'].toString());
-                                        }
-                                        if (kDebugMode) {
-                                          print(
-                                              'saveQuestionsIdList---------->$saveQuestionsIdList');
-                                        }
-                                        if (kDebugMode) {
-                                          print(
-                                              'saveAnswerIdList=========>$saveAnswerIdList');
-                                        }
-                                        /*questionsAnswerViewModel
-                                            .saveQuestionsViewModel(
-                                            examId: widget.examId,
-                                            answers: saveAnswerIdList,
-                                            questionIds: saveQuestionsIdList
-                                        );*/
-                                      }
+                                      } else if (index == questionsDetail.length - 1) {}
                                     },
                                     title: AppStrings.next,
                                     bgColor: AppColors.primaryColor,

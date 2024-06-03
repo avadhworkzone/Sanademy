@@ -29,8 +29,6 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
         isLoading = false;
       });
     });
-
-    // TODO: implement initState
     super.initState();
   }
 
@@ -195,8 +193,6 @@ class CustomSliderThumbShape extends SliderComponentShape {
     canvas.drawPath(thumbPath, paint);
 
     final double secondCircleRadius = radius * 0.8.w;
-    final Offset secondCircleCenter =
-        Offset(center.dx, center.dy - radius / secondCircleRadius);
 
     final Paint secondColorPaint = Paint()..color = color2;
 

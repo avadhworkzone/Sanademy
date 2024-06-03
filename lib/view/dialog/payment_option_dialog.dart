@@ -97,7 +97,6 @@ void paymentOptionDialog(BuildContext context) {
                 ),
                 SizeConfig.sH16,
                 Row(
-                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomBtn(
                       onTap: () {},

@@ -7,9 +7,32 @@
     <list default="true" id="83c49ef8-8fc9-48dc-9daa-57274fc03aea" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/localization/ar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/localization/ar.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/localization/en_us.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/localization/en_us.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/app_colors.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_colors.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/app_string.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_string.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/view/audio_wave_form.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/audio_wave_form.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/auth/otp_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/auth/otp_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/auth/sign_up_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/auth/sign_up_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/dialog/payment_option_dialog.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/dialog/payment_option_dialog.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/view/examScreen/questions_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/examScreen/questions_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/view/examScreen/solutions_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/examScreen/solutions_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/general/connectivity_wrapper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/general/connectivity_wrapper.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/homeScreen/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/homeScreen/home_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/homeScreen/sub_screens/categories_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/homeScreen/sub_screens/categories_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/homeScreen/sub_screens/description_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/homeScreen/sub_screens/description_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/homeScreen/widget/common_recommended_container_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/homeScreen/widget/common_recommended_container_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/homeScreen/widget/home_recommend_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/homeScreen/widget/home_recommend_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/menu_screen/about_us_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/menu_screen/about_us_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/menu_screen/contact_us_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/menu_screen/contact_us_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/myProgressScreen/my_progress_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/myProgressScreen/my_progress_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/my_certificate_screen/my_certificate_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/my_certificate_screen/my_certificate_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/notificationScreen/notification_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/notificationScreen/notification_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/profile_screen/profile_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/profile_screen/profile_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/splashScreen/splash_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/splashScreen/splash_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/view_all_screen/view_all_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/view_all_screen/view_all_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view_model/question_answer_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view_model/question_answer_view_model.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

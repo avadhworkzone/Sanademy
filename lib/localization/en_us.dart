@@ -1,9 +1,8 @@
 import 'package:sanademy/utils/app_string.dart';
 
 Map<String, String> en = {
-  /// create account screen
+  /// CREATE ACCOUNT SCREEN
   AppStrings.enterYourName: "Enter your name",
-
   AppStrings.titleTxt: "Sana Academy",
   AppStrings.register: "Register",
   AppStrings.registerYourAccount:
@@ -11,6 +10,8 @@ Map<String, String> en = {
   AppStrings.dateFormat: "mm/dd/yyyy",
   AppStrings.enterYourPhoneNumber: "Enter your phone number",
   AppStrings.submit: "Submit",
+
+  /// OTP SCREEN
   AppStrings.otpTxt: "OTP Verification",
   AppStrings.enterOtpTxt:
       "Please enter the verification code sent to your number",
@@ -75,7 +76,6 @@ Map<String, String> en = {
   AppStrings.firstIraqiBank: 'First Iraqi Bank',
   AppStrings.mobileBalance: 'Mobile Balance',
   AppStrings.creditCard: 'Credit Card',
-  AppStrings.notifications: 'Notifications',
   AppStrings.contactUs: 'Contact Us',
   AppStrings.aboutUs: 'About Us',
   AppStrings.ourMission: 'Our Mission',
@@ -97,19 +97,25 @@ Map<String, String> en = {
 
   /// Profile Screen
   AppStrings.save: 'Save',
+  AppStrings.profile : 'Profile',
   AppStrings.enterAddress: 'Enter your address',
   AppStrings.connectWithFaceBook: 'Connect With Facebook',
   AppStrings.connectWithInstagram: 'Connect With Instagram',
+  AppStrings.pickProfilePicture: 'Pick Profile Picture',
+  AppStrings.pickFromGallery: 'Pick From Gallery',
+  AppStrings.pickFromCamera: 'Pick From Camera',
 
   /// my progress screen
   AppStrings.progressIntroductionTxt:
       "In this page, you can see all your enrolled courses and the progress that you made in each one of them.",
 
-  /// certificate screen
+  /// my certificate screen
+  AppStrings.certificate: 'My Certificates',
   AppStrings.certificateScreenTxt:
       "In this page, you can see all your certificates for completing each course, or passing the test in that field.",
 
   /// notification screen
+  AppStrings.notifications: 'Notifications',
   AppStrings.clearAll: "Clear all",
 
   /// exam screen
@@ -122,7 +128,6 @@ Map<String, String> en = {
   AppStrings.questions: "Questions",
   AppStrings.of: "of",
   AppStrings.q: "Q",
-
   AppStrings.skip: "Skip",
   AppStrings.next: "Next",
   AppStrings.writeHere: "Write here....",
@@ -139,6 +144,16 @@ Map<String, String> en = {
   AppStrings.result: "Result",
   AppStrings.continues: "Continue",
   AppStrings.pass: "Pass",
+
+  /// solution screen
+  AppStrings.solution : "Solutions",
+  AppStrings.yourAnswer : "Your Answer",
+  AppStrings.correctAnswer : "Correct Answer",
+
+  /// payment success dialog
+  AppStrings.thankYouTxt :
+  'Thank you for your interest in participating in “Course Name” this course is priced at',
+  AppStrings.thankYouTxt2 : 'you can make the payment through below options',
 
   ///APP ERROR MESSAGE
   AppStrings.emailIsRequired: "email is required",

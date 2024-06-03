@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/networks/api_base_helper.dart';
@@ -11,10 +13,35 @@ import 'package:sanademy/utils/enum_utils.dart';
 import 'package:sanademy/view/examScreen/congratulations_screen.dart';
 
 class QuestionsAnswerViewModel extends GetxController {
-  Rx<TextEditingController> commentController = TextEditingController().obs;
+  Rx<TextEditingController> audioAnswerController = TextEditingController().obs;
   Rx<ResponseStatus> responseStatus = ResponseStatus.INITIAL.obs;
   RxList<QuestionsDetail> questionsDetail = <QuestionsDetail>[].obs;
   GetQuestionResModel getQuestionResModel = GetQuestionResModel();
+  Rx<PageController> pageController = PageController().obs;
+  Rx<Timer>? timer1;
+  Rx<Duration> duration = const Duration(seconds: 0).obs;
+  String timeIs = DateTime.now().toString();
+  List<Map<String, dynamic>> selectedAnswerList = [];
+
+
+  initData(bool mounted) {
+    timer1 = Timer.periodic(const Duration(seconds: 1), (timer) async {
+      var difference = DateTime.now().difference(DateTime.parse(timeIs));
+      if (mounted) {
+          duration.value = Duration(seconds: difference.inSeconds);
+      }
+    }).obs;
+  }
+
+  void stopTimer() {
+    if (timer1 != null) {
+      timer1!.value.cancel();
+    }
+  }
+
+  void jumpToPage(int pageIndex) {
+    pageController.value.jumpToPage(pageIndex);
+  }
 
   Future<void> getQuestionsViewModel({
     required String examId,

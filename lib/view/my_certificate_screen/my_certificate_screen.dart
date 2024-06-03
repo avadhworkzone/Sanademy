@@ -70,7 +70,7 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.r),
                           gradient: LinearGradient(colors: myCertificateList[index]['color']),
-                          image: DecorationImage(
+                          image: const DecorationImage(
                               image: AssetImage(AppImageAssets.recommendedBgImg))
                       ),
                       child: Column(
