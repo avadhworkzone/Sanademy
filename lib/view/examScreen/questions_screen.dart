@@ -329,9 +329,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                           curve: Curves.ease);
                                     } else if (index ==
                                         questionsDetail.length - 1) {
-                                      Get.to(CongratulationsScreen(
+                                      /*Get.to(CongratulationsScreen(
                                         examTitle: widget.examTitle,
-                                      ));
+                                      ));*/
                                     }
                                   },
                                   title: AppStrings.skip,

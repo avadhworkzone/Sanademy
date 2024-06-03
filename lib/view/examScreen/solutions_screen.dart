@@ -6,6 +6,7 @@ import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_string.dart';
+import 'package:sanademy/utils/enum_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/audio_wave_form.dart';
 import 'package:sanademy/view_model/question_answer_view_model.dart';
@@ -42,6 +43,14 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.w),
           child: Obx(
             () {
+              if (questionsAnswerViewModel.responseStatus.value ==
+                  ResponseStatus.Loading ||
+                  questionsAnswerViewModel.responseStatus.value ==
+                      ResponseStatus.INITIAL) {}
+              if (questionsAnswerViewModel.responseStatus.value ==
+                  ResponseStatus.Error) {
+                return const Center(child: CustomText("Something went wrong"));
+              }
               final questionsDetail = questionsAnswerViewModel.questionsDetail;
               return Column(
                 children: [
@@ -67,7 +76,7 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                   SizeConfig.sH25,
                   Expanded(
                     child: PageView(
-                      controller: questionsAnswerViewModel.pageController.value,
+                      controller: questionsAnswerViewModel.solutionPageController.value,
                       physics: const NeverScrollableScrollPhysics(),
                       children: List.generate(questionsDetail.length, (index) {
                         final question = questionsDetail[index];
@@ -80,7 +89,7 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                   borderRadius: BorderRadius.circular(18.r),
                                   onTap: () {
                                     if (index > 0) {
-                                      questionsAnswerViewModel.pageController.value.previousPage(
+                                      questionsAnswerViewModel.solutionPageController.value.previousPage(
                                         duration:
                                             const Duration(milliseconds: 500),
                                         curve: Curves.ease,
@@ -117,7 +126,7 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                   borderRadius: BorderRadius.circular(18.r),
                                   onTap: () {
                                     if (questionsDetail.length - 1 > index) {
-                                      questionsAnswerViewModel.pageController.value.nextPage(
+                                      questionsAnswerViewModel.solutionPageController.value.nextPage(
                                           duration:
                                               const Duration(milliseconds: 500),
                                           curve: Curves.ease);
@@ -227,7 +236,6 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                                   CustomText(
                                                     option,
                                                     fontWeight: FontWeight.w500,
-                                                    // color: color
                                                   )
                                                 ],
                                               ),
@@ -257,7 +265,7 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                         });
                                       }
                                       if (questionsDetail.length - 1 > index) {
-                                        questionsAnswerViewModel.pageController.value.nextPage(
+                                        questionsAnswerViewModel.solutionPageController.value.nextPage(
                                             duration: const Duration(
                                                 milliseconds: 500),
                                             curve: Curves.ease);
@@ -278,7 +286,7 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                   child: CustomBtn(
                                     onTap: () async {
                                       if (questionsDetail.length - 1 > index) {
-                                        questionsAnswerViewModel.pageController.value.nextPage(
+                                        questionsAnswerViewModel.solutionPageController.value.nextPage(
                                             duration: const Duration(
                                                 milliseconds: 500),
                                             curve: Curves.ease);

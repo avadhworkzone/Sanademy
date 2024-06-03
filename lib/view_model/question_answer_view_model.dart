@@ -18,6 +18,7 @@ class QuestionsAnswerViewModel extends GetxController {
   RxList<QuestionsDetail> questionsDetail = <QuestionsDetail>[].obs;
   GetQuestionResModel getQuestionResModel = GetQuestionResModel();
   Rx<PageController> pageController = PageController().obs;
+  Rx<PageController> solutionPageController = PageController().obs;
   Rx<Timer>? timer1;
   Rx<Duration> duration = const Duration(seconds: 0).obs;
   String timeIs = DateTime.now().toString();
