@@ -137,7 +137,6 @@ class _WaveBubbleState extends State<WaveBubble> {
   Future<void> _preparePlayer() async {
     if (widget.videoUrl != null) {
       file = await _downloadFile(widget.videoUrl!);
-      setState(() {});
     }
     if (file?.path == null) {
       return;
@@ -155,7 +154,6 @@ class _WaveBubbleState extends State<WaveBubble> {
 
     final response = await http.get(Uri.parse(url));
     await file.writeAsBytes(response.bodyBytes);
-    setState(() {});
     return file;
 
   }

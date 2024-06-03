@@ -371,8 +371,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                               Expanded(
                                 child: CustomBtn(
                                   onTap: () async {
-                                    stopTimer();
-                                    final formattedTime = formatDuration(duration.inSeconds);
+
                                     if (questionsDetail.length - 1 > index) {
                                       pageController.nextPage(
                                           duration:
@@ -380,6 +379,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                           curve: Curves.ease);
                                     } else if (index ==
                                         questionsDetail.length - 1) {
+                                      stopTimer();
+                                      final formattedTime = formatDuration(duration.inSeconds);
                                       /// CALL SAVE QUESTIONS API
                                       List saveQuestionsIdList = [];
                                       List saveAnswerIdList = [];

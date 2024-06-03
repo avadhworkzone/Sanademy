@@ -166,83 +166,70 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                           itemBuilder: (context, optionIndex) {
                                             final option = question.toJson()[
                                                 'option_${optionIndex + 1}'];
-                                            bool isSelected = false;
-                                            final containIndex =
-                                                selectedAnswerList.indexWhere(
-                                                    (element) =>
-                                                        element['questionId'] ==
-                                                        question.id);
-
-                                            if (containIndex > -1) {
-                                              if (selectedAnswerList[
-                                                      containIndex]['option'] ==
-                                                  option) {
-                                                isSelected = true;
-                                              }
+                                            int isCorrect = -1;
+                                            int isFail = -1;
+                                            if (question.selectedAnswer ==
+                                                question.correctAns) {
+                                              isCorrect = int.parse(
+                                                  question.correctAns ?? '-1');
+                                            } else {
+                                              isCorrect = int.parse(
+                                                  question.correctAns ?? '-1');
+                                              isFail = int.parse(
+                                                  question.selectedAnswer ??
+                                                      '-1');
                                             }
-                                            return GestureDetector(
-                                              onTap: () {
-                                                if (containIndex == -1) {
-                                                  selectedAnswerList.add({
-                                                    "questionId": question.id,
-                                                    "option": option,
-                                                    "answerId": optionIndex + 1,
-                                                  });
-                                                  if (kDebugMode) {
-                                                    print(
-                                                        'selectedAnswerList<<<$selectedAnswerList>>>>');
-                                                  }
-                                                } else {
-                                                  selectedAnswerList[
-                                                          containIndex]
-                                                      ['option'] = option;
-                                                  selectedAnswerList[
-                                                              containIndex]
-                                                          ['answerId'] =
-                                                      optionIndex + 1;
-                                                }
-                                              },
-                                              child: Container(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 10.w,
-                                                    vertical: 15.w),
-                                                margin: EdgeInsets.symmetric(
-                                                    vertical: 10.w),
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: isSelected
-                                                            ? AppColors
-                                                                .primaryColor
-                                                            : AppColors.greyEE),
-                                                    color: AppColors.greyFD,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10)),
-                                                child: Row(
-                                                  children: [
-                                                    Icon(
-                                                      isSelected
-                                                          ? Icons
-                                                              .radio_button_checked
-                                                          : Icons
-                                                              .radio_button_off,
-                                                      color: isSelected
-                                                          ? AppColors
-                                                              .primaryColor
-                                                          : AppColors.black,
-                                                    ),
-                                                    SizeConfig.sW10,
-                                                    CustomText(
-                                                      option,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: isSelected
-                                                          ? AppColors
-                                                              .primaryColor
-                                                          : AppColors.black,
-                                                    )
-                                                  ],
-                                                ),
+                                            return Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 10.w,
+                                                  vertical: 15.w),
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 10.w),
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: isCorrect ==
+                                                              (optionIndex + 1)
+                                                          ? AppColors.green0B
+                                                          : isFail ==
+                                                                  (optionIndex +
+                                                                      1)
+                                                              ? AppColors.red
+                                                              : AppColors
+                                                                  .greyEE),
+                                                  color: AppColors.greyFD,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10)),
+                                              child: Row(
+                                                children: [
+                                                  Icon(
+                                                    isCorrect ==
+                                                            (optionIndex + 1)
+                                                        ? Icons
+                                                            .radio_button_checked
+                                                        : isFail ==
+                                                                (optionIndex +
+                                                                    1)
+                                                            ? Icons
+                                                                .radio_button_checked
+                                                            : Icons
+                                                                .radio_button_off,
+                                                    color: isCorrect ==
+                                                            (optionIndex + 1)
+                                                        ? AppColors.green0B
+                                                        : isFail ==
+                                                                (optionIndex +
+                                                                    1)
+                                                            ? AppColors.red
+                                                            : AppColors.black0E,
+                                                  ),
+                                                  SizeConfig.sW10,
+                                                  CustomText(
+                                                    option,
+                                                    fontWeight: FontWeight.w500,
+                                                    // color: color
+                                                  )
+                                                ],
                                               ),
                                             );
                                           },
