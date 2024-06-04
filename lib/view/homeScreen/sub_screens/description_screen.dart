@@ -32,6 +32,8 @@ class DescriptionScreen extends StatefulWidget {
 
 class _DescriptionScreenState extends State<DescriptionScreen> {
   DescriptionViewModel descriptionViewModel = Get.put(DescriptionViewModel());
+  Duration watchedTime = Duration.zero;
+  Duration remainingTime = Duration.zero;
 
   @override
   void initState() {
@@ -40,7 +42,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   }
 
   descriptionApiCall() async {
-    descriptionViewModel.courseDetailViewModel(courseId: widget.courseId);
+    await descriptionViewModel.courseDetailViewModel(courseId: widget.courseId);
     descriptionViewModel.youtubePlayerController = YoutubePlayerController(
       initialVideoId: '',
       flags: const YoutubePlayerFlags(
@@ -56,6 +58,16 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   void dispose() {
     descriptionViewModel.youtubePlayerController?.value.dispose();
     super.dispose();
+  }
+
+  saveCourseProgressApiCall() async {
+    await  descriptionViewModel.saveCourseProcessViewModel(
+      courseId: "1",
+      completedHour: descriptionViewModel.completedHours.toString(),
+      completedMinute: descriptionViewModel.completedMinutes.toString(),
+      remainingHour: descriptionViewModel.remainingHours.toString(),
+      remainingMinute: descriptionViewModel.remainingMinutes.toString(),
+    );
   }
 
   @override
@@ -113,7 +125,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                         Positioned(
                           child: GestureDetector(
                               onTap: () {
-                                Get.back();
+                                saveCourseProgressApiCall();
+
                               },
                               child: Container(
                                 margin: EdgeInsets.only(

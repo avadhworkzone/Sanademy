@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -101,7 +100,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                               imagePath: AppImageAssets.clockIcon),
                           SizeConfig.sW5,
                           CustomText(
-                            formatDuration(questionsAnswerViewModel.duration.value.inSeconds),
+                            formatDuration(questionsAnswerViewModel
+                                .duration.value.inSeconds),
                             color: AppColors.primaryColor,
                             fontWeight: FontWeight.w700,
                           ),
@@ -126,7 +126,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                 borderRadius: BorderRadius.circular(18.r),
                                 onTap: () {
                                   if (index > 0) {
-                                    questionsAnswerViewModel.pageController.value.previousPage(
+                                    questionsAnswerViewModel
+                                        .pageController.value
+                                        .previousPage(
                                       duration:
                                           const Duration(milliseconds: 500),
                                       curve: Curves.ease,
@@ -163,16 +165,19 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                 borderRadius: BorderRadius.circular(18.r),
                                 onTap: () {
                                   if (questionsDetail.length - 1 > index) {
-                                    questionsAnswerViewModel.pageController.value.nextPage(
-                                        duration:
-                                            const Duration(milliseconds: 500),
-                                        curve: Curves.ease);
+                                    questionsAnswerViewModel
+                                        .pageController.value
+                                        .nextPage(
+                                            duration: const Duration(
+                                                milliseconds: 500),
+                                            curve: Curves.ease);
                                   } else if (index ==
                                       questionsDetail.length - 1) {
                                     /// CALL SAVE QUESTIONS API
                                     List saveQuestionsIdList = [];
                                     List saveAnswerIdList = [];
-                                    for (var item in questionsAnswerViewModel.selectedAnswerList) {
+                                    for (var item in questionsAnswerViewModel
+                                        .selectedAnswerList) {
                                       saveQuestionsIdList
                                           .add(item['questionId'].toString());
                                       saveAnswerIdList
@@ -226,14 +231,16 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                               'option_${optionIndex + 1}'];
                                           bool isSelected = false;
                                           final containIndex =
-                                          questionsAnswerViewModel.selectedAnswerList.indexWhere(
-                                                  (element) =>
+                                              questionsAnswerViewModel
+                                                  .selectedAnswerList
+                                                  .indexWhere((element) =>
                                                       element['questionId'] ==
                                                       question.id);
 
                                           if (containIndex > -1) {
-                                            if (questionsAnswerViewModel.selectedAnswerList[containIndex]
-                                                    ['option'] ==
+                                            if (questionsAnswerViewModel
+                                                        .selectedAnswerList[
+                                                    containIndex]['option'] ==
                                                 option) {
                                               isSelected = true;
                                             }
@@ -241,21 +248,26 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                           return GestureDetector(
                                             onTap: () {
                                               if (containIndex == -1) {
-                                                questionsAnswerViewModel.selectedAnswerList.add({
+                                                questionsAnswerViewModel
+                                                    .selectedAnswerList
+                                                    .add({
                                                   "questionId": question.id,
                                                   "option": option,
                                                   "answerId": optionIndex + 1,
                                                 });
                                                 if (kDebugMode) {
                                                   print(
-                                                      'questionsAnswerViewModel.selectedAnswerList<<<$questionsAnswerViewModel.selectedAnswerList>>>>');
+                                                      'questionsAnswerViewModel.selectedAnswerList<<<${questionsAnswerViewModel.selectedAnswerList}>>>>');
                                                 }
                                               } else {
-                                                questionsAnswerViewModel.selectedAnswerList[containIndex]
+                                                questionsAnswerViewModel
+                                                            .selectedAnswerList[
+                                                        containIndex]
                                                     ['option'] = option;
-                                                questionsAnswerViewModel.selectedAnswerList[containIndex]
-                                                        ['answerId'] =
-                                                    optionIndex + 1;
+                                                questionsAnswerViewModel
+                                                            .selectedAnswerList[
+                                                        containIndex][
+                                                    'answerId'] = optionIndex + 1;
                                               }
                                             },
                                             child: Container(
@@ -312,21 +324,27 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                               Expanded(
                                 child: CustomBtn(
                                   onTap: () {
-                                    final containIndex = questionsAnswerViewModel.selectedAnswerList
-                                        .indexWhere((element) =>
-                                            element['questionId'] ==
-                                            question.id);
+                                    final containIndex =
+                                        questionsAnswerViewModel
+                                            .selectedAnswerList
+                                            .indexWhere((element) =>
+                                                element['questionId'] ==
+                                                question.id);
                                     if (containIndex == -1) {
-                                      questionsAnswerViewModel.selectedAnswerList.add({
+                                      questionsAnswerViewModel
+                                          .selectedAnswerList
+                                          .add({
                                         "questionId": question.id,
                                         "option": "",
                                       });
                                     }
                                     if (questionsDetail.length - 1 > index) {
-                                      questionsAnswerViewModel.pageController.value.nextPage(
-                                          duration:
-                                              const Duration(milliseconds: 500),
-                                          curve: Curves.ease);
+                                      questionsAnswerViewModel
+                                          .pageController.value
+                                          .nextPage(
+                                              duration: const Duration(
+                                                  milliseconds: 500),
+                                              curve: Curves.ease);
                                     } else if (index ==
                                         questionsDetail.length - 1) {
                                       /*Get.to(CongratulationsScreen(
@@ -346,26 +364,36 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                 child: CustomBtn(
                                   onTap: () async {
                                     if (questionsDetail.length - 1 > index) {
-                                      questionsAnswerViewModel.pageController.value.nextPage(
-                                          duration:
-                                              const Duration(milliseconds: 500),
-                                          curve: Curves.ease);
-                                    } else if (index == questionsDetail.length - 1) {
+                                      questionsAnswerViewModel
+                                          .pageController.value
+                                          .nextPage(
+                                              duration: const Duration(
+                                                  milliseconds: 500),
+                                              curve: Curves.ease);
+                                    } else if (index ==
+                                        questionsDetail.length - 1) {
                                       questionsAnswerViewModel.stopTimer();
-                                      final formattedTime =
-                                          formatDuration(questionsAnswerViewModel.duration.value.inSeconds);
+                                      final formattedTime = formatDuration(
+                                          questionsAnswerViewModel
+                                              .duration.value.inSeconds);
+
                                       /// CALL SAVE QUESTIONS API
                                       List saveQuestionsIdList = [];
                                       List saveAnswerIdList = [];
-                                      for (var item in questionsAnswerViewModel.selectedAnswerList) {
+                                      questionsAnswerViewModel
+                                          .selectedAnswerList
+                                          .add({
+                                        "questionId": question.id,
+                                        "answerId": questionsAnswerViewModel
+                                            .audioAnswerController.value.text
+                                      });
+                                      for (var item in questionsAnswerViewModel
+                                          .selectedAnswerList) {
                                         saveQuestionsIdList
                                             .add(item['questionId'].toString());
                                         saveAnswerIdList
                                             .add(item['answerId'].toString());
                                       }
-                                      saveAnswerIdList.add(
-                                          questionsAnswerViewModel
-                                              .audioAnswerController.value.text);
                                       questionsAnswerViewModel
                                           .saveQuestionsViewModel(
                                               widget.examTitle,

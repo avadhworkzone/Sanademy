@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:sanademy/commonWidget/commom_textfield.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
+import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
+import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
+import 'package:sanademy/utils/regex.dart';
+import 'package:sanademy/view_model/home_screen_view_model.dart';
 
 AppBar commonAppBar(
     {String? titleTxt,
@@ -23,7 +28,7 @@ AppBar commonAppBar(
     automaticallyImplyLeading: false,
     centerTitle: centerTitle ?? true,
     elevation: 0.0,
-    bottomOpacity: 0.0,
+    // bottomOpacity: 0.0,
     scrolledUnderElevation: 0,
     leading: leadingWidget ?? const SizedBox(),
     leadingWidth: leadingWidth ?? 0.w,
@@ -49,10 +54,8 @@ AppBar commonAppBar(
             ),
           ],
         ),
-    bottom: bottom == null
-        ? null
-        : PreferredSize(
-            preferredSize: Size(Get.width, 20.h), child: SizedBox()),
+    bottom: bottom /*?? PreferredSize(
+            preferredSize: Size(Get.width, 10.h), child: const SizedBox(), ),*/
   );
 }
 

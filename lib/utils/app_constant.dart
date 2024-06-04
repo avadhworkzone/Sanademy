@@ -1,6 +1,7 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
 
@@ -11,6 +12,9 @@ class AppConstants {
 
   static const String quicksand = "Quicksand";
 }
+
+RxBool isCallApi = false.obs;
+
 /*
 
 final List<String> images = [

@@ -42,6 +42,7 @@ class AppStrings {
   static String lectures = 'lectures';
   static String hours = 'hours';
   static String minutes = 'minutes';
+  static String noDataFound = 'No Data Found';
 
   ///  Description Screen
   static String enrollNow = 'Enroll Now';

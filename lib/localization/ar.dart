@@ -44,6 +44,7 @@ Map<String, String> ar = {
   AppStrings.lectures: "محاضرات",
   AppStrings.hours: "ساعات",
   AppStrings.minutes: "دقائق",
+  AppStrings.noDataFound : 'لاتوجد بيانات',
 
   /// Description Screen
   AppStrings.enrollNow: "تسجيل الآن",

@@ -17,11 +17,12 @@ class AudioWaveForm extends StatefulWidget {
   const AudioWaveForm({
     super.key,
     required this.videoUrl,
-    this.isSolutionScreen = false,
+    this.isSolutionScreen = false, this.index = 0,
   });
 
   final String videoUrl;
   final bool isSolutionScreen;
+  final int index;
 
   @override
   State<AudioWaveForm> createState() => _AudioWaveFormState();
@@ -86,7 +87,8 @@ class _AudioWaveFormState extends State<AudioWaveForm> {
                           SizeConfig.sH15,
                           CustomText(
                             questionsAnswerViewModel
-                                .audioAnswerController.value.text,
+                                .questionsDetail[widget.index].selectedAnswer
+                                .toString(),
                           ),
                           SizeConfig.sH15,
                            CustomText(AppStrings.correctAnswer,
@@ -95,7 +97,7 @@ class _AudioWaveFormState extends State<AudioWaveForm> {
                           SizeConfig.sH15,
                           CustomText(
                             questionsAnswerViewModel
-                                .questionsDetail[1].correctAns
+                                .questionsDetail[widget.index].correctAns
                                 .toString(),
                           ),
                         ],

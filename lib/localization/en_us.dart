@@ -44,6 +44,7 @@ Map<String, String> en = {
   AppStrings.lectures: "lectures",
   AppStrings.hours: "hours",
   AppStrings.minutes: "minutes",
+  AppStrings.noDataFound : 'No Data Found',
 
   /// Description Screen
   AppStrings.enrollNow: "Enroll Now",

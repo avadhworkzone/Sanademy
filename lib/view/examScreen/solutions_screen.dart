@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -44,7 +43,7 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
           child: Obx(
             () {
               if (questionsAnswerViewModel.responseStatus.value ==
-                  ResponseStatus.Loading ||
+                      ResponseStatus.Loading ||
                   questionsAnswerViewModel.responseStatus.value ==
                       ResponseStatus.INITIAL) {}
               if (questionsAnswerViewModel.responseStatus.value ==
@@ -76,7 +75,8 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                   SizeConfig.sH25,
                   Expanded(
                     child: PageView(
-                      controller: questionsAnswerViewModel.solutionPageController.value,
+                      controller:
+                          questionsAnswerViewModel.solutionPageController.value,
                       physics: const NeverScrollableScrollPhysics(),
                       children: List.generate(questionsDetail.length, (index) {
                         final question = questionsDetail[index];
@@ -89,7 +89,9 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                   borderRadius: BorderRadius.circular(18.r),
                                   onTap: () {
                                     if (index > 0) {
-                                      questionsAnswerViewModel.solutionPageController.value.previousPage(
+                                      questionsAnswerViewModel
+                                          .solutionPageController.value
+                                          .previousPage(
                                         duration:
                                             const Duration(milliseconds: 500),
                                         curve: Curves.ease,
@@ -126,10 +128,12 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                   borderRadius: BorderRadius.circular(18.r),
                                   onTap: () {
                                     if (questionsDetail.length - 1 > index) {
-                                      questionsAnswerViewModel.solutionPageController.value.nextPage(
-                                          duration:
-                                              const Duration(milliseconds: 500),
-                                          curve: Curves.ease);
+                                      questionsAnswerViewModel
+                                          .solutionPageController.value
+                                          .nextPage(
+                                              duration: const Duration(
+                                                  milliseconds: 500),
+                                              curve: Curves.ease);
                                     } /* else if (index ==
                                         questionsDetail.length - 1) {
                                       Get.to(const CongratulationsScreen());
@@ -168,6 +172,7 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                               .audio
                                               .toString(),
                                           isSolutionScreen: true,
+                                          index: index,
                                         )
                                       : ListView.builder(
                                           shrinkWrap: true,
@@ -254,21 +259,27 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                 Expanded(
                                   child: CustomBtn(
                                     onTap: () {
-                                      final containIndex = questionsAnswerViewModel.selectedAnswerList
-                                          .indexWhere((element) =>
-                                              element['questionId'] ==
-                                              question.id);
+                                      final containIndex =
+                                          questionsAnswerViewModel
+                                              .selectedAnswerList
+                                              .indexWhere((element) =>
+                                                  element['questionId'] ==
+                                                  question.id);
                                       if (containIndex == -1) {
-                                        questionsAnswerViewModel.selectedAnswerList.add({
+                                        questionsAnswerViewModel
+                                            .selectedAnswerList
+                                            .add({
                                           "questionId": question.id,
                                           "option": "",
                                         });
                                       }
                                       if (questionsDetail.length - 1 > index) {
-                                        questionsAnswerViewModel.solutionPageController.value.nextPage(
-                                            duration: const Duration(
-                                                milliseconds: 500),
-                                            curve: Curves.ease);
+                                        questionsAnswerViewModel
+                                            .solutionPageController.value
+                                            .nextPage(
+                                                duration: const Duration(
+                                                    milliseconds: 500),
+                                                curve: Curves.ease);
                                       } /*else if (index ==
                                           questionsDetail.length - 1) {
                                         Get.to(const CongratulationsScreen());
@@ -286,11 +297,14 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                   child: CustomBtn(
                                     onTap: () async {
                                       if (questionsDetail.length - 1 > index) {
-                                        questionsAnswerViewModel.solutionPageController.value.nextPage(
-                                            duration: const Duration(
-                                                milliseconds: 500),
-                                            curve: Curves.ease);
-                                      } else if (index == questionsDetail.length - 1) {}
+                                        questionsAnswerViewModel
+                                            .solutionPageController.value
+                                            .nextPage(
+                                                duration: const Duration(
+                                                    milliseconds: 500),
+                                                curve: Curves.ease);
+                                      } else if (index ==
+                                          questionsDetail.length - 1) {}
                                     },
                                     title: AppStrings.next,
                                     bgColor: AppColors.primaryColor,

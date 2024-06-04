@@ -76,7 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         alignment: Alignment.bottomCenter,
                         children: [
                           Container(
-                            height: 120.h,
+                            height: 100.h,
                             margin: EdgeInsets.only(bottom: 60.h),
                             color: AppColors.primaryColor,
                           ),

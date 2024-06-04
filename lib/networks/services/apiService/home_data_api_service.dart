@@ -2,14 +2,16 @@ import 'package:flutter/foundation.dart';
 import 'package:sanademy/networks/api_base_helper.dart';
 import 'package:sanademy/networks/api_urls.dart';
 import 'package:sanademy/networks/response_model.dart';
+import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_utils.dart';
 
 class HomeDataService{
 
-  Future<ResponseModel?> homeDataRepo() async {
+  Future<ResponseModel?> homeDataRepo({required Map<String, dynamic> mapData}) async {
     final response = await ApiBaseHelper().postHTTP(
       ApiUrls.home,
-
+      params: mapData,
+      showProgress: (isCallApi.value)?false:true,
       onError: (error) {
         Utils.validationCheck(message: error.message);
       },
