@@ -61,7 +61,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   }
 
   saveCourseProgressApiCall() async {
-    await  descriptionViewModel.saveCourseProcessViewModel(
+    await descriptionViewModel.saveCourseProcessViewModel(
       courseId: "1",
       completedHour: descriptionViewModel.completedHours.toString(),
       completedMinute: descriptionViewModel.completedMinutes.toString(),
@@ -126,7 +126,6 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           child: GestureDetector(
                               onTap: () {
                                 saveCourseProgressApiCall();
-
                               },
                               child: Container(
                                 margin: EdgeInsets.only(

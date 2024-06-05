@@ -94,14 +94,14 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                         ),
                       )
                     : Padding(
-                      padding:  EdgeInsets.only(top: 40.h),
-                      child: CustomText(
+                        padding: EdgeInsets.only(top: 40.h),
+                        child: CustomText(
                           AppStrings.noDataFound,
                           fontSize: 20.sp,
                           fontWeight: FontWeight.w700,
                           color: AppColors.black0E,
                         ),
-                    )
+                      )
               ],
             )
           : const Material();
