@@ -6,7 +6,9 @@ import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
+import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view/auth/sign_up_screen.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
 import 'package:sanademy/view/examScreen/exam_screen.dart';
 import 'package:sanademy/view_model/bottom_bar_view_model.dart';
@@ -50,7 +52,9 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                 SizeConfig.sH30,
                 CustomBtn(
                   onTap: () {
-                    Get.to(() => const ExamScreen());
+                    SharedPreferenceUtils.getIsLogin() == true
+                        ? Get.to(() => const ExamScreen())
+                        : Get.to(() => const SignUpScreen());
                   },
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w700,
@@ -69,10 +73,11 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                           vertical: 20.h, horizontal: 20.w),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.r),
-                          gradient: LinearGradient(colors: myCertificateList[index]['color']),
+                          gradient: LinearGradient(
+                              colors: myCertificateList[index]['color']),
                           image: const DecorationImage(
-                              image: AssetImage(AppImageAssets.recommendedBgImg))
-                      ),
+                              image:
+                                  AssetImage(AppImageAssets.recommendedBgImg))),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -160,20 +165,13 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
       'titleTxt': 'Exploring the Beauty of Mathematical Structures',
       'lectures': '12 lectures',
       'time': '7 hours 40 minutes',
-      'color': [
-        Color(0xff9BEE42),
-        Color(0xff9BEE42)
-      ],
+      'color': [Color(0xff9BEE42), Color(0xff9BEE42)],
     },
     {
       'titleTxt': 'Exploring the Beauty of Mathematical Structures',
       'lectures': '14 lectures',
       'time': '8 hours 30 minutes',
-      'color':  [
-        Color(0xffE9984E),
-        Color(0xffDD6E07)
-      ],
+      'color': [Color(0xffE9984E), Color(0xffDD6E07)],
     },
-
   ];
 }

@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
+import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
+import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/view_model/bottom_bar_view_model.dart';
 
 class BottomBar extends StatefulWidget {
@@ -28,8 +30,7 @@ class _BottomBarState extends State<BottomBar> {
         bottomNavigationBar: Container(
           padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 12.w),
           width: Get.width,
-          decoration: BoxDecoration(color: AppColors.white,
-              boxShadow: [
+          decoration: BoxDecoration(color: AppColors.white, boxShadow: [
             BoxShadow(
               color: AppColors.black.withOpacity(0.10),
               blurRadius: 0.1,
