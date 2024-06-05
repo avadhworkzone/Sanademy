@@ -97,7 +97,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
                                   ),
                                   SizeConfig.sH10,
                                   CustomText(
-                                    '16/20',
+                                    '${congratulationsScreenViewModel.examResultResModel.data!.completedExam!.score ?? ''}/${congratulationsScreenViewModel.examResultResModel.data!.completedExam!.totalQuestion ?? ''}',
                                     fontWeight: FontWeight.w700,
                                     fontSize: 32.sp,
                                     color: AppColors.black0E,
@@ -114,7 +114,12 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
                                   ),
                                   SizeConfig.sH10,
                                   CustomText(
-                                    '10:00',
+                                    congratulationsScreenViewModel
+                                            .examResultResModel
+                                            .data!
+                                            .completedExam!
+                                            .time ??
+                                        '',
                                     fontWeight: FontWeight.w700,
                                     fontSize: 32.sp,
                                     color: AppColors.black0E,
@@ -136,15 +141,13 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
                             runSpacing: 10.w,
                             children: List.generate(
                                 congratulationsScreenViewModel
-                                    .examResultResModel
-                                    .data!
-                                    .length /*32*/, (index) {
+                                    .questionAnswerDetail.length, (index) {
                               var examResultData =
                                   congratulationsScreenViewModel
-                                      .examResultResModel.data;
+                                      .questionAnswerDetail;
                               return CircleAvatar(
                                   backgroundColor:
-                                      (examResultData![index].correct == 1)
+                                      (examResultData[index].correct == 1)
                                           ? AppColors.green0B
                                           : AppColors.colorsB2,
                                   radius: 11,
@@ -207,7 +210,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
                               ),
                               SizeConfig.sH10,
                               CustomText(
-                                '80%',
+                                '${congratulationsScreenViewModel.examResultResModel.data!.completedExam!.percentage ?? ''}%',
                                 fontWeight: FontWeight.w700,
                                 fontSize: 32.sp,
                                 color: AppColors.black0E,

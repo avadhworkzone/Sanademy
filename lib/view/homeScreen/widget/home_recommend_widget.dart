@@ -22,89 +22,89 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Obx(() {
-        return homeScreenViewModel.responseStatus.value ==
-                ResponseStatus.Completed
-            ? Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(
-                          AppStrings.recommended,
-                          fontWeight: FontWeight.w700,
+    return Obx(() {
+      return homeScreenViewModel.responseStatus.value ==
+              ResponseStatus.Completed
+          ? Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomText(
+                        AppStrings.recommended,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20.sp,
+                        color: AppColors.black0E,
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Get.to(const ViewAllScreen());
+                        },
+                        child: CustomText(
+                          AppStrings.viewAll,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 13.sp,
+                          color: AppColors.color8B,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                (homeScreenViewModel.courses.isNotEmpty)
+                    ? SizedBox(
+                        height: (250 * homeScreenViewModel.courses.length).h,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20.w),
+                          child: ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: homeScreenViewModel.courses.length,
+                              itemBuilder: (context, index) {
+                                final courses =
+                                    homeScreenViewModel.courses[index];
+                                final List<Color> colors = courses.colorCode!
+                                    .split(',')
+                                    .map((color) =>
+                                        Color(int.parse(color, radix: 16))
+                                            .withOpacity(1.0))
+                                    .toList();
+                                return Padding(
+                                  padding:
+                                      EdgeInsets.only(bottom: 15.h, top: 10.h),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Get.to(() => DescriptionScreen(
+                                            courseId: courses.id.toString(),
+                                            videoUrl: courses.videoUrl ?? '',
+                                          ));
+                                    },
+                                    child: CommonContainerWidget(
+                                      color: colors,
+                                      title: courses.title!,
+                                      numberOfLecture: courses.numberOfLecture!,
+                                      hours: courses.hours!,
+                                      minutes: courses.minutes!,
+                                      teacherName: courses.teacher!.name!,
+                                      teacherImage: courses.teacher!.image!,
+                                    ),
+                                  ),
+                                );
+                              }),
+                        ),
+                      )
+                    : Padding(
+                      padding:  EdgeInsets.only(top: 40.h),
+                      child: CustomText(
+                          AppStrings.noDataFound,
                           fontSize: 20.sp,
+                          fontWeight: FontWeight.w700,
                           color: AppColors.black0E,
                         ),
-                        TextButton(
-                          onPressed: () {
-                            Get.to(const ViewAllScreen());
-                          },
-                          child: CustomText(
-                            AppStrings.viewAll,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 13.sp,
-                            color: AppColors.color8B,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.w),
-                      child: ListView.builder(
-                          itemCount: homeScreenViewModel.courses.length,
-                          itemBuilder: (context, index) {
-                            final courses = homeScreenViewModel.courses[index];
-                            final List<Color> colors = courses.colorCode!
-                                .split(',')
-                                .map((color) =>
-                                    Color(int.parse(color, radix: 16))
-                                        .withOpacity(1.0))
-                                .toList();
-                            return Padding(
-                              padding: EdgeInsets.only(bottom: 15.h, top: 10.h),
-                              child: GestureDetector(
-                                onTap: () {
-                                  Get.to(() => DescriptionScreen(
-                                        courseId: courses.id.toString(),
-                                        videoUrl: courses.videoUrl ?? '',
-                                        /* description: homeScreenViewModel.courseDetailResModel.data![0].description ?? '',
-                                    requirements: homeScreenViewModel.courseDetailResModel.data![0].requirements ?? '',
-                                    whatWillYouLearn: homeScreenViewModel.courseDetailResModel.data![0].whatWillYouLearn!,
-                                    whoThisCourseIsFor: homeScreenViewModel.courseDetailResModel.data![0].whoThisCourseIsFor!,
-                                    teacherName: homeScreenViewModel.courseDetailResModel.data![0].teacher!.name!,
-                                    teacherImage: homeScreenViewModel.courseDetailResModel.data![0].teacher!.image!,
-                                    instructorDetail: homeScreenViewModel.courseDetailResModel.data![0].instructor!,
-                                    // courseContents: homeScreenViewModel.courseDetailResModel.data![0].courseContents!,
-                                    courseContentTitle: homeScreenViewModel.courseDetailResModel.data![0].courseContents![index].title!,
-                                    courseContentLecture: homeScreenViewModel.courseDetailResModel.data![0].courseContents![index].numberOfLecture!,
-                                    courseContentMinutes: homeScreenViewModel.courseDetailResModel.data![0].courseContents![index].minutes!,
-                                    courseContentDescription: homeScreenViewModel.courseDetailResModel.data![0].courseContents![index].description!,*/
-                                      ));
-                                },
-                                child: CommonContainerWidget(
-                                  color: colors,
-                                  title: courses.title!,
-                                  numberOfLecture: courses.numberOfLecture!,
-                                  hours: courses.hours!,
-                                  minutes: courses.minutes!,
-                                  teacherName: courses.teacher!.name!,
-                                  teacherImage: courses.teacher!.image!,
-                                ),
-                              ),
-                            );
-                          }),
-                    ),
-                  )
-                ],
-              )
-            : const Material();
-      }),
-    );
+                    )
+              ],
+            )
+          : const Material();
+    });
   }
 }

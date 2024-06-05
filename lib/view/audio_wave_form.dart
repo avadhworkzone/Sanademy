@@ -1,21 +1,28 @@
-
 import 'dart:async';
 import 'dart:io';
+
+import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
-import 'package:audio_waveforms/audio_waveforms.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view_model/question_answer_view_model.dart';
 
 class AudioWaveForm extends StatefulWidget {
-  const AudioWaveForm({super.key, required this.videoUrl});
+  const AudioWaveForm({
+    super.key,
+    required this.videoUrl,
+    this.isSolutionScreen = false, this.index = 0,
+  });
 
   final String videoUrl;
+  final bool isSolutionScreen;
+  final int index;
 
   @override
   State<AudioWaveForm> createState() => _AudioWaveFormState();
@@ -43,7 +50,7 @@ class _AudioWaveFormState extends State<AudioWaveForm> {
   Widget build(BuildContext context) {
     return Material(
       child: Obx(
-        () =>  Column(
+        () => Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
@@ -51,48 +58,87 @@ class _AudioWaveFormState extends State<AudioWaveForm> {
             _isLoading
                 ? const CircularProgressIndicator()
                 : WaveBubble(
-              videoUrl: video,
-            ),
+                    videoUrl: video,
+                  ),
             SizeConfig.sH20,
             Container(
+              width: Get.width,
               decoration: BoxDecoration(
                 color: AppColors.greyFD,
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: TextFormField(
-                controller: questionsAnswerViewModel.commentController.value,
-                cursorColor: AppColors.primaryColor,
-                showCursor: true,
-                maxLines: 10,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return AppStrings.pleaseEnterSomeText;
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  hintText: AppStrings.writeHere,
-                  hintStyle: TextStyle(
-                    fontSize: 14.sp,
-                    color: AppColors.black.withOpacity(0.8),
-                    fontWeight: FontWeight.w500,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: AppColors.greyEE,
-                    ),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: AppColors.greyEE,
-                    ),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  contentPadding: EdgeInsets.only(left: 10.w, top: 10.h, bottom: 10.h),
+                border: Border.all(
+                  color: widget.isSolutionScreen
+                      ? AppColors.greyEE
+                      : Colors.transparent,
                 ),
-                keyboardType: TextInputType.multiline,
+                borderRadius: BorderRadius.circular(15),
               ),
+              child: widget.isSolutionScreen
+                  ? Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20.w, vertical: 20.h),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                           CustomText(AppStrings.yourAnswer,
+                              color: AppColors.redB2,
+                              fontWeight: FontWeight.w700,
+                            fontSize: 15.sp,
+                          ),
+                          SizeConfig.sH15,
+                          CustomText(
+                            questionsAnswerViewModel
+                                .questionsDetail[widget.index].selectedAnswer
+                                .toString(),
+                          ),
+                          SizeConfig.sH15,
+                           CustomText(AppStrings.correctAnswer,
+                              color: AppColors.green0B,
+                              fontWeight: FontWeight.w700),
+                          SizeConfig.sH15,
+                          CustomText(
+                            questionsAnswerViewModel
+                                .questionsDetail[widget.index].correctAns
+                                .toString(),
+                          ),
+                        ],
+                      ),
+                    )
+                  : TextFormField(
+                      controller:
+                          questionsAnswerViewModel.audioAnswerController.value,
+                      cursorColor: AppColors.primaryColor,
+                      showCursor: true,
+                      maxLines: 9,
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return AppStrings.pleaseEnterSomeText;
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        hintText: AppStrings.writeHere,
+                        hintStyle: TextStyle(
+                          fontSize: 14.sp,
+                          color: AppColors.black.withOpacity(0.8),
+                          fontWeight: FontWeight.w500,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: AppColors.greyEE,
+                          ),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: AppColors.greyEE,
+                          ),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        contentPadding: EdgeInsets.only(
+                            left: 10.w, top: 10.h, bottom: 10.h),
+                      ),
+                      keyboardType: TextInputType.multiline,
+                    ),
             ),
           ],
         ),
@@ -137,7 +183,6 @@ class _WaveBubbleState extends State<WaveBubble> {
   Future<void> _preparePlayer() async {
     if (widget.videoUrl != null) {
       file = await _downloadFile(widget.videoUrl!);
-      setState(() {});
     }
     if (file?.path == null) {
       return;
@@ -155,9 +200,7 @@ class _WaveBubbleState extends State<WaveBubble> {
 
     final response = await http.get(Uri.parse(url));
     await file.writeAsBytes(response.bodyBytes);
-    setState(() {});
     return file;
-
   }
 
   @override
@@ -171,45 +214,46 @@ class _WaveBubbleState extends State<WaveBubble> {
   Widget build(BuildContext context) {
     return file != null
         ? Align(
-      alignment: Alignment.centerLeft,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (!controller.playerState.isStopped)
-            CircleAvatar(
-              radius: 25,
-              backgroundColor: const Color(0xff1FA7A8),
-              child: IconButton(
-                onPressed: () async {
-                  controller.playerState.isPlaying
-                      ? await controller.pausePlayer()
-                      : await controller.startPlayer(
-                    finishMode: FinishMode.loop,
-                  );
-                },
-                icon: Icon(
-                  controller.playerState.isPlaying
-                      ? Icons.stop
-                      : Icons.play_arrow,
-                  size: 30,
+            alignment: Alignment.centerLeft,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (!controller.playerState.isStopped)
+                  CircleAvatar(
+                    radius: 25,
+                    backgroundColor: const Color(0xff1FA7A8),
+                    child: IconButton(
+                      onPressed: () async {
+                        controller.playerState.isPlaying
+                            ? await controller.pausePlayer()
+                            : await controller.startPlayer(
+                                finishMode: FinishMode.loop,
+                              );
+                      },
+                      icon: Icon(
+                        controller.playerState.isPlaying
+                            ? Icons.stop
+                            : Icons.play_arrow,
+                        size: 30,
+                      ),
+                      color: Colors.white,
+                    ),
+                  ),
+                const SizedBox(width: 10),
+                AudioFileWaveforms(
+                  size: Size(MediaQuery.of(context).size.width / 1.5, 70),
+                  playerController: controller,
+                  waveformType: WaveformType.fitWidth,
+                  playerWaveStyle: playerWaveStyle,
                 ),
-                color: Colors.white,
-              ),
+              ],
             ),
-          const SizedBox(width: 10),
-          AudioFileWaveforms(
-            size: Size(MediaQuery.of(context).size.width / 1.5, 70),
-            playerController: controller,
-            waveformType: WaveformType.fitWidth,
-            playerWaveStyle: playerWaveStyle,
-          ),
-        ],
-      ),
-    )
-        : const CircularProgressIndicator(color: AppColors.primaryColor,);
+          )
+        : const CircularProgressIndicator(
+            color: AppColors.primaryColor,
+          );
   }
 }
-
 
 // import 'dart:async';
 // import 'dart:io';

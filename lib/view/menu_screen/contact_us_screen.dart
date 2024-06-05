@@ -30,7 +30,6 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     getContactUsApiCall();
     super.initState();
   }
@@ -152,7 +151,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         errorText: (contactUsViewModel.isValidate.value == true &&
                                 contactUsViewModel
                                     .contactUsPhoneController.value.text.isEmpty)
-                            ? '* Required'.tr
+                            ? AppStrings.isRequired.tr
                             : null,
                         errorBorder:
                             (contactUsViewModel.isValidate.value == true &&
@@ -230,7 +229,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         errorText: (contactUsViewModel.isValidate.value == true &&
                                 contactUsViewModel
                                     .contactUsMessageController.value.text.isEmpty)
-                            ? '* Required'.tr
+                            ? AppStrings.isRequired.tr
                             : null,
                         errorBorder:
                             (contactUsViewModel.isValidate.value == true &&

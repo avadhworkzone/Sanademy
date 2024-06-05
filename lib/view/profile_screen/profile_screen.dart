@@ -76,7 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         alignment: Alignment.bottomCenter,
                         children: [
                           Container(
-                            height: 120.h,
+                            height: 100.h,
                             margin: EdgeInsets.only(bottom: 60.h),
                             color: AppColors.primaryColor,
                           ),
@@ -93,24 +93,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 child: profileScreenViewModel
                                         .imgFile.value.path.isNotEmpty
                                     ? Image(
-                                        image: (profileScreenViewModel
-                                                .imgFile.value.path.isNotEmpty)
-                                            ? FileImage(profileScreenViewModel
-                                                .imgFile.value) as ImageProvider
-                                            : const NetworkImage(
-                                                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s'),
+                                        image:FileImage(profileScreenViewModel
+                                                .imgFile.value),
                                         fit: BoxFit.cover,
                                       )
                                     : NetWorkOcToAssets(
                                         imgUrl: profileScreenViewModel
                                             .newImage.value)
-                               /* Image(
-                                  image: (profileScreenViewModel.imgFile.value.path.isNotEmpty)
-                                      ? FileImage(profileScreenViewModel.imgFile.value) as ImageProvider
-                                      : const NetworkImage(
-                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu0gYR-As9-_w2_fjRc895mD_91WQ5p7N_9Q&s'),
-                                  fit: BoxFit.cover,
-                                )*/
                                 ),
                           ),
                         ],
@@ -135,8 +124,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     hintText: AppStrings.enterYourName,
                                     hintFontWeight: FontWeight.w400,
                                     pIcon:
-                                     Padding(
-                                       padding: const EdgeInsets.all(12),
+                                     const Padding(
+                                       padding: EdgeInsets.all(12),
                                        child: LocalAssets(imagePath: AppImageAssets.userImage,),
                                      ),
                                     validationType: ValidationTypeEnum.name,
@@ -270,7 +259,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   .value
                                                   .text
                                                   .isEmpty)
-                                          ? '* Required'.tr
+                                          ? AppStrings.isRequired.tr
                                           : null,
                                       errorBorder: (profileScreenViewModel
                                                       .isValidate.value ==
@@ -450,10 +439,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             padding: EdgeInsets.only(
                 top: Get.height * .03, bottom: Get.height * .05),
             children: [
-              /// pick profile picture label
-              const Text('Pick Profile Picture',
+               Text(AppStrings.pickProfilePicture,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
               SizedBox(height: Get.height * .02),
 
               /// Buttons
@@ -461,6 +449,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: EdgeInsets.only(left: 20.w),
                 child: Column(
                   children: [
+                    /// FOR PIC IMAGE FROM CAMERA
                     Row(
                       children: [
                         const Icon(
@@ -480,6 +469,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                     SizeConfig.sH20,
+                    /// FOR PIC IMAGE FROM GALLERY
                     Row(
                       children: [
                         LocalAssets(

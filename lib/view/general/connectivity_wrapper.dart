@@ -12,7 +12,7 @@ import 'package:sanademy/utils/local_assets.dart';
 class ConnectivityWrapper extends StatefulWidget {
   final Widget child;
 
-  const ConnectivityWrapper({required this.child});
+  const ConnectivityWrapper({super.key, required this.child});
 
   @override
   _ConnectivityWrapperState createState() => _ConnectivityWrapperState();

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,15 +11,12 @@ import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_enum.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
-import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/auth/log_in_screen.dart';
-import 'package:sanademy/view/auth/otp_screen.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
-import 'package:sanademy/view_model/sign_in_view_model.dart';
 import 'package:sanademy/view_model/sign_up_view_model.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -32,6 +28,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   SignUpViewModel signUpViewModel = Get.put(SignUpViewModel());
+
   @override
   void initState() {
     // TODO: implement initState
@@ -74,15 +71,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   /// NAME TEXT FIELD
                   CommonTextField(
                     textInputAction: TextInputAction.next,
-                    textEditController: signUpViewModel.signUpNameController.value,
+                    textEditController:
+                        signUpViewModel.signUpNameController.value,
                     validator: ValidationMethod.validateName,
                     regularExpression:
                         RegularExpressionUtils.alphabetSpacePattern,
                     hintText: AppStrings.enterYourName,
                     hintFontWeight: FontWeight.w400,
-                    pIcon:  const Padding(
+                    pIcon: const Padding(
                       padding: EdgeInsets.all(12),
-                      child: LocalAssets(imagePath: AppImageAssets.userImage,boxFix: BoxFit.cover,),
+                      child: LocalAssets(
+                        imagePath: AppImageAssets.userImage,
+                        boxFix: BoxFit.cover,
+                      ),
                     ),
                     validationType: ValidationTypeEnum.name,
                     borderColor: AppColors.black.withOpacity(0.10),
@@ -117,11 +118,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         fontFamily: AppConstants.quicksand,
                         fontWeight: FontWeight.w400,
                       ),
-                      prefixIcon:
-                          Padding(
-                            padding: const EdgeInsets.all(12),
-                            child: LocalAssets(imagePath: AppImageAssets.calendarIcon,boxFix: BoxFit.cover,),
-                          ),
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: LocalAssets(
+                          imagePath: AppImageAssets.calendarIcon,
+                          boxFix: BoxFit.cover,
+                        ),
+                      ),
                       errorBorder: OutlineInputBorder(
                           borderSide: const BorderSide(color: AppColors.red),
                           borderRadius: BorderRadius.circular(10.r)),
@@ -168,8 +171,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         keyboardType: TextInputType.number,
                         initialCountryCode: 'IQ',
                         onCountryChanged: (country) {
-                          signUpViewModel.signUpPhoneCode.value = country.dialCode;
-                          signUpViewModel.signUpCountryCode.value = country.code;
+                          signUpViewModel.signUpPhoneCode.value =
+                              country.dialCode;
+                          signUpViewModel.signUpCountryCode.value =
+                              country.code;
                         },
                         onChanged: (val) {
                           if (val.toString().isNotEmpty) {
@@ -252,7 +257,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               .validate() &&
                           signUpViewModel
                               .signUpPhoneController.value.text.isNotEmpty) {
-
                         /// CALL API FOR SEND OTP
                         await signUpViewModel.registerViewModel(
                           step: 1,

@@ -10,6 +10,7 @@ import 'package:sanademy/utils/enum_utils.dart';
 class CongratulationsScreenViewModel extends GetxController{
   Rx<ResponseStatus> responseStatus = ResponseStatus.INITIAL.obs;
   ExamResultResModel examResultResModel = ExamResultResModel();
+  RxList<QuestionAnswers> questionAnswerDetail = <QuestionAnswers>[].obs;
 
 
   Future<void> examResultViewModel({
@@ -25,6 +26,7 @@ class CongratulationsScreenViewModel extends GetxController{
       examResultResModelFromJson(response.response.toString());
       if (examResultResModel.success!) {
         if (examResultResModel.data != null) {
+            questionAnswerDetail.value = examResultResModel.data!.questionAnswers!;
           responseStatus.value = ResponseStatus.Completed;
         }else{
           showErrorSnackBar('', examResultResModel.message.toString());

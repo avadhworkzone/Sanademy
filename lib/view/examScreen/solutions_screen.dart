@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -6,30 +5,35 @@ import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_string.dart';
+import 'package:sanademy/utils/enum_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/audio_wave_form.dart';
 import 'package:sanademy/view_model/question_answer_view_model.dart';
 
 class SolutionsScreen extends StatefulWidget {
-  const SolutionsScreen({super.key, required this.examId, required this.examTitle});
+  const SolutionsScreen(
+      {super.key, required this.examId, required this.examTitle});
+
   final String examId;
   final String examTitle;
+
   @override
   State<SolutionsScreen> createState() => _SolutionsScreenState();
 }
 
 class _SolutionsScreenState extends State<SolutionsScreen> {
-  PageController pageController = PageController();
   QuestionsAnswerViewModel questionsAnswerViewModel = Get.find();
-  List<Map<String, dynamic>> selectedAnswerList = [];
+
   @override
   void initState() {
     questionDetailAPiCall();
     super.initState();
   }
+
   questionDetailAPiCall() async {
     await questionsAnswerViewModel.getQuestionsViewModel(examId: widget.examId);
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -38,6 +42,14 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.w),
           child: Obx(
             () {
+              if (questionsAnswerViewModel.responseStatus.value ==
+                      ResponseStatus.Loading ||
+                  questionsAnswerViewModel.responseStatus.value ==
+                      ResponseStatus.INITIAL) {}
+              if (questionsAnswerViewModel.responseStatus.value ==
+                  ResponseStatus.Error) {
+                return const Center(child: CustomText("Something went wrong"));
+              }
               final questionsDetail = questionsAnswerViewModel.questionsDetail;
               return Column(
                 children: [
@@ -45,14 +57,15 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                     AppStrings.solution,
                     color: AppColors.black0E,
                     fontSize: 20.sp,
-                    fontWeight: FontWeight.w700,),
+                    fontWeight: FontWeight.w700,
+                  ),
                   SizeConfig.sH30,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CustomText(
-                        // "Mathematics Mastery",
-                        widget.examTitle ?? '',
+                        "Mathematics Mastery",
+                        // widget.examTitle ?? '',
                         color: AppColors.black0E,
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w700,
@@ -62,7 +75,8 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                   SizeConfig.sH25,
                   Expanded(
                     child: PageView(
-                      controller: pageController,
+                      controller:
+                          questionsAnswerViewModel.solutionPageController.value,
                       physics: const NeverScrollableScrollPhysics(),
                       children: List.generate(questionsDetail.length, (index) {
                         final question = questionsDetail[index];
@@ -75,7 +89,9 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                   borderRadius: BorderRadius.circular(18.r),
                                   onTap: () {
                                     if (index > 0) {
-                                      pageController.previousPage(
+                                      questionsAnswerViewModel
+                                          .solutionPageController.value
+                                          .previousPage(
                                         duration:
                                             const Duration(milliseconds: 500),
                                         curve: Curves.ease,
@@ -100,7 +116,7 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                   child: CustomBtn(
                                     onTap: () {},
                                     title:
-                                        'Question ${index + 1} of ${questionsDetail.length}',
+                                        '${AppStrings.questions} ${index + 1} ${AppStrings.of} ${questionsDetail.length}',
                                     textColor: AppColors.primaryColor,
                                     bgColor: AppColors.greyFD,
                                     borderColor: AppColors.primaryColor,
@@ -112,10 +128,12 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                   borderRadius: BorderRadius.circular(18.r),
                                   onTap: () {
                                     if (questionsDetail.length - 1 > index) {
-                                      pageController.nextPage(
-                                          duration:
-                                              const Duration(milliseconds: 500),
-                                          curve: Curves.ease);
+                                      questionsAnswerViewModel
+                                          .solutionPageController.value
+                                          .nextPage(
+                                              duration: const Duration(
+                                                  milliseconds: 500),
+                                              curve: Curves.ease);
                                     } /* else if (index ==
                                         questionsDetail.length - 1) {
                                       Get.to(const CongratulationsScreen());
@@ -143,7 +161,7 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                               child: Column(
                                 children: [
                                   CustomText(
-                                    'Q${index + 1}. ${question.title}',
+                                    '${AppStrings.q}${index + 1}. ${question.title}',
                                     color: AppColors.black,
                                     fontWeight: FontWeight.w700,
                                   ),
@@ -152,90 +170,79 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                       ? AudioWaveForm(
                                           videoUrl: questionsDetail[index]
                                               .audio
-                                              .toString())
+                                              .toString(),
+                                          isSolutionScreen: true,
+                                          index: index,
+                                        )
                                       : ListView.builder(
                                           shrinkWrap: true,
                                           itemCount: 4,
                                           itemBuilder: (context, optionIndex) {
                                             final option = question.toJson()[
                                                 'option_${optionIndex + 1}'];
-                                            bool isSelected = false;
-                                            final containIndex =
-                                                selectedAnswerList.indexWhere(
-                                                    (element) =>
-                                                        element['questionId'] ==
-                                                        question.id);
-
-                                            if (containIndex > -1) {
-                                              if (selectedAnswerList[
-                                                      containIndex]['option'] ==
-                                                  option) {
-                                                isSelected = true;
-                                              }
+                                            int isCorrect = -1;
+                                            int isFail = -1;
+                                            if (question.selectedAnswer ==
+                                                question.correctAns) {
+                                              isCorrect = int.parse(
+                                                  question.correctAns ?? '-1');
+                                            } else {
+                                              isCorrect = int.parse(
+                                                  question.correctAns ?? '-1');
+                                              isFail = int.parse(
+                                                  question.selectedAnswer ??
+                                                      '-1');
                                             }
-                                            return GestureDetector(
-                                              onTap: () {
-                                                if (containIndex == -1) {
-                                                  selectedAnswerList.add({
-                                                    "questionId": question.id,
-                                                    "option": option,
-                                                    "answerId": optionIndex + 1,
-                                                  });
-                                                  if (kDebugMode) {
-                                                    print(
-                                                        'selectedAnswerList<<<$selectedAnswerList>>>>');
-                                                  }
-                                                } else {
-                                                  selectedAnswerList[
-                                                          containIndex]
-                                                      ['option'] = option;
-                                                  selectedAnswerList[
-                                                              containIndex]
-                                                          ['answerId'] =
-                                                      optionIndex + 1;
-                                                }
-                                              },
-                                              child: Container(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 10.w,
-                                                    vertical: 15.w),
-                                                margin: EdgeInsets.symmetric(
-                                                    vertical: 10.w),
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: isSelected
-                                                            ? AppColors
-                                                                .primaryColor
-                                                            : AppColors.greyEE),
-                                                    color: AppColors.greyFD,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10)),
-                                                child: Row(
-                                                  children: [
-                                                    Icon(
-                                                      isSelected
-                                                          ? Icons
-                                                              .radio_button_checked
-                                                          : Icons
-                                                              .radio_button_off,
-                                                      color: isSelected
-                                                          ? AppColors
-                                                              .primaryColor
-                                                          : AppColors.black,
-                                                    ),
-                                                    SizeConfig.sW10,
-                                                    CustomText(
-                                                      option,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: isSelected
-                                                          ? AppColors
-                                                              .primaryColor
-                                                          : AppColors.black,
-                                                    )
-                                                  ],
-                                                ),
+                                            return Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 10.w,
+                                                  vertical: 15.w),
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 10.w),
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: isCorrect ==
+                                                              (optionIndex + 1)
+                                                          ? AppColors.green0B
+                                                          : isFail ==
+                                                                  (optionIndex +
+                                                                      1)
+                                                              ? AppColors.red
+                                                              : AppColors
+                                                                  .greyEE),
+                                                  color: AppColors.greyFD,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10)),
+                                              child: Row(
+                                                children: [
+                                                  Icon(
+                                                    isCorrect ==
+                                                            (optionIndex + 1)
+                                                        ? Icons
+                                                            .radio_button_checked
+                                                        : isFail ==
+                                                                (optionIndex +
+                                                                    1)
+                                                            ? Icons
+                                                                .radio_button_checked
+                                                            : Icons
+                                                                .radio_button_off,
+                                                    color: isCorrect ==
+                                                            (optionIndex + 1)
+                                                        ? AppColors.green0B
+                                                        : isFail ==
+                                                                (optionIndex +
+                                                                    1)
+                                                            ? AppColors.red
+                                                            : AppColors.black0E,
+                                                  ),
+                                                  SizeConfig.sW10,
+                                                  CustomText(
+                                                    option,
+                                                    fontWeight: FontWeight.w500,
+                                                  )
+                                                ],
                                               ),
                                             );
                                           },
@@ -252,21 +259,27 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                 Expanded(
                                   child: CustomBtn(
                                     onTap: () {
-                                      final containIndex = selectedAnswerList
-                                          .indexWhere((element) =>
-                                              element['questionId'] ==
-                                              question.id);
+                                      final containIndex =
+                                          questionsAnswerViewModel
+                                              .selectedAnswerList
+                                              .indexWhere((element) =>
+                                                  element['questionId'] ==
+                                                  question.id);
                                       if (containIndex == -1) {
-                                        selectedAnswerList.add({
+                                        questionsAnswerViewModel
+                                            .selectedAnswerList
+                                            .add({
                                           "questionId": question.id,
                                           "option": "",
                                         });
                                       }
                                       if (questionsDetail.length - 1 > index) {
-                                        pageController.nextPage(
-                                            duration: const Duration(
-                                                milliseconds: 500),
-                                            curve: Curves.ease);
+                                        questionsAnswerViewModel
+                                            .solutionPageController.value
+                                            .nextPage(
+                                                duration: const Duration(
+                                                    milliseconds: 500),
+                                                curve: Curves.ease);
                                       } /*else if (index ==
                                           questionsDetail.length - 1) {
                                         Get.to(const CongratulationsScreen());
@@ -284,36 +297,14 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                   child: CustomBtn(
                                     onTap: () async {
                                       if (questionsDetail.length - 1 > index) {
-                                        pageController.nextPage(
-                                            duration: const Duration(
-                                                milliseconds: 500),
-                                            curve: Curves.ease);
+                                        questionsAnswerViewModel
+                                            .solutionPageController.value
+                                            .nextPage(
+                                                duration: const Duration(
+                                                    milliseconds: 500),
+                                                curve: Curves.ease);
                                       } else if (index ==
-                                          questionsDetail.length - 1) {
-                                        /// CALL SAVE QUESTIONS API
-                                        List saveQuestionsIdList = [];
-                                        List saveAnswerIdList = [];
-                                        for (var item in selectedAnswerList) {
-                                          saveQuestionsIdList.add(
-                                              item['questionId'].toString());
-                                          saveAnswerIdList
-                                              .add(item['answerId'].toString());
-                                        }
-                                        if (kDebugMode) {
-                                          print(
-                                              'saveQuestionsIdList---------->$saveQuestionsIdList');
-                                        }
-                                        if (kDebugMode) {
-                                          print(
-                                              'saveAnswerIdList=========>$saveAnswerIdList');
-                                        }
-                                        /*questionsAnswerViewModel
-                                            .saveQuestionsViewModel(
-                                            examId: widget.examId,
-                                            answers: saveAnswerIdList,
-                                            questionIds: saveQuestionsIdList
-                                        );*/
-                                      }
+                                          questionsDetail.length - 1) {}
                                     },
                                     title: AppStrings.next,
                                     bgColor: AppColors.primaryColor,

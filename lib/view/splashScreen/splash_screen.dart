@@ -20,12 +20,8 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
         const Duration(seconds: 5),
         () =>
-            // SharedPreferenceUtils.getIsLogin() == true
-            //     ?
             Get.offAll(() => const ConnectivityWrapper(child: BottomBar()))
-        // : Get.offAll(() => const SignUpScreen())
         );
-    // TODO: implement initState
     super.initState();
   }
 

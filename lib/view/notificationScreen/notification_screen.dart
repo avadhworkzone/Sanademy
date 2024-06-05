@@ -37,6 +37,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
               titleWidget: commonBackArrowAppBar(
                   titleTxt: AppStrings.notification,
                   actionTitle: AppStrings.clearAll,
+                  actionTextOnTap: (){},
                   horizontalPadding: 0.10.w,
                   leadingWidget: false),
             ),

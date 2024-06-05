@@ -1,7 +1,6 @@
 class AppStrings {
   /// CREATE ACCOUNT SCREEN
   static String enterYourName = 'Enter your name';
-
   static String titleTxt = "Sana Academy";
   static String register = 'Register';
   static String registerYourAccount =
@@ -43,6 +42,7 @@ class AppStrings {
   static String lectures = 'lectures';
   static String hours = 'hours';
   static String minutes = 'minutes';
+  static String noDataFound = 'No Data Found';
 
   ///  Description Screen
   static String enrollNow = 'Enroll Now';
@@ -100,12 +100,18 @@ class AppStrings {
   static String enterAddress = 'Enter your address';
   static String connectWithFaceBook = 'Connect With Facebook';
   static String connectWithInstagram = 'Connect With Instagram';
+  static String pickProfilePicture = 'Pick Profile Picture';
   static String pickFromGallery = 'Pick From Gallery';
   static String pickFromCamera = 'Pick From Camera';
 
   /// my progress screen
   static String progressIntroductionTxt =
       'In this page, you can see all your enrolled courses and the progress that you made in each one of them.';
+
+  /// my certificate screen
+  static String certificate = 'My Certificates';
+  static String certificateScreenTxt =
+      'In this page, you can see all your certificates for completing each course, or passing the test in that field.';
 
   /// notification screen
   static String notifications = 'Notifications';
@@ -115,11 +121,6 @@ class AppStrings {
   static String exams = 'Exams';
   static String examsScreenTxt =
       'In this page, you can test your knowledge in each field, and possibly receive the certificate.';
-
-  /// certificate screen
-  static String certificate = 'My Certificates';
-  static String certificateScreenTxt =
-      'In this page, you can see all your certificates for completing each course, or passing the test in that field.';
 
   /// questions screen
   static String finishExam = 'Finish Exam';
@@ -132,6 +133,8 @@ class AppStrings {
 
   /// congratulation screen
   static String congratulations = "Congratulations!";
+  static String youHaveCompletedMathematicsMasteryTest =
+      "You have completed Mathematics Mastery test";
   static String yourScore = "Your Score";
   static String yourTime = "Your Time";
   static String yourAnswers = "Your Answers";
@@ -140,11 +143,11 @@ class AppStrings {
   static String result = "Result";
   static String pass = "Pass";
   static String continues = "Continue";
-  static String youHaveCompletedMathematicsMasteryTest =
-      "You have completed Mathematics Mastery test";
 
   /// solution screen
   static String solution = 'Solutions';
+  static String yourAnswer = "Your Answer";
+  static String correctAnswer = "Correct Answer";
 
   /// payment success dialog
   static String thankYouTxt =

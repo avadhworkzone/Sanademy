@@ -14,7 +14,6 @@ import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/auth/sign_up_screen.dart';
 import 'package:sanademy/view/dialog/payment_option_dialog.dart';
 import 'package:sanademy/view_model/description_view_model.dart';
-import 'package:sanademy/view_model/home_screen_view_model.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class DescriptionScreen extends StatefulWidget {
@@ -22,35 +21,10 @@ class DescriptionScreen extends StatefulWidget {
     super.key,
     required this.courseId,
     required this.videoUrl,
-    /*  required this.description,
-    required this.requirements,
-    required this.whatWillYouLearn,
-    required this.whoThisCourseIsFor,
-    required this.teacherImage,
-    required this.teacherName,
-    required this.instructorDetail,
-    required this.courseContentTitle,
-    required this.courseContentMinutes,
-    required this.courseContentLecture,
-    required this.courseContentDescription,
-    required this.courseContents,*/
   });
 
   final String courseId;
   final String videoUrl;
-/*
-  final String description;
-  final String requirements;
-  final String whatWillYouLearn;
-  final String whoThisCourseIsFor;
-  final String teacherImage;
-  final String teacherName;
-  final String instructorDetail;
-  final List<CourseContents> courseContents;
-  final String courseContentTitle;
-  final String courseContentMinutes;
-  final String courseContentLecture;
-  final String courseContentDescription;*/
 
   @override
   State<DescriptionScreen> createState() => _DescriptionScreenState();
@@ -58,6 +32,8 @@ class DescriptionScreen extends StatefulWidget {
 
 class _DescriptionScreenState extends State<DescriptionScreen> {
   DescriptionViewModel descriptionViewModel = Get.put(DescriptionViewModel());
+  Duration watchedTime = Duration.zero;
+  Duration remainingTime = Duration.zero;
 
   @override
   void initState() {
@@ -66,8 +42,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   }
 
   descriptionApiCall() async {
-    // descriptionViewModel.videoPlayer();
-    descriptionViewModel.courseDetailViewModel(courseId: widget.courseId);
+    await descriptionViewModel.courseDetailViewModel(courseId: widget.courseId);
     descriptionViewModel.youtubePlayerController = YoutubePlayerController(
       initialVideoId: '',
       flags: const YoutubePlayerFlags(
@@ -81,9 +56,18 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
 
   @override
   void dispose() {
-    // descriptionViewModel.videoPlayerController.dispose();
     descriptionViewModel.youtubePlayerController?.value.dispose();
     super.dispose();
+  }
+
+  saveCourseProgressApiCall() async {
+    await  descriptionViewModel.saveCourseProcessViewModel(
+      courseId: "1",
+      completedHour: descriptionViewModel.completedHours.toString(),
+      completedMinute: descriptionViewModel.completedMinutes.toString(),
+      remainingHour: descriptionViewModel.remainingHours.toString(),
+      remainingMinute: descriptionViewModel.remainingMinutes.toString(),
+    );
   }
 
   @override
@@ -137,71 +121,12 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                     builder: (context, player) => player,
                                   ),
                                 ),
-                          /*  AspectRatio(
-                                  aspectRatio: descriptionViewModel
-                                      .videoPlayerController.value.aspectRatio,
-                                  child: Stack(
-                                    alignment: Alignment.center,
-                                    children: [
-                                      VideoPlayer(descriptionViewModel.videoPlayerController.value as VideoPlayerController),
-                                      InkWell(
-                                          onTap: () {
-                                            descriptionViewModel
-                                                .onTouch.value = true;
-
-                                            if (descriptionViewModel
-                                                .videoPlayerController
-                                                .value
-                                                .isPlaying) {
-                                              descriptionViewModel
-                                                  .videoPlayerController
-                                                  .pause();
-                                            } else {
-                                              descriptionViewModel
-                                                  .videoPlayerController
-                                                  .play();
-                                            }
-
-                                            Future.delayed(
-                                              const Duration(seconds: 2),
-                                              () => descriptionViewModel
-                                                  .onTouch.value = false,
-                                            );
-                                            setState(() {});
-                                          },
-                                          child: descriptionViewModel
-                                                          .onTouch.value ==
-                                                      true &&
-                                                  descriptionViewModel
-                                                          .videoPlayerController
-                                                          .value
-                                                          .isPlaying ==
-                                                      true
-                                              ? const Icon(
-                                                  Icons.pause_circle,
-                                                  size: 50,
-                                                  color: Colors.white,
-                                                )
-                                              : descriptionViewModel.onTouch
-                                                              .value ==
-                                                          true &&
-                                                      descriptionViewModel
-                                                              .videoPlayerController
-                                                              .value
-                                                              .isPlaying ==
-                                                          false
-                                                  ? const Icon(
-                                                      Icons.play_circle,
-                                                      size: 50,
-                                                      color: Colors.white)
-                                                  : Container())
-                                    ],
-                                  )),*/
                         ),
                         Positioned(
                           child: GestureDetector(
                               onTap: () {
-                                Get.back();
+                                saveCourseProgressApiCall();
+
                               },
                               child: Container(
                                 margin: EdgeInsets.only(
@@ -234,7 +159,6 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                               : Get.offAll(() => const SignUpScreen());
 
                           /// Enrollment successfully dialog
-                          // enrolledSuccessDialog(context);
                         },
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w700,
@@ -407,7 +331,6 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                   .copyWith(dividerColor: Colors.transparent),
                               child: ExpansionTile(
                                   tilePadding: EdgeInsets.only(left: 5.w),
-                                  // childrenPadding: EdgeInsets.only(left: 20.w),
                                   title: CustomText(
                                     AppStrings.requirements,
                                     fontSize: 20.sp,
@@ -454,42 +377,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                           '',
                                       shrinkWrap: true,
                                     )
-                                  ]
-                                  // List.generate(
-                                  //     requirementsList.length,
-                                  //     (index) => Align(
-                                  //           alignment: Alignment.centerLeft,
-                                  //           child: Column(
-                                  //             children: [
-                                  //               Padding(
-                                  //                 padding: EdgeInsets.only(
-                                  //                     left: 20.w),
-                                  //                 child: Row(
-                                  //                   children: [
-                                  //                     CustomText(
-                                  //                       "•",
-                                  //                       fontWeight:
-                                  //                           FontWeight.w400,
-                                  //                       fontSize: 20.sp,
-                                  //                       color:
-                                  //                           AppColors.black0E,
-                                  //                     ),
-                                  //                     SizeConfig.sW10,
-                                  //                     CustomText(
-                                  //                       requirementsList[index],
-                                  //                       fontWeight:
-                                  //                           FontWeight.w400,
-                                  //                       fontSize: 14.sp,
-                                  //                       color:
-                                  //                           AppColors.black0E,
-                                  //                     ),
-                                  //                   ],
-                                  //                 ),
-                                  //               ),
-                                  //             ],
-                                  //           ),
-                                  //         ))
-                                  ),
+                                  ]),
                             ),
                           ),
                           Divider(
@@ -504,7 +392,6 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                   .copyWith(dividerColor: Colors.transparent),
                               child: ExpansionTile(
                                   tilePadding: EdgeInsets.only(left: 5.w),
-                                  // childrenPadding: EdgeInsets.only(left: 20.w),
                                   title: CustomText(
                                     AppStrings.whoThisCourseIsFor,
                                     fontSize: 20.sp,
@@ -616,99 +503,6 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                                   '',
                                               shrinkWrap: true,
                                             ),
-                                            /*  RichText(
-                                              text: TextSpan(
-                                                  text:
-                                                      AppStrings.yourExperience,
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 14.sp,
-                                                    color: AppColors.black0E,
-                                                  ),
-                                                  children: [
-                                                    TextSpan(
-                                                        text: '10',
-                                                        style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 14.sp,
-                                                          color:
-                                                              AppColors.black0E,
-                                                        ))
-                                                  ]),
-                                            ),
-                                            SizeConfig.sH10,
-                                            RichText(
-                                              text: TextSpan(
-                                                  text: AppStrings.expertIn,
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 14.sp,
-                                                    color: AppColors.black0E,
-                                                  ),
-                                                  children: [
-                                                    TextSpan(
-                                                        text:
-                                                            'Social media management, graphic design',
-                                                        style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 14.sp,
-                                                          color:
-                                                              AppColors.black0E,
-                                                        ))
-                                                  ]),
-                                            ),
-                                            SizeConfig.sH10,
-                                            RichText(
-                                              text: TextSpan(
-                                                  text: AppStrings.noOfStudents,
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 14.sp,
-                                                    color: AppColors.black0E,
-                                                  ),
-                                                  children: [
-                                                    TextSpan(
-                                                        text: '124',
-                                                        style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 14.sp,
-                                                          color:
-                                                              AppColors.black0E,
-                                                        ))
-                                                  ]),
-                                            ),
-                                            SizeConfig.sH10,
-                                            RichText(
-                                              text: TextSpan(
-                                                  text: AppStrings.noOfCourses,
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 14.sp,
-                                                    color: AppColors.black0E,
-                                                  ),
-                                                  children: [
-                                                    TextSpan(
-                                                        text: '3',
-                                                        style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 14.sp,
-                                                          color:
-                                                              AppColors.black0E,
-                                                        ))
-                                                  ]),
-                                            ),
-                                            Html(
-                                              data: descriptionViewModel
-                                                      .courseDetailResModel
-                                                      .data![0]
-                                                      .instructor ??
-                                                  '',
-                                              shrinkWrap: true,
-                                            ),*/
                                           ],
                                         )
                                       ]),

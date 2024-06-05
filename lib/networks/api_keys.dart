@@ -13,4 +13,10 @@ class ApiKeys {
   static const examId = 'exam_id';
   static const questionIds = 'question_ids';
   static const answers = 'answers';
+  static const time = 'time';
+  static const search = 'search';
+  static const completedHour = 'completed_hour';
+  static const completedMinute = 'completed_minute';
+  static const remainingHour = 'remaining_hour';
+  static const remainingMinute = 'remaining_minute';
 }

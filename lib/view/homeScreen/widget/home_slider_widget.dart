@@ -19,9 +19,7 @@ class HomeSliderWidget extends StatefulWidget {
 }
 
 class _HomeSliderWidgetState extends State<HomeSliderWidget> {
-
   HomeScreenViewModel homeScreenViewModel = Get.find<HomeScreenViewModel>();
-
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -29,39 +27,9 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
         alignment: Alignment.center,
         children: [
           Container(
-            height: 180.w,
+            height: 100.w,
             margin: EdgeInsets.only(bottom: 80.h),
             color: AppColors.primaryColor,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 10.w),
-              child: CommonTextField(
-                textEditController:
-                    Get.find<HomeScreenViewModel>().searchController.value,
-                regularExpression: RegularExpressionUtils.alphabetPattern,
-                hintText: AppStrings.searchHere.tr,
-                style: TextStyle(
-                    fontSize: 14.sp,
-                    color: AppColors.white,
-                    fontFamily: AppConstants.quicksand,
-                    fontWeight: FontWeight.w400),
-                cursorColor: AppColors.white,
-                isValidate: false,
-                underLineBorder: false,
-                hintTextColor: AppColors.white,
-                borderColor: AppColors.primaryColor,
-                fillColor: AppColors.white.withOpacity(0.20),
-                pIcon: Padding(
-                  padding: EdgeInsets.only(
-                      left: 15.w, top: 15.w, bottom: 15.w, right: 7.w),
-                  child: LocalAssets(
-                    imagePath: AppImageAssets.searchIcon,
-                  ),
-                ),
-                onChange: (firstNameData) {
-                  // createAccountController.isAllFieldInput();
-                },
-              ),
-            ),
           ),
           Positioned(
             bottom: 20,

@@ -1,14 +1,17 @@
 import 'package:sanademy/utils/app_string.dart';
 
 Map<String, String> ar = {
-  /// create account screen
+  /// CREATE ACCOUNT SCREEN
   AppStrings.enterYourName: 'ناوت چی یە؟',
   AppStrings.titleTxt: 'أكاديمية سناء',
   AppStrings.register: 'يسجل',
-  AppStrings.registerYourAccount: 'سجل حسابك وابدأ رحلتك التعليمية!',
+  AppStrings.registerYourAccount:
+  'سجل حسابك وابدأ رحلتك التعليمية!',
   AppStrings.dateFormat: 'سمم/ي ي/س س س س',
   AppStrings.enterYourPhoneNumber: 'أدخل رقم هاتفك',
   AppStrings.submit: 'يُقدِّم',
+
+  /// OTP SCREEN
   AppStrings.otpTxt: 'التحقق من OTP',
   AppStrings.enterOtpTxt: 'الرجاء إدخال رمز التحقق المرسل إلى رقمك',
   AppStrings.enterFourDigitOtp:
@@ -41,6 +44,7 @@ Map<String, String> ar = {
   AppStrings.lectures: "محاضرات",
   AppStrings.hours: "ساعات",
   AppStrings.minutes: "دقائق",
+  AppStrings.noDataFound : 'لاتوجد بيانات',
 
   /// Description Screen
   AppStrings.enrollNow: "تسجيل الآن",
@@ -73,7 +77,6 @@ Map<String, String> ar = {
   AppStrings.firstIraqiBank: 'البنك العراقي الأول',
   AppStrings.mobileBalance: 'رصيد الجوال',
   AppStrings.creditCard: 'بطاقة إئتمان',
-  AppStrings.notifications: 'إشعارات',
   AppStrings.contactUs: 'اتصل بنا',
   AppStrings.aboutUs: 'معلومات عنا',
   AppStrings.ourMission: 'مهمتنا',
@@ -95,19 +98,25 @@ Map<String, String> ar = {
 
   /// Profile Screen
   AppStrings.save: 'يحفظ',
+  AppStrings.profile : 'حساب تعريفي',
   AppStrings.enterAddress: 'أدخل عنوانك',
   AppStrings.connectWithFaceBook: 'تواصل مع الفيسبوك',
   AppStrings.connectWithInstagram: 'تواصل مع إنستغرام',
+  AppStrings.pickProfilePicture: 'اختر صورة الملف الشخصي',
+  AppStrings.pickFromGallery: 'اختر من المعرض',
+  AppStrings.pickFromCamera: 'اختر من الكاميرا',
 
   /// my progress screen
   AppStrings.progressIntroductionTxt:
       "في هذه الصفحة، يمكنك رؤية جميع الدورات التي قمت بالتسجيل فيها والتقدم الذي أحرزته في كل منها.",
 
   /// my certificate screen
+  AppStrings.certificate: 'شهاداتي',
   AppStrings.certificateScreenTxt:
       "في هذه الصفحة، يمكنك رؤية جميع الشهادات الخاصة بك لإكمال كل دورة، أو اجتياز الاختبار في هذا المجال.",
 
   /// notification screen
+  AppStrings.notifications: 'إشعارات',
   AppStrings.clearAll: "امسح الكل",
 
   /// exam Screen
@@ -136,6 +145,16 @@ Map<String, String> ar = {
   AppStrings.result: "نتيجة",
   AppStrings.continues: "يكمل",
   AppStrings.pass: "يمر",
+
+  /// solution screen
+  AppStrings.solution : "حلول",
+  AppStrings.yourAnswer : "إجابتك",
+  AppStrings.correctAnswer : "اجابة صحيحة",
+
+  /// payment success dialog
+  AppStrings.thankYouTxt :
+  'نشكرك على اهتمامك بالمشاركة في "اسم الدورة" بسعر هذه الدورة',
+  AppStrings.thankYouTxt2 : 'يمكنك إجراء الدفع من خلال الخيارات أدناه',
 
   ///APP ERROR MESSAGE
   AppStrings.emailIsRequired:"البريد الالكتروني مطلوب",
