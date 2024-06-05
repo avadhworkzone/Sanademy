@@ -44,7 +44,7 @@ Map<String, String> en = {
   AppStrings.lectures: "lectures",
   AppStrings.hours: "hours",
   AppStrings.minutes: "minutes",
-  AppStrings.noDataFound : 'No Data Found',
+  AppStrings.noDataFound: 'No Data Found',
 
   /// Description Screen
   AppStrings.enrollNow: "Enroll Now",
@@ -98,7 +98,7 @@ Map<String, String> en = {
 
   /// Profile Screen
   AppStrings.save: 'Save',
-  AppStrings.profile : 'Profile',
+  AppStrings.profile: 'Profile',
   AppStrings.enterAddress: 'Enter your address',
   AppStrings.connectWithFaceBook: 'Connect With Facebook',
   AppStrings.connectWithInstagram: 'Connect With Instagram',
@@ -109,6 +109,10 @@ Map<String, String> en = {
   /// my progress screen
   AppStrings.progressIntroductionTxt:
       "In this page, you can see all your enrolled courses and the progress that you made in each one of them.",
+  AppStrings.minutesComplete: ' minutes complete',
+  AppStrings.hoursComplete: ' hours complete',
+  AppStrings.minutesRemaining: ' minutes remaining',
+  AppStrings.hoursRemaining: ' hours remaining',
 
   /// my certificate screen
   AppStrings.certificate: 'My Certificates',
@@ -147,14 +151,14 @@ Map<String, String> en = {
   AppStrings.pass: "Pass",
 
   /// solution screen
-  AppStrings.solution : "Solutions",
-  AppStrings.yourAnswer : "Your Answer",
-  AppStrings.correctAnswer : "Correct Answer",
+  AppStrings.solution: "Solutions",
+  AppStrings.yourAnswer: "Your Answer",
+  AppStrings.correctAnswer: "Correct Answer",
 
   /// payment success dialog
-  AppStrings.thankYouTxt :
-  'Thank you for your interest in participating in “Course Name” this course is priced at',
-  AppStrings.thankYouTxt2 : 'you can make the payment through below options',
+  AppStrings.thankYouTxt:
+      'Thank you for your interest in participating in “Course Name” this course is priced at',
+  AppStrings.thankYouTxt2: 'you can make the payment through below options',
 
   ///APP ERROR MESSAGE
   AppStrings.emailIsRequired: "email is required",

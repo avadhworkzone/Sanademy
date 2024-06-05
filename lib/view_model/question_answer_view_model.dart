@@ -14,6 +14,7 @@ import 'package:sanademy/view/examScreen/congratulations_screen.dart';
 
 class QuestionsAnswerViewModel extends GetxController {
   Rx<TextEditingController> audioAnswerController = TextEditingController().obs;
+  // Map<int, TextEditingController> audioAnswerController = {};
   Rx<ResponseStatus> responseStatus = ResponseStatus.INITIAL.obs;
   RxList<QuestionsDetail> questionsDetail = <QuestionsDetail>[].obs;
   GetQuestionResModel getQuestionResModel = GetQuestionResModel();

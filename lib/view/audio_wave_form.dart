@@ -16,10 +16,12 @@ import 'package:sanademy/view_model/question_answer_view_model.dart';
 class AudioWaveForm extends StatefulWidget {
   const AudioWaveForm({
     super.key,
+    // required this.audioQuestions,
     required this.videoUrl,
-    this.isSolutionScreen = false, this.index = 0,
+    this.isSolutionScreen = false,
+    this.index = 0,
   });
-
+  // final List<String> audioQuestions;
   final String videoUrl;
   final bool isSolutionScreen;
   final int index;
@@ -30,12 +32,16 @@ class AudioWaveForm extends StatefulWidget {
 
 class _AudioWaveFormState extends State<AudioWaveForm> {
   QuestionsAnswerViewModel questionsAnswerViewModel = Get.find();
+  List<TextEditingController> _controllers = [];
   bool _isLoading = true;
   String? video;
 
   @override
   void initState() {
     super.initState();
+    // _controllers = List.generate(widget.audioQuestions.length, (index) {
+    //   return TextEditingController();
+    // });
     getVideoUrl();
   }
 
@@ -45,12 +51,27 @@ class _AudioWaveFormState extends State<AudioWaveForm> {
       _isLoading = false;
     });
   }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    // _controllers.forEach((controller) {
+    //   controller.dispose();
+    // });
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Material(
       child: Obx(
-        () => Column(
+
+        () {
+          final isNotSame = questionsAnswerViewModel
+              .questionsDetail[widget.index].selectedAnswer
+              .toString() != questionsAnswerViewModel
+              .questionsDetail[widget.index].correctAns
+              .toString();
+       return Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
@@ -75,17 +96,17 @@ class _AudioWaveFormState extends State<AudioWaveForm> {
               child: widget.isSolutionScreen
                   ? Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 20.w, vertical: 20.h),
+                          horizontal: 20.w, vertical: 10.h),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                           CustomText(AppStrings.yourAnswer,
+                          if(isNotSame)CustomText(AppStrings.yourAnswer,
                               color: AppColors.redB2,
                               fontWeight: FontWeight.w700,
                             fontSize: 15.sp,
                           ),
-                          SizeConfig.sH15,
-                          CustomText(
+                         if(isNotSame)SizeConfig.sH15,
+                          if(isNotSame)CustomText(
                             questionsAnswerViewModel
                                 .questionsDetail[widget.index].selectedAnswer
                                 .toString(),
@@ -141,7 +162,7 @@ class _AudioWaveFormState extends State<AudioWaveForm> {
                     ),
             ),
           ],
-        ),
+        );}
       ),
     );
   }

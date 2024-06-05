@@ -42,135 +42,171 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () {
-        bottomBarViewModel.selectedBottomIndex.value = 0;
-        Get.offAll(() => const BottomBar());
-        return Future.value(true);
-      },
-      child: Obx(() {
-        return myProgressViewModel.responseStatus.value == ResponseStatus.Error
-            ? CustomText(
-          AppStrings.error,
-          fontSize: 20.sp,
-        )
-            : myProgressViewModel.responseStatus.value == ResponseStatus.Completed
-            ? SafeArea(
-          child: Material(
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: 20.w, vertical: 20.w),
-              child: /*isLoading == true
-                  ? const Center(child: CircularProgressIndicator())
-                  :*/ Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CustomText(
-                    AppStrings.myProgress,
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.black0E,
-                  ),
-                  SizeConfig.sH25,
-                  SizedBox(
-                    child: CustomText(
-                      AppStrings.progressIntroductionTxt,
-                      color: AppColors.black0E.withOpacity(0.8),
-                    ),
-                  ),
-                  SizeConfig.sH10,
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: 1,
-                      itemBuilder: (context, index) {
-                        final courseDetail = myProgressViewModel
-                            .getCourseProgressResponseModel.data;
-                        return Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 15.w, vertical: 20.w),
-                          margin: EdgeInsets.symmetric(
-                              vertical: 10.w),
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  colorFilter: ColorFilter.mode(
-                                      AppColors.black
-                                          .withOpacity(0.6),
-                                      BlendMode.srcOver),
-                                  filterQuality:
-                                  FilterQuality.low,
-                                  image: const NetworkImage(
-                                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWpCP7MLNqspI1pA3XAurJiFdi2_t3ekbU0A&s',
-                                  )),
-                              borderRadius:
-                              BorderRadius.circular(20)),
-                          child: Column(
-                            children: [
-                              CustomText(
-                                'Exploring the Beauty of Mathematical Structures',
-                                color: AppColors.white,
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.w700,
-                              ),
-                              SliderTheme(
-                                data: SliderTheme.of(context)
-                                    .copyWith(
-                                  trackHeight: 12.w,
-                                  thumbColor:
-                                  AppColors.primaryColor,
-                                  activeTrackColor:
-                                  AppColors.white,
-                                  inactiveTrackColor: AppColors
-                                      .white
-                                      .withOpacity(0.60),
-                                  thumbShape:
-                                  CustomSliderThumbShape(
-                                    color1: AppColors.white,
-                                    color2: AppColors.primaryColor,
-                                  ),
-                                  trackShape: CustomTrackShape(),
-                                ),
-                                child: Slider(
-                                  value: 50000.0,
-                                  min: 1000.0,
-                                  max: 100000.0,
-                                  onChanged: (double newValue) {},
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment
-                                    .spaceBetween,
-                                children: [
-                                  CustomText(
-                                      (courseDetail!.completedHour == '0')?
-                                      '${courseDetail.completedMinute.toString()} minutes complete':
-                                      '${courseDetail.completedHour.toString()} hours complete',
-                                      color: AppColors.white,
-                                      fontSize: 12.sp),
-                                  CustomText(
-                                      (courseDetail.remainingHour == '0')?
-                                      '${courseDetail.remainingMinute.toString()} minutes complete':
-                                      '${courseDetail.remainingHour.toString()} hours complete',
-                                      color: AppColors.white,
-                                      fontSize: 12.sp),
-                                ],
-                              )
-                            ],
+    return WillPopScope(onWillPop: () {
+      bottomBarViewModel.selectedBottomIndex.value = 0;
+      Get.offAll(() => const BottomBar());
+      return Future.value(true);
+    }, child: Obx(() {
+      final courseDetail =
+          myProgressViewModel.getCourseProgressResponseModel.data;
+      return myProgressViewModel.responseStatus.value == ResponseStatus.Error
+          ? CustomText(
+              AppStrings.error,
+              fontSize: 20.sp,
+            )
+          : myProgressViewModel.responseStatus.value == ResponseStatus.Completed
+              ? SafeArea(
+                  child: Material(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20.w, vertical: 20.w),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          CustomText(
+                            AppStrings.myProgress,
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.black0E,
                           ),
-                        );
-                      },
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-        )
-            : const Material();
-      })
+                          SizeConfig.sH25,
+                          SizedBox(
+                            child: CustomText(
+                              AppStrings.progressIntroductionTxt,
+                              color: AppColors.black0E.withOpacity(0.8),
+                            ),
+                          ),
+                          SizeConfig.sH10,
+                          (courseDetail!.isNotEmpty)
+                              ? Expanded(
+                                  child: ListView.builder(
+                                    itemCount: 1,
+                                    itemBuilder: (context, index) {
+                                      /// Parsing the completed and remaining times
+                                      double completedTime =
+                                          (courseDetail[index].completedHour ==
+                                                  '0')
+                                              ? double.parse(courseDetail[index]
+                                                  .completedMinute
+                                                  .toString())
+                                              : double.parse(courseDetail[index]
+                                                      .completedHour
+                                                      .toString()) *
+                                                  60;
+                                      double remainingTime =
+                                          (courseDetail[index].remainingHour ==
+                                                  '0')
+                                              ? double.parse(courseDetail[index]
+                                                  .remainingMinute
+                                                  .toString())
+                                              : double.parse(courseDetail[index]
+                                                      .remainingHour
+                                                      .toString()) *
+                                                  60;
 
-    );
+                                      /// Calculating the total time and the ratio
+                                      double totalTime =
+                                          completedTime + remainingTime;
+
+                                      return Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 15.w, vertical: 20.w),
+                                        margin: EdgeInsets.symmetric(
+                                            vertical: 10.w),
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                fit: BoxFit.cover,
+                                                colorFilter: ColorFilter.mode(
+                                                    AppColors.black
+                                                        .withOpacity(0.6),
+                                                    BlendMode.srcOver),
+                                                filterQuality:
+                                                    FilterQuality.low,
+                                                image: const NetworkImage(
+                                                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWpCP7MLNqspI1pA3XAurJiFdi2_t3ekbU0A&s',
+                                                )),
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        child: Column(
+                                          children: [
+                                            CustomText(
+                                              courseDetail[index]
+                                                  .course!
+                                                  .title!,
+                                              color: AppColors.white,
+                                              fontSize: 20.sp,
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                            SliderTheme(
+                                              data: SliderTheme.of(context)
+                                                  .copyWith(
+                                                trackHeight: 12.w,
+                                                thumbColor:
+                                                    AppColors.primaryColor,
+                                                activeTrackColor:
+                                                    AppColors.white,
+                                                inactiveTrackColor: AppColors
+                                                    .white
+                                                    .withOpacity(0.60),
+                                                thumbShape:
+                                                    CustomSliderThumbShape(
+                                                  color1: AppColors.white,
+                                                  color2:
+                                                      AppColors.primaryColor,
+                                                ),
+                                                trackShape: CustomTrackShape(),
+                                              ),
+                                              child: Slider(
+                                                value: completedTime,
+                                                min: 0,
+                                                max: totalTime,
+                                                onChanged: (double newValue) {},
+                                              ),
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                CustomText(
+                                                    (courseDetail[index]
+                                                                .completedHour ==
+                                                            '0')
+                                                        ? '${courseDetail[index].completedMinute}${AppStrings.minutesComplete}'
+                                                        : '${courseDetail[index].completedHour}${AppStrings.hoursComplete}',
+                                                    color: AppColors.white,
+                                                    fontSize: 12.sp),
+                                                CustomText(
+                                                    (courseDetail[index]
+                                                                .remainingHour ==
+                                                            '0')
+                                                        ? '${courseDetail[index].remainingMinute.toString()}${AppStrings.minutesRemaining}'
+                                                        : '${courseDetail[index].remainingHour.toString()}${AppStrings.hoursRemaining}',
+                                                    color: AppColors.white,
+                                                    fontSize: 12.sp),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                )
+                              : Padding(
+                                  padding: EdgeInsets.only(top: 70.h),
+                                  child: CustomText(
+                                      AppStrings.noProgressAvailable,
+                                      color: AppColors.black0E,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 18.sp),
+                                ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              : const Material();
+    }));
   }
 }
 

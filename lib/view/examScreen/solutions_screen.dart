@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -51,6 +53,7 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                 return const Center(child: CustomText("Something went wrong"));
               }
               final questionsDetail = questionsAnswerViewModel.questionsDetail;
+              print('api mathi aave che ${jsonEncode(questionsAnswerViewModel.questionsDetail)}');
               return Column(
                 children: [
                   CustomText(
@@ -80,6 +83,7 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                       physics: const NeverScrollableScrollPhysics(),
                       children: List.generate(questionsDetail.length, (index) {
                         final question = questionsDetail[index];
+                        print('question is =------>>> ${jsonEncode(question)}');
                         return Column(
                           children: [
                             Row(
@@ -167,7 +171,8 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                   ),
                                   SizeConfig.sH10,
                                   question.type == "Audio"
-                                      ? AudioWaveForm(
+                                      ?
+                                  AudioWaveForm(
                                           videoUrl: questionsDetail[index]
                                               .audio
                                               .toString(),
@@ -180,10 +185,12 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                           itemBuilder: (context, optionIndex) {
                                             final option = question.toJson()[
                                                 'option_${optionIndex + 1}'];
+                                            print('option is ${option}');
                                             int isCorrect = -1;
                                             int isFail = -1;
                                             if (question.selectedAnswer ==
                                                 question.correctAns) {
+                                              print(' question.correctAns${ question.correctAns}');
                                               isCorrect = int.parse(
                                                   question.correctAns ?? '-1');
                                             } else {
@@ -192,7 +199,10 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                               isFail = int.parse(
                                                   question.selectedAnswer ??
                                                       '-1');
+                                              print(' question.correctAns${ question.correctAns}');
                                             }
+                                            print('isCorrect===${isCorrect}');
+                                            print('isFail===${isFail}');
                                             return Container(
                                               padding: EdgeInsets.symmetric(
                                                   horizontal: 10.w,

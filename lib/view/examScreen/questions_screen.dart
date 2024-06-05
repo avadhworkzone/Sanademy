@@ -370,6 +370,13 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                               duration: const Duration(
                                                   milliseconds: 500),
                                               curve: Curves.ease);
+                                      if(question.type=='Audio'){
+                                        questionsAnswerViewModel.selectedAnswerList.add({
+                                          "questionId": /*"5"*/question.id,
+                                          "answerId": questionsAnswerViewModel
+                                              .audioAnswerController.value.text
+                                        });
+                                      }
                                     } else if (index ==
                                         questionsDetail.length - 1) {
                                       questionsAnswerViewModel.stopTimer();
@@ -380,13 +387,6 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                       /// CALL SAVE QUESTIONS API
                                       List saveQuestionsIdList = [];
                                       List saveAnswerIdList = [];
-                                      questionsAnswerViewModel
-                                          .selectedAnswerList
-                                          .add({
-                                        "questionId": question.id,
-                                        "answerId": questionsAnswerViewModel
-                                            .audioAnswerController.value.text
-                                      });
                                       for (var item in questionsAnswerViewModel
                                           .selectedAnswerList) {
                                         saveQuestionsIdList
@@ -394,6 +394,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                         saveAnswerIdList
                                             .add(item['answerId'].toString());
                                       }
+
                                       questionsAnswerViewModel
                                           .saveQuestionsViewModel(
                                               widget.examTitle,
@@ -401,6 +402,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                               answers: saveAnswerIdList,
                                               questionIds: saveQuestionsIdList,
                                               time: formattedTime);
+
                                     }
                                   },
                                   title: AppStrings.next,
