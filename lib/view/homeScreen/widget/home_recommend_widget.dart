@@ -23,11 +23,10 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Obx(
-        () {
-          return homeScreenViewModel.responseStatus.value ==
+      child: Obx(() {
+        return homeScreenViewModel.responseStatus.value ==
                 ResponseStatus.Completed
-            ?  Column(
+            ? Column(
                 children: [
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -72,9 +71,9 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                               child: GestureDetector(
                                 onTap: () {
                                   Get.to(() => DescriptionScreen(
-                                    courseId: courses.id.toString(),
-                                    videoUrl: courses.videoUrl ?? '',
-                                   /* description: homeScreenViewModel.courseDetailResModel.data![0].description ?? '',
+                                        courseId: courses.id.toString(),
+                                        videoUrl: courses.videoUrl ?? '',
+                                        /* description: homeScreenViewModel.courseDetailResModel.data![0].description ?? '',
                                     requirements: homeScreenViewModel.courseDetailResModel.data![0].requirements ?? '',
                                     whatWillYouLearn: homeScreenViewModel.courseDetailResModel.data![0].whatWillYouLearn!,
                                     whoThisCourseIsFor: homeScreenViewModel.courseDetailResModel.data![0].whoThisCourseIsFor!,
@@ -86,14 +85,13 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                     courseContentLecture: homeScreenViewModel.courseDetailResModel.data![0].courseContents![index].numberOfLecture!,
                                     courseContentMinutes: homeScreenViewModel.courseDetailResModel.data![0].courseContents![index].minutes!,
                                     courseContentDescription: homeScreenViewModel.courseDetailResModel.data![0].courseContents![index].description!,*/
-                                  ));
+                                      ));
                                 },
                                 child: CommonContainerWidget(
                                   color: colors,
                                   title: courses.title!,
                                   numberOfLecture: courses.numberOfLecture!,
-                                  hours:
-                                  courses.hours!,
+                                  hours: courses.hours!,
                                   minutes: courses.minutes!,
                                   teacherName: courses.teacher!.name!,
                                   teacherImage: courses.teacher!.image!,
@@ -105,8 +103,8 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                   )
                 ],
               )
-            : const Material();}
-      ),
+            : const Material();
+      }),
     );
   }
 }
