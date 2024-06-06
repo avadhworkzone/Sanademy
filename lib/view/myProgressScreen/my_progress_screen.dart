@@ -109,7 +109,6 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                                       /// Calculating the total time and the ratio
                                       double totalTime =
                                           completedTime + remainingTime;
-
                                       return Container(
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 15.w, vertical: 20.w),

@@ -62,6 +62,8 @@ class AppStrings {
   static String noOfStudents = 'No. of students: ';
   static String noOfCourses = 'No. of courses: ';
   static String courseContent = 'Course Content';
+  static String courseContentLectures = 'Lectures';
+  static String mins = 'mins';
 
   /// payment option dialog
   static String paymentOption = 'Payment Options';
@@ -172,4 +174,6 @@ class AppStrings {
   static String error = 'Error';
   static String userCreatedSuccessfully = 'User Created Successfully';
   static String otpMismatch = 'Please enter valid Otp';
+
+
 }

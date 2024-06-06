@@ -93,7 +93,6 @@ class QuestionsAnswerViewModel extends GetxController {
           saveQuestionsResModelFromJson(response.response.toString());
       if (saveQuestionsResModel.success!) {
         if (saveQuestionsResModel.data != null) {
-
           saveQuestionsResponseStatus.value = ResponseStatus.Completed;
           showSussesSnackBar('', saveQuestionsResModel.message.toString());
         } else {

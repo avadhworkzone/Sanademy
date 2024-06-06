@@ -24,7 +24,9 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
         child: Column(
           children: [
             commonBackArrowAppBar(
-                titleTxt: AppStrings.recommended, actionWidget: false),
+              titleTxt: AppStrings.recommended,
+              actionWidget: false,
+            ),
             SizeConfig.sH10,
             Expanded(
               child: Padding(

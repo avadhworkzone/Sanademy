@@ -71,6 +71,7 @@ commonBackArrowAppBar({
   FontWeight? actionWidgetFontWeight,
   double? actionFontSize,
   void Function()? actionTextOnTap,
+  void Function()? backOnTap
 }) {
   return Padding(
     padding: EdgeInsets.symmetric(
@@ -82,7 +83,7 @@ commonBackArrowAppBar({
       children: [
         leadingWidget == true
             ? InkWell(
-                onTap: () {
+                onTap: backOnTap??() {
                   FocusManager.instance.primaryFocus?.unfocus();
                   Get.back();
                 },
@@ -124,7 +125,7 @@ commonBackArrowAppBar({
                 ),
               )
             : SizedBox(
-                width: 50.w,
+                width: 60.w,
               )
       ],
     ),

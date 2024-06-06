@@ -29,7 +29,7 @@ class DescriptionViewModel extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    handleScreenTransition();
+    // handleScreenTransition();
   }
 
   /// Youtube Player Function
@@ -50,7 +50,7 @@ class DescriptionViewModel extends GetxController {
     } else {
       showErrorSnackBar('Error', 'Invalid YouTube URL');
     }
-
+/*
     /// Add a listener to the controller to track playback time
     youtubePlayerController?.value.addListener(() {
       if (youtubePlayerController?.value.value.isPlaying == true &&
@@ -63,18 +63,19 @@ class DescriptionViewModel extends GetxController {
       final Duration totalDuration =
           youtubePlayerController?.value.metadata.duration ?? Duration.zero;
       remainingTime = totalDuration - watchedTime;
-      /*completedHours   = watchedTime.inHours;
+      completedHours   = watchedTime.inHours;
       completedMinutes = watchedTime.inMinutes % 60;
       remainingHours   = remainingTime.inHours;
-      remainingMinutes = remainingTime.inMinutes % 60;*/
+      remainingMinutes = remainingTime.inMinutes % 60;
 
       print('completedHours: --------=>$completedHours');
       print('completedMinutes: $completedMinutes');
       print('remainingHours: $remainingHours');
       print('remainingMinutes: $remainingMinutes');
-    });
+    });*/
   }
 
+/*
   void handleScreenTransition() {
     final Duration totalDuration =
         youtubePlayerController?.value.metadata.duration ?? Duration.zero;
@@ -146,6 +147,7 @@ class DescriptionViewModel extends GetxController {
       }
     }
   }
+*/
 
 
   /// Course Detail Api Calling Function
