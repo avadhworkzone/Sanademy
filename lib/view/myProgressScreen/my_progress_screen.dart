@@ -24,16 +24,16 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      setState(() {
-        isLoading = true;
-      });
-      Future.delayed(const Duration(seconds: 3), () {
-        setState(() {
-          isLoading = false;
-        });
-      });
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    //   setState(() {
+    //     isLoading = true;
+    //   });
+    //   Future.delayed(const Duration(seconds: 3), () {
+    //     setState(() {
+    //       isLoading = false;
+    //     });
+    //   });
+    // });
     getCourseProgressApiCall();
     super.initState();
   }
@@ -101,10 +101,15 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                                               ? double.parse(courseDetail[index]
                                                   .remainingMinute
                                                   .toString())
-                                              : double.parse(courseDetail[index]
-                                                      .remainingHour
-                                                      .toString()) *
-                                                  60;
+                                              : courseDetail[index]
+                                                          .remainingHour ==
+                                                      ''
+                                                  ? 0.0
+                                                  : double.parse(
+                                                          courseDetail[index]
+                                                              .remainingHour
+                                                              .toString()) *
+                                                      60;
 
                                       /// Calculating the total time and the ratio
                                       double totalTime =

@@ -25,12 +25,11 @@ class QuestionsAnswerViewModel extends GetxController {
   String timeIs = DateTime.now().toString();
   List<Map<String, dynamic>> selectedAnswerList = [];
 
-
   initData(bool mounted) {
     timer1 = Timer.periodic(const Duration(seconds: 1), (timer) async {
       var difference = DateTime.now().difference(DateTime.parse(timeIs));
       if (mounted) {
-          duration.value = Duration(seconds: difference.inSeconds);
+        duration.value = Duration(seconds: difference.inSeconds);
       }
     }).obs;
   }
@@ -83,7 +82,7 @@ class QuestionsAnswerViewModel extends GetxController {
       ApiKeys.examId: examId.toString(),
       ApiKeys.questionIds: questionIds,
       ApiKeys.answers: answers,
-      ApiKeys.time:time
+      ApiKeys.time: time
     };
 
     final response = await SaveQuestionApiService()
@@ -93,16 +92,15 @@ class QuestionsAnswerViewModel extends GetxController {
           saveQuestionsResModelFromJson(response.response.toString());
       if (saveQuestionsResModel.success!) {
         if (saveQuestionsResModel.data != null) {
-
           saveQuestionsResponseStatus.value = ResponseStatus.Completed;
           showSussesSnackBar('', saveQuestionsResModel.message.toString());
+          Get.to(() => CongratulationsScreen(
+                examId: examId,
+                examTitle: examTitle,
+              ));
         } else {
           showErrorSnackBar('', saveQuestionsResModel.message ?? 'Error');
         }
-        Get.to(() => CongratulationsScreen(
-              examId: examId,
-              examTitle: examTitle,
-            ));
       } else {
         showErrorSnackBar('', saveQuestionsResModel.message ?? 'Error');
         responseStatus.value = ResponseStatus.Error;
