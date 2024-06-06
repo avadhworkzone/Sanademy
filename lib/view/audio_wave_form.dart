@@ -17,11 +17,13 @@ class AudioWaveForm extends StatefulWidget {
   const AudioWaveForm({
     super.key,
     // required this.audioQuestions,
+    this.controller,
     required this.videoUrl,
     this.isSolutionScreen = false,
     this.index = 0,
   });
   // final List<String> audioQuestions;
+  final TextEditingController? controller;
   final String videoUrl;
   final bool isSolutionScreen;
   final int index;
@@ -51,6 +53,7 @@ class _AudioWaveFormState extends State<AudioWaveForm> {
       _isLoading = false;
     });
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -63,15 +66,13 @@ class _AudioWaveFormState extends State<AudioWaveForm> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Obx(
-
-        () {
-          final isNotSame = questionsAnswerViewModel
-              .questionsDetail[widget.index].selectedAnswer
-              .toString() != questionsAnswerViewModel
-              .questionsDetail[widget.index].correctAns
-              .toString();
-       return Column(
+      child: Obx(() {
+        final isNotSame = questionsAnswerViewModel
+                .questionsDetail[widget.index].selectedAnswer
+                .toString() !=
+            questionsAnswerViewModel.questionsDetail[widget.index].correctAns
+                .toString();
+        return Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
@@ -100,19 +101,22 @@ class _AudioWaveFormState extends State<AudioWaveForm> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          if(isNotSame)CustomText(AppStrings.yourAnswer,
+                          if (isNotSame)
+                            CustomText(
+                              AppStrings.yourAnswer,
                               color: AppColors.redB2,
                               fontWeight: FontWeight.w700,
-                            fontSize: 15.sp,
-                          ),
-                         if(isNotSame)SizeConfig.sH15,
-                          if(isNotSame)CustomText(
-                            questionsAnswerViewModel
-                                .questionsDetail[widget.index].selectedAnswer
-                                .toString(),
-                          ),
+                              fontSize: 15.sp,
+                            ),
+                          if (isNotSame) SizeConfig.sH15,
+                          if (isNotSame)
+                            CustomText(
+                              questionsAnswerViewModel
+                                  .questionsDetail[widget.index].selectedAnswer
+                                  .toString(),
+                            ),
                           SizeConfig.sH15,
-                           CustomText(AppStrings.correctAnswer,
+                          CustomText(AppStrings.correctAnswer,
                               color: AppColors.green0B,
                               fontWeight: FontWeight.w700),
                           SizeConfig.sH15,
@@ -125,8 +129,9 @@ class _AudioWaveFormState extends State<AudioWaveForm> {
                       ),
                     )
                   : TextFormField(
-                      controller:
-                          questionsAnswerViewModel.audioAnswerController.value,
+                      controller: widget.controller,
+
+                      ///questionsAnswerViewModel.audioAnswerController.value,
                       cursorColor: AppColors.primaryColor,
                       showCursor: true,
                       maxLines: 9,
@@ -162,8 +167,8 @@ class _AudioWaveFormState extends State<AudioWaveForm> {
                     ),
             ),
           ],
-        );}
-      ),
+        );
+      }),
     );
   }
 }

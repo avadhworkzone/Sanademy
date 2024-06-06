@@ -28,6 +28,7 @@ class QuestionsScreen extends StatefulWidget {
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
   QuestionsAnswerViewModel questionsAnswerViewModel = Get.find();
+  List<TextEditingController> _controllers = [];
 
   @override
   void initState() {
@@ -38,11 +39,18 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
   questionDetailAPiCall() async {
     await questionsAnswerViewModel.getQuestionsViewModel(examId: widget.examId);
+    _controllers = List.generate(
+      questionsAnswerViewModel.questionsDetail.length,
+      (index) => TextEditingController(),
+    );
   }
 
   @override
   void dispose() {
     questionsAnswerViewModel.timer1?.value.cancel();
+    for (var controller in _controllers) {
+      controller.dispose();
+    }
     super.dispose();
   }
 
@@ -222,6 +230,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                 question.type == "Audio"
                                     ? AudioWaveForm(
                                         videoUrl: question.audio.toString(),
+                                        controller: _controllers[index],
                                       )
                                     : ListView.builder(
                                         shrinkWrap: true,
@@ -370,13 +379,28 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                               duration: const Duration(
                                                   milliseconds: 500),
                                               curve: Curves.ease);
-                                      if(question.type=='Audio'){
-                                        questionsAnswerViewModel.selectedAnswerList.add({
-                                          "questionId": /*"5"*/question.id,
-                                          "answerId": questionsAnswerViewModel
-                                              .audioAnswerController.value.text
-                                        });
-                                      }
+
+                                      // _controllers.forEach((element) {
+                                      //   if (element.text.isNotEmpty) {
+                                      //     if (question.type == 'Audio') {
+                                      //
+                                      //         questionsAnswerViewModel
+                                      //             .selectedAnswerList
+                                      //             .add({
+                                      //           "questionId": /*"5"*/
+                                      //               question.id,
+                                      //           "answerId": element.text
+                                      //           // questionsAnswerViewModel
+                                      //           //     .audioAnswerController
+                                      //           //     .value
+                                      //           //     .text
+                                      //         });
+                                      //
+                                      //     }
+                                      //   }
+                                      // });
+                                      print(
+                                          'questionsAnswerViewModel.selectedAnswerList${questionsAnswerViewModel.selectedAnswerList}');
                                     } else if (index ==
                                         questionsDetail.length - 1) {
                                       questionsAnswerViewModel.stopTimer();
@@ -387,6 +411,25 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                       /// CALL SAVE QUESTIONS API
                                       List saveQuestionsIdList = [];
                                       List saveAnswerIdList = [];
+                                      _controllers.forEach((element) {
+                                        if (element.text.isNotEmpty) {
+                                          if (questionsDetail == 'Audio') {
+                                            questionsAnswerViewModel
+                                                .selectedAnswerList
+                                                .add({
+                                              "questionId": /*"5"*/
+                                                  question.id,
+                                              "answerId": element.text
+                                              // questionsAnswerViewModel
+                                              //     .audioAnswerController
+                                              //     .value
+                                              //     .text
+                                            });
+                                          }
+                                        }
+                                      });
+                                      print(
+                                          'else questionsAnswerViewModel.selectedAnswerList${questionsAnswerViewModel.selectedAnswerList}');
                                       for (var item in questionsAnswerViewModel
                                           .selectedAnswerList) {
                                         saveQuestionsIdList
@@ -402,7 +445,6 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                               answers: saveAnswerIdList,
                                               questionIds: saveQuestionsIdList,
                                               time: formattedTime);
-
                                     }
                                   },
                                   title: AppStrings.next,
