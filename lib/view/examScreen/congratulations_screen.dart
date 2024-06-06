@@ -9,6 +9,7 @@ import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/enum_utils.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view/examScreen/exam_screen.dart';
 import 'package:sanademy/view/examScreen/solutions_screen.dart';
 import 'package:sanademy/view_model/congratulations_view_model.dart';
 
@@ -243,7 +244,9 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20.w),
                       child: CustomBtn(
-                        onTap: () {},
+                        onTap: () {
+                          Get.offAll(() => const ExamScreen());
+                        },
                         height: 55.h,
                         title: AppStrings.continues,
                         fontWeight: FontWeight.w700,

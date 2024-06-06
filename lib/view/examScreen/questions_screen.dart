@@ -28,6 +28,7 @@ class QuestionsScreen extends StatefulWidget {
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
   QuestionsAnswerViewModel questionsAnswerViewModel = Get.find();
+  List<TextEditingController> _controllers = [];
 
   @override
   void initState() {
@@ -38,11 +39,19 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
   questionDetailAPiCall() async {
     await questionsAnswerViewModel.getQuestionsViewModel(examId: widget.examId);
+    _controllers = List.generate(
+      questionsAnswerViewModel.questionsDetail.length,
+      (index) => TextEditingController(),
+    );
   }
 
   @override
   void dispose() {
     questionsAnswerViewModel.timer1?.value.cancel();
+    for (var controller in _controllers) {
+      controller.dispose();
+    }
+    _controllers.clear();
     super.dispose();
   }
 
@@ -163,7 +172,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                               SizeConfig.sW15,
                               InkWell(
                                 borderRadius: BorderRadius.circular(18.r),
-                                onTap: () {
+                                onTap: () async {
                                   if (questionsDetail.length - 1 > index) {
                                     questionsAnswerViewModel
                                         .pageController.value
@@ -183,13 +192,16 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                       saveAnswerIdList
                                           .add(item['answerId'].toString());
                                     }
-                                    questionsAnswerViewModel
+                                    final formattedTime = formatDuration(
+                                        questionsAnswerViewModel
+                                            .duration.value.inSeconds);
+                                    await questionsAnswerViewModel
                                         .saveQuestionsViewModel(
                                             widget.examTitle,
                                             examId: widget.examId,
                                             answers: saveAnswerIdList,
                                             questionIds: saveQuestionsIdList,
-                                            time: "15:00");
+                                            time: formattedTime);
                                   }
                                 },
                                 child: Container(
@@ -222,6 +234,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                 question.type == "Audio"
                                     ? AudioWaveForm(
                                         videoUrl: question.audio.toString(),
+                                        controller: _controllers[index],
                                       )
                                     : ListView.builder(
                                         shrinkWrap: true,
@@ -229,6 +242,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                         itemBuilder: (context, optionIndex) {
                                           final option = question.toJson()[
                                               'option_${optionIndex + 1}'];
+
                                           bool isSelected = false;
                                           final containIndex =
                                               questionsAnswerViewModel
@@ -323,7 +337,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                               SizeConfig.sW5,
                               Expanded(
                                 child: CustomBtn(
-                                  onTap: () {
+                                  onTap: () async {
                                     final containIndex =
                                         questionsAnswerViewModel
                                             .selectedAnswerList
@@ -347,9 +361,29 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                               curve: Curves.ease);
                                     } else if (index ==
                                         questionsDetail.length - 1) {
-                                      /*Get.to(CongratulationsScreen(
-                                        examTitle: widget.examTitle,
-                                      ));*/
+                                      questionsAnswerViewModel.stopTimer();
+                                      final formattedTime = formatDuration(
+                                          questionsAnswerViewModel
+                                              .duration.value.inSeconds);
+
+                                      /// CALL SAVE QUESTIONS API
+                                      List saveQuestionsIdList = [];
+                                      List saveAnswerIdList = [];
+                                      for (var item in questionsAnswerViewModel
+                                          .selectedAnswerList) {
+                                        saveQuestionsIdList
+                                            .add(item['questionId'].toString());
+                                        saveAnswerIdList
+                                            .add(item['answerId'].toString());
+                                      }
+
+                                      await questionsAnswerViewModel
+                                          .saveQuestionsViewModel(
+                                              widget.examTitle,
+                                              examId: widget.examId,
+                                              answers: saveAnswerIdList,
+                                              questionIds: saveQuestionsIdList,
+                                              time: formattedTime);
                                     }
                                   },
                                   title: AppStrings.skip,
@@ -370,11 +404,17 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                               duration: const Duration(
                                                   milliseconds: 500),
                                               curve: Curves.ease);
-                                      if(question.type=='Audio'){
-                                        questionsAnswerViewModel.selectedAnswerList.add({
-                                          "questionId": /*"5"*/question.id,
-                                          "answerId": questionsAnswerViewModel
-                                              .audioAnswerController.value.text
+
+                                      if (question.type == 'Audio') {
+                                        questionsAnswerViewModel
+                                            .selectedAnswerList
+                                            .add({
+                                          "questionId": question.id,
+                                          "answerId": _controllers[index].text
+                                          // questionsAnswerViewModel
+                                          //     .audioAnswerController
+                                          //     .value
+                                          //     .text
                                         });
                                       }
                                     } else if (index ==
@@ -395,14 +435,13 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                             .add(item['answerId'].toString());
                                       }
 
-                                      questionsAnswerViewModel
+                                      await questionsAnswerViewModel
                                           .saveQuestionsViewModel(
                                               widget.examTitle,
                                               examId: widget.examId,
                                               answers: saveAnswerIdList,
                                               questionIds: saveQuestionsIdList,
                                               time: formattedTime);
-
                                     }
                                   },
                                   title: AppStrings.next,

@@ -53,7 +53,8 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                 return const Center(child: CustomText("Something went wrong"));
               }
               final questionsDetail = questionsAnswerViewModel.questionsDetail;
-              print('api mathi aave che ${jsonEncode(questionsAnswerViewModel.questionsDetail)}');
+              print(
+                  'api mathi aave che ${jsonEncode(questionsAnswerViewModel.questionsDetail)}');
               return Column(
                 children: [
                   CustomText(
@@ -171,8 +172,7 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                   ),
                                   SizeConfig.sH10,
                                   question.type == "Audio"
-                                      ?
-                                  AudioWaveForm(
+                                      ? AudioWaveForm(
                                           videoUrl: questionsDetail[index]
                                               .audio
                                               .toString(),
@@ -190,19 +190,28 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                             int isFail = -1;
                                             if (question.selectedAnswer ==
                                                 question.correctAns) {
-                                              print(' question.correctAns${ question.correctAns}');
-                                              isCorrect = int.parse(
-                                                  question.correctAns ?? '-1');
+                                              isCorrect =
+                                                  question.correctAns == "null"
+                                                      ? -1
+                                                      : int.parse(
+                                                          question.correctAns ??
+                                                              '-1');
                                             } else {
-                                              isCorrect = int.parse(
-                                                  question.correctAns ?? '-1');
-                                              isFail = int.parse(
-                                                  question.selectedAnswer ??
-                                                      '-1');
-                                              print(' question.correctAns${ question.correctAns}');
+                                              isCorrect =
+                                                  question.correctAns == "null"
+                                                      ? -1
+                                                      : int.parse(
+                                                          question.correctAns ??
+                                                              '-1');
+                                              isFail = question
+                                                          .selectedAnswer ==
+                                                      "null"
+                                                  ? -1
+                                                  : int.parse(
+                                                      question.selectedAnswer ??
+                                                          '-1');
                                             }
-                                            print('isCorrect===${isCorrect}');
-                                            print('isFail===${isFail}');
+
                                             return Container(
                                               padding: EdgeInsets.symmetric(
                                                   horizontal: 10.w,

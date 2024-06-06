@@ -1,10 +1,15 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
+import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
@@ -12,6 +17,7 @@ import 'package:sanademy/view/auth/sign_up_screen.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
 import 'package:sanademy/view/examScreen/exam_screen.dart';
 import 'package:sanademy/view_model/bottom_bar_view_model.dart';
+import 'package:sanademy/view_model/my_certificate_view_model.dart';
 
 class MyCertificateScreen extends StatefulWidget {
   const MyCertificateScreen({super.key});
@@ -22,6 +28,20 @@ class MyCertificateScreen extends StatefulWidget {
 
 class _MyCertificateScreenState extends State<MyCertificateScreen> {
   BottomBarViewModel bottomBarViewModel = Get.find();
+  MyCertificateViewModel myCertificateViewModel =
+      Get.put(MyCertificateViewModel());
+
+  @override
+  void initState() {
+    getCertificateApiCall();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  getCertificateApiCall() async {
+    await myCertificateViewModel.getCertificateData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -64,94 +84,137 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                   textColor: AppColors.white,
                 ),
                 SizeConfig.sH20,
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: myCertificateList.length,
-                    itemBuilder: (context, index) => Container(
-                      margin: EdgeInsets.only(bottom: 15.h),
-                      padding: EdgeInsets.symmetric(
-                          vertical: 20.h, horizontal: 20.w),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.r),
-                          gradient: LinearGradient(
-                              colors: myCertificateList[index]['color']),
-                          image: const DecorationImage(
-                              image:
-                                  AssetImage(AppImageAssets.recommendedBgImg))),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                            myCertificateList[index]['titleTxt'],
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.black0E,
-                          ),
-                          SizeConfig.sH8,
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
+                Obx(() {
+                  return Expanded(
+                    child: ListView.builder(
+                      itemCount: myCertificateViewModel.getCertificates.length,
+                      itemBuilder: (context, index) {
+                        final certificates =
+                            myCertificateViewModel.getCertificates[index];
+                        final List<Color> colors = certificates
+                            .course!.colorCode!
+                            .split(',')
+                            .map((color) => Color(int.parse(color, radix: 16))
+                                .withOpacity(0.8))
+                            .toList();
+                        return Container(
+                          margin: EdgeInsets.only(bottom: 15.h),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 20.h, horizontal: 20.w),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.r),
+                              gradient: LinearGradient(colors: colors),
+                              image: const DecorationImage(
+                                  // colorFilter: ColorFilter.mode(
+                                  //   Colors.white.withOpacity(
+                                  //       0.2), // You can change the color and opacity as needed
+                                  //   BlendMode
+                                  //       .color, // Blend mode to use with the color
+                                  // ),
+                                  image: AssetImage(
+                                      AppImageAssets.recommendedBgImg))),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CustomText(
-                                myCertificateList[index]['lectures'],
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.black0E,
-                              ),
-                              SizeConfig.sW6,
-                              CustomText(
-                                "•",
-                                fontWeight: FontWeight.w400,
+                                certificates.course!.title ?? '',
                                 fontSize: 20.sp,
+                                fontWeight: FontWeight.w700,
                                 color: AppColors.black0E,
                               ),
-                              SizeConfig.sW6,
-                              CustomText(
-                                myCertificateList[index]['time'],
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.black0E,
+                              SizeConfig.sH8,
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  CustomText(
+                                    certificates.course!.numberOfLecture ?? '',
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColors.black0E,
+                                  ),
+                                  SizeConfig.sW6,
+                                  CustomText(
+                                    "•",
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 20.sp,
+                                    color: AppColors.black0E,
+                                  ),
+                                  SizeConfig.sW6,
+                                  CustomText(
+                                    '${'${certificates.course!.hours} ${AppStrings.hours}'} ${'${certificates.course!.minutes} ${AppStrings.minutes}'}',
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColors.black0E,
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                          SizeConfig.sH15,
-                          Row(
-                            children: [
-                              Container(
-                                width: 150.34.w,
-                                height: 56.h,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.r),
-                                    color: AppColors.white),
-                                child: Center(
-                                    child: CustomText(
-                                  AppStrings.downloadPDF,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14.sp,
-                                  color: AppColors.black02,
-                                )),
-                              ),
-                              SizeConfig.sW20,
-                              Container(
-                                width: 150.34.w,
-                                height: 56.h,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.r),
-                                    color: AppColors.white),
-                                child: Center(
-                                    child: CustomText(
-                                  AppStrings.requestHartCopy,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14.sp,
-                                  color: AppColors.black02,
-                                )),
+                              SizeConfig.sH15,
+                              Row(
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      FileDownloader.downloadFile(
+                                          url: certificates.certificate ?? '',
+                                          onDownloadError: (String error) {
+                                            if (kDebugMode) {
+                                              print('Download error : $error');
+                                            }
+                                          },
+                                          onDownloadCompleted: (path) {
+                                            final File file = File(path);
+                                            showSussesSnackBar('',
+                                                'Pdf Download Successfully');
+                                            print(file);
+                                          },
+                                          onProgress: (fileName, progress) {
+                                            setState(() {
+                                              progress = progress;
+                                            });
+                                          });
+                                    },
+                                    child: Container(
+                                      width: Get.width / 2.7,
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 20.w),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10.r),
+                                          color: AppColors.white),
+                                      child: Center(
+                                          child: CustomText(
+                                        AppStrings.downloadPDF,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 14.sp,
+                                        color: AppColors.black02,
+                                      )),
+                                    ),
+                                  ),
+                                  SizeConfig.sW20,
+                                  Container(
+                                    width: Get.width / 2.7,
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 20.w),
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(10.r),
+                                        color: AppColors.white),
+                                    child: Center(
+                                        child: CustomText(
+                                      AppStrings.requestHartCopy,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 14.sp,
+                                      color: AppColors.black02,
+                                    )),
+                                  )
+                                ],
                               )
                             ],
-                          )
-                        ],
-                      ),
+                          ),
+                        );
+                      },
                     ),
-                  ),
-                )
+                  );
+                })
               ],
             ),
           ),
@@ -159,19 +222,4 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
       ),
     );
   }
-
-  final List<Map<String, dynamic>> myCertificateList = [
-    {
-      'titleTxt': 'Exploring the Beauty of Mathematical Structures',
-      'lectures': '12 lectures',
-      'time': '7 hours 40 minutes',
-      'color': [Color(0xff9BEE42), Color(0xff9BEE42)],
-    },
-    {
-      'titleTxt': 'Exploring the Beauty of Mathematical Structures',
-      'lectures': '14 lectures',
-      'time': '8 hours 30 minutes',
-      'color': [Color(0xffE9984E), Color(0xffDD6E07)],
-    },
-  ];
 }

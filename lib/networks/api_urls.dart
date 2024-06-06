@@ -36,4 +36,5 @@ class ApiUrls {
   static const String getCourseProgress = 'get_course_progress';
   static const String saveCourseProgress = 'save_course_progress';
   static const String getNotification = 'notifications';
+  static const String getCertificate = 'get_certificates';
 }
