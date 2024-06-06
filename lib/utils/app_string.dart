@@ -107,6 +107,11 @@ class AppStrings {
   /// my progress screen
   static String progressIntroductionTxt =
       'In this page, you can see all your enrolled courses and the progress that you made in each one of them.';
+  static String  minutesComplete = ' minutes complete';
+  static String  hoursComplete = ' hours complete';
+  static String  minutesRemaining = ' minutes remaining';
+  static String  hoursRemaining = ' hours remaining';
+  static String  noProgressAvailable = '"No Progress Available"';
 
   /// my certificate screen
   static String certificate = 'My Certificates';

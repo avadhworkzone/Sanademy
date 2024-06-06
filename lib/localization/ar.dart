@@ -109,6 +109,10 @@ Map<String, String> ar = {
   /// my progress screen
   AppStrings.progressIntroductionTxt:
       "في هذه الصفحة، يمكنك رؤية جميع الدورات التي قمت بالتسجيل فيها والتقدم الذي أحرزته في كل منها.",
+  AppStrings.minutesComplete: ' دقائق كاملة ',
+  AppStrings.hoursComplete: ' ساعات كاملة ',
+  AppStrings.minutesRemaining: ' دقائق متبقية',
+  AppStrings.hoursRemaining: ' الساعات المتبقية',
 
   /// my certificate screen
   AppStrings.certificate: 'شهاداتي',
