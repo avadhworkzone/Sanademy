@@ -61,7 +61,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   }
 
   saveCourseProgressApiCall() async {
-    await  descriptionViewModel.saveCourseProcessViewModel(
+    await descriptionViewModel.saveCourseProcessViewModel(
       courseId: "1",
       completedHour: descriptionViewModel.completedHours.toString(),
       completedMinute: descriptionViewModel.completedMinutes.toString(),
@@ -126,7 +126,6 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           child: GestureDetector(
                               onTap: () {
                                 saveCourseProgressApiCall();
-
                               },
                               child: Container(
                                 margin: EdgeInsets.only(
@@ -322,6 +321,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                             ),
                           ),
                           SizeConfig.sH25,
+
+                          /// REQUIREMENTS
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 15.w),
                             child: Theme(
@@ -350,6 +351,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           Divider(
                             color: AppColors.black0E.withOpacity(0.2),
                           ),
+
+                          /// WHAT WILL YOU LEARN
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 15.w),
                             child: Theme(
@@ -379,6 +382,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           Divider(
                             color: AppColors.black0E.withOpacity(0.2),
                           ),
+
+                          /// WHO THIS COURSE IS FOR
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 15.w),
                             child: Theme(

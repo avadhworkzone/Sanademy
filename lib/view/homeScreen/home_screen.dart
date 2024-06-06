@@ -99,12 +99,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       )),
                 )),
             bottom: PreferredSize(
-              preferredSize:  const Size.fromHeight(70),
-              child:  Padding(
+              preferredSize: const Size.fromHeight(70),
+              child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 10.w),
                 child: CommonTextField(
                   textEditController:
-                  Get.find<HomeScreenViewModel>().searchController.value,
+                      Get.find<HomeScreenViewModel>().searchController.value,
                   regularExpression: RegularExpressionUtils.alphabetPattern,
                   hintText: AppStrings.searchHere.tr,
                   style: TextStyle(
@@ -127,21 +127,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   onChange: (firstNameData) {
                     homeScreenViewModel.homeViewModel(
-                    search: homeScreenViewModel.searchController.value.text);
+                        search:
+                            homeScreenViewModel.searchController.value.text);
                   },
                 ),
               ),
-            )
-        ),
+            )),
         body: Obx(
           () => homeScreenViewModel.responseStatus.value == ResponseStatus.Error
               ? CustomText(
                   AppStrings.error,
                   fontSize: 20.sp,
                 )
-              : homeScreenViewModel.responseStatus.value == ResponseStatus.Completed
+              : homeScreenViewModel.responseStatus.value ==
+                      ResponseStatus.Completed
                   ? const SingleChildScrollView(
-                    child: Column(
+                      child: Column(
                         children: [
                           /// CAROUSAL SLIDER VIEW....
                           HomeSliderWidget(),
@@ -153,9 +154,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           HomeRecommendedWidget(),
                         ],
                       ),
-                  )
+                    )
                   : const Material(),
         ));
   }
 }
-

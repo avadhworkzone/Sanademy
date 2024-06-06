@@ -20,12 +20,12 @@ class AboutUsScreen extends StatefulWidget {
 class _AboutUsScreenState extends State<AboutUsScreen> {
   AboutUsViewModel aboutUsViewModel = Get.put(AboutUsViewModel());
 
-
   @override
   void initState() {
     getAboutUsApiCall();
     super.initState();
   }
+
   getAboutUsApiCall() async {
     await aboutUsViewModel.getAboutUsData();
   }
@@ -43,7 +43,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
           ),
         ),
         body: Obx(
-          () =>  SingleChildScrollView(
+          () => SingleChildScrollView(
             child: Column(
               children: [
                 SizeConfig.sH10,
@@ -52,7 +52,8 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                   shrinkWrap: true,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.w,vertical: 20.h),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 25.w, vertical: 20.h),
                   child: CustomBtn(
                     onTap: () {
                       Get.to(const ContactUsScreen());

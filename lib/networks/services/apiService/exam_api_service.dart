@@ -5,7 +5,8 @@ import 'package:sanademy/networks/response_model.dart';
 import 'package:sanademy/utils/app_utils.dart';
 
 class ExamService {
-  Future<ResponseModel?> examDataRepo({required Map<String, dynamic> mapData}) async {
+  Future<ResponseModel?> examDataRepo(
+      {required Map<String, dynamic> mapData}) async {
     final response = await ApiBaseHelper().postHTTP(
       ApiUrls.getExams,
       params: mapData,
