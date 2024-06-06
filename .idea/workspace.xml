@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83c49ef8-8fc9-48dc-9daa-57274fc03aea" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/localization/ar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/localization/ar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/localization/en_us.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/localization/en_us.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/networks/model/get_course_progress_response_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/networks/model/get_course_progress_response_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/app_string.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_string.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/audio_wave_form.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/audio_wave_form.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/examScreen/questions_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/examScreen/questions_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/examScreen/solutions_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/examScreen/solutions_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/myProgressScreen/my_progress_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/myProgressScreen/my_progress_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view_model/description_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view_model/description_view_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view_model/question_answer_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view_model/question_answer_view_model.dart" afterDir="false" />
-    </list>
+    <list default="true" id="83c49ef8-8fc9-48dc-9daa-57274fc03aea" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
