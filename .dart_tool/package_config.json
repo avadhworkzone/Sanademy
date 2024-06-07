@@ -122,6 +122,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "fastpay_merchant",
+      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/fastpay_merchant-1.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "ffi",
       "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/ffi-2.1.0",
       "packageUri": "lib/",
@@ -626,7 +632,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-06-01T05:52:39.218478Z",
+  "generated": "2024-06-07T05:19:29.671180Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }
