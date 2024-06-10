@@ -14,8 +14,9 @@ import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/auth/sign_up_screen.dart';
 import 'package:sanademy/view/dialog/payment_option_dialog.dart';
 import 'package:sanademy/view/homeScreen/sub_screens/lectures_videos_screen.dart';
+import 'package:sanademy/view_model/bottom_bar_view_model.dart';
 import 'package:sanademy/view_model/description_view_model.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:video_player/video_player.dart';
 
 class DescriptionScreen extends StatefulWidget {
   const DescriptionScreen({
@@ -33,6 +34,7 @@ class DescriptionScreen extends StatefulWidget {
 
 class _DescriptionScreenState extends State<DescriptionScreen> {
   DescriptionViewModel descriptionViewModel = Get.put(DescriptionViewModel());
+  BottomBarViewModel bottomBarViewModel = Get.find<BottomBarViewModel>();
 
   @override
   void initState() {
@@ -42,32 +44,30 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
 
   descriptionApiCall() async {
     await descriptionViewModel.courseDetailViewModel(courseId: widget.courseId);
-    descriptionViewModel.youtubePlayerController = YoutubePlayerController(
+    /* descriptionViewModel.youtubePlayerController = YoutubePlayerController(
       initialVideoId: '',
       flags: const YoutubePlayerFlags(
         isLive: true,
         autoPlay: false,
       ),
-    ).obs;
-    descriptionViewModel.youTubPlayer(widget
-        .videoUrl /*descriptionViewModel.courseDetailResModel.data!.videoUrl ?? ''*/);
+    ).obs;*/
+    descriptionViewModel
+        .videoPlayer(widget.videoUrl /*descriptionViewModel.courseDetailResModel.data!.videoUrl ?? ''*/);
   }
 
   @override
   void dispose() {
-    descriptionViewModel.youtubePlayerController?.value.dispose();
+    // descriptionViewModel.youtubePlayerController?.value.dispose();
+    descriptionViewModel.videoPlayerController.dispose();
     super.dispose();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Material(
-        child: Obx(() => descriptionViewModel
-                    .courseDetailResponseStatus.value ==
-                ResponseStatus.Completed
+        child: Obx(() =>
+        descriptionViewModel.courseDetailResponseStatus.value == ResponseStatus.Completed
             ? SingleChildScrollView(
                 child: Column(
                   children: [
@@ -88,30 +88,52 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                       )),
                                 )
                               : SizedBox(
+                                  height: 300.h,
+                                  width: 430.w,
+                                  child: AspectRatio(
+                                    aspectRatio: descriptionViewModel.videoPlayerController.value.aspectRatio,
+                                    child: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        VideoPlayer(descriptionViewModel.videoPlayerController),
+                                        InkWell(
+                                          onTap: () {
+                                            if (descriptionViewModel.videoPlayerController.value.isPlaying) {
+                                              setState(() {
+                                                descriptionViewModel.videoPlayerController.pause();
+                                              });
+                                            } else {
+                                              setState(() {
+                                                descriptionViewModel.videoPlayerController.play();
+                                              });
+                                            }
+                                          },
+                                          child: descriptionViewModel.videoPlayerController.value.isPlaying
+                                              ? const Icon(Icons.pause_circle, size: 50, color: Colors.white)
+                                              : const Icon(Icons.play_circle, size: 50, color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                          /* : SizedBox(
                                   height: Get.width * 0.7,
                                   width: Get.width,
                                   child: YoutubePlayerBuilder(
                                     player: YoutubePlayer(
-                                      controller: descriptionViewModel
-                                          .youtubePlayerController!.value,
+                                      controller: descriptionViewModel.youtubePlayerController!.value,
                                       showVideoProgressIndicator: true,
                                       onReady: () {
-                                        descriptionViewModel
-                                            .youtubePlayerController?.value
-                                            .addListener(() {
-                                          descriptionViewModel.onTouch.value =
-                                              descriptionViewModel
-                                                      .youtubePlayerController
-                                                      ?.value
-                                                      .value
-                                                      .isPlaying ??
-                                                  false;
+                                        descriptionViewModel.youtubePlayerController?.value.addListener(() {
+                                          descriptionViewModel.onTouch.value = descriptionViewModel
+                                                  .youtubePlayerController?.value.value.isPlaying ??
+                                              false;
                                         });
                                       },
                                     ),
                                     builder: (context, player) => player,
                                   ),
-                                ),
+                                ),*/
                         ),
                         Positioned(
                           child: GestureDetector(
@@ -119,10 +141,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                 Get.back();
                               },
                               child: Container(
-                                margin: EdgeInsets.only(
-                                    left: 10.w, top: 10.w, right: 10.w),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 10.w, vertical: 10.w),
+                                margin: EdgeInsets.only(left: 10.w, top: 10.w, right: 10.w),
+                                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
                                 decoration: BoxDecoration(
                                     color: AppColors.black.withOpacity(0.20),
                                     borderRadius: BorderRadius.circular(17)),
@@ -176,9 +196,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 10.w),
                             child: Html(
-                              data: descriptionViewModel
-                                      .courseDetailResModel.data!.description ??
-                                  '',
+                              data: descriptionViewModel.courseDetailResModel.data!.description ?? '',
                               shrinkWrap: true,
                             ),
                           ),
@@ -200,10 +218,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                           ),
                                           SizeConfig.sW8,
                                           CustomText(
-                                            descriptionViewModel
-                                                    .courseDetailResModel
-                                                    .data!
-                                                    .numberOfLecture ??
+                                            descriptionViewModel.courseDetailResModel.data!.numberOfLecture ??
                                                 '',
                                             fontWeight: FontWeight.w400,
                                             fontSize: 14.sp,
@@ -215,8 +230,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                       Row(
                                         children: [
                                           LocalAssets(
-                                            imagePath:
-                                                AppImageAssets.languageIcn,
+                                            imagePath: AppImageAssets.languageIcn,
                                             height: 24.h,
                                             width: 24.w,
                                           ),
@@ -273,8 +287,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                       Row(
                                         children: [
                                           LocalAssets(
-                                            imagePath:
-                                                AppImageAssets.educationIcn,
+                                            imagePath: AppImageAssets.educationIcn,
                                             height: 24.h,
                                             width: 24.w,
                                           ),
@@ -291,8 +304,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                       Row(
                                         children: [
                                           LocalAssets(
-                                            imagePath:
-                                                AppImageAssets.certificates,
+                                            imagePath: AppImageAssets.certificates,
                                             height: 24.h,
                                             width: 24.w,
                                           ),
@@ -317,8 +329,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 15.w),
                             child: Theme(
-                              data: Theme.of(context)
-                                  .copyWith(dividerColor: Colors.transparent),
+                              data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
                               child: ExpansionTile(
                                   tilePadding: EdgeInsets.only(left: 5.w),
                                   title: CustomText(
@@ -329,11 +340,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                   ),
                                   children: [
                                     Html(
-                                      data: descriptionViewModel
-                                              .courseDetailResModel
-                                              .data!
-                                              .requirements ??
-                                          '',
+                                      data:
+                                          descriptionViewModel.courseDetailResModel.data!.requirements ?? '',
                                       shrinkWrap: true,
                                     )
                                   ]),
@@ -347,8 +355,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 15.w),
                             child: Theme(
-                              data: Theme.of(context)
-                                  .copyWith(dividerColor: Colors.transparent),
+                              data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
                               child: ExpansionTile(
                                   tilePadding: EdgeInsets.only(left: 5.w),
                                   //childrenPadding: EdgeInsets.only(left: 20.w),
@@ -360,11 +367,9 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                   ),
                                   children: [
                                     Html(
-                                      data: descriptionViewModel
-                                              .courseDetailResModel
-                                              .data!
-                                              .whatWillYouLearn ??
-                                          '',
+                                      data:
+                                          descriptionViewModel.courseDetailResModel.data!.whatWillYouLearn ??
+                                              '',
                                       shrinkWrap: true,
                                     )
                                   ]),
@@ -378,8 +383,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 15.w),
                             child: Theme(
-                              data: Theme.of(context)
-                                  .copyWith(dividerColor: Colors.transparent),
+                              data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
                               child: ExpansionTile(
                                   tilePadding: EdgeInsets.only(left: 5.w),
                                   title: CustomText(
@@ -392,9 +396,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                     Html(
                                       shrinkWrap: true,
                                       data: descriptionViewModel
-                                              .courseDetailResModel
-                                              .data!
-                                              .whoThisCourseIsFor ??
+                                              .courseDetailResModel.data!.whoThisCourseIsFor ??
                                           '',
                                     )
                                   ]),
@@ -422,43 +424,30 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                               decoration: BoxDecoration(
                                   color: AppColors.white,
                                   boxShadow: const [
-                                    BoxShadow(
-                                        color: Colors.black26,
-                                        offset: Offset(0, 1),
-                                        blurRadius: 4.0)
+                                    BoxShadow(color: Colors.black26, offset: Offset(0, 1), blurRadius: 4.0)
                                   ],
                                   borderRadius: BorderRadius.circular(20.r)),
                               child: Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 10.h),
                                 child: Theme(
-                                  data: Theme.of(context).copyWith(
-                                      dividerColor: Colors.transparent),
+                                  data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
                                   child: ExpansionTile(
-                                      tilePadding: EdgeInsets.symmetric(
-                                          horizontal: 5.w, vertical: 10.h),
+                                      tilePadding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.h),
                                       title: Row(
                                         children: [
                                           CircleAvatar(
                                             radius: 40.r,
-                                            backgroundImage: NetworkImage(
-                                                descriptionViewModel
-                                                        .courseDetailResModel
-                                                        .data!
-                                                        .teacher!
-                                                        .image ??
-                                                    ''),
+                                            backgroundImage: NetworkImage(descriptionViewModel
+                                                    .courseDetailResModel.data!.teacher!.image ??
+                                                ''),
                                           ),
                                           SizeConfig.sW8,
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               CustomText(
                                                 descriptionViewModel
-                                                        .courseDetailResModel
-                                                        .data!
-                                                        .teacher!
-                                                        .name ??
+                                                        .courseDetailResModel.data!.teacher!.name ??
                                                     '',
                                                 fontWeight: FontWeight.w700,
                                                 fontSize: 15.sp,
@@ -476,19 +465,14 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                       ),
                                       children: [
                                         Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Divider(
-                                              color: AppColors.black0E
-                                                  .withOpacity(0.2),
+                                              color: AppColors.black0E.withOpacity(0.2),
                                             ),
                                             Html(
                                               data: descriptionViewModel
-                                                      .courseDetailResModel
-                                                      .data!
-                                                      .teacher!
-                                                      .description ??
+                                                      .courseDetailResModel.data!.teacher!.description ??
                                                   '',
                                               shrinkWrap: true,
                                             ),
@@ -528,51 +512,29 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                               ),
                               child: ListView.builder(
                                 shrinkWrap: true,
-                                itemCount: descriptionViewModel
-                                    .courseDetailResModel
-                                    .data!
-                                    .courseContents!
-                                    .length,
+                                itemCount:
+                                    descriptionViewModel.courseDetailResModel.data!.courseContents!.length,
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
-                                  var courseContent = descriptionViewModel
-                                      .courseDetailResModel
-                                      .data!
-                                      .courseContents![index];
-                                  List<String> lectureVideoUrls = [];
-                                  for (var lecture in courseContent.lectures!) {
-                                    lectureVideoUrls
-                                        .add(lecture.videoUrl ?? '');
-                                  }
+                                  var courseContent =
+                                      descriptionViewModel.courseDetailResModel.data!.courseContents![index];
                                   return Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 20.w),
+                                    padding: EdgeInsets.symmetric(horizontal: 20.w),
                                     child: Column(
                                       children: [
                                         Theme(
-                                          data: Theme.of(context).copyWith(
-                                              dividerColor: Colors.transparent),
+                                          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
                                           child: ExpansionTile(
                                             tilePadding:
-                                                const EdgeInsets.symmetric(
-                                                    horizontal: 5,
-                                                    vertical: 10),
+                                                const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                                             title: Row(
                                               children: [
                                                 Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     CustomText(
-                                                      descriptionViewModel
-                                                              .courseDetailResModel
-                                                              .data!
-                                                              .courseContents![
-                                                                  index]
-                                                              .title ??
-                                                          '',
-                                                      fontWeight:
-                                                          FontWeight.w700,
+                                                      courseContent.title ?? '',
+                                                      fontWeight: FontWeight.w700,
                                                       fontSize: 15,
                                                       color: AppColors.black,
                                                     ),
@@ -580,34 +542,48 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                                       children: [
                                                         InkWell(
                                                           onTap: () {
-                                                            Get.to(
-                                                                LecturesVideoScreen(
-                                                              lectureVideoUrls:
-                                                                  lectureVideoUrls,
-                                                              videoTitle: courseContent.lectures![index].title!,
-                                                              videoDescription:courseContent.lectures![index].description!,
-                                                            ));
+                                                            /*  List contentVideoList = [];
+                                                            List<Lectures> lectures =
+                                                                courseContent.lectures! ?? [];
+                                                            for (var element in lectures) {
+                                                              contentVideoList.add({
+                                                                'videoId': element.id,
+                                                                'watchedTime': '',
+                                                                'remainingTime': '',
+                                                              });
+                                                            }
+                                                            Map map = {
+                                                              'contentId': courseContent.id,
+                                                              'lectureVideos': contentVideoList,
+                                                            };
+                                                            bool isContain = false;
+                                                            for (var element in bottomBarViewModel.progressDetailList) {
+                                                              if(element['contentId'] == map['contentId']){
+                                                                isContain = true;
+                                                              }
+                                                            }
+                                                            if(!isContain){
+                                                              bottomBarViewModel.progressDetailList.add(map);
+                                                            }*/
+                                                            Get.to(() => LecturesVideoScreen(
+                                                                  lectureVideoUrls: courseContent.lectures!,
+                                                                  contentId: courseContent.id.toString(),
+                                                                ));
                                                           },
                                                           child: CustomText(
                                                             "${courseContent.numberOfLecture ?? ''} ${AppStrings.courseContentLectures}",
-                                                            fontWeight:
-                                                                FontWeight.w400,
+                                                            fontWeight: FontWeight.w400,
                                                             fontSize: 15,
-                                                            color: AppColors
-                                                                .primaryColor,
-                                                            decoration:
-                                                                TextDecoration
-                                                                    .underline,
+                                                            color: AppColors.primaryColor,
+                                                            decoration: TextDecoration.underline,
                                                           ),
                                                         ),
                                                         SizeConfig.sW10,
                                                         CustomText(
                                                           "• ${courseContent.minutes ?? ''} ${AppStrings.mins}",
-                                                          fontWeight:
-                                                              FontWeight.w400,
+                                                          fontWeight: FontWeight.w400,
                                                           fontSize: 15,
-                                                          color:
-                                                              AppColors.black,
+                                                          color: AppColors.black,
                                                         ),
                                                       ],
                                                     ),
@@ -617,9 +593,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                             ),
                                             children: [
                                               Html(
-                                                data:
-                                                    courseContent.description ??
-                                                        '',
+                                                data: courseContent.description ?? '',
                                                 shrinkWrap: true,
                                               )
                                             ],
@@ -627,14 +601,10 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                         ),
                                         if (index !=
                                             descriptionViewModel
-                                                    .courseDetailResModel
-                                                    .data!
-                                                    .courseContents!
-                                                    .length -
+                                                    .courseDetailResModel.data!.courseContents!.length -
                                                 1)
                                           Divider(
-                                            color: AppColors.black0E
-                                                .withOpacity(0.2),
+                                            color: AppColors.black0E.withOpacity(0.2),
                                           ),
                                       ],
                                     ),

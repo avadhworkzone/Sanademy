@@ -26,10 +26,23 @@ class DescriptionViewModel extends GetxController {
   Rx<YoutubePlayerController>? youtubePlayerController;
   bool videoStartedPlaying = false;
 
-  @override
-  void onClose() {
-    super.onClose();
-    // handleScreenTransition();
+ /// VIDEO PLAYER FUNCTION
+  void videoPlayer(String videoUrl) {
+    Future.delayed(const Duration(seconds: 2), () {
+      isLoader.value = false;
+    });
+    videoPlayerController = VideoPlayerController.networkUrl(
+      Uri.parse(videoUrl
+        // 'https://cdn.create.vista.com/api/media/medium/502694658/stock-video-dolly-out-shot-woman-short-red-hair-standing-blackboard-teaching?token='
+      ),
+      videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true,),
+
+    );
+    videoPlayerController.addListener(() {});
+    videoPlayerController.setLooping(true);
+    videoPlayerController.pause();
+    videoPlayerController.initialize();
+    onTouch.value = true;
   }
 
   /// Youtube Player Function
@@ -179,20 +192,5 @@ class DescriptionViewModel extends GetxController {
   }
 
 
-/*void videoPlayer(String videoUrl) {
-    Future.delayed(const Duration(seconds: 2), () {
-      isLoader.value = false;
-    });
-    videoPlayerController = VideoPlayerController.networkUrl(
-      Uri.parse(videoUrl
-          // 'https://cdn.create.vista.com/api/media/medium/502694658/stock-video-dolly-out-shot-woman-short-red-hair-standing-blackboard-teaching?token='
-          ),
-      videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
-    );
-    videoPlayerController.addListener(() {});
-    videoPlayerController.setLooping(true);
-    videoPlayerController.pause();
-    videoPlayerController.initialize();
-    onTouch.value = true;
-  }*/
+
 }

@@ -59,7 +59,9 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                           padding: EdgeInsets.symmetric(horizontal: 20.w),
                           child: ListView.builder(
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: homeScreenViewModel.courses.length,
+                              itemCount: homeScreenViewModel.courses.length >= 5
+                                  ? 5
+                                  : homeScreenViewModel.courses.length,
                               itemBuilder: (context, index) {
                                 final courses =
                                     homeScreenViewModel.courses[index];

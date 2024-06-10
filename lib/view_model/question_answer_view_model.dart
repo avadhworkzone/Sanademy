@@ -94,13 +94,14 @@ class QuestionsAnswerViewModel extends GetxController {
         if (saveQuestionsResModel.data != null) {
           saveQuestionsResponseStatus.value = ResponseStatus.Completed;
           showSussesSnackBar('', saveQuestionsResModel.message.toString());
-          Get.to(() => CongratulationsScreen(
-                examId: examId,
-                examTitle: examTitle,
-              ));
+
         } else {
           showErrorSnackBar('', saveQuestionsResModel.message ?? 'Error');
         }
+        Get.to(() => CongratulationsScreen(
+          examId: examId,
+          examTitle: examTitle,
+        ));
       } else {
         showErrorSnackBar('', saveQuestionsResModel.message ?? 'Error');
         responseStatus.value = ResponseStatus.Error;
