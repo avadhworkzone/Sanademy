@@ -195,7 +195,7 @@ class ApiBaseHelper {
       header.addAll(
           {'Authorization': 'Bearer ${SharedPreferenceUtils.getToken()}'});
     }
-log("HEADER :==>${jsonEncode(header)}");
+    log("HEADER :==>${jsonEncode(header)}");
     return header;
   }
 
@@ -231,7 +231,7 @@ log("HEADER :==>${jsonEncode(header)}");
     void Function(int, int)? onSendProgress,
   }) async {
     try {
-      final formData= DIO.FormData.fromMap(params);
+      final formData = DIO.FormData.fromMap(params);
       showProgressDialog = showProgress;
       DIO.Response response = await baseAPI.post(
         url,
@@ -274,7 +274,9 @@ log("HEADER :==>${jsonEncode(header)}");
   }) async {
     try {
       showProgressDialog = showProgress;
-      DIO.Response response = await baseAPI.get(url, queryParameters: params,
+      DIO.Response response = await baseAPI.get(
+        url,
+        queryParameters: params,
         options: DIO.Options(headers: getHeaders()),
       );
 
@@ -293,7 +295,11 @@ log("HEADER :==>${jsonEncode(header)}");
   }) async {
     try {
       showProgressDialog = showProgress;
-      DIO.Response response = await baseAPI.put(url, data: data,options: DIO.Options(headers: getHeaders()),);
+      DIO.Response response = await baseAPI.put(
+        url,
+        data: data,
+        options: DIO.Options(headers: getHeaders()),
+      );
       return handleResponse(response, onError!, onSuccess!);
     } on DIO.DioException catch (e) {
       return handleError(e, onError!, onSuccess!);
@@ -323,7 +329,7 @@ log("HEADER :==>${jsonEncode(header)}");
   }
 
   handleResponse(
-      DIO.Response response,
+    DIO.Response response,
     Function(DioExceptions dioExceptions) onError,
     Function(ResponseModel res) onSuccess,
   ) {
@@ -334,7 +340,7 @@ log("HEADER :==>${jsonEncode(header)}");
   }
 
   static handleError(
-      DIO.DioException e,
+    DIO.DioException e,
     Function(DioExceptions dioExceptions) onError,
     Function(ResponseModel res) onSuccess,
   ) {

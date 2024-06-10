@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_file_downloader/flutter_file_downloader.dart';
@@ -190,21 +189,32 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                                     ),
                                   ),
                                   SizeConfig.sW20,
-                                  Container(
-                                    width: Get.width / 2.7,
-                                    padding:
-                                        EdgeInsets.symmetric(vertical: 20.w),
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10.r),
-                                        color: AppColors.white),
-                                    child: Center(
-                                        child: CustomText(
-                                      AppStrings.requestHartCopy,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 14.sp,
-                                      color: AppColors.black02,
-                                    )),
+                                  InkWell(
+                                    onTap: () async {
+                                      await myCertificateViewModel
+                                          .requestHardCopyViewModel(
+                                              courseId:
+                                                  certificates.courseId == null
+                                                      ? ''
+                                                      : certificates.courseId
+                                                          .toString());
+                                    },
+                                    child: Container(
+                                      width: Get.width / 2.7,
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 20.w),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10.r),
+                                          color: AppColors.white),
+                                      child: Center(
+                                          child: CustomText(
+                                        AppStrings.requestHartCopy,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 14.sp,
+                                        color: AppColors.black02,
+                                      )),
+                                    ),
                                   )
                                 ],
                               )

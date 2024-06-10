@@ -542,6 +542,54 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "url_launcher",
+      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/url_launcher-6.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "url_launcher_android",
+      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "url_launcher_ios",
+      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/url_launcher_ios-6.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "url_launcher_linux",
+      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/url_launcher_linux-3.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "url_launcher_macos",
+      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/url_launcher_macos-3.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.1"
+    },
+    {
+      "name": "url_launcher_platform_interface",
+      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/url_launcher_platform_interface-2.3.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.1"
+    },
+    {
+      "name": "url_launcher_web",
+      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/url_launcher_web-2.2.3",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "url_launcher_windows",
+      "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/url_launcher_windows-3.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "vector_graphics",
       "rootUri": "file:///Users/techcureindia/.pub-cache/hosted/pub.dev/vector_graphics-1.1.11+1",
       "packageUri": "lib/",
@@ -632,7 +680,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-06-07T05:19:29.671180Z",
+  "generated": "2024-06-10T10:24:44.609235Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }
