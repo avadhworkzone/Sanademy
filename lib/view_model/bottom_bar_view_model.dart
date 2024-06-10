@@ -15,7 +15,9 @@ class BottomBarViewModel extends GetxController {
     SharedPreferenceUtils.getIsLogin() == true
         ? const MyProgressScreen()
         : const SignUpScreen(),
-    const MyCertificateScreen(),
+    SharedPreferenceUtils.getIsLogin() == true
+        ? const MyCertificateScreen()
+        : const SignUpScreen(),
     const NotificationScreen(),
     const NoInterNetScreen(),
   ].obs;

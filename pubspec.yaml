@@ -34,6 +34,8 @@ dependencies:
   flutter_html:
   youtube_player_flutter: ^9.0.1
   chewie:
+  fastpay_merchant: ^1.1.1
+  url_launcher: ^6.3.0
 
 
 dev_dependencies:
