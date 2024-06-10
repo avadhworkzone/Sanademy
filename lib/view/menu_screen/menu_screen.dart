@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/view/dialog/log_out_dialog.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
@@ -13,6 +14,7 @@ import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/menu_screen/about_us_screen.dart';
 import 'package:sanademy/view/menu_screen/contact_us_screen.dart';
 import 'package:sanademy/view_model/menu_screen_view_model.dart';
+import 'package:fastpay_merchant/fastPayRequests.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
@@ -75,23 +77,54 @@ class _MenuScreenState extends State<MenuScreen> {
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w700,
                         bgColor: AppColors.pinkEE,
-                        widget: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15.w),
-                          child: Row(
-                            children: [
-                              LocalAssets(
-                                imagePath: AppImageAssets.fastPayImg,
-                                height: 28.h,
-                                width: 28.w,
-                              ),
-                              SizeConfig.sW5,
-                              CustomText(
-                                AppStrings.fastPay,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 15.sp,
-                                color: AppColors.white,
-                              ),
-                            ],
+                        widget: InkWell(
+                          onTap: () async {
+                            FastpayResult _fastpayResult = await FastPayRequest(
+                              storeID: "1234",
+                              storePassword: "123456",
+                              amount: "450",
+                              orderID: DateTime.now()
+                                  .microsecondsSinceEpoch
+                                  .toString(),
+                              isProduction: false,
+                              callback: (status, message) {
+                                debugPrint(
+                                    "CALLBACK...................$message");
+                                //_showToast(context,message);
+                              },
+                              callbackUri: "sdk://fastpay-sdk.com/callback",
+                            );
+                            if (_fastpayResult.isSuccess ?? false) {
+                              // transaction success
+                              // _showToast(context, "transaction success");
+                              print(
+                                  '......................................transaction success');
+                            } else {
+                              // transaction failed
+                              //_showToast(context, "transaction failed");
+                              print(
+                                  '......................................transaction failed');
+                            }
+                            setState(() {});
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 15.w),
+                            child: Row(
+                              children: [
+                                LocalAssets(
+                                  imagePath: AppImageAssets.fastPayImg,
+                                  height: 28.h,
+                                  width: 28.w,
+                                ),
+                                SizeConfig.sW5,
+                                CustomText(
+                                  AppStrings.fastPay,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 15.sp,
+                                  color: AppColors.white,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -197,7 +230,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 return Column(
                   children: [
                     ListTile(
-                      onTap: (){
+                      onTap: () {
                         if (index == 0) {
                           Get.to(const ContactUsScreen());
                         } else if (index == 1) {
@@ -207,35 +240,41 @@ class _MenuScreenState extends State<MenuScreen> {
                         } else {}
                       },
                       title:
-                    /// FOR SHOW LOGOUT AND DELETE BUTTON
-                    index == 2 || index == 3
-                        ? CustomText(
-                      SharedPreferenceUtils.getIsLogin() == true?
-                      menuScreenViewModel.drawerData[index]:'',
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.red90,
-                    )
-                        : CustomText(
-                      menuScreenViewModel.drawerData[index],
-                      fontWeight: FontWeight.w500,
-                      fontSize: 15.sp,
-                      color: AppColors.black13,
-                    ),
-                      trailing:   index == 2 || index == 3
+
+                          /// FOR SHOW LOGOUT AND DELETE BUTTON
+                          index == 2 || index == 3
+                              ? CustomText(
+                                  SharedPreferenceUtils.getIsLogin() == true
+                                      ? menuScreenViewModel.drawerData[index]
+                                      : '',
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.red90,
+                                )
+                              : CustomText(
+                                  menuScreenViewModel.drawerData[index],
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 15.sp,
+                                  color: AppColors.black13,
+                                ),
+                      trailing: index == 2 || index == 3
                           ? const SizedBox()
                           : const Icon(
-                        Icons.arrow_forward_ios,
-                        size: 15,
-                      ),
+                              Icons.arrow_forward_ios,
+                              size: 15,
+                            ),
                     ),
+
                     ///IF USER LOG IN THAN SHOW EXTRA DIVIDER FOR LOGIN AND DELETE OPTION
                     index == 3
                         ? const SizedBox()
-                        : index==2&& SharedPreferenceUtils.getIsLogin() == false?const SizedBox():Divider(
-                            color: AppColors.black.withOpacity(0.2),
-                      height: 0.1,
-                          ),
+                        : index == 2 &&
+                                SharedPreferenceUtils.getIsLogin() == false
+                            ? const SizedBox()
+                            : Divider(
+                                color: AppColors.black.withOpacity(0.2),
+                                height: 0.1,
+                              ),
                   ],
                 );
               }),
