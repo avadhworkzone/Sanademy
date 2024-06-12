@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,7 @@ import 'package:sanademy/view/menu_screen/about_us_screen.dart';
 import 'package:sanademy/view/menu_screen/contact_us_screen.dart';
 import 'package:sanademy/view_model/menu_screen_view_model.dart';
 import 'package:fastpay_merchant/fastPayRequests.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
@@ -188,7 +190,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       ),
                       SizeConfig.sH12,
                       CustomBtn(
-                        onTap: () {},
+                        onTap: () async {},
                         title: null,
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w700,
@@ -199,23 +201,42 @@ class _MenuScreenState extends State<MenuScreen> {
                               offset: Offset(0, 1),
                               blurRadius: 4.0)
                         ],
-                        widget: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            LocalAssets(
-                              imagePath: AppImageAssets.visaIcn,
-                              height: 30.h,
-                              width: 50.w,
-                            ),
-                            SizeConfig.sW5,
-                            CustomText(
-                              AppStrings.creditCard,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 15.sp,
-                              color: AppColors.black02,
-                            ),
-                          ],
+                        widget: InkWell(
+                          onTap: () async {
+                            String phoneNumber = '9313343685';
+                            String encodedMessage =
+                                Uri.encodeComponent('userId');
+                            var whatsappUrl = Uri.parse(
+                                'whatsapp://send?phone=$phoneNumber&text=$encodedMessage');
+
+                            /// Launch the WhatsApp URL
+                            try {
+                              /// send as url
+                              await launchUrl(whatsappUrl);
+                            } catch (e) {
+                              if (kDebugMode) {
+                                print('Error launching WhatsApp: $e');
+                              }
+                            }
+                          },
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              LocalAssets(
+                                imagePath: AppImageAssets.visaIcn,
+                                height: 30.h,
+                                width: 50.w,
+                              ),
+                              SizeConfig.sW5,
+                              CustomText(
+                                AppStrings.creditCard,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 15.sp,
+                                color: AppColors.black02,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
