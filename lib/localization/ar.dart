@@ -64,6 +64,8 @@ Map<String, String> ar = {
   AppStrings.noOfStudents: 'خبير في:',
   AppStrings.noOfCourses: 'عدد الدورات:',
   AppStrings.courseContent: 'محتوى الدورة',
+  AppStrings.taskIncluded: 'المهام متضمنة',
+  AppStrings.certificates: 'الشهادات',
 
   /// payment option dialog
   AppStrings.paymentOption: 'خيارات الدفع',
@@ -109,10 +111,8 @@ Map<String, String> ar = {
   /// my progress screen
   AppStrings.progressIntroductionTxt:
       "في هذه الصفحة، يمكنك رؤية جميع الدورات التي قمت بالتسجيل فيها والتقدم الذي أحرزته في كل منها.",
-  AppStrings.minutesComplete: ' دقائق كاملة ',
-  AppStrings.hoursComplete: ' ساعات كاملة ',
-  AppStrings.minutesRemaining: ' دقائق متبقية',
-  AppStrings.hoursRemaining: ' الساعات المتبقية',
+  AppStrings.complete: ' مكتمل',
+  AppStrings.remaining: ' متبقي',
 
   /// my certificate screen
   AppStrings.certificate: 'شهاداتي',

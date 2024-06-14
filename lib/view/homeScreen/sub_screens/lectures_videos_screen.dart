@@ -1,4 +1,5 @@
 import 'package:chewie/chewie.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,16 +13,17 @@ import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view_model/lectures_videos_view_model.dart';
-import 'package:video_player/video_player.dart';
 
 class LecturesVideoScreen extends StatefulWidget {
   const LecturesVideoScreen({
     super.key,
     required this.lectureVideoUrls,
     required this.contentId,
+    required this.courseId,
   });
 
   final String contentId;
+  final String courseId;
   final List<Lectures> lectureVideoUrls;
 
   @override
@@ -29,18 +31,19 @@ class LecturesVideoScreen extends StatefulWidget {
 }
 
 class _LecturesVideoScreenState extends State<LecturesVideoScreen> {
-  LecturesVideosViewModel lecturesVideosViewModel = Get.put(LecturesVideosViewModel());
+  LecturesVideosViewModel lecturesVideosViewModel = Get.find<LecturesVideosViewModel>();
 
   @override
   void initState() {
     super.initState();
-    lecturesVideosViewModel.lectures = widget.lectureVideoUrls;
-    lecturesVideosViewModel.initializeVideoPlayers();
+    lecturesVideosViewModel.initializeVideoPlayers(widget.lectureVideoUrls);
   }
 
   @override
   void dispose() {
-    lecturesVideosViewModel.dispose();
+    // lecturesVideosViewModel.videoControllers.clear();
+    lecturesVideosViewModel.chewieControllers.clear();
+    lecturesVideosViewModel.videoPlayerController.pause();
     super.dispose();
   }
 
@@ -49,40 +52,43 @@ class _LecturesVideoScreenState extends State<LecturesVideoScreen> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(top: 20),
-        child: Obx(
-          () => Column(
+        child: Obx(() {
+          return Column(
             children: [
               commonBackArrowAppBar(
-                  titleTxt: AppStrings.courseContentLectures,
-                  actionWidget: false,
-                 ),
+                titleTxt: AppStrings.courseContentLectures,
+                actionWidget: false,
+              ),
               (lecturesVideosViewModel.isLoader.value == false)
                   ? Expanded(
                       child: ListView.builder(
                         itemCount: widget.lectureVideoUrls.length,
                         itemBuilder: (context, index) {
-                          var controller = lecturesVideosViewModel.chewieControllers[index].videoPlayerController;
-                               return controller.value.isInitialized
-                                  ? Padding(
-                                      padding: EdgeInsets.only(right: 10.w, left: 10.w, bottom: 15.h),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: AppColors.white,
-                                          boxShadow: const [
-                                            BoxShadow(
-                                              color: Colors.black26,
-                                              offset: Offset(0, 1),
-                                              blurRadius: 4.0,
-                                            ),
-                                          ],
-                                          borderRadius: BorderRadius.circular(20.r),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              AspectRatio(
+                          return Obx(
+                            () {
+                              var controller =
+                                  lecturesVideosViewModel.chewieControllers[index].videoPlayerController;
+                              return Padding(
+                                padding: EdgeInsets.only(right: 10.w, left: 10.w, bottom: 15.h),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: AppColors.white,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.black26,
+                                        offset: Offset(0, 1),
+                                        blurRadius: 4.0,
+                                      ),
+                                    ],
+                                    borderRadius: BorderRadius.circular(20.r),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        (lecturesVideosViewModel.isLoader.value == false)
+                                            ? AspectRatio(
                                                 aspectRatio: controller.value.aspectRatio,
                                                 child: Stack(
                                                   alignment: Alignment.center,
@@ -91,72 +97,87 @@ class _LecturesVideoScreenState extends State<LecturesVideoScreen> {
                                                       controller:
                                                           lecturesVideosViewModel.chewieControllers[index],
                                                     ),
+
+                                                    /// FOR SET ONLY ONE VIDEO PLAY AT A TIME
                                                     GestureDetector(
                                                       onTap: () {
                                                         if (controller.value.isPlaying) {
-                                                          controller.pause();
+                                                          lecturesVideosViewModel.pauseVideo(
+                                                            lecturesVideosViewModel
+                                                                .chewieControllers[index],
+                                                            widget.courseId,
+                                                            widget.contentId,
+                                                            index,
+                                                          );
                                                         } else {
-                                                          lecturesVideosViewModel.playVideo(lecturesVideosViewModel.chewieControllers[index]);
+                                                          lecturesVideosViewModel.playVideo(
+                                                            lecturesVideosViewModel
+                                                                .chewieControllers[index],
+                                                          );
                                                         }
                                                       },
                                                     ),
                                                   ],
                                                 ),
+                                              )
+                                            : Center(
+                                                child: SizedBox(
+                                                    height: 50.h,
+                                                    width: 50.h,
+                                                    child: const LocalAssets(
+                                                      imagePath: AppImageAssets.sanademaylogo,
+                                                      imgColor: AppColors.primaryColor,
+                                                    )),
                                               ),
-                                              SizeConfig.sH5,
+                                        SizeConfig.sH5,
+                                        CustomText(
+                                          widget.lectureVideoUrls[index].title ?? '',
+                                          fontSize: 18.sp,
+                                          color: AppColors.black0E,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 25.w, right: 20.w),
+                                          child: Row(
+                                            children: [
                                               CustomText(
-                                                widget.lectureVideoUrls[index].title ?? '',
+                                                "•",
                                                 fontSize: 18.sp,
                                                 color: AppColors.black0E,
                                                 fontWeight: FontWeight.w700,
                                               ),
-                                              Padding(
-                                                padding: EdgeInsets.only(left: 25.w, right: 20.w),
-                                                child: Row(
-                                                  children: [
-                                                    CustomText(
-                                                      "•",
-                                                      fontSize: 18.sp,
-                                                      color: AppColors.black0E,
-                                                      fontWeight: FontWeight.w700,
-                                                    ),
-                                                    Html(
-                                                      data: widget.lectureVideoUrls[index].description ?? '',
-                                                      shrinkWrap: true,
-                                                    ),
-                                                  ],
-                                                ),
+                                              Html(
+                                                data: widget.lectureVideoUrls[index].description ?? '',
+                                                shrinkWrap: true,
                                               ),
                                             ],
                                           ),
                                         ),
-                                      ),
-                                    )
-                                  : Center(
-                                      child: SizedBox(
-                                          height: 50.h,
-                                          width: 50.h,
-                                          child: const LocalAssets(
-                                            imagePath: AppImageAssets.sanademaylogo,
-                                            imgColor: AppColors.primaryColor,
-                                          )),
-                                    );
-
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
                         },
                       ),
                     )
-                  : const CircularProgressIndicator(),
+                  : Padding(
+                      padding: EdgeInsets.only(top: 50.h),
+                      child: const CircularProgressIndicator(
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
             ],
-          ),
-        ),
+          );
+        }),
       ),
     );
   }
-  String formatDuration(Duration duration) {
-    return '${duration.inMinutes.remainder(60).toString().padLeft(2, '0')}:${duration.inSeconds.remainder(60).toString().padLeft(2, '0')}';
-  }
 }
 
+///  FOR SHOW VIDEO USING VIDEO PLAYER
 /*class VideoPlayerItem extends StatelessWidget {
   final VideoPlayerController controller;
   final Lectures lecture;
@@ -283,6 +304,7 @@ class _LecturesVideoScreenState extends State<LecturesVideoScreen> {
   }
 }*/
 
+/// SHOW VIDEO USING YOUTUBE PLAYER
 // class LecturesVideoScreen extends StatefulWidget {
 //   const LecturesVideoScreen({
 //     super.key,
@@ -372,41 +394,7 @@ class _LecturesVideoScreenState extends State<LecturesVideoScreen> {
 //                                 child: Stack(
 //                                   alignment: Alignment.center,
 //                                   children: [
-//                                     VideoPlayer(controller),
-//                                     InkWell(
-//                                         onTap: () {
-//                                           setState(() {
-//                                             lecturesVideosViewModel.onTouch.value = true;
-//                                           });
-//                                           if (controller.value.isPlaying) {
-//                                             controller.pause();
-//                                           } else {
-//                                             controller.play();
-//                                           }
-//                                           Future.delayed(
-//                                             const Duration(seconds: 2),
-//                                                 () => setState(() {
-//                                               lecturesVideosViewModel.onTouch.value = false;
-//                                             }),
-//                                           );
-//                                         },
-//                                         child: lecturesVideosViewModel.onTouch == true &&
-//                                             controller.value.isPlaying == true
-//                                             ? const Icon(
-//                                           Icons.pause_circle,
-//                                           size: 50,
-//                                           color: Colors.white,
-//                                         )
-//                                             : lecturesVideosViewModel.onTouch == true &&
-//                                             controller.value.isPlaying == false
-//                                             ? const Icon(Icons.play_circle,
-//                                             size: 50, color: Colors.white)
-//                                             : Container())
-//                                   ],
-//                                 ),
-//                               ),
-//                             ),
-//                             /*    YoutubePlayerBuilder(
+//                                 YoutubePlayerBuilder(
 //                                           player: YoutubePlayer(
 //                                             controller: lecturesVideosViewModel
 //                                                 .youtubePlayerControllers[index],
@@ -426,7 +414,7 @@ class _LecturesVideoScreenState extends State<LecturesVideoScreen> {
 //                                             },
 //                                           ),
 //                                           builder: (context, player) => player,
-//                                         ),*/
+//                                         ),
 //                             SizeConfig.sH5,
 //                             CustomText(
 //                               lecture.title ?? '',

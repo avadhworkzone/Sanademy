@@ -17,20 +17,27 @@ import 'package:path_provider_foundation/path_provider_foundation.dart';
 import 'package:url_launcher_ios/url_launcher_ios.dart';
 import 'package:video_player_avfoundation/video_player_avfoundation.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:file_selector_linux/file_selector_linux.dart';
 import 'package:image_picker_linux/image_picker_linux.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider_linux/path_provider_linux.dart';
 import 'package:url_launcher_linux/url_launcher_linux.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:file_selector_macos/file_selector_macos.dart';
 import 'package:flutter_inappwebview_macos/flutter_inappwebview_macos.dart';
 import 'package:image_picker_macos/image_picker_macos.dart';
 import 'package:path_provider_foundation/path_provider_foundation.dart';
 import 'package:url_launcher_macos/url_launcher_macos.dart';
 import 'package:video_player_avfoundation/video_player_avfoundation.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:file_selector_windows/file_selector_windows.dart';
 import 'package:image_picker_windows/image_picker_windows.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider_windows/path_provider_windows.dart';
 import 'package:url_launcher_windows/url_launcher_windows.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 @pragma('vm:entry-point')
 class _PluginRegistrant {
@@ -140,6 +147,15 @@ class _PluginRegistrant {
       }
 
       try {
+        DeviceInfoPlusLinuxPlugin.registerWith();
+      } catch (err) {
+        print(
+          '`device_info_plus` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
+      try {
         FileSelectorLinux.registerWith();
       } catch (err) {
         print(
@@ -158,6 +174,15 @@ class _PluginRegistrant {
       }
 
       try {
+        PackageInfoPlusLinuxPlugin.registerWith();
+      } catch (err) {
+        print(
+          '`package_info_plus` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
+      try {
         PathProviderLinux.registerWith();
       } catch (err) {
         print(
@@ -171,6 +196,15 @@ class _PluginRegistrant {
       } catch (err) {
         print(
           '`url_launcher_linux` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
+      try {
+        WakelockPlusLinuxPlugin.registerWith();
+      } catch (err) {
+        print(
+          '`wakelock_plus` threw an error: $err. '
           'The app may not function as expected until you remove this plugin from pubspec.yaml'
         );
       }
@@ -230,7 +264,25 @@ class _PluginRegistrant {
         );
       }
 
+      try {
+        WakelockPlusMacOSPlugin.registerWith();
+      } catch (err) {
+        print(
+          '`wakelock_plus` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
     } else if (Platform.isWindows) {
+      try {
+        DeviceInfoPlusWindowsPlugin.registerWith();
+      } catch (err) {
+        print(
+          '`device_info_plus` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
       try {
         FileSelectorWindows.registerWith();
       } catch (err) {
@@ -250,6 +302,15 @@ class _PluginRegistrant {
       }
 
       try {
+        PackageInfoPlusWindowsPlugin.registerWith();
+      } catch (err) {
+        print(
+          '`package_info_plus` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
+      try {
         PathProviderWindows.registerWith();
       } catch (err) {
         print(
@@ -263,6 +324,15 @@ class _PluginRegistrant {
       } catch (err) {
         print(
           '`url_launcher_windows` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
+      try {
+        WakelockPlusWindowsPlugin.registerWith();
+      } catch (err) {
+        print(
+          '`wakelock_plus` threw an error: $err. '
           'The app may not function as expected until you remove this plugin from pubspec.yaml'
         );
       }

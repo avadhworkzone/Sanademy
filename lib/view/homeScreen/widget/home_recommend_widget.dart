@@ -83,12 +83,12 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                     },
                                     child: CommonContainerWidget(
                                       color: colors,
-                                      title: courses.title!,
-                                      numberOfLecture: courses.numberOfLecture!,
-                                      hours: courses.hours!,
-                                      minutes: courses.minutes!,
-                                      teacherName: courses.teacher!.name!,
-                                      teacherImage: courses.teacher!.image!,
+                                      title: courses.title ?? '',
+                                      numberOfLecture: courses.numberOfLecture ?? '',
+                                      hours: courses.hours ?? '',
+                                      minutes: courses.minutes ?? '',
+                                      teacherName: courses.teacher!.name ?? '',
+                                      teacherImage: courses.teacher!.image ?? '',
                                     ),
                                   ),
                                 );

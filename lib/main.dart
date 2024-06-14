@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,6 +17,13 @@ import 'package:sanademy/view/splashScreen/splash_screen.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+  await Firebase.initializeApp(
+      options: const FirebaseOptions(apiKey: 'AIzaSyBEnkadOiG18SEFFU7MEaHiNIEhmlmm0bg',
+      appId: '1:823204851962:android:486d28ffa08340476a9943',
+      messagingSenderId: '823204851962',
+      projectId: 'sana-academy',
+        storageBucket: 'sana-academy.appspot.com'
+      ));
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,

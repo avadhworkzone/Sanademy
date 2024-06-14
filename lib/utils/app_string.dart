@@ -64,6 +64,8 @@ class AppStrings {
   static String courseContent = 'Course Content';
   static String courseContentLectures = 'Lectures';
   static String mins = 'mins';
+  static String taskIncluded =  'Tasks Included';
+  static String certificates =  'Certificates';
 
   /// payment option dialog
   static String paymentOption = 'Payment Options';
@@ -109,10 +111,8 @@ class AppStrings {
   /// my progress screen
   static String progressIntroductionTxt =
       'In this page, you can see all your enrolled courses and the progress that you made in each one of them.';
-  static String  minutesComplete = ' minutes complete';
-  static String  hoursComplete = ' hours complete';
-  static String  minutesRemaining = ' minutes remaining';
-  static String  hoursRemaining = ' hours remaining';
+  static String  complete = ' complete';
+  static String  remaining = ' remaining';
   static String  noProgressAvailable = '"No Progress Available"';
 
   /// my certificate screen
@@ -174,6 +174,8 @@ class AppStrings {
   static String error = 'Error';
   static String userCreatedSuccessfully = 'User Created Successfully';
   static String otpMismatch = 'Please enter valid Otp';
+  static String android = 'Android';
+  static String iPhone = 'iPhone';
 
 
 }

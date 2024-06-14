@@ -104,12 +104,6 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                               borderRadius: BorderRadius.circular(20.r),
                               gradient: LinearGradient(colors: colors),
                               image: const DecorationImage(
-                                  // colorFilter: ColorFilter.mode(
-                                  //   Colors.white.withOpacity(
-                                  //       0.2), // You can change the color and opacity as needed
-                                  //   BlendMode
-                                  //       .color, // Blend mode to use with the color
-                                  // ),
                                   image: AssetImage(
                                       AppImageAssets.recommendedBgImg))),
                           child: Column(

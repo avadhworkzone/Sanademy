@@ -47,6 +47,10 @@ class Data {
       this.whatWillYouLearn, 
       this.whoThisCourseIsFor, 
       this.instructor, 
+      this.language, 
+      this.price, 
+      this.taskIncluded, 
+      this.certificate, 
       this.createdAt, 
       this.updatedAt, 
       this.teacher, 
@@ -69,6 +73,10 @@ class Data {
     whatWillYouLearn = json['what_will_you_learn'];
     whoThisCourseIsFor = json['who_this_course_is_for'];
     instructor = json['instructor'];
+    language = json['language'];
+    price = json['price'];
+    taskIncluded = json['task_included'];
+    certificate = json['certificate'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     teacher = json['teacher'] != null ? Teacher.fromJson(json['teacher']) : null;
@@ -86,7 +94,7 @@ class Data {
   String? title;
   String? videoUrl;
   String? banner;
-  String? hours;
+  dynamic hours;
   String? minutes;
   String? numberOfLecture;
   String? colorCode;
@@ -95,6 +103,10 @@ class Data {
   String? whatWillYouLearn;
   String? whoThisCourseIsFor;
   String? instructor;
+  String? language;
+  num? price;
+  num? taskIncluded;
+  num? certificate;
   String? createdAt;
   String? updatedAt;
   Teacher? teacher;
@@ -118,6 +130,10 @@ class Data {
     map['what_will_you_learn'] = whatWillYouLearn;
     map['who_this_course_is_for'] = whoThisCourseIsFor;
     map['instructor'] = instructor;
+    map['language'] = language;
+    map['price'] = price;
+    map['task_included'] = taskIncluded;
+    map['certificate'] = certificate;
     map['created_at'] = createdAt;
     map['updated_at'] = updatedAt;
     if (teacher != null) {
@@ -201,8 +217,10 @@ class Lectures {
       this.title, 
       this.description, 
       this.videoUrl, 
+      this.minutes, 
       this.createdAt, 
-      this.updatedAt,});
+      this.updatedAt, 
+      this.courseProgress,});
 
   Lectures.fromJson(dynamic json) {
     id = json['id'];
@@ -210,16 +228,25 @@ class Lectures {
     title = json['title'];
     description = json['description'];
     videoUrl = json['video_url'];
+    minutes = json['minutes'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    /*if (json['course_progress'] != null) {
+      courseProgress = [];
+      json['course_progress'].forEach((v) {
+        courseProgress?.add(Dynamic.fromJson(v));
+      });
+    }*/
   }
   num? id;
   num? courseContentId;
   String? title;
   String? description;
   String? videoUrl;
+  String? minutes;
   String? createdAt;
   String? updatedAt;
+  List<dynamic>? courseProgress;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -228,8 +255,12 @@ class Lectures {
     map['title'] = title;
     map['description'] = description;
     map['video_url'] = videoUrl;
+    map['minutes'] = minutes;
     map['created_at'] = createdAt;
     map['updated_at'] = updatedAt;
+    if (courseProgress != null) {
+      map['course_progress'] = courseProgress?.map((v) => v.toJson()).toList();
+    }
     return map;
   }
 

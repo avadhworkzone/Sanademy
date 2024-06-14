@@ -5,16 +5,14 @@ Map<String, String> en = {
   AppStrings.enterYourName: "Enter your name",
   AppStrings.titleTxt: "Sana Academy",
   AppStrings.register: "Register",
-  AppStrings.registerYourAccount:
-      "Register your account and embark on your educational journey!",
+  AppStrings.registerYourAccount: "Register your account and embark on your educational journey!",
   AppStrings.dateFormat: "mm/dd/yyyy",
   AppStrings.enterYourPhoneNumber: "Enter your phone number",
   AppStrings.submit: "Submit",
 
   /// OTP SCREEN
   AppStrings.otpTxt: "OTP Verification",
-  AppStrings.enterOtpTxt:
-      "Please enter the verification code sent to your number",
+  AppStrings.enterOtpTxt: "Please enter the verification code sent to your number",
   AppStrings.enterFourDigitOtp: "Enter the 4-digit OTP ",
   AppStrings.didNotGetOtp: "Did not get the OTP?",
   AppStrings.resendOtp: "Resend OTP",
@@ -64,6 +62,8 @@ Map<String, String> en = {
   AppStrings.noOfStudents: "No. of students: ",
   AppStrings.noOfCourses: "No. of courses: ",
   AppStrings.courseContent: "Course Content",
+  AppStrings.taskIncluded: 'Tasks Included',
+  AppStrings.certificates: 'Certificates',
 
   /// payment option dialog
   AppStrings.paymentOption: "Payment Options",
@@ -109,10 +109,9 @@ Map<String, String> en = {
   /// my progress screen
   AppStrings.progressIntroductionTxt:
       "In this page, you can see all your enrolled courses and the progress that you made in each one of them.",
-  AppStrings.minutesComplete: ' minutes complete',
-  AppStrings.hoursComplete: ' hours complete',
-  AppStrings.minutesRemaining: ' minutes remaining',
-  AppStrings.hoursRemaining: ' hours remaining',
+  AppStrings.complete: ' complete',
+  AppStrings.remaining: ' remaining',
+
 
   /// my certificate screen
   AppStrings.certificate: 'My Certificates',
@@ -139,8 +138,7 @@ Map<String, String> en = {
 
   /// congratulation screen
   AppStrings.congratulations: "Congratulations!",
-  AppStrings.youHaveCompletedMathematicsMasteryTest:
-      "You have completed Mathematics Mastery test",
+  AppStrings.youHaveCompletedMathematicsMasteryTest: "You have completed Mathematics Mastery test",
   AppStrings.yourScore: "Your Score",
   AppStrings.yourTime: "Your Time",
   AppStrings.yourAnswers: "Your Answers",

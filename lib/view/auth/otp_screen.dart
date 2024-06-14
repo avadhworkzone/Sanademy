@@ -15,7 +15,9 @@ import 'package:sanademy/view_model/otp_view_model.dart';
 import 'package:sanademy/view_model/sign_up_view_model.dart';
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({super.key});
+  const OtpScreen({super.key, required this.verificationIDFinal});
+
+  final String verificationIDFinal;
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -77,6 +79,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       fontWeight: FontWeight.w700,
                     ),
                     SizeConfig.sH10,
+                    /*
                     signUpController.signUpUserOtp.value != 0
                         ? CustomText(
                             "Your Otp is: ${signUpController.signUpUserOtp.value.toString()}",
@@ -85,7 +88,7 @@ class _OtpScreenState extends State<OtpScreen> {
                             fontWeight: FontWeight.w700,
                           )
                         : SizeConfig.sH2,
-                    SizeConfig.sH10,
+                    SizeConfig.sH10,*/
                     CustomText(
                       AppStrings.enterFourDigitOtp,
                       fontSize: 15.sp,
@@ -106,14 +109,14 @@ class _OtpScreenState extends State<OtpScreen> {
                           width: 50.w,
                           textStyle: TextStyle(fontSize: 15.sp),
                           decoration: BoxDecoration(
-                              color: AppColors.pinputColor,
-                              borderRadius: BorderRadius.circular(10.r))),
-                      onChanged: (val) {},
+                              color: AppColors.pinputColor, borderRadius: BorderRadius.circular(10.r))),
+                      onChanged: (val) {
+                        signUpController.code.value = val;
+                      },
                     ),
                     SizeConfig.sH15,
                     if (int.parse(otpViewModel
-                            .strDigits(otpViewModel.myDuration.value.inSeconds
-                                .remainder(60))
+                            .strDigits(otpViewModel.myDuration.value.inSeconds.remainder(60))
                             .value) >
                         0)
                       CustomText(
@@ -134,9 +137,7 @@ class _OtpScreenState extends State<OtpScreen> {
 
                         /// resend button
                         int.parse(otpViewModel
-                                    .strDigits(otpViewModel
-                                        .myDuration.value.inSeconds
-                                        .remainder(60))
+                                    .strDigits(otpViewModel.myDuration.value.inSeconds.remainder(60))
                                     .value) >
                                 0
                             ? CustomText(
@@ -146,7 +147,6 @@ class _OtpScreenState extends State<OtpScreen> {
                               )
                             : InkWell(
                                 onTap: () {
-
                                   otpViewModel.resetTimer();
                                 },
                                 child: CustomText(
@@ -161,35 +161,33 @@ class _OtpScreenState extends State<OtpScreen> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 22.w),
                       child: CustomBtn(
-                        onTap: otpViewModel.pinPutController.value.text.length <
-                                6
+                        onTap: otpViewModel.pinPutController.value.text.length < 6
                             ? null
                             : () async {
-                                if (otpViewModel.formKey.value.currentState!
-                                    .validate()) {
-                                  if (signUpController.signUpUserOtp.value != 0) {
+                                if (otpViewModel.formKey.value.currentState!.validate()) {
+                                  await SharedPreferenceUtils.setIsLogin(true);
+                                  await signUpController.registerViewModel(
+                                      step: 2,
+                                      context: context,
+                                      verificationIDFinal: widget.verificationIDFinal
+                                  );
+                                /*  if (signUpController.signUpUserOtp.value != 0) {
                                     if (signUpController.signUpUserOtp.value.toString() ==
-                                        otpViewModel
-                                            .pinPutController.value.text) {
-                                      await SharedPreferenceUtils.setIsLogin(true);
-                                      await signUpController.registerViewModel(
-                                        step: 2,
-                                      );
+                                        otpViewModel.pinPutController.value.text) {
+
                                     } else {
-                                      showErrorSnackBar(
-                                          '', AppStrings.otpMismatch);
+                                      showErrorSnackBar('', AppStrings.otpMismatch);
                                     }
-                                  }
+                                  }*/
                                 }
                               },
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w700,
                         radius: 10.r,
                         title: AppStrings.verify,
-                        bgColor:
-                            otpViewModel.pinPutController.value.text.length < 6
-                                ? AppColors.primaryColor.withOpacity(0.5)
-                                : AppColors.primaryColor,
+                        bgColor: otpViewModel.pinPutController.value.text.length < 6
+                            ? AppColors.primaryColor.withOpacity(0.5)
+                            : AppColors.primaryColor,
                         textColor: AppColors.white,
                       ),
                     ),

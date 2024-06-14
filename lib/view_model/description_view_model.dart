@@ -1,3 +1,4 @@
+import 'package:chewie/chewie.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/networks/api_base_helper.dart';
 import 'package:sanademy/networks/api_keys.dart';
@@ -12,7 +13,6 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class DescriptionViewModel extends GetxController {
   late VideoPlayerController videoPlayerController;
-
   RxBool onTouch = false.obs;
   RxBool isLoader = true.obs;
   RxBool isPaySuccessfully = false.obs;
@@ -24,19 +24,65 @@ class DescriptionViewModel extends GetxController {
   int remainingMinutes = 0;
   Rx<ResponseStatus> responseStatus = ResponseStatus.INITIAL.obs;
   Rx<YoutubePlayerController>? youtubePlayerController;
+  late ChewieController chewieControllers;
   bool videoStartedPlaying = false;
 
- /// VIDEO PLAYER FUNCTION
+  /// CHEWIE VIDEO PLAYER
+  Future<void> chewiePlayer(String videoUrl) async {
+    var videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(
+      videoUrl,
+    ));
+    await videoPlayerController.initialize();
+    chewieControllers = ChewieController(
+        videoPlayerController: videoPlayerController,
+        aspectRatio: 16 / 9,
+        autoInitialize: true,
+        showOptions: false);
+    Future.delayed(const Duration(seconds: 1), () {
+      isLoader.value = false;
+    });
+  }
+
+
+
+  /// Course Detail Api Calling Function
+  CourseDetailResModel courseDetailResModel = CourseDetailResModel();
+  Rx<ResponseStatus> courseDetailResponseStatus = ResponseStatus.INITIAL.obs;
+
+  Future<void> courseDetailViewModel({
+    required String courseId,
+  }) async {
+    unFocus();
+    Map<String, String> queryParams = {
+      ApiKeys.courseId: courseId.toString(),
+    };
+    final response = await CourseDetailApiService().courseDetailRepo(mapData: queryParams);
+    if (checkStatusCode(response!.statusCode ?? 0)) {
+      courseDetailResModel = courseDetailResModelFromJson(response.response.toString());
+      if (courseDetailResModel.success!) {
+        if (courseDetailResModel.data != null) {
+          courseDetailResponseStatus.value = ResponseStatus.Completed;
+        } else {
+          showErrorSnackBar('', courseDetailResModel.message ?? 'Error');
+        }
+      } else {
+        showErrorSnackBar('', courseDetailResModel.message ?? 'Error');
+        courseDetailResponseStatus.value = ResponseStatus.Error;
+      }
+    }
+  }
+
+/*
+    /// VIDEO PLAYER FUNCTION
   void videoPlayer(String videoUrl) {
     Future.delayed(const Duration(seconds: 2), () {
       isLoader.value = false;
     });
     videoPlayerController = VideoPlayerController.networkUrl(
-      Uri.parse(videoUrl
-        // 'https://cdn.create.vista.com/api/media/medium/502694658/stock-video-dolly-out-shot-woman-short-red-hair-standing-blackboard-teaching?token='
+      Uri.parse(videoUrl),
+      videoPlayerOptions: VideoPlayerOptions(
+        mixWithOthers: true,
       ),
-      videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true,),
-
     );
     videoPlayerController.addListener(() {});
     videoPlayerController.setLooping(true);
@@ -63,6 +109,7 @@ class DescriptionViewModel extends GetxController {
     } else {
       showErrorSnackBar('Error', 'Invalid YouTube URL');
     }
+
 /*
     /// Add a listener to the controller to track playback time
     youtubePlayerController?.value.addListener(() {
@@ -87,9 +134,7 @@ class DescriptionViewModel extends GetxController {
       print('remainingMinutes: $remainingMinutes');
     });*/
   }
-
-/*
-  void handleScreenTransition() {
+void handleScreenTransition() {
     final Duration totalDuration =
         youtubePlayerController?.value.metadata.duration ?? Duration.zero;
     final int completedHours;
@@ -161,36 +206,4 @@ class DescriptionViewModel extends GetxController {
     }
   }
 */
-
-
-  /// Course Detail Api Calling Function
-  CourseDetailResModel courseDetailResModel = CourseDetailResModel();
-  Rx<ResponseStatus> courseDetailResponseStatus = ResponseStatus.INITIAL.obs;
-  Future<void> courseDetailViewModel({
-    required String courseId,
-  }) async {
-    unFocus();
-    Map<String, String> queryParams = {
-      ApiKeys.courseId: courseId.toString(),
-    };
-    final response =
-        await CourseDetailApiService().courseDetailRepo(mapData: queryParams);
-    if (checkStatusCode(response!.statusCode ?? 0)) {
-      courseDetailResModel =
-          courseDetailResModelFromJson(response.response.toString());
-      if (courseDetailResModel.success!) {
-        if (courseDetailResModel.data != null) {
-          courseDetailResponseStatus.value = ResponseStatus.Completed;
-        } else {
-          showErrorSnackBar('', courseDetailResModel.message ?? 'Error');
-        }
-      } else {
-        showErrorSnackBar('', courseDetailResModel.message ?? 'Error');
-        courseDetailResponseStatus.value = ResponseStatus.Error;
-      }
-    }
-  }
-
-
-
 }

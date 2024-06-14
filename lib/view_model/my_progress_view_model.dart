@@ -10,15 +10,13 @@ class MyProgressViewModel extends GetxController {
 
   Rx<ResponseStatus> responseStatus = ResponseStatus.INITIAL.obs;
   GetCourseProgressResponseModel getCourseProgressResponseModel = GetCourseProgressResponseModel();
-  Future<void> getCourseProgressViewModel({
-    required String courseId,
-  }) async {
+  Future<void> getCourseProgressViewModel(/*{required String courseId}*/) async {
     unFocus();
-    Map<String, String> queryParams = {
+   /* Map<String, String> queryParams = {
       ApiKeys.courseId: courseId.toString(),
-    };
+    };*/
     final response =
-    await GetCourseProgressApi().getCourseProgressRepo(mapData: queryParams);
+    await GetCourseProgressApi().getCourseProgressRepo(/*mapData: queryParams*/);
     if (checkStatusCode(response!.statusCode ?? 0)) {
        getCourseProgressResponseModel =
       getCourseProgressResponseModelFromJson(response.response.toString());

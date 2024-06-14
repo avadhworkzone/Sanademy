@@ -1,3 +1,4 @@
+import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,7 +17,7 @@ import 'package:sanademy/view/dialog/payment_option_dialog.dart';
 import 'package:sanademy/view/homeScreen/sub_screens/lectures_videos_screen.dart';
 import 'package:sanademy/view_model/bottom_bar_view_model.dart';
 import 'package:sanademy/view_model/description_view_model.dart';
-import 'package:video_player/video_player.dart';
+import 'package:sanademy/view_model/lectures_videos_view_model.dart';
 
 class DescriptionScreen extends StatefulWidget {
   const DescriptionScreen({
@@ -35,6 +36,7 @@ class DescriptionScreen extends StatefulWidget {
 class _DescriptionScreenState extends State<DescriptionScreen> {
   DescriptionViewModel descriptionViewModel = Get.put(DescriptionViewModel());
   BottomBarViewModel bottomBarViewModel = Get.find<BottomBarViewModel>();
+  LecturesVideosViewModel lecturesVideosViewModel = Get.put(LecturesVideosViewModel());
 
   @override
   void initState() {
@@ -44,21 +46,13 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
 
   descriptionApiCall() async {
     await descriptionViewModel.courseDetailViewModel(courseId: widget.courseId);
-    /* descriptionViewModel.youtubePlayerController = YoutubePlayerController(
-      initialVideoId: '',
-      flags: const YoutubePlayerFlags(
-        isLive: true,
-        autoPlay: false,
-      ),
-    ).obs;*/
-    descriptionViewModel
-        .videoPlayer(widget.videoUrl /*descriptionViewModel.courseDetailResModel.data!.videoUrl ?? ''*/);
+    descriptionViewModel.chewiePlayer(widget.videoUrl);
   }
 
   @override
   void dispose() {
-    // descriptionViewModel.youtubePlayerController?.value.dispose();
     descriptionViewModel.videoPlayerController.dispose();
+    descriptionViewModel.chewieControllers.dispose();
     super.dispose();
   }
 
@@ -66,8 +60,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Material(
-        child: Obx(() =>
-        descriptionViewModel.courseDetailResponseStatus.value == ResponseStatus.Completed
+        child: Obx(() => descriptionViewModel.courseDetailResponseStatus.value == ResponseStatus.Completed
             ? SingleChildScrollView(
                 child: Column(
                   children: [
@@ -91,54 +84,42 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                   height: 300.h,
                                   width: 430.w,
                                   child: AspectRatio(
-                                    aspectRatio: descriptionViewModel.videoPlayerController.value.aspectRatio,
+                                    aspectRatio: descriptionViewModel
+                                        .chewieControllers.videoPlayerController.value.aspectRatio,
                                     child: Stack(
                                       alignment: Alignment.center,
                                       children: [
-                                        VideoPlayer(descriptionViewModel.videoPlayerController),
-                                        InkWell(
-                                          onTap: () {
-                                            if (descriptionViewModel.videoPlayerController.value.isPlaying) {
-                                              setState(() {
-                                                descriptionViewModel.videoPlayerController.pause();
-                                              });
-                                            } else {
-                                              setState(() {
-                                                descriptionViewModel.videoPlayerController.play();
-                                              });
-                                            }
-                                          },
-                                          child: descriptionViewModel.videoPlayerController.value.isPlaying
-                                              ? const Icon(Icons.pause_circle, size: 50, color: Colors.white)
-                                              : const Icon(Icons.play_circle, size: 50, color: Colors.white),
+                                        Chewie(
+                                          controller: descriptionViewModel.chewieControllers,
                                         ),
                                       ],
                                     ),
                                   ),
                                 ),
-                          /* : SizedBox(
-                                  height: Get.width * 0.7,
-                                  width: Get.width,
-                                  child: YoutubePlayerBuilder(
-                                    player: YoutubePlayer(
-                                      controller: descriptionViewModel.youtubePlayerController!.value,
-                                      showVideoProgressIndicator: true,
-                                      onReady: () {
-                                        descriptionViewModel.youtubePlayerController?.value.addListener(() {
-                                          descriptionViewModel.onTouch.value = descriptionViewModel
-                                                  .youtubePlayerController?.value.value.isPlaying ??
-                                              false;
-                                        });
-                                      },
-                                    ),
-                                    builder: (context, player) => player,
-                                  ),
-                                ),*/
                         ),
                         Positioned(
                           child: GestureDetector(
                               onTap: () {
                                 Get.back();
+                                /*   print(
+                                    ' lecturesVideosViewModel.allLectureWatchedTimeHours.toString()***${lecturesVideosViewModel.allLectureWatchedTimeHours.toString()}');
+                                print(
+                                    ' lecturesVideosViewModel.allLectureWatchedTimeMinutes.toString()***${lecturesVideosViewModel.allLectureWatchedTimeMinutes.toString()}');
+                                print(
+                                    ' lecturesVideosViewModel.allLectureRemainingTimeHours.toString()***${lecturesVideosViewModel.allLectureRemainingTimeHours.toString()}');
+                                print(
+                                    ' lecturesVideosViewModel.allLectureRemainingTimeMinutes.toString()***${lecturesVideosViewModel.allLectureRemainingTimeMinutes.toString()}');
+                                descriptionViewModel.saveCourseProcessViewModel(
+                                  courseId: widget.courseId,
+                                  completedHour:
+                                      lecturesVideosViewModel.allLectureWatchedTimeHours.toString(),
+                                  completedMinute:
+                                      lecturesVideosViewModel.allLectureWatchedTimeMinutes.toString(),
+                                  remainingHour:
+                                      lecturesVideosViewModel.allLectureRemainingTimeHours.toString(),
+                                  remainingMinute:
+                                      lecturesVideosViewModel.allLectureRemainingTimeMinutes.toString(),
+                                );*/
                               },
                               child: Container(
                                 margin: EdgeInsets.only(left: 10.w, top: 10.w, right: 10.w),
@@ -218,8 +199,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                           ),
                                           SizeConfig.sW8,
                                           CustomText(
-                                            descriptionViewModel.courseDetailResModel.data!.numberOfLecture ??
-                                                '',
+                                            '${descriptionViewModel.courseDetailResModel.data!.numberOfLecture} ${AppStrings.lectures}',
                                             fontWeight: FontWeight.w400,
                                             fontSize: 14.sp,
                                             color: AppColors.black0E,
@@ -236,7 +216,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                           ),
                                           SizeConfig.sW8,
                                           CustomText(
-                                            'Taught in Kurdish',
+                                            descriptionViewModel.courseDetailResModel.data!.language ?? '',
                                             fontWeight: FontWeight.w400,
                                             fontSize: 14.sp,
                                             color: AppColors.black0E,
@@ -244,7 +224,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                         ],
                                       ),
                                       SizeConfig.sH8,
-                                      Row(
+                                      if(descriptionViewModel.courseDetailResModel.data!.taskIncluded == 1)Row(
                                         children: [
                                           LocalAssets(
                                             imagePath: AppImageAssets.taskIcn,
@@ -252,8 +232,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                             width: 24.w,
                                           ),
                                           SizeConfig.sW8,
-                                          CustomText(
-                                            'Tasks Included',
+                                        CustomText(
+                                           AppStrings.taskIncluded,
                                             fontWeight: FontWeight.w400,
                                             fontSize: 14.sp,
                                             color: AppColors.black0E,
@@ -301,7 +281,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                         ],
                                       ),
                                       SizeConfig.sH8,
-                                      Row(
+                                      if(descriptionViewModel.courseDetailResModel.data!.certificate == 1)Row(
                                         children: [
                                           LocalAssets(
                                             imagePath: AppImageAssets.certificates,
@@ -310,7 +290,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                           ),
                                           SizeConfig.sW8,
                                           CustomText(
-                                            'Certificates',
+                                            AppStrings.certificates,
                                             fontWeight: FontWeight.w400,
                                             fontSize: 14.sp,
                                             color: AppColors.black0E,
@@ -518,6 +498,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                 itemBuilder: (context, index) {
                                   var courseContent =
                                       descriptionViewModel.courseDetailResModel.data!.courseContents![index];
+                                  var courseId = descriptionViewModel.courseDetailResModel.data!.id;
                                   return Padding(
                                     padding: EdgeInsets.symmetric(horizontal: 20.w),
                                     child: Column(
@@ -542,32 +523,10 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                                       children: [
                                                         InkWell(
                                                           onTap: () {
-                                                            /*  List contentVideoList = [];
-                                                            List<Lectures> lectures =
-                                                                courseContent.lectures! ?? [];
-                                                            for (var element in lectures) {
-                                                              contentVideoList.add({
-                                                                'videoId': element.id,
-                                                                'watchedTime': '',
-                                                                'remainingTime': '',
-                                                              });
-                                                            }
-                                                            Map map = {
-                                                              'contentId': courseContent.id,
-                                                              'lectureVideos': contentVideoList,
-                                                            };
-                                                            bool isContain = false;
-                                                            for (var element in bottomBarViewModel.progressDetailList) {
-                                                              if(element['contentId'] == map['contentId']){
-                                                                isContain = true;
-                                                              }
-                                                            }
-                                                            if(!isContain){
-                                                              bottomBarViewModel.progressDetailList.add(map);
-                                                            }*/
                                                             Get.to(() => LecturesVideoScreen(
                                                                   lectureVideoUrls: courseContent.lectures!,
                                                                   contentId: courseContent.id.toString(),
+                                                                  courseId: courseId.toString(),
                                                                 ));
                                                           },
                                                           child: CustomText(
@@ -624,3 +583,42 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
     );
   }
 }
+
+/// YOUTUBE PLAYER
+/* : SizedBox(
+                                  height: Get.width * 0.7,
+                                  width: Get.width,
+                                  child: YoutubePlayerBuilder(
+                                    player: YoutubePlayer(
+                                      controller: descriptionViewModel.youtubePlayerController!.value,
+                                      showVideoProgressIndicator: true,
+                                      onReady: () {
+                                        descriptionViewModel.youtubePlayerController?.value.addListener(() {
+                                          descriptionViewModel.onTouch.value = descriptionViewModel
+                                                  .youtubePlayerController?.value.value.isPlaying ??
+                                              false;
+                                        });
+                                      },
+                                    ),
+                                    builder: (context, player) => player,
+                                  ),
+                                ),*/
+
+/// VIDEO PLAYER
+/*     VideoPlayer(descriptionViewModel.videoPlayerController),
+                                        InkWell(
+                                          onTap: () {
+                                            if (descriptionViewModel.videoPlayerController.value.isPlaying) {
+                                              setState(() {
+                                                descriptionViewModel.videoPlayerController.pause();
+                                              });
+                                            } else {
+                                              setState(() {
+                                                descriptionViewModel.videoPlayerController.play();
+                                              });
+                                            }
+                                          },
+                                          child: descriptionViewModel.videoPlayerController.value.isPlaying
+                                              ? const Icon(Icons.pause_circle, size: 50, color: Colors.white)
+                                              : const Icon(Icons.play_circle, size: 50, color: Colors.white),
+                                        ),*/

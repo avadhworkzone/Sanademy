@@ -6,10 +6,10 @@ import 'package:sanademy/utils/app_utils.dart';
 
 class GetCourseProgressApi{
 
-  Future<ResponseModel?> getCourseProgressRepo({required Map<String, dynamic> mapData}) async {
+  Future<ResponseModel?> getCourseProgressRepo(/*{required Map<String, dynamic> mapData}*/) async {
     final response = await ApiBaseHelper().postHTTP(
       ApiUrls.getCourseProgress,
-      params: mapData,
+      // params: mapData,
       onError: (error) {
         Utils.validationCheck(message: error.message);
       },

@@ -20,7 +20,6 @@ class MyCertificateViewModel extends GetxController {
           getMyCertificateResModelFromJson(response.response.toString());
       if (getMyCertificateResModel.data != null) {
         getCertificates.value = getMyCertificateResModel.data!;
-        // description.value = getAboutUsResModel.data!.description!;
         responseStatus.value = ResponseStatus.Completed;
       } else {
         showErrorSnackBar('', getMyCertificateResModel.message.toString());

@@ -1,11 +1,16 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sanademy/utils/app_snackbar.dart';
+import 'package:sanademy/utils/loading_dialog.dart';
+import 'package:sanademy/view/bottombar/bottom_bar.dart';
 
 class OtpViewModel extends GetxController {
   /// OTP FIELD CONTROLLER
   Rx<TextEditingController> pinPutController = TextEditingController().obs;
   final Rx<GlobalKey<FormState>> formKey = GlobalKey<FormState>().obs;
+  // RxString code = ''.obs;
 
   ///COUNT DOWN TIMER FOR OTP
   Rx<Timer?>? countdownTimer =
@@ -36,6 +41,24 @@ class OtpViewModel extends GetxController {
     }
   }
 
+  // Future<void> verifyOtp(BuildContext context,String verificationIDFinal) async {
+  //   try{
+  //     showLoadingDialog(context: context);
+  //     final FirebaseAuth auth = FirebaseAuth.instance;
+  //     PhoneAuthCredential credential = PhoneAuthProvider.credential(
+  //         verificationId: verificationIDFinal, smsCode: code.value);
+  //     await auth.signInWithCredential(credential);
+  //     hideLoadingDialog(context: context);
+  //     showSussesSnackBar('', 'Registration Successfully');
+  //     Get.offAll(const BottomBar());
+  //   }on FirebaseAuthException catch (e) {
+  //     hideLoadingDialog(context: context);
+  //     if (e.code == "invalid-verification-code") {
+  //     } else {
+  //       showErrorSnackBar('', e.toString());
+  //     }
+  //   }
+  // }
  /* void setCountDown() {
     Rx<int> reduceSecondsBy = 1.obs;
 

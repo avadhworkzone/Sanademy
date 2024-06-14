@@ -37,51 +37,27 @@ Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
 class Data {
   Data({
-      this.id, 
-      this.userId, 
       this.courseId, 
-      this.completedHour, 
-      this.completedMinute, 
-      this.remainingHour, 
-      this.remainingMinute, 
-      this.createdAt, 
-      this.updatedAt, 
+      this.completedMinutes, 
+      this.remainingMinutes, 
       this.course,});
 
   Data.fromJson(dynamic json) {
-    id = json['id'];
-    userId = json['user_id'];
     courseId = json['course_id'];
-    completedHour = json['completed_hour'];
-    completedMinute = json['completed_minute'];
-    remainingHour = json['remaining_hour'];
-    remainingMinute = json['remaining_minute'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+    completedMinutes = json['completed_minutes'];
+    remainingMinutes = json['remaining_minutes'];
     course = json['course'] != null ? Course.fromJson(json['course']) : null;
   }
-  num? id;
-  num? userId;
   num? courseId;
-  String? completedHour;
-  String? completedMinute;
-  String? remainingHour;
-  String? remainingMinute;
-  String? createdAt;
-  String? updatedAt;
+  num? completedMinutes;
+  num? remainingMinutes;
   Course? course;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['id'] = id;
-    map['user_id'] = userId;
     map['course_id'] = courseId;
-    map['completed_hour'] = completedHour;
-    map['completed_minute'] = completedMinute;
-    map['remaining_hour'] = remainingHour;
-    map['remaining_minute'] = remainingMinute;
-    map['created_at'] = createdAt;
-    map['updated_at'] = updatedAt;
+    map['completed_minutes'] = completedMinutes;
+    map['remaining_minutes'] = remainingMinutes;
     if (course != null) {
       map['course'] = course?.toJson();
     }
@@ -109,6 +85,10 @@ class Course {
       this.whatWillYouLearn, 
       this.whoThisCourseIsFor, 
       this.instructor, 
+      this.language, 
+      this.price, 
+      this.taskIncluded, 
+      this.certificate, 
       this.createdAt, 
       this.updatedAt,});
 
@@ -128,6 +108,10 @@ class Course {
     whatWillYouLearn = json['what_will_you_learn'];
     whoThisCourseIsFor = json['who_this_course_is_for'];
     instructor = json['instructor'];
+    language = json['language'];
+    price = json['price'];
+    taskIncluded = json['task_included'];
+    certificate = json['certificate'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -137,7 +121,7 @@ class Course {
   String? title;
   String? videoUrl;
   String? banner;
-  String? hours;
+  dynamic hours;
   String? minutes;
   String? numberOfLecture;
   String? colorCode;
@@ -146,6 +130,10 @@ class Course {
   String? whatWillYouLearn;
   String? whoThisCourseIsFor;
   String? instructor;
+  String? language;
+  num? price;
+  num? taskIncluded;
+  num? certificate;
   String? createdAt;
   String? updatedAt;
 
@@ -166,6 +154,10 @@ class Course {
     map['what_will_you_learn'] = whatWillYouLearn;
     map['who_this_course_is_for'] = whoThisCourseIsFor;
     map['instructor'] = instructor;
+    map['language'] = language;
+    map['price'] = price;
+    map['task_included'] = taskIncluded;
+    map['certificate'] = certificate;
     map['created_at'] = createdAt;
     map['updated_at'] = updatedAt;
     return map;
