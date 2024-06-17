@@ -120,7 +120,7 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   CustomText(
-                                    certificates.course!.numberOfLecture ?? '',
+                                    '${certificates.course!.numberOfLecture} ${AppStrings.lectures}' ?? '',
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w500,
                                     color: AppColors.black0E,
@@ -134,7 +134,9 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                                   ),
                                   SizeConfig.sW6,
                                   CustomText(
-                                    '${'${certificates.course!.hours} ${AppStrings.hours}'} ${'${certificates.course!.minutes} ${AppStrings.minutes}'}',
+                                    formatTime(Duration(
+                                        minutes: int.parse(certificates.course!.minutes!))),
+                                    // '${'${certificates.course!.hours} ${AppStrings.hours}'} ${'${certificates.course!.minutes} ${AppStrings.minutes}'}',
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w500,
                                     color: AppColors.black0E,
@@ -225,5 +227,14 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
         ),
       ),
     );
+  }
+  String formatTime(Duration duration) {
+    if (duration.inMinutes >= 60) {
+      int hours = duration.inHours;
+      int minutes = duration.inMinutes.remainder(60);
+      return '$hours ${AppStrings.hours} $minutes ${AppStrings.minutes}';
+    } else {
+      return '${duration.inMinutes} ${AppStrings.minutes}';
+    }
   }
 }

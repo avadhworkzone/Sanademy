@@ -17,6 +17,7 @@ import 'package:sanademy/view/dialog/payment_option_dialog.dart';
 import 'package:sanademy/view/homeScreen/sub_screens/lectures_videos_screen.dart';
 import 'package:sanademy/view_model/bottom_bar_view_model.dart';
 import 'package:sanademy/view_model/description_view_model.dart';
+import 'package:sanademy/view_model/home_screen_view_model.dart';
 import 'package:sanademy/view_model/lectures_videos_view_model.dart';
 
 class DescriptionScreen extends StatefulWidget {
@@ -24,10 +25,12 @@ class DescriptionScreen extends StatefulWidget {
     super.key,
     required this.courseId,
     required this.videoUrl,
+
   });
 
   final String courseId;
   final String videoUrl;
+
 
   @override
   State<DescriptionScreen> createState() => _DescriptionScreenState();
@@ -37,6 +40,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   DescriptionViewModel descriptionViewModel = Get.put(DescriptionViewModel());
   BottomBarViewModel bottomBarViewModel = Get.find<BottomBarViewModel>();
   LecturesVideosViewModel lecturesVideosViewModel = Get.put(LecturesVideosViewModel());
+  HomeScreenViewModel homeScreenViewModel = Get.find<HomeScreenViewModel>();
 
   @override
   void initState() {
@@ -144,9 +148,12 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                         onTap: () {
                           SharedPreferenceUtils.getIsLogin() == true
                               ?
-
                               /// payment Option dialog
-                              paymentOptionDialog(context)
+                              paymentOptionDialog(context: context,
+                                  userMobileNumber: homeScreenViewModel.homeResModel.data!.user!.phoneNumber.toString(),
+                                userPhoneCode: homeScreenViewModel.homeResModel.data!.user!.countryCode.toString(),
+                                userId: homeScreenViewModel.homeResModel.data!.user!.id.toString()
+                              )
                               : Get.offAll(() => const SignUpScreen());
 
                           /// Enrollment successfully dialog

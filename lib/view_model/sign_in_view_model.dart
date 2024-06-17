@@ -56,7 +56,6 @@ class SignInViewModel extends GetxController {
               countryTxtCode: countryLoginCode.value
             );
           }else{
-            print('loginResModel.data!.token@@@@@@@@${loginResModel.data!.token}');
             if (loginResModel.data!.token != null) {
               try {
                 showLoadingDialog(context: context);
@@ -70,10 +69,6 @@ class SignInViewModel extends GetxController {
                 Get.offAll(const BottomBar());
               } on FirebaseAuthException catch (e) {
                 hideLoadingDialog(context: context);
-                if (e.code == "invalid-verification-code") {
-                } else {
-                  showErrorSnackBar('Error', e.toString());
-                }
               }
 
               // Get.offAll(() => const BottomBar());

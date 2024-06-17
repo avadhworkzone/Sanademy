@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/common_appbar.dart';
 import 'package:sanademy/utils/app_string.dart';
+import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view/auth/sign_up_screen.dart';
 import 'package:sanademy/view/homeScreen/sub_screens/description_screen.dart';
 import 'package:sanademy/view/homeScreen/widget/common_recommended_container_widget.dart';
 import 'package:sanademy/view_model/home_screen_view_model.dart';
@@ -44,19 +46,21 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
                         padding: EdgeInsets.only(bottom: 15.h, top: 10.h),
                         child: GestureDetector(
                           onTap: () {
-                            Get.to(() => DescriptionScreen(
-                                  courseId: courses.id.toString(),
-                                  videoUrl: courses.videoUrl ?? '',
-                                ));
+                            SharedPreferenceUtils.getIsLogin() == true
+                                ? Get.to(() => DescriptionScreen(
+                              courseId: courses.id.toString(),
+                              videoUrl: courses.videoUrl ?? '',
+                            ))
+                                : Get.to(() => const SignUpScreen());
+
                           },
-                          child: CommonContainerWidget(
+                          child:  CommonContainerWidget(
                             color: colors,
-                            title: courses.title!,
-                            numberOfLecture: courses.numberOfLecture!,
-                            hours: courses.hours!,
-                            minutes: courses.minutes!,
-                            teacherName: courses.teacher!.name!,
-                            teacherImage: courses.teacher!.image!,
+                            title: courses.title ?? '',
+                            numberOfLecture: courses.numberOfLecture ?? '',
+                            minutes: (courses.minutes == null)?0:int.parse(courses.minutes.toString()),
+                            teacherName: courses.teacher!.name ?? '',
+                            teacherImage: courses.teacher!.image ?? '',
                           ),
                         ),
                       );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sanademy/utils/app_colors.dart';
 
 void showLoadingDialog({
   @required BuildContext? context,
@@ -10,7 +11,7 @@ void showLoadingDialog({
 // barrierColor: barrierColor ?? AppColors.textColorWhite.withOpacity(0.50),
         barrierDismissible: false,
         builder: (context) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator(color: AppColors.primaryColor,));
         });
   });
 }

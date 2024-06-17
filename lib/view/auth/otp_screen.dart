@@ -6,18 +6,28 @@ import 'package:sanademy/commonWidget/common_appbar.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
-import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view/auth/send_otp_method.dart';
+import 'package:sanademy/view/auth/sign_up_screen.dart';
 import 'package:sanademy/view_model/otp_view_model.dart';
 import 'package:sanademy/view_model/sign_up_view_model.dart';
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({super.key, required this.verificationIDFinal});
+  const OtpScreen({
+    super.key,
+    required this.verificationIDFinal,
+    this.phoneNumber = '',
+    this.countryCode = '',
+    this.countryTxtCode = '',
+  });
 
   final String verificationIDFinal;
+  final String phoneNumber;
+  final String countryCode;
+  final String countryTxtCode;
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -35,6 +45,7 @@ class _OtpScreenState extends State<OtpScreen> {
 
   @override
   void dispose() {
+    otpViewModel.pinPutController.value.clear();
     otpViewModel.stopTimer();
     super.dispose();
   }
@@ -148,6 +159,12 @@ class _OtpScreenState extends State<OtpScreen> {
                             : InkWell(
                                 onTap: () {
                                   otpViewModel.resetTimer();
+                                  sendOtp(
+                                    phoneNumber: widget.phoneNumber,
+                                    context: context,
+                                    countryCode: widget.countryCode,
+                                    countryTxtCode: widget.countryTxtCode,
+                                  );
                                 },
                                 child: CustomText(
                                   AppStrings.resendOtp.tr,
@@ -169,16 +186,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                   await signUpController.registerViewModel(
                                       step: 2,
                                       context: context,
-                                      verificationIDFinal: widget.verificationIDFinal
-                                  );
-                                /*  if (signUpController.signUpUserOtp.value != 0) {
-                                    if (signUpController.signUpUserOtp.value.toString() ==
-                                        otpViewModel.pinPutController.value.text) {
-
-                                    } else {
-                                      showErrorSnackBar('', AppStrings.otpMismatch);
-                                    }
-                                  }*/
+                                      verificationIDFinal: widget.verificationIDFinal);
                                 }
                               },
                         fontSize: 14.sp,
@@ -196,7 +204,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       padding: EdgeInsets.symmetric(horizontal: 22.w),
                       child: CustomBtn(
                         onTap: () {
-                          Get.back();
+                          Get.to(const SignUpScreen());
                         },
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w700,

@@ -9,6 +9,7 @@ Future<bool?> sendOtp({
   required String phoneNumber,
   required BuildContext context,
   required String countryCode,
+  required String countryTxtCode,
 }) async {
   showLoadingDialog(context: context);
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -19,6 +20,9 @@ Future<bool?> sendOtp({
       MaterialPageRoute(
           builder: (context) => OtpScreen(
                 verificationIDFinal: verificationID,
+                countryTxtCode: countryTxtCode,
+                phoneNumber: phoneNumber,
+                countryCode: countryCode,
               )),
     );
   }
@@ -26,7 +30,7 @@ Future<bool?> sendOtp({
   try {
     await auth.verifyPhoneNumber(
         phoneNumber: "+$countryCode $phoneNumber",
-        timeout: const Duration(seconds: 100),
+        timeout: const Duration(seconds: 59),
         verificationCompleted: (PhoneAuthCredential credential) {},
         verificationFailed: (FirebaseAuthException exception) {
           hideLoadingDialog(context: context);
@@ -74,7 +78,7 @@ Future<bool?> loginSendOtp({
   try {
     await auth.verifyPhoneNumber(
         phoneNumber: "+$countryCode $phoneNumber",
-        timeout: const Duration(seconds: 100),
+        timeout: const Duration(seconds: 59),
         verificationCompleted: (PhoneAuthCredential credential) {},
         verificationFailed: (FirebaseAuthException exception) {
           hideLoadingDialog(context: context);

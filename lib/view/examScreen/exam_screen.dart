@@ -24,7 +24,7 @@ class _ExamScreenState extends State<ExamScreen> {
 
   @override
   void initState() {
-    examViewModel.getExamData(courseId: 1);
+    examViewModel.getExamData(courseId: 3);
     super.initState();
   }
 

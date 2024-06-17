@@ -25,7 +25,7 @@ class HomeScreenViewModel extends GetxController {
   Rx<ResponseStatus> responseStatus = ResponseStatus.INITIAL.obs;
   HomeResModel homeResModel = HomeResModel();
 
-  Future<void> homeViewModel({required String search}) async {
+  Future<void> homeViewModel({ String search = ''}) async {
     Map<String, String> queryParams = {
       ApiKeys.search: search,
     };
@@ -54,7 +54,7 @@ class HomeScreenViewModel extends GetxController {
     userImage.value = newImageUrl;
   }
 
-  /// Fetch Course Detail Data
+/*  /// Fetch Course Detail Data
   CourseDetailResModel courseDetailResModel = CourseDetailResModel();
   Rx<ResponseStatus> courseDetailResponseStatus = ResponseStatus.INITIAL.obs;
   Future<void> courseDetailViewModel({
@@ -80,7 +80,7 @@ class HomeScreenViewModel extends GetxController {
         courseDetailResponseStatus.value = ResponseStatus.Error;
       }
     }
-  }
+  }*/
 
   /// Fetch Category Wise CourseData
   Rx<ResponseStatus> categoryWiseCourseResponseStatus = ResponseStatus.INITIAL.obs;

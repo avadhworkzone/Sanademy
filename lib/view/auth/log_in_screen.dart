@@ -9,10 +9,12 @@ import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
+import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view/auth/send_otp_method.dart';
 import 'package:sanademy/view/auth/sign_up_screen.dart';
 import 'package:sanademy/view_model/otp_view_model.dart';
 import 'package:sanademy/view_model/sign_in_view_model.dart';
@@ -53,7 +55,7 @@ class _LogInScreenState extends State<LogInScreen> {
   @override
   void initState() {
     if (widget.isSendOtp == true) {
-      otpViewModel.startTimer();
+      otpViewModel.resetTimer();
       signInViewModel.showContainer.value = true;
       signInViewModel.signInPhoneController.value.text = widget.phoneNumber;
       signInViewModel.phoneLoginCode.value = widget.countryCode;
@@ -244,7 +246,13 @@ class _LogInScreenState extends State<LogInScreen> {
                                         color: AppColors.primaryColor.withOpacity(0.4))
                                     : InkWell(
                                         onTap: () {
-                                          otpViewModel.resetTimer();
+                                          signInViewModel.showContainer.value = true;
+                                          loginSendOtp(
+                                              context: context,
+                                              countryCode:signInViewModel.phoneLoginCode.value,
+                                              phoneNumber: signInViewModel.signInPhoneController.value.text,
+                                              countryTxtCode: signInViewModel.countryLoginCode.value
+                                          );
                                         },
                                         child: CustomText(
                                           AppStrings.resendOtp.tr,
@@ -265,10 +273,12 @@ class _LogInScreenState extends State<LogInScreen> {
                         child: CustomBtn(
                           onTap: () async {
                             await SharedPreferenceUtils.setIsLogin(true);
-                            signInViewModel.loginViewModel(
-                              step: 2, context: context,
-                                verificationIDFinal: widget.verificationIDFinal
-                            );
+                            if(otpViewModel.pinPutController.value.isBlank == false){
+                              signInViewModel.loginViewModel(
+                                  step: 2, context: context, verificationIDFinal: widget.verificationIDFinal);
+                            }else{
+                              showErrorSnackBar('', 'Please Enter Otp');
+                            }
                           },
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w700,
@@ -285,7 +295,6 @@ class _LogInScreenState extends State<LogInScreen> {
                               signInViewModel.signInPhoneController.value.text.isNotEmpty) {
                             FocusScope.of(context).requestFocus(FocusNode());
                             await signInViewModel.loginViewModel(step: 1, context: context);
-                            otpViewModel.resetTimer();
                           }
                         },
                         fontSize: 14.sp,

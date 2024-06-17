@@ -16,6 +16,7 @@ import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/loading_dialog.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
+
 import '../view/auth/send_otp_method.dart';
 
 class SignUpViewModel extends GetxController {
@@ -62,7 +63,6 @@ class SignUpViewModel extends GetxController {
 
   /// GET DEVICE INFORMATION
   Future<void> getDeviceInfo() async {
-
     if (Platform.isAndroid) {
       var androidInfo = await DeviceInfoPlugin().androidInfo;
       var release = androidInfo.version.release;
@@ -148,8 +148,7 @@ class SignUpViewModel extends GetxController {
       ApiKeys.countryCode: signUpCountryCode.value,
       ApiKeys.step: step.toString(),
       ApiKeys.deviceType: deviceToken,
-      ApiKeys.deviceToken: Platform.isAndroid?AppStrings.android:AppStrings.iPhone,
-
+      ApiKeys.deviceToken: Platform.isAndroid ? AppStrings.android : AppStrings.iPhone,
     };
 
     final response = await SignUpService().registrationRepo(mapData: queryParams);
@@ -164,7 +163,8 @@ class SignUpViewModel extends GetxController {
             sendOtp(
                 phoneNumber: signUpPhoneController.value.text,
                 context: context,
-                countryCode: signUpPhoneCode.value);
+                countryCode: signUpPhoneCode.value,
+                countryTxtCode: signUpCountryCode.value);
             // Get.to(() => const OtpScreen());
           } else {
             if (registerResModel.data!.token != null) {

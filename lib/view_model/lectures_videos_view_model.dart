@@ -18,17 +18,7 @@ class LecturesVideosViewModel extends GetxController {
   Rx<Duration> currentVideoDuration = Duration.zero.obs;
   List<Map<String, Duration>> videoDurations = [];
 
-  /* List<Map<String, dynamic>> lecturesDuration = [];
-  Duration videoTotalTime = Duration.zero;
-  Duration videoWatchedTime = Duration.zero;
-  Duration videoRemainingTime = Duration.zero;
-  Duration allLectureDuration = Duration.zero;
-  Duration allLectureWatchedTime = Duration.zero;
-  Duration allLectureRemainingTime = Duration.zero;
-  int allLectureWatchedTimeHours = 0;
-  int allLectureWatchedTimeMinutes = 0;
-  int allLectureRemainingTimeHours = 0;
-  int allLectureRemainingTimeMinutes = 0;*/
+
 
   Future<void> initializeVideoPlayers(List<Lectures> lecturesUrls) async {
     isLoader.value = true;
@@ -37,12 +27,6 @@ class LecturesVideosViewModel extends GetxController {
         lectureUrl.videoUrl!,
       ));
       await videoPlayerController.initialize();
-      /* videoPlayerController.addListener(() {
-        if (videoPlayerController.value.isInitialized) {
-          currentVideoDuration.value = videoPlayerController.value.duration;
-          currentVideoPosition.value = Duration.zero;
-        }
-      });*/
       videoDurations
           .add({'videoTotalTime': videoPlayerController.value.duration, 'videoWatchedTime': Duration.zero});
       // videoDurations.add(videoPlayerController.value.duration);
@@ -139,7 +123,19 @@ class LecturesVideosViewModel extends GetxController {
     }
   }
 
-/*  /// FOR ADD ALL TOTAL DURATION OF VIDEOS
+
+  /* List<Map<String, dynamic>> lecturesDuration = [];
+  Duration videoTotalTime = Duration.zero;
+  Duration videoWatchedTime = Duration.zero;
+  Duration videoRemainingTime = Duration.zero;
+  Duration allLectureDuration = Duration.zero;
+  Duration allLectureWatchedTime = Duration.zero;
+  Duration allLectureRemainingTime = Duration.zero;
+  int allLectureWatchedTimeHours = 0;
+  int allLectureWatchedTimeMinutes = 0;
+  int allLectureRemainingTimeHours = 0;
+  int allLectureRemainingTimeMinutes = 0;
+  /// FOR ADD ALL TOTAL DURATION OF VIDEOS
   void addLecturesDuration(String contentId) {
     videoTotalTime = Duration.zero;
     videoWatchedTime = Duration.zero;

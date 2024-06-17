@@ -24,24 +24,13 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
 
   @override
   void initState() {
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    //   setState(() {
-    //     isLoading = true;
-    //   });
-    //   Future.delayed(const Duration(seconds: 3), () {
-    //     setState(() {
-    //       isLoading = false;
-    //     });
-    //   });
-    // });
-    getCourseProgressApiCall();
+    getProgressApi();
     super.initState();
   }
 
-  getCourseProgressApiCall() async {
+  Future<void> getProgressApi() async {
     await myProgressViewModel.getCourseProgressViewModel();
   }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(onWillPop: () {
@@ -84,24 +73,7 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                                     itemBuilder: (context, index) {
                                       double completedTime =
                                           double.parse(courseDetail[index].completedMinutes.toString());
-                                      double remainingTime =
-                                          double.parse(courseDetail[index].remainingMinutes.toString());
-                                      /*  /// Parsing the completed and remaining times
-                                      double completedTime =
-                                         double.parse(courseDetail[index]
-                                                  .completedMinutes
-                                                  .toString()) *
-                                                  60;
-                                      double remainingTime =
-                                          double.parse(courseDetail[index]
-                                                  .remainingMinutes
-                                                  .toString()) *
-                                                      60;
-
-                                      /// Calculating the total time and the ratio
-                                      double totalTime =
-                                          completedTime + remainingTime;*/
-
+                                      double totalTime = double.parse(courseDetail[index].course!.minutes.toString());
                                       return Container(
                                         padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.w),
                                         margin: EdgeInsets.symmetric(vertical: 10.w),
@@ -138,7 +110,7 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                                               ),
                                               child: Slider(
                                                 value: completedTime,
-                                                max: completedTime + remainingTime,
+                                                max: totalTime,
                                                 onChanged: (double newValue) {},
                                               ),
                                             ),
@@ -151,16 +123,15 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                                                                 .completedMinutes!
                                                                 .toInt())) +
                                                         AppStrings.complete,
-                                                    // '${courseDetail[index].completedMinutes} ${AppStrings.minutesComplete}',
                                                     color: AppColors.white,
                                                     fontSize: 12.sp),
                                                 CustomText(
                                                     formatTime(Duration(
-                                                            minutes: int.parse(courseDetail[index]
-                                                                .remainingMinutes
-                                                                .toString()))) +
+                                                            minutes: int.parse(courseDetail[index].course!.minutes.toString()) - courseDetail[index]
+                                                                    .completedMinutes!
+                                                                    .toInt() 
+                                                                )) +
                                                         AppStrings.remaining,
-                                                    // '${courseDetail[index].remainingMinutes} ${AppStrings.minutesRemaining}',
                                                     color: AppColors.white,
                                                     fontSize: 12.sp),
                                               ],

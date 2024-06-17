@@ -7,6 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:sanademy/commonWidget/loading_spinner.dart';
 import 'package:sanademy/localization/translations.dart';
 import 'package:sanademy/networks/services/connectivity_service.dart';
+import 'package:sanademy/networks/services/firebase_api.dart';
 import 'package:sanademy/utils/app_class.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
@@ -24,6 +25,7 @@ Future<void> main() async {
       projectId: 'sana-academy',
         storageBucket: 'sana-academy.appspot.com'
       ));
+  await FirebaseApi().initNotification();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
