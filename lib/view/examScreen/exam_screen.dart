@@ -6,12 +6,17 @@ import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view/bottombar/bottom_bar.dart';
 import 'package:sanademy/view/examScreen/questions_screen.dart';
+import 'package:sanademy/view/my_certificate_screen/my_certificate_screen.dart';
+import 'package:sanademy/view_model/bottom_bar_view_model.dart';
 import 'package:sanademy/view_model/exam_view_model.dart';
 import 'package:sanademy/view_model/question_answer_view_model.dart';
 
 class ExamScreen extends StatefulWidget {
-  const ExamScreen({super.key});
+  const ExamScreen({
+    super.key,
+  });
 
   @override
   State<ExamScreen> createState() => _ExamScreenState();
@@ -19,8 +24,8 @@ class ExamScreen extends StatefulWidget {
 
 class _ExamScreenState extends State<ExamScreen> {
   ExamViewModel examViewModel = Get.put(ExamViewModel());
-  QuestionsAnswerViewModel questionsAnswerViewModel =
-      Get.put(QuestionsAnswerViewModel());
+  QuestionsAnswerViewModel questionsAnswerViewModel = Get.put(QuestionsAnswerViewModel());
+  BottomBarViewModel bottomBarViewModel = Get.find<BottomBarViewModel>();
 
   @override
   void initState() {
@@ -38,7 +43,12 @@ class _ExamScreenState extends State<ExamScreen> {
               commonBackArrowAppBar(
                   titleTxt: AppStrings.exams,
                   actionWidget: false,
-                  leadingWidget: true),
+                  leadingWidget: true,
+                  backOnTap: () {
+                    FocusManager.instance.primaryFocus?.unfocus();
+                    bottomBarViewModel.selectedBottomIndex.value = 2;
+                    Get.offAll(() => const BottomBar());
+                  }),
               SizeConfig.sH10,
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -58,18 +68,15 @@ class _ExamScreenState extends State<ExamScreen> {
                         return GestureDetector(
                           onTap: () {
                             Get.to(() => QuestionsScreen(
-                                  examTitle: examViewModel.examData[index].title
-                                      .toString(),
-                                  examId: examViewModel.examData[index].id
-                                      .toString(),
+                                  examTitle: examViewModel.examData[index].title.toString(),
+                                  examId: examViewModel.examData[index].id.toString(),
                                 ));
                           },
                           child: Container(
                             padding: EdgeInsets.all(20.w),
                             margin: EdgeInsets.symmetric(vertical: 10.w),
                             decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: AppColors.greyEE, width: 1.sp),
+                                border: Border.all(color: AppColors.greyEE, width: 1.sp),
                                 borderRadius: BorderRadius.circular(15),
                                 color: AppColors.greyFD),
                             child: Row(
@@ -90,21 +97,16 @@ class _ExamScreenState extends State<ExamScreen> {
                                         CustomText(
                                           '${examViewModel.examData[index].questionsCount} ${AppStrings.questions}',
                                           fontWeight: FontWeight.w500,
-                                          color: AppColors.black0E
-                                              .withOpacity(0.80),
+                                          color: AppColors.black0E.withOpacity(0.80),
                                         ),
                                         SizeConfig.sW6,
                                         const CustomText('•',
-                                            fontWeight: FontWeight.w500,
-                                            color: AppColors.black0E),
+                                            fontWeight: FontWeight.w500, color: AppColors.black0E),
                                         SizeConfig.sW6,
                                         CustomText(
-                                          examViewModel
-                                                  .examData[index].subTitle ??
-                                              '',
+                                          examViewModel.examData[index].subTitle ?? '',
                                           fontWeight: FontWeight.w500,
-                                          color: AppColors.black0E
-                                              .withOpacity(0.80),
+                                          color: AppColors.black0E.withOpacity(0.80),
                                         ),
                                       ],
                                     )
@@ -113,8 +115,7 @@ class _ExamScreenState extends State<ExamScreen> {
                                 Column(
                                   children: [
                                     CircleAvatar(
-                                      backgroundColor:
-                                          AppColors.color8B.withOpacity(0.20),
+                                      backgroundColor: AppColors.color8B.withOpacity(0.20),
                                       child: const Icon(
                                         Icons.play_arrow,
                                         color: AppColors.color8B,

@@ -32,7 +32,7 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
 
   @override
   void initState() {
-    getCertificateApiCall();
+    // getCertificateApiCall();
     // TODO: implement initState
     super.initState();
   }
@@ -45,7 +45,7 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        bottomBarViewModel.selectedBottomIndex.value = 0;
+        bottomBarViewModel.selectedBottomIndex.value = 2;
         Get.offAll(() => const BottomBar());
         return Future.value(true);
       },
@@ -72,7 +72,7 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                 CustomBtn(
                   onTap: () {
                     SharedPreferenceUtils.getIsLogin() == true
-                        ? Get.to(() => const ExamScreen())
+                        ? Get.to(() =>  ExamScreen())
                         : Get.to(() => const SignUpScreen());
                   },
                   fontSize: 14.sp,

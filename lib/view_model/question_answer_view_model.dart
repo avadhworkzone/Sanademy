@@ -7,14 +7,13 @@ import 'package:sanademy/networks/api_keys.dart';
 import 'package:sanademy/networks/model/get_question_res_model.dart';
 import 'package:sanademy/networks/model/save_questions_res_model.dart';
 import 'package:sanademy/networks/services/apiService/get_question_api_service.dart';
-import 'package:sanademy/networks/services/apiService/save_questions_api_sevice.dart';
+import 'package:sanademy/networks/services/apiService/save_questions_api_service.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/enum_utils.dart';
 import 'package:sanademy/view/examScreen/congratulations_screen.dart';
 
 class QuestionsAnswerViewModel extends GetxController {
   Rx<TextEditingController> audioAnswerController = TextEditingController().obs;
-  // Map<int, TextEditingController> audioAnswerController = {};
   Rx<ResponseStatus> responseStatus = ResponseStatus.INITIAL.obs;
   RxList<QuestionsDetail> questionsDetail = <QuestionsDetail>[].obs;
   GetQuestionResModel getQuestionResModel = GetQuestionResModel();
@@ -26,6 +25,7 @@ class QuestionsAnswerViewModel extends GetxController {
   List<Map<String, dynamic>> selectedAnswerList = [];
 
   initData(bool mounted) {
+    timeIs = DateTime.now().toString();
     timer1 = Timer.periodic(const Duration(seconds: 1), (timer) async {
       var difference = DateTime.now().difference(DateTime.parse(timeIs));
       if (mounted) {
@@ -35,6 +35,7 @@ class QuestionsAnswerViewModel extends GetxController {
   }
 
   void stopTimer() {
+    timeIs =  DateTime.now().toString();
     if (timer1 != null) {
       timer1!.value.cancel();
     }
@@ -44,22 +45,31 @@ class QuestionsAnswerViewModel extends GetxController {
     pageController.value.jumpToPage(pageIndex);
   }
 
-  Future<void> getQuestionsViewModel({
-    required String examId,
-  }) async {
+  final RxList<TextEditingController> controllers = <TextEditingController>[].obs;
+
+  void addController() {
+    controllers.clear();
+    controllers.value = List.generate(
+      questionsDetail.length,
+      (index) => TextEditingController(),
+    );
+  }
+
+  Future<void> getQuestionsViewModel({required String examId, bool isFromQuestion = false}) async {
     unFocus();
     Map<String, String> queryParams = {
       ApiKeys.examId: examId.toString(),
     };
-    final response =
-        await GetQuestionApiService().getQuestionRepo(mapData: queryParams);
+    final response = await GetQuestionApiService().getQuestionRepo(mapData: queryParams);
     if (checkStatusCode(response!.statusCode ?? 0)) {
-      getQuestionResModel =
-          getQuestionResModelFromJson(response.response.toString());
+      getQuestionResModel = getQuestionResModelFromJson(response.response.toString());
       if (getQuestionResModel.success!) {
         if (getQuestionResModel.data != null) {
           questionsDetail.value = getQuestionResModel.data!;
           responseStatus.value = ResponseStatus.Completed;
+          if (isFromQuestion == true) {
+            addController();
+          }
         } else {
           showErrorSnackBar('', getQuestionResModel.message ?? 'Error');
         }
@@ -85,8 +95,7 @@ class QuestionsAnswerViewModel extends GetxController {
       ApiKeys.time: time
     };
 
-    final response = await SaveQuestionApiService()
-        .saveQuestionApiRepo(mapData: queryParams);
+    final response = await SaveQuestionApiService().saveQuestionApiRepo(mapData: queryParams);
     if (checkStatusCode(response!.statusCode ?? 0)) {
       SaveQuestionsResModel saveQuestionsResModel =
           saveQuestionsResModelFromJson(response.response.toString());
@@ -94,14 +103,13 @@ class QuestionsAnswerViewModel extends GetxController {
         if (saveQuestionsResModel.data != null) {
           saveQuestionsResponseStatus.value = ResponseStatus.Completed;
           showSussesSnackBar('', saveQuestionsResModel.message.toString());
-
         } else {
           showErrorSnackBar('', saveQuestionsResModel.message ?? 'Error');
         }
         Get.to(() => CongratulationsScreen(
-          examId: examId,
-          examTitle: examTitle,
-        ));
+              examId: examId,
+              examTitle: examTitle,
+            ));
       } else {
         showErrorSnackBar('', saveQuestionsResModel.message ?? 'Error');
         responseStatus.value = ResponseStatus.Error;

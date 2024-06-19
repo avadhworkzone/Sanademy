@@ -45,8 +45,6 @@ class SignInViewModel extends GetxController {
           loginResModelFromJson(response.response.toString());
       if (loginResModel.success == true) {
         if (loginResModel.data != null) {
-          // userLoginOtp.value = loginResModel.data!.otp ?? 0;
-          // showSussesSnackBar('', loginResModel.message ?? 'SUCCESS');
           if(step == 1){
             showContainer.value = true;
             loginSendOtp(
@@ -64,7 +62,7 @@ class SignInViewModel extends GetxController {
                 PhoneAuthProvider.credential(verificationId: verificationIDFinal, smsCode: code.value);
                 await auth.signInWithCredential(credential);
                 hideLoadingDialog(context: context);
-                showSussesSnackBar('', 'Login Successfully');
+                showSussesSnackBar('', loginResModel.message ?? 'SUCCESS');
                 await SharedPreferenceUtils.setToken(loginResModel.data!.token ?? '');
                 Get.offAll(const BottomBar());
               } on FirebaseAuthException catch (e) {

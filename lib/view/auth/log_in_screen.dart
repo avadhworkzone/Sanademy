@@ -48,7 +48,9 @@ class _LogInScreenState extends State<LogInScreen> {
   @override
   void dispose() {
     otpViewModel.pinPutController.value.clear();
+    signInViewModel.signInPhoneController.value..clear();
     otpViewModel.stopTimer();
+    signInViewModel.showContainer.value = false;
     super.dispose();
   }
 
@@ -271,20 +273,22 @@ class _LogInScreenState extends State<LogInScreen> {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 22.w),
                         child: CustomBtn(
-                          onTap: () async {
-                            await SharedPreferenceUtils.setIsLogin(true);
-                            if(otpViewModel.pinPutController.value.isBlank == false){
-                              signInViewModel.loginViewModel(
-                                  step: 2, context: context, verificationIDFinal: widget.verificationIDFinal);
-                            }else{
-                              showErrorSnackBar('', 'Please Enter Otp');
-                            }
-                          },
+                          onTap:  otpViewModel.pinPutController.value.text.length < 6
+                              ? null
+                              : () async {
+                              await SharedPreferenceUtils.setIsLogin(true);
+                              await signInViewModel.loginViewModel(
+                                  step: 2,
+                                  context: context,
+                                  verificationIDFinal: widget.verificationIDFinal);
+                            },
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w700,
                           radius: 10.r,
                           title: AppStrings.verify,
-                          bgColor: AppColors.primaryColor,
+                          bgColor:  otpViewModel.pinPutController.value.text.length < 6
+                              ? AppColors.primaryColor.withOpacity(0.5)
+                              : AppColors.primaryColor,
                           textColor: AppColors.white,
                         ),
                       )
@@ -295,6 +299,8 @@ class _LogInScreenState extends State<LogInScreen> {
                               signInViewModel.signInPhoneController.value.text.isNotEmpty) {
                             FocusScope.of(context).requestFocus(FocusNode());
                             await signInViewModel.loginViewModel(step: 1, context: context);
+                          }else{
+                            showErrorSnackBar('', 'Please Enter Mobile Number ');
                           }
                         },
                         fontSize: 14.sp,

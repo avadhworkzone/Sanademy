@@ -5,7 +5,7 @@ void showLoadingDialog({
   @required BuildContext? context,
   Color? barrierColor,
 }) {
-  Future.delayed(Duration(seconds: 0), () {
+  Future.delayed(const Duration(seconds: 0), () {
     showDialog(
         context: context!,
 // barrierColor: barrierColor ?? AppColors.textColorWhite.withOpacity(0.50),

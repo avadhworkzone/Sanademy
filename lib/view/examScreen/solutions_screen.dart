@@ -53,8 +53,6 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                 return const Center(child: CustomText("Something went wrong"));
               }
               final questionsDetail = questionsAnswerViewModel.questionsDetail;
-              print(
-                  'api mathi aave che ${jsonEncode(questionsAnswerViewModel.questionsDetail)}');
               return Column(
                 children: [
                   CustomText(

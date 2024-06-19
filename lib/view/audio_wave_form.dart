@@ -21,8 +21,11 @@ class AudioWaveForm extends StatefulWidget {
     required this.videoUrl,
     this.isSolutionScreen = false,
     this.index = 0,
+    this.onTap,
+    // this.isAnswerFilled = false,
   });
-  // final List<String> audioQuestions;
+  // final bool isAnswerFilled;
+   final void Function()? onTap;
   final TextEditingController? controller;
   final String videoUrl;
   final bool isSolutionScreen;
@@ -34,16 +37,13 @@ class AudioWaveForm extends StatefulWidget {
 
 class _AudioWaveFormState extends State<AudioWaveForm> {
   QuestionsAnswerViewModel questionsAnswerViewModel = Get.find();
-  List<TextEditingController> _controllers = [];
+  bool isFillAnswer = false;
   bool _isLoading = true;
   String? video;
 
   @override
   void initState() {
     super.initState();
-    // _controllers = List.generate(widget.audioQuestions.length, (index) {
-    //   return TextEditingController();
-    // });
     getVideoUrl();
   }
 
@@ -56,9 +56,6 @@ class _AudioWaveFormState extends State<AudioWaveForm> {
 
   @override
   void dispose() {
-    // _controllers.forEach((controller) {
-    //   controller.dispose();
-    // });
     super.dispose();
   }
 
@@ -66,11 +63,8 @@ class _AudioWaveFormState extends State<AudioWaveForm> {
   Widget build(BuildContext context) {
     return Material(
       child: Obx(() {
-        final isNotSame = questionsAnswerViewModel
-                .questionsDetail[widget.index].selectedAnswer
-                .toString() !=
-            questionsAnswerViewModel.questionsDetail[widget.index].correctAns
-                .toString();
+        final isNotSame = questionsAnswerViewModel.questionsDetail[widget.index].selectedAnswer.toString() !=
+            questionsAnswerViewModel.questionsDetail[widget.index].correctAns.toString();
         return Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -87,16 +81,13 @@ class _AudioWaveFormState extends State<AudioWaveForm> {
               decoration: BoxDecoration(
                 color: AppColors.greyFD,
                 border: Border.all(
-                  color: widget.isSolutionScreen
-                      ? AppColors.greyEE
-                      : Colors.transparent,
+                  color: widget.isSolutionScreen ? AppColors.greyEE : Colors.transparent,
                 ),
                 borderRadius: BorderRadius.circular(15),
               ),
               child: widget.isSolutionScreen
                   ? Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 20.w, vertical: 10.h),
+                      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -110,27 +101,21 @@ class _AudioWaveFormState extends State<AudioWaveForm> {
                           if (isNotSame) SizeConfig.sH15,
                           if (isNotSame)
                             CustomText(
-                              questionsAnswerViewModel
-                                  .questionsDetail[widget.index].selectedAnswer
+                              questionsAnswerViewModel.questionsDetail[widget.index].selectedAnswer
                                   .toString(),
                             ),
                           SizeConfig.sH15,
                           CustomText(AppStrings.correctAnswer,
-                              color: AppColors.green0B,
-                              fontWeight: FontWeight.w700),
+                              color: AppColors.green0B, fontWeight: FontWeight.w700),
                           SizeConfig.sH15,
                           CustomText(
-                            questionsAnswerViewModel
-                                .questionsDetail[widget.index].correctAns
-                                .toString(),
+                            questionsAnswerViewModel.questionsDetail[widget.index].correctAns.toString(),
                           ),
                         ],
                       ),
                     )
                   : TextFormField(
                       controller: widget.controller,
-
-                      ///questionsAnswerViewModel.audioAnswerController.value,
                       cursorColor: AppColors.primaryColor,
                       showCursor: true,
                       maxLines: 9,
@@ -159,10 +144,10 @@ class _AudioWaveFormState extends State<AudioWaveForm> {
                           ),
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        contentPadding: EdgeInsets.only(
-                            left: 10.w, top: 10.h, bottom: 10.h),
+                        contentPadding: EdgeInsets.only(left: 10.w, top: 10.h, bottom: 10.h),
                       ),
                       keyboardType: TextInputType.multiline,
+                      onTap: widget.onTap,
                     ),
             ),
           ],
@@ -256,9 +241,7 @@ class _WaveBubbleState extends State<WaveBubble> {
                               );
                       },
                       icon: Icon(
-                        controller.playerState.isPlaying
-                            ? Icons.stop
-                            : Icons.play_arrow,
+                        controller.playerState.isPlaying ? Icons.stop : Icons.play_arrow,
                         size: 30,
                       ),
                       color: Colors.white,
@@ -279,4 +262,3 @@ class _WaveBubbleState extends State<WaveBubble> {
           );
   }
 }
-
