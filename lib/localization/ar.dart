@@ -88,6 +88,7 @@ Map<String, String> ar = {
   AppStrings.logOutTxt: 'هل أنت متأكد أنك تريد تسجيل الخروج؟"',
   AppStrings.yes: 'نعم',
   AppStrings.no: 'لا',
+  AppStrings.reDirectOnWhatsAppMessage: 'من فضلك اتصل بنا :\n+964 7509790444\n+964 7709790444\nمعرف المستخدم الخاص بي لأكاديمية سناء هو:',
 
   /// Contact Us Screen
   AppStrings.getInTouch: 'ابقى على تواصل',
@@ -118,6 +119,7 @@ Map<String, String> ar = {
   AppStrings.certificate: 'شهاداتي',
   AppStrings.certificateScreenTxt:
       "في هذه الصفحة، يمكنك رؤية جميع الشهادات الخاصة بك لإكمال كل دورة، أو اجتياز الاختبار في هذا المجال.",
+  AppStrings.pdfSuccessfullyDownload: 'تم تنزيل ملف pdf بنجاح',
 
   /// notification screen
   AppStrings.notifications: 'إشعارات',
@@ -166,6 +168,8 @@ Map<String, String> ar = {
   AppStrings.pleaseEnterOtp: 'الرجاء إدخال كلمة المرور',
   AppStrings.pleaseEnterValidOtp: 'الرجاء إدخال كلمة مرور صالحة',
   AppStrings.pleaseEnterSomeText: 'الرجاء إدخال بعض النص',
+  AppStrings.pleaseEnterMobileNumber: 'الرجاء إدخال رقم الجوال',
+  AppStrings.somethingWantWrong: 'هناك خطأ ما',
 
   ///k-dev Registration
   AppStrings.name: 'اسم',

@@ -32,8 +32,7 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
 
   @override
   void initState() {
-    // getCertificateApiCall();
-    // TODO: implement initState
+    getCertificateApiCall();
     super.initState();
   }
 
@@ -72,7 +71,7 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                 CustomBtn(
                   onTap: () {
                     SharedPreferenceUtils.getIsLogin() == true
-                        ? Get.to(() =>  ExamScreen())
+                        ? Get.to(() =>  const ExamScreen())
                         : Get.to(() => const SignUpScreen());
                   },
                   fontSize: 14.sp,
@@ -90,8 +89,7 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                       itemBuilder: (context, index) {
                         final certificates =
                             myCertificateViewModel.getCertificates[index];
-                        final List<Color> colors = certificates
-                            .course!.colorCode!
+                        final List<Color> colors = certificates.colorCode!
                             .split(',')
                             .map((color) => Color(int.parse(color, radix: 16))
                                 .withOpacity(0.8))
@@ -110,7 +108,7 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CustomText(
-                                certificates.course!.title ?? '',
+                                certificates.title ?? '',
                                 fontSize: 20.sp,
                                 fontWeight: FontWeight.w700,
                                 color: AppColors.black0E,
@@ -120,7 +118,7 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   CustomText(
-                                    '${certificates.course!.numberOfLecture} ${AppStrings.lectures}' ?? '',
+                                    '${certificates.numberOfLecture} ${AppStrings.lectures}',
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w500,
                                     color: AppColors.black0E,
@@ -135,8 +133,7 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                                   SizeConfig.sW6,
                                   CustomText(
                                     formatTime(Duration(
-                                        minutes: int.parse(certificates.course!.minutes!))),
-                                    // '${'${certificates.course!.hours} ${AppStrings.hours}'} ${'${certificates.course!.minutes} ${AppStrings.minutes}'}',
+                                        minutes: int.parse(certificates.minutes!))),
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w500,
                                     color: AppColors.black0E,
@@ -157,9 +154,10 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                                           },
                                           onDownloadCompleted: (path) {
                                             final File file = File(path);
-                                            showSussesSnackBar('',
-                                                'Pdf Download Successfully');
-                                            print(file);
+                                            showSussesSnackBar('',AppStrings.pdfSuccessfullyDownload);
+                                            if (kDebugMode) {
+                                              print(file);
+                                            }
                                           },
                                           onProgress: (fileName, progress) {
                                             setState(() {
@@ -190,9 +188,9 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                                       await myCertificateViewModel
                                           .requestHardCopyViewModel(
                                               courseId:
-                                                  certificates.courseId == null
+                                                  certificates.id == null
                                                       ? ''
-                                                      : certificates.courseId
+                                                      : certificates.id
                                                           .toString());
                                     },
                                     child: Container(

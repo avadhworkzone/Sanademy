@@ -1,17 +1,11 @@
 import 'dart:convert';
-
-GetMyCertificateResModel getMyCertificateResModelFromJson(String str) =>
-    GetMyCertificateResModel.fromJson(json.decode(str));
-
-String getMyCertificateResModelToJson(GetMyCertificateResModel data) =>
-    json.encode(data.toJson());
-
+GetMyCertificateResModel getMyCertificateResModelFromJson(String str) => GetMyCertificateResModel.fromJson(json.decode(str));
+String getMyCertificateResModelToJson(GetMyCertificateResModel data) => json.encode(data.toJson());
 class GetMyCertificateResModel {
   GetMyCertificateResModel({
-    this.success,
-    this.data,
-    this.message,
-  });
+      this.success, 
+      this.data, 
+      this.message,});
 
   GetMyCertificateResModel.fromJson(dynamic json) {
     success = json['success'];
@@ -36,96 +30,36 @@ class GetMyCertificateResModel {
     map['message'] = message;
     return map;
   }
+
 }
 
-CertificateData dataFromJson(String str) =>
-    CertificateData.fromJson(json.decode(str));
+CertificateData dataFromJson(String str) => CertificateData.fromJson(json.decode(str));
 String dataToJson(CertificateData data) => json.encode(data.toJson());
-
 class CertificateData {
   CertificateData({
-    this.id,
-    this.userId,
-    this.courseId,
-    this.completedHour,
-    this.completedMinute,
-    this.remainingHour,
-    this.remainingMinute,
-    this.createdAt,
-    this.updatedAt,
-    this.certificate,
-    this.course,
-  });
+      this.id, 
+      this.categoryId, 
+      this.teacherId, 
+      this.title, 
+      this.videoUrl, 
+      this.banner, 
+      this.hours, 
+      this.minutes, 
+      this.numberOfLecture, 
+      this.colorCode, 
+      this.description, 
+      this.requirements, 
+      this.whatWillYouLearn, 
+      this.whoThisCourseIsFor, 
+      this.instructor, 
+      this.language, 
+      this.price, 
+      this.taskIncluded, 
+      this.certificate, 
+      this.createdAt, 
+      this.updatedAt,});
 
   CertificateData.fromJson(dynamic json) {
-    id = json['id'];
-    userId = json['user_id'];
-    courseId = json['course_id'];
-    completedHour = json['completed_hour'];
-    completedMinute = json['completed_minute'];
-    remainingHour = json['remaining_hour'];
-    remainingMinute = json['remaining_minute'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    certificate = json['certificate'];
-    course = json['course'] != null ? Course.fromJson(json['course']) : null;
-  }
-  num? id;
-  num? userId;
-  num? courseId;
-  String? completedHour;
-  String? completedMinute;
-  String? remainingHour;
-  String? remainingMinute;
-  String? createdAt;
-  String? updatedAt;
-  String? certificate;
-  Course? course;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['user_id'] = userId;
-    map['course_id'] = courseId;
-    map['completed_hour'] = completedHour;
-    map['completed_minute'] = completedMinute;
-    map['remaining_hour'] = remainingHour;
-    map['remaining_minute'] = remainingMinute;
-    map['created_at'] = createdAt;
-    map['updated_at'] = updatedAt;
-    map['certificate'] = certificate;
-    if (course != null) {
-      map['course'] = course?.toJson();
-    }
-    return map;
-  }
-}
-
-Course courseFromJson(String str) => Course.fromJson(json.decode(str));
-String courseToJson(Course data) => json.encode(data.toJson());
-
-class Course {
-  Course({
-    this.id,
-    this.categoryId,
-    this.teacherId,
-    this.title,
-    this.videoUrl,
-    this.banner,
-    this.hours,
-    this.minutes,
-    this.numberOfLecture,
-    this.colorCode,
-    this.description,
-    this.requirements,
-    this.whatWillYouLearn,
-    this.whoThisCourseIsFor,
-    this.instructor,
-    this.createdAt,
-    this.updatedAt,
-  });
-
-  Course.fromJson(dynamic json) {
     id = json['id'];
     categoryId = json['category_id'];
     teacherId = json['teacher_id'];
@@ -141,6 +75,10 @@ class Course {
     whatWillYouLearn = json['what_will_you_learn'];
     whoThisCourseIsFor = json['who_this_course_is_for'];
     instructor = json['instructor'];
+    language = json['language'];
+    price = json['price'];
+    taskIncluded = json['task_included'];
+    certificate = json['certificate'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -150,7 +88,7 @@ class Course {
   String? title;
   String? videoUrl;
   String? banner;
-  String? hours;
+  dynamic hours;
   String? minutes;
   String? numberOfLecture;
   String? colorCode;
@@ -159,6 +97,10 @@ class Course {
   String? whatWillYouLearn;
   String? whoThisCourseIsFor;
   String? instructor;
+  String? language;
+  num? price;
+  num? taskIncluded;
+  String? certificate;
   String? createdAt;
   String? updatedAt;
 
@@ -179,8 +121,13 @@ class Course {
     map['what_will_you_learn'] = whatWillYouLearn;
     map['who_this_course_is_for'] = whoThisCourseIsFor;
     map['instructor'] = instructor;
+    map['language'] = language;
+    map['price'] = price;
+    map['task_included'] = taskIncluded;
+    map['certificate'] = certificate;
     map['created_at'] = createdAt;
     map['updated_at'] = updatedAt;
     return map;
   }
+
 }

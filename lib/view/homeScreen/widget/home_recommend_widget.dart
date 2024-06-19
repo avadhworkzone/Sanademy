@@ -78,12 +78,12 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                       EdgeInsets.only(bottom: 15.h, top: 10.h),
                                   child: GestureDetector(
                                     onTap: () {
-                                      SharedPreferenceUtils.getIsLogin() == true
-                                          ? Get.to(() => DescriptionScreen(
+                                     /* SharedPreferenceUtils.getIsLogin() == true
+                                          ?*/ Get.to(() => DescriptionScreen(
                                         courseId: courses.id.toString(),
                                         videoUrl: courses.videoUrl ?? '',
-                                      ))
-                                          : Get.to(() => const SignUpScreen());
+                                      ));
+                                          // : Get.to(() => const SignUpScreen());
 
                                     },
                                     child: CommonContainerWidget(

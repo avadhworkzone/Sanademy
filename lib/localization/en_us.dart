@@ -86,6 +86,7 @@ Map<String, String> en = {
   AppStrings.logOutTxt: 'Are you sure you want to logout?"',
   AppStrings.yes: 'Yes',
   AppStrings.no: 'No',
+  AppStrings.reDirectOnWhatsAppMessage: 'Please Contact Us :\n+964 7509790444\n+964 7709790444\nMy user id for Sana Academy is:',
 
   /// Contact Us Screen
   AppStrings.getInTouch: 'Get In Touch',
@@ -117,6 +118,7 @@ Map<String, String> en = {
   AppStrings.certificate: 'My Certificates',
   AppStrings.certificateScreenTxt:
       "In this page, you can see all your certificates for completing each course, or passing the test in that field.",
+  AppStrings.pdfSuccessfullyDownload: 'Pdf Download Successfully',
 
   /// notification screen
   AppStrings.notifications: 'Notifications',
@@ -126,6 +128,7 @@ Map<String, String> en = {
   AppStrings.exams: "Exams",
   AppStrings.examsScreenTxt:
       'In this page, you can test your knowledge in each field, and possibly receive the certificate.',
+
 
   /// questions screen
   AppStrings.finishExam: "Finish Exam",
@@ -164,6 +167,9 @@ Map<String, String> en = {
   AppStrings.pleaseEnterOtp: 'Please Enter Otp',
   AppStrings.pleaseEnterValidOtp: 'Please Enter Valid OTP',
   AppStrings.pleaseEnterSomeText: "Please Enter Some Text",
+  AppStrings.pleaseEnterMobileNumber: "Please Enter Mobile Number",
+  AppStrings.somethingWantWrong: "Something went wrong",
+
 
   ///Registration
   AppStrings.name: "Name",

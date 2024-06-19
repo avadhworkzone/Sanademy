@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
+import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/loading_dialog.dart';
 import 'package:sanademy/view/auth/log_in_screen.dart';
 import 'package:sanademy/view/auth/otp_screen.dart';
@@ -32,22 +33,11 @@ Future<bool?> sendOtp({
         phoneNumber: "+$countryCode $phoneNumber",
         timeout: const Duration(seconds: 59),
         verificationCompleted: (PhoneAuthCredential credential) {},
-        verificationFailed: (FirebaseAuthException exception) {
-          hideLoadingDialog(context: context);
-          // setLoader(false);
-          if (exception.code == 'invalid-phone-number' || exception.code == "missing-client-identifier") {
-            // hideLoadingDialog(context: context);
-            showErrorSnackBar('', 'The provided phone number is not valid.');
-          } else if (exception.code == "too-many-requests") {
-            // hideLoadingDialog(context: context);
-            showErrorSnackBar('',
-                'We have blocked all requests from this device due to unusual activity. Try again later.');
-          }
-        },
+        verificationFailed: (FirebaseAuthException exception) {},
         codeSent: phoneCodeSent,
         codeAutoRetrievalTimeout: (String verificationId) {});
   } catch (e) {
-    showErrorSnackBar('', "Something went wrong, try Again!");
+    showErrorSnackBar('', AppStrings.somethingWantWrong);
   }
   return null;
 }
@@ -81,21 +71,11 @@ Future<bool?> loginSendOtp({
         timeout: const Duration(seconds: 59),
         verificationCompleted: (PhoneAuthCredential credential) {},
         verificationFailed: (FirebaseAuthException exception) {
-          hideLoadingDialog(context: context);
-          // setLoader(false);
-          if (exception.code == 'invalid-phone-number' || exception.code == "missing-client-identifier") {
-            // hideLoadingDialog(context: context);
-            showErrorSnackBar('', 'The provided phone number is not valid.');
-          } else if (exception.code == "too-many-requests") {
-            // hideLoadingDialog(context: context);
-            showErrorSnackBar('',
-                'We have blocked all requests from this device due to unusual activity. Try again later.');
-          }
         },
         codeSent: phoneCodeSent,
         codeAutoRetrievalTimeout: (String verificationId) {});
   } catch (e) {
-    showErrorSnackBar('', "Something went wrong, try Again!");
+    showErrorSnackBar('', AppStrings.somethingWantWrong);
   }
   return null;
 }

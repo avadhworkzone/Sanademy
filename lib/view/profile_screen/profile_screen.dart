@@ -65,8 +65,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             centerTitle: false),
         body: Obx(() => profileScreenViewModel.responseStatus.value ==
                 ResponseStatus.Error
-            ? const Center(
-                child: Text('ERROR'),
+            ?  Center(
+                child: Text(AppStrings.error),
               )
             : profileScreenViewModel.responseStatus.value ==
                     ResponseStatus.Completed

@@ -22,12 +22,8 @@ import 'package:sanademy/view_model/menu_screen_view_model.dart';
 class MenuScreen extends StatefulWidget {
   const MenuScreen({
     super.key,
-   /*  this.userMobileNumber = '',
-     this.userId = '',*/
   });
 
- /* final String userMobileNumber;
-  final String userId;*/
 
   @override
   State<MenuScreen> createState() => _MenuScreenState();
@@ -61,14 +57,10 @@ class _MenuScreenState extends State<MenuScreen> {
       callbackUri: "sdk://fastpay-sdk.com/callback",
     );
     if (fastPayResult.isSuccess ?? false) {
-      // transaction success
-      // _showToast(context, "transaction success");
       if (kDebugMode) {
         print('......................................transaction success');
       }
     } else {
-      // transaction failed
-      //_showToast(context, "transaction failed");
       if (kDebugMode) {
         print('......................................transaction failed');
       }
@@ -193,7 +185,7 @@ class _MenuScreenState extends State<MenuScreen> {
                             onTap: () {
                               SharedPreferenceUtils.getIsLogin() == true
                                   ? menuScreenViewModel.launchWhatsApp(
-                                      'Please Contact Us :\n+964 7509790444\n+964 7709790444\nMy user id for Sana Academy is: ${homeScreenViewModel.homeResModel.data!.user!.id.toString()}.',
+                                      '${AppStrings.reDirectOnWhatsAppMessage} ${homeScreenViewModel.homeResModel.data!.user!.id.toString()}.',
                                       homeScreenViewModel.homeResModel.data!.user!.phoneNumber.toString(),
                                     ):Get.to(const SignUpScreen());
                             },

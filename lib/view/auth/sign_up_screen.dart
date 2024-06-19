@@ -1,4 +1,3 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,7 +33,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void initState() {
     super.initState();
    signUpViewModel.getToken();
-   signUpViewModel.getDeviceInfo();
   }
 
   @override
@@ -261,7 +259,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             signUpViewModel.signUpDateController.value.clear();
                             signUpViewModel.signUpPhoneController.value.clear();
                             signUpViewModel.signUpIsValidate.value = false;
-                            Get.to(() => LogInScreen());
+                            Get.to(() => const LogInScreen());
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,

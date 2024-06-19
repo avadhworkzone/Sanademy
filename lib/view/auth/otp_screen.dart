@@ -91,16 +91,6 @@ class _OtpScreenState extends State<OtpScreen> {
                       fontWeight: FontWeight.w700,
                     ),
                     SizeConfig.sH10,
-                    /*
-                    signUpController.signUpUserOtp.value != 0
-                        ? CustomText(
-                            "Your Otp is: ${signUpController.signUpUserOtp.value.toString()}",
-                            fontSize: 14.sp,
-                            color: AppColors.black12,
-                            fontWeight: FontWeight.w700,
-                          )
-                        : SizeConfig.sH2,
-                    SizeConfig.sH10,*/
                     CustomText(
                       AppStrings.enterFourDigitOtp,
                       fontSize: 15.sp,

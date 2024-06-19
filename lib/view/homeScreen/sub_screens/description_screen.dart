@@ -105,25 +105,6 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           child: GestureDetector(
                               onTap: () {
                                 Get.back();
-                                /*   print(
-                                    ' lecturesVideosViewModel.allLectureWatchedTimeHours.toString()***${lecturesVideosViewModel.allLectureWatchedTimeHours.toString()}');
-                                print(
-                                    ' lecturesVideosViewModel.allLectureWatchedTimeMinutes.toString()***${lecturesVideosViewModel.allLectureWatchedTimeMinutes.toString()}');
-                                print(
-                                    ' lecturesVideosViewModel.allLectureRemainingTimeHours.toString()***${lecturesVideosViewModel.allLectureRemainingTimeHours.toString()}');
-                                print(
-                                    ' lecturesVideosViewModel.allLectureRemainingTimeMinutes.toString()***${lecturesVideosViewModel.allLectureRemainingTimeMinutes.toString()}');
-                                descriptionViewModel.saveCourseProcessViewModel(
-                                  courseId: widget.courseId,
-                                  completedHour:
-                                      lecturesVideosViewModel.allLectureWatchedTimeHours.toString(),
-                                  completedMinute:
-                                      lecturesVideosViewModel.allLectureWatchedTimeMinutes.toString(),
-                                  remainingHour:
-                                      lecturesVideosViewModel.allLectureRemainingTimeHours.toString(),
-                                  remainingMinute:
-                                      lecturesVideosViewModel.allLectureRemainingTimeMinutes.toString(),
-                                );*/
                               },
                               child: Container(
                                 margin: EdgeInsets.only(left: 10.w, top: 10.w, right: 10.w),

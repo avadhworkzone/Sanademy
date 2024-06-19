@@ -1,5 +1,4 @@
 import 'package:chewie/chewie.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,7 +40,6 @@ class _LecturesVideoScreenState extends State<LecturesVideoScreen> {
 
   @override
   void dispose() {
-    // lecturesVideosViewModel.videoControllers.clear();
     lecturesVideosViewModel.chewieControllers.clear();
     lecturesVideosViewModel.videoPlayerController.pause();
     super.dispose();
@@ -103,16 +101,14 @@ class _LecturesVideoScreenState extends State<LecturesVideoScreen> {
                                                       onTap: () {
                                                         if (controller.value.isPlaying) {
                                                           lecturesVideosViewModel.pauseVideo(
-                                                            lecturesVideosViewModel
-                                                                .chewieControllers[index],
+                                                            lecturesVideosViewModel.chewieControllers[index],
                                                             widget.courseId,
                                                             widget.contentId,
                                                             index,
                                                           );
                                                         } else {
                                                           lecturesVideosViewModel.playVideo(
-                                                            lecturesVideosViewModel
-                                                                .chewieControllers[index],
+                                                            lecturesVideosViewModel.chewieControllers[index],
                                                           );
                                                         }
                                                       },

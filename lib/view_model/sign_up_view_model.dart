@@ -51,35 +51,9 @@ class SignUpViewModel extends GetxController {
         deviceToken = token!;
       });
       print('token is $deviceToken');
-      /* FirebaseMessaging.instance.onTokenRefresh
-          .listen((fcmToken) {
-            print('fcmToken  is $fcmToken');
-      })
-          .onError((err) {});*/
-    } else {
-      print('User declined or has not accepted permission');
     }
   }
 
-  /// GET DEVICE INFORMATION
-  Future<void> getDeviceInfo() async {
-    if (Platform.isAndroid) {
-      var androidInfo = await DeviceInfoPlugin().androidInfo;
-      var release = androidInfo.version.release;
-      var sdkInt = androidInfo.version.sdkInt;
-      var manufacturer = androidInfo.manufacturer;
-      var model = androidInfo.model;
-      print('Android $release (SDK $sdkInt), $manufacturer $model');
-    }
-    if (Platform.isIOS) {
-      var iosInfo = await DeviceInfoPlugin().iosInfo;
-      var systemName = iosInfo.systemName;
-      var version = iosInfo.systemVersion;
-      var name = iosInfo.name;
-      var model = iosInfo.model;
-      print('$systemName $version, $name $model');
-    }
-  }
 
   /// DATE PICKER
   Future<void> selectDate(BuildContext context) async {
@@ -101,8 +75,6 @@ class SignUpViewModel extends GetxController {
     if (picked != null && picked != signUpSelectedDate.value) {
       String formattedDate = DateFormat('MM/dd/yyyy').format(picked);
       signUpDateController.value.text = formattedDate;
-      /* String date = "${picked.month}/${picked.day}/${picked.year}";
-      signUpDateController.value.text = date;*/
     }
   }
 
@@ -115,7 +87,7 @@ class SignUpViewModel extends GetxController {
     return '$year-${month.toString().padLeft(2, '0')}-${day.toString().padLeft(2, '0')}';
   }
 
-  Future<void> verifyOtp(BuildContext context, String verificationIDFinal) async {
+ /* Future<void> verifyOtp(BuildContext context, String verificationIDFinal) async {
     try {
       showLoadingDialog(context: context);
       final FirebaseAuth auth = FirebaseAuth.instance;
@@ -132,7 +104,7 @@ class SignUpViewModel extends GetxController {
         showErrorSnackBar('', e.toString());
       }
     }
-  }
+  }*/
 
   ///Register API CALLING AND VALIDATION....
   Future<void> registerViewModel(
@@ -175,7 +147,7 @@ class SignUpViewModel extends GetxController {
                     PhoneAuthProvider.credential(verificationId: verificationIDFinal, smsCode: code.value);
                 await auth.signInWithCredential(credential);
                 hideLoadingDialog(context: context);
-                showSussesSnackBar('', 'Registration Successfully');
+                showSussesSnackBar('', registerResModel.message.toString());
                 await SharedPreferenceUtils.setToken(registerResModel.data!.token ?? '');
                 Get.offAll(const BottomBar());
               } on FirebaseAuthException catch (e) {
@@ -185,8 +157,6 @@ class SignUpViewModel extends GetxController {
                   showErrorSnackBar('', e.toString());
                 }
               }
-
-              // Get.offAll(() => const BottomBar());
             }
           }
         }

@@ -7,9 +7,7 @@ import 'package:sanademy/commonWidget/common_appbar.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/commonWidget/network_assets.dart';
 import 'package:sanademy/utils/app_colors.dart';
-import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
-import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
 import 'package:sanademy/view_model/bottom_bar_view_model.dart';
@@ -24,13 +22,11 @@ class NotificationScreen extends StatefulWidget {
 
 class _NotificationScreenState extends State<NotificationScreen> {
   BottomBarViewModel bottomBarViewModel = Get.find();
-  NotificationViewModel notificationViewModel =
-      Get.put(NotificationViewModel());
+  NotificationViewModel notificationViewModel = Get.put(NotificationViewModel());
 
   @override
   void initState() {
     getNotificationApiCall();
-    // TODO: implement initState
     super.initState();
   }
 
@@ -69,11 +65,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         return Column(
                           children: [
                             Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20.w, vertical: 22.w),
-                              color: index.isOdd
-                                  ? AppColors.white
-                                  : AppColors.color8B.withOpacity(0.3),
+                              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 22.w),
+                              color: index.isOdd ? AppColors.white : AppColors.color8B.withOpacity(0.3),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -81,8 +74,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                     children: [
                                       NetWorkOcToAssets(
                                           scale: 4.w,
-                                          imgUrl: notificationViewModel
-                                              .getNotifications[index].image)
+                                          imgUrl: notificationViewModel.getNotifications[index].image)
                                       // CircleAvatar(
                                       //     radius: 20.w,
                                       //     backgroundColor:
@@ -99,60 +91,33 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   SizeConfig.sW10,
                                   Expanded(
                                     child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Padding(
                                           padding: EdgeInsets.only(left: 10.w),
                                           child: CustomText(
-                                            notificationViewModel
-                                                    .getNotifications[index]
-                                                    .title ??
-                                                '',
+                                            notificationViewModel.getNotifications[index].title ?? '',
                                             color: AppColors.black13,
                                             fontWeight: FontWeight.w700,
                                             fontSize: 20.sp,
                                           ),
                                         ),
                                         // SizeConfig.sH6,
-                                        notificationViewModel
-                                                    .getNotifications[index]
-                                                    .description ==
-                                                ''
+                                        notificationViewModel.getNotifications[index].description == ''
                                             ? const SizedBox()
                                             : Html(
                                                 shrinkWrap: true,
                                                 data: notificationViewModel
-                                                    .getNotifications[index]
-                                                    .description),
-                                        // CustomText(
-                                        //   notificationViewModel
-                                        //           .getNotifications[index]
-                                        //           .description ??
-                                        //       '',
-                                        //   fontWeight: FontWeight.w500,
-                                        //   color: AppColors.black0E
-                                        //       .withOpacity(0.80),
-                                        // ),
-                                        // SizeConfig.sH6,
-                                        notificationViewModel
-                                                    .getNotifications[index]
-                                                    .createdAt ==
-                                                ''
+                                                    .getNotifications[index].description),
+                                        notificationViewModel.getNotifications[index].createdAt == ''
                                             ? const SizedBox()
                                             : Padding(
-                                                padding:
-                                                    EdgeInsets.only(left: 10.w),
+                                                padding: EdgeInsets.only(left: 10.w),
                                                 child: CustomText(
-                                                  DateFormat(
-                                                          'd MMM, yyyy - h:mm a')
-                                                      .format(DateTime.parse(
-                                                          notificationViewModel
-                                                              .getNotifications[
-                                                                  index]
-                                                              .createdAt!)),
+                                                  DateFormat('d MMM, yyyy - h:mm a').format(DateTime.parse(
+                                                      notificationViewModel
+                                                          .getNotifications[index].createdAt!)),
                                                   fontSize: 12.sp,
                                                   color: AppColors.black0E,
                                                 ),

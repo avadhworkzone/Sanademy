@@ -68,8 +68,6 @@ class SignInViewModel extends GetxController {
               } on FirebaseAuthException catch (e) {
                 hideLoadingDialog(context: context);
               }
-
-              // Get.offAll(() => const BottomBar());
             }
 
           }

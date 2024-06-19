@@ -128,7 +128,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           ),
                           errorText: (signInViewModel.signInIsValidate.value == true &&
                                   signInViewModel.signInPhoneController.value.text.isEmpty)
-                              ? '* Required'.tr
+                              ? AppStrings.isRequired.tr
                               : null,
                           errorBorder: (signInViewModel.signInIsValidate.value == true &&
                                   signInViewModel.signInPhoneController.value.text.isEmpty)
@@ -189,16 +189,6 @@ class _LogInScreenState extends State<LogInScreen> {
                               fontWeight: FontWeight.w400,
                             ),
                             SizeConfig.sH15,
-                            /*  signInViewModel.userLoginOtp.value != 0
-                                ? CustomText(
-                                    "Your Otp is: ${signInViewModel.userLoginOtp.value.toString()}",
-                                    fontSize: 14.sp,
-                                    color: AppColors.black12,
-                                    fontWeight: FontWeight.w700,
-                                  )
-                                : SizeConfig.sH2,
-                            SizeConfig.sH15,*/
-
                             /// otp field
                             Pinput(
                               validator: (val) => ValidationMethod.validateOtp(val),
@@ -300,7 +290,7 @@ class _LogInScreenState extends State<LogInScreen> {
                             FocusScope.of(context).requestFocus(FocusNode());
                             await signInViewModel.loginViewModel(step: 1, context: context);
                           }else{
-                            showErrorSnackBar('', 'Please Enter Mobile Number ');
+                            showErrorSnackBar('', AppStrings.pleaseEnterMobileNumber);
                           }
                         },
                         fontSize: 14.sp,

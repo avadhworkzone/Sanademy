@@ -29,7 +29,7 @@ class QuestionsScreen extends StatefulWidget {
 class _QuestionsScreenState extends State<QuestionsScreen> {
   QuestionsAnswerViewModel questionsAnswerViewModel = Get.find();
   bool isAnswer = false;
-  bool isSelected = false;
+  bool isSelectedOption = false;
 
   @override
   void initState() {
@@ -56,44 +56,10 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
   Future<bool> _onWillPop() async {
     questionsAnswerViewModel.duration.value = const Duration(seconds: 0);
-    questionsAnswerViewModel.timer1?.value.cancel();
+    questionsAnswerViewModel.selectedAnswerList.clear();
     questionsAnswerViewModel.stopTimer();
     return true;
   }
-/*
-  void onOptionSelected() {
-    setState(() {
-      isOptionSelected = true;
-    });
-  }*/
-
-/*
-  void onSkip() {
-    setState(() {
-      isOptionSelected = false;
-    });
-    questionsAnswerViewModel.pageController.value.nextPage(
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.ease,
-    );
-  }
-
-  void onNext() {
-    if (!isOptionSelected) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please select an option before proceeding.')),
-      );
-    } else {
-      questionsAnswerViewModel.pageController.value.nextPage(
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.ease,
-      );
-      setState(() {
-        isOptionSelected = false;
-      });
-    }
-  }
-*/
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +68,6 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
         child: Obx(() {
           if (questionsAnswerViewModel.responseStatus.value == ResponseStatus.Loading ||
               questionsAnswerViewModel.responseStatus.value == ResponseStatus.INITIAL) {
-            // return CircularProgressIndicator();
           }
           if (questionsAnswerViewModel.responseStatus.value == ResponseStatus.Error) {
             return const Center(child: CustomText("Something went wrong"));
@@ -177,7 +142,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                           duration: const Duration(milliseconds: 500),
                                           curve: Curves.ease,
                                         );
-                                        isSelected = false;
+                                        isSelectedOption = false;
                                       }
                                     },
                                     child: Container(
@@ -207,7 +172,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                   InkWell(
                                     borderRadius: BorderRadius.circular(18.r),
                                     onTap: () async {
-                                      if (isSelected != true) {
+                                      if (isSelectedOption != true) {
                                         (question.type == 'Audio')
                                             ? showErrorSnackBar('', 'Please Enter Answer')
                                             : showErrorSnackBar('', 'Please Select Any Option');
@@ -216,7 +181,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                           questionsAnswerViewModel.pageController.value.nextPage(
                                               duration: const Duration(milliseconds: 500),
                                               curve: Curves.ease);
-                                          isSelected = false;
+                                          isSelectedOption = false;
                                         }
                                         else if (index == questionsDetail.length - 1) {
                                           /// CALL SAVE QUESTIONS API
@@ -280,6 +245,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                             shrinkWrap: true,
                                             itemCount: 4,
                                             itemBuilder: (context, optionIndex) {
+                                             bool isSelected = false;
                                               final option = question.toJson()['option_${optionIndex + 1}'];
                                               final containIndex = questionsAnswerViewModel.selectedAnswerList
                                                   .indexWhere(
@@ -300,10 +266,6 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                                       "option": option,
                                                       "answerId": optionIndex + 1,
                                                     });
-                                                    if (kDebugMode) {
-                                                      print(
-                                                          'questionsAnswerViewModel.selectedAnswerList<<<${questionsAnswerViewModel.selectedAnswerList}>>>>');
-                                                    }
                                                   } else {
                                                     questionsAnswerViewModel.selectedAnswerList[containIndex]
                                                         ['option'] = option;
@@ -401,22 +363,24 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                   Expanded(
                                     child: CustomBtn(
                                       onTap: () async {
-                                        if (isSelected != true) {
-                                          (question.type == 'Audio')
-                                              ? showErrorSnackBar('', 'Please Enter Answer')
-                                              : showErrorSnackBar('', 'Please Select Any Option');
-                                        } else {
+                                        // final currentIndex = questionsAnswerViewModel.controllers[index];
+                                        // final question = questionsDetail[currentIndex];
+                                        if (question.type == 'Audio') {
+                                          questionsAnswerViewModel.selectedAnswerList.add({
+                                            "questionId": question.id,
+                                            "answerId": questionsAnswerViewModel.controllers[index].text
+                                          });
+                                        }
+                                       final indexIs = questionsAnswerViewModel.selectedAnswerList.indexWhere((element) => element['questionId'] == question.id);
+                                        if (question.type == 'Option' && indexIs == -1 ){
+                                          showErrorSnackBar('', 'Please Select Any Option');
+                                        }else if(question.type == 'Audio' && questionsAnswerViewModel.controllers[index].text.isEmpty){
+                                          showErrorSnackBar('', 'Please Enter Answer');
+                                        }else{
                                           if (questionsDetail.length - 1 > index) {
                                             questionsAnswerViewModel.pageController.value.nextPage(
                                                 duration: const Duration(milliseconds: 500),
                                                 curve: Curves.ease);
-                                            if (question.type == 'Audio') {
-                                              questionsAnswerViewModel.selectedAnswerList.add({
-                                                "questionId": question.id,
-                                                "answerId": questionsAnswerViewModel.controllers[index].text
-                                              });
-                                            }
-                                            isSelected = false;
                                           }
                                           else if (index == questionsDetail.length - 1) {
                                             questionsAnswerViewModel.stopTimer();
@@ -430,7 +394,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                               saveQuestionsIdList.add(item['questionId'].toString());
                                               saveAnswerIdList.add(item['answerId'].toString());
                                             }
-
+                                            isSelectedOption = false;
                                             await questionsAnswerViewModel.saveQuestionsViewModel(
                                                 widget.examTitle,
                                                 examId: widget.examId,
@@ -439,7 +403,6 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                                 time: formattedTime);
                                           }
                                         }
-
                                       },
                                       title: AppStrings.next,
                                       bgColor: AppColors.primaryColor,

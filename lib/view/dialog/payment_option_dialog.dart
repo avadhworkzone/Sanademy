@@ -112,7 +112,7 @@ void paymentOptionDialog({
                 onTap: () {
                   SharedPreferenceUtils.getIsLogin() == true ?
                   launchWhatsApp(
-                    'Please Contact Us :\n+964 7509790444\n+964 7709790444\nMy user id for Sana Academy is: $userId',
+                    '${AppStrings.reDirectOnWhatsAppMessage} $userId',
                     '$userMobileNumber',
                   ) : Get.to(const SignUpScreen());
                 },
@@ -182,7 +182,7 @@ void paymentOptionDialog({
                 onTap: () {
                   SharedPreferenceUtils.getIsLogin() == true ?
                   launchWhatsApp(
-                    'Please Contact Us :\n+964 7509790444\n+964 7709790444\nMy user id for Sana Academy is: $userId',
+                    '${AppStrings.reDirectOnWhatsAppMessage} $userId',
                     '$userMobileNumber',
                   ) : Get.to(const SignUpScreen());
                   /* Get.find<DescriptionViewModel>().isPaySuccessfully.value =

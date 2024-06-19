@@ -88,6 +88,7 @@ class AppStrings {
   static String logOutTxt = "Are you sure you want to logout?";
   static String yes = "Yes";
   static String no = "No";
+  static String reDirectOnWhatsAppMessage = 'Please Contact Us :\n+964 7509790444\n+964 7709790444\nMy user id for Sana Academy is:';
 
   /// Contact Us Screen
   static String getInTouch = 'Get In Touch';
@@ -119,6 +120,7 @@ class AppStrings {
   static String certificate = 'My Certificates';
   static String certificateScreenTxt =
       'In this page, you can see all your certificates for completing each course, or passing the test in that field.';
+  static String pdfSuccessfullyDownload = 'Pdf Download Successfully';
 
   /// notification screen
   static String notifications = 'Notifications';
@@ -167,6 +169,8 @@ class AppStrings {
   static String pleaseEnterOtp = "Please Enter Otp";
   static String pleaseEnterValidOtp = "Please Enter Valid OTP";
   static String pleaseEnterSomeText = "Please Enter Some Text";
+  static String pleaseEnterMobileNumber = "Please Enter Mobile Number";
+  static String somethingWantWrong = "Something went wrong";
 
   ///Registration
   static String name = 'Name';
