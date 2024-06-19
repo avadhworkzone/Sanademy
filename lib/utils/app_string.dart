@@ -139,6 +139,8 @@ class AppStrings {
   static String skip = 'Skip';
   static String next = 'Next';
   static String writeHere = 'Write here....';
+  static String pleaseEnterAnswer = 'Please Enter Answer';
+  static String pleaseSelectAnyOption = 'Please Select Any Option';
 
   /// congratulation screen
   static String congratulations = "Congratulations!";

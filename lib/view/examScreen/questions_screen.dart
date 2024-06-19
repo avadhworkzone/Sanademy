@@ -70,7 +70,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               questionsAnswerViewModel.responseStatus.value == ResponseStatus.INITIAL) {
           }
           if (questionsAnswerViewModel.responseStatus.value == ResponseStatus.Error) {
-            return const Center(child: CustomText("Something went wrong"));
+            return  Center(child: CustomText(AppStrings.somethingWantWrong));
           }
           final questionsDetail = questionsAnswerViewModel.questionsDetail;
           return SafeArea(
@@ -174,8 +174,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                     onTap: () async {
                                       if (isSelectedOption != true) {
                                         (question.type == 'Audio')
-                                            ? showErrorSnackBar('', 'Please Enter Answer')
-                                            : showErrorSnackBar('', 'Please Select Any Option');
+                                            ? showErrorSnackBar('', AppStrings.pleaseEnterAnswer)
+                                            : showErrorSnackBar('', AppStrings.pleaseSelectAnyOption);
                                       } else {
                                         if (questionsDetail.length - 1 > index) {
                                           questionsAnswerViewModel.pageController.value.nextPage(
@@ -363,8 +363,6 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                   Expanded(
                                     child: CustomBtn(
                                       onTap: () async {
-                                        // final currentIndex = questionsAnswerViewModel.controllers[index];
-                                        // final question = questionsDetail[currentIndex];
                                         if (question.type == 'Audio') {
                                           questionsAnswerViewModel.selectedAnswerList.add({
                                             "questionId": question.id,
@@ -373,9 +371,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                         }
                                        final indexIs = questionsAnswerViewModel.selectedAnswerList.indexWhere((element) => element['questionId'] == question.id);
                                         if (question.type == 'Option' && indexIs == -1 ){
-                                          showErrorSnackBar('', 'Please Select Any Option');
+                                         showErrorSnackBar('', AppStrings.pleaseSelectAnyOption);
                                         }else if(question.type == 'Audio' && questionsAnswerViewModel.controllers[index].text.isEmpty){
-                                          showErrorSnackBar('', 'Please Enter Answer');
+                                          showErrorSnackBar('', AppStrings.pleaseEnterAnswer);
                                         }else{
                                           if (questionsDetail.length - 1 > index) {
                                             questionsAnswerViewModel.pageController.value.nextPage(

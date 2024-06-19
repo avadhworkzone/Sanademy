@@ -245,7 +245,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
                       padding: EdgeInsets.symmetric(horizontal: 20.w),
                       child: CustomBtn(
                         onTap: () {
-                          Get.offAll(() =>  ExamScreen());
+                          Get.offAll(() =>  const ExamScreen());
                         },
                         height: 55.h,
                         title: AppStrings.continues,

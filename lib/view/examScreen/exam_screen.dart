@@ -8,7 +8,6 @@ import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
 import 'package:sanademy/view/examScreen/questions_screen.dart';
-import 'package:sanademy/view/my_certificate_screen/my_certificate_screen.dart';
 import 'package:sanademy/view_model/bottom_bar_view_model.dart';
 import 'package:sanademy/view_model/exam_view_model.dart';
 import 'package:sanademy/view_model/question_answer_view_model.dart';

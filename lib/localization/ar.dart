@@ -138,6 +138,8 @@ Map<String, String> ar = {
   AppStrings.skip: "يتخطى",
   AppStrings.next: "التالي",
   AppStrings.writeHere: "اكتب هنا....",
+  AppStrings.pleaseEnterAnswer: "الرجاء إدخال الإجابة",
+  AppStrings.pleaseSelectAnyOption: "الرجاء تحديد أي خيار",
 
   /// congratulations screen
   AppStrings.congratulations: "تهانينا!",

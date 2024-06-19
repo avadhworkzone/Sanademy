@@ -138,6 +138,8 @@ Map<String, String> en = {
   AppStrings.skip: "Skip",
   AppStrings.next: "Next",
   AppStrings.writeHere: "Write here....",
+  AppStrings.pleaseEnterAnswer: "Please Enter Answer",
+  AppStrings.pleaseSelectAnyOption: "Please Select Any Option",
 
   /// congratulation screen
   AppStrings.congratulations: "Congratulations!",
