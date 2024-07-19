@@ -86,6 +86,7 @@ class AppStrings {
   static String logOut = 'Logout';
   static String deleteAccount = 'Delete Account';
   static String logOutTxt = "Are you sure you want to logout?";
+  static String deleteAccountTxt = "Are you sure you want to delete account?";
   static String yes = "Yes";
   static String no = "No";
   static String reDirectOnWhatsAppMessage = 'Please Contact Us :\n+964 7509790444\n+964 7709790444\nMy user id for Sana Academy is:';
@@ -114,7 +115,7 @@ class AppStrings {
       'In this page, you can see all your enrolled courses and the progress that you made in each one of them.';
   static String  complete = ' complete';
   static String  remaining = ' remaining';
-  static String  noProgressAvailable = '"No Progress Available"';
+  static String  noProgressAvailable = 'No Progress Available';
 
   /// my certificate screen
   static String certificate = 'My Certificates';
@@ -130,6 +131,8 @@ class AppStrings {
   static String exams = 'Exams';
   static String examsScreenTxt =
       'In this page, you can test your knowledge in each field, and possibly receive the certificate.';
+  static String noExamAvailable = 'No Exams Available';
+  static String pleaseCompleteYourExamTxt = 'Please complete your progress after you can give the exams';
 
   /// questions screen
   static String finishExam = 'Finish Exam';
@@ -182,6 +185,4 @@ class AppStrings {
   static String otpMismatch = 'Please enter valid Otp';
   static String android = 'Android';
   static String iPhone = 'iPhone';
-
-
 }

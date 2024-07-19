@@ -144,7 +144,8 @@ class SignUpViewModel extends GetxController {
                 showLoadingDialog(context: context);
                 final FirebaseAuth auth = FirebaseAuth.instance;
                 PhoneAuthCredential credential =
-                    PhoneAuthProvider.credential(verificationId: verificationIDFinal, smsCode: code.value);
+                    PhoneAuthProvider.credential(verificationId: verificationIDFinal,
+                        smsCode: code.value);
                 await auth.signInWithCredential(credential);
                 hideLoadingDialog(context: context);
                 showSussesSnackBar('', registerResModel.message.toString());

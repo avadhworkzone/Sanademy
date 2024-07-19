@@ -86,6 +86,7 @@ Map<String, String> ar = {
   AppStrings.logOut: 'تسجيل خروج',
   AppStrings.deleteAccount: 'حذف الحساب',
   AppStrings.logOutTxt: 'هل أنت متأكد أنك تريد تسجيل الخروج؟"',
+  AppStrings.deleteAccountTxt: 'هل أنت متأكد أنك تريد حذف الحساب؟',
   AppStrings.yes: 'نعم',
   AppStrings.no: 'لا',
   AppStrings.reDirectOnWhatsAppMessage: 'من فضلك اتصل بنا :\n+964 7509790444\n+964 7709790444\nمعرف المستخدم الخاص بي لأكاديمية سناء هو:',
@@ -114,6 +115,7 @@ Map<String, String> ar = {
       "في هذه الصفحة، يمكنك رؤية جميع الدورات التي قمت بالتسجيل فيها والتقدم الذي أحرزته في كل منها.",
   AppStrings.complete: ' مكتمل',
   AppStrings.remaining: ' متبقي',
+  AppStrings.noProgressAvailable: 'لا يوجد تقدم متاح',
 
   /// my certificate screen
   AppStrings.certificate: 'شهاداتي',
@@ -129,6 +131,8 @@ Map<String, String> ar = {
   AppStrings.exams: "الامتحانات",
   AppStrings.examsScreenTxt:
       "في هذه الصفحة، يمكنك اختبار معرفتك في كل مجال، وربما الحصول على الشهادة.",
+  AppStrings.noExamAvailable : "لا توجد امتحانات متاحة",
+  AppStrings.pleaseCompleteYourExamTxt : "يرجى إكمال تقدمك بعد أن تتمكن من إجراء الاختبارات",
 
   /// questions screen
   AppStrings.finishExam: "إنهاء الامتحان",

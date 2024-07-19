@@ -21,4 +21,6 @@ class ApiKeys {
   static const lectureId = 'lecture_id';
   static const completedMinute = 'completed_minute';
   static const remainingMinute = 'remaining_minute';
+  static const paymentId = 'payment_id';
+  static const paymentStatus = 'payment_status';
 }

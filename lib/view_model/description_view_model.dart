@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:sanademy/networks/api_base_helper.dart';
 import 'package:sanademy/networks/api_keys.dart';
 import 'package:sanademy/networks/model/course_detail_res_model.dart';
-import 'package:sanademy/networks/model/save_course_progress_response_model.dart';
+import 'package:sanademy/networks/model/course_enroll_res_model.dart';
 import 'package:sanademy/networks/services/apiService/course_detail_api_service.dart';
-import 'package:sanademy/networks/services/apiService/save_course_progress_api_service.dart';
+import 'package:sanademy/networks/services/apiService/course_enroll_api_service.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/enum_utils.dart';
 import 'package:video_player/video_player.dart';
@@ -43,9 +43,7 @@ class DescriptionViewModel extends GetxController {
     });
   }
 
-
-
-  /// Course Detail Api Calling Function
+  /// COURSE DETAIL API CALLING
   CourseDetailResModel courseDetailResModel = CourseDetailResModel();
   Rx<ResponseStatus> courseDetailResponseStatus = ResponseStatus.INITIAL.obs;
 
@@ -64,10 +62,40 @@ class DescriptionViewModel extends GetxController {
           courseDetailResponseStatus.value = ResponseStatus.Completed;
         } else {
           showErrorSnackBar('', courseDetailResModel.message ?? 'Error');
+          }
+      }  else {
+         showErrorSnackBar('', courseDetailResModel.message ?? 'Error');
+         courseDetailResponseStatus.value = ResponseStatus.Error;
+         }
+    }
+  }
+
+  /// COURSE ENROLL API CALLING
+  Rx<ResponseStatus> courseEnrollResponseStatus = ResponseStatus.INITIAL.obs;
+
+  Future<void> courseEnrollViewModel({
+    required String courseId,
+    required String paymentId,
+    required String paymentStatus,
+  }) async {
+    unFocus();
+    Map<String, String> queryParams = {
+      ApiKeys.courseId: courseId.toString(),
+      ApiKeys.paymentId: paymentId.toString(),
+      ApiKeys.paymentStatus: paymentStatus.toString(),
+    };
+    final response = await CourseEnrollApiService().courseEnrollRepo(mapData: queryParams);
+    if (checkStatusCode(response!.statusCode ?? 0)) {
+      CourseEnrollResModel courseEnrollResModel = courseEnrollResModelFromJson(response.response.toString());
+      if (courseEnrollResModel.success!) {
+        if (courseEnrollResModel.data != null) {
+          courseEnrollResponseStatus.value = ResponseStatus.Completed;
+        } else {
+          showErrorSnackBar('', courseEnrollResModel.message ?? 'Error');
         }
-      } else {
-        showErrorSnackBar('', courseDetailResModel.message ?? 'Error');
-        courseDetailResponseStatus.value = ResponseStatus.Error;
+      }else {
+        showErrorSnackBar('', courseEnrollResModel.message ?? 'Error');
+        courseEnrollResponseStatus.value = ResponseStatus.Error;
       }
     }
   }

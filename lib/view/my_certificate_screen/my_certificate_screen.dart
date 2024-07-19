@@ -44,7 +44,6 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        bottomBarViewModel.selectedBottomIndex.value = 2;
         Get.offAll(() => const BottomBar());
         return Future.value(true);
       },

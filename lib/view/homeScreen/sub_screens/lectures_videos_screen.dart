@@ -95,7 +95,6 @@ class _LecturesVideoScreenState extends State<LecturesVideoScreen> {
                                                       controller:
                                                           lecturesVideosViewModel.chewieControllers[index],
                                                     ),
-
                                                     /// FOR SET ONLY ONE VIDEO PLAY AT A TIME
                                                     GestureDetector(
                                                       onTap: () {

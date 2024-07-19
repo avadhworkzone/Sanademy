@@ -24,7 +24,6 @@ class MenuScreen extends StatefulWidget {
     super.key,
   });
 
-
   @override
   State<MenuScreen> createState() => _MenuScreenState();
 }
@@ -48,7 +47,10 @@ class _MenuScreenState extends State<MenuScreen> {
       storeID: "1234",
       storePassword: "123456",
       amount: "450",
-      orderID: DateTime.now().microsecondsSinceEpoch.toString(),
+      orderID: DateTime
+          .now()
+          .microsecondsSinceEpoch
+          .toString(),
       isProduction: false,
       callback: (status, message) {
         debugPrint("CALLBACK...................$message");
@@ -70,8 +72,8 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      return  homeScreenViewModel.responseStatus.value == ResponseStatus.Completed
-      ?Column(
+      return homeScreenViewModel.responseStatus.value == ResponseStatus.Completed
+          ? Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
@@ -120,8 +122,9 @@ class _MenuScreenState extends State<MenuScreen> {
                           bgColor: AppColors.pinkEE,
                           widget: InkWell(
                             onTap: () async {
-                              SharedPreferenceUtils.getIsLogin() == true ?
-                              fastPlay():Get.to(const SignUpScreen());
+                              SharedPreferenceUtils.getIsLogin() == true
+                                  ? fastPlay()
+                                  : Get.to(const SignUpScreen());
                               setState(() {});
                             },
                             child: Padding(
@@ -185,9 +188,12 @@ class _MenuScreenState extends State<MenuScreen> {
                             onTap: () {
                               SharedPreferenceUtils.getIsLogin() == true
                                   ? menuScreenViewModel.launchWhatsApp(
-                                      '${AppStrings.reDirectOnWhatsAppMessage} ${homeScreenViewModel.homeResModel.data!.user!.id.toString()}.',
-                                      homeScreenViewModel.homeResModel.data!.user!.phoneNumber.toString(),
-                                    ):Get.to(const SignUpScreen());
+                                '${AppStrings.reDirectOnWhatsAppMessage} ${homeScreenViewModel.homeResModel
+                                    .data!.user!.id.toString()}.',
+                                homeScreenViewModel.homeResModel.data!.user!.phoneNumber
+                                    .toString(),
+                              )
+                                  : Get.to(const SignUpScreen());
                             },
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -259,50 +265,68 @@ class _MenuScreenState extends State<MenuScreen> {
                           } else if (index == 1) {
                             Get.to(const AboutUsScreen());
                           } else if (index == 2) {
-                            logoutDialog(context);
-                          } else {}
+                            logoutAndDeleteDialog(
+                                context: context,
+                                messageTxt: AppStrings.logOutTxt,
+                                onTap: () async {
+                                  await logout();
+                                });
+                          } else {
+                            logoutAndDeleteDialog(
+                                context: context,
+                                messageTxt: AppStrings.deleteAccountTxt,
+                                onTap: () async {
+                                  await menuScreenViewModel.deleteUserAccountViewModel();
+                                });
+                          }
                         },
                         title:
 
-                            /// FOR SHOW LOGOUT AND DELETE BUTTON
-                            index == 2 || index == 3
-                                ? CustomText(
-                                    SharedPreferenceUtils.getIsLogin() == true
-                                        ? menuScreenViewModel.drawerData[index]
-                                        : '',
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: AppColors.red90,
-                                  )
-                                : CustomText(
-                                    menuScreenViewModel.drawerData[index],
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 15.sp,
-                                    color: AppColors.black13,
-                                  ),
+                        /// FOR SHOW LOGOUT AND DELETE BUTTON
+                        index == 2 || index == 3
+                            ? CustomText(
+                          SharedPreferenceUtils.getIsLogin() == true
+                              ? menuScreenViewModel.drawerData[index]
+                              : '',
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.red90,
+                        )
+                            : CustomText(
+                          menuScreenViewModel.drawerData[index],
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15.sp,
+                          color: AppColors.black13,
+                        ),
                         trailing: index == 2 || index == 3
                             ? const SizedBox()
                             : const Icon(
-                                Icons.arrow_forward_ios,
-                                size: 15,
-                              ),
+                          Icons.arrow_forward_ios,
+                          size: 15,
+                        ),
                       ),
 
                       ///IF USER LOG IN THAN SHOW EXTRA DIVIDER FOR LOGIN AND DELETE OPTION
                       index == 3
                           ? const SizedBox()
                           : index == 2 && SharedPreferenceUtils.getIsLogin() == false
-                              ? const SizedBox()
-                              : Divider(
-                                  color: AppColors.black.withOpacity(0.2),
-                                  height: 0.1,
-                                ),
+                          ? const SizedBox()
+                          : Divider(
+                        color: AppColors.black.withOpacity(0.2),
+                        height: 0.1,
+                      ),
                     ],
                   );
                 }),
           ),
         ],
-      ) : Material();
+      )
+          : Material();
     });
+  }
+
+  Future<void> logout() async {
+    await SharedPreferenceUtils.clearPreference();
+    Get.offAll(() => const SignUpScreen());
   }
 }

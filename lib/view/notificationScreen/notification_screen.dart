@@ -38,7 +38,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        bottomBarViewModel.selectedBottomIndex.value = 0;
         Get.offAll(() => const BottomBar());
         return Future.value(true);
       },

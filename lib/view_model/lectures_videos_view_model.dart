@@ -28,12 +28,13 @@ class LecturesVideosViewModel extends GetxController {
       ));
       await videoPlayerController.initialize();
       videoDurations
-          .add({'videoTotalTime': videoPlayerController.value.duration, 'videoWatchedTime': Duration.zero});
+          .add({'videoTotalTime': videoPlayerController.value.duration,
+        'videoWatchedTime': Duration.zero});
       // videoDurations.add(videoPlayerController.value.duration);
       // videoWatchedTimes.add(videoPlayerController.value.position);
       var chewieController = ChewieController(
           videoPlayerController: videoPlayerController,
-          aspectRatio: 16 / 9,
+          // aspectRatio: 16 / 9,
           autoInitialize: true,
           showOptions: false);
       chewieControllers.add(chewieController);

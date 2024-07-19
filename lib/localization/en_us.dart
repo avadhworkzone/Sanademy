@@ -84,6 +84,7 @@ Map<String, String> en = {
   AppStrings.logOut: 'Logout',
   AppStrings.deleteAccount: 'Delete Account',
   AppStrings.logOutTxt: 'Are you sure you want to logout?"',
+  AppStrings.deleteAccountTxt: 'Are you sure you want to delete account?',
   AppStrings.yes: 'Yes',
   AppStrings.no: 'No',
   AppStrings.reDirectOnWhatsAppMessage: 'Please Contact Us :\n+964 7509790444\n+964 7709790444\nMy user id for Sana Academy is:',
@@ -112,6 +113,7 @@ Map<String, String> en = {
       "In this page, you can see all your enrolled courses and the progress that you made in each one of them.",
   AppStrings.complete: ' complete',
   AppStrings.remaining: ' remaining',
+  AppStrings.noProgressAvailable: 'No Progress Available',
 
 
   /// my certificate screen
@@ -128,7 +130,8 @@ Map<String, String> en = {
   AppStrings.exams: "Exams",
   AppStrings.examsScreenTxt:
       'In this page, you can test your knowledge in each field, and possibly receive the certificate.',
-
+  AppStrings.noExamAvailable : "No Exams Available",
+  AppStrings.pleaseCompleteYourExamTxt : 'Please complete your progress after you can give the exams',
 
   /// questions screen
   AppStrings.finishExam: "Finish Exam",

@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sanademy/commonWidget/commom_textfield.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
-import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
-import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
-import 'package:sanademy/utils/regex.dart';
-import 'package:sanademy/view_model/home_screen_view_model.dart';
 
 AppBar commonAppBar(
     {String? titleTxt,
@@ -24,79 +19,73 @@ AppBar commonAppBar(
     Color? appBarBackgroundColor,
     PreferredSizeWidget? bottom}) {
   return AppBar(
-    backgroundColor: appBarBackgroundColor ?? AppColors.primaryColor,
-    automaticallyImplyLeading: false,
-    centerTitle: centerTitle ?? true,
-    elevation: 0.0,
-    // bottomOpacity: 0.0,
-    scrolledUnderElevation: 0,
-    leading: leadingWidget ?? const SizedBox(),
-    leadingWidth: leadingWidth ?? 0.w,
-    actions: [actionWidget ?? const SizedBox(), SizedBox(width: 8.w)],
-    title: titleWidget ??
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            sizedBox ??
-                LocalAssets(
-                  imagePath: AppImageAssets.sanademaylogo,
-                  width: 33.52.w,
-                  height: 27.2.h,
-                ),
-            SizedBox(
-              width: 10.w,
-            ),
-            CustomText(
-              titleTxt!.tr,
-              color: textColor ?? AppColors.white,
-              fontWeight: textFontWeight ?? FontWeight.w500,
-              fontSize: 20.sp,
-            ),
-          ],
-        ),
-    bottom: bottom /*?? PreferredSize(
+      backgroundColor: appBarBackgroundColor ?? AppColors.primaryColor,
+      automaticallyImplyLeading: false,
+      centerTitle: centerTitle ?? true,
+      elevation: 0.0,
+      // bottomOpacity: 0.0,
+      scrolledUnderElevation: 0,
+      leading: leadingWidget ?? const SizedBox(),
+      leadingWidth: leadingWidth ?? 0.w,
+      actions: [actionWidget ?? const SizedBox(), SizedBox(width: 8.w)],
+      title: titleWidget ??
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              sizedBox ??
+                  LocalAssets(
+                    imagePath: AppImageAssets.sanademaylogo,
+                    width: 33.52.w,
+                    height: 27.2.h,
+                  ),
+              SizedBox(
+                width: 10.w,
+              ),
+              CustomText(
+                titleTxt!.tr,
+                color: textColor ?? AppColors.white,
+                fontWeight: textFontWeight ?? FontWeight.w500,
+                fontSize: 20.sp,
+              ),
+            ],
+          ),
+      bottom:
+          bottom /*?? PreferredSize(
             preferredSize: Size(Get.width, 10.h), child: const SizedBox(), ),*/
-  );
+      );
 }
 
-commonBackArrowAppBar({
-  required String titleTxt,
-  String? actionTitle,
-  bool leadingWidget = true,
-  bool actionWidget = true,
-  Color? actionWidgetColor,
-  Color? titleWidgetColor,
-  double? horizontalPadding,
-  double? verticalPadding,
-  FontWeight? actionWidgetFontWeight,
-  double? actionFontSize,
-  void Function()? actionTextOnTap,
-  void Function()? backOnTap
-}) {
+commonBackArrowAppBar(
+    {required String titleTxt,
+    String? actionTitle,
+    bool leadingWidget = true,
+    bool actionWidget = true,
+    Color? actionWidgetColor,
+    Color? titleWidgetColor,
+    double? horizontalPadding,
+    double? verticalPadding,
+    FontWeight? actionWidgetFontWeight,
+    double? actionFontSize,
+    void Function()? actionTextOnTap,
+    void Function()? backOnTap}) {
   return Padding(
-    padding: EdgeInsets.symmetric(
-        horizontal: horizontalPadding ?? 20.w,
-        vertical: verticalPadding ?? 20.w),
+    padding: EdgeInsets.symmetric(horizontal: horizontalPadding ?? 20.w, vertical: verticalPadding ?? 20.w),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         leadingWidget == true
             ? InkWell(
-                onTap: backOnTap??() {
-                  FocusManager.instance.primaryFocus?.unfocus();
-                  Get.back();
-                },
+                onTap: backOnTap ??
+                    () {
+                      FocusManager.instance.primaryFocus?.unfocus();
+                      Get.back();
+                    },
                 borderRadius: BorderRadius.circular(17.r),
                 child: Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
+                  padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
                   decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            color: AppColors.black.withOpacity(0.10),
-                            blurRadius: 20)
-                      ],
+                      boxShadow: [BoxShadow(color: AppColors.black.withOpacity(0.10), blurRadius: 20)],
                       color: AppColors.white,
                       borderRadius: BorderRadius.circular(17)),
                   child: const Icon(
