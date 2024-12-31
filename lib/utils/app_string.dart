@@ -62,6 +62,10 @@ class AppStrings {
   static String noOfStudents = 'No. of students: ';
   static String noOfCourses = 'No. of courses: ';
   static String courseContent = 'Course Content';
+  static String courseContentLectures = 'Lectures';
+  static String mins = 'mins';
+  static String taskIncluded =  'Tasks Included';
+  static String certificates =  'Certificates';
 
   /// payment option dialog
   static String paymentOption = 'Payment Options';
@@ -82,8 +86,10 @@ class AppStrings {
   static String logOut = 'Logout';
   static String deleteAccount = 'Delete Account';
   static String logOutTxt = "Are you sure you want to logout?";
+  static String deleteAccountTxt = "Are you sure you want to delete account?";
   static String yes = "Yes";
   static String no = "No";
+  static String reDirectOnWhatsAppMessage = 'Please Contact Us :\n+964 7509790444\n+964 7709790444\nMy user id for Sana Academy is:';
 
   /// Contact Us Screen
   static String getInTouch = 'Get In Touch';
@@ -107,16 +113,15 @@ class AppStrings {
   /// my progress screen
   static String progressIntroductionTxt =
       'In this page, you can see all your enrolled courses and the progress that you made in each one of them.';
-  static String  minutesComplete = ' minutes complete';
-  static String  hoursComplete = ' hours complete';
-  static String  minutesRemaining = ' minutes remaining';
-  static String  hoursRemaining = ' hours remaining';
-  static String  noProgressAvailable = '"No Progress Available"';
+  static String  complete = ' complete';
+  static String  remaining = ' remaining';
+  static String  noProgressAvailable = 'No Progress Available';
 
   /// my certificate screen
   static String certificate = 'My Certificates';
   static String certificateScreenTxt =
       'In this page, you can see all your certificates for completing each course, or passing the test in that field.';
+  static String pdfSuccessfullyDownload = 'Pdf Download Successfully';
 
   /// notification screen
   static String notifications = 'Notifications';
@@ -126,6 +131,8 @@ class AppStrings {
   static String exams = 'Exams';
   static String examsScreenTxt =
       'In this page, you can test your knowledge in each field, and possibly receive the certificate.';
+  static String noExamAvailable = 'No Exams Available';
+  static String pleaseCompleteYourExamTxt = 'Please complete your progress after you can give the exams';
 
   /// questions screen
   static String finishExam = 'Finish Exam';
@@ -135,6 +142,8 @@ class AppStrings {
   static String skip = 'Skip';
   static String next = 'Next';
   static String writeHere = 'Write here....';
+  static String pleaseEnterAnswer = 'Please Enter Answer';
+  static String pleaseSelectAnyOption = 'Please Select Any Option';
 
   /// congratulation screen
   static String congratulations = "Congratulations!";
@@ -165,6 +174,8 @@ class AppStrings {
   static String pleaseEnterOtp = "Please Enter Otp";
   static String pleaseEnterValidOtp = "Please Enter Valid OTP";
   static String pleaseEnterSomeText = "Please Enter Some Text";
+  static String pleaseEnterMobileNumber = "Please Enter Mobile Number";
+  static String somethingWantWrong = "Something went wrong";
 
   ///Registration
   static String name = 'Name';
@@ -172,4 +183,6 @@ class AppStrings {
   static String error = 'Error';
   static String userCreatedSuccessfully = 'User Created Successfully';
   static String otpMismatch = 'Please enter valid Otp';
+  static String android = 'Android';
+  static String iPhone = 'iPhone';
 }

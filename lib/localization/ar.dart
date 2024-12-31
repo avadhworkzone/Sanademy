@@ -64,6 +64,8 @@ Map<String, String> ar = {
   AppStrings.noOfStudents: 'خبير في:',
   AppStrings.noOfCourses: 'عدد الدورات:',
   AppStrings.courseContent: 'محتوى الدورة',
+  AppStrings.taskIncluded: 'المهام متضمنة',
+  AppStrings.certificates: 'الشهادات',
 
   /// payment option dialog
   AppStrings.paymentOption: 'خيارات الدفع',
@@ -84,8 +86,10 @@ Map<String, String> ar = {
   AppStrings.logOut: 'تسجيل خروج',
   AppStrings.deleteAccount: 'حذف الحساب',
   AppStrings.logOutTxt: 'هل أنت متأكد أنك تريد تسجيل الخروج؟"',
+  AppStrings.deleteAccountTxt: 'هل أنت متأكد أنك تريد حذف الحساب؟',
   AppStrings.yes: 'نعم',
   AppStrings.no: 'لا',
+  AppStrings.reDirectOnWhatsAppMessage: 'من فضلك اتصل بنا :\n+964 7509790444\n+964 7709790444\nمعرف المستخدم الخاص بي لأكاديمية سناء هو:',
 
   /// Contact Us Screen
   AppStrings.getInTouch: 'ابقى على تواصل',
@@ -109,15 +113,15 @@ Map<String, String> ar = {
   /// my progress screen
   AppStrings.progressIntroductionTxt:
       "في هذه الصفحة، يمكنك رؤية جميع الدورات التي قمت بالتسجيل فيها والتقدم الذي أحرزته في كل منها.",
-  AppStrings.minutesComplete: ' دقائق كاملة ',
-  AppStrings.hoursComplete: ' ساعات كاملة ',
-  AppStrings.minutesRemaining: ' دقائق متبقية',
-  AppStrings.hoursRemaining: ' الساعات المتبقية',
+  AppStrings.complete: ' مكتمل',
+  AppStrings.remaining: ' متبقي',
+  AppStrings.noProgressAvailable: 'لا يوجد تقدم متاح',
 
   /// my certificate screen
   AppStrings.certificate: 'شهاداتي',
   AppStrings.certificateScreenTxt:
       "في هذه الصفحة، يمكنك رؤية جميع الشهادات الخاصة بك لإكمال كل دورة، أو اجتياز الاختبار في هذا المجال.",
+  AppStrings.pdfSuccessfullyDownload: 'تم تنزيل ملف pdf بنجاح',
 
   /// notification screen
   AppStrings.notifications: 'إشعارات',
@@ -127,6 +131,8 @@ Map<String, String> ar = {
   AppStrings.exams: "الامتحانات",
   AppStrings.examsScreenTxt:
       "في هذه الصفحة، يمكنك اختبار معرفتك في كل مجال، وربما الحصول على الشهادة.",
+  AppStrings.noExamAvailable : "لا توجد امتحانات متاحة",
+  AppStrings.pleaseCompleteYourExamTxt : "يرجى إكمال تقدمك بعد أن تتمكن من إجراء الاختبارات",
 
   /// questions screen
   AppStrings.finishExam: "إنهاء الامتحان",
@@ -136,6 +142,8 @@ Map<String, String> ar = {
   AppStrings.skip: "يتخطى",
   AppStrings.next: "التالي",
   AppStrings.writeHere: "اكتب هنا....",
+  AppStrings.pleaseEnterAnswer: "الرجاء إدخال الإجابة",
+  AppStrings.pleaseSelectAnyOption: "الرجاء تحديد أي خيار",
 
   /// congratulations screen
   AppStrings.congratulations: "تهانينا!",
@@ -166,6 +174,8 @@ Map<String, String> ar = {
   AppStrings.pleaseEnterOtp: 'الرجاء إدخال كلمة المرور',
   AppStrings.pleaseEnterValidOtp: 'الرجاء إدخال كلمة مرور صالحة',
   AppStrings.pleaseEnterSomeText: 'الرجاء إدخال بعض النص',
+  AppStrings.pleaseEnterMobileNumber: 'الرجاء إدخال رقم الجوال',
+  AppStrings.somethingWantWrong: 'هناك خطأ ما',
 
   ///k-dev Registration
   AppStrings.name: 'اسم',

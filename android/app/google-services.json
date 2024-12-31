@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "823204851962",
+    "project_id": "sana-academy",
+    "storage_bucket": "sana-academy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:823204851962:android:486d28ffa08340476a9943",
+        "android_client_info": {
+          "package_name": "com.example.sanademy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEnkadOiG18SEFFU7MEaHiNIEhmlmm0bg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -24,24 +24,13 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
 
   @override
   void initState() {
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    //   setState(() {
-    //     isLoading = true;
-    //   });
-    //   Future.delayed(const Duration(seconds: 3), () {
-    //     setState(() {
-    //       isLoading = false;
-    //     });
-    //   });
-    // });
-    getCourseProgressApiCall();
+    getProgressApi();
     super.initState();
   }
 
-  getCourseProgressApiCall() async {
-    await myProgressViewModel.getCourseProgressViewModel(courseId: "1");
+  Future<void> getProgressApi() async {
+    await myProgressViewModel.getCourseProgressViewModel();
   }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(onWillPop: () {
@@ -49,8 +38,7 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
       Get.offAll(() => const BottomBar());
       return Future.value(true);
     }, child: Obx(() {
-      final courseDetail =
-          myProgressViewModel.getCourseProgressResponseModel.data;
+      final courseDetail = myProgressViewModel.getCourseProgressResponseModel.data;
       return myProgressViewModel.responseStatus.value == ResponseStatus.Error
           ? CustomText(
               AppStrings.error,
@@ -60,8 +48,7 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
               ? SafeArea(
                   child: Material(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 20.w, vertical: 20.w),
+                      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.w),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -82,113 +69,69 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                           (courseDetail!.isNotEmpty)
                               ? Expanded(
                                   child: ListView.builder(
-                                    itemCount: 1,
+                                    itemCount: courseDetail.length,
                                     itemBuilder: (context, index) {
-                                      /// Parsing the completed and remaining times
                                       double completedTime =
-                                          (courseDetail[index].completedHour ==
-                                                  '0')
-                                              ? double.parse(courseDetail[index]
-                                                  .completedMinute
-                                                  .toString())
-                                              : double.parse(courseDetail[index]
-                                                      .completedHour
-                                                      .toString()) *
-                                                  60;
-                                      double remainingTime =
-                                          (courseDetail[index].remainingHour ==
-                                                  '0')
-                                              ? double.parse(courseDetail[index]
-                                                  .remainingMinute
-                                                  .toString())
-                                              : courseDetail[index]
-                                                          .remainingHour ==
-                                                      ''
-                                                  ? 0.0
-                                                  : double.parse(
-                                                          courseDetail[index]
-                                                              .remainingHour
-                                                              .toString()) *
-                                                      60;
-
-                                      /// Calculating the total time and the ratio
-                                      double totalTime =
-                                          completedTime + remainingTime;
-
+                                          double.parse(courseDetail[index].completedMinutes.toString());
+                                      double totalTime = double.parse(courseDetail[index].course!.minutes.toString());
                                       return Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 15.w, vertical: 20.w),
-                                        margin: EdgeInsets.symmetric(
-                                            vertical: 10.w),
+                                        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.w),
+                                        margin: EdgeInsets.symmetric(vertical: 10.w),
                                         decoration: BoxDecoration(
                                             image: DecorationImage(
                                                 fit: BoxFit.cover,
                                                 colorFilter: ColorFilter.mode(
-                                                    AppColors.black
-                                                        .withOpacity(0.6),
-                                                    BlendMode.srcOver),
-                                                filterQuality:
-                                                    FilterQuality.low,
+                                                    AppColors.black.withOpacity(0.6), BlendMode.srcOver),
+                                                filterQuality: FilterQuality.low,
                                                 image: const NetworkImage(
                                                   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWpCP7MLNqspI1pA3XAurJiFdi2_t3ekbU0A&s',
                                                 )),
-                                            borderRadius:
-                                                BorderRadius.circular(20)),
+                                            borderRadius: BorderRadius.circular(20)),
                                         child: Column(
                                           children: [
-                                            CustomText(
-                                              courseDetail[index]
-                                                  .course!
-                                                  .title!,
-                                              color: AppColors.white,
-                                              fontSize: 20.sp,
-                                              fontWeight: FontWeight.w700,
-                                            ),
+                                            if (courseDetail[index].course != null)
+                                              CustomText(
+                                                courseDetail[index].course!.title ?? '',
+                                                color: AppColors.white,
+                                                fontSize: 20.sp,
+                                                fontWeight: FontWeight.w700,
+                                              ),
                                             SliderTheme(
-                                              data: SliderTheme.of(context)
-                                                  .copyWith(
+                                              data: SliderTheme.of(context).copyWith(
                                                 trackHeight: 12.w,
-                                                thumbColor:
-                                                    AppColors.primaryColor,
-                                                activeTrackColor:
-                                                    AppColors.white,
-                                                inactiveTrackColor: AppColors
-                                                    .white
-                                                    .withOpacity(0.60),
-                                                thumbShape:
-                                                    CustomSliderThumbShape(
+                                                thumbColor: AppColors.primaryColor,
+                                                activeTrackColor: AppColors.white,
+                                                inactiveTrackColor: AppColors.white.withOpacity(0.60),
+                                                thumbShape: CustomSliderThumbShape(
                                                   color1: AppColors.white,
-                                                  color2:
-                                                      AppColors.primaryColor,
+                                                  color2: AppColors.primaryColor,
                                                 ),
                                                 trackShape: CustomTrackShape(),
                                               ),
                                               child: Slider(
                                                 value: completedTime,
-                                                min: 0,
                                                 max: totalTime,
                                                 onChanged: (double newValue) {},
                                               ),
                                             ),
                                             Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
                                                 CustomText(
-                                                    (courseDetail[index]
-                                                                .completedHour ==
-                                                            '0')
-                                                        ? '${courseDetail[index].completedMinute}${AppStrings.minutesComplete}'
-                                                        : '${courseDetail[index].completedHour}${AppStrings.hoursComplete}',
+                                                    formatTime(Duration(
+                                                            minutes: courseDetail[index]
+                                                                .completedMinutes!
+                                                                .toInt())) +
+                                                        AppStrings.complete,
                                                     color: AppColors.white,
                                                     fontSize: 12.sp),
                                                 CustomText(
-                                                    (courseDetail[index]
-                                                                .remainingHour ==
-                                                            '0')
-                                                        ? '${courseDetail[index].remainingMinute.toString()}${AppStrings.minutesRemaining}'
-                                                        : '${courseDetail[index].remainingHour.toString()}${AppStrings.hoursRemaining}',
+                                                    formatTime(Duration(
+                                                            minutes: int.parse(courseDetail[index].course!.minutes.toString()) - courseDetail[index]
+                                                                    .completedMinutes!
+                                                                    .toInt() 
+                                                                )) +
+                                                        AppStrings.remaining,
                                                     color: AppColors.white,
                                                     fontSize: 12.sp),
                                               ],
@@ -201,11 +144,8 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                                 )
                               : Padding(
                                   padding: EdgeInsets.only(top: 70.h),
-                                  child: CustomText(
-                                      AppStrings.noProgressAvailable,
-                                      color: AppColors.black0E,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 18.sp),
+                                  child: CustomText(AppStrings.noProgressAvailable,
+                                      color: AppColors.black0E, fontWeight: FontWeight.w700, fontSize: 18.sp),
                                 ),
                         ],
                       ),
@@ -214,6 +154,16 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
                 )
               : const Material();
     }));
+  }
+
+  String formatTime(Duration duration) {
+    if (duration.inMinutes >= 60) {
+      int hours = duration.inHours;
+      int minutes = duration.inMinutes.remainder(60);
+      return '$hours ${AppStrings.hours} $minutes ${AppStrings.minutes}';
+    } else {
+      return '${duration.inMinutes} ${AppStrings.minutes}';
+    }
   }
 }
 
@@ -227,8 +177,7 @@ class CustomTrackShape extends RoundedRectSliderTrackShape {
       bool isDiscrete = false}) {
     final double trackHeight = sliderTheme.trackHeight!;
     final double trackLeft = offset.dx + 2.0;
-    final double trackTop =
-        offset.dy + (parentBox.size.height - trackHeight) / 2;
+    final double trackTop = offset.dy + (parentBox.size.height - trackHeight) / 2;
     final double trackWidth = parentBox.size.width - 5.0;
 
     return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
@@ -267,8 +216,7 @@ class CustomSliderThumbShape extends SliderComponentShape {
 
     final double radius = 13.0.w;
 
-    final Path thumbPath = Path()
-      ..addOval(Rect.fromCircle(center: center, radius: radius));
+    final Path thumbPath = Path()..addOval(Rect.fromCircle(center: center, radius: radius));
 
     canvas.drawPath(thumbPath, paint);
 

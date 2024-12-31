@@ -33,7 +33,6 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
   @override
   void initState() {
     getCertificateApiCall();
-    // TODO: implement initState
     super.initState();
   }
 
@@ -45,7 +44,6 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        bottomBarViewModel.selectedBottomIndex.value = 0;
         Get.offAll(() => const BottomBar());
         return Future.value(true);
       },
@@ -72,7 +70,7 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                 CustomBtn(
                   onTap: () {
                     SharedPreferenceUtils.getIsLogin() == true
-                        ? Get.to(() => const ExamScreen())
+                        ? Get.to(() =>  const ExamScreen())
                         : Get.to(() => const SignUpScreen());
                   },
                   fontSize: 14.sp,
@@ -90,8 +88,7 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                       itemBuilder: (context, index) {
                         final certificates =
                             myCertificateViewModel.getCertificates[index];
-                        final List<Color> colors = certificates
-                            .course!.colorCode!
+                        final List<Color> colors = certificates.colorCode!
                             .split(',')
                             .map((color) => Color(int.parse(color, radix: 16))
                                 .withOpacity(0.8))
@@ -104,19 +101,13 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                               borderRadius: BorderRadius.circular(20.r),
                               gradient: LinearGradient(colors: colors),
                               image: const DecorationImage(
-                                  // colorFilter: ColorFilter.mode(
-                                  //   Colors.white.withOpacity(
-                                  //       0.2), // You can change the color and opacity as needed
-                                  //   BlendMode
-                                  //       .color, // Blend mode to use with the color
-                                  // ),
                                   image: AssetImage(
                                       AppImageAssets.recommendedBgImg))),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CustomText(
-                                certificates.course!.title ?? '',
+                                certificates.title ?? '',
                                 fontSize: 20.sp,
                                 fontWeight: FontWeight.w700,
                                 color: AppColors.black0E,
@@ -126,7 +117,7 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   CustomText(
-                                    certificates.course!.numberOfLecture ?? '',
+                                    '${certificates.numberOfLecture} ${AppStrings.lectures}',
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w500,
                                     color: AppColors.black0E,
@@ -140,7 +131,8 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                                   ),
                                   SizeConfig.sW6,
                                   CustomText(
-                                    '${'${certificates.course!.hours} ${AppStrings.hours}'} ${'${certificates.course!.minutes} ${AppStrings.minutes}'}',
+                                    formatTime(Duration(
+                                        minutes: int.parse(certificates.minutes!))),
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w500,
                                     color: AppColors.black0E,
@@ -161,9 +153,10 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                                           },
                                           onDownloadCompleted: (path) {
                                             final File file = File(path);
-                                            showSussesSnackBar('',
-                                                'Pdf Download Successfully');
-                                            print(file);
+                                            showSussesSnackBar('',AppStrings.pdfSuccessfullyDownload);
+                                            if (kDebugMode) {
+                                              print(file);
+                                            }
                                           },
                                           onProgress: (fileName, progress) {
                                             setState(() {
@@ -194,9 +187,9 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
                                       await myCertificateViewModel
                                           .requestHardCopyViewModel(
                                               courseId:
-                                                  certificates.courseId == null
+                                                  certificates.id == null
                                                       ? ''
-                                                      : certificates.courseId
+                                                      : certificates.id
                                                           .toString());
                                     },
                                     child: Container(
@@ -231,5 +224,14 @@ class _MyCertificateScreenState extends State<MyCertificateScreen> {
         ),
       ),
     );
+  }
+  String formatTime(Duration duration) {
+    if (duration.inMinutes >= 60) {
+      int hours = duration.inHours;
+      int minutes = duration.inMinutes.remainder(60);
+      return '$hours ${AppStrings.hours} $minutes ${AppStrings.minutes}';
+    } else {
+      return '${duration.inMinutes} ${AppStrings.minutes}';
+    }
   }
 }

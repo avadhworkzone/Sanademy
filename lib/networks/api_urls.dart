@@ -29,6 +29,7 @@ class ApiUrls {
   static const String contact = 'contact';
   static const String getExams = 'get_exams';
   static const String courseDetail = 'course_detail';
+  static const String courseEnroll = 'course_enroll';
   static const String getCourseByCategory = 'get_course_by_category';
   static const String getQuestions = 'get_questions';
   static const String examResult = 'exam_result';
@@ -38,4 +39,5 @@ class ApiUrls {
   static const String getNotification = 'notifications';
   static const String getCertificate = 'get_certificates';
   static const String requestHardCopy = 'request_hard_copy';
+  static const String deleteUser = 'delete_user';
 }

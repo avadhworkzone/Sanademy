@@ -11,11 +11,24 @@ import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view/auth/send_otp_method.dart';
+import 'package:sanademy/view/auth/sign_up_screen.dart';
 import 'package:sanademy/view_model/otp_view_model.dart';
 import 'package:sanademy/view_model/sign_up_view_model.dart';
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({super.key});
+  const OtpScreen({
+    super.key,
+    required this.verificationIDFinal,
+    this.phoneNumber = '',
+    this.countryCode = '',
+    this.countryTxtCode = '',
+  });
+
+  final String verificationIDFinal;
+  final String phoneNumber;
+  final String countryCode;
+  final String countryTxtCode;
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -33,6 +46,7 @@ class _OtpScreenState extends State<OtpScreen> {
 
   @override
   void dispose() {
+    otpViewModel.pinPutController.value.clear();
     otpViewModel.stopTimer();
     super.dispose();
   }
@@ -77,15 +91,6 @@ class _OtpScreenState extends State<OtpScreen> {
                       fontWeight: FontWeight.w700,
                     ),
                     SizeConfig.sH10,
-                    signUpController.signUpUserOtp.value != 0
-                        ? CustomText(
-                            "Your Otp is: ${signUpController.signUpUserOtp.value.toString()}",
-                            fontSize: 14.sp,
-                            color: AppColors.black12,
-                            fontWeight: FontWeight.w700,
-                          )
-                        : SizeConfig.sH2,
-                    SizeConfig.sH10,
                     CustomText(
                       AppStrings.enterFourDigitOtp,
                       fontSize: 15.sp,
@@ -106,14 +111,14 @@ class _OtpScreenState extends State<OtpScreen> {
                           width: 50.w,
                           textStyle: TextStyle(fontSize: 15.sp),
                           decoration: BoxDecoration(
-                              color: AppColors.pinputColor,
-                              borderRadius: BorderRadius.circular(10.r))),
-                      onChanged: (val) {},
+                              color: AppColors.pinputColor, borderRadius: BorderRadius.circular(10.r))),
+                      onChanged: (val) {
+                        signUpController.code.value = val;
+                      },
                     ),
                     SizeConfig.sH15,
                     if (int.parse(otpViewModel
-                            .strDigits(otpViewModel.myDuration.value.inSeconds
-                                .remainder(60))
+                            .strDigits(otpViewModel.myDuration.value.inSeconds.remainder(60))
                             .value) >
                         0)
                       CustomText(
@@ -134,9 +139,7 @@ class _OtpScreenState extends State<OtpScreen> {
 
                         /// resend button
                         int.parse(otpViewModel
-                                    .strDigits(otpViewModel
-                                        .myDuration.value.inSeconds
-                                        .remainder(60))
+                                    .strDigits(otpViewModel.myDuration.value.inSeconds.remainder(60))
                                     .value) >
                                 0
                             ? CustomText(
@@ -146,8 +149,13 @@ class _OtpScreenState extends State<OtpScreen> {
                               )
                             : InkWell(
                                 onTap: () {
-
                                   otpViewModel.resetTimer();
+                                  sendOtp(
+                                    phoneNumber: widget.phoneNumber,
+                                    context: context,
+                                    countryCode: widget.countryCode,
+                                    countryTxtCode: widget.countryTxtCode,
+                                  );
                                 },
                                 child: CustomText(
                                   AppStrings.resendOtp.tr,
@@ -161,35 +169,24 @@ class _OtpScreenState extends State<OtpScreen> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 22.w),
                       child: CustomBtn(
-                        onTap: otpViewModel.pinPutController.value.text.length <
-                                6
+                        onTap: otpViewModel.pinPutController.value.text.length < 6
                             ? null
                             : () async {
-                                if (otpViewModel.formKey.value.currentState!
-                                    .validate()) {
-                                  if (signUpController.signUpUserOtp.value != 0) {
-                                    if (signUpController.signUpUserOtp.value.toString() ==
-                                        otpViewModel
-                                            .pinPutController.value.text) {
-                                      await SharedPreferenceUtils.setIsLogin(true);
-                                      await signUpController.registerViewModel(
-                                        step: 2,
-                                      );
-                                    } else {
-                                      showErrorSnackBar(
-                                          '', AppStrings.otpMismatch);
-                                    }
-                                  }
+                                if (otpViewModel.formKey.value.currentState!.validate()) {
+                                  await SharedPreferenceUtils.setIsLogin(true);
+                                  await signUpController.registerViewModel(
+                                      step: 2,
+                                      context: context,
+                                      verificationIDFinal: widget.verificationIDFinal);
                                 }
                               },
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w700,
                         radius: 10.r,
                         title: AppStrings.verify,
-                        bgColor:
-                            otpViewModel.pinPutController.value.text.length < 6
-                                ? AppColors.primaryColor.withOpacity(0.5)
-                                : AppColors.primaryColor,
+                        bgColor: otpViewModel.pinPutController.value.text.length < 6
+                            ? AppColors.primaryColor.withOpacity(0.5)
+                            : AppColors.primaryColor,
                         textColor: AppColors.white,
                       ),
                     ),
@@ -198,7 +195,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       padding: EdgeInsets.symmetric(horizontal: 22.w),
                       child: CustomBtn(
                         onTap: () {
-                          Get.back();
+                          Get.to(const SignUpScreen());
                         },
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w700,

@@ -9,11 +9,11 @@ class HomeResModel {
 
   HomeResModel.fromJson(dynamic json) {
     success = json['success'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? HomeData.fromJson(json['data']) : null;
     message = json['message'];
   }
   bool? success;
-  Data? data;
+  HomeData? data;
   String? message;
 
   Map<String, dynamic> toJson() {
@@ -28,16 +28,16 @@ class HomeResModel {
 
 }
 
-Data dataFromJson(String str) => Data.fromJson(json.decode(str));
-String dataToJson(Data data) => json.encode(data.toJson());
-class Data {
-  Data({
+HomeData dataFromJson(String str) => HomeData.fromJson(json.decode(str));
+String dataToJson(HomeData data) => json.encode(data.toJson());
+class HomeData {
+  HomeData({
       this.user, 
       this.categories, 
       this.banners, 
       this.courses,});
 
-  Data.fromJson(dynamic json) {
+  HomeData.fromJson(dynamic json) {
     user = json['user'] != null ? User.fromJson(json['user']) : null;
     if (json['categories'] != null) {
       categories = [];

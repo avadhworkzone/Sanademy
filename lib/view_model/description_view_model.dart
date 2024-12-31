@@ -1,10 +1,11 @@
+import 'package:chewie/chewie.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/networks/api_base_helper.dart';
 import 'package:sanademy/networks/api_keys.dart';
 import 'package:sanademy/networks/model/course_detail_res_model.dart';
-import 'package:sanademy/networks/model/save_course_progress_response_model.dart';
+import 'package:sanademy/networks/model/course_enroll_res_model.dart';
 import 'package:sanademy/networks/services/apiService/course_detail_api_service.dart';
-import 'package:sanademy/networks/services/apiService/save_course_progress_api_service.dart';
+import 'package:sanademy/networks/services/apiService/course_enroll_api_service.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/enum_utils.dart';
 import 'package:video_player/video_player.dart';
@@ -12,7 +13,6 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class DescriptionViewModel extends GetxController {
   late VideoPlayerController videoPlayerController;
-
   RxBool onTouch = false.obs;
   RxBool isLoader = true.obs;
   RxBool isPaySuccessfully = false.obs;
@@ -24,12 +24,99 @@ class DescriptionViewModel extends GetxController {
   int remainingMinutes = 0;
   Rx<ResponseStatus> responseStatus = ResponseStatus.INITIAL.obs;
   Rx<YoutubePlayerController>? youtubePlayerController;
+  late ChewieController chewieControllers;
   bool videoStartedPlaying = false;
 
-  @override
-  void onClose() {
-    super.onClose();
-    handleScreenTransition();
+  /// CHEWIE VIDEO PLAYER
+  Future<void> chewiePlayer(String videoUrl) async {
+    var videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(
+      videoUrl,
+    ));
+    await videoPlayerController.initialize();
+    chewieControllers = ChewieController(
+        videoPlayerController: videoPlayerController,
+        aspectRatio: 16 / 9,
+        autoInitialize: true,
+        showOptions: false);
+    Future.delayed(const Duration(seconds: 1), () {
+      isLoader.value = false;
+    });
+  }
+
+  /// COURSE DETAIL API CALLING
+  CourseDetailResModel courseDetailResModel = CourseDetailResModel();
+  Rx<ResponseStatus> courseDetailResponseStatus = ResponseStatus.INITIAL.obs;
+
+  Future<void> courseDetailViewModel({
+    required String courseId,
+  }) async {
+    unFocus();
+    Map<String, String> queryParams = {
+      ApiKeys.courseId: courseId.toString(),
+    };
+    final response = await CourseDetailApiService().courseDetailRepo(mapData: queryParams);
+    if (checkStatusCode(response!.statusCode ?? 0)) {
+      courseDetailResModel = courseDetailResModelFromJson(response.response.toString());
+      if (courseDetailResModel.success!) {
+        if (courseDetailResModel.data != null) {
+          courseDetailResponseStatus.value = ResponseStatus.Completed;
+        } else {
+          showErrorSnackBar('', courseDetailResModel.message ?? 'Error');
+          }
+      }  else {
+         showErrorSnackBar('', courseDetailResModel.message ?? 'Error');
+         courseDetailResponseStatus.value = ResponseStatus.Error;
+         }
+    }
+  }
+
+  /// COURSE ENROLL API CALLING
+  Rx<ResponseStatus> courseEnrollResponseStatus = ResponseStatus.INITIAL.obs;
+
+  Future<void> courseEnrollViewModel({
+    required String courseId,
+    required String paymentId,
+    required String paymentStatus,
+  }) async {
+    unFocus();
+    Map<String, String> queryParams = {
+      ApiKeys.courseId: courseId.toString(),
+      ApiKeys.paymentId: paymentId.toString(),
+      ApiKeys.paymentStatus: paymentStatus.toString(),
+    };
+    final response = await CourseEnrollApiService().courseEnrollRepo(mapData: queryParams);
+    if (checkStatusCode(response!.statusCode ?? 0)) {
+      CourseEnrollResModel courseEnrollResModel = courseEnrollResModelFromJson(response.response.toString());
+      if (courseEnrollResModel.success!) {
+        if (courseEnrollResModel.data != null) {
+          courseEnrollResponseStatus.value = ResponseStatus.Completed;
+        } else {
+          showErrorSnackBar('', courseEnrollResModel.message ?? 'Error');
+        }
+      }else {
+        showErrorSnackBar('', courseEnrollResModel.message ?? 'Error');
+        courseEnrollResponseStatus.value = ResponseStatus.Error;
+      }
+    }
+  }
+
+/*
+    /// VIDEO PLAYER FUNCTION
+  void videoPlayer(String videoUrl) {
+    Future.delayed(const Duration(seconds: 2), () {
+      isLoader.value = false;
+    });
+    videoPlayerController = VideoPlayerController.networkUrl(
+      Uri.parse(videoUrl),
+      videoPlayerOptions: VideoPlayerOptions(
+        mixWithOthers: true,
+      ),
+    );
+    videoPlayerController.addListener(() {});
+    videoPlayerController.setLooping(true);
+    videoPlayerController.pause();
+    videoPlayerController.initialize();
+    onTouch.value = true;
   }
 
   /// Youtube Player Function
@@ -51,6 +138,7 @@ class DescriptionViewModel extends GetxController {
       showErrorSnackBar('Error', 'Invalid YouTube URL');
     }
 
+/*
     /// Add a listener to the controller to track playback time
     youtubePlayerController?.value.addListener(() {
       if (youtubePlayerController?.value.value.isPlaying == true &&
@@ -63,19 +151,18 @@ class DescriptionViewModel extends GetxController {
       final Duration totalDuration =
           youtubePlayerController?.value.metadata.duration ?? Duration.zero;
       remainingTime = totalDuration - watchedTime;
-      /*completedHours   = watchedTime.inHours;
+      completedHours   = watchedTime.inHours;
       completedMinutes = watchedTime.inMinutes % 60;
       remainingHours   = remainingTime.inHours;
-      remainingMinutes = remainingTime.inMinutes % 60;*/
+      remainingMinutes = remainingTime.inMinutes % 60;
 
       print('completedHours: --------=>$completedHours');
       print('completedMinutes: $completedMinutes');
       print('remainingHours: $remainingHours');
       print('remainingMinutes: $remainingMinutes');
-    });
+    });*/
   }
-
-  void handleScreenTransition() {
+void handleScreenTransition() {
     final Duration totalDuration =
         youtubePlayerController?.value.metadata.duration ?? Duration.zero;
     final int completedHours;
@@ -146,51 +233,5 @@ class DescriptionViewModel extends GetxController {
       }
     }
   }
-
-
-  /// Course Detail Api Calling Function
-  CourseDetailResModel courseDetailResModel = CourseDetailResModel();
-  Rx<ResponseStatus> courseDetailResponseStatus = ResponseStatus.INITIAL.obs;
-  Future<void> courseDetailViewModel({
-    required String courseId,
-  }) async {
-    unFocus();
-    Map<String, String> queryParams = {
-      ApiKeys.courseId: courseId.toString(),
-    };
-    final response =
-        await CourseDetailApiService().courseDetailRepo(mapData: queryParams);
-    if (checkStatusCode(response!.statusCode ?? 0)) {
-      courseDetailResModel =
-          courseDetailResModelFromJson(response.response.toString());
-      if (courseDetailResModel.success!) {
-        if (courseDetailResModel.data != null) {
-          courseDetailResponseStatus.value = ResponseStatus.Completed;
-        } else {
-          showErrorSnackBar('', courseDetailResModel.message ?? 'Error');
-        }
-      } else {
-        showErrorSnackBar('', courseDetailResModel.message ?? 'Error');
-        courseDetailResponseStatus.value = ResponseStatus.Error;
-      }
-    }
-  }
-
-
-/*void videoPlayer(String videoUrl) {
-    Future.delayed(const Duration(seconds: 2), () {
-      isLoader.value = false;
-    });
-    videoPlayerController = VideoPlayerController.networkUrl(
-      Uri.parse(videoUrl
-          // 'https://cdn.create.vista.com/api/media/medium/502694658/stock-video-dolly-out-shot-woman-short-red-hair-standing-blackboard-teaching?token='
-          ),
-      videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
-    );
-    videoPlayerController.addListener(() {});
-    videoPlayerController.setLooping(true);
-    videoPlayerController.pause();
-    videoPlayerController.initialize();
-    onTouch.value = true;
-  }*/
+*/
 }

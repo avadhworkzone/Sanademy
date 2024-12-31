@@ -14,13 +14,27 @@ import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view/auth/send_otp_method.dart';
 import 'package:sanademy/view/auth/sign_up_screen.dart';
 import 'package:sanademy/view_model/otp_view_model.dart';
 import 'package:sanademy/view_model/sign_in_view_model.dart';
 import 'package:sanademy/view_model/sign_up_view_model.dart';
 
 class LogInScreen extends StatefulWidget {
-  const LogInScreen({super.key});
+  const LogInScreen({
+    super.key,
+    this.verificationIDFinal = '',
+    this.isSendOtp = false,
+    this.phoneNumber = '',
+    this.countryCode = '',
+    this.countryTxtCode = '',
+  });
+
+  final String verificationIDFinal;
+  final bool isSendOtp;
+  final String phoneNumber;
+  final String countryCode;
+  final String countryTxtCode;
 
   @override
   State<LogInScreen> createState() => _LogInScreenState();
@@ -31,12 +45,25 @@ class _LogInScreenState extends State<LogInScreen> {
   SignUpViewModel signUpController = Get.find<SignUpViewModel>();
   OtpViewModel otpViewModel = Get.put(OtpViewModel());
 
-
   @override
   void dispose() {
+    otpViewModel.pinPutController.value.clear();
+    signInViewModel.signInPhoneController.value..clear();
     otpViewModel.stopTimer();
-    // TODO: implement dispose
+    signInViewModel.showContainer.value = false;
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    if (widget.isSendOtp == true) {
+      otpViewModel.resetTimer();
+      signInViewModel.showContainer.value = true;
+      signInViewModel.signInPhoneController.value.text = widget.phoneNumber;
+      signInViewModel.phoneLoginCode.value = widget.countryCode;
+      signInViewModel.countryLoginCode.value = widget.countryTxtCode;
+    }
+    super.initState();
   }
 
   @override
@@ -63,101 +90,85 @@ class _LogInScreenState extends State<LogInScreen> {
                     SizeConfig.sH25,
 
                     /// PHONE NUMBER TEXT FIELD
-                     SizedBox(
-                        child: IntlPhoneField(
-                          readOnly: signInViewModel.showContainer.value == true
-                              ? true
-                              : false,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
-                          controller:
-                              signInViewModel.signInPhoneController.value,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          initialCountryCode: 'IQ',
-                          onChanged: (val) {
-                            if (val.toString().isNotEmpty) {
-                              signInViewModel.signInIsValidate.value = false;
-                            }
-                          },
-                          onCountryChanged: (country) {
-                            signInViewModel.phoneLoginCode.value =
-                                country.dialCode;
-                            signInViewModel.countryLoginCode.value =
-                                country.code;
-                          },
-                          style: TextStyle(
-                            color: signInViewModel.showContainer.value == true
-                                ? AppColors.black.withOpacity(0.4)
-                                : AppColors.black,
+                    SizedBox(
+                      child: IntlPhoneField(
+                        readOnly: signInViewModel.showContainer.value == true ? true : false,
+                        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                        controller: signInViewModel.signInPhoneController.value,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        initialCountryCode: signInViewModel.showContainer.value == true
+                            ? signInViewModel.countryLoginCode.value
+                            : 'IQ',
+                        onChanged: (val) {
+                          if (val.toString().isNotEmpty) {
+                            signInViewModel.signInIsValidate.value = false;
+                          }
+                        },
+                        onCountryChanged: (country) {
+                          signInViewModel.phoneLoginCode.value = country.dialCode;
+                          signInViewModel.countryLoginCode.value = country.code;
+                        },
+                        style: TextStyle(
+                          color: signInViewModel.showContainer.value == true
+                              ? AppColors.black.withOpacity(0.4)
+                              : AppColors.black,
+                          fontSize: 14.sp,
+                          fontFamily: AppConstants.quicksand,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 17.h),
+                          hintText: AppStrings.enterYourPhoneNumber.tr,
+                          hintStyle: TextStyle(
+                            color: AppColors.black12,
                             fontSize: 14.sp,
                             fontFamily: AppConstants.quicksand,
                             fontWeight: FontWeight.w400,
                           ),
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 15.w, vertical: 17.h),
-                            hintText: AppStrings.enterYourPhoneNumber.tr,
-                            hintStyle: TextStyle(
-                              color: AppColors.black12,
-                              fontSize: 14.sp,
-                              fontFamily: AppConstants.quicksand,
-                              fontWeight: FontWeight.w400,
-                            ),
-                            errorText:
-                                (signInViewModel.signInIsValidate.value ==
-                                            true &&
-                                        signInViewModel.signInPhoneController
-                                            .value.text.isEmpty)
-                                    ? '* Required'.tr
-                                    : null,
-                            errorBorder: (signInViewModel
-                                            .signInIsValidate.value ==
-                                        true &&
-                                    signInViewModel.signInPhoneController.value
-                                        .text.isEmpty)
-                                ? OutlineInputBorder(
-                                    borderSide:
-                                        const BorderSide(color: AppColors.red),
-                                    borderRadius: BorderRadius.circular(10.r))
-                                : OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
-                                      color: AppColors.black.withOpacity(0.10),
-                                    )),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: AppColors.black.withOpacity(0.10),
-                                )),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                width: 1.0,
-                                color: AppColors.black.withOpacity(0.10),
-                              ),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(10)),
-                            ),
-                            disabledBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  width: 1.0, color: AppColors.black),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(10)),
+                          errorText: (signInViewModel.signInIsValidate.value == true &&
+                                  signInViewModel.signInPhoneController.value.text.isEmpty)
+                              ? AppStrings.isRequired.tr
+                              : null,
+                          errorBorder: (signInViewModel.signInIsValidate.value == true &&
+                                  signInViewModel.signInPhoneController.value.text.isEmpty)
+                              ? OutlineInputBorder(
+                                  borderSide: const BorderSide(color: AppColors.red),
+                                  borderRadius: BorderRadius.circular(10.r))
+                              : OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: AppColors.black.withOpacity(0.10),
+                                  )),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide(
                                 color: AppColors.black.withOpacity(0.10),
-                                width: 1.0,
-                              ),
+                              )),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1.0,
+                              color: AppColors.black.withOpacity(0.10),
+                            ),
+                            borderRadius: const BorderRadius.all(Radius.circular(10)),
+                          ),
+                          disabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(width: 1.0, color: AppColors.black),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(
+                              color: AppColors.black.withOpacity(0.10),
+                              width: 1.0,
                             ),
                           ),
                         ),
                       ),
+                    ),
                     TextButton(
                         onPressed: () {
+                          otpViewModel.pinPutController.value.clear();
                           signInViewModel.showContainer.value = false;
                           otpViewModel.stopTimer();
                         },
@@ -178,20 +189,9 @@ class _LogInScreenState extends State<LogInScreen> {
                               fontWeight: FontWeight.w400,
                             ),
                             SizeConfig.sH15,
-                            signInViewModel.userLoginOtp.value != 0
-                                ? CustomText(
-                                    "Your Otp is: ${signInViewModel.userLoginOtp.value.toString()}",
-                                    fontSize: 14.sp,
-                                    color: AppColors.black12,
-                                    fontWeight: FontWeight.w700,
-                                  )
-                                : SizeConfig.sH2,
-                            SizeConfig.sH15,
-
                             /// otp field
                             Pinput(
-                              validator: (val) =>
-                                  ValidationMethod.validateOtp(val),
+                              validator: (val) => ValidationMethod.validateOtp(val),
                               controller: otpViewModel.pinPutController.value,
                               length: 6,
                               showCursor: true,
@@ -202,15 +202,14 @@ class _LogInScreenState extends State<LogInScreen> {
                                   textStyle: TextStyle(fontSize: 15.sp),
                                   decoration: BoxDecoration(
                                       color: AppColors.pinputColor,
-                                      borderRadius:
-                                          BorderRadius.circular(10.r))),
-                              onChanged: (val) {},
+                                      borderRadius: BorderRadius.circular(10.r))),
+                              onChanged: (val) {
+                                signInViewModel.code.value = val;
+                              },
                             ),
                             SizeConfig.sH15,
                             if (int.parse(otpViewModel
-                                    .strDigits(otpViewModel
-                                        .myDuration.value.inSeconds
-                                        .remainder(60))
+                                    .strDigits(otpViewModel.myDuration.value.inSeconds.remainder(60))
                                     .value) >
                                 0)
                               CustomText(
@@ -231,18 +230,21 @@ class _LogInScreenState extends State<LogInScreen> {
 
                                 /// resend button
                                 int.parse(otpViewModel
-                                            .strDigits(otpViewModel
-                                                .myDuration.value.inSeconds
-                                                .remainder(60))
+                                            .strDigits(otpViewModel.myDuration.value.inSeconds.remainder(60))
                                             .value) >
                                         0
                                     ? CustomText(AppStrings.resendOtp.tr,
                                         fontWeight: FontWeight.w600,
-                                        color: AppColors.primaryColor
-                                            .withOpacity(0.4))
+                                        color: AppColors.primaryColor.withOpacity(0.4))
                                     : InkWell(
                                         onTap: () {
-                                          otpViewModel.resetTimer();
+                                          signInViewModel.showContainer.value = true;
+                                          loginSendOtp(
+                                              context: context,
+                                              countryCode:signInViewModel.phoneLoginCode.value,
+                                              phoneNumber: signInViewModel.signInPhoneController.value.text,
+                                              countryTxtCode: signInViewModel.countryLoginCode.value
+                                          );
                                         },
                                         child: CustomText(
                                           AppStrings.resendOtp.tr,
@@ -261,35 +263,34 @@ class _LogInScreenState extends State<LogInScreen> {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 22.w),
                         child: CustomBtn(
-                          onTap: () async {
-                            if (signInViewModel.userLoginOtp.value.toString() ==
-                                otpViewModel.pinPutController.value.text) {
+                          onTap:  otpViewModel.pinPutController.value.text.length < 6
+                              ? null
+                              : () async {
                               await SharedPreferenceUtils.setIsLogin(true);
-                              signInViewModel.loginViewModel(step: 2);
-                              // Get.offAll(() => const BottomBar());
-                            } else {
-                              showErrorSnackBar('', AppStrings.otpMismatch);
-                            }
-                          },
+                              await signInViewModel.loginViewModel(
+                                  step: 2,
+                                  context: context,
+                                  verificationIDFinal: widget.verificationIDFinal);
+                            },
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w700,
                           radius: 10.r,
                           title: AppStrings.verify,
-                          bgColor: AppColors.primaryColor,
+                          bgColor:  otpViewModel.pinPutController.value.text.length < 6
+                              ? AppColors.primaryColor.withOpacity(0.5)
+                              : AppColors.primaryColor,
                           textColor: AppColors.white,
                         ),
                       )
                     else
                       CustomBtn(
                         onTap: () async {
-                          signInViewModel.signInIsValidate.value = true;
-                          if (signInViewModel.signInFormKey.value.currentState!
-                                  .validate() &&
-                              signInViewModel.signInPhoneController.value.text
-                                  .isNotEmpty) {
+                          if (signInViewModel.signInFormKey.value.currentState!.validate() &&
+                              signInViewModel.signInPhoneController.value.text.isNotEmpty) {
                             FocusScope.of(context).requestFocus(FocusNode());
-                            await signInViewModel.loginViewModel(step: 1);
-                            otpViewModel.resetTimer();
+                            await signInViewModel.loginViewModel(step: 1, context: context);
+                          }else{
+                            showErrorSnackBar('', AppStrings.pleaseEnterMobileNumber);
                           }
                         },
                         fontSize: 14.sp,
@@ -305,8 +306,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           padding: EdgeInsets.all(2.w),
                           child: GestureDetector(
                             onTap: () {
-                              signInViewModel.signInPhoneController.value
-                                  .clear();
+                              signInViewModel.signInPhoneController.value.clear();
                               signInViewModel.signInIsValidate.value = false;
                               signInViewModel.showContainer.value = false;
                               Get.offAll(() => const SignUpScreen());

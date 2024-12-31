@@ -16,15 +16,13 @@ class CommonContainerWidget extends StatefulWidget {
       required this.color,
       required this.title,
       required this.numberOfLecture,
-      required this.hours,
       required this.minutes,
       required this.teacherImage,
       required this.teacherName});
 
   final String title;
   final String numberOfLecture;
-  final String hours;
-  final String minutes;
+  final int minutes;
   final String teacherImage;
   final String teacherName;
   final List<Color> color;
@@ -83,7 +81,9 @@ class _CommonContainerWidgetState extends State<CommonContainerWidget> {
                           ),
                           SizeConfig.sH4,
                           CustomText(
-                            '${'${widget.hours} ${AppStrings.hours}'} ${'${widget.minutes} ${AppStrings.minutes}'}',
+                            formatTime(Duration(
+                                minutes: widget.minutes)),
+                            // '${'${widget.minutes.toString()} ${AppStrings.minutes}'}',
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
                             color: AppColors.black0E,
@@ -156,5 +156,15 @@ class _CommonContainerWidgetState extends State<CommonContainerWidget> {
             ))
       ],
     );
+  }
+
+  String formatTime(Duration duration) {
+    if (duration.inMinutes >= 60) {
+      int hours = duration.inHours ;
+      int minutes = duration.inMinutes.remainder(60);
+      return '$hours ${AppStrings.hours} $minutes ${AppStrings.minutes}';
+    } else {
+      return '${duration.inMinutes} ${AppStrings.minutes}';
+    }
   }
 }

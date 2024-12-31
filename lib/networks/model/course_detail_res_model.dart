@@ -9,23 +9,18 @@ class CourseDetailResModel {
 
   CourseDetailResModel.fromJson(dynamic json) {
     success = json['success'];
-    if (json['data'] != null) {
-      data = [];
-      json['data'].forEach((v) {
-        data?.add(Data.fromJson(v));
-      });
-    }
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
     message = json['message'];
   }
   bool? success;
-  List<Data>? data;
+  Data? data;
   String? message;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['success'] = success;
     if (data != null) {
-      map['data'] = data?.map((v) => v.toJson()).toList();
+      map['data'] = data?.toJson();
     }
     map['message'] = message;
     return map;
@@ -52,6 +47,10 @@ class Data {
       this.whatWillYouLearn, 
       this.whoThisCourseIsFor, 
       this.instructor, 
+      this.language, 
+      this.price, 
+      this.taskIncluded, 
+      this.certificate, 
       this.createdAt, 
       this.updatedAt, 
       this.teacher, 
@@ -74,6 +73,10 @@ class Data {
     whatWillYouLearn = json['what_will_you_learn'];
     whoThisCourseIsFor = json['who_this_course_is_for'];
     instructor = json['instructor'];
+    language = json['language'];
+    price = json['price'];
+    taskIncluded = json['task_included'];
+    certificate = json['certificate'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     teacher = json['teacher'] != null ? Teacher.fromJson(json['teacher']) : null;
@@ -91,7 +94,7 @@ class Data {
   String? title;
   String? videoUrl;
   String? banner;
-  String? hours;
+  dynamic hours;
   String? minutes;
   String? numberOfLecture;
   String? colorCode;
@@ -100,6 +103,10 @@ class Data {
   String? whatWillYouLearn;
   String? whoThisCourseIsFor;
   String? instructor;
+  String? language;
+  num? price;
+  num? taskIncluded;
+  num? certificate;
   String? createdAt;
   String? updatedAt;
   Teacher? teacher;
@@ -123,6 +130,10 @@ class Data {
     map['what_will_you_learn'] = whatWillYouLearn;
     map['who_this_course_is_for'] = whoThisCourseIsFor;
     map['instructor'] = instructor;
+    map['language'] = language;
+    map['price'] = price;
+    map['task_included'] = taskIncluded;
+    map['certificate'] = certificate;
     map['created_at'] = createdAt;
     map['updated_at'] = updatedAt;
     if (teacher != null) {
@@ -150,7 +161,8 @@ class CourseContents {
       this.minutes, 
       this.description, 
       this.createdAt, 
-      this.updatedAt,});
+      this.updatedAt, 
+      this.lectures,});
 
   CourseContents.fromJson(dynamic json) {
     id = json['id'];
@@ -161,6 +173,12 @@ class CourseContents {
     description = json['description'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    if (json['lectures'] != null) {
+      lectures = [];
+      json['lectures'].forEach((v) {
+        lectures?.add(Lectures.fromJson(v));
+      });
+    }
   }
   num? id;
   num? courseId;
@@ -170,6 +188,7 @@ class CourseContents {
   String? description;
   String? createdAt;
   String? updatedAt;
+  List<Lectures>? lectures;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -181,6 +200,67 @@ class CourseContents {
     map['description'] = description;
     map['created_at'] = createdAt;
     map['updated_at'] = updatedAt;
+    if (lectures != null) {
+      map['lectures'] = lectures?.map((v) => v.toJson()).toList();
+    }
+    return map;
+  }
+
+}
+
+Lectures lecturesFromJson(String str) => Lectures.fromJson(json.decode(str));
+String lecturesToJson(Lectures data) => json.encode(data.toJson());
+class Lectures {
+  Lectures({
+      this.id, 
+      this.courseContentId, 
+      this.title, 
+      this.description, 
+      this.videoUrl, 
+      this.minutes, 
+      this.createdAt, 
+      this.updatedAt, 
+      this.courseProgress,});
+
+  Lectures.fromJson(dynamic json) {
+    id = json['id'];
+    courseContentId = json['course_content_id'];
+    title = json['title'];
+    description = json['description'];
+    videoUrl = json['video_url'];
+    minutes = json['minutes'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    /*if (json['course_progress'] != null) {
+      courseProgress = [];
+      json['course_progress'].forEach((v) {
+        courseProgress?.add(Dynamic.fromJson(v));
+      });
+    }*/
+  }
+  num? id;
+  num? courseContentId;
+  String? title;
+  String? description;
+  String? videoUrl;
+  String? minutes;
+  String? createdAt;
+  String? updatedAt;
+  List<dynamic>? courseProgress;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = id;
+    map['course_content_id'] = courseContentId;
+    map['title'] = title;
+    map['description'] = description;
+    map['video_url'] = videoUrl;
+    map['minutes'] = minutes;
+    map['created_at'] = createdAt;
+    map['updated_at'] = updatedAt;
+    if (courseProgress != null) {
+      map['course_progress'] = courseProgress?.map((v) => v.toJson()).toList();
+    }
     return map;
   }
 
@@ -250,7 +330,7 @@ class Teacher {
   String? name;
   String? mobileNumber;
   String? image;
-  dynamic description;
+  String? description;
   String? createdAt;
   String? updatedAt;
 

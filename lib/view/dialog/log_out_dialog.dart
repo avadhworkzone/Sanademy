@@ -8,7 +8,7 @@ import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/view/auth/sign_up_screen.dart';
 
-void logoutDialog(BuildContext context) {
+void logoutAndDeleteDialog({required BuildContext context, required String messageTxt, required void Function() onTap}) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -19,7 +19,7 @@ void logoutDialog(BuildContext context) {
         ),
         content: CustomText(
             textAlign: TextAlign.center,
-            AppStrings.logOutTxt,
+            messageTxt ?? '',
             fontWeight: FontWeight.w600),
         actions: [
           Padding(
@@ -32,9 +32,7 @@ void logoutDialog(BuildContext context) {
                     bgColor: AppColors.white,
                     textColor: AppColors.primaryColor,
                     title: AppStrings.yes,
-                    onTap: () async {
-                      await logout();
-                    },
+                    onTap: onTap
                   ),
                 ),
                 SizedBox(
@@ -61,7 +59,3 @@ void logoutDialog(BuildContext context) {
   );
 }
 
-Future<void> logout() async {
-  await SharedPreferenceUtils.clearPreference();
-  Get.offAll(() => const SignUpScreen());
-}

@@ -31,8 +31,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+   signUpViewModel.getToken();
   }
 
   @override
@@ -71,11 +71,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   /// NAME TEXT FIELD
                   CommonTextField(
                     textInputAction: TextInputAction.next,
-                    textEditController:
-                        signUpViewModel.signUpNameController.value,
+                    textEditController: signUpViewModel.signUpNameController.value,
                     validator: ValidationMethod.validateName,
-                    regularExpression:
-                        RegularExpressionUtils.alphabetSpacePattern,
+                    regularExpression: RegularExpressionUtils.alphabetSpacePattern,
                     hintText: AppStrings.enterYourName,
                     hintFontWeight: FontWeight.w400,
                     pIcon: const Padding(
@@ -109,8 +107,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         fontWeight: FontWeight.w400),
                     controller: signUpViewModel.signUpDateController.value,
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(
-                          horizontal: 15.w, vertical: 17.h),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 17.h),
                       hintText: AppStrings.dateFormat.tr,
                       hintStyle: TextStyle(
                         color: AppColors.black12,
@@ -118,8 +115,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         fontFamily: AppConstants.quicksand,
                         fontWeight: FontWeight.w400,
                       ),
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.all(12),
+                      prefixIcon: const Padding(
+                        padding: EdgeInsets.all(12),
                         child: LocalAssets(
                           imagePath: AppImageAssets.calendarIcon,
                           boxFix: BoxFit.cover,
@@ -138,17 +135,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           width: 1.0,
                           color: AppColors.black.withOpacity(0.10),
                         ),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
+                        borderRadius: const BorderRadius.all(Radius.circular(10)),
                       ),
                       disabledBorder: const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 1.0, color: AppColors.black),
+                        borderSide: BorderSide(width: 1.0, color: AppColors.black),
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
+                        borderRadius: const BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
                           color: AppColors.black.withOpacity(0.10),
                           width: 1.0,
@@ -163,18 +157,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     () => SizedBox(
                       child: IntlPhoneField(
                         textInputAction: TextInputAction.done,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
+                        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                         controller: signUpViewModel.signUpPhoneController.value,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         keyboardType: TextInputType.number,
                         initialCountryCode: 'IQ',
                         onCountryChanged: (country) {
-                          signUpViewModel.signUpPhoneCode.value =
-                              country.dialCode;
-                          signUpViewModel.signUpCountryCode.value =
-                              country.code;
+                          signUpViewModel.signUpPhoneCode.value = country.dialCode;
+                          signUpViewModel.signUpCountryCode.value = country.code;
                         },
                         onChanged: (val) {
                           if (val.toString().isNotEmpty) {
@@ -188,8 +178,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           fontWeight: FontWeight.w400,
                         ),
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 15.w, vertical: 17.h),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 17.h),
                           hintText: AppStrings.enterYourPhoneNumber.tr,
                           hintStyle: TextStyle(
                             color: AppColors.black12,
@@ -197,20 +186,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             fontFamily: AppConstants.quicksand,
                             fontWeight: FontWeight.w400,
                           ),
-                          errorText:
-                              (signUpViewModel.signUpIsValidate.value == true &&
-                                      signUpViewModel.signUpPhoneController
-                                          .value.text.isEmpty)
-                                  ? '* Required'.tr
-                                  : null,
-                          errorBorder: (signUpViewModel
-                                          .signUpIsValidate.value ==
-                                      true &&
-                                  signUpViewModel
-                                      .signUpPhoneController.value.text.isEmpty)
+                          errorText: (signUpViewModel.signUpIsValidate.value == true &&
+                                  signUpViewModel.signUpPhoneController.value.text.isEmpty)
+                              ? AppStrings.isRequired.tr
+                              : null,
+                          errorBorder: (signUpViewModel.signUpIsValidate.value == true &&
+                                  signUpViewModel.signUpPhoneController.value.text.isEmpty)
                               ? OutlineInputBorder(
-                                  borderSide:
-                                      const BorderSide(color: AppColors.red),
+                                  borderSide: const BorderSide(color: AppColors.red),
                                   borderRadius: BorderRadius.circular(10.r))
                               : OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
@@ -227,17 +210,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               width: 1.0,
                               color: AppColors.black.withOpacity(0.10),
                             ),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(10)),
+                            borderRadius: const BorderRadius.all(Radius.circular(10)),
                           ),
                           disabledBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 1.0, color: AppColors.black),
+                            borderSide: BorderSide(width: 1.0, color: AppColors.black),
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(10)),
+                            borderRadius: const BorderRadius.all(Radius.circular(10)),
                             borderSide: BorderSide(
                               color: AppColors.black.withOpacity(0.10),
                               width: 1.0,
@@ -253,15 +233,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   CustomBtn(
                     onTap: () async {
                       signUpViewModel.signUpIsValidate.value = true;
-                      if (signUpViewModel.signUpFormKey.value.currentState!
-                              .validate() &&
-                          signUpViewModel
-                              .signUpPhoneController.value.text.isNotEmpty) {
+                      if (signUpViewModel.signUpFormKey.value.currentState!.validate() &&
+                          signUpViewModel.signUpPhoneController.value.text.isNotEmpty) {
                         /// CALL API FOR SEND OTP
                         await signUpViewModel.registerViewModel(
                           step: 1,
+                          context: context,
                         );
-                        // Get.to(() => const OtpScreen());
                       }
                     },
                     fontSize: 14.sp,
@@ -271,7 +249,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   SizeConfig.sH30,
 
-                  ///
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

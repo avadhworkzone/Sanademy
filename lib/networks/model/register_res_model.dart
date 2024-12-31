@@ -1,16 +1,11 @@
 import 'dart:convert';
-
-RegisterResModel registerResModelFromJson(String str) =>
-    RegisterResModel.fromJson(json.decode(str));
-String registerResModelToJson(RegisterResModel data) =>
-    json.encode(data.toJson());
-
+RegisterResModel registerResModelFromJson(String str) => RegisterResModel.fromJson(json.decode(str));
+String registerResModelToJson(RegisterResModel data) => json.encode(data.toJson());
 class RegisterResModel {
   RegisterResModel({
-    this.success,
-    this.data,
-    this.message,
-  });
+      this.success, 
+      this.data, 
+      this.message,});
 
   RegisterResModel.fromJson(dynamic json) {
     success = json['success'];
@@ -30,48 +25,48 @@ class RegisterResModel {
     map['message'] = message;
     return map;
   }
+
 }
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
-
 class Data {
   Data({
-    this.name,
-    this.dateOfBirth,
-    this.phoneCode,
-    this.countryCode,
-    this.phoneNumber,
-    this.updatedAt,
-    this.createdAt,
-    this.id,
-    this.otp,
-    this.token,
-  });
+      this.name, 
+      this.dateOfBirth, 
+      this.phoneCode, 
+      this.phoneNumber, 
+      this.countryCode, 
+      this.deviceType, 
+      this.deviceToken, 
+      this.updatedAt, 
+      this.createdAt, 
+      this.id, 
+      this.token,});
 
   Data.fromJson(dynamic json) {
-    name = json['name'] ?? '';
+    name = json['name'];
     dateOfBirth = json['date_of_birth'];
     phoneCode = json['phone_code'];
-    countryCode = json['country_code'];
     phoneNumber = json['phone_number'];
+    countryCode = json['country_code'];
+    deviceType = json['device_type'];
+    deviceToken = json['device_token'];
     updatedAt = json['updated_at'];
     createdAt = json['created_at'];
     id = json['id'];
-    otp = json['otp'];
     token = json['token'];
   }
   String? name;
   String? dateOfBirth;
   String? phoneCode;
-  String? countryCode;
   String? phoneNumber;
+  String? countryCode;
+  String? deviceType;
+  String? deviceToken;
   String? updatedAt;
   String? createdAt;
   num? id;
-
-  ///Only if step 1 pass in api
-  int? otp;
   String? token;
 
   Map<String, dynamic> toJson() {
@@ -79,13 +74,15 @@ class Data {
     map['name'] = name;
     map['date_of_birth'] = dateOfBirth;
     map['phone_code'] = phoneCode;
-    map['country_code'] = countryCode;
     map['phone_number'] = phoneNumber;
+    map['country_code'] = countryCode;
+    map['device_type'] = deviceType;
+    map['device_token'] = deviceToken;
     map['updated_at'] = updatedAt;
     map['created_at'] = createdAt;
     map['id'] = id;
-    map['otp'] = otp;
     map['token'] = token;
     return map;
   }
+
 }

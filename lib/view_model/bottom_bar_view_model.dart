@@ -21,4 +21,8 @@ class BottomBarViewModel extends GetxController {
     const NotificationScreen(),
     const NoInterNetScreen(),
   ].obs;
+
+  RxList progressDetailList = [].obs;
+
+
 }

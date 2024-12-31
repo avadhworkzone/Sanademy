@@ -4,12 +4,12 @@ import 'package:sanademy/networks/api_urls.dart';
 import 'package:sanademy/networks/response_model.dart';
 import 'package:sanademy/utils/app_utils.dart';
 
-class SaveCourseProgressApiService{
-
+class SaveCourseProgressApiService {
   Future<ResponseModel?> saveCourseProgressRepo({required Map<String, dynamic> mapData}) async {
     final response = await ApiBaseHelper().postHTTP(
       ApiUrls.saveCourseProgress,
       params: mapData,
+      showProgress: false,
       onError: (error) {
         Utils.validationCheck(message: error.message);
       },
@@ -22,12 +22,10 @@ class SaveCourseProgressApiService{
           if (kDebugMode) {
             print('error ::: ${data.response?.data['message']}');
           }
-          Utils.validationCheck(
-              message: data.response?.data['message'], isError: true);
+          Utils.validationCheck(message: data.response?.data['message'], isError: true);
         }
       },
     );
     return response;
   }
-
 }
