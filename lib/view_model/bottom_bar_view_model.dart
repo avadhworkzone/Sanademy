@@ -13,7 +13,8 @@ class BottomBarViewModel extends GetxController {
   RxList screenList = [
     const HomeScreen(),
     SharedPreferenceUtils.getIsLogin() == true
-        ? const MyProgressScreen()
+        ?
+    const MyProgressScreen()
         : const SignUpScreen(),
     SharedPreferenceUtils.getIsLogin() == true
         ? const MyCertificateScreen()

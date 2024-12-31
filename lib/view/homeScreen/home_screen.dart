@@ -78,9 +78,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             actionWidget: Obx(() => GestureDetector(
                   onTap: () {
-                    SharedPreferenceUtils.getIsLogin() == true
-                        ? Get.to(const ProfileScreen())
-                        : Get.to(() => const SignUpScreen());
+                    // SharedPreferenceUtils.getIsLogin() == true
+                    //     ?
+                    Get.to(const ProfileScreen());
+                        // : Get.to(() => const SignUpScreen());
                   },
                   child: Container(
                       height: 50.h,

@@ -137,11 +137,13 @@ class SignUpViewModel extends GetxController {
                 context: context,
                 countryCode: signUpPhoneCode.value,
                 countryTxtCode: signUpCountryCode.value);
+            print('----------djnekb-----------------');
             // Get.to(() => const OtpScreen());
           } else {
             if (registerResModel.data!.token != null) {
               try {
                 showLoadingDialog(context: context);
+                print('djnekb-----------------');
                 final FirebaseAuth auth = FirebaseAuth.instance;
                 PhoneAuthCredential credential =
                     PhoneAuthProvider.credential(verificationId: verificationIDFinal,

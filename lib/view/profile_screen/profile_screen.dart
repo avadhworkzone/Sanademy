@@ -28,10 +28,14 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   ProfileScreenViewModel profileScreenViewModel = Get.put(ProfileScreenViewModel());
+  final List<String> _genders = ['Male', 'Female', 'Other'];
+
+  // Selected gender
+  String? _selectedGender;
 
   @override
   void initState() {
-    getUserDataApiCall();
+    // getUserDataApiCall();
    super.initState();
   }
 
@@ -63,14 +67,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
               actionFontSize: 15.sp,
             ),
             centerTitle: false),
-        body: Obx(() => profileScreenViewModel.responseStatus.value ==
-                ResponseStatus.Error
-            ?  Center(
-                child: Text(AppStrings.error),
-              )
-            : profileScreenViewModel.responseStatus.value ==
-                    ResponseStatus.Completed
-                ? Column(
+        body:
+        // Obx(() => profileScreenViewModel.responseStatus.value ==
+        //         ResponseStatus.Error
+        //     ?  Center(
+        //         child: Text(AppStrings.error),
+        //       )
+        //     : profileScreenViewModel.responseStatus.value ==
+        //             ResponseStatus.Completed
+        //         ?
+        Column(
                     children: [
                       Stack(
                         alignment: Alignment.bottomCenter,
@@ -224,6 +230,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     controller: profileScreenViewModel
                                         .phoneController.value,
                                     initialCountryCode: profileScreenViewModel
+                                        .countryCode.value==''?'IQ':profileScreenViewModel
                                         .countryCode.value,
                                     autovalidateMode:
                                         AutovalidateMode.onUserInteraction,
@@ -231,6 +238,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       if (val.toString().isNotEmpty) {
                                         profileScreenViewModel
                                             .isValidate.value = false;
+                                        var countryCode =profileScreenViewModel.countryCode.value==''?'IQ':profileScreenViewModel.countryCode.value;
+                                        if (countryCode == 'IQ') {
+                                if (val.number.startsWith('0')) {
+                              profileScreenViewModel.phoneController.value.text =
+                                 val.number.replaceFirst('0', '');
+                               // profileScreenViewModel.phoneController.value.selection =
+                             // TextSelection.fromPosition(TextPosition(
+                               // offset: profileScreenViewModel.phoneController.value.text.length));
+                             }
+                                        }
                                       }
                                     },
                                     style: TextStyle(
@@ -317,6 +334,61 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
 
                                 SizeConfig.sH10,
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 20.w,
+                                  ),
+                                  child: DropdownButtonFormField<String>(
+                                    value: _selectedGender,
+                                    decoration: InputDecoration(
+                                      fillColor: Colors.white,
+                                      filled: true,
+                                      contentPadding:
+                                      const EdgeInsets.symmetric(horizontal: 15, vertical: 17),
+                                      hintText: 'Select Gender',
+                                      hintStyle: const TextStyle(
+                                        fontSize: 14,
+                                        color: AppColors.black12,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                      // errorText: _selectedGender == null ? 'Please select a gender' : null,
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(color: Colors.red),
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(color: Colors.black.withOpacity(0.10)),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(color: Colors.black.withOpacity(0.10)),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(color: Colors.black.withOpacity(0.10)),
+                                      ),
+                                    ),
+                                    items: _genders.map((String gender) {
+                                      return DropdownMenuItem<String>(
+                                        value: gender,
+                                        child: Text(
+                                          gender,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      );
+                                    }).toList(),
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        _selectedGender = newValue;
+                                      });
+                                    },
+                                  )),
+                                SizeConfig.sH16,
 
                                 /// Address TextFiled
                                 Padding(
@@ -340,80 +412,80 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ),
                                 SizeConfig.sH16,
-                                Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 20.w),
-                                  child: CustomBtn(
-                                    onTap: () {},
-                                    title: null,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w700,
-                                    bgColor: AppColors.white,
-                                    boxShadow: const [
-                                      BoxShadow(
-                                          color: Colors.black26,
-                                          offset: Offset(0, 1),
-                                          blurRadius: 4.0)
-                                    ],
-                                    widget: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        SizeConfig.sW10,
-                                        LocalAssets(
-                                          imagePath: AppImageAssets.facebookIcn,
-                                          height: 30.h,
-                                          width: 50.w,
-                                        ),
-                                        SizeConfig.sW10,
-                                        CustomText(
-                                          AppStrings.connectWithFaceBook,
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 15.sp,
-                                          color: AppColors.black02,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                SizeConfig.sH16,
-                                Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 20.w),
-                                  child: CustomBtn(
-                                    onTap: () {},
-                                    title: null,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w700,
-                                    bgColor: AppColors.white,
-                                    boxShadow: const [
-                                      BoxShadow(
-                                          color: Colors.black26,
-                                          offset: Offset(0, 1),
-                                          blurRadius: 4.0)
-                                    ],
-                                    widget: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        SizeConfig.sW10,
-                                        LocalAssets(
-                                          imagePath:
-                                              AppImageAssets.instagramIcn,
-                                          height: 30.h,
-                                          width: 50.w,
-                                        ),
-                                        SizeConfig.sW10,
-                                        CustomText(
-                                          AppStrings.connectWithInstagram,
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 15.sp,
-                                          color: AppColors.black02,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                                // Padding(
+                                //   padding:
+                                //       EdgeInsets.symmetric(horizontal: 20.w),
+                                //   child: CustomBtn(
+                                //     onTap: () {},
+                                //     title: null,
+                                //     fontSize: 14.sp,
+                                //     fontWeight: FontWeight.w700,
+                                //     bgColor: AppColors.white,
+                                //     boxShadow: const [
+                                //       BoxShadow(
+                                //           color: Colors.black26,
+                                //           offset: Offset(0, 1),
+                                //           blurRadius: 4.0)
+                                //     ],
+                                //     widget: Row(
+                                //       mainAxisAlignment:
+                                //           MainAxisAlignment.start,
+                                //       children: [
+                                //         SizeConfig.sW10,
+                                //         LocalAssets(
+                                //           imagePath: AppImageAssets.facebookIcn,
+                                //           height: 30.h,
+                                //           width: 50.w,
+                                //         ),
+                                //         SizeConfig.sW10,
+                                //         CustomText(
+                                //           AppStrings.connectWithFaceBook,
+                                //           fontWeight: FontWeight.w700,
+                                //           fontSize: 15.sp,
+                                //           color: AppColors.black02,
+                                //         ),
+                                //       ],
+                                //     ),
+                                //   ),
+                                // ),
+                                // SizeConfig.sH16,
+                                // Padding(
+                                //   padding:
+                                //       EdgeInsets.symmetric(horizontal: 20.w),
+                                //   child: CustomBtn(
+                                //     onTap: () {},
+                                //     title: null,
+                                //     fontSize: 14.sp,
+                                //     fontWeight: FontWeight.w700,
+                                //     bgColor: AppColors.white,
+                                //     boxShadow: const [
+                                //       BoxShadow(
+                                //           color: Colors.black26,
+                                //           offset: Offset(0, 1),
+                                //           blurRadius: 4.0)
+                                //     ],
+                                //     widget: Row(
+                                //       mainAxisAlignment:
+                                //           MainAxisAlignment.start,
+                                //       children: [
+                                //         SizeConfig.sW10,
+                                //         LocalAssets(
+                                //           imagePath:
+                                //               AppImageAssets.instagramIcn,
+                                //           height: 30.h,
+                                //           width: 50.w,
+                                //         ),
+                                //         SizeConfig.sW10,
+                                //         CustomText(
+                                //           AppStrings.connectWithInstagram,
+                                //           fontWeight: FontWeight.w700,
+                                //           fontSize: 15.sp,
+                                //           color: AppColors.black02,
+                                //         ),
+                                //       ],
+                                //     ),
+                                //   ),
+                                // ),
                                 SizeConfig.sH16,
                               ],
                             ),
@@ -422,7 +494,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       )
                     ],
                   )
-                : Material()));
+                // : Material();
+        );
+
   }
 
   /// bottom sheet for picking a profile picture for user

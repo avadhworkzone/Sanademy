@@ -69,8 +69,10 @@ class _MyAppState extends State<MyApp> {
                   pageTransitionsTheme: const PageTransitionsTheme()),
               transitionDuration: const Duration(milliseconds: 100),
               translations: Translation(),
-              locale: const Locale('en_US'),
-              fallbackLocale: const Locale('en_US'),
+              // locale: const Locale('en_US'),
+              // fallbackLocale: const Locale('en_US'),
+              locale: const Locale('ku'),
+              fallbackLocale: const Locale('ku'),
               builder: (context, widget) => ColoredBox(
                 color: AppColors.white,
                 child: NotificationListener<OverscrollIndicatorNotification>(
