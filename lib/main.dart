@@ -71,8 +71,8 @@ class _MyAppState extends State<MyApp> {
               translations: Translation(),
               // locale: const Locale('en_US'),
               // fallbackLocale: const Locale('en_US'),
-              locale: const Locale('ku'),
-              fallbackLocale: const Locale('ku'),
+              locale: const Locale('ckb'),
+              fallbackLocale: const Locale('ckb'),
               builder: (context, widget) => ColoredBox(
                 color: AppColors.white,
                 child: NotificationListener<OverscrollIndicatorNotification>(

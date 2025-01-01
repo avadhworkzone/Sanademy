@@ -50,9 +50,9 @@ class _SplashScreenState extends State<SplashScreen> {
                   aspectRatio: _videoController.value.aspectRatio,
                   child: VideoPlayer(_videoController),
                 )
-              : Center(
+              : const Center(
                   child: CircularProgressIndicator(
-                    color: Colors.white,
+                    color: AppColors.primaryColor,
                   ),
                 ),
         ],
