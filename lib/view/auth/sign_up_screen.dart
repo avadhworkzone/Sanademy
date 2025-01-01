@@ -67,7 +67,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     fontWeight: FontWeight.w400,
                   ),
                   SizeConfig.sH25,
-
+Text(AppStrings.enterYourName.tr),
                   /// NAME TEXT FIELD
                   CommonTextField(
                     textInputAction: TextInputAction.next,

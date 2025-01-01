@@ -13,6 +13,7 @@ import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_theme.dart';
 import 'package:sanademy/view/general/no_internet_screen.dart';
+import 'package:sanademy/view/language_screen/language_screen.dart';
 import 'package:sanademy/view/splashScreen/splash_screen.dart';
 
 Future<void> main() async {
@@ -69,10 +70,10 @@ class _MyAppState extends State<MyApp> {
                   pageTransitionsTheme: const PageTransitionsTheme()),
               transitionDuration: const Duration(milliseconds: 100),
               translations: Translation(),
-              // locale: const Locale('en_US'),
-              // fallbackLocale: const Locale('en_US'),
-              locale: const Locale('ckb'),
-              fallbackLocale: const Locale('ckb'),
+              locale: const Locale('en_US'),
+              fallbackLocale: const Locale('en_US'),
+              // locale:  Locale(myLan),
+              // fallbackLocale:  Locale(myLan,),
               builder: (context, widget) => ColoredBox(
                 color: AppColors.white,
                 child: NotificationListener<OverscrollIndicatorNotification>(
@@ -88,7 +89,8 @@ class _MyAppState extends State<MyApp> {
               ),
               home: Obx(() => connectivityViewModel.isOnline != null
                   ? connectivityViewModel.isOnline!.value
-                      ? const SplashScreen()
+                      // ? const SplashScreen()
+                      ? const LanguageScreen()
                       // ? const BottomBar()
                       : const NoInterNetScreen()
                   : const SizedBox()),

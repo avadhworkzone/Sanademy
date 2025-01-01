@@ -120,3 +120,52 @@ commonBackArrowAppBar(
     ),
   );
 }
+
+AppBar commonUpdateAppBar(
+    {String? titleTxt,
+      Widget? leadingWidget,
+      Widget? actionWidget,
+      Widget? titleWidget,
+      Widget? sizedBox,
+      bool? centerTitle,
+      double? leadingWidth,
+      Color? textColor,
+      FontWeight? textFontWeight,
+      Color? appBarBackgroundColor,
+      PreferredSizeWidget? bottom}) {
+  return AppBar(
+
+      automaticallyImplyLeading: false,
+      centerTitle: centerTitle ?? true,
+      elevation: 0.0,
+      // bottomOpacity: 0.0,
+      scrolledUnderElevation: 0,
+      leading: leadingWidget ?? const SizedBox(),
+      leadingWidth: leadingWidth ?? 0.w,
+      actions: [actionWidget ?? const SizedBox(), SizedBox(width: 8.w)],
+      title: titleWidget ??
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              sizedBox ??
+                  LocalAssets(
+                    imagePath: AppImageAssets.sanademaylogo,
+                    width: 33.52.w,
+                    height: 27.2.h,
+                  ),
+              SizedBox(
+                width: 10.w,
+              ),
+              CustomText(
+                titleTxt!.tr,
+                color: textColor ?? AppColors.white,
+                fontWeight: textFontWeight ?? FontWeight.w500,
+                fontSize: 20.sp,
+              ),
+            ],
+          ),
+      bottom:
+      bottom /*?? PreferredSize(
+            preferredSize: Size(Get.width, 10.h), child: const SizedBox(), ),*/
+  );
+}
