@@ -4,6 +4,7 @@ class AppColors {
   static const Color black = Color(0xff000000);
   static const Color white = Color(0xffFFFFFF);
   static const Color primaryColor = Color(0xff1FA7A8);
+  // static const Color primaryColor = Color(0xff199098);
   static const Color black12 = Color(0xff131412);
   static const Color black13 = Color(0xff131313);
   static const Color red = Color(0xffD00303);
@@ -26,4 +27,11 @@ class AppColors {
   static const Color primaryColor11 = Color(0xff11998F);
   static const Color whiteShadeF8 = Color(0xffF6F8F8);
   static const Color colorsB2 = Color(0xffB22234);
+
+
+  ///new design
+  static const Color borderColor = Color(0xff1E848C);
+  static const Color blue34 = Color(0xff141B34);
+  static const Color black73 = Color(0xff5E6373);
+  static const Color blackE0 = Color(0xffE0E0E0);
 }

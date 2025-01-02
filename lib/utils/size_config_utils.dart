@@ -59,6 +59,8 @@ class SizeConfig {
   );
   static Widget sH30 = SizedBox(
     height: 30.h,
+  ); static Widget sH35 = SizedBox(
+    height: 35.h,
   );
   static Widget sH40 = SizedBox(
     height: 40.h,
@@ -98,6 +100,16 @@ class SizeConfig {
   );
   static Widget sW30 = SizedBox(
     width: 30.w,
+  );  static Widget sW31 = SizedBox(
+    width: 31.w,
+  );
+  static Widget sW33 = SizedBox(
+    width: 33.w,
+  );
+  static Widget sW35 = SizedBox(
+    width: 35.w,
+  ); static Widget sW40 = SizedBox(
+    width: 40.w,
   );
   static Widget sW50 = SizedBox(
     width: 50.w,

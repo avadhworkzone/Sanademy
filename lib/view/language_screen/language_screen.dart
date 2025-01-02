@@ -1,12 +1,20 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/common_appbar.dart';
+import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
+import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
+import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view/bottombar/bottom_bar.dart';
 
 class LanguageScreen extends StatefulWidget {
   const LanguageScreen({super.key});
@@ -16,79 +24,178 @@ class LanguageScreen extends StatefulWidget {
 }
 
 class _LanguageScreenState extends State<LanguageScreen> {
+
+  late ScrollController _scrollController;
+  final double _scrollSpeed = 15.0;
+  int selectedLanguage=0;
+
+  void _startScrolling() {
+    if (_scrollController.hasClients) {
+      Future.delayed(Duration(milliseconds: 100), () {
+        if (_scrollController.hasClients) {
+          _scrollController
+              .animateTo(
+            _scrollController.offset + _scrollSpeed,
+            duration: Duration(milliseconds: 500),
+            curve: Curves.linear,
+          )
+              .then((_) {
+            // Reset when reaching the end
+            if (_scrollController.offset >=
+                _scrollController.position.maxScrollExtent) {
+              _scrollController.jumpTo(0);
+            }
+            _startScrolling();
+          });
+        }
+      });
+    }
+  }
+
+  List<LanguageSelection> languageList=[
+    LanguageSelection(image: AppImageAssets.englishLanguageLogo,name: AppStrings.english,subName: 'English'),
+    LanguageSelection(image: AppImageAssets.kurdishLanguageLogo,name: AppStrings.kurdish,subName: 'کوردی'),
+  ];
+  @override
+  void initState() {
+    _scrollController = ScrollController();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _startScrolling();
+    });
+    // _startScrolling();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-       body: Column(children: [
-         Container(
-           height: 300,
-           decoration:
-         BoxDecoration(image: DecorationImage(
-           image: AssetImage('assets/images/Background.png'), // Replace with your image path
-           fit: BoxFit.cover, // Adjusts how the image fits the container
-         ),),)
-         // Image.asset('assets/images/Background.png')
-       ],),
+    return Scaffold(
+      bottomNavigationBar: Padding(
+        padding:  EdgeInsets.symmetric(horizontal: 19.w,vertical: 30.w),
+        child: CustomUpdateBtn(onTap: () {
+          Get.offAll(()=>const BottomBar());
+        }, title: AppStrings.continues,),
+      ),
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          commonUpdateAppBar(
+            context: context,
+            paddingLeft: 18.w,
+            actionWidget: SizeConfig.sW40,
+             otherWidget: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizeConfig.sH25,
+                CustomText(
+                 AppStrings.languageSelection,
+                  color: AppColors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16.sp,
+                  fontFamily: AppConstants.metropolis,
+                ),CustomText(
+                  'حەزدەکەی بە کامە زمان ئەپەکە بەکاربهێنی؟',
+                  color: AppColors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16.sp,
+                  fontFamily: AppConstants.metropolis,
+                ),
+                SizeConfig.sH35,
+                SizedBox(
+                  height: 39.w,
+                  // color: AppColors.red,
+                  child: ListView.builder(
+                    controller: _scrollController,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          LocalAssets(
+                            imagePath: AppImageAssets.animationImage,
+                            boxFix: BoxFit.cover,
+                            width: Get.width,
+                          ),
+                          const SizedBox(width: 0), // Optional spacing
+                        ],
+                      );
+                    },
+                  ),
+                )
+              ],
+            ),
+          ),
+          SizeConfig.sH15,
+          ListView.builder(
+            shrinkWrap: true,
+            padding: EdgeInsets.zero,
+            itemCount:languageList.length,itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: (){
+                selectedLanguage=index;
+                setState(() {
 
-//       appBar: AppBar(
-//       centerTitle:  true,
-//       leading: Row(
-//         children: [
-//           SizedBox(
-//             width: 8.w,
-//           ),
-//           Container(
-//             padding: EdgeInsets.symmetric(horizontal: 13.w,vertical: 13.w),
-//             alignment: Alignment.center,
-//             decoration: BoxDecoration(
-//               color: AppColors.white.withOpacity(0.2),
-//                 shape: BoxShape.circle,
-//                 border: Border.all(color:
-//                 AppColors.white.withOpacity(0.5))),
-//             child:  Icon(
-//               weight: 10.w,
-// size: 12.w
-// ,              Icons.arrow_back_ios_new,
-//               color: AppColors.white,),)
-//         ],
-//       ),
-//       automaticallyImplyLeading: false,
-//       title: Column(
-//         children: [
-//           Row(
-//             mainAxisSize: MainAxisSize.min,
-//             children: [
-//               LocalAssets(
-//                 imagePath: AppImageAssets.sanademaylogo,
-//                 width: 42.w,
-//                 height: 35.w,
-//               ),
-//               CustomText(
-//                 AppStrings.titleTxt.tr,
-//                 color: AppColors.white,
-//                 fontWeight: FontWeight.bold,
-//                 fontSize: 20.sp,
-//               ),
-//             ],
-//           ),
-//           CustomText(
-//             'Which language would you prefer for the app?'
-//             ,
-//             color: AppColors.white,
-//             fontWeight: FontWeight.bold,
-//             fontSize: 20.sp,
-//           ),
-//         ],
-//       ),
-//       flexibleSpace: Container(
-//         decoration: BoxDecoration(
-//           image: DecorationImage(
-//             image: AssetImage('assets/images/Background.png'), // Replace with your image path
-//             fit: BoxFit.cover,
-//           ),
-//         ),
-//       ),
-//     ),
+                });
+              },
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 19.w,vertical: 10.w),
+                padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 15.w),
+                decoration:
+                BoxDecoration(border: Border.all(color: selectedLanguage==index?AppColors.borderColor:AppColors.blackE0),borderRadius: BorderRadius.circular(10)),
+                child: Row(
+                  children: [
+                    LocalAssets(
+                      imagePath: languageList[index].image,
+                      height: 35.w,
+                      width: 35.w,
+                    ),
+                    SizeConfig.sW10,
+
+                    CustomText(
+                      languageList[index].name,
+                      color: AppColors.blue34,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: AppConstants.metropolis,
+                    ),
+                    const Spacer(),
+                    CustomText(
+                      '(${languageList[index].subName})',
+                      color: AppColors.black73,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: AppConstants.metropolis,
+                    ),
+                    SizeConfig.sW10,
+                    selectedLanguage==index? CircleAvatar(
+                      radius: 8.w,
+                      backgroundColor: AppColors.borderColor,
+                      child: Icon(Icons.done,
+                        color: AppColors.white,size: 10.w,weight: 100.w,),):Container(height: 16.w,width:16.w,decoration: BoxDecoration(border: Border.all(color: AppColors.blackE0,width: 2),shape: BoxShape.circle),)
+                  ],
+                ),
+              ),
+            );
+          },),
+
+        ],
+      ),
     );
   }
+
+}
+class LanguageSelection{
+   String image;
+   String name;
+   String subName;
+
+  LanguageSelection({ required this.image,required this.name,required this.subName});
 }

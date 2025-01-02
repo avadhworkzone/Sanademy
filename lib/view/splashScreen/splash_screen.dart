@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/utils/app_colors.dart';
+import 'package:sanademy/view/language_screen/language_screen.dart';
 import 'package:video_player/video_player.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
 import 'package:sanademy/view/general/connectivity_wrapper.dart';
@@ -29,7 +30,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
     // Navigate to the next screen after 5 seconds
     Future.delayed(const Duration(seconds: 5),
-        () => Get.offAll(() => const ConnectivityWrapper(child: BottomBar())));
+        () => Get.offAll(() => const ConnectivityWrapper(child: LanguageScreen()
+        // BottomBar()
+        )));
   }
 
   @override
@@ -41,21 +44,25 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryColor,
-      body: Stack(
+      // backgroundColor: AppColors.primaryColor,
+      body:  _videoController.value.isInitialized
+          ? Stack(
         fit: StackFit.expand,
         children: [
-          _videoController.value.isInitialized
-              ? AspectRatio(
-                  aspectRatio: _videoController.value.aspectRatio,
-                  child: VideoPlayer(_videoController),
-                )
-              : const Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.primaryColor,
-                  ),
-                ),
+          FittedBox(
+            fit: BoxFit.cover, // Ensures the video covers the screen
+            child: SizedBox(
+              width: _videoController.value.size.width,
+              height: _videoController.value.size.height,
+              child: VideoPlayer(_videoController),
+            ),
+          ),
         ],
+      )
+          : const Center(
+        child: CircularProgressIndicator(
+          color: AppColors.primaryColor,
+        ),
       ),
     );
   }

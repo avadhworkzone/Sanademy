@@ -5,6 +5,7 @@ import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/local_assets.dart';
+import 'package:sanademy/utils/size_config_utils.dart';
 
 AppBar commonAppBar(
     {String? titleTxt,
@@ -121,51 +122,61 @@ commonBackArrowAppBar(
   );
 }
 
-AppBar commonUpdateAppBar(
-    {String? titleTxt,
-      Widget? leadingWidget,
-      Widget? actionWidget,
-      Widget? titleWidget,
-      Widget? sizedBox,
-      bool? centerTitle,
-      double? leadingWidth,
-      Color? textColor,
-      FontWeight? textFontWeight,
-      Color? appBarBackgroundColor,
-      PreferredSizeWidget? bottom}) {
-  return AppBar(
+commonUpdateAppBar({required BuildContext context,Widget? actionWidget, Widget? otherWidget,double? paddingLeft}){
+  return  Container(
+    // height: Get.width,
+    width: Get.width,
+    alignment: Alignment.topCenter,
+    decoration:  BoxDecoration(
+      image: DecorationImage(
+        image: AssetImage(
+            AppImageAssets.appLogo), // Replace with your image path
+        fit: BoxFit.cover, // Adjusts how the image fits the container
+      ),
+    ),
+    child: Padding(
+      padding: EdgeInsets.only(
+          // top: MediaQuery.of(context).padding.top, left: 18.w),
+          top: MediaQuery.of(context).padding.top),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+SizeConfig.sH8,
+          Padding(
+            padding: EdgeInsets.only(left: paddingLeft??0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
 
-      automaticallyImplyLeading: false,
-      centerTitle: centerTitle ?? true,
-      elevation: 0.0,
-      // bottomOpacity: 0.0,
-      scrolledUnderElevation: 0,
-      leading: leadingWidget ?? const SizedBox(),
-      leadingWidth: leadingWidth ?? 0.w,
-      actions: [actionWidget ?? const SizedBox(), SizedBox(width: 8.w)],
-      title: titleWidget ??
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              sizedBox ??
-                  LocalAssets(
-                    imagePath: AppImageAssets.sanademaylogo,
-                    width: 33.52.w,
-                    height: 27.2.h,
-                  ),
-              SizedBox(
-                width: 10.w,
-              ),
-              CustomText(
-                titleTxt!.tr,
-                color: textColor ?? AppColors.white,
-                fontWeight: textFontWeight ?? FontWeight.w500,
-                fontSize: 20.sp,
-              ),
-            ],
+              children: [
+
+                Container(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 13.w, vertical: 13.w),
+                  // alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: AppColors.white.withOpacity(0.2),
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                          color: AppColors.white.withOpacity(0.5))),
+                  child: Icon(
+                      weight: 10.w,
+                      size: 12.w,
+                      Icons.arrow_back_ios_new,
+                      color: AppColors.white),
+                ),
+                LocalAssets(
+                imagePath:  'assets/images/sanademyLogo.png',
+                  scaleSize: 4.w,
+                ),
+               actionWidget??const SizedBox()
+              ],
+            ),
           ),
-      bottom:
-      bottom /*?? PreferredSize(
-            preferredSize: Size(Get.width, 10.h), child: const SizedBox(), ),*/
+          otherWidget??SizedBox()
+        ],
+      ),
+    ),
   );
 }
+

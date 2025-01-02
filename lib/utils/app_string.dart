@@ -185,4 +185,9 @@ class AppStrings {
   static String otpMismatch = 'Please enter valid Otp';
   static String android = 'Android';
   static String iPhone = 'iPhone';
+
+  /// Language Screen
+  static String languageSelection = 'Which language would you prefer for the app?';
+  static String english = 'English';
+  static String kurdish = 'Kurdish';
 }

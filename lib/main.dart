@@ -52,9 +52,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
-          statusBarIconBrightness: Brightness.dark,
-          statusBarBrightness: Brightness.dark,
-          statusBarColor: AppColors.white),
+          statusBarIconBrightness: Brightness.light,
+          statusBarBrightness: Brightness.light,
+          statusBarColor: Colors.transparent),
       child: ScreenUtilInit(
         designSize: AppTheme.designSize,
         builder: (context, child) {
@@ -89,8 +89,8 @@ class _MyAppState extends State<MyApp> {
               ),
               home: Obx(() => connectivityViewModel.isOnline != null
                   ? connectivityViewModel.isOnline!.value
-                      // ? const SplashScreen()
-                      ? const LanguageScreen()
+                      ? const SplashScreen()
+                      // ? const LanguageScreen()
                       // ? const BottomBar()
                       : const NoInterNetScreen()
                   : const SizedBox()),

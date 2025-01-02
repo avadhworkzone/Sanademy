@@ -11,6 +11,7 @@ class AppConstants {
   static const String baseAudioAssetsPath = "assets/audio/";
 
   static const String quicksand = "Quicksand";
+  static const String metropolis = "Metropolis";
 }
 
 RxBool isCallApi = false.obs;

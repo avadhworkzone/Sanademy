@@ -104,4 +104,18 @@ class AppImageAssets {
   ///NO FOUND IMAGES
   static String noImageFound =
       "${AppConstants.baseImageAssetsPath}noImageFound.jpg";
+
+
+  ///IMAGES
+
+  /// language screen
+  static String appLogo = "${AppConstants.baseImageAssetsPath}Background.png";
+  static String animationImage = "${AppConstants.baseImageAssetsPath}animationImage.png";
+
+  /// ICONS
+
+ /// language screen
+ static String englishLanguageLogo = "${AppConstants.baseIconAssetsPath}englishLanguage.png";
+ static String kurdishLanguageLogo = "${AppConstants.baseIconAssetsPath}kurdishLanguageIcon.png";
+
 }
