@@ -7,11 +7,14 @@ import 'package:sanademy/view/myProgressScreen/my_progress_screen.dart';
 import 'package:sanademy/view/notificationScreen/notification_screen.dart';
 import 'package:sanademy/view/my_certificate_screen/my_certificate_screen.dart';
 
+import '../view/homeScreen/widget/home_screen_new.dart';
+
 class BottomBarViewModel extends GetxController {
   Rx<int> selectedBottomIndex = 0.obs;
 
   RxList screenList = [
-    const HomeScreen(),
+    const HomeScreenNew(),
+    // const HomeScreen(),
     SharedPreferenceUtils.getIsLogin() == true
         ?
     const MyProgressScreen()

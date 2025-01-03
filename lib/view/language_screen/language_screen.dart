@@ -86,6 +86,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           commonUpdateAppBar(
+            isBack: true,
             context: context,
             paddingLeft: 18.w,
             actionWidget: SizeConfig.sW40,
@@ -123,6 +124,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                             imagePath: AppImageAssets.animationImage,
                             boxFix: BoxFit.cover,
                             width: Get.width,
+                            height: 25.h,
                           ),
                           const SizedBox(width: 0), // Optional spacing
                         ],

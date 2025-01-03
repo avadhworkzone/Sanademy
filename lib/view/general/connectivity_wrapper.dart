@@ -82,7 +82,7 @@ class _ConnectivityWrapperState extends State<ConnectivityWrapper> {
               child: AlertDialog(
                 content: SizedBox(
                   height: 300.h,
-                  child: Center(child: LocalAssets(imagePath: AppImageAssets.noInternet)),
+                  child: const Center(child: LocalAssets(imagePath: AppImageAssets.noInternet)),
                 ),
               ),
             );

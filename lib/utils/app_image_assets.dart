@@ -43,9 +43,24 @@ class AppImageAssets {
   /// home screen
 
   static String searchIcon = "${AppConstants.baseIconAssetsPath}searchIcon.svg";
-  static const String categoryIcon = '${AppConstants.baseIconAssetsPath}categoryIcon.svg';
+  static const String categoryIcon = '${AppConstants.baseIconAssetsPath}categoryIcon.png';
+  static const String infoIcon = '${AppConstants.baseIconAssetsPath}info.png';
+  static const String notificationNew = '${AppConstants.baseIconAssetsPath}notificationNew.png';
+  static const String playIcon = '${AppConstants.baseIconAssetsPath}play.png';
   static const String recommendedBgImg= '${AppConstants.baseImageAssetsPath}recommendedBgImg.png';
+  static const String bookOutlined= '${AppConstants.baseIconAssetsPath}book_outlined.png';
   static const String profileImage= '${AppConstants.baseImageAssetsPath}profileImage.png';
+  static const String bookIcon= '${AppConstants.baseIconAssetsPath}book.png';
+  static const String mediaArts= '${AppConstants.baseIconAssetsPath}media_arts.png';
+  static const String technology= '${AppConstants.baseIconAssetsPath}technology.png';
+  static const String featured= '${AppConstants.baseIconAssetsPath}featured.png';
+  static const String image1= '${AppConstants.baseIconAssetsPath}image1.png';
+  static const String image2= '${AppConstants.baseIconAssetsPath}image2.png';
+  static const String image3= '${AppConstants.baseIconAssetsPath}image3.png';
+  static const String copyIcon= '${AppConstants.baseImageAssetsPath}copyIcon.png';
+  static const String callIcon= '${AppConstants.baseImageAssetsPath}callIcon.png';
+  static const String whatAppIcon= '${AppConstants.baseImageAssetsPath}whatsappLogo.png';
+  static const String telegramIcon= '${AppConstants.baseImageAssetsPath}telegranLogo.png';
 
   /// notification screen
   static const String alertIcon =

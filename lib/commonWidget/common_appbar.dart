@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -70,7 +73,9 @@ commonBackArrowAppBar(
     void Function()? actionTextOnTap,
     void Function()? backOnTap}) {
   return Padding(
-    padding: EdgeInsets.symmetric(horizontal: horizontalPadding ?? 20.w, vertical: verticalPadding ?? 20.w),
+    padding: EdgeInsets.symmetric(
+        horizontal: horizontalPadding ?? 20.w,
+        vertical: verticalPadding ?? 20.w),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -84,9 +89,14 @@ commonBackArrowAppBar(
                     },
                 borderRadius: BorderRadius.circular(17.r),
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
                   decoration: BoxDecoration(
-                      boxShadow: [BoxShadow(color: AppColors.black.withOpacity(0.10), blurRadius: 20)],
+                      boxShadow: [
+                        BoxShadow(
+                            color: AppColors.black.withOpacity(0.10),
+                            blurRadius: 20)
+                      ],
                       color: AppColors.white,
                       borderRadius: BorderRadius.circular(17)),
                   child: const Icon(
@@ -122,15 +132,21 @@ commonBackArrowAppBar(
   );
 }
 
-commonUpdateAppBar({required BuildContext context,Widget? actionWidget, Widget? otherWidget,double? paddingLeft}){
-  return  Container(
-    // height: Get.width,
+commonUpdateAppBar(
+    {required BuildContext context,
+    Widget? actionWidget,
+    bool? isBack,
+    bool? isHomeScreen,
+    Widget? otherWidget,
+    Widget? homeScreenLeading,
+    double? paddingLeft}) {
+  return Container(
     width: Get.width,
     alignment: Alignment.topCenter,
-    decoration:  BoxDecoration(
+    decoration: BoxDecoration(
       image: DecorationImage(
-        image: AssetImage(
-            AppImageAssets.appLogo), // Replace with your image path
+        image:
+            AssetImage(AppImageAssets.appLogo), // Replace with your image path
         fit: BoxFit.cover, // Adjusts how the image fits the container
       ),
     ),
@@ -141,42 +157,46 @@ commonUpdateAppBar({required BuildContext context,Widget? actionWidget, Widget? 
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-SizeConfig.sH8,
+          SizeConfig.sH8,
           Padding(
-            padding: EdgeInsets.only(left: paddingLeft??0),
+            padding: EdgeInsets.only(left: paddingLeft ?? 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-
-                Container(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 13.w, vertical: 13.w),
-                  // alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: AppColors.white.withOpacity(0.2),
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                          color: AppColors.white.withOpacity(0.5))),
-                  child: Icon(
-                      weight: 10.w,
-                      size: 12.w,
-                      Icons.arrow_back_ios_new,
-                      color: AppColors.white),
+                (isBack ?? false)
+                    ? Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 13.w, vertical: 13.w),
+                        // alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: AppColors.white.withOpacity(0.2),
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                                color: AppColors.white.withOpacity(0.5))),
+                        child: Icon(
+                            weight: 10.w,
+                            size: 12.w,
+                            Icons.arrow_back_ios_new,
+                            color: AppColors.white),
+                      )
+                    : const SizedBox(),
+                (isHomeScreen ?? false)
+                    ? (homeScreenLeading ?? const SizedBox( ))
+                    : const SizedBox(),
+                Flexible(
+                  child: LocalAssets(
+                    imagePath: 'assets/images/sanademyLogo.png',
+                    scaleSize: 4.w,
+                  ),
                 ),
-                LocalAssets(
-                imagePath:  'assets/images/sanademyLogo.png',
-                  scaleSize: 4.w,
-                ),
-               actionWidget??const SizedBox()
+                actionWidget ?? const SizedBox()
               ],
             ),
           ),
-          otherWidget??SizedBox()
+          otherWidget ?? const SizedBox()
         ],
       ),
     ),
   );
 }
-
