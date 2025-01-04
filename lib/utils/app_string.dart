@@ -194,4 +194,9 @@ class AppStrings {
   static String whatDoYouWantToLearnToday = 'What do you want\nto learn today?';
     static String myCourses = 'My Courses';
     static String sanaAcademyAboutUsDes = 'Sana Academy is an online and in-person educational institution dedicated to empowering the youth in Iraq. We offer affordable courses and access to top tutors, helping individuals shape their lives through quality education. Our mission is to make learning accessible and transformative for the community. ';
+
+  static String whatsApp = 'WhatsApp';
+  static String telegram = 'Telegram';
+  static String contactNo = '750 991 0444';
+  static String emailId = 'info@sanademy.net';
 }

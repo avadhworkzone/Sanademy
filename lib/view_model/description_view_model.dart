@@ -35,7 +35,8 @@ class DescriptionViewModel extends GetxController {
     await videoPlayerController.initialize();
     chewieControllers = ChewieController(
         videoPlayerController: videoPlayerController,
-        aspectRatio: 16 / 9,
+        // aspectRatio: 16 / 9,
+        looping: true,
         autoInitialize: true,
         showOptions: false);
     Future.delayed(const Duration(seconds: 1), () {

@@ -3,7 +3,7 @@
 // This file is generated from template in file `flutter_tools/lib/src/flutter_plugins.dart`.
 //
 
-// @dart = 3.2
+// @dart = 3.0
 
 import 'dart:io'; // flutter_ignore: dart_io_import.
 import 'package:flutter_inappwebview_android/flutter_inappwebview_android.dart';
@@ -19,6 +19,7 @@ import 'package:video_player_avfoundation/video_player_avfoundation.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:file_selector_linux/file_selector_linux.dart';
+import 'package:flutter_local_notifications_linux/flutter_local_notifications_linux.dart';
 import 'package:image_picker_linux/image_picker_linux.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider_linux/path_provider_linux.dart';
@@ -160,6 +161,15 @@ class _PluginRegistrant {
       } catch (err) {
         print(
           '`file_selector_linux` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
+      try {
+        LinuxFlutterLocalNotificationsPlugin.registerWith();
+      } catch (err) {
+        print(
+          '`flutter_local_notifications_linux` threw an error: $err. '
           'The app may not function as expected until you remove this plugin from pubspec.yaml'
         );
       }

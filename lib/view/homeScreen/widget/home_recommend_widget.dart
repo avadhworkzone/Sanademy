@@ -12,6 +12,7 @@ import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/auth/sign_up_screen.dart';
+import 'package:sanademy/view/homeScreen/sub_screens/course_description_screen.dart';
 import 'package:sanademy/view/homeScreen/sub_screens/description_screen.dart';
 import 'package:sanademy/view/homeScreen/widget/common_recommended_container_widget.dart';
 import 'package:sanademy/view/view_all_screen/view_all_screen.dart';
@@ -143,6 +144,7 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20.w),
                           child: ListView.builder(
+                            padding: EdgeInsets.zero,
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount: homeScreenViewModel.courses.length >= 5
                                   ? 5
@@ -157,7 +159,13 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                     onTap: () {
                                       /* SharedPreferenceUtils.getIsLogin() == true
                                           ?*/
-                                      Get.to(() => DescriptionScreen(
+                                      ///old
+                                      // Get.to(() => DescriptionScreen(
+                                      //       courseId: courses.id.toString(),
+                                      //       videoUrl: courses.videoUrl ?? '',
+                                      //     ));
+                                      /// new
+                                      Get.to(() => CourseDescriptionScreen(
                                             courseId: courses.id.toString(),
                                             videoUrl: courses.videoUrl ?? '',
                                           ));

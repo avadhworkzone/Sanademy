@@ -234,11 +234,11 @@ class _WaveBubbleState extends State<WaveBubble> {
                     backgroundColor: const Color(0xff1FA7A8),
                     child: IconButton(
                       onPressed: () async {
-                        controller.playerState.isPlaying
-                            ? await controller.pausePlayer()
-                            : await controller.startPlayer(
-                                finishMode: FinishMode.loop,
-                              );
+                        // controller.playerState.isPlaying
+                        //     ? await controller.pausePlayer()
+                        //     : await controller.startPlayer(
+                        //         finishMode: FinishMode.loop,
+                        //       );
                       },
                       icon: Icon(
                         controller.playerState.isPlaying ? Icons.stop : Icons.play_arrow,

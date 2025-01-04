@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION"/>
     <application
-        android:label="sanademy"
+        android:label="Sana Academy"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme"

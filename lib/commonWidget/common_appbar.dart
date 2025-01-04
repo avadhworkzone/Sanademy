@@ -139,6 +139,7 @@ commonUpdateAppBar(
     bool? isHomeScreen,
     Widget? otherWidget,
     Widget? homeScreenLeading,
+      VoidCallback? onTap,
     double? paddingLeft}) {
   return Container(
     width: Get.width,
@@ -163,23 +164,30 @@ commonUpdateAppBar(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
+
               children: [
                 (isBack ?? false)
-                    ? Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 13.w, vertical: 13.w),
-                        // alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: AppColors.white.withOpacity(0.2),
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                                color: AppColors.white.withOpacity(0.5))),
-                        child: Icon(
-                            weight: 10.w,
-                            size: 12.w,
-                            Icons.arrow_back_ios_new,
-                            color: AppColors.white),
-                      )
+                    ? InkWell(
+                  onTap: onTap ??
+                          () {
+                        Get.back();
+                      },
+                      child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 13.w, vertical: 13.w),
+                          // alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              color: AppColors.white.withOpacity(0.2),
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  color: AppColors.white.withOpacity(0.5))),
+                          child: Icon(
+                              weight: 10.w,
+                              size: 12.w,
+                              Icons.arrow_back_ios_new,
+                              color: AppColors.white),
+                        ),
+                    )
                     : const SizedBox(),
                 (isHomeScreen ?? false)
                     ? (homeScreenLeading ?? const SizedBox( ))

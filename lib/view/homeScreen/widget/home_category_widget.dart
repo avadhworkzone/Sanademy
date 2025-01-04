@@ -157,6 +157,7 @@ class _HomeCategoryWidgetState extends State<HomeCategoryWidget> {
     return SizedBox(
       height: 49.h,
       child: ListView.builder(
+        padding: EdgeInsets.zero,
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
         itemBuilder: (context, index) {

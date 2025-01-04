@@ -31,22 +31,19 @@ class _LanguageScreenState extends State<LanguageScreen> {
 
   void _startScrolling() {
     if (_scrollController.hasClients) {
-      Future.delayed(Duration(milliseconds: 100), () {
+      _scrollController
+          .animateTo(
+        _scrollController.offset + _scrollSpeed,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.linear,
+      )
+          .then((_) {
         if (_scrollController.hasClients) {
-          _scrollController
-              .animateTo(
-            _scrollController.offset + _scrollSpeed,
-            duration: Duration(milliseconds: 500),
-            curve: Curves.linear,
-          )
-              .then((_) {
-            // Reset when reaching the end
-            if (_scrollController.offset >=
-                _scrollController.position.maxScrollExtent) {
-              _scrollController.jumpTo(0);
-            }
-            _startScrolling();
-          });
+          // Loop back to the start if the end is reached
+          if (_scrollController.offset >= _scrollController.position.maxScrollExtent) {
+            _scrollController.jumpTo(0);
+          }
+          _startScrolling(); // Continue scrolling
         }
       });
     }

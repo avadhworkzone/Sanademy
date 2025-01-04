@@ -161,14 +161,16 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                             actionWidget:  Padding(
                               padding:  EdgeInsets.only(left: 15.w),
                               child: Row(
+                                mainAxisSize: MainAxisSize.min,
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   LocalAssets(
                                       imagePath: AppImageAssets.infoIcon, height: 24.sp, width: 24.sp,
                                   ),
                                   Container(
-                                    margin: EdgeInsets.all(8.w),
+                                    margin: EdgeInsets.only(left: 8.w,right: 8.w),
                                     padding: EdgeInsets.all(12.w),
+
                                     decoration: BoxDecoration(
                                         // color: AppColors.white.withOpacity(0.20),
                                         borderRadius: BorderRadius.circular(30)),
@@ -253,7 +255,7 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                           //
                           /// CATEGORIES VIEW
                           const HomeCategoryWidget(),
-                          // SizeConfig.sH20,
+                          SizeConfig.sH15,
                           //
                           // /// RECOMMENDED
                           HomeRecommendedWidget(),

@@ -62,6 +62,8 @@ class AppImageAssets {
   static const String whatAppIcon= '${AppConstants.baseImageAssetsPath}whatsappLogo.png';
   static const String telegramIcon= '${AppConstants.baseImageAssetsPath}telegranLogo.png';
 
+  static const String emailIdIcon =
+      '${AppConstants.baseImageAssetsPath}emailId.png';
   /// notification screen
   static const String alertIcon =
       '${AppConstants.baseIconAssetsPath}alertIcon.svg';

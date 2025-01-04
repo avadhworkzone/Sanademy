@@ -1,4 +1,4 @@
-import 'package:fastpay_merchant/fastPayRequests.dart';
+// import 'package:fastpay_merchant/fastPayRequests.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -43,29 +43,29 @@ class _MenuScreenState extends State<MenuScreen> {
   }
 
   Future<void> fastPlay() async {
-    FastpayResult fastPayResult = await FastPayRequest(
-      storeID: "1234",
-      storePassword: "123456",
-      amount: "450",
-      orderID: DateTime
-          .now()
-          .microsecondsSinceEpoch
-          .toString(),
-      isProduction: false,
-      callback: (status, message) {
-        debugPrint("CALLBACK...................$message");
-        //_showToast(context,message);
-      },
-      callbackUri: "sdk://fastpay-sdk.com/callback",
-    );
-    if (fastPayResult.isSuccess ?? false) {
+    // FastpayResult fastPayResult = await FastPayRequest(
+    //   storeID: "1234",
+    //   storePassword: "123456",
+    //   amount: "450",
+    //   orderID: DateTime
+    //       .now()
+    //       .microsecondsSinceEpoch
+    //       .toString(),
+    //   isProduction: false,
+    //   callback: (status, message) {
+    //     debugPrint("CALLBACK...................$message");
+    //     //_showToast(context,message);
+    //   },
+    //   callbackUri: "sdk://fastpay-sdk.com/callback",
+    // );
+    // if (fastPayResult.isSuccess ?? false) {
       if (kDebugMode) {
         print('......................................transaction success');
       }
-    } else {
+    // } else {
       if (kDebugMode) {
         print('......................................transaction failed');
-      }
+      // }
     }
   }
 
