@@ -125,9 +125,10 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                         children: [
                           LocalAssets(
                             imagePath: AppImageAssets.animationImage,
+                            imgColor: AppColors.white.withOpacity(0.4),
                             boxFix: BoxFit.cover,
                             width: Get.width,
-                            height: 25.h,
+                            height: 28.h,
                           ),
                           const SizedBox(width: 0), // Optional spacing
                         ],

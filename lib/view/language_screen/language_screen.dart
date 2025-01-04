@@ -94,18 +94,17 @@ class _LanguageScreenState extends State<LanguageScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizeConfig.sH25,
-                CustomText(
+                CustomNewText(
                  AppStrings.languageSelection,
                   color: AppColors.white,
                   fontWeight: FontWeight.w600,
                   fontSize: 16.sp,
-                  fontFamily: AppConstants.metropolis,
-                ),CustomText(
+                ),
+                CustomNewText(
                   'حەزدەکەی بە کامە زمان ئەپەکە بەکاربهێنی؟',
                   color: AppColors.white,
                   fontWeight: FontWeight.w600,
                   fontSize: 16.sp,
-                  fontFamily: AppConstants.metropolis,
                 ),
                 SizeConfig.sH35,
                 SizedBox(
@@ -122,9 +121,10 @@ class _LanguageScreenState extends State<LanguageScreen> {
                         children: [
                           LocalAssets(
                             imagePath: AppImageAssets.animationImage,
+                            imgColor: AppColors.white.withOpacity(0.4),
                             boxFix: BoxFit.cover,
                             width: Get.width,
-                            height: 25.h,
+                            height: 28.h,
                           ),
                           const SizedBox(width: 0), // Optional spacing
                         ],
@@ -161,20 +161,18 @@ class _LanguageScreenState extends State<LanguageScreen> {
                     ),
                     SizeConfig.sW10,
 
-                    CustomText(
+                    CustomNewText(
                       languageList[index].name,
                       color: AppColors.blue34,
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w500,
-                      fontFamily: AppConstants.metropolis,
                     ),
                     const Spacer(),
-                    CustomText(
+                    CustomNewText(
                       '(${languageList[index].subName})',
                       color: AppColors.black73,
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
-                      fontFamily: AppConstants.metropolis,
                     ),
                     SizeConfig.sW10,
                     selectedLanguage==index? CircleAvatar(
