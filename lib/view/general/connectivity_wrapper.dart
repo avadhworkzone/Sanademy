@@ -56,7 +56,7 @@ class _ConnectivityWrapperState extends State<ConnectivityWrapper> {
           _handleBackButton = false;
         }
       });
-    });
+    }) ;
 
     _checkInitialConnectivity();
   }

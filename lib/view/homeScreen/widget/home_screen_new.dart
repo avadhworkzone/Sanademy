@@ -257,8 +257,8 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                           const HomeCategoryWidget(),
                           SizeConfig.sH15,
                           //
-                          // /// RECOMMENDED
-                          HomeRecommendedWidget(),
+                          /// RECOMMENDED
+                          const HomeRecommendedWidget(),
                         ],
                       ),
                     )

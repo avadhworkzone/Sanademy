@@ -15,6 +15,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.6
   dio: ^5.4.0
+#  connectivity_plus: ^6.1.0
   connectivity_plus: ^5.0.2
   flutter_screenutil: ^5.9.0
   flutter_svg: ^2.0.9
@@ -59,6 +60,23 @@ flutter:
     - assets/icons/
     - assets/images/
 
+#  fonts:
+#    - family: Quicksand
+#      fonts:
+#        - asset: assets/fonts/Quicksand-Regular.ttf
+#          weight: 400
+#        - asset: assets/fonts/Quicksand-SemiBold.ttf
+#          weight: 600
+#        - asset: assets/fonts/Quicksand-Bold.ttf
+#          weight: 700
+#        - asset: assets/fonts/Metropolis-Regular.otf
+#          weight: 400
+#        - asset: assets/fonts/Metropolis-SemiBold.otf
+#          weight: 600
+#        - asset: assets/fonts/Metropolis-Bold.otf
+#          weight: 700
+
+
   fonts:
     - family: Quicksand
       fonts:
@@ -68,10 +86,14 @@ flutter:
           weight: 600
         - asset: assets/fonts/Quicksand-Bold.ttf
           weight: 700
+
+    - family: Metropolis
+      fonts:
         - asset: assets/fonts/Metropolis-Regular.otf
           weight: 400
         - asset: assets/fonts/Metropolis-SemiBold.otf
           weight: 600
         - asset: assets/fonts/Metropolis-Bold.otf
           weight: 700
+
 
