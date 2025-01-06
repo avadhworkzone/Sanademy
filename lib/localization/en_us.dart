@@ -82,6 +82,7 @@ Map<String, String> en = {
   AppStrings.ourMission: 'Our Mission',
   AppStrings.ourVision: 'Our Vision',
   AppStrings.logOut: 'Logout',
+  AppStrings.logIn: 'Log In',
   AppStrings.deleteAccount: 'Delete Account',
   AppStrings.logOutTxt: 'Are you sure you want to logout?"',
   AppStrings.deleteAccountTxt: 'Are you sure you want to delete account?',

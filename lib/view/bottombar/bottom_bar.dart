@@ -42,24 +42,25 @@ class _BottomBarState extends State<BottomBar> {
             children: [
               navItem(
                   index: 0,
-                  icon: AppImageAssets.homeIcn,
-                  selectedIcon: AppImageAssets.selectedHomeIcon,
+                  icon: AppImageAssets.homeUnselected,
+                  selectedIcon: AppImageAssets.homeSelected,
                   title: AppStrings.home),
               navItem(
                   index: 1,
-                  icon: AppImageAssets.myProgress,
-                  selectedIcon: AppImageAssets.selectedProgressIcon,
+                  icon: AppImageAssets.progressUnselected,
+                  selectedIcon: AppImageAssets.progressSelected,
                   title: AppStrings.myProgress),
               navItem(
                   index: 2,
-                  icon: AppImageAssets.myCertificate,
-                  selectedIcon: AppImageAssets.selectedCertificateIcon,
+                  icon: AppImageAssets.certificateUnselected,
+                  selectedIcon: AppImageAssets.certificateSelected,
+
                   title: AppStrings.myCertificate),
               navItem(
                   index: 3,
-                  icon: AppImageAssets.notification,
-                  selectedIcon: AppImageAssets.selectedNotificationIcon,
-                  title: AppStrings.notification),
+                  icon: AppImageAssets.profileUnselected,
+                  selectedIcon: AppImageAssets.profileSelected,
+                  title: AppStrings.profile),
             ],
           ),
         ),

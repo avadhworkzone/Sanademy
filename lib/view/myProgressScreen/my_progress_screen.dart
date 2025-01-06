@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
+import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/enum_utils.dart';
+import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
 import 'package:sanademy/view_model/bottom_bar_view_model.dart';
@@ -25,6 +27,8 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
   @override
   void initState() {
     getProgressApi();
+
+
     super.initState();
   }
 
@@ -165,6 +169,8 @@ class _MyProgressScreenState extends State<MyProgressScreen> {
       return '${duration.inMinutes} ${AppStrings.minutes}';
     }
   }
+
+
 }
 
 class CustomTrackShape extends RoundedRectSliderTrackShape {

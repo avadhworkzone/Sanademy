@@ -199,4 +199,8 @@ class AppStrings {
   static String telegram = 'Telegram';
   static String contactNo = '750 991 0444';
   static String emailId = 'info@sanademy.net';
+
+  ///New UI
+  static String logIn = 'Log In';
+
 }

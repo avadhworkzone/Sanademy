@@ -70,6 +70,14 @@ class AppImageAssets {
   static const String checkmark= '${AppConstants.baseIconAssetsPath}checkmark.png';
   static const String lock= '${AppConstants.baseIconAssetsPath}lock.png';
   static const String yellowPlay= '${AppConstants.baseIconAssetsPath}yellow_play.png';
+  static const String certificateSelected= '${AppConstants.baseIconAssetsPath}certificate_selected.png';
+  static const String certificateUnselected= '${AppConstants.baseIconAssetsPath}certificate_unselected.png';
+  static const String homeSelected= '${AppConstants.baseIconAssetsPath}home_selected.png';
+  static const String homeUnselected= '${AppConstants.baseIconAssetsPath}home_unselected.png';
+  static const String profileSelected= '${AppConstants.baseIconAssetsPath}profile_selected.png';
+  static const String profileUnselected= '${AppConstants.baseIconAssetsPath}profile_unselected.png';
+  static const String progressSelected= '${AppConstants.baseIconAssetsPath}progress_selected.png';
+  static const String progressUnselected= '${AppConstants.baseIconAssetsPath}progress_unselected.png';
 
   static const String emailIdIcon =
       '${AppConstants.baseImageAssetsPath}emailId.png';
