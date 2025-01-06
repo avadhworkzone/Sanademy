@@ -6,7 +6,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.2.3 <4.0.0'
+  sdk: '>=3.0.1 <4.0.0'
 
 dependencies:
   flutter:
@@ -15,6 +15,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.6
   dio: ^5.4.0
+#  connectivity_plus: ^6.1.0
   connectivity_plus: ^5.0.2
   flutter_screenutil: ^5.9.0
   flutter_svg: ^2.0.9
@@ -31,6 +32,18 @@ dependencies:
   connectivity: ^3.0.6
   image_picker:
   intl: ^0.19.0
+  flutter_html:
+  youtube_player_flutter: ^9.0.1
+  chewie: ^1.8.5
+#  fastpay_merchant: ^1.1.1
+  url_launcher: ^6.3.0
+  firebase_auth: ^4.10.0
+  firebase_core:
+  firebase_messaging: ^14.7.19
+  flutter_local_notifications: ^17.1.2
+  device_info_plus:
+  flutter_native_splash: ^2.4.4
+
 
 dev_dependencies:
   flutter_test:
@@ -46,7 +59,23 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-    - assets/audios/
+
+#  fonts:
+#    - family: Quicksand
+#      fonts:
+#        - asset: assets/fonts/Quicksand-Regular.ttf
+#          weight: 400
+#        - asset: assets/fonts/Quicksand-SemiBold.ttf
+#          weight: 600
+#        - asset: assets/fonts/Quicksand-Bold.ttf
+#          weight: 700
+#        - asset: assets/fonts/Metropolis-Regular.otf
+#          weight: 400
+#        - asset: assets/fonts/Metropolis-SemiBold.otf
+#          weight: 600
+#        - asset: assets/fonts/Metropolis-Bold.otf
+#          weight: 700
+
 
   fonts:
     - family: Quicksand
@@ -57,4 +86,14 @@ flutter:
           weight: 600
         - asset: assets/fonts/Quicksand-Bold.ttf
           weight: 700
+
+    - family: Metropolis
+      fonts:
+        - asset: assets/fonts/Metropolis-Regular.otf
+          weight: 400
+        - asset: assets/fonts/Metropolis-SemiBold.otf
+          weight: 600
+        - asset: assets/fonts/Metropolis-Bold.otf
+          weight: 700
+
 

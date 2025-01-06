@@ -13,11 +13,12 @@ class AppImageAssets {
   static const String audio =
       '${AppConstants.baseAudioAssetsPath}example_assets_audios_audio4.mp3';
 
-  /// icons==========================
-
+  /// prefix Icons
+  static const String calendarIcon = '${AppConstants.baseIconAssetsPath}calendarIcon.svg';
+  static const String locationIcon = '${AppConstants.baseIconAssetsPath}locationIcon.svg';
+  /// common user Icon
+  static const String userImage = '${AppConstants.baseIconAssetsPath}userImage.svg';
   /// bottombar
-  static const String homeIcon =
-      '${AppConstants.baseIconAssetsPath}homeIcon.svg';
   static const String myProgress =
       '${AppConstants.baseIconAssetsPath}myProgressIcon.svg';
   static const String myCertificate =
@@ -26,6 +27,8 @@ class AppImageAssets {
       '${AppConstants.baseIconAssetsPath}notificationIcon.svg';
   static const String selectedHomeIcon =
       '${AppConstants.baseIconAssetsPath}selectedHomeIcon.svg';
+  static const String homeIcn =
+      '${AppConstants.baseIconAssetsPath}homeIcn.svg';
   static const String selectedCertificateIcon =
       '${AppConstants.baseIconAssetsPath}Vector (1).svg';
   static const String selectedNotificationIcon =
@@ -40,9 +43,36 @@ class AppImageAssets {
   /// home screen
 
   static String searchIcon = "${AppConstants.baseIconAssetsPath}searchIcon.svg";
-  static const String categoryIcon =
-      '${AppConstants.baseIconAssetsPath}categoryIcon.svg';
+  static const String categoryIcon = '${AppConstants.baseIconAssetsPath}categoryIcon.png';
+  static const String infoIcon = '${AppConstants.baseIconAssetsPath}info.png';
+  static const String notificationNew = '${AppConstants.baseIconAssetsPath}notificationNew.png';
+  static const String playIcon = '${AppConstants.baseIconAssetsPath}play.png';
+  static const String recommendedBgImg= '${AppConstants.baseImageAssetsPath}recommendedBgImg.png';
+  static const String bookOutlined= '${AppConstants.baseIconAssetsPath}book_outlined.png';
+  static const String profileImage= '${AppConstants.baseImageAssetsPath}profileImage.png';
+  static const String bookIcon= '${AppConstants.baseIconAssetsPath}book.png';
+  static const String mediaArts= '${AppConstants.baseIconAssetsPath}media_arts.png';
+  static const String technology= '${AppConstants.baseIconAssetsPath}technology.png';
+  static const String featured= '${AppConstants.baseIconAssetsPath}featured.png';
+  static const String teacherImage= '${AppConstants.baseIconAssetsPath}teacher_image.png';
+  static const String image1= '${AppConstants.baseIconAssetsPath}image1.png';
+  static const String image2= '${AppConstants.baseIconAssetsPath}image2.png';
+  static const String image3= '${AppConstants.baseIconAssetsPath}image3.png';
+  static const String copyIcon= '${AppConstants.baseImageAssetsPath}copyIcon.png';
+  static const String callIcon= '${AppConstants.baseImageAssetsPath}callIcon.png';
+  static const String whatAppIcon= '${AppConstants.baseImageAssetsPath}whatsappLogo.png';
+  static const String telegramIcon= '${AppConstants.baseImageAssetsPath}telegranLogo.png';
+  static const String certificate= '${AppConstants.baseIconAssetsPath}certificate.png';
+  static const String downloadCircle= '${AppConstants.baseIconAssetsPath}download_circle.png';
+  static const String list= '${AppConstants.baseIconAssetsPath}list.png';
+  static const String tv= '${AppConstants.baseIconAssetsPath}tv.png';
+  static const String videoPlay= '${AppConstants.baseIconAssetsPath}video_play.png';
+  static const String checkmark= '${AppConstants.baseIconAssetsPath}checkmark.png';
+  static const String lock= '${AppConstants.baseIconAssetsPath}lock.png';
+  static const String yellowPlay= '${AppConstants.baseIconAssetsPath}yellow_play.png';
 
+  static const String emailIdIcon =
+      '${AppConstants.baseImageAssetsPath}emailId.png';
   /// notification screen
   static const String alertIcon =
       '${AppConstants.baseIconAssetsPath}alertIcon.svg';
@@ -79,7 +109,6 @@ class AppImageAssets {
       "${AppConstants.baseIconAssetsPath}facebookIcn.svg";
   static String instagramIcn =
       "${AppConstants.baseIconAssetsPath}instagramIcn.svg";
-  static String cameraImg = "${AppConstants.baseImageAssetsPath}cameraImg.jpg";
   static String galleryImg = "${AppConstants.baseImageAssetsPath}galleryImg.png";
 
   /// Contact Us
@@ -101,4 +130,18 @@ class AppImageAssets {
   ///NO FOUND IMAGES
   static String noImageFound =
       "${AppConstants.baseImageAssetsPath}noImageFound.jpg";
+
+
+  ///IMAGES
+
+  /// language screen
+  static String appLogo = "${AppConstants.baseImageAssetsPath}Background.png";
+  static String animationImage = "${AppConstants.baseImageAssetsPath}animationImage.png";
+
+  /// ICONS
+
+ /// language screen
+ static String englishLanguageLogo = "${AppConstants.baseIconAssetsPath}englishLanguage.png";
+ static String kurdishLanguageLogo = "${AppConstants.baseIconAssetsPath}kurdishLanguageIcon.png";
+
 }
