@@ -265,35 +265,51 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
 //   }
 // }
 
+final List<Map<String, dynamic>> courses = [
+  {
+    "title": "Exploring the Beauty of Mathematical Structures",
+    "completed": 0,
+    "total": 10,
+    "progress": 0,
+  },
+  {
+    "title": "Understanding Physics with Practical Applications",
+    "completed": 0,
+    "total": 10,
+    "progress": 0,
+  },
+  {
+    "title": "Basics of Computer Science for Beginners",
+    "completed": 0,
+    "total": 10,
+    "progress": 0,
+  }, {
+    "title": "Exploring the Beauty of Mathematical Structures",
+    "completed": 0,
+    "total": 10,
+    "progress": 0,
+  }, {
+    "title": "Exploring the Beauty of Mathematical Structures",
+    "completed": 0,
+    "total": 10,
+    "progress": 0,
+  }, {
+    "title": "Exploring the Beauty of Mathematical Structures",
+    "completed": 0,
+    "total": 10,
+    "progress": 0,
+  },
+];
 
 class MyCoursesWidget extends StatefulWidget {
-  const MyCoursesWidget({Key? key}) : super(key: key);
+  Axis? scrollDirection ;
+   MyCoursesWidget({Key? key, this.scrollDirection = Axis.horizontal}) : super(key: key);
 
   @override
   State<MyCoursesWidget> createState() => _MyCoursesWidgetState();
 }
 
 class _MyCoursesWidgetState extends State<MyCoursesWidget> {
-  final List<Map<String, dynamic>> courses = [
-    {
-      "title": "Exploring the Beauty of Mathematical Structures",
-      "completed": 0,
-      "total": 10,
-      "progress": 0,
-    },
-    {
-      "title": "Understanding Physics with Practical Applications",
-      "completed": 0,
-      "total": 10,
-      "progress": 0,
-    },
-    {
-      "title": "Basics of Computer Science for Beginners",
-      "completed": 0,
-      "total": 10,
-      "progress": 0,
-    },
-  ];
 
   late Timer _timer;
 
@@ -341,8 +357,9 @@ class _MyCoursesWidgetState extends State<MyCoursesWidget> {
           SizedBox(
             height: 150.h,
             child: ListView.builder(
-              scrollDirection: Axis.horizontal,
+              scrollDirection:widget.scrollDirection ?? Axis.horizontal,
               itemCount: courses.length,
+              shrinkWrap: true,
               itemBuilder: (context, index) {
                 final course = courses[index];
                 return Container(
@@ -405,7 +422,7 @@ class _MyCoursesWidgetState extends State<MyCoursesWidget> {
                                   value: course["progress"] / 100,
                                   color: AppColors.yellow,
                                   backgroundColor: AppColors.white,
-                                  strokeWidth: 5.w,
+                                  strokeWidth: 4.w,
                                 ),
                               ),
                               CustomText(

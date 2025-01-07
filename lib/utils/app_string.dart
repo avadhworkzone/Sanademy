@@ -15,7 +15,7 @@ class AppStrings {
       'Please enter the verification code sent to your number';
   static String enterFourDigitOtp = 'Enter the 4-digit OTP';
   static String didNotGetOtp = 'Did not get the OTP?';
-  static String resendOtp = 'Resend OTP';
+  static String resendOtp = 'Resend Code';
   static String verify = 'Verify';
   static String goBack = 'Go back';
 
@@ -202,5 +202,14 @@ class AppStrings {
 
   ///New UI
   static String logIn = 'Log In';
+  static String enterYourPassword = 'Enter your password';
+  static String loginOrRegisterToEnrollThisCourse = 'Login or Register to enroll this course';
+  static String inputPhoneNumber = 'Input Phone Number ';
+  static String password  = 'Password ';
+  static String verifyYourPhone  = 'Verify Your Phone';
+  static String resendCode  = 'Resend Code';
+  static String verifyPhoneNumber  = 'Verify Phone Number';
+  static String otpHasBeenSetToYourPhone  = 'OTP Has been set to your phone ';
+  static String onWhatsApp  = ' on WhatsApp';
 
 }

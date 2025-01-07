@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
+import 'package:sanademy/view/auth/sign_up_new_screen.dart';
 import 'package:sanademy/view/auth/sign_up_screen.dart';
 import 'package:sanademy/view/general/no_internet_screen.dart';
 import 'package:sanademy/view/homeScreen/home_screen.dart';
@@ -18,7 +19,7 @@ class BottomBarViewModel extends GetxController {
     SharedPreferenceUtils.getIsLogin() == true
         ?
     const MyProgressScreen()
-        : const SignUpScreen(),
+        : const SignUpNewScreen(),
         // : const SignUpScreen(),
     SharedPreferenceUtils.getIsLogin() == true
         ? const MyCertificateScreen()

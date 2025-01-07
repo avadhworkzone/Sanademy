@@ -60,6 +60,7 @@ class AppImageAssets {
   static const String image3= '${AppConstants.baseIconAssetsPath}image3.png';
   static const String copyIcon= '${AppConstants.baseImageAssetsPath}copyIcon.png';
   static const String callIcon= '${AppConstants.baseImageAssetsPath}callIcon.png';
+  static const String blankBackground= '${AppConstants.baseImageAssetsPath}blanck_Background.png';
   static const String whatAppIcon= '${AppConstants.baseImageAssetsPath}whatsappLogo.png';
   static const String telegramIcon= '${AppConstants.baseImageAssetsPath}telegranLogo.png';
   static const String certificate= '${AppConstants.baseIconAssetsPath}certificate.png';

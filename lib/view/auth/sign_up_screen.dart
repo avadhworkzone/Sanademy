@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:pinput/pinput.dart';
 import 'package:sanademy/commonWidget/commom_textfield.dart';
 import 'package:sanademy/commonWidget/common_appbar.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
@@ -18,7 +19,9 @@ import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/auth/log_in_screen.dart';
+import 'package:sanademy/view/auth/send_otp_method.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
+import 'package:sanademy/view_model/otp_view_model.dart';
 import 'package:sanademy/view_model/sign_up_view_model.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -34,14 +37,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   void initState() {
     super.initState();
-    logs("---INIT");
-    logs("---${SharedPreferenceUtils.getIsLogin() == true}");
-
-    // Delay showing the bottom sheet until after the widget tree is built
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      logs("---BOTTOMSHEET");
-      showLoginBottomSheet(context);
-    });
     signUpViewModel.getToken();
   }
 
@@ -321,181 +316,4 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  void showLoginBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) {
-        return SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.only(
-              left: 20.w,
-              right: 20.w,
-              top: 20.h,
-              bottom: MediaQuery.of(context).viewInsets.bottom + 20.h,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: Container(
-                    width: 50.w,
-                    height: 5.h,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10.h),
-                Center(
-                  child: CustomNewText(
-                    "Login or Register to enroll this course",
-                    fontSize: 26.sp,
-                    fontWeight: FontWeight.w600,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-          
-                SizedBox(height: 30.h),
-                Row(
-                  children: [
-                    CustomNewText(
-                      "Input Phone Number ",
-                      fontSize: 14.sp,
-                      color: AppColors.grey73,
-                      fontWeight: FontWeight.w500,
-                    ),CustomNewText(
-                      "*",
-                      color: AppColors.red,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ],
-                ),
-                SizedBox(height: 4.h),
-                Obx(
-                  () => SizedBox(
-                    child: IntlPhoneField(
-                      textInputAction: TextInputAction.done,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      controller: signUpViewModel.signUpPhoneController.value,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      keyboardType: TextInputType.number,
-                      initialCountryCode: 'IQ',
-                      showDropdownIcon: false,
-                      flagsButtonPadding: EdgeInsets.only(left: 10.w),
-                      // onCountryChanged: (country) {
-                      //   signUpViewModel.signUpPhoneCode.value = country.dialCode;
-                      //   signUpViewModel.signUpCountryCode.value = country.code;
-                      // },
-                      // onChanged: (val) {
-                      //   if (val.toString().isNotEmpty) {
-                      //     signUpViewModel.signUpIsValidate.value = false;
-                      //   }
-                      // },
-                      style: TextStyle(
-                        color: AppColors.black,
-                        fontSize: 16.sp,
-                        fontFamily: AppConstants.metropolis,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 15.w, vertical: 17.h),
-                        hintText: AppStrings.enterYourPhoneNumber.tr,
-                        hintStyle: TextStyle(
-                          fontSize: 14.sp,
-                          fontFamily: AppConstants.metropolis,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        prefixStyle: TextStyle(
-                          color: AppColors.grey73,
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        // errorText:
-                        //     (signUpViewModel.signUpIsValidate.value == true &&
-                        //             signUpViewModel
-                        //                 .signUpPhoneController.value.text.isEmpty)
-                        //         ? AppStrings.isRequired.tr
-                        //         : null,
-                        // errorBorder:
-                        //     (signUpViewModel.signUpIsValidate.value == true &&
-                        //             signUpViewModel
-                        //                 .signUpPhoneController.value.text.isEmpty)
-                        //         ? OutlineInputBorder(
-                        //             borderSide:
-                        //                 const BorderSide(color: AppColors.red),
-                        //             borderRadius: BorderRadius.circular(10.r))
-                        //         : OutlineInputBorder(
-                        //             borderRadius: BorderRadius.circular(10),
-                        //             borderSide: BorderSide(
-                        //               color: AppColors.black.withOpacity(0.10),
-                        //             )),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                              color: AppColors.black.withOpacity(0.10),
-                            )),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 1.0,
-                            color: AppColors.black.withOpacity(0.10),
-                          ),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
-                        ),
-                        disabledBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 1.0, color: AppColors.black),
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
-                          borderSide: BorderSide(
-                            color: AppColors.black.withOpacity(0.10),
-                            width: 1.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 350.h),
-          
-                /// SUBMIT BUTTON
-          
-                CustomBtn(
-                  onTap: () async {
-                    // signUpViewModel.signUpIsValidate.value = true;
-                    // if (signUpViewModel.signUpFormKey.value.currentState!
-                    //         .validate() &&
-                    //     signUpViewModel
-                    //         .signUpPhoneController.value.text.isNotEmpty) {
-                    //   /// CALL API FOR SEND OTP
-                    //   await signUpViewModel.registerViewModel(
-                    //     step: 1,
-                    //     context: context,
-                    //   );
-                    // }
-                  },
-                  fontSize: 16.sp,
-                  radius: 10.r,
-                  title: AppStrings.logIn,
-                  fontWeight: FontWeight.w600,
-                ),
-                SizeConfig.sH30,
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
 }

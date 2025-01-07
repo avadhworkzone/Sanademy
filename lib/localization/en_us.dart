@@ -15,7 +15,7 @@ Map<String, String> en = {
   AppStrings.enterOtpTxt: "Please enter the verification code sent to your number",
   AppStrings.enterFourDigitOtp: "Enter the 4-digit OTP ",
   AppStrings.didNotGetOtp: "Did not get the OTP?",
-  AppStrings.resendOtp: "Resend OTP",
+  AppStrings.resendOtp: "Resend Code",
   AppStrings.verify: "Verify",
   AppStrings.goBack: "Go back",
 
@@ -82,7 +82,6 @@ Map<String, String> en = {
   AppStrings.ourMission: 'Our Mission',
   AppStrings.ourVision: 'Our Vision',
   AppStrings.logOut: 'Logout',
-  AppStrings.logIn: 'Log In',
   AppStrings.deleteAccount: 'Delete Account',
   AppStrings.logOutTxt: 'Are you sure you want to logout?"',
   AppStrings.deleteAccountTxt: 'Are you sure you want to delete account?',
@@ -183,4 +182,9 @@ Map<String, String> en = {
   AppStrings.error: "Error",
   AppStrings.userCreatedSuccessfully: "User Created Successfully",
   AppStrings.otpMismatch: "Please enter valid Otp",
+
+  ///New
+  AppStrings.logIn: 'Log In',
+  AppStrings.enterYourPassword: 'Enter your password',
+
 };

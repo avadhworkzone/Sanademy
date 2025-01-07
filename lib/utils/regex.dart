@@ -6,8 +6,10 @@ class RegularExpressionUtils {
   static String alphabetPattern = "[a-zA-Z]";
   static String text = "^[a-zA-Z ]*\$";
   static String alphabetSpacePattern = "[a-zA-Z ]";
-
   static String address = r"^[a-zA-Z0-9\s,-]+$";
+  static const String onlyNumbersPattern = r'^[0-9]+$';
+
+
 
   /// capitalCase is used for one capital character is requiter in string
   var capitalCase = RegExp(r'[A-Z]');
@@ -114,5 +116,22 @@ class ValidationMethod {
       return AppStrings.isRequired.tr;
     }
     return null;
+  }
+
+  static String? validatePassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Password is required';
+    } else if (value.length < 6) {
+      return 'Password must be at least 6 characters';
+    } /*else if (!RegExp(r'[A-Z]').hasMatch(value)) {
+      return 'Password must contain at least one uppercase letter';
+    } else if (!RegExp(r'[a-z]').hasMatch(value)) {
+      return 'Password must contain at least one lowercase letter';
+    } else if (!RegExp(r'[0-9]').hasMatch(value)) {
+      return 'Password must contain at least one number';
+    } else if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value)) {
+      return 'Password must contain at least one special character';
+    }*/
+    return null; // Valid password
   }
 }

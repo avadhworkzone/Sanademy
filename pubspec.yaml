@@ -60,23 +60,6 @@ flutter:
     - assets/icons/
     - assets/images/
 
-#  fonts:
-#    - family: Quicksand
-#      fonts:
-#        - asset: assets/fonts/Quicksand-Regular.ttf
-#          weight: 400
-#        - asset: assets/fonts/Quicksand-SemiBold.ttf
-#          weight: 600
-#        - asset: assets/fonts/Quicksand-Bold.ttf
-#          weight: 700
-#        - asset: assets/fonts/Metropolis-Regular.otf
-#          weight: 400
-#        - asset: assets/fonts/Metropolis-SemiBold.otf
-#          weight: 600
-#        - asset: assets/fonts/Metropolis-Bold.otf
-#          weight: 700
-
-
   fonts:
     - family: Quicksand
       fonts:
