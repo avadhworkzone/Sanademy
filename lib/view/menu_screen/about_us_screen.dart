@@ -89,7 +89,7 @@
 //       //       preferredSize: const Size.fromHeight(40),
 //       //       child: Padding(
 //       //           padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 10.w),
-//       //           child: CustomText(AppStrings.aboutUs)),
+//       //           child: CustomNewText(AppStrings.aboutUs)),
 //       //     )),
 //       body: Column(
 //         crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +103,7 @@
 //               mainAxisSize: MainAxisSize.min,
 //               children: [
 //                 SizeConfig.sH25,
-//                 CustomText(
+//                 CustomNewText(
 //                   AppStrings.aboutUs,
 //                   color: AppColors.white,
 //                   fontWeight: FontWeight.w700,
@@ -144,12 +144,12 @@
 //             child: Column(
 //               crossAxisAlignment: CrossAxisAlignment.start,
 //
-//               children: [CustomText(AppStrings.sanaAcademyAboutUsDes,
+//               children: [CustomNewText(AppStrings.sanaAcademyAboutUsDes,
 //                 fontWeight: FontWeight.w400,
 //                 fontSize: 16.sp,
 //                 color: AppColors.blue34),
 //               SizedBox(height: 20.h),
-//               CustomText(AppStrings.contactUs,
+//               CustomNewText(AppStrings.contactUs,
 //                   fontWeight: FontWeight.w600,
 //                   fontSize: 20.sp,
 //                   color: AppColors.blue34),
@@ -227,7 +227,7 @@
 //               ),
 //             ),
 //             SizedBox(width: 8.w),
-//             CustomText(title,
+//             CustomNewText(title,
 //                 fontWeight: FontWeight.w500,
 //                 fontSize: 16.sp,
 //                 color: AppColors.blue34),
@@ -253,6 +253,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/common_appbar.dart';
+import 'package:sanademy/commonWidget/common_scrollable_appbar_widget.dart';
 import 'package:sanademy/commonWidget/common_snackbar.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
@@ -273,31 +274,7 @@ class AboutUsScreen extends StatefulWidget {
 
 class _AboutUsScreenState extends State<AboutUsScreen> {
   AboutUsViewModel aboutUsViewModel = Get.put(AboutUsViewModel());
-  late ScrollController _scrollController;
-  final double _scrollSpeed = 15.0;
   int selectedLanguage = 0;
-
-  void _startScrolling() {
-    if (_scrollController.hasClients) {
-      Future.delayed(const Duration(milliseconds: 100), () {
-        if (_scrollController.hasClients) {
-          _scrollController
-              .animateTo(
-            _scrollController.offset + _scrollSpeed,
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.linear,
-          )
-              .then((_) {
-            if (_scrollController.offset >=
-                _scrollController.position.maxScrollExtent) {
-              _scrollController.jumpTo(0);
-            }
-            _startScrolling();
-          });
-        }
-      });
-    }
-  }
 
   // @override
   // void initState() {
@@ -307,23 +284,6 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
 
   getAboutUsApiCall() async {
     await aboutUsViewModel.getAboutUsData();
-  }
-
-  @override
-  void initState() {
-    _scrollController = ScrollController();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _startScrolling();
-    });
-    // _startScrolling();
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
   }
 
   Future<void> _launchWhatsApp({required String phone}) async {
@@ -353,7 +313,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizeConfig.sH25,
-                CustomText(
+                CustomNewText(
                   AppStrings.aboutUs,
                   color: AppColors.white,
                   fontWeight: FontWeight.w700,
@@ -361,29 +321,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                   fontFamily: AppConstants.metropolis,
                 ),
                 SizeConfig.sH35,
-                SizedBox(
-                  height: 39.w,
-                  child: ListView.builder(
-                    controller: _scrollController,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          LocalAssets(
-                            imagePath: AppImageAssets.animationImage,
-                            imgColor: AppColors.white.withOpacity(0.4),
-                            boxFix: BoxFit.cover,
-                            width: Get.width,
-                            height: 28.h,
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                )
+                const CommonScrollableAppbarWidget()
               ],
             ),
           ),
@@ -394,14 +332,14 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               children: [
                 SizedBox(height: 16.h),
-                CustomText(
+                CustomNewText(
                   AppStrings.sanaAcademyAboutUsDes,
                   fontWeight: FontWeight.w400,
                   fontSize: 16.sp,
                   color: AppColors.blue34,
                 ),
                 SizedBox(height: 16.h),
-                CustomText(
+                CustomNewText(
                   AppStrings.contactUs,
                   fontWeight: FontWeight.w600,
                   fontSize: 20.sp,
@@ -458,7 +396,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
               ),
             ),
             SizedBox(width: 8.w),
-            CustomText(title,
+            CustomNewText(title,
                 fontWeight: FontWeight.w500,
                 fontSize: 16.sp,
                 color: AppColors.blue34),

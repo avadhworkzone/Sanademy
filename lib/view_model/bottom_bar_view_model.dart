@@ -7,6 +7,8 @@ import 'package:sanademy/view/homeScreen/home_screen.dart';
 import 'package:sanademy/view/myProgressScreen/my_progress_screen.dart';
 import 'package:sanademy/view/notificationScreen/notification_screen.dart';
 import 'package:sanademy/view/my_certificate_screen/my_certificate_screen.dart';
+import 'package:sanademy/view/profile_screen/new_profile_screen.dart';
+import 'package:sanademy/view/profile_screen/profile_screen.dart';
 
 import '../view/homeScreen/widget/home_screen_new.dart';
 
@@ -17,18 +19,16 @@ class BottomBarViewModel extends GetxController {
     const HomeScreenNew(),
     // const HomeScreen(),
     SharedPreferenceUtils.getIsLogin() == true
-        ?
-    const MyProgressScreen()
+        ? const MyProgressScreen()
         : const SignUpNewScreen(),
-        // : const SignUpScreen(),
+    // : const SignUpScreen(),
     SharedPreferenceUtils.getIsLogin() == true
         ? const MyCertificateScreen()
         : const SignUpScreen(),
-    const NotificationScreen(),
+    const NewProfileScreen(),
+    // const NotificationScreen(),
     const NoInterNetScreen(),
   ].obs;
 
   RxList progressDetailList = [].obs;
-
-
 }

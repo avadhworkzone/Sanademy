@@ -64,8 +64,8 @@ class AppStrings {
   static String courseContent = 'Course Content';
   static String courseContentLectures = 'Lectures';
   static String mins = 'mins';
-  static String taskIncluded =  'Tasks Included';
-  static String certificates =  'Certificates';
+  static String taskIncluded = 'Tasks Included';
+  static String certificates = 'Certificates';
 
   /// payment option dialog
   static String paymentOption = 'Payment Options';
@@ -89,7 +89,8 @@ class AppStrings {
   static String deleteAccountTxt = "Are you sure you want to delete account?";
   static String yes = "Yes";
   static String no = "No";
-  static String reDirectOnWhatsAppMessage = 'Please Contact Us :\n+964 7509790444\n+964 7709790444\nMy user id for Sana Academy is:';
+  static String reDirectOnWhatsAppMessage =
+      'Please Contact Us :\n+964 7509790444\n+964 7709790444\nMy user id for Sana Academy is:';
 
   /// Contact Us Screen
   static String getInTouch = 'Get In Touch';
@@ -113,9 +114,9 @@ class AppStrings {
   /// my progress screen
   static String progressIntroductionTxt =
       'In this page, you can see all your enrolled courses and the progress that you made in each one of them.';
-  static String  complete = ' complete';
-  static String  remaining = ' remaining';
-  static String  noProgressAvailable = 'No Progress Available';
+  static String complete = ' complete';
+  static String remaining = ' remaining';
+  static String noProgressAvailable = 'No Progress Available';
 
   /// my certificate screen
   static String certificate = 'My Certificates';
@@ -132,7 +133,8 @@ class AppStrings {
   static String examsScreenTxt =
       'In this page, you can test your knowledge in each field, and possibly receive the certificate.';
   static String noExamAvailable = 'No Exams Available';
-  static String pleaseCompleteYourExamTxt = 'Please complete your progress after you can give the exams';
+  static String pleaseCompleteYourExamTxt =
+      'Please complete your progress after you can give the exams';
 
   /// questions screen
   static String finishExam = 'Finish Exam';
@@ -187,13 +189,15 @@ class AppStrings {
   static String iPhone = 'iPhone';
 
   /// Language Screen
-  static String languageSelection = 'Which language would you prefer for the app?';
+  static String languageSelection =
+      'Which language would you prefer for the app?';
   static String english = 'English';
   static String kurdish = 'Kurdish';
   static String welcomeBack = 'Welcome Back';
   static String whatDoYouWantToLearnToday = 'What do you want\nto learn today?';
-    static String myCourses = 'My Courses';
-    static String sanaAcademyAboutUsDes = 'Sana Academy is an online and in-person educational institution dedicated to empowering the youth in Iraq. We offer affordable courses and access to top tutors, helping individuals shape their lives through quality education. Our mission is to make learning accessible and transformative for the community. ';
+  static String myCourses = 'My Courses';
+  static String sanaAcademyAboutUsDes =
+      'Sana Academy is an online and in-person educational institution dedicated to empowering the youth in Iraq. We offer affordable courses and access to top tutors, helping individuals shape their lives through quality education. Our mission is to make learning accessible and transformative for the community. ';
 
   static String whatsApp = 'WhatsApp';
   static String telegram = 'Telegram';
@@ -203,13 +207,18 @@ class AppStrings {
   ///New UI
   static String logIn = 'Log In';
   static String enterYourPassword = 'Enter your password';
-  static String loginOrRegisterToEnrollThisCourse = 'Login or Register to enroll this course';
+  static String loginOrRegisterToEnrollThisCourse =
+      'Login or Register to enroll this course';
   static String inputPhoneNumber = 'Input Phone Number ';
-  static String password  = 'Password ';
-  static String verifyYourPhone  = 'Verify Your Phone';
-  static String resendCode  = 'Resend Code';
-  static String verifyPhoneNumber  = 'Verify Phone Number';
-  static String otpHasBeenSetToYourPhone  = 'OTP Has been set to your phone ';
-  static String onWhatsApp  = ' on WhatsApp';
-
+  static String password = 'Password ';
+  static String verifyYourPhone = 'Verify Your Phone';
+  static String resendCode = 'Resend Code';
+  static String verifyPhoneNumber = 'Verify Phone Number';
+  static String otpHasBeenSetToYourPhone = 'OTP Has been set to your phone ';
+  static String onWhatsApp = ' on WhatsApp';
+  static String profileCompletion = 'Profile Completion :';
+  static String fullNameEng = 'Full Name (English) *';
+  static String fullNameKur = 'Full Name (Kurdis) *';
+  static String birthOfDate = 'Birth of Date';
+  static String gender = 'Gender *';
 }
