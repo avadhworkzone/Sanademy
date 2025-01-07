@@ -35,13 +35,13 @@ dependencies:
   youtube_player_flutter: ^9.0.1
   chewie: ^1.8.5
 #  fastpay_merchant: ^1.1.1
-  url_launcher: ^6.3.0
+  url_launcher: ^6.3.1
   firebase_auth: ^4.10.0
   firebase_core:
   firebase_messaging: ^14.7.19
   flutter_local_notifications: ^17.1.2
-  device_info_plus:
-  flutter_native_splash: ^2.4.4
+#  device_info_plus:
+  flutter_native_splash:
 
 
 dev_dependencies:
