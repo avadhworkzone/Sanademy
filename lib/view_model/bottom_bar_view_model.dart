@@ -8,6 +8,8 @@ import 'package:sanademy/view/myProgressScreen/my_progress_screen_new_screen.dar
 import 'package:sanademy/view/my_certificate_screen/my_certificate_new_screen.dart';
 import 'package:sanademy/view/notificationScreen/notification_screen.dart';
 import 'package:sanademy/view/my_certificate_screen/my_certificate_screen.dart';
+import 'package:sanademy/view/profile_screen/new_profile_screen.dart';
+import 'package:sanademy/view/profile_screen/profile_screen.dart';
 
 import '../view/homeScreen/widget/home_screen_new.dart';
 
@@ -26,7 +28,7 @@ class BottomBarViewModel extends GetxController {
         ? const MyCertificateNewScreen()
         // ? const MyCertificateScreen()
         : */const MyCertificateNewScreen(),
-    const NotificationScreen(),
+    const NewProfileScreen(),
     const NoInterNetScreen(),
   ].obs;
 

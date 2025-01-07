@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +59,6 @@ class SignUpViewModel extends GetxController {
     }
   }
 
-
   /// DATE PICKER
   Future<void> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -72,8 +69,10 @@ class SignUpViewModel extends GetxController {
         builder: (BuildContext context, Widget? child) {
           return Theme(
             data: ThemeData.light().copyWith(
-              colorScheme: const ColorScheme.light(primary: AppColors.primaryColor),
-              buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.primary),
+              colorScheme:
+                  const ColorScheme.light(primary: AppColors.primaryColor),
+              buttonTheme:
+                  const ButtonThemeData(textTheme: ButtonTextTheme.primary),
             ),
             child: child!,
           );
@@ -94,7 +93,7 @@ class SignUpViewModel extends GetxController {
     return '$year-${month.toString().padLeft(2, '0')}-${day.toString().padLeft(2, '0')}';
   }
 
- /* Future<void> verifyOtp(BuildContext context, String verificationIDFinal) async {
+  /* Future<void> verifyOtp(BuildContext context, String verificationIDFinal) async {
     try {
       showLoadingDialog(context: context);
       final FirebaseAuth auth = FirebaseAuth.instance;
@@ -115,7 +114,9 @@ class SignUpViewModel extends GetxController {
 
   ///Register API CALLING AND VALIDATION....
   Future<void> registerViewModel(
-      {required num step, required BuildContext context, String verificationIDFinal = ''}) async {
+      {required num step,
+      required BuildContext context,
+      String verificationIDFinal = ''}) async {
     unFocus();
 
     ///new....
@@ -127,13 +128,16 @@ class SignUpViewModel extends GetxController {
       ApiKeys.countryCode: signUpCountryCode.value,
       ApiKeys.step: step.toString(),
       ApiKeys.deviceType: deviceToken,
-      ApiKeys.deviceToken: Platform.isAndroid ? AppStrings.android : AppStrings.iPhone,
+      ApiKeys.deviceToken:
+          Platform.isAndroid ? AppStrings.android : AppStrings.iPhone,
     };
 
-    final response = await SignUpService().registrationRepo(mapData: queryParams);
+    final response =
+        await SignUpService().registrationRepo(mapData: queryParams);
 
     if (checkStatusCode(response!.statusCode ?? 0)) {
-      RegisterResModel registerResModel = registerResModelFromJson(response.response.toString());
+      RegisterResModel registerResModel =
+          registerResModelFromJson(response.response.toString());
       if (registerResModel.success!) {
         if (registerResModel.data != null) {
           // signUpUserOtp.value = registerResModel.data!.otp ?? 0;
@@ -152,13 +156,13 @@ class SignUpViewModel extends GetxController {
                 showLoadingDialog(context: context);
                 print('djnekb-----------------');
                 final FirebaseAuth auth = FirebaseAuth.instance;
-                PhoneAuthCredential credential =
-                    PhoneAuthProvider.credential(verificationId: verificationIDFinal,
-                        smsCode: code.value);
+                PhoneAuthCredential credential = PhoneAuthProvider.credential(
+                    verificationId: verificationIDFinal, smsCode: code.value);
                 await auth.signInWithCredential(credential);
                 hideLoadingDialog(context: context);
                 showSussesSnackBar('', registerResModel.message.toString());
-                await SharedPreferenceUtils.setToken(registerResModel.data!.token ?? '');
+                await SharedPreferenceUtils.setToken(
+                    registerResModel.data!.token ?? '');
                 Get.offAll(const BottomBar());
               } on FirebaseAuthException catch (e) {
                 hideLoadingDialog(context: context);

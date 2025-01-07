@@ -178,21 +178,19 @@ commonUpdateAppBar(
     Widget? homeScreenLeading,
     String? title,
     VoidCallback? onTap,
+    String? replaceLogoText,
     double? paddingLeft}) {
   return Container(
     width: Get.width,
     alignment: Alignment.topCenter,
     decoration: BoxDecoration(
       image: DecorationImage(
-        image:
-            AssetImage(AppImageAssets.appLogo), // Replace with your image path
-        fit: BoxFit.cover, // Adjusts how the image fits the container
+        image: AssetImage(AppImageAssets.appLogo),
+        fit: BoxFit.cover,
       ),
     ),
     child: Padding(
-      padding: EdgeInsets.only(
-          // top: MediaQuery.of(context).padding.top, left: 18.w),
-          top: MediaQuery.of(context).padding.top),
+      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -238,14 +236,26 @@ commonUpdateAppBar(
                 (isHomeScreen ?? false)
                     ? (homeScreenLeading ?? const SizedBox())
                     : const SizedBox(),
-                if (isLogoRequired ?? true)
-                  Flexible(
-                    child: LocalAssets(
-                      imagePath: 'assets/images/sanademyLogo.png',
-                      scaleSize: 4.w,
-                    ),
-                  ),
-
+                // if (isLogoRequired ?? true)
+                //   Flexible(
+                //     child: LocalAssets(
+                //       imagePath: 'assets/images/sanademyLogo.png',
+                //       scaleSize: 4.w,
+                //     ),
+                //   ),
+                isLogoRequired == true
+                    ? Flexible(
+                        child: LocalAssets(
+                          imagePath: 'assets/images/sanademyLogo.png',
+                          scaleSize: 4.w,
+                        ),
+                      )
+                    : CustomText(
+                        replaceLogoText ?? "",
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.white,
+                        fontSize: 20.sp,
+                      ),
                 actionWidget ?? const SizedBox()
               ],
             ),

@@ -89,7 +89,7 @@
 //       //       preferredSize: const Size.fromHeight(40),
 //       //       child: Padding(
 //       //           padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 10.w),
-//       //           child: CustomText(AppStrings.aboutUs)),
+//       //           child: CustomNewText(AppStrings.aboutUs)),
 //       //     )),
 //       body: Column(
 //         crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +103,7 @@
 //               mainAxisSize: MainAxisSize.min,
 //               children: [
 //                 SizeConfig.sH25,
-//                 CustomText(
+//                 CustomNewText(
 //                   AppStrings.aboutUs,
 //                   color: AppColors.white,
 //                   fontWeight: FontWeight.w700,
@@ -144,12 +144,12 @@
 //             child: Column(
 //               crossAxisAlignment: CrossAxisAlignment.start,
 //
-//               children: [CustomText(AppStrings.sanaAcademyAboutUsDes,
+//               children: [CustomNewText(AppStrings.sanaAcademyAboutUsDes,
 //                 fontWeight: FontWeight.w400,
 //                 fontSize: 16.sp,
 //                 color: AppColors.blue34),
 //               SizedBox(height: 20.h),
-//               CustomText(AppStrings.contactUs,
+//               CustomNewText(AppStrings.contactUs,
 //                   fontWeight: FontWeight.w600,
 //                   fontSize: 20.sp,
 //                   color: AppColors.blue34),
@@ -227,7 +227,7 @@
 //               ),
 //             ),
 //             SizedBox(width: 8.w),
-//             CustomText(title,
+//             CustomNewText(title,
 //                 fontWeight: FontWeight.w500,
 //                 fontSize: 16.sp,
 //                 color: AppColors.blue34),
@@ -246,14 +246,15 @@
 //     );
 //   }
 // }
+
+///-------------------------------------///
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/common_appbar.dart';
+import 'package:sanademy/commonWidget/common_scrollable_appbar_widget.dart';
 import 'package:sanademy/commonWidget/common_snackbar.dart';
-import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
@@ -261,8 +262,8 @@ import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
-import 'package:sanademy/view/menu_screen/contact_us_screen.dart';
 import 'package:sanademy/view_model/about_us_view_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutUsScreen extends StatefulWidget {
   const AboutUsScreen({super.key});
@@ -273,31 +274,7 @@ class AboutUsScreen extends StatefulWidget {
 
 class _AboutUsScreenState extends State<AboutUsScreen> {
   AboutUsViewModel aboutUsViewModel = Get.put(AboutUsViewModel());
-  late ScrollController _scrollController;
-  final double _scrollSpeed = 15.0;
   int selectedLanguage = 0;
-  void _startScrolling() {
-    if (_scrollController.hasClients) {
-      Future.delayed(const Duration(milliseconds: 100), () {
-        if (_scrollController.hasClients) {
-          _scrollController
-              .animateTo(
-            _scrollController.offset + _scrollSpeed,
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.linear,
-          )
-              .then((_) {
-            if (_scrollController.offset >=
-                _scrollController.position.maxScrollExtent) {
-              _scrollController.jumpTo(0);
-              // _scrollController.onAttach;
-            }
-            _startScrolling();
-          });
-        }
-      });
-    }
-  }
 
   // @override
   // void initState() {
@@ -309,21 +286,13 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
     await aboutUsViewModel.getAboutUsData();
   }
 
-  @override
-  void initState() {
-    _scrollController = ScrollController();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _startScrolling();
-    });
-    // _startScrolling();
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
+  Future<void> _launchWhatsApp({required String phone}) async {
+    final url = "https://wa.me/$phone";
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      commonSnackBar(title: 'Error', subTitle: 'Could not launch WhatsApp');
+    }
   }
 
   @override
@@ -344,7 +313,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizeConfig.sH25,
-                CustomText(
+                CustomNewText(
                   AppStrings.aboutUs,
                   color: AppColors.white,
                   fontWeight: FontWeight.w700,
@@ -352,29 +321,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                   fontFamily: AppConstants.metropolis,
                 ),
                 SizeConfig.sH35,
-                SizedBox(
-                  height: 39.w,
-                  child: ListView.builder(
-                    controller: _scrollController,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          LocalAssets(
-                            imagePath: AppImageAssets.animationImage,
-                            imgColor: AppColors.white.withOpacity(0.4),
-                            boxFix: BoxFit.cover,
-                            width: Get.width,
-                            height: 28.h,
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                )
+                const CommonScrollableAppbarWidget()
               ],
             ),
           ),
@@ -385,14 +332,14 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               children: [
                 SizedBox(height: 16.h),
-                CustomText(
+                CustomNewText(
                   AppStrings.sanaAcademyAboutUsDes,
                   fontWeight: FontWeight.w400,
                   fontSize: 16.sp,
                   color: AppColors.blue34,
                 ),
                 SizedBox(height: 16.h),
-                CustomText(
+                CustomNewText(
                   AppStrings.contactUs,
                   fontWeight: FontWeight.w600,
                   fontSize: 20.sp,
@@ -400,24 +347,18 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                 ),
                 SizedBox(height: 16.h),
                 contactUsMethod(
-                    preIcon: AppImageAssets.whatAppIcon,
-                    title: AppStrings.whatsApp,
-                    postIcon: AppImageAssets.copyIcon),
-                SizedBox(height: 8.h),
-                contactUsMethod(
-                    preIcon: AppImageAssets.telegramIcon,
-                    title: AppStrings.telegram,
-                    postIcon: AppImageAssets.copyIcon),
-                SizedBox(height: 16.h),
-                contactUsMethod(
                     preIcon: AppImageAssets.callIcon,
                     title: AppStrings.contactNo,
-                    postIcon: AppImageAssets.copyIcon),
+                    postIcon: AppImageAssets.copyIcon,
+                    postIcon1: AppImageAssets.whatAppIcon,
+                    postIcon2: AppImageAssets.telegramIcon),
                 SizedBox(height: 8.h),
                 contactUsMethod(
                     preIcon: AppImageAssets.callIcon,
                     title: AppStrings.contactNo,
-                    postIcon: AppImageAssets.copyIcon),
+                    postIcon: AppImageAssets.copyIcon,
+                    postIcon1: AppImageAssets.whatAppIcon,
+                    postIcon2: AppImageAssets.telegramIcon),
                 SizedBox(height: 8.h),
                 contactUsMethod(
                     preIcon: AppImageAssets.emailIdIcon,
@@ -434,8 +375,10 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
 
   Container contactUsMethod(
       {required String preIcon,
-        required String title,
-        required String postIcon}) {
+      required String title,
+      String? postIcon1,
+      String? postIcon2,
+      required String postIcon}) {
     return Container(
       decoration: BoxDecoration(
           border: Border.all(color: AppColors.greyE0),
@@ -448,32 +391,61 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
               backgroundColor: AppColors.whitef7,
               child: LocalAssets(
                 imagePath: preIcon,
-                // imagePath: AppImageAssets.enrollSuccessfullyImg,
                 height: 20.h,
                 width: 20.w,
               ),
             ),
             SizedBox(width: 8.w),
-            CustomText(title,
+            CustomNewText(title,
                 fontWeight: FontWeight.w500,
                 fontSize: 16.sp,
                 color: AppColors.blue34),
             const Spacer(),
-            InkWell(
-              onTap: () {
-                Clipboard.setData(ClipboardData(text: title));
-                commonSnackBar(
-                    title: 'Copied!', subTitle: '$title copied to clipboard');
-              },
-              child: CircleAvatar(
-                backgroundColor: AppColors.whitef7,
-                child: LocalAssets(
-                  imagePath: postIcon,
-                  // imagePath: AppImageAssets.enrollSuccessfullyImg,
-                  height: 16.h,
-                  width: 16.w,
+            Row(
+              children: [
+                if (postIcon1 != null)
+                  InkWell(
+                    onTap: () {
+                      _launchWhatsApp(phone: title);
+                    },
+                    child: CircleAvatar(
+                      backgroundColor: AppColors.whitef7,
+                      child: LocalAssets(
+                        imagePath: postIcon1,
+                        height: 20.h,
+                        width: 20.w,
+                      ),
+                    ),
+                  ),
+                SizedBox(width: 5.w),
+                if (postIcon2 != null)
+                  CircleAvatar(
+                    backgroundColor: AppColors.whitef7,
+                    child: LocalAssets(
+                      imagePath: postIcon2,
+                      height: 20.h,
+                      width: 20.w,
+                    ),
+                  ),
+                SizedBox(width: 5.w),
+                InkWell(
+                  onTap: () {
+                    Clipboard.setData(ClipboardData(text: title));
+                    commonSnackBar(
+                        title: 'Copied!',
+                        subTitle: '$title copied to clipboard');
+                  },
+                  child: CircleAvatar(
+                    backgroundColor: AppColors.whitef7,
+                    child: LocalAssets(
+                      imagePath: postIcon,
+                      // imagePath: AppImageAssets.enrollSuccessfullyImg,
+                      height: 16.h,
+                      width: 16.w,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
           ],
         ),
