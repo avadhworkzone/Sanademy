@@ -186,5 +186,17 @@ Map<String, String> en = {
   ///New
   AppStrings.logIn: 'Log In',
   AppStrings.enterYourPassword: 'Enter your password',
+  AppStrings.loginOrRegisterToEnrollThisCourse: 'Login or Register to enroll this course',
+  AppStrings.inputPhoneNumber: 'Input Phone Number',
+  AppStrings.password: 'Password',
+  AppStrings.verifyYourPhone: 'Verify Your Phone',
+  AppStrings.resendCode: 'Resend Code',
+  AppStrings.verifyPhoneNumber: 'Verify Phone Number',
+  AppStrings.otpHasBeenSetToYourPhone: 'OTP has been sent to your phone',
+  AppStrings.onWhatsApp: 'on WhatsApp',
+  AppStrings.reqHardCopy: 'Req. Hard Copy',
+  AppStrings.testsAndCertificates: 'Tests & Certificates',
+  AppStrings.inThisPageYouCanSeeAllCertificates: 'In this page, you can see all your certificates for completing each course, or passing the test in that field.',
+  AppStrings.inThisPageYouCanTestYourKnowledge: 'In this page, you can test your knowledge in each field, and possibly receive the certificate.',
 
 };

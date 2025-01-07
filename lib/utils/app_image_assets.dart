@@ -47,6 +47,8 @@ class AppImageAssets {
   static const String infoIcon = '${AppConstants.baseIconAssetsPath}info.png';
   static const String notificationNew = '${AppConstants.baseIconAssetsPath}notificationNew.png';
   static const String playIcon = '${AppConstants.baseIconAssetsPath}play.png';
+  static const String downloadCircleFilled = '${AppConstants.baseIconAssetsPath}download_circle_filled.png';
+  static const String requestHardCopy = '${AppConstants.baseIconAssetsPath}request_hard_copy.png';
   static const String recommendedBgImg= '${AppConstants.baseImageAssetsPath}recommendedBgImg.png';
   static const String bookOutlined= '${AppConstants.baseIconAssetsPath}book_outlined.png';
   static const String profileImage= '${AppConstants.baseImageAssetsPath}profileImage.png';
@@ -68,6 +70,7 @@ class AppImageAssets {
   static const String list= '${AppConstants.baseIconAssetsPath}list.png';
   static const String tv= '${AppConstants.baseIconAssetsPath}tv.png';
   static const String videoPlay= '${AppConstants.baseIconAssetsPath}video_play.png';
+  static const String warning= '${AppConstants.baseIconAssetsPath}warning.png';
   static const String checkmark= '${AppConstants.baseIconAssetsPath}checkmark.png';
   static const String lock= '${AppConstants.baseIconAssetsPath}lock.png';
   static const String yellowPlay= '${AppConstants.baseIconAssetsPath}yellow_play.png';

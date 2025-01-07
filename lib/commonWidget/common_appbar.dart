@@ -173,8 +173,10 @@ commonUpdateAppBar(
     bool? isBack,
     bool? isHomeScreen,
     bool? isLogoRequired,
+    bool? isOnlyTitleRequired,
     Widget? otherWidget,
     Widget? homeScreenLeading,
+    String? title,
     VoidCallback? onTap,
     double? paddingLeft}) {
   return Container(
@@ -224,16 +226,26 @@ commonUpdateAppBar(
                         ),
                       )
                     : const SizedBox(),
+                if (isOnlyTitleRequired ?? false)
+                  Center(
+                    child: CustomText(
+                      title ?? "",
+                      color: AppColors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20.sp,
+                    ),
+                  ),
                 (isHomeScreen ?? false)
                     ? (homeScreenLeading ?? const SizedBox())
                     : const SizedBox(),
-                if(isLogoRequired ?? true)
-                Flexible(
-                  child: LocalAssets(
-                    imagePath: 'assets/images/sanademyLogo.png',
-                    scaleSize: 4.w,
+                if (isLogoRequired ?? true)
+                  Flexible(
+                    child: LocalAssets(
+                      imagePath: 'assets/images/sanademyLogo.png',
+                      scaleSize: 4.w,
+                    ),
                   ),
-                ),
+
                 actionWidget ?? const SizedBox()
               ],
             ),
@@ -244,3 +256,89 @@ commonUpdateAppBar(
     ),
   );
 }
+commonOnlyTitleAppBar({
+  required BuildContext context,
+  Widget? actionWidget,
+  bool? isBack,
+  bool? isLogoRequired,
+
+  Widget? otherWidget,
+  String? title,
+  String? description,
+  VoidCallback? onTap,
+  double? paddingLeft,
+}) {
+  return Container(
+    width: Get.width,
+    alignment: Alignment.topCenter,
+    decoration: BoxDecoration(
+      image: DecorationImage(
+        image: AssetImage(AppImageAssets.appLogo), // Replace with your image path
+        fit: BoxFit.cover, // Adjusts how the image fits the container
+      ),
+    ),
+    child: Padding(
+      padding: EdgeInsets.only(
+        top: MediaQuery.of(context).padding.top,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizeConfig.sH8,
+          Stack(
+            alignment: Alignment.center, // Center the title
+            children: [
+              // Back Button
+              Align(
+                alignment: Alignment.centerLeft,
+                child: InkWell(
+                  onTap: onTap ?? () => Get.back(),
+                  child: Container(
+                    margin: EdgeInsets.only(left: paddingLeft ?? 0),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 13.w, vertical: 13.w),
+                    decoration: BoxDecoration(
+                      color: AppColors.white.withOpacity(0.2),
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: AppColors.white.withOpacity(0.5),
+                      ),
+                    ),
+                    child: Icon(
+                      Icons.arrow_back_ios_new,
+                      size: 12.w,
+                      color: AppColors.white,
+                    ),
+                  ),
+                ),
+              ),
+              // Title in the center
+
+                CustomText(
+                  title ?? "",
+                  color: AppColors.white,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 20.sp,
+                ),
+              // SizedBox(height: 10.h),
+              // if(description?.isNotEmpty ?? false)
+              // CustomText(
+              //     description ?? "",
+              //     color: AppColors.white,
+              //     fontWeight: FontWeight.w700,
+              //     fontSize: 20.sp,
+              //   ),
+              // Optional action widget on the right
+              Align(
+                alignment: Alignment.centerRight,
+                child: actionWidget ?? const SizedBox(),
+              ),
+            ],
+          ),
+          otherWidget ?? const SizedBox(),
+        ],
+      ),
+    ),
+  );
+}
+
