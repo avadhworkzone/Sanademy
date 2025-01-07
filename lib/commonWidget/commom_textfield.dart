@@ -23,6 +23,7 @@ class CommonTextField extends StatelessWidget {
   final String? hintText;
   final String? validationMessage;
   final String? preFixIconPath;
+  final String? obscuringCharacter;
   final int? maxLine;
   final int? maxLength;
   final Widget? sIcon;
@@ -50,6 +51,7 @@ class CommonTextField extends StatelessWidget {
     required this.regularExpression,
     this.title,
     this.textEditController,
+    this.obscuringCharacter,
     this.isValidate = true,
     this.isCapitalize = false,
     this.keyBoardType,
@@ -128,6 +130,7 @@ class CommonTextField extends StatelessWidget {
                               : null;
         },
         textInputAction: textInputAction,
+        obscuringCharacter: obscuringCharacter ?? "*",
         autovalidateMode: AutovalidateMode.onUserInteraction,
         cursorColor: cursorColor ?? AppColors.black,
         decoration: InputDecoration(
@@ -138,7 +141,7 @@ class CommonTextField extends StatelessWidget {
               EdgeInsets.symmetric(horizontal: 15.w, vertical: 17.h),
           hintText: hintText!.tr,
           errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.red),
+              borderSide: const BorderSide(color: AppColors.red),
               borderRadius: BorderRadius.circular(10.r)),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),

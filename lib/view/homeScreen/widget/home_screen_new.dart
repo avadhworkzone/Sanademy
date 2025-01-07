@@ -249,7 +249,7 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                           // SizeConfig.sH15,
 
                           /// CAROUSAL SLIDER VIEW....
-                          const MyCoursesWidget(),
+                           MyCoursesWidget(),
                           SizeConfig.sH20,
                           // HomeSliderWidget(),
                           //
@@ -257,8 +257,8 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                           const HomeCategoryWidget(),
                           SizeConfig.sH15,
                           //
-                          // /// RECOMMENDED
-                          HomeRecommendedWidget(),
+                          /// RECOMMENDED
+                          const HomeRecommendedWidget(),
                         ],
                       ),
                     )

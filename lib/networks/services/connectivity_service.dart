@@ -29,7 +29,7 @@ class ConnectivityViewModel extends GetxController {
             },
           );
         }
-      },
+      } ,
     );
   }
 

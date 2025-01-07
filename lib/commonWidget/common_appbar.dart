@@ -59,6 +59,41 @@ AppBar commonAppBar(
       );
 }
 
+AppBar onlyTitleNewCommonAppBar(
+    {String? titleTxt,
+    Widget? leadingWidget,
+    Widget? actionWidget,
+    Widget? titleWidget,
+    Widget? sizedBox,
+    bool? centerTitle,
+    double? leadingWidth,
+    Color? textColor,
+    FontWeight? textFontWeight,
+    Color? appBarBackgroundColor,
+    PreferredSizeWidget? bottom}) {
+  return AppBar(
+      backgroundColor: appBarBackgroundColor ?? AppColors.primaryColor,
+      automaticallyImplyLeading: false,
+      centerTitle: centerTitle ?? true,
+      elevation: 0.0,
+      // bottomOpacity: 0.0,
+      scrolledUnderElevation: 0,
+      leading: leadingWidget ?? const SizedBox(),
+      leadingWidth: leadingWidth ?? 0.w,
+      actions: [actionWidget ?? const SizedBox(), SizedBox(width: 8.w)],
+      title: titleWidget ??
+          CustomText(
+            titleTxt!.tr,
+            color: textColor ?? AppColors.white,
+            fontWeight: textFontWeight ?? FontWeight.w700,
+            fontSize: 20.sp,
+          ),
+      bottom:
+          bottom /*?? PreferredSize(
+            preferredSize: Size(Get.width, 10.h), child: const SizedBox(), ),*/
+      );
+}
+
 commonBackArrowAppBar(
     {required String titleTxt,
     String? actionTitle,
@@ -137,9 +172,10 @@ commonUpdateAppBar(
     Widget? actionWidget,
     bool? isBack,
     bool? isHomeScreen,
+    bool? isLogoRequired,
     Widget? otherWidget,
     Widget? homeScreenLeading,
-      VoidCallback? onTap,
+    VoidCallback? onTap,
     double? paddingLeft}) {
   return Container(
     width: Get.width,
@@ -164,15 +200,14 @@ commonUpdateAppBar(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
-
               children: [
                 (isBack ?? false)
                     ? InkWell(
-                  onTap: onTap ??
-                          () {
-                        Get.back();
-                      },
-                      child: Container(
+                        onTap: onTap ??
+                            () {
+                              Get.back();
+                            },
+                        child: Container(
                           padding: EdgeInsets.symmetric(
                               horizontal: 13.w, vertical: 13.w),
                           // alignment: Alignment.center,
@@ -187,11 +222,12 @@ commonUpdateAppBar(
                               Icons.arrow_back_ios_new,
                               color: AppColors.white),
                         ),
-                    )
+                      )
                     : const SizedBox(),
                 (isHomeScreen ?? false)
-                    ? (homeScreenLeading ?? const SizedBox( ))
+                    ? (homeScreenLeading ?? const SizedBox())
                     : const SizedBox(),
+                if(isLogoRequired ?? true)
                 Flexible(
                   child: LocalAssets(
                     imagePath: 'assets/images/sanademyLogo.png',
