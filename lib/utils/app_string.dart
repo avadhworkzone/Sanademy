@@ -210,16 +210,18 @@ class AppStrings {
   static String loginOrRegisterToEnrollThisCourse =
       'Login or Register to enroll this course';
   static String inputPhoneNumber = 'Input Phone Number ';
-  static String password  = 'Password ';
-  static String verifyYourPhone  = 'Verify Your Phone';
-  static String resendCode  = 'Resend Code';
-  static String verifyPhoneNumber  = 'Verify Phone Number';
-  static String otpHasBeenSetToYourPhone  = 'OTP Has been set to your phone ';
-  static String onWhatsApp  = ' on WhatsApp';
-  static String reqHardCopy  = 'Req. Hard Copy';
-  static String testsAndCertificates  = 'Tests & Certificates';
-  static String inThisPageYouCanSeeAllCertificates  = 'In this page, you can see all your certificates for completing each course, or passing the test in that field.';
-  static String inThisPageYouCanTestYourKnowledge  = 'In this page, you can test your knowledge in each field, and possibly receive the certificate.';
+  static String password = 'Password ';
+  static String verifyYourPhone = 'Verify Your Phone';
+  static String resendCode = 'Resend Code';
+  static String verifyPhoneNumber = 'Verify Phone Number';
+  static String otpHasBeenSetToYourPhone = 'OTP Has been set to your phone ';
+  static String onWhatsApp = ' on WhatsApp';
+  static String reqHardCopy = 'Req. Hard Copy';
+  static String testsAndCertificates = 'Tests & Certificates';
+  static String inThisPageYouCanSeeAllCertificates =
+      'In this page, you can see all your certificates for completing each course, or passing the test in that field.';
+  static String inThisPageYouCanTestYourKnowledge =
+      'In this page, you can test your knowledge in each field, and possibly receive the certificate.';
 
   // static String password = 'Password ';
   // static String verifyYourPhone = 'Verify Your Phone';
