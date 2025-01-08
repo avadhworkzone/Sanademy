@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/commom_textfield.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/commonWidget/network_assets.dart';
+import 'package:sanademy/networks/model/home_res_model.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
@@ -56,7 +57,8 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: NetWorkOcToAssets(
-                              imgUrl: homeScreenViewModel.bannerData[index].image,
+                              imgUrl:
+                                  homeScreenViewModel.bannerData[index].image,
                               boxFit: BoxFit.cover,
                             )),
                       );
@@ -101,6 +103,7 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
     );
   }
 }
+
 ///
 
 // class MyCoursesWidget extends StatefulWidget {
@@ -283,17 +286,20 @@ final List<Map<String, dynamic>> courses = [
     "completed": 0,
     "total": 10,
     "progress": 0,
-  }, {
+  },
+  {
     "title": "Exploring the Beauty of Mathematical Structures",
     "completed": 0,
     "total": 10,
     "progress": 0,
-  }, {
+  },
+  {
     "title": "Exploring the Beauty of Mathematical Structures",
     "completed": 0,
     "total": 10,
     "progress": 0,
-  }, {
+  },
+  {
     "title": "Exploring the Beauty of Mathematical Structures",
     "completed": 0,
     "total": 10,
@@ -302,15 +308,17 @@ final List<Map<String, dynamic>> courses = [
 ];
 
 class MyCoursesWidget extends StatefulWidget {
-  Axis? scrollDirection ;
-   MyCoursesWidget({Key? key, this.scrollDirection = Axis.horizontal}) : super(key: key);
+  Axis? scrollDirection;
+  RxList<Courses> courses;
+  MyCoursesWidget(
+      {Key? key, this.scrollDirection = Axis.horizontal, required this.courses})
+      : super(key: key);
 
   @override
   State<MyCoursesWidget> createState() => _MyCoursesWidgetState();
 }
 
 class _MyCoursesWidgetState extends State<MyCoursesWidget> {
-
   late Timer _timer;
 
   @override
@@ -322,12 +330,13 @@ class _MyCoursesWidgetState extends State<MyCoursesWidget> {
   void _startAutoProgress() {
     _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
       setState(() {
-        for (var course in courses) {
-          if (course["completed"] < course["total"]) {
-            course["completed"] += 1;
-            course["progress"] = (course["completed"] / course["total"] * 100).toInt();
-          }
-        }
+        // for (var course in widget.courses) {
+        //   if (course["completed"] < course["total"]) {
+        //     course["completed"] += 1;
+        //     course["progress"] =
+        //         (course["completed"] / course["total"] * 100).toInt();
+        //   }
+        // }
       });
     });
   }
@@ -357,19 +366,21 @@ class _MyCoursesWidgetState extends State<MyCoursesWidget> {
           SizedBox(
             height: 150.h,
             child: ListView.builder(
-              scrollDirection:widget.scrollDirection ?? Axis.horizontal,
-              itemCount: courses.length,
+              scrollDirection: widget.scrollDirection ?? Axis.horizontal,
+              itemCount: widget.courses.length,
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                final course = courses[index];
+                final course = widget.courses[index];
                 return Container(
                   width: 300.w,
                   margin: EdgeInsets.only(right: 16.w),
                   padding: EdgeInsets.all(16.w),
                   decoration: BoxDecoration(
-                    color: AppColors.primaryColor,
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
+                      // color: AppColors.primaryColor,
+                      borderRadius: BorderRadius.circular(12.r),
+                      image: DecorationImage(
+                          image: AssetImage(AppImageAssets.appLogo),
+                          fit: BoxFit.cover)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -378,7 +389,7 @@ class _MyCoursesWidgetState extends State<MyCoursesWidget> {
                         children: [
                           Expanded(
                             child: CustomText(
-                              course["title"],
+                              course.title ?? "",
                               color: AppColors.white,
                               fontFamily: AppConstants.metropolis,
                               fontWeight: FontWeight.w600,
@@ -389,7 +400,9 @@ class _MyCoursesWidgetState extends State<MyCoursesWidget> {
                             ),
                           ),
                           LocalAssets(
-                                imagePath: AppImageAssets.playIcon, height: 46.sp, width: 46.sp,
+                            imagePath: AppImageAssets.playIcon,
+                            height: 46.sp,
+                            width: 46.sp,
                           ),
                         ],
                       ),
@@ -400,69 +413,74 @@ class _MyCoursesWidgetState extends State<MyCoursesWidget> {
                           Row(
                             children: [
                               LocalAssets(
-                            imagePath: AppImageAssets.bookIcon, height: 14.sp, width: 14.sp,
-                          ),
-                              SizedBox(width: 8.w),
-                              CustomText(
-                                "${course["completed"]}/${course["total"]}",
-                                color: AppColors.white,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: AppConstants.metropolis,
-                                fontSize: 14.sp,
+                                imagePath: AppImageAssets.bookIcon,
+                                height: 14.sp,
+                                width: 14.sp,
                               ),
+                              SizedBox(width: 8.w),
+                              // CustomText(
+                              //   "${course["completed"]}/${course["total"]}",
+                              //   color: AppColors.white,
+                              //   fontWeight: FontWeight.w500,
+                              //   fontFamily: AppConstants.metropolis,
+                              //   fontSize: 14.sp,
+                              // ),
                             ],
                           ),
                           Stack(
                             alignment: Alignment.center,
                             children: [
-                              SizedBox(
-                                width: 38.w,
-                                height: 38.w,
-                                child: CircularProgressIndicator(
-                                  value: course["progress"] / 100,
-                                  color: AppColors.yellow,
-                                  backgroundColor: AppColors.white,
-                                  strokeWidth: 4.w,
-                                ),
-                              ),
-                              CustomText(
-                                "${course["progress"]}%",
-                                color: AppColors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 10.sp,
-                              ),
+                              // SizedBox(
+                              //   width: 38.w,
+                              //   height: 38.w,
+                              //   child: CircularProgressIndicator(
+                              //     value: course["progress"] / 100,
+                              //     color: AppColors.yellow,
+                              //     backgroundColor: AppColors.white,
+                              //     strokeWidth: 4.w,
+                              //   ),
+                              // ),
+                              // CustomText(
+                              //   "${course["progress"]}%",
+                              //   color: AppColors.white,
+                              //   fontWeight: FontWeight.w600,
+                              //   fontSize: 10.sp,
+                              // ),
                             ],
                           ),
                         ],
                       ),
                       SizedBox(height: 13.h),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Row(
-                              children: List.generate(10, (i) {
-                                bool isActiveSegment = i == course["completed"];
-                                return Expanded(
-                                  child: Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 3.w),
-                                    height: 4.5.h,
-                                    decoration: BoxDecoration(
-                                      color: i < course["completed"]
-                                          ? AppColors.yellow
-                                          : AppColors.white,
-                                      border: isActiveSegment
-                                          ? Border.all(color: AppColors.yellow, width: 1.5.w)
-                                          : null,
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
-                                );
-                              }),
-                            ),
-                          ),
-                          SizedBox(width: 8.w),
-                        ],
-                      ),
+                      // Row(
+                      //   children: [
+                      //     Expanded(
+                      //       child: Row(
+                      //         children: List.generate(10, (i) {
+                      //           bool isActiveSegment = i == course["completed"];
+                      //           return Expanded(
+                      //             child: Container(
+                      //               margin:
+                      //                   EdgeInsets.symmetric(horizontal: 3.w),
+                      //               height: 4.5.h,
+                      //               decoration: BoxDecoration(
+                      //                 color: i < course["completed"]
+                      //                     ? AppColors.yellow
+                      //                     : AppColors.white,
+                      //                 border: isActiveSegment
+                      //                     ? Border.all(
+                      //                         color: AppColors.yellow,
+                      //                         width: 1.5.w)
+                      //                     : null,
+                      //                 borderRadius: BorderRadius.circular(5),
+                      //               ),
+                      //             ),
+                      //           );
+                      //         }),
+                      //       ),
+                      //     ),
+                      //     SizedBox(width: 8.w),
+                      //   ],
+                      // ),
                     ],
                   ),
                 );

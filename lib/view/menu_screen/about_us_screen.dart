@@ -286,12 +286,15 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
     await aboutUsViewModel.getAboutUsData();
   }
 
-  Future<void> _launchWhatsApp({required String phone}) async {
-    final url = "https://wa.me/$phone";
+  Future<void> _launchWhatsApp(
+      {required String phone,
+      required String urlString,
+      required String subTitleMsg}) async {
+    final url = "$urlString/$phone";
     if (await canLaunchUrl(Uri.parse(url))) {
       await launchUrl(Uri.parse(url));
     } else {
-      commonSnackBar(title: 'Error', subTitle: 'Could not launch WhatsApp');
+      commonSnackBar(title: 'Error', subTitle: subTitleMsg);
     }
   }
 
@@ -303,6 +306,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
         children: [
           commonUpdateAppBar(
             isBack: true,
+            isLogoRequired: true,
             context: context,
             paddingLeft: 18.w,
             onTap: () {
@@ -404,9 +408,12 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
             Row(
               children: [
                 if (postIcon1 != null)
-                  InkWell(
+                  GestureDetector(
                     onTap: () {
-                      _launchWhatsApp(phone: title);
+                      _launchWhatsApp(
+                          phone: title,
+                          urlString: 'https://wa.me',
+                          subTitleMsg: 'Could not launch WhatsApp');
                     },
                     child: CircleAvatar(
                       backgroundColor: AppColors.whitef7,
@@ -419,12 +426,20 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                   ),
                 SizedBox(width: 5.w),
                 if (postIcon2 != null)
-                  CircleAvatar(
-                    backgroundColor: AppColors.whitef7,
-                    child: LocalAssets(
-                      imagePath: postIcon2,
-                      height: 20.h,
-                      width: 20.w,
+                  GestureDetector(
+                    onTap: () {
+                      _launchWhatsApp(
+                          urlString: 'https://t.me',
+                          phone: "+91$title",
+                          subTitleMsg: 'Could not launch Telegram');
+                    },
+                    child: CircleAvatar(
+                      backgroundColor: AppColors.whitef7,
+                      child: LocalAssets(
+                        imagePath: postIcon2,
+                        height: 20.h,
+                        width: 20.w,
+                      ),
                     ),
                   ),
                 SizedBox(width: 5.w),

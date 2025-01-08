@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/commonWidget/network_assets.dart';
+import 'package:sanademy/networks/model/home_res_model.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
@@ -126,7 +127,8 @@ import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 
 class HomeCategoryWidget extends StatefulWidget {
-  const HomeCategoryWidget({super.key});
+  RxList<Categories> categories;
+  HomeCategoryWidget({super.key, required this.categories});
 
   @override
   State<HomeCategoryWidget> createState() => _HomeCategoryWidgetState();
@@ -135,22 +137,22 @@ class HomeCategoryWidget extends StatefulWidget {
 class _HomeCategoryWidgetState extends State<HomeCategoryWidget> {
   int selectedIndex = 0; // To track the selected category
 
-  final List<Map<String, dynamic>> categories = [
-    {
-      "name": "Featured",
-      "icon": AppImageAssets.featured,
-      "isSelected": true,
-    },
-    {
-      "name": "Technology",
-      "icon":AppImageAssets.technology,
-    },
-    {
-      "name": "Media & Arts",
-      "icon": AppImageAssets.mediaArts,
-    },
-    // Add more categories as needed
-  ];
+  // final List<Map<String, dynamic>> categories = [
+  //   {
+  //     "name": "Featured",
+  //     "icon": AppImageAssets.featured,
+  //     "isSelected": true,
+  //   },
+  //   {
+  //     "name": "Technology",
+  //     "icon": AppImageAssets.technology,
+  //   },
+  //   {
+  //     "name": "Media & Arts",
+  //     "icon": AppImageAssets.mediaArts,
+  //   },
+  //   // Add more categories as needed
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -159,9 +161,9 @@ class _HomeCategoryWidgetState extends State<HomeCategoryWidget> {
       child: ListView.builder(
         padding: EdgeInsets.zero,
         scrollDirection: Axis.horizontal,
-        itemCount: categories.length,
+        itemCount: widget.categories.length,
         itemBuilder: (context, index) {
-          final category = categories[index];
+          final category = widget.categories[index];
           final isSelected = selectedIndex == index;
 
           return GestureDetector(
@@ -188,23 +190,28 @@ class _HomeCategoryWidgetState extends State<HomeCategoryWidget> {
                     padding: EdgeInsets.all(6.w),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color:  isSelected ? AppColors.yellow700 : AppColors.whitef7,
+                      color:
+                          isSelected ? AppColors.yellow700 : AppColors.whitef7,
                     ),
-                    child: Image.asset(
-                      category["icon"],
+                    child: Image.network(
+                      widget.categories[index].image ?? "",
                       height: 20.sp,
                       width: 20.sp,
                       fit: BoxFit.contain,
+                      color: isSelected
+                          ? AppColors.red00 // Selected background
+                          : AppColors.black,
                     ),
                   ),
                   SizedBox(width: 8.w),
                   CustomText(
-                    category["name"],
+                    widget.categories[index].name ?? "",
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
                     fontFamily: AppConstants.metropolis,
-                    color:
-                    isSelected ? AppColors.blue34 : AppColors.blue34, // Text color
+                    color: isSelected
+                        ? AppColors.blue34
+                        : AppColors.blue34, // Text color
                   ),
                 ],
               ),
