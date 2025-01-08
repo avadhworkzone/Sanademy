@@ -75,8 +75,8 @@ class _MyAppState extends State<MyApp> {
                   pageTransitionsTheme: const PageTransitionsTheme()),
               transitionDuration: const Duration(milliseconds: 100),
               translations: Translation(),
-              locale: const Locale('en_US'),
-              fallbackLocale: const Locale('en_US'),
+              locale: const Locale('en', 'US'),
+              fallbackLocale: const Locale('en', 'US'),
               // locale:  Locale(myLan),
               // fallbackLocale:  Locale(myLan,),
               builder: (context, widget) => ColoredBox(

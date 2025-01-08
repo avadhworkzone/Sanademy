@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/common_appbar.dart';
+import 'package:sanademy/commonWidget/common_scrollable_appbar_widget.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
@@ -24,30 +25,7 @@ class LanguageScreen extends StatefulWidget {
 }
 
 class _LanguageScreenState extends State<LanguageScreen> {
-  late ScrollController _scrollController;
-  final double _scrollSpeed = 15.0;
   int selectedLanguage = 0;
-
-  void _startScrolling() {
-    if (_scrollController.hasClients) {
-      _scrollController
-          .animateTo(
-        _scrollController.offset + _scrollSpeed,
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.linear,
-      )
-          .then((_) {
-        if (_scrollController.hasClients) {
-          // Loop back to the start if the end is reached
-          if (_scrollController.offset >=
-              _scrollController.position.maxScrollExtent) {
-            _scrollController.jumpTo(0);
-          }
-          _startScrolling(); // Continue scrolling
-        }
-      });
-    }
-  }
 
   List<LanguageSelection> languageList = [
     LanguageSelection(
@@ -61,29 +39,19 @@ class _LanguageScreenState extends State<LanguageScreen> {
   ];
 
   @override
-  void initState() {
-    _scrollController = ScrollController();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _startScrolling();
-    });
-    // _startScrolling();
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(horizontal: 19.w, vertical: 30.w),
         child: CustomUpdateBtn(
           onTap: () {
+            setState(() {
+              if (selectedLanguage == 0) {
+                Get.updateLocale(const Locale('en', 'US'));
+              } else if (selectedLanguage == 1) {
+                Get.updateLocale(const Locale('ckb'));
+              }
+            });
             Get.offAll(() => const BottomBar());
           },
           title: AppStrings.continues,
@@ -114,31 +82,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   fontSize: 16.sp,
                 ),
                 SizeConfig.sH35,
-                SizedBox(
-                  height: 39.w,
-                  // color: AppColors.red,
-                  child: ListView.builder(
-                    controller: _scrollController,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          LocalAssets(
-                            imagePath: AppImageAssets.animationImage,
-                            imgColor: AppColors.white.withOpacity(0.4),
-                            boxFix: BoxFit.cover,
-                            width: Get.width,
-                            height: 28.h,
-                          ),
-                          const SizedBox(width: 0), // Optional spacing
-                        ],
-                      );
-                    },
-                  ),
-                )
+                const CommonScrollableAppbarWidget()
               ],
             ),
           ),
