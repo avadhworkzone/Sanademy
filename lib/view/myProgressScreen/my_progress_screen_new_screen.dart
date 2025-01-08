@@ -52,18 +52,6 @@ class _MyProgressNewScreenState extends State<MyProgressNewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: onlyTitleNewCommonAppBar(
-      //   titleTxt: AppStrings.myProgress,
-      //   textFontWeight: FontWeight.w700,
-      //   titleWidget: CustomText(
-      //     AppStrings.myProgress,
-      //     color: AppColors.white,
-      //     fontWeight: FontWeight.w700,
-      //     fontSize: 20.sp,
-      //   ),
-      // ),
-
-      // appBar: commonAppBar(titleTxt: AppStrings.titleTxt),
       body: WillPopScope(
         onWillPop: () {
           Get.offAll(() => const BottomBar());
@@ -77,7 +65,7 @@ class _MyProgressNewScreenState extends State<MyProgressNewScreen> {
                 context: context,
                 paddingLeft: 18.w,
                 actionWidget: SizeConfig.sW40,
-                title:AppStrings.myProgress ,
+                title: AppStrings.myProgress,
                 otherWidget: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -87,7 +75,9 @@ class _MyProgressNewScreenState extends State<MyProgressNewScreen> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w,),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20.w,
+                ),
                 child: ListView.builder(
                   itemCount: courses.length,
                   shrinkWrap: true,
@@ -100,14 +90,17 @@ class _MyProgressNewScreenState extends State<MyProgressNewScreen> {
                           margin: EdgeInsets.only(right: 16.w),
                           padding: EdgeInsets.all(16.w),
                           decoration: BoxDecoration(
-                            color: AppColors.primaryColor,
-                            borderRadius: BorderRadius.circular(12.r),
-                          ),
+                              // color: AppColors.primaryColor,
+                              borderRadius: BorderRadius.circular(12.r),
+                              image: DecorationImage(
+                                  image: AssetImage(AppImageAssets.appLogo),
+                                  fit: BoxFit.cover)),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
                                     child: CustomText(
@@ -132,7 +125,8 @@ class _MyProgressNewScreenState extends State<MyProgressNewScreen> {
                               SizedBox(height: 10.h),
                               // const Spacer(),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
@@ -184,8 +178,8 @@ class _MyProgressNewScreenState extends State<MyProgressNewScreen> {
                                             i == course["completed"];
                                         return Expanded(
                                           child: Container(
-                                            margin:
-                                                EdgeInsets.symmetric(horizontal: 3.w),
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 3.w),
                                             height: 4.5.h,
                                             decoration: BoxDecoration(
                                               color: i < course["completed"]
@@ -196,7 +190,8 @@ class _MyProgressNewScreenState extends State<MyProgressNewScreen> {
                                                       color: AppColors.yellow,
                                                       width: 1.5.w)
                                                   : null,
-                                              borderRadius: BorderRadius.circular(5),
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
                                             ),
                                           ),
                                         );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/utils/app_colors.dart';
@@ -14,44 +15,41 @@ class CommonScrollableAppbarWidget extends StatefulWidget {
 }
 
 class _CommonScrollableAppbarWidgetState
-    extends State<CommonScrollableAppbarWidget> {
+    extends State<CommonScrollableAppbarWidget>
+    with SingleTickerProviderStateMixin {
   late ScrollController _scrollController;
-  final double _scrollSpeed = 15.0;
-  void _startScrolling() {
-    if (_scrollController.hasClients) {
-      Future.delayed(const Duration(milliseconds: 100), () {
-        if (_scrollController.hasClients) {
-          _scrollController
-              .animateTo(
-            _scrollController.offset + _scrollSpeed,
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.linear,
-          )
-              .then((_) {
-            if (_scrollController.offset >=
-                _scrollController.position.maxScrollExtent) {
-              _scrollController.jumpTo(0);
-            }
-            _startScrolling();
-          });
-        }
-      });
-    }
-  }
+  late Ticker _ticker;
+  final double _scrollSpeed = 0.3;
+  final Duration _tickRate = const Duration(milliseconds: 50);
 
   @override
   void initState() {
-    _scrollController = ScrollController();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _startScrolling();
-    });
-    // _startScrolling();
-    // TODO: implement initState
     super.initState();
+    _scrollController = ScrollController();
+    _ticker = createTicker((elapsed) {
+      if (_scrollController.hasClients) {
+        _scrollController.jumpTo(
+          _scrollController.offset + _scrollSpeed,
+        );
+        if (_scrollController.offset >=
+            _scrollController.position.maxScrollExtent) {
+          _scrollController.jumpTo(0);
+        }
+      }
+    });
+
+    // Start ticker with custom tick rate
+    _ticker.start();
+    Future.delayed(_tickRate, () {
+      if (mounted && !_ticker.isTicking) {
+        _ticker.start();
+      }
+    });
   }
 
   @override
   void dispose() {
+    _ticker.dispose();
     _scrollController.dispose();
     super.dispose();
   }
@@ -62,7 +60,6 @@ class _CommonScrollableAppbarWidgetState
       height: 39.w,
       child: ListView.builder(
         controller: _scrollController,
-        shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {

@@ -24,10 +24,9 @@ class LanguageScreen extends StatefulWidget {
 }
 
 class _LanguageScreenState extends State<LanguageScreen> {
-
   late ScrollController _scrollController;
   final double _scrollSpeed = 15.0;
-  int selectedLanguage=0;
+  int selectedLanguage = 0;
 
   void _startScrolling() {
     if (_scrollController.hasClients) {
@@ -40,7 +39,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
           .then((_) {
         if (_scrollController.hasClients) {
           // Loop back to the start if the end is reached
-          if (_scrollController.offset >= _scrollController.position.maxScrollExtent) {
+          if (_scrollController.offset >=
+              _scrollController.position.maxScrollExtent) {
             _scrollController.jumpTo(0);
           }
           _startScrolling(); // Continue scrolling
@@ -49,10 +49,17 @@ class _LanguageScreenState extends State<LanguageScreen> {
     }
   }
 
-  List<LanguageSelection> languageList=[
-    LanguageSelection(image: AppImageAssets.englishLanguageLogo,name: AppStrings.english,subName: 'English'),
-    LanguageSelection(image: AppImageAssets.kurdishLanguageLogo,name: AppStrings.kurdish,subName: 'کوردی'),
+  List<LanguageSelection> languageList = [
+    LanguageSelection(
+        image: AppImageAssets.englishLanguageLogo,
+        name: AppStrings.english,
+        subName: 'English'),
+    LanguageSelection(
+        image: AppImageAssets.kurdishLanguageLogo,
+        name: AppStrings.kurdish,
+        subName: 'کوردی'),
   ];
+
   @override
   void initState() {
     _scrollController = ScrollController();
@@ -74,10 +81,13 @@ class _LanguageScreenState extends State<LanguageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 19.w,vertical: 30.w),
-        child: CustomUpdateBtn(onTap: () {
-          Get.offAll(()=>const BottomBar());
-        }, title: AppStrings.continues,),
+        padding: EdgeInsets.symmetric(horizontal: 19.w, vertical: 30.w),
+        child: CustomUpdateBtn(
+          onTap: () {
+            Get.offAll(() => const BottomBar());
+          },
+          title: AppStrings.continues,
+        ),
       ),
       body: Column(
         mainAxisSize: MainAxisSize.min,
@@ -87,12 +97,12 @@ class _LanguageScreenState extends State<LanguageScreen> {
             context: context,
             paddingLeft: 18.w,
             actionWidget: SizeConfig.sW40,
-             otherWidget: Column(
+            otherWidget: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizeConfig.sH25,
                 CustomNewText(
-                 AppStrings.languageSelection,
+                  AppStrings.languageSelection,
                   color: AppColors.white,
                   fontWeight: FontWeight.w600,
                   fontSize: 16.sp,
@@ -136,63 +146,82 @@ class _LanguageScreenState extends State<LanguageScreen> {
           ListView.builder(
             shrinkWrap: true,
             padding: EdgeInsets.zero,
-            itemCount:languageList.length,itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: (){
-                selectedLanguage=index;
-                setState(() {
-
-                });
-              },
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 19.w,vertical: 10.w),
-                padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 15.w),
-                decoration:
-                BoxDecoration(border: Border.all(color: selectedLanguage==index?AppColors.borderColor:AppColors.blackE0),borderRadius: BorderRadius.circular(10)),
-                child: Row(
-                  children: [
-                    LocalAssets(
-                      imagePath: languageList[index].image,
-                      height: 35.w,
-                      width: 35.w,
-                    ),
-                    SizeConfig.sW10,
-
-                    CustomNewText(
-                      languageList[index].name,
-                      color: AppColors.blue34,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    const Spacer(),
-                    CustomNewText(
-                      '(${languageList[index].subName})',
-                      color: AppColors.black73,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    SizeConfig.sW10,
-                    selectedLanguage==index? CircleAvatar(
-                      radius: 8.w,
-                      backgroundColor: AppColors.borderColor,
-                      child: Icon(Icons.done,
-                        color: AppColors.white,size: 10.w,weight: 100.w,),):Container(height: 16.w,width:16.w,decoration: BoxDecoration(border: Border.all(color: AppColors.blackE0,width: 2),shape: BoxShape.circle),)
-                  ],
+            itemCount: languageList.length,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () {
+                  selectedLanguage = index;
+                  setState(() {});
+                },
+                child: Container(
+                  margin:
+                      EdgeInsets.symmetric(horizontal: 19.w, vertical: 10.w),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.w),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: selectedLanguage == index
+                              ? AppColors.borderColor
+                              : AppColors.blackE0),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Row(
+                    children: [
+                      LocalAssets(
+                        imagePath: languageList[index].image,
+                        height: 35.w,
+                        width: 35.w,
+                      ),
+                      SizeConfig.sW10,
+                      CustomNewText(
+                        languageList[index].name,
+                        color: AppColors.blue34,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      const Spacer(),
+                      CustomNewText(
+                        '(${languageList[index].subName})',
+                        color: AppColors.black73,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      SizeConfig.sW10,
+                      selectedLanguage == index
+                          ? CircleAvatar(
+                              radius: 8.w,
+                              backgroundColor: AppColors.borderColor,
+                              child: Icon(
+                                Icons.done,
+                                color: AppColors.white,
+                                size: 10.w,
+                                weight: 100.w,
+                              ),
+                            )
+                          : Container(
+                              height: 16.w,
+                              width: 16.w,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: AppColors.blackE0, width: 2),
+                                  shape: BoxShape.circle),
+                            )
+                    ],
+                  ),
                 ),
-              ),
-            );
-          },),
-
+              );
+            },
+          ),
         ],
       ),
     );
   }
-
 }
-class LanguageSelection{
-   String image;
-   String name;
-   String subName;
 
-  LanguageSelection({ required this.image,required this.name,required this.subName});
+class LanguageSelection {
+  String image;
+  String name;
+  String subName;
+
+  LanguageSelection(
+      {required this.image, required this.name, required this.subName});
 }

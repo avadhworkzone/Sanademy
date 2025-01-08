@@ -39,7 +39,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   homeApiCall() async {
-    await homeScreenViewModel.homeViewModel(search: homeScreenViewModel.searchController.value.text);
+    await homeScreenViewModel.homeViewModel(
+        search: homeScreenViewModel.searchController.value.text);
   }
 
   @override
@@ -68,7 +69,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     margin: EdgeInsets.all(8.w),
                     padding: EdgeInsets.all(10.w),
                     decoration: BoxDecoration(
-                        color: AppColors.white.withOpacity(0.20), borderRadius: BorderRadius.circular(15)),
+                        color: AppColors.white.withOpacity(0.20),
+                        borderRadius: BorderRadius.circular(15)),
                     child: const LocalAssets(
                       imagePath: AppImageAssets.categoryIcon,
                     ),
@@ -81,22 +83,25 @@ class _HomeScreenState extends State<HomeScreen> {
                     // SharedPreferenceUtils.getIsLogin() == true
                     //     ?
                     Get.to(const ProfileScreen());
-                        // : Get.to(() => const SignUpScreen());
+                    // : Get.to(() => const SignUpScreen());
                   },
                   child: Container(
                       height: 50.h,
                       width: 50.w,
                       margin: EdgeInsets.all(7.w),
                       decoration: BoxDecoration(
-                          color: AppColors.white.withOpacity(0.20), borderRadius: BorderRadius.circular(15)),
+                          color: AppColors.white.withOpacity(0.20),
+                          borderRadius: BorderRadius.circular(15)),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
                         child: (homeScreenViewModel.userImage.value.isNotEmpty)
                             ? Image(
-                                image: NetworkImage(homeScreenViewModel.userImage.value),
+                                image: NetworkImage(
+                                    homeScreenViewModel.userImage.value),
                                 fit: BoxFit.cover,
                               )
-                            : const LocalAssets(imagePath: AppImageAssets.profileImage),
+                            : const LocalAssets(
+                                imagePath: AppImageAssets.profileImage),
                       )),
                 )),
             bottom: PreferredSize(
@@ -104,7 +109,8 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 10.w),
                 child: CommonTextField(
-                  textEditController: Get.find<HomeScreenViewModel>().searchController.value,
+                  textEditController:
+                      Get.find<HomeScreenViewModel>().searchController.value,
                   regularExpression: RegularExpressionUtils.alphabetPattern,
                   hintText: AppStrings.searchHere.tr,
                   style: TextStyle(
@@ -119,14 +125,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderColor: AppColors.primaryColor,
                   fillColor: AppColors.white.withOpacity(0.20),
                   pIcon: Padding(
-                    padding: EdgeInsets.only(left: 15.w, top: 15.w, bottom: 15.w, right: 7.w),
+                    padding: EdgeInsets.only(
+                        left: 15.w, top: 15.w, bottom: 15.w, right: 7.w),
                     child: LocalAssets(
                       imagePath: AppImageAssets.searchIcon,
                     ),
                   ),
                   onChange: (firstNameData) {
                     homeScreenViewModel.homeViewModel(
-                        search: homeScreenViewModel.searchController.value.text);
+                        search:
+                            homeScreenViewModel.searchController.value.text);
                   },
                 ),
               ),
@@ -137,7 +145,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   AppStrings.error,
                   fontSize: 20.sp,
                 )
-              : homeScreenViewModel.responseStatus.value == ResponseStatus.Completed
+              : homeScreenViewModel.responseStatus.value ==
+                      ResponseStatus.Completed
                   ? const SingleChildScrollView(
                       child: Column(
                         children: [
@@ -145,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           HomeSliderWidget(),
 
                           /// CATEGORIES VIEW
-                          HomeCategoryWidget(),
+                          // HomeCategoryWidget(categories: [],),
 
                           /// RECOMMENDED
                           HomeRecommendedWidget(),

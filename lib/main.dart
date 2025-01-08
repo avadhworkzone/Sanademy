@@ -22,12 +22,12 @@ Future<void> main() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await GetStorage.init();
   await Firebase.initializeApp(
-      options: const FirebaseOptions(apiKey: 'AIzaSyBEnkadOiG18SEFFU7MEaHiNIEhmlmm0bg',
+      options: const FirebaseOptions(
+          apiKey: 'AIzaSyBEnkadOiG18SEFFU7MEaHiNIEhmlmm0bg',
           appId: '1:823204851962:android:486d28ffa08340476a9943',
           messagingSenderId: '823204851962',
           projectId: 'sana-academy',
-          storageBucket: 'sana-academy.appspot.com'
-      ));
+          storageBucket: 'sana-academy.appspot.com'));
   await FirebaseApi().initNotification();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -52,7 +52,6 @@ class _MyAppState extends State<MyApp> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -71,7 +70,8 @@ class _MyAppState extends State<MyApp> {
               theme: ThemeData(
                   fontFamily: AppConstants.quicksand,
                   // useMaterial3: true,
-                  scaffoldBackgroundColor: AppColors.white,
+                  scaffoldBackgroundColor: AppColors.whitef7,
+                  // scaffoldBackgroundColor: AppColors.white,
                   pageTransitionsTheme: const PageTransitionsTheme()),
               transitionDuration: const Duration(milliseconds: 100),
               translations: Translation(),
@@ -94,10 +94,10 @@ class _MyAppState extends State<MyApp> {
               ),
               home: Obx(() => connectivityViewModel.isOnline != null
                   ? connectivityViewModel.isOnline!.value
-                  ? const SplashScreen()
-              // ? const LanguageScreen()
-              // ? const BottomBar()
-                  : const NoInterNetScreen()
+                      ? const SplashScreen()
+                      // ? const LanguageScreen()
+                      // ? const BottomBar()
+                      : const NoInterNetScreen()
                   : const SizedBox()),
             ),
           );

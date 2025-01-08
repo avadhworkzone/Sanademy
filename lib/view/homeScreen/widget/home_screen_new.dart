@@ -47,101 +47,10 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: homeDrawerKey,
-        backgroundColor: AppColors.whitef7,
+        // backgroundColor: AppColors.whitef7,
         drawer: const Drawer(
-          child: MenuScreen(
-              /*   userMobileNumber: homeScreenViewModel.homeResModel.data!.user!.phoneNumber.toString(),
-            userId:  homeScreenViewModel.homeResModel.data!.user!.id.toString(),*/
-              ),
+          child: MenuScreen(),
         ),
-        // appBar: commonAppBar(
-        //     titleTxt: AppStrings.titleTxt,
-        //     leadingWidth: 80.w,
-        //     leadingWidget: Row(
-        //       children: [
-        //         SizedBox(
-        //           width: 8.w,
-        //         ),
-        //         GestureDetector(
-        //           onTap: () {
-        //             homeDrawerKey.currentState?.openDrawer();
-        //           },
-        //           child: Container(
-        //             margin: EdgeInsets.all(8.w),
-        //             padding: EdgeInsets.all(10.w),
-        //             decoration: BoxDecoration(
-        //                 color: AppColors.white.withOpacity(0.20),
-        //                 borderRadius: BorderRadius.circular(15)),
-        //             child: const LocalAssets(
-        //               imagePath: AppImageAssets.categoryIcon,
-        //             ),
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //     actionWidget: Obx(
-        //       () => GestureDetector(
-        //         onTap: () {
-        //           // SharedPreferenceUtils.getIsLogin() == true
-        //           //     ?
-        //           Get.to(const ProfileScreen());
-        //           // : Get.to(() => const SignUpScreen());
-        //         },
-        //         child: Container(
-        //             height: 50.h,
-        //             width: 50.w,
-        //             margin: EdgeInsets.all(7.w),
-        //             decoration: BoxDecoration(
-        //                 color: AppColors.white.withOpacity(0.20),
-        //                 borderRadius: BorderRadius.circular(15)),
-        //             child: ClipRRect(
-        //               borderRadius: BorderRadius.circular(15),
-        //               child: (homeScreenViewModel.userImage.value.isNotEmpty)
-        //                   ? Image(
-        //                       image: NetworkImage(
-        //                           homeScreenViewModel.userImage.value),
-        //                       fit: BoxFit.cover,
-        //                     )
-        //                   : const LocalAssets(
-        //                       imagePath: AppImageAssets.profileImage),
-        //             )),
-        //       ),
-        //     ),
-        //     bottom: PreferredSize(
-        //       preferredSize: const Size.fromHeight(70),
-        //       child: Padding(
-        //         padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 10.w),
-        //         child: CommonTextField(
-        //           textEditController:
-        //               Get.find<HomeScreenViewModel>().searchController.value,
-        //           regularExpression: RegularExpressionUtils.alphabetPattern,
-        //           hintText: AppStrings.searchHere.tr,
-        //           style: TextStyle(
-        //               fontSize: 14.sp,
-        //               color: AppColors.white,
-        //               fontFamily: AppConstants.quicksand,
-        //               fontWeight: FontWeight.w400),
-        //           cursorColor: AppColors.white,
-        //           isValidate: false,
-        //           underLineBorder: false,
-        //           hintTextColor: AppColors.white,
-        //           borderColor: AppColors.primaryColor,
-        //           fillColor: AppColors.white.withOpacity(0.20),
-        //           pIcon: Padding(
-        //             padding: EdgeInsets.only(
-        //                 left: 15.w, top: 15.w, bottom: 15.w, right: 7.w),
-        //             child: LocalAssets(
-        //               imagePath: AppImageAssets.searchIcon,
-        //             ),
-        //           ),
-        //           onChange: (firstNameData) {
-        //             homeScreenViewModel.homeViewModel(
-        //                 search:
-        //                     homeScreenViewModel.searchController.value.text);
-        //           },
-        //         ),
-        //       ),
-        //     )),
         body: Obx(
           () => homeScreenViewModel.responseStatus.value == ResponseStatus.Error
               ? CustomText(
@@ -155,7 +64,6 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           commonUpdateAppBar(
-                            // height: 100.h,
                             paddingLeft: 15.w,
                             context: context,
                             isHomeScreen: true,
@@ -260,12 +168,16 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                           // SizeConfig.sH15,
 
                           /// CAROUSAL SLIDER VIEW....
-                          MyCoursesWidget(),
+                          MyCoursesWidget(
+                            courses: homeScreenViewModel.courses,
+                          ),
                           SizeConfig.sH20,
                           // HomeSliderWidget(),
                           //
                           /// CATEGORIES VIEW
-                          const HomeCategoryWidget(),
+                          HomeCategoryWidget(
+                            categories: homeScreenViewModel.categoriesData,
+                          ),
                           SizeConfig.sH15,
                           //
                           /// RECOMMENDED
