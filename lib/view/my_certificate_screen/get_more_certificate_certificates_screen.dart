@@ -60,12 +60,14 @@ class _GetMoreCertificatesScreenState extends State<GetMoreCertificatesScreen> {
       "title": "Email Marketing",
       "questions": "20 Questions",
       "testType": "Listening Test",
-    },{
+    },
+    {
       "image": AppImageAssets.blankBackground, // Replace with your asset
       "title": "MS Office",
       "questions": "20 Questions",
       "testType": "Listening Test",
-    },{
+    },
+    {
       "image": AppImageAssets.blankBackground, // Replace with your asset
       "title": "Network Installation & ...",
       "questions": "20 Questions",
@@ -167,7 +169,7 @@ class _GetMoreCertificatesScreenState extends State<GetMoreCertificatesScreen> {
             ),
             SizeConfig.sH15,
             Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 16.sp,vertical: 10.h),
+              padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 10.h),
               child: Column(
                 children:
                     courses.map((course) => buildCourseCard(course)).toList(),
@@ -182,7 +184,7 @@ class _GetMoreCertificatesScreenState extends State<GetMoreCertificatesScreen> {
   Widget buildCourseCard(Map<String, String> course) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
-      padding:  EdgeInsets.symmetric(horizontal: 16.sp,vertical: 10.h),
+      padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 10.h),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
@@ -219,33 +221,37 @@ class _GetMoreCertificatesScreenState extends State<GetMoreCertificatesScreen> {
                 const SizedBox(height: 4),
                 Row(
                   children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
-                        // color: Colors.grey.withOpacity(0.1),
-                        border: Border.all(color: AppColors.whitef7),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: CustomNewText(
-                        course["questions"] ?? "",
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w400,
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          // color: Colors.grey.withOpacity(0.1),
+                          border: Border.all(color: AppColors.whitef7),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: CustomNewText(
+                          course["questions"] ?? "",
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 8),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
-                        // color: Colors.grey.withOpacity(0.1),
-                        border: Border.all(color: AppColors.whitef7),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: CustomNewText(
-                        course["testType"] ?? "",
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w400,
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          // color: Colors.grey.withOpacity(0.1),
+                          border: Border.all(color: AppColors.whitef7),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: CustomNewText(
+                          course["testType"] ?? "",
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                   ],
@@ -257,7 +263,6 @@ class _GetMoreCertificatesScreenState extends State<GetMoreCertificatesScreen> {
           InkWell(
             onTap: () {
               showDisabledDialog(context, "IELTS Mock Test");
-
             },
             child: Container(
               height: 40,
@@ -278,6 +283,7 @@ class _GetMoreCertificatesScreenState extends State<GetMoreCertificatesScreen> {
     );
   }
 }
+
 void showDisabledDialog(BuildContext context, String courseTitle) {
   showDialog(
     context: context,
@@ -292,7 +298,7 @@ void showDisabledDialog(BuildContext context, String courseTitle) {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-               // SizedBox(height: 10.h),
+              // SizedBox(height: 10.h),
               // Close Icon
               Align(
                 alignment: Alignment.topRight,
@@ -344,14 +350,12 @@ void showDisabledDialog(BuildContext context, String courseTitle) {
                       ),
                     ),
                     const TextSpan(
-                      text:
-                      " is disabled for now, it will come back soon.",
+                      text: " is disabled for now, it will come back soon.",
                     ),
                   ],
                 ),
               ),
               const SizedBox(height: 24),
-
             ],
           ),
         ),

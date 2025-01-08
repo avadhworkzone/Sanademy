@@ -156,33 +156,41 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                         children: [
                           commonUpdateAppBar(
                             // height: 100.h,
+                            paddingLeft: 15.w,
                             context: context,
                             isHomeScreen: true,
-                            actionWidget:  Padding(
-                              padding:  EdgeInsets.only(left: 15.w),
+                            isLogoRequired: true,
+                            actionWidget: Padding(
+                              padding: EdgeInsets.only(left: 15.w),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   LocalAssets(
-                                      imagePath: AppImageAssets.infoIcon, height: 24.sp, width: 24.sp,
+                                    imagePath: AppImageAssets.infoIcon,
+                                    height: 24.sp,
+                                    width: 24.sp,
                                   ),
                                   Container(
-                                    margin: EdgeInsets.only(left: 8.w,right: 8.w),
+                                    margin:
+                                        EdgeInsets.only(left: 8.w, right: 8.w),
                                     padding: EdgeInsets.all(12.w),
-
                                     decoration: BoxDecoration(
                                         // color: AppColors.white.withOpacity(0.20),
-                                        borderRadius: BorderRadius.circular(30)),
-                                    child:  LocalAssets(
-                                        imagePath: AppImageAssets.notificationNew,height: 40.sp, width: 40.sp,
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
+                                    child: LocalAssets(
+                                      imagePath: AppImageAssets.notificationNew,
+                                      height: 40.sp,
+                                      width: 40.sp,
                                     ),
                                   ),
                                 ],
                               ),
                             ),
                             homeScreenLeading: Padding(
-                              padding:  EdgeInsets.only(right: 40.w),
+                              padding: EdgeInsets.only(right: 40.w),
                               child: GestureDetector(
                                 onTap: () {
                                   homeDrawerKey.currentState?.openDrawer();
@@ -191,11 +199,13 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                                   // margin: EdgeInsets.all(8.w),
                                   // padding: EdgeInsets.all(12.w),
                                   decoration: BoxDecoration(
-                                      // color: AppColors.white.withOpacity(0.20),
-                                      borderRadius: BorderRadius.circular(30),
+                                    // color: AppColors.white.withOpacity(0.20),
+                                    borderRadius: BorderRadius.circular(30),
                                   ),
-                                  child:  LocalAssets(
-                                    imagePath: AppImageAssets.categoryIcon, height: 40.sp, width: 40.sp,
+                                  child: LocalAssets(
+                                    imagePath: AppImageAssets.categoryIcon,
+                                    height: 40.sp,
+                                    width: 40.sp,
                                   ),
                                 ),
                               ),
@@ -221,13 +231,14 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                                 ),
                                 SizeConfig.sH15,
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 70.w),
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 70.w),
                                   child: CustomText(
                                     AppStrings.whatDoYouWantToLearnToday,
                                     color: AppColors.white,
                                     fontWeight: FontWeight.w600,
                                     fontSize: 32.sp,
-                                     letterSpacing: -1.sp,
+                                    letterSpacing: -1.sp,
                                     height: 1,
                                     textAlign: TextAlign.center,
                                     fontFamily: AppConstants.metropolis,
@@ -249,7 +260,7 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                           // SizeConfig.sH15,
 
                           /// CAROUSAL SLIDER VIEW....
-                           MyCoursesWidget(),
+                          MyCoursesWidget(),
                           SizeConfig.sH20,
                           // HomeSliderWidget(),
                           //
