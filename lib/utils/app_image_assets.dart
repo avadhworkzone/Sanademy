@@ -156,4 +156,6 @@ class AppImageAssets {
  static String englishLanguageLogo = "${AppConstants.baseIconAssetsPath}englishLanguage.png";
  static String kurdishLanguageLogo = "${AppConstants.baseIconAssetsPath}kurdishLanguageIcon.png";
 
+ /// profile screen
+ static String cameraIcon = "${AppConstants.baseIconAssetsPath}camera_icons.png";
 }

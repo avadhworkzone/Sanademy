@@ -110,12 +110,15 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                         )),
                   ),
                   Positioned(
+                    right: 7,
                     child: Container(
-                      height: 35.h,
-                      width: 35.w,
+                      // height: 35.h,
+                      // width: 35.w,
+                      padding: EdgeInsets.all(6.w),
                       decoration: BoxDecoration(
-                        color: AppColors.primaryColor,
+                        color: AppColors.borderColor,
                         shape: BoxShape.circle,
+                        border: Border.all(color: AppColors.white),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.1),
@@ -123,10 +126,11 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                           ),
                         ],
                       ),
-                      child: Icon(
-                        Icons.camera_alt,
-                        size: 20.sp,
-                        color: AppColors.white,
+                      child: LocalAssets(
+                         imagePath: AppImageAssets.cameraIcon,
+                        // ,
+                        scaleSize: 3.w,
+                        // color: AppColors.white,
                       ),
                     ),
                   )
