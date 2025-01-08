@@ -54,7 +54,8 @@ class ProfileScreenViewModel extends GetxController {
           );
         });
     if (picked != null && picked != selectedDate.value) {
-      String formattedDate = DateFormat('MM/dd/yyyy').format(picked);
+      // String formattedDate = DateFormat('MM/dd/yyyy').format(picked);
+      String formattedDate = DateFormat('yyyy/MM/dd').format(picked);
       dateController.value.text = formattedDate;
       /* String date = "${picked.month}/${picked.day}/${picked.year}";
       dateController.value.text = date;*/

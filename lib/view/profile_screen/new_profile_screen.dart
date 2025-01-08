@@ -65,9 +65,9 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                     Get.back();
                   },
                   actionWidget: Padding(
-                    padding: EdgeInsets.only(right: 8.w),
+                    padding: EdgeInsets.only(right: 18.w),
                     child: Container(
-                      padding: EdgeInsets.all(12.w),
+                      padding: EdgeInsets.symmetric(horizontal:12.w,vertical: 8.w),
                       // alignment: Alignment.center,
                       decoration: BoxDecoration(
                           color: AppColors.white.withOpacity(0.2),
@@ -83,7 +83,7 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                   otherWidget: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      SizeConfig.sH35,
+                      SizeConfig.sH40,
                       const CommonScrollableAppbarWidget()
                     ],
                   ),
@@ -174,10 +174,34 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                     SizedBox(height: 20.h),
 
                     ///FULL NAME ENG
-                    CustomText(
-                      AppStrings.fullNameEng,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.grey73,
+                    // CustomText(
+                    //   AppStrings.fullNameEng,
+                    //   fontWeight: FontWeight.w500,
+                    //   color: AppColors.grey73,
+                    // ),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: AppStrings.fullNameEng, // "Full Name (English) "
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.grey73,
+                              fontSize: 14.sp,
+                              fontFamily: AppConstants.metropolis,
+                            ),
+                          ),
+                          TextSpan(
+                            text: '*',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.red,
+                              fontSize: 14.sp,
+                              fontFamily: AppConstants.metropolis,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(height: 8.h),
                     CommonTextField(
@@ -193,10 +217,34 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                     SizedBox(height: 12.h),
 
                     ///FULL NAME KUR
-                    CustomText(
-                      AppStrings.fullNameKur,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.grey73,
+                    // CustomText(
+                    //   AppStrings.fullNameKur,
+                    //   fontWeight: FontWeight.w500,
+                    //   color: AppColors.grey73,
+                    // ),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: AppStrings.fullNameKur, // "Full Name (English) "
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.grey73,
+                              fontSize: 14.sp,
+                              fontFamily: AppConstants.metropolis,
+                            ),
+                          ),
+                          TextSpan(
+                            text: '*',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.red,
+                              fontSize: 14.sp,
+                              fontFamily: AppConstants.metropolis,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(height: 8.h),
                     CommonTextField(
@@ -212,10 +260,34 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                     SizedBox(height: 12.h),
 
                     ///GENDER
-                    CustomText(
-                      AppStrings.gender,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.grey73,
+                    // CustomText(
+                    //   AppStrings.gender,
+                    //   fontWeight: FontWeight.w500,
+                    //   color: AppColors.grey73,
+                    // ),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: AppStrings.gender, // "Full Name (English) "
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.grey73,
+                              fontSize: 14.sp,
+                              fontFamily: AppConstants.metropolis,
+                            ),
+                          ),
+                          TextSpan(
+                            text: '*',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.red,
+                              fontSize: 14.sp,
+                              fontFamily: AppConstants.metropolis,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(height: 8.h),
                     DropdownButtonFormField<String>(
@@ -344,10 +416,34 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                     SizedBox(height: 12.h),
 
                     ///PHONE NUMBER
-                    CustomText(
-                      AppStrings.phoneNumber,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.grey73,
+                    // CustomText(
+                    //   AppStrings.phoneNumber,
+                    //   fontWeight: FontWeight.w500,
+                    //   color: AppColors.grey73,
+                    // ),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: AppStrings.phoneNumber, // "Full Name (English) "
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.grey73,
+                              fontSize: 14.sp,
+                              fontFamily: AppConstants.metropolis,
+                            ),
+                          ),
+                          TextSpan(
+                            text: '*',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.red,
+                              fontSize: 14.sp,
+                              fontFamily: AppConstants.metropolis,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(height: 8.h),
                     IntlPhoneField(

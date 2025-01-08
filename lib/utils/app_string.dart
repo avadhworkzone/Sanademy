@@ -230,8 +230,8 @@ class AppStrings {
   // static String otpHasBeenSetToYourPhone = 'OTP Has been set to your phone ';
   // static String onWhatsApp = ' on WhatsApp';
   static String profileCompletion = 'Profile Completion :';
-  static String fullNameEng = 'Full Name (English) *';
-  static String fullNameKur = 'Full Name (Kurdis) *';
+  static String fullNameEng = 'Full Name (English)';
+  static String fullNameKur = 'Full Name (Kurdis)';
   static String birthOfDate = 'Birth of Date';
-  static String gender = 'Gender *';
+  static String gender = 'Gender';
 }
