@@ -120,6 +120,7 @@ class AppImageAssets {
 
   static const String emailIdIcon =
       '${AppConstants.baseImageAssetsPath}emailId.png';
+
   /// notification screen
   static const String alertIcon =
       '${AppConstants.baseIconAssetsPath}alertIcon.svg';
@@ -179,7 +180,6 @@ class AppImageAssets {
   static String noImageFound =
       "${AppConstants.baseImageAssetsPath}noImageFound.jpg";
 
-
   ///IMAGES
 
   /// language screen
@@ -195,9 +195,11 @@ class AppImageAssets {
   static String kurdishLanguageLogo =
       "${AppConstants.baseIconAssetsPath}kurdishLanguageIcon.png";
 
- /// profile screen
- static String cameraIcon = "${AppConstants.baseIconAssetsPath}camera_icons.png";
- static String calenderIcon = "${AppConstants.baseIconAssetsPath}calender.png";
- static String dropDownIcon = "${AppConstants.baseIconAssetsPath}dropdown_icon.png";
- static String edit = "${AppConstants.baseIconAssetsPath}edit.png";
+  /// profile screen
+  static String cameraIcon =
+      "${AppConstants.baseIconAssetsPath}camera_icons.png";
+  static String calenderIcon = "${AppConstants.baseIconAssetsPath}calender.png";
+  static String dropDownIcon =
+      "${AppConstants.baseIconAssetsPath}dropdown_icon.png";
+  static String edit = "${AppConstants.baseIconAssetsPath}edit.png";
 }
