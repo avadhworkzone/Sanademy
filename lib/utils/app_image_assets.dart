@@ -158,4 +158,5 @@ class AppImageAssets {
 
  /// profile screen
  static String cameraIcon = "${AppConstants.baseIconAssetsPath}camera_icons.png";
+ static String calenderIcon = "${AppConstants.baseIconAssetsPath}calender.png";
 }

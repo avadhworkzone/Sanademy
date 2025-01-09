@@ -5,18 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83c49ef8-8fc9-48dc-9daa-57274fc03aea" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/icons/camera_icons.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/calender.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/d2cf90865d04c77244d0b65d58f8863c/.filecache" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/d2cf90865d04c77244d0b65d58f8863c/.filecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/d2cf90865d04c77244d0b65d58f8863c/app.dill" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/d2cf90865d04c77244d0b65d58f8863c/app.dill" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/d2cf90865d04c77244d0b65d58f8863c/debug_android_application.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/d2cf90865d04c77244d0b65d58f8863c/debug_android_application.stamp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/d2cf90865d04c77244d0b65d58f8863c/flutter_assets.d" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/d2cf90865d04c77244d0b65d58f8863c/flutter_assets.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/d2cf90865d04c77244d0b65d58f8863c/kernel_snapshot_program.d" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/d2cf90865d04c77244d0b65d58f8863c/kernel_snapshot_program.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/d2cf90865d04c77244d0b65d58f8863c/kernel_snapshot_program.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/d2cf90865d04c77244d0b65d58f8863c/kernel_snapshot_program.stamp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/d2cf90865d04c77244d0b65d58f8863c/outputs.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/d2cf90865d04c77244d0b65d58f8863c/outputs.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/d2cf90865d04c77244d0b65d58f8863c/program.dill" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/d2cf90865d04c77244d0b65d58f8863c/program.dill" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/app_colors.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_colors.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/utils/app_image_assets.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_image_assets.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/app_string.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_string.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/view/profile_screen/new_profile_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/profile_screen/new_profile_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view_model/profile_screen_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view_model/profile_screen_view_model.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,11 +59,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.cidr.known.project.marker": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
     "io.flutter.reload.alreadyRun": "true",
     "last_opened_file_path": "/Users/avadhkatrodiya/Documents/GitHub/Sanademy/assets/icons",
-    "settings.editor.selected.configurable": "flutter.settings"
+    "settings.editor.selected.configurable": "flutter.settings",
+    "show.migrate.to.gradle.popup": "false"
   }
 }]]></component>
   <component name="RecentsManager">

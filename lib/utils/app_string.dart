@@ -6,6 +6,7 @@ class AppStrings {
   static String registerYourAccount =
       'Register your account and embark on your educational journey!';
   static String dateFormat = 'mm/dd/yyyy';
+  static String yyyyMMdd = 'yyyy/MM/dd';
   static String enterYourPhoneNumber = 'Enter your phone number';
   static String submit = 'Submit';
 
