@@ -5,38 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83c49ef8-8fc9-48dc-9daa-57274fc03aea" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/images/arrowRight.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/commonWidget/common_container_dialog.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/view/myProgressScreen/progess_bottom_sheet.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/view/notificationScreen/notification_screen_new.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/3b5f83ed8da18e6412493f3f667bb73f/.filecache" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/3b5f83ed8da18e6412493f3f667bb73f/.filecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/3b5f83ed8da18e6412493f3f667bb73f/app.dill" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/3b5f83ed8da18e6412493f3f667bb73f/app.dill" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/3b5f83ed8da18e6412493f3f667bb73f/debug_android_application.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/3b5f83ed8da18e6412493f3f667bb73f/debug_android_application.stamp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/3b5f83ed8da18e6412493f3f667bb73f/flutter_assets.d" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/3b5f83ed8da18e6412493f3f667bb73f/flutter_assets.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/3b5f83ed8da18e6412493f3f667bb73f/kernel_snapshot_program.d" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/3b5f83ed8da18e6412493f3f667bb73f/kernel_snapshot_program.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/3b5f83ed8da18e6412493f3f667bb73f/kernel_snapshot_program.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/3b5f83ed8da18e6412493f3f667bb73f/kernel_snapshot_program.stamp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/3b5f83ed8da18e6412493f3f667bb73f/program.dill" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/3b5f83ed8da18e6412493f3f667bb73f/program.dill" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/commonWidget/common_appbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commonWidget/common_appbar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/commonWidget/custom_btn.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/commonWidget/custom_btn.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/localization/ar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/localization/ar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/localization/ckb.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/localization/ckb.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/localization/en_us.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/localization/en_us.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/app_colors.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_colors.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/app_image_assets.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_image_assets.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/app_string.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/app_string.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/homeScreen/widget/home_screen_new.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/homeScreen/widget/home_screen_new.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/menu_screen/about_us_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/menu_screen/about_us_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/menu_screen/menu_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/menu_screen/menu_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/myProgressScreen/my_progress_screen_new_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/myProgressScreen/my_progress_screen_new_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/my_certificate_screen/get_more_certificate_certificates_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/my_certificate_screen/get_more_certificate_certificates_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/my_certificate_screen/my_certificate_new_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/my_certificate_screen/my_certificate_new_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/my_certificate_screen/my_certificate_screen.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/notificationScreen/notification_screen.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view_model/bottom_bar_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view_model/bottom_bar_view_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view_model/notification_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view_model/notification_view_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sa.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,11 +61,11 @@
       <recent name="$PROJECT_DIR$/android/app/src/main/res" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/assets/fonts" />
       <recent name="$PROJECT_DIR$/assets/images" />
       <recent name="$PROJECT_DIR$/lib/view/dialog" />
       <recent name="F:\madvise_github\Sanademy\lib\view\general" />
-      <recent name="$PROJECT_DIR$/lib/view/homeScreen/widget" />
     </key>
   </component>
   <component name="RunManager">
