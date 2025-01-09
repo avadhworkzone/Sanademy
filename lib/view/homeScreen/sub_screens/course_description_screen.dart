@@ -8,6 +8,7 @@ import 'package:sanademy/commonWidget/common_appbar.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
+import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/enum_utils.dart';
@@ -648,8 +649,10 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20.w),
                       child: CustomUpdateBtn(
-                        onTap: () {},
-                        title: "Enroll The Course",
+                        onTap: () {
+                          showEnrollmentDialog(context);
+                        },
+                        title: AppStrings.enrollTheCourse,
                         radius: 15,
                         fontSize: 16.sp,
                       ),
@@ -663,6 +666,109 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
           ),
     );
   }
+}
+
+void showEnrollmentDialog(BuildContext context) {
+  showDialog(
+    context: context,
+
+    builder: (BuildContext context) {
+      return AlertDialog(
+        contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+
+        content: SizedBox(
+          width: double.maxFinite,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: 10.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Icon(
+                        Icons.close,
+                        color: Colors.transparent,
+                      )),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: LocalAssets(
+                      imagePath: AppImageAssets.image1,
+                      height: 95.h,
+                    ),
+                  ),
+                  // SizedBox(width: 10.w),
+                  const Icon(Icons.close),
+                ],
+              ),
+              SizedBox(height: 20.h),
+              RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'Do you want to Enroll in AI course for ',
+                      style: TextStyle(
+                        color: AppColors.blue34,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: AppConstants.metropolis,
+                      ),
+                    ),
+                    TextSpan(
+                      text: '15000',
+                      style: TextStyle(
+                        color: AppColors.blue34,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: AppConstants.metropolis,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'IQD',
+                      style: TextStyle(
+                        color: AppColors.blue34,
+                        fontSize: 16.sp,
+
+                        fontWeight: FontWeight.w600,
+                        fontFamily: AppConstants.metropolis,
+                      ),
+                    ),
+                    TextSpan(
+                      text: ' amount?',
+                      style: TextStyle(
+                        color: AppColors.blue34,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: AppConstants.metropolis,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20.h),
+
+              SizedBox(height: 20.h),
+              // const CustomText('This is a dialog with a local image.')
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('Close'),
+          ),
+        ],
+      );
+    },
+  );
 }
 
 /// YOUTUBE PLAYER

@@ -6,6 +6,7 @@ class AppStrings {
   static String registerYourAccount =
       'Register your account and embark on your educational journey!';
   static String dateFormat = 'mm/dd/yyyy';
+  static String yyyyMMdd = 'yyyy/MM/dd';
   static String enterYourPhoneNumber = 'Enter your phone number';
   static String submit = 'Submit';
 
@@ -83,7 +84,7 @@ class AppStrings {
   static String aboutUs = 'About Us';
   static String ourMission = 'Our Mission';
   static String ourVision = 'Our Vision';
-  static String logOut = 'Logout';
+  static String logOut = 'Log Out';
   static String deleteAccount = 'Delete Account';
   static String logOutTxt = "Are you sure you want to logout?";
   static String deleteAccountTxt = "Are you sure you want to delete account?";
@@ -223,6 +224,12 @@ class AppStrings {
   static String inThisPageYouCanTestYourKnowledge =
       'In this page, you can test your knowledge in each field, and possibly receive the certificate.';
 
+  // static String password = 'Password ';
+  // static String verifyYourPhone = 'Verify Your Phone';
+  // static String resendCode = 'Resend Code';
+  // static String verifyPhoneNumber = 'Verify Phone Number';
+  // static String otpHasBeenSetToYourPhone = 'OTP Has been set to your phone ';
+  // static String onWhatsApp = ' on WhatsApp';
   static String profileCompletion = 'Profile Completion :';
   static String fullNameEng = 'Full Name (English)';
   static String fullNameKur = 'Full Name (Kurdis)';
@@ -237,4 +244,10 @@ class AppStrings {
   static String transactionHistory = 'Transaction history';
   static String inThisPageYourKnow =
       'In this page, you can test your knowledge in each field, and possibly receive the certificate.';
+  static String selectGender = 'Select Gender';
+  static String city = 'City';
+  static String province = 'Province';
+  static String select = 'Select';
+  static String saveDetails = 'Save Details';
+  static String enrollTheCourse = 'Enroll The Course';
 }

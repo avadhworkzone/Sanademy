@@ -94,7 +94,7 @@ class CommonTextField extends StatelessWidget {
             TextStyle(
                 fontSize: 14.sp,
                 color: AppColors.black,
-                fontFamily: AppConstants.quicksand,
+                fontFamily: AppConstants.metropolis,
                 fontWeight: FontWeight.w400),
         /*?? underLineBorder!
             ? CustomTextStyle.textStyleInputField
@@ -139,7 +139,7 @@ class CommonTextField extends StatelessWidget {
           filled: true,
           contentPadding: contentPadding ??
               EdgeInsets.symmetric(horizontal: 15.w, vertical: 17.h),
-          hintText: hintText!.tr,
+          hintText: hintText?.tr,
           errorBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: AppColors.red),
               borderRadius: BorderRadius.circular(10.r)),
@@ -174,11 +174,12 @@ class CommonTextField extends StatelessWidget {
           labelStyle: TextStyle(
               fontSize: 14.sp,
               color: AppColors.black,
+              fontFamily: AppConstants.metropolis,
               fontWeight: FontWeight.w600),
           hintStyle: TextStyle(
             color: hintTextColor ?? AppColors.black12,
             fontSize: 14.sp,
-            fontFamily: AppConstants.quicksand,
+            fontFamily: AppConstants.metropolis,
             fontWeight: hintFontWeight ?? FontWeight.normal,
           ),
           errorMaxLines: 2,

@@ -1,10 +1,13 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart' as dio;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/networks/api_base_helper.dart';
 import 'package:sanademy/networks/api_keys.dart';
 import 'package:sanademy/networks/model/get_profile_res_model.dart';
@@ -13,27 +16,27 @@ import 'package:sanademy/networks/services/apiService/profile_api_service.dart';
 import 'package:sanademy/networks/services/apiService/update_profile_api_service.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
+import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/enum_utils.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
-import 'package:sanademy/view/homeScreen/home_screen.dart';
 import 'package:sanademy/view_model/home_screen_view_model.dart';
 
 class ProfileScreenViewModel extends GetxController {
   Rx<TextEditingController> nameController = TextEditingController().obs;
+  Rx<TextEditingController> nameKurdishController = TextEditingController().obs;
   Rx<TextEditingController> dateController = TextEditingController().obs;
   Rx<TextEditingController> phoneController = TextEditingController().obs;
   Rx<TextEditingController> addressController = TextEditingController().obs;
   final Rx<GlobalKey<FormState>> formKey = GlobalKey<FormState>().obs;
   Rx<ResponseStatus> responseStatus = ResponseStatus.INITIAL.obs;
-   HomeScreenViewModel homeScreenViewModel = Get.find();
+  HomeScreenViewModel homeScreenViewModel = Get.find();
   Rx<DateTime> selectedDate = DateTime.now().obs;
   RxBool isValidate = false.obs;
   Rx<File> imgFile = File('').obs;
   RxString phoneCode = ''.obs;
   RxString countryCode = ''.obs;
   RxString newImage = ''.obs;
-
 
   /// DATE PICKER
   Future<void> selectDate(BuildContext context) async {
@@ -60,6 +63,72 @@ class ProfileScreenViewModel extends GetxController {
       /* String date = "${picked.month}/${picked.day}/${picked.year}";
       dateController.value.text = date;*/
     }
+  }
+
+  Future<void> showCupertinoDatePicker(BuildContext context) async {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (BuildContext context) {
+        return Container(
+          height: 300, // Adjust height for the picker
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: CustomText(
+                      'Cancel',
+                      color: AppColors.borderColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.sp,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      // Format the selected date and set it to the controller
+                      dateController.value.text =
+                          DateFormat(AppStrings.yyyyMMdd).format(
+                              selectedDate.value);
+                    },
+                    child: CustomText(
+                      'Done',
+                      color: AppColors.borderColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.sp,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10.h),
+              Expanded(
+                child: CupertinoDatePicker(
+                  mode: CupertinoDatePickerMode.date,
+                  initialDateTime: selectedDate.value,
+                  minimumDate: DateTime(1950, 8),
+                  maximumDate: DateTime.now(),
+                  dateOrder: DatePickerDateOrder.ymd,
+                  onDateTimeChanged: (DateTime date) {
+                    selectedDate.value = date;
+                  },
+                ),
+              ),
+
+
+            ],
+          ),
+        );
+      },
+    );
   }
 
   Future<void> pickImageFromGallery() async {
@@ -105,8 +174,9 @@ class ProfileScreenViewModel extends GetxController {
             DateTime.parse(getProfileResModel.data!.dateOfBirth.toString()));
         addressController.value.text = getProfileResModel.data!.address ?? '';
         newImage.value = getProfileResModel.data!.image ?? '';
-       await SharedPreferenceUtils.setImage(newImage.value);
-        logs('SharedPreferenceUtils.getImage()======${SharedPreferenceUtils.getImage()}');
+        await SharedPreferenceUtils.setImage(newImage.value);
+        logs(
+            'SharedPreferenceUtils.getImage()======${SharedPreferenceUtils.getImage()}');
 
         phoneCode.value = '';
         phoneCode.value = getProfileResModel.data!.phoneCode ?? '';
@@ -156,7 +226,8 @@ class ProfileScreenViewModel extends GetxController {
         if (updateProfileResModel.data != null) {
           showSussesSnackBar('', updateProfileResModel.message ?? 'SUCCESS');
           // SharedPreferenceUtils.setImage(updateProfileResModel.data!.image.toString());
-          homeScreenViewModel.updateUserImage(updateProfileResModel.data!.image.toString());
+          homeScreenViewModel
+              .updateUserImage(updateProfileResModel.data!.image.toString());
           Get.to(const BottomBar());
         } else {
           showErrorSnackBar('', updateProfileResModel.message ?? 'ERROR');
