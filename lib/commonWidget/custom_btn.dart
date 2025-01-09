@@ -24,7 +24,23 @@ class CustomBtn extends StatelessWidget {
   final List<BoxShadow>? boxShadow;
 
   // ignore: use_key_in_widget_constructors
-  const CustomBtn({required this.onTap, required this.title, this.radius, this.fontWeight, this.borderColor, this.height, this.width, this.fontSize, this.bgColor, this.textColor, this.leading, this.withIcon = false, this.iconPath, this.isDownloadFile = false, this.widget, this.boxShadow});
+  const CustomBtn(
+      {required this.onTap,
+      required this.title,
+      this.radius,
+      this.fontWeight,
+      this.borderColor,
+      this.height,
+      this.width,
+      this.fontSize,
+      this.bgColor,
+      this.textColor,
+      this.leading,
+      this.withIcon = false,
+      this.iconPath,
+      this.isDownloadFile = false,
+      this.widget,
+      this.boxShadow});
 
   @override
   Widget build(BuildContext context) {
@@ -34,29 +50,31 @@ class CustomBtn extends StatelessWidget {
         height: height ?? 50.h,
         width: width ?? Get.width,
         decoration: BoxDecoration(
-          color: bgColor ?? AppColors.primaryColor,
+          // color: bgColor ?? AppColors.primaryColor,
           border: Border.all(color: borderColor ?? Colors.transparent),
           borderRadius: BorderRadius.circular(radius ?? 5),
+          image: DecorationImage(
+              image: AssetImage(AppImageAssets.appLogo), fit: BoxFit.cover),
           boxShadow: boxShadow,
         ),
-        child: widget ?? InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(radius ?? 5),
-          child: Center(
-            child: CustomText(
-              title!.tr,
-              fontWeight: fontWeight ?? FontWeight.w600,
-              color: textColor ?? AppColors.white,
-              fontSize: fontSize ?? 15.sp,
-              textAlign: TextAlign.center,
+        child: widget ??
+            InkWell(
+              onTap: onTap,
+              borderRadius: BorderRadius.circular(radius ?? 5),
+              child: Center(
+                child: CustomText(
+                  title!.tr,
+                  fontWeight: fontWeight ?? FontWeight.w600,
+                  color: textColor ?? AppColors.white,
+                  fontSize: fontSize ?? 15.sp,
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ),
-          ),
-        ),
       ),
     );
   }
 }
-
 
 class CustomUpdateBtn extends StatelessWidget {
   final VoidCallback? onTap;
@@ -77,7 +95,23 @@ class CustomUpdateBtn extends StatelessWidget {
   final List<BoxShadow>? boxShadow;
 
   // ignore: use_key_in_widget_constructors
-  const CustomUpdateBtn({required this.onTap, required this.title, this.radius, this.fontWeight, this.borderColor, this.height, this.width, this.fontSize, this.bgColor, this.textColor, this.leading, this.withIcon = false, this.iconPath, this.isDownloadFile = false, this.widget, this.boxShadow});
+  const CustomUpdateBtn(
+      {required this.onTap,
+      required this.title,
+      this.radius,
+      this.fontWeight,
+      this.borderColor,
+      this.height,
+      this.width,
+      this.fontSize,
+      this.bgColor,
+      this.textColor,
+      this.leading,
+      this.withIcon = false,
+      this.iconPath,
+      this.isDownloadFile = false,
+      this.widget,
+      this.boxShadow});
 
   @override
   Widget build(BuildContext context) {
@@ -97,19 +131,20 @@ class CustomUpdateBtn extends StatelessWidget {
           borderRadius: BorderRadius.circular(radius ?? 15),
           // boxShadow: boxShadow,
         ),
-        child: widget ?? InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(radius ?? 5),
-          child: Center(
-            child: CustomText(
-              title!.tr,
-              fontWeight: fontWeight ?? FontWeight.w600,
-              color: textColor ?? AppColors.white,
-              fontSize: fontSize ?? 15.sp,
-              textAlign: TextAlign.center,
+        child: widget ??
+            InkWell(
+              onTap: onTap,
+              borderRadius: BorderRadius.circular(radius ?? 5),
+              child: Center(
+                child: CustomText(
+                  title!.tr,
+                  fontWeight: fontWeight ?? FontWeight.w600,
+                  color: textColor ?? AppColors.white,
+                  fontSize: fontSize ?? 15.sp,
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ),
-          ),
-        ),
       ),
     );
   }

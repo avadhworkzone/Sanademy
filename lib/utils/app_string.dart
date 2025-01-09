@@ -223,15 +223,18 @@ class AppStrings {
   static String inThisPageYouCanTestYourKnowledge =
       'In this page, you can test your knowledge in each field, and possibly receive the certificate.';
 
-  // static String password = 'Password ';
-  // static String verifyYourPhone = 'Verify Your Phone';
-  // static String resendCode = 'Resend Code';
-  // static String verifyPhoneNumber = 'Verify Phone Number';
-  // static String otpHasBeenSetToYourPhone = 'OTP Has been set to your phone ';
-  // static String onWhatsApp = ' on WhatsApp';
   static String profileCompletion = 'Profile Completion :';
   static String fullNameEng = 'Full Name (English)';
   static String fullNameKur = 'Full Name (Kurdis)';
   static String birthOfDate = 'Birth of Date';
   static String gender = 'Gender';
+
+  ///---------------///
+  static String myBalance = 'My Balance';
+  static String addBalance = 'Add Balance';
+  static String markAllRead = 'Mark All Read';
+  static String testCertificate = 'Tests & Certificates';
+  static String transactionHistory = 'Transaction history';
+  static String inThisPageYourKnow =
+      'In this page, you can test your knowledge in each field, and possibly receive the certificate.';
 }

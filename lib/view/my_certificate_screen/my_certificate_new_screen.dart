@@ -1,7 +1,4 @@
-import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/common_appbar.dart';
@@ -10,17 +7,11 @@ import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
-import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
-import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
-import 'package:sanademy/view/auth/sign_up_screen.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
-import 'package:sanademy/view/examScreen/exam_screen.dart';
 import 'package:sanademy/view/my_certificate_screen/get_more_certificate_certificates_screen.dart';
-import 'package:sanademy/view_model/bottom_bar_view_model.dart';
-import 'package:sanademy/view_model/my_certificate_view_model.dart';
 
 class MyCertificateNewScreen extends StatefulWidget {
   const MyCertificateNewScreen({super.key});
@@ -58,7 +49,6 @@ class _MyCertificateNewScreenState extends State<MyCertificateNewScreen> {
           child: Column(
             children: [
               commonOnlyTitleAppBar(
-                isBack: true,
                 paddingLeft: 18.w,
                 context: context,
                 isLogoRequired: false,

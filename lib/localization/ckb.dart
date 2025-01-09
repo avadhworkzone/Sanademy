@@ -186,4 +186,13 @@ Map<String, String> ckb = {
   AppStrings.error: "هەڵە",
   AppStrings.userCreatedSuccessfully: "بەکارهێنەر بە سەرکەوتوویی دروستکراوە",
   AppStrings.otpMismatch: "تکایە Otp ی ڕەوا دابنێ",
+
+  ///---------------///
+  AppStrings.myBalance: 'باڵانسی من',
+  AppStrings.addBalance: 'زیادکردنی باڵانس',
+  AppStrings.markAllRead: 'مارک ئۆڵ خوێندنەوە',
+  AppStrings.testCertificate: 'تاقیکردنەوە و بڕوانامە',
+  AppStrings.transactionHistory: 'مێژووی مامەڵەکان',
+  AppStrings.inThisPageYourKnow:
+      'لەم لاپەڕەیەدا دەتوانیت زانیاریەکانت لە هەر بوارێکدا تاقی بکەیتەوە، و ئەگەری هەیە بڕوانامەکە وەربگریت.'
 };

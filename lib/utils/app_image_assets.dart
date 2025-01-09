@@ -14,10 +14,15 @@ class AppImageAssets {
       '${AppConstants.baseAudioAssetsPath}example_assets_audios_audio4.mp3';
 
   /// prefix Icons
-  static const String calendarIcon = '${AppConstants.baseIconAssetsPath}calendarIcon.svg';
-  static const String locationIcon = '${AppConstants.baseIconAssetsPath}locationIcon.svg';
+  static const String calendarIcon =
+      '${AppConstants.baseIconAssetsPath}calendarIcon.svg';
+  static const String locationIcon =
+      '${AppConstants.baseIconAssetsPath}locationIcon.svg';
+
   /// common user Icon
-  static const String userImage = '${AppConstants.baseIconAssetsPath}userImage.svg';
+  static const String userImage =
+      '${AppConstants.baseIconAssetsPath}userImage.svg';
+
   /// bottombar
   static const String myProgress =
       '${AppConstants.baseIconAssetsPath}myProgressIcon.svg';
@@ -27,8 +32,7 @@ class AppImageAssets {
       '${AppConstants.baseIconAssetsPath}notificationIcon.svg';
   static const String selectedHomeIcon =
       '${AppConstants.baseIconAssetsPath}selectedHomeIcon.svg';
-  static const String homeIcn =
-      '${AppConstants.baseIconAssetsPath}homeIcn.svg';
+  static const String homeIcn = '${AppConstants.baseIconAssetsPath}homeIcn.svg';
   static const String selectedCertificateIcon =
       '${AppConstants.baseIconAssetsPath}Vector (1).svg';
   static const String selectedNotificationIcon =
@@ -43,48 +47,80 @@ class AppImageAssets {
   /// home screen
 
   static String searchIcon = "${AppConstants.baseIconAssetsPath}searchIcon.svg";
-  static const String categoryIcon = '${AppConstants.baseIconAssetsPath}categoryIcon.png';
+  static const String categoryIcon =
+      '${AppConstants.baseIconAssetsPath}categoryIcon.png';
   static const String infoIcon = '${AppConstants.baseIconAssetsPath}info.png';
-  static const String notificationNew = '${AppConstants.baseIconAssetsPath}notificationNew.png';
+  static const String notificationNew =
+      '${AppConstants.baseIconAssetsPath}notificationNew.png';
   static const String playIcon = '${AppConstants.baseIconAssetsPath}play.png';
-  static const String downloadCircleFilled = '${AppConstants.baseIconAssetsPath}download_circle_filled.png';
-  static const String requestHardCopy = '${AppConstants.baseIconAssetsPath}request_hard_copy.png';
-  static const String recommendedBgImg= '${AppConstants.baseImageAssetsPath}recommendedBgImg.png';
-  static const String bookOutlined= '${AppConstants.baseIconAssetsPath}book_outlined.png';
-  static const String profileImage= '${AppConstants.baseImageAssetsPath}profileImage.png';
-  static const String bookIcon= '${AppConstants.baseIconAssetsPath}book.png';
-  static const String mediaArts= '${AppConstants.baseIconAssetsPath}media_arts.png';
-  static const String technology= '${AppConstants.baseIconAssetsPath}technology.png';
-  static const String featured= '${AppConstants.baseIconAssetsPath}featured.png';
-  static const String teacherImage= '${AppConstants.baseIconAssetsPath}teacher_image.png';
-  static const String image1= '${AppConstants.baseIconAssetsPath}image1.png';
-  static const String image2= '${AppConstants.baseIconAssetsPath}image2.png';
-  static const String image3= '${AppConstants.baseIconAssetsPath}image3.png';
-  static const String copyIcon= '${AppConstants.baseImageAssetsPath}copyIcon.png';
-  static const String callIcon= '${AppConstants.baseImageAssetsPath}callIcon.png';
-  static const String blankBackground= '${AppConstants.baseImageAssetsPath}blanck_Background.png';
-  static const String whatAppIcon= '${AppConstants.baseImageAssetsPath}whatsappLogo.png';
-  static const String telegramIcon= '${AppConstants.baseImageAssetsPath}telegranLogo.png';
-  static const String certificate= '${AppConstants.baseIconAssetsPath}certificate.png';
-  static const String downloadCircle= '${AppConstants.baseIconAssetsPath}download_circle.png';
-  static const String list= '${AppConstants.baseIconAssetsPath}list.png';
-  static const String tv= '${AppConstants.baseIconAssetsPath}tv.png';
-  static const String videoPlay= '${AppConstants.baseIconAssetsPath}video_play.png';
-  static const String warning= '${AppConstants.baseIconAssetsPath}warning.png';
-  static const String checkmark= '${AppConstants.baseIconAssetsPath}checkmark.png';
-  static const String lock= '${AppConstants.baseIconAssetsPath}lock.png';
-  static const String yellowPlay= '${AppConstants.baseIconAssetsPath}yellow_play.png';
-  static const String certificateSelected= '${AppConstants.baseIconAssetsPath}certificate_selected.png';
-  static const String certificateUnselected= '${AppConstants.baseIconAssetsPath}certificate_unselected.png';
-  static const String homeSelected= '${AppConstants.baseIconAssetsPath}home_selected.png';
-  static const String homeUnselected= '${AppConstants.baseIconAssetsPath}home_unselected.png';
-  static const String profileSelected= '${AppConstants.baseIconAssetsPath}profile_selected.png';
-  static const String profileUnselected= '${AppConstants.baseIconAssetsPath}profile_unselected.png';
-  static const String progressSelected= '${AppConstants.baseIconAssetsPath}progress_selected.png';
-  static const String progressUnselected= '${AppConstants.baseIconAssetsPath}progress_unselected.png';
+  static const String downloadCircleFilled =
+      '${AppConstants.baseIconAssetsPath}download_circle_filled.png';
+  static const String requestHardCopy =
+      '${AppConstants.baseIconAssetsPath}request_hard_copy.png';
+  static const String recommendedBgImg =
+      '${AppConstants.baseImageAssetsPath}recommendedBgImg.png';
+  static const String bookOutlined =
+      '${AppConstants.baseIconAssetsPath}book_outlined.png';
+  static const String profileImage =
+      '${AppConstants.baseImageAssetsPath}profileImage.png';
+  static const String bookIcon = '${AppConstants.baseIconAssetsPath}book.png';
+  static const String mediaArts =
+      '${AppConstants.baseIconAssetsPath}media_arts.png';
+  static const String technology =
+      '${AppConstants.baseIconAssetsPath}technology.png';
+  static const String featured =
+      '${AppConstants.baseIconAssetsPath}featured.png';
+  static const String teacherImage =
+      '${AppConstants.baseIconAssetsPath}teacher_image.png';
+  static const String image1 = '${AppConstants.baseIconAssetsPath}image1.png';
+  static const String image2 = '${AppConstants.baseIconAssetsPath}image2.png';
+  static const String image3 = '${AppConstants.baseIconAssetsPath}image3.png';
+  static const String copyIcon =
+      '${AppConstants.baseImageAssetsPath}copyIcon.png';
+  static const String arrowRightIcon =
+      '${AppConstants.baseImageAssetsPath}arrowRight.png';
+  static const String callIcon =
+      '${AppConstants.baseImageAssetsPath}callIcon.png';
+  static const String blankBackground =
+      '${AppConstants.baseImageAssetsPath}blanck_Background.png';
+  static const String whatAppIcon =
+      '${AppConstants.baseImageAssetsPath}whatsappLogo.png';
+  static const String telegramIcon =
+      '${AppConstants.baseImageAssetsPath}telegranLogo.png';
+  static const String certificate =
+      '${AppConstants.baseIconAssetsPath}certificate.png';
+  static const String downloadCircle =
+      '${AppConstants.baseIconAssetsPath}download_circle.png';
+  static const String list = '${AppConstants.baseIconAssetsPath}list.png';
+  static const String tv = '${AppConstants.baseIconAssetsPath}tv.png';
+  static const String videoPlay =
+      '${AppConstants.baseIconAssetsPath}video_play.png';
+  static const String warning = '${AppConstants.baseIconAssetsPath}warning.png';
+  static const String checkmark =
+      '${AppConstants.baseIconAssetsPath}checkmark.png';
+  static const String lock = '${AppConstants.baseIconAssetsPath}lock.png';
+  static const String yellowPlay =
+      '${AppConstants.baseIconAssetsPath}yellow_play.png';
+  static const String certificateSelected =
+      '${AppConstants.baseIconAssetsPath}certificate_selected.png';
+  static const String certificateUnselected =
+      '${AppConstants.baseIconAssetsPath}certificate_unselected.png';
+  static const String homeSelected =
+      '${AppConstants.baseIconAssetsPath}home_selected.png';
+  static const String homeUnselected =
+      '${AppConstants.baseIconAssetsPath}home_unselected.png';
+  static const String profileSelected =
+      '${AppConstants.baseIconAssetsPath}profile_selected.png';
+  static const String profileUnselected =
+      '${AppConstants.baseIconAssetsPath}profile_unselected.png';
+  static const String progressSelected =
+      '${AppConstants.baseIconAssetsPath}progress_selected.png';
+  static const String progressUnselected =
+      '${AppConstants.baseIconAssetsPath}progress_unselected.png';
 
   static const String emailIdIcon =
       '${AppConstants.baseImageAssetsPath}emailId.png';
+
   /// notification screen
   static const String alertIcon =
       '${AppConstants.baseIconAssetsPath}alertIcon.svg';
@@ -121,7 +157,8 @@ class AppImageAssets {
       "${AppConstants.baseIconAssetsPath}facebookIcn.svg";
   static String instagramIcn =
       "${AppConstants.baseIconAssetsPath}instagramIcn.svg";
-  static String galleryImg = "${AppConstants.baseImageAssetsPath}galleryImg.png";
+  static String galleryImg =
+      "${AppConstants.baseImageAssetsPath}galleryImg.png";
 
   /// Contact Us
   static String locationIcn =
@@ -143,19 +180,22 @@ class AppImageAssets {
   static String noImageFound =
       "${AppConstants.baseImageAssetsPath}noImageFound.jpg";
 
-
   ///IMAGES
 
   /// language screen
   static String appLogo = "${AppConstants.baseImageAssetsPath}Background.png";
-  static String animationImage = "${AppConstants.baseImageAssetsPath}animationImage.png";
+  static String animationImage =
+      "${AppConstants.baseImageAssetsPath}animationImage.png";
 
   /// ICONS
 
- /// language screen
- static String englishLanguageLogo = "${AppConstants.baseIconAssetsPath}englishLanguage.png";
- static String kurdishLanguageLogo = "${AppConstants.baseIconAssetsPath}kurdishLanguageIcon.png";
+  /// language screen
+  static String englishLanguageLogo =
+      "${AppConstants.baseIconAssetsPath}englishLanguage.png";
+  static String kurdishLanguageLogo =
+      "${AppConstants.baseIconAssetsPath}kurdishLanguageIcon.png";
 
- /// profile screen
- static String cameraIcon = "${AppConstants.baseIconAssetsPath}camera_icons.png";
+  /// profile screen
+  static String cameraIcon =
+      "${AppConstants.baseIconAssetsPath}camera_icons.png";
 }

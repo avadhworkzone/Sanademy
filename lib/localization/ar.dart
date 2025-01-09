@@ -5,8 +5,7 @@ Map<String, String> ar = {
   AppStrings.enterYourName: 'ناوت چی یە؟',
   AppStrings.titleTxt: 'أكاديمية سناء',
   AppStrings.register: 'يسجل',
-  AppStrings.registerYourAccount:
-  'سجل حسابك وابدأ رحلتك التعليمية!',
+  AppStrings.registerYourAccount: 'سجل حسابك وابدأ رحلتك التعليمية!',
   AppStrings.dateFormat: 'سمم/ي ي/س س س س',
   AppStrings.enterYourPhoneNumber: 'أدخل رقم هاتفك',
   AppStrings.submit: 'يُقدِّم',
@@ -44,7 +43,7 @@ Map<String, String> ar = {
   AppStrings.lectures: "محاضرات",
   AppStrings.hours: "ساعات",
   AppStrings.minutes: "دقائق",
-  AppStrings.noDataFound : 'لاتوجد بيانات',
+  AppStrings.noDataFound: 'لاتوجد بيانات',
 
   /// Description Screen
   AppStrings.enrollNow: "تسجيل الآن",
@@ -89,7 +88,8 @@ Map<String, String> ar = {
   AppStrings.deleteAccountTxt: 'هل أنت متأكد أنك تريد حذف الحساب؟',
   AppStrings.yes: 'نعم',
   AppStrings.no: 'لا',
-  AppStrings.reDirectOnWhatsAppMessage: 'من فضلك اتصل بنا :\n+964 7509790444\n+964 7709790444\nمعرف المستخدم الخاص بي لأكاديمية سناء هو:',
+  AppStrings.reDirectOnWhatsAppMessage:
+      'من فضلك اتصل بنا :\n+964 7509790444\n+964 7709790444\nمعرف المستخدم الخاص بي لأكاديمية سناء هو:',
 
   /// Contact Us Screen
   AppStrings.getInTouch: 'ابقى على تواصل',
@@ -102,7 +102,7 @@ Map<String, String> ar = {
 
   /// Profile Screen
   AppStrings.save: 'يحفظ',
-  AppStrings.profile : 'حساب تعريفي',
+  AppStrings.profile: 'حساب تعريفي',
   AppStrings.enterAddress: 'أدخل عنوانك',
   AppStrings.connectWithFaceBook: 'تواصل مع الفيسبوك',
   AppStrings.connectWithInstagram: 'تواصل مع إنستغرام',
@@ -131,14 +131,15 @@ Map<String, String> ar = {
   AppStrings.exams: "الامتحانات",
   AppStrings.examsScreenTxt:
       "في هذه الصفحة، يمكنك اختبار معرفتك في كل مجال، وربما الحصول على الشهادة.",
-  AppStrings.noExamAvailable : "لا توجد امتحانات متاحة",
-  AppStrings.pleaseCompleteYourExamTxt : "يرجى إكمال تقدمك بعد أن تتمكن من إجراء الاختبارات",
+  AppStrings.noExamAvailable: "لا توجد امتحانات متاحة",
+  AppStrings.pleaseCompleteYourExamTxt:
+      "يرجى إكمال تقدمك بعد أن تتمكن من إجراء الاختبارات",
 
   /// questions screen
   AppStrings.finishExam: "إنهاء الامتحان",
-  AppStrings.questions:"أسئلة",
-  AppStrings.of:"ل",
-  AppStrings.q:"س",
+  AppStrings.questions: "أسئلة",
+  AppStrings.of: "ل",
+  AppStrings.q: "س",
   AppStrings.skip: "يتخطى",
   AppStrings.next: "التالي",
   AppStrings.writeHere: "اكتب هنا....",
@@ -159,17 +160,17 @@ Map<String, String> ar = {
   AppStrings.pass: "يمر",
 
   /// solution screen
-  AppStrings.solution : "حلول",
-  AppStrings.yourAnswer : "إجابتك",
-  AppStrings.correctAnswer : "اجابة صحيحة",
+  AppStrings.solution: "حلول",
+  AppStrings.yourAnswer: "إجابتك",
+  AppStrings.correctAnswer: "اجابة صحيحة",
 
   /// payment success dialog
-  AppStrings.thankYouTxt :
-  'نشكرك على اهتمامك بالمشاركة في "اسم الدورة" بسعر هذه الدورة',
-  AppStrings.thankYouTxt2 : 'يمكنك إجراء الدفع من خلال الخيارات أدناه',
+  AppStrings.thankYouTxt:
+      'نشكرك على اهتمامك بالمشاركة في "اسم الدورة" بسعر هذه الدورة',
+  AppStrings.thankYouTxt2: 'يمكنك إجراء الدفع من خلال الخيارات أدناه',
 
   ///APP ERROR MESSAGE
-  AppStrings.emailIsRequired:"البريد الالكتروني مطلوب",
+  AppStrings.emailIsRequired: "البريد الالكتروني مطلوب",
   AppStrings.isRequired: '* مطلوب',
   AppStrings.pleaseEnterOtp: 'الرجاء إدخال كلمة المرور',
   AppStrings.pleaseEnterValidOtp: 'الرجاء إدخال كلمة مرور صالحة',
@@ -183,4 +184,13 @@ Map<String, String> ar = {
   AppStrings.error: 'خطأ',
   AppStrings.userCreatedSuccessfully: "تم إنشاء المستخدم بنجاح",
   AppStrings.otpMismatch: "الرجاء إدخال كلمة مرور صالحة",
+
+  ///---------------///
+  AppStrings.myBalance: 'رصيدي',
+  AppStrings.addBalance: 'إضافة الرصيد',
+  AppStrings.markAllRead: 'وضع علامة على الكل مقروءة',
+  AppStrings.testCertificate: 'الاختبارات والشهادات',
+  AppStrings.transactionHistory: 'تاريخ المعاملات',
+  AppStrings.inThisPageYourKnow:
+      'في هذه الصفحة، يمكنك اختبار معرفتك في كل مجال، وربما الحصول على الشهادة.'
 };

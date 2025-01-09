@@ -141,7 +141,7 @@ class _GetMoreCertificatesScreenState extends State<GetMoreCertificatesScreen> {
         child: Column(
           children: [
             commonOnlyTitleAppBar(
-              isBack: true,
+              isBackBtn: true,
               paddingLeft: 18.w,
               context: context,
               isLogoRequired: false,

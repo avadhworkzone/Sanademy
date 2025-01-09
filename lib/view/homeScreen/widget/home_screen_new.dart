@@ -10,12 +10,11 @@ import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/enum_utils.dart';
 import 'package:sanademy/utils/local_assets.dart';
-import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/view/homeScreen/widget/home_category_widget.dart';
 import 'package:sanademy/view/homeScreen/widget/home_recommend_widget.dart';
 import 'package:sanademy/view/homeScreen/widget/home_slider_widget.dart';
 import 'package:sanademy/view/menu_screen/menu_screen.dart';
-import 'package:sanademy/view/profile_screen/profile_screen.dart';
+import 'package:sanademy/view/notificationScreen/notification_screen_new.dart';
 import 'package:sanademy/view_model/home_screen_view_model.dart';
 
 import '../../../utils/size_config_utils.dart';
@@ -29,7 +28,8 @@ class HomeScreenNew extends StatefulWidget {
 
 class _HomeScreenNewState extends State<HomeScreenNew> {
   HomeScreenViewModel homeScreenViewModel = Get.put(HomeScreenViewModel());
-  GlobalKey<ScaffoldState> homeDrawerKey = GlobalKey();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  // GlobalKey<ScaffoldState> homeDrawerKey = GlobalKey();
 
   @override
   void initState() {
@@ -46,10 +46,14 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: homeDrawerKey,
-        // backgroundColor: AppColors.whitef7,
-        drawer: const Drawer(
-          child: MenuScreen(),
+        key: scaffoldKey,
+        drawerEnableOpenDragGesture: false,
+        drawer: Drawer(
+          child: WillPopScope(
+              onWillPop: () async {
+                return false;
+              },
+              child: const MenuScreen()),
         ),
         body: Obx(
           () => homeScreenViewModel.responseStatus.value == ResponseStatus.Error
@@ -80,18 +84,25 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                                     height: 24.sp,
                                     width: 24.sp,
                                   ),
-                                  Container(
-                                    margin:
-                                        EdgeInsets.only(left: 8.w, right: 8.w),
-                                    padding: EdgeInsets.all(12.w),
-                                    decoration: BoxDecoration(
-                                        // color: AppColors.white.withOpacity(0.20),
-                                        borderRadius:
-                                            BorderRadius.circular(30)),
-                                    child: LocalAssets(
-                                      imagePath: AppImageAssets.notificationNew,
-                                      height: 40.sp,
-                                      width: 40.sp,
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.to(
+                                          () => const NotificationScreenNew());
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.only(
+                                          left: 8.w, right: 8.w),
+                                      padding: EdgeInsets.all(12.w),
+                                      decoration: BoxDecoration(
+                                          // color: AppColors.white.withOpacity(0.20),
+                                          borderRadius:
+                                              BorderRadius.circular(30)),
+                                      child: LocalAssets(
+                                        imagePath:
+                                            AppImageAssets.notificationNew,
+                                        height: 40.sp,
+                                        width: 40.sp,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -101,7 +112,8 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                               padding: EdgeInsets.only(right: 40.w),
                               child: GestureDetector(
                                 onTap: () {
-                                  homeDrawerKey.currentState?.openDrawer();
+                                  // homeDrawerKey.currentState?.openDrawer();
+                                  scaffoldKey.currentState?.openDrawer();
                                 },
                                 child: Container(
                                   // margin: EdgeInsets.all(8.w),
