@@ -10,7 +10,8 @@ class AppConstants {
   static const String baseIconAssetsPath = "assets/icons/";
   static const String baseAudioAssetsPath = "assets/audio/";
 
-  static const String quicksand = "Quicksand";
+  static const String quicksand = "Metropolis";
+  // static const String quicksand = "Quicksand";
   static const String metropolis = "Metropolis";
 }
 

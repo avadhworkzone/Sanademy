@@ -84,7 +84,7 @@ class AppStrings {
   static String aboutUs = 'About Us';
   static String ourMission = 'Our Mission';
   static String ourVision = 'Our Vision';
-  static String logOut = 'Logout';
+  static String logOut = 'Log Out';
   static String deleteAccount = 'Delete Account';
   static String logOutTxt = "Are you sure you want to logout?";
   static String deleteAccountTxt = "Are you sure you want to delete account?";
@@ -235,4 +235,10 @@ class AppStrings {
   static String fullNameKur = 'Full Name (Kurdis)';
   static String birthOfDate = 'Birth of Date';
   static String gender = 'Gender';
+  static String selectGender = 'Select Gender';
+  static String city = 'City';
+  static String province = 'Province';
+  static String select = 'Select';
+  static String saveDetails = 'Save Details';
+  static String enrollTheCourse = 'Enroll The Course';
 }

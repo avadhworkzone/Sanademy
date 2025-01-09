@@ -20,11 +20,11 @@ import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/enum_utils.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
-import 'package:sanademy/view/homeScreen/home_screen.dart';
 import 'package:sanademy/view_model/home_screen_view_model.dart';
 
 class ProfileScreenViewModel extends GetxController {
   Rx<TextEditingController> nameController = TextEditingController().obs;
+  Rx<TextEditingController> nameKurdishController = TextEditingController().obs;
   Rx<TextEditingController> dateController = TextEditingController().obs;
   Rx<TextEditingController> phoneController = TextEditingController().obs;
   Rx<TextEditingController> addressController = TextEditingController().obs;
@@ -116,7 +116,6 @@ class ProfileScreenViewModel extends GetxController {
                   initialDateTime: selectedDate.value,
                   minimumDate: DateTime(1950, 8),
                   maximumDate: DateTime.now(),
-
                   dateOrder: DatePickerDateOrder.ymd,
                   onDateTimeChanged: (DateTime date) {
                     selectedDate.value = date;
