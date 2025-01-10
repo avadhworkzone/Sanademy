@@ -44,15 +44,17 @@ Container contactUsMethod(
               imagePath: preIcon,
               height: 20.h,
               width: 20.w,
-              imgColor: preIconColor ?? AppColors.white,
+              imgColor:preIconColor,
             ),
           ),
-          SizedBox(width: 8.w),
-          CustomNewText(title,
-              fontWeight: FontWeight.w500,
-              fontSize: 16.sp,
-              color: AppColors.blue34),
-          const Spacer(),
+          SizedBox(width: 5.w),
+          Expanded(
+            child: CustomNewText(title,
+                fontWeight: FontWeight.w500,
+                fontSize: 16.sp,
+                color: AppColors.blue34),
+          ),
+          // const Spacer(),
           Row(
             children: [
               if (postIcon1 != null)
@@ -91,7 +93,7 @@ Container contactUsMethod(
                   ),
                 ),
               SizedBox(width: 5.w),
-              InkWell(
+              GestureDetector(
                 onTap: onTap ??
                     () {
                       Clipboard.setData(ClipboardData(text: title));

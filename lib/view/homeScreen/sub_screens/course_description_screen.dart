@@ -669,184 +669,372 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
     );
   }
 }
-
 void showEnrollmentDialog(BuildContext context) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return AlertDialog(
-        contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-        content: SizedBox(
-          width: double.maxFinite,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: 10.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Icon(
-                    Icons.close,
-                    color: Colors.transparent,
-                  ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: LocalAssets(
-                      imagePath: AppImageAssets.image1,
-                      height: 95.h,
-                    ),
-                  ),
-                  // SizedBox(width: 10.w),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: const Icon(Icons.close),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20.h),
-              RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'Do you want to Enroll in AI course for ',
-                      style: TextStyle(
-                        color: AppColors.blue34,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: AppConstants.metropolis,
-                      ),
-                    ),
-                    TextSpan(
-                      text: '15000',
-                      style: TextStyle(
-                        color: AppColors.blue34,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: AppConstants.metropolis,
-                      ),
-                    ),
-                    TextSpan(
-                      text: 'IQD',
-                      style: TextStyle(
-                        color: AppColors.blue34,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: AppConstants.metropolis,
-                      ),
-                    ),
-                    TextSpan(
-                      text: ' amount?',
-                      style: TextStyle(
-                        color: AppColors.blue34,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: AppConstants.metropolis,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 20.h),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
-                decoration: BoxDecoration(
-                  color: AppColors.greyF7,
-                  border: Border.all(color: AppColors.greyE4),
-                  borderRadius: BorderRadius.circular(12.sp),
-                ),
+      return Material(
+        type: MaterialType.transparency,
+        child: Center(
+          child: Container(
+            width:
+            MediaQuery.of(context).size.width * 0.90, // Almost full width
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.all(15.w), // Adjust padding for consistency
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    commonRowForEnrollDialog(
-                      title: AppStrings.coursePrice,
-                      amount: "280,000 IQD",
+                    SizedBox(height: 10.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Icon(
+                          Icons.close,
+                          color: Colors.transparent,
+                        ),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: LocalAssets(
+                            imagePath: AppImageAssets.image1,
+                            height: 95.h,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Icon(Icons.close),
+                        ),
+                      ],
                     ),
-                    SizedBox(height: 2.h),
-                    dottedLine(),
-                    SizedBox(height: 2.h),
-                    commonRowForEnrollDialog(
-                      title: "${AppStrings.discountOfCourse} (25%)",
-                      amount: "-120,000 IQD",
+                    SizedBox(height: 20.h),
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Do you want to Enroll in AI course for ',
+                            style: TextStyle(
+                              color: AppColors.blue34,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: AppConstants.metropolis,
+                            ),
+                          ),
+                          TextSpan(
+                            text: '15000',
+                            style: TextStyle(
+                              color: AppColors.blue34,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: AppConstants.metropolis,
+                            ),
+                          ),
+                          TextSpan(
+                            text: ' IQD',
+                            style: TextStyle(
+                              color: AppColors.blue34,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: AppConstants.metropolis,
+                            ),
+                          ),
+                          TextSpan(
+                            text: ' amount?',
+                            style: TextStyle(
+                              color: AppColors.blue34,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: AppConstants.metropolis,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    SizedBox(height: 2.h),
-                    dottedLine(),
-                    SizedBox(height: 2.h),
-                    commonRowForEnrollDialog(
-                      title: AppStrings.yourCurrentBalance,
-                      amount: "-100,000 IQD",
+                    SizedBox(height: 20.h),
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
+                      decoration: BoxDecoration(
+                        color: AppColors.greyF7,
+                        border: Border.all(color: AppColors.greyE4),
+                        borderRadius: BorderRadius.circular(12.sp),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          commonRowForEnrollDialog(
+                            title: AppStrings.coursePrice,
+                            amount: "280,000 IQD",
+                          ),
+                          SizedBox(height: 2.h),
+                          dottedLine(),
+                          SizedBox(height: 2.h),
+                          commonRowForEnrollDialog(
+                            title: "${AppStrings.discountOfCourse} (25%)",
+                            amount: "-120,000 IQD",
+                          ),
+                          SizedBox(height: 2.h),
+                          dottedLine(),
+                          SizedBox(height: 2.h),
+                          commonRowForEnrollDialog(
+                            title: AppStrings.yourCurrentBalance,
+                            amount: "-100,000 IQD",
+                          ),
+                        ],
+                      ),
                     ),
-                    // SizedBox(height: 2.h),
+                    SizedBox(height: 10.h),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10.w),
+                      child: commonRowForEnrollDialog(
+                        title: AppStrings.pendingToPay,
+                        fontSizeTitle: 14.sp,
+                        fontWeightTitle: FontWeight.w600,
+                        titleColor: AppColors.grey73,
+                        fontSizeAmount: 14.sp,
+                        fontWeightAmount: FontWeight.w700,
+                        amountColor: AppColors.blue34,
+                        amount: "60,000 IQD",
+                      ),
+                    ),
+                    SizedBox(height: 30.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 30.w, vertical: 15.h),
+                              decoration: BoxDecoration(
+                                color: AppColors.greyF7,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: CustomText(
+                                  AppStrings.cancel,
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.blue34,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 15.w),
+                        Expanded(
+                          child: CustomUpdateBtn(
+                            onTap: () {
+                              Get.to(const SelectPaymentMethodScreen());
+                            },
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16.sp,
+                            radius: 10,
+                            title: AppStrings.payNow,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20.h),
                   ],
                 ),
               ),
-              SizedBox(height: 10.h),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.w),
-                child: commonRowForEnrollDialog(
-                  title: AppStrings.pendingToPay,
-                  fontSizeTitle: 14.sp,
-                  fontWeightTitle: FontWeight.w600,
-                  titleColor: AppColors.grey73,
-                  fontSizeAmount: 14.sp,
-                  fontWeightAmount: FontWeight.w700,
-                  amountColor: AppColors.blue34,
-                  amount: "60,000 IQD",
-                ),
-              ),
-              SizedBox(height: 30.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Container(
-                        width: 150.w,
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 30.w, vertical: 15.h),
-                        decoration: BoxDecoration(
-                          color: AppColors.greyF7,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: CustomText(
-                          AppStrings.cancel,
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.blue34,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 15.w),
-                  Expanded(
-                    child: CustomUpdateBtn(
-                      onTap: () {
-                        Get.to(const SelectPaymentMethodScreen());
-                      },
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16.sp,
-                      radius: 10,
-                      title: AppStrings.payNow,
-                      width: 150.w,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20.h),
-            ],
+            ),
           ),
         ),
       );
     },
   );
 }
+
+
+// void showEnrollmentDialog(BuildContext context) {
+//   showDialog(
+//     context: context,
+//     builder: (BuildContext context) {
+//       return AlertDialog(
+//         contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+//         content: SizedBox(
+//           width: double.maxFinite,
+//           child: Column(
+//             mainAxisSize: MainAxisSize.min,
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             children: [
+//               SizedBox(height: 10.h),
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: [
+//                   const Icon(
+//                     Icons.close,
+//                     color: Colors.transparent,
+//                   ),
+//                   ClipRRect(
+//                     borderRadius: BorderRadius.circular(15),
+//                     child: LocalAssets(
+//                       imagePath: AppImageAssets.image1,
+//                       height: 95.h,
+//                     ),
+//                   ),
+//                   // SizedBox(width: 10.w),
+//                   InkWell(
+//                     onTap: () {
+//                       Navigator.of(context).pop();
+//                     },
+//                     child: const Icon(Icons.close),
+//                   ),
+//                 ],
+//               ),
+//               SizedBox(height: 20.h),
+//               RichText(
+//                 textAlign: TextAlign.center,
+//                 text: TextSpan(
+//                   children: [
+//                     TextSpan(
+//                       text: 'Do you want to Enroll in AI course for ',
+//                       style: TextStyle(
+//                         color: AppColors.blue34,
+//                         fontSize: 20.sp,
+//                         fontWeight: FontWeight.w600,
+//                         fontFamily: AppConstants.metropolis,
+//                       ),
+//                     ),
+//                     TextSpan(
+//                       text: '15000',
+//                       style: TextStyle(
+//                         color: AppColors.blue34,
+//                         fontSize: 20.sp,
+//                         fontWeight: FontWeight.w600,
+//                         fontFamily: AppConstants.metropolis,
+//                       ),
+//                     ),
+//                     TextSpan(
+//                       text: 'IQD',
+//                       style: TextStyle(
+//                         color: AppColors.blue34,
+//                         fontSize: 16.sp,
+//                         fontWeight: FontWeight.w600,
+//                         fontFamily: AppConstants.metropolis,
+//                       ),
+//                     ),
+//                     TextSpan(
+//                       text: ' amount?',
+//                       style: TextStyle(
+//                         color: AppColors.blue34,
+//                         fontSize: 20.sp,
+//                         fontWeight: FontWeight.w600,
+//                         fontFamily: AppConstants.metropolis,
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//               SizedBox(height: 20.h),
+//               Container(
+//                 padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
+//                 decoration: BoxDecoration(
+//                   color: AppColors.greyF7,
+//                   border: Border.all(color: AppColors.greyE4),
+//                   borderRadius: BorderRadius.circular(12.sp),
+//                 ),
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                     commonRowForEnrollDialog(
+//                       title: AppStrings.coursePrice,
+//                       amount: "280,000 IQD",
+//                     ),
+//                     SizedBox(height: 2.h),
+//                     dottedLine(),
+//                     SizedBox(height: 2.h),
+//                     commonRowForEnrollDialog(
+//                       title: "${AppStrings.discountOfCourse} (25%)",
+//                       amount: "-120,000 IQD",
+//                     ),
+//                     SizedBox(height: 2.h),
+//                     dottedLine(),
+//                     SizedBox(height: 2.h),
+//                     commonRowForEnrollDialog(
+//                       title: AppStrings.yourCurrentBalance,
+//                       amount: "-100,000 IQD",
+//                     ),
+//                     // SizedBox(height: 2.h),
+//                   ],
+//                 ),
+//               ),
+//               SizedBox(height: 10.h),
+//               Padding(
+//                 padding: EdgeInsets.symmetric(horizontal: 10.w),
+//                 child: commonRowForEnrollDialog(
+//                   title: AppStrings.pendingToPay,
+//                   fontSizeTitle: 14.sp,
+//                   fontWeightTitle: FontWeight.w600,
+//                   titleColor: AppColors.grey73,
+//                   fontSizeAmount: 14.sp,
+//                   fontWeightAmount: FontWeight.w700,
+//                   amountColor: AppColors.blue34,
+//                   amount: "60,000 IQD",
+//                 ),
+//               ),
+//               SizedBox(height: 30.h),
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Expanded(
+//                     child: InkWell(
+//                       onTap: () {
+//                         Navigator.of(context).pop();
+//                       },
+//                       child: Container(
+//                         width: 150.w,
+//                         padding: EdgeInsets.symmetric(
+//                             horizontal: 30.w, vertical: 15.h),
+//                         decoration: BoxDecoration(
+//                           color: AppColors.greyF7,
+//                           borderRadius: BorderRadius.circular(10),
+//                         ),
+//                         child: CustomText(
+//                           AppStrings.cancel,
+//                           fontSize: 16.sp,
+//                           fontWeight: FontWeight.w600,
+//                           color: AppColors.blue34,
+//                         ),
+//                       ),
+//                     ),
+//                   ),
+//                   SizedBox(width: 15.w),
+//                   Expanded(
+//                     child: CustomUpdateBtn(
+//                       onTap: () {
+//                         Get.to(const SelectPaymentMethodScreen());
+//                       },
+//                       fontWeight: FontWeight.w600,
+//                       fontSize: 16.sp,
+//                       radius: 10,
+//                       title: AppStrings.payNow,
+//                       width: 150.w,
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//               SizedBox(height: 20.h),
+//             ],
+//           ),
+//         ),
+//       );
+//     },
+//   );
+// }
 
 /// YOUTUBE PLAYER
 /* : SizedBox(

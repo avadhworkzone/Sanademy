@@ -43,6 +43,7 @@ dependencies:
   flutter_local_notifications: ^17.1.2
 #  device_info_plus:
   flutter_native_splash:
+  easy_stepper: ^0.8.5+1
 
 
 dev_dependencies:

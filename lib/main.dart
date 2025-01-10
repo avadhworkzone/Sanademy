@@ -16,6 +16,8 @@ import 'package:sanademy/utils/app_theme.dart';
 import 'package:sanademy/view/general/no_internet_screen.dart';
 import 'package:sanademy/view/splashScreen/splash_screen.dart';
 
+import 'view_model/profile_screen_view_model.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
