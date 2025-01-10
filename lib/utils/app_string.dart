@@ -254,4 +254,6 @@ class AppStrings {
   static String saveDetails = 'Save Details';
   static String enrollTheCourse = 'Enroll The Course';
   static String payNow = 'Pay Now';
+  static String whatsApp = 'WhatsApp';
+  static String telegram = 'Telegram';
 }

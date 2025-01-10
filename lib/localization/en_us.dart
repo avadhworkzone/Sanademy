@@ -225,6 +225,8 @@ Map<String, String> en = {
   AppStrings.saveDetails: 'Save Details',
   AppStrings.enrollTheCourse: 'Enroll The Course',
   AppStrings.payNow: 'Pay Now',
+  AppStrings.telegram: 'Telegram',
+  AppStrings.whatsApp: 'WhatsApp',
 
   ///-------------///
   AppStrings.myBalance: 'My Balance',
