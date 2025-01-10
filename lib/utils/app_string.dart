@@ -235,6 +235,11 @@ class AppStrings {
   static String fullNameKur = 'Full Name (Kurdis)';
   static String birthOfDate = 'Birth of Date';
   static String gender = 'Gender';
+  static String coursePrice = 'Course Price';
+  static String discountOfCourse = 'Discount of Course';
+  static String yourCurrentBalance = 'Your Current Balance';
+  static String pendingToPay = 'Pending to Pay';
+  static String cancel = 'Cancel';
 
   ///---------------///
   static String myBalance = 'My Balance';
@@ -250,4 +255,5 @@ class AppStrings {
   static String select = 'Select';
   static String saveDetails = 'Save Details';
   static String enrollTheCourse = 'Enroll The Course';
+  static String payNow = 'Pay Now';
 }

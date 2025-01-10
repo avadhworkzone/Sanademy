@@ -202,4 +202,6 @@ class AppImageAssets {
   static String dropDownIcon =
       "${AppConstants.baseIconAssetsPath}dropdown_icon.png";
   static String edit = "${AppConstants.baseIconAssetsPath}edit.png";
+  static String infoIconShaped =
+      "${AppConstants.baseIconAssetsPath}infoIcon.png";
 }

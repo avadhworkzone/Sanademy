@@ -36,6 +36,7 @@ class CommonTextField extends StatelessWidget {
   final VoidCallback? onTap;
   final Color? borderColor;
   final Color? hintTextColor;
+  final double? hintFontSize;
   final Color? fillColor;
   final double? borderWidth;
   final FontWeight? hintFontWeight;
@@ -56,6 +57,7 @@ class CommonTextField extends StatelessWidget {
     this.isCapitalize = false,
     this.keyBoardType,
     this.validationType,
+    this.hintFontSize,
     this.inputLength,
     this.readOnly = false,
     this.underLineBorder = false,
@@ -181,7 +183,7 @@ class CommonTextField extends StatelessWidget {
                 fontWeight: FontWeight.w600),
             hintStyle: TextStyle(
               color: hintTextColor ?? AppColors.black12,
-              fontSize: 14.sp,
+              fontSize: hintFontSize ?? 14.sp,
               fontFamily: AppConstants.metropolis,
               fontWeight: hintFontWeight ?? FontWeight.normal,
             ),

@@ -23,7 +23,8 @@ class ExamScreen extends StatefulWidget {
 
 class _ExamScreenState extends State<ExamScreen> {
   ExamViewModel examViewModel = Get.put(ExamViewModel());
-  QuestionsAnswerViewModel questionsAnswerViewModel = Get.put(QuestionsAnswerViewModel());
+  QuestionsAnswerViewModel questionsAnswerViewModel =
+      Get.put(QuestionsAnswerViewModel());
   BottomBarViewModel bottomBarViewModel = Get.find<BottomBarViewModel>();
 
   @override
@@ -35,7 +36,7 @@ class _ExamScreenState extends State<ExamScreen> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: (){
+      onWillPop: () {
         bottomBarViewModel.selectedBottomIndex.value = 2;
         Get.offAll(() => const BottomBar());
         return Future.value(true);
@@ -74,26 +75,37 @@ class _ExamScreenState extends State<ExamScreen> {
                                 return GestureDetector(
                                   onTap: () {
                                     Get.to(() => QuestionsScreen(
-                                          examTitle: examViewModel.examData[index].title.toString(),
-                                          examId: examViewModel.examData[index].id.toString(),
+                                          examTitle: examViewModel
+                                              .examData[index].title
+                                              .toString(),
+                                          examId: examViewModel
+                                              .examData[index].id
+                                              .toString(),
                                         ));
                                   },
                                   child: Container(
                                     padding: EdgeInsets.all(20.w),
-                                    margin: EdgeInsets.symmetric(vertical: 10.w),
+                                    margin:
+                                        EdgeInsets.symmetric(vertical: 10.w),
                                     decoration: BoxDecoration(
-                                        border: Border.all(color: AppColors.greyEE, width: 1.sp),
+                                        border: Border.all(
+                                            color: AppColors.greyEE,
+                                            width: 1.sp),
                                         borderRadius: BorderRadius.circular(15),
                                         color: AppColors.greyFD),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Column(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             CustomText(
-                                              examViewModel.examData[index].title!,
+                                              examViewModel
+                                                  .examData[index].title!,
                                               fontWeight: FontWeight.w700,
                                               fontSize: 20.sp,
                                             ),
@@ -103,16 +115,21 @@ class _ExamScreenState extends State<ExamScreen> {
                                                 CustomText(
                                                   '${examViewModel.examData[index].questionsCount} ${AppStrings.questions}',
                                                   fontWeight: FontWeight.w500,
-                                                  color: AppColors.black0E.withOpacity(0.80),
+                                                  color: AppColors.black0E
+                                                      .withOpacity(0.80),
                                                 ),
                                                 SizeConfig.sW6,
-                                                const CustomText('•',
-                                                    fontWeight: FontWeight.w500, color: AppColors.black0E),
+                                                CustomText('•',
+                                                    fontWeight: FontWeight.w500,
+                                                    color: AppColors.black0E),
                                                 SizeConfig.sW6,
                                                 CustomText(
-                                                  examViewModel.examData[index].subTitle ?? '',
+                                                  examViewModel.examData[index]
+                                                          .subTitle ??
+                                                      '',
                                                   fontWeight: FontWeight.w500,
-                                                  color: AppColors.black0E.withOpacity(0.80),
+                                                  color: AppColors.black0E
+                                                      .withOpacity(0.80),
                                                 ),
                                               ],
                                             )
@@ -121,7 +138,8 @@ class _ExamScreenState extends State<ExamScreen> {
                                         Column(
                                           children: [
                                             CircleAvatar(
-                                              backgroundColor: AppColors.color8B.withOpacity(0.20),
+                                              backgroundColor: AppColors.color8B
+                                                  .withOpacity(0.20),
                                               child: const Icon(
                                                 Icons.play_arrow,
                                                 color: AppColors.color8B,
@@ -136,7 +154,8 @@ class _ExamScreenState extends State<ExamScreen> {
                               },
                             )
                           : Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 50.h),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 40.w, vertical: 50.h),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [

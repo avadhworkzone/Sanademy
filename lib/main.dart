@@ -68,9 +68,9 @@ class _MyAppState extends State<MyApp> {
               enableLog: true,
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
-                  fontFamily: AppConstants.quicksand,
+                  fontFamily: AppConstants.metropolis,
                   // useMaterial3: true,
-                  scaffoldBackgroundColor: AppColors.whitef7,
+                  // scaffoldBackgroundColor: AppColors.whitef7,
                   // scaffoldBackgroundColor: AppColors.white,
                   pageTransitionsTheme: const PageTransitionsTheme()),
               transitionDuration: const Duration(milliseconds: 100),

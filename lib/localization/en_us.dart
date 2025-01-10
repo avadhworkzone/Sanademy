@@ -214,11 +214,17 @@ Map<String, String> en = {
   AppStrings.fullNameKur: 'Full Name (Kurdis)',
   AppStrings.birthOfDate: 'Birth of Date',
   AppStrings.gender: 'Gender',
+  AppStrings.coursePrice: 'Course Price',
+  AppStrings.discountOfCourse: 'Discount Of Course',
+  AppStrings.yourCurrentBalance: 'Your Current Balance',
+  AppStrings.pendingToPay: 'Pending to Pay',
+  AppStrings.cancel: 'Cancel',
   AppStrings.city: 'City',
   AppStrings.province: 'Province',
   AppStrings.select: 'Select',
   AppStrings.saveDetails: 'Save Details',
   AppStrings.enrollTheCourse: 'Enroll The Course',
+  AppStrings.payNow: 'Pay Now',
 
   ///-------------///
   AppStrings.myBalance: 'My Balance',

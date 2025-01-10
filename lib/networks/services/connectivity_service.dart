@@ -29,7 +29,7 @@ class ConnectivityViewModel extends GetxController {
             },
           );
         }
-      } ,
+      },
     );
   }
 
@@ -88,7 +88,7 @@ class ConnectivityViewModel extends GetxController {
                   // ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10.w),
-                    child: const CustomText(
+                    child: CustomText(
                       "Please check your connection again,or connect to wi-fi.",
                       textAlign: TextAlign.center,
                     ),

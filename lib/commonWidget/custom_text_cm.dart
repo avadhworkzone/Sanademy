@@ -18,9 +18,10 @@ class CustomText extends StatelessWidget {
   final TextDecoration? decoration;
   final double? letterSpacing;
   final Color? decorationColor;
+
   final TextDecorationStyle? decorationStyle;
 
-  const CustomText(
+  CustomText(
     this.title, {
     Key? key,
     this.color,
@@ -55,12 +56,12 @@ class CustomText extends StatelessWidget {
         decoration: decoration,
         letterSpacing: letterSpacing,
         decorationColor: decorationColor,
+
         decorationStyle: decorationStyle,
       ),
     );
   }
 }
-
 
 class CustomNewText extends StatelessWidget {
   final String title;
@@ -79,22 +80,22 @@ class CustomNewText extends StatelessWidget {
   final TextDecorationStyle? decorationStyle;
 
   const CustomNewText(
-      this.title, {
-        Key? key,
-        this.color,
-        this.fontWeight,
-        this.fontFamily,
-        this.fontSize,
-        this.textAlign,
-        this.height,
-        this.fontStyle,
-        this.maxLines,
-        this.overflow,
-        this.decoration = TextDecoration.none,
-        this.letterSpacing,
-        this.decorationColor,
-        this.decorationStyle,
-      }) : super(key: key);
+    this.title, {
+    Key? key,
+    this.color,
+    this.fontWeight,
+    this.fontFamily,
+    this.fontSize,
+    this.textAlign,
+    this.height,
+    this.fontStyle,
+    this.maxLines,
+    this.overflow,
+    this.decoration = TextDecoration.none,
+    this.letterSpacing,
+    this.decorationColor,
+    this.decorationStyle,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Text(

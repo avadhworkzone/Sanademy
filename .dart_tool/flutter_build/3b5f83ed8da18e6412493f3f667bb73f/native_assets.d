@@ -1,0 +1,1 @@
+ /Users/user/Documents/GitHub/Sanademy/.dart_tool/flutter_build/3b5f83ed8da18e6412493f3f667bb73f/native_assets.yaml: 

@@ -50,7 +50,7 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                       ResponseStatus.INITIAL) {}
               if (questionsAnswerViewModel.responseStatus.value ==
                   ResponseStatus.Error) {
-                return const Center(child: CustomText("Something went wrong"));
+                return Center(child: CustomText("Something went wrong"));
               }
               final questionsDetail = questionsAnswerViewModel.questionsDetail;
               return Column(

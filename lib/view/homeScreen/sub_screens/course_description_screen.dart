@@ -23,6 +23,8 @@ import 'package:sanademy/view_model/description_view_model.dart';
 import 'package:sanademy/view_model/home_screen_view_model.dart';
 import 'package:sanademy/view_model/lectures_videos_view_model.dart';
 
+import 'select_payment_method_screen.dart';
+
 class CourseDescriptionScreen extends StatefulWidget {
   const CourseDescriptionScreen({
     super.key,
@@ -671,11 +673,9 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
 void showEnrollmentDialog(BuildContext context) {
   showDialog(
     context: context,
-
     builder: (BuildContext context) {
       return AlertDialog(
         contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-
         content: SizedBox(
           width: double.maxFinite,
           child: Column(
@@ -687,14 +687,10 @@ void showEnrollmentDialog(BuildContext context) {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Icon(
-                        Icons.close,
-                        color: Colors.transparent,
-                      )),
+                  const Icon(
+                    Icons.close,
+                    color: Colors.transparent,
+                  ),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: LocalAssets(
@@ -703,7 +699,12 @@ void showEnrollmentDialog(BuildContext context) {
                     ),
                   ),
                   // SizedBox(width: 10.w),
-                  const Icon(Icons.close),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Icon(Icons.close),
+                  ),
                 ],
               ),
               SizedBox(height: 20.h),
@@ -734,7 +735,6 @@ void showEnrollmentDialog(BuildContext context) {
                       style: TextStyle(
                         color: AppColors.blue34,
                         fontSize: 16.sp,
-
                         fontWeight: FontWeight.w600,
                         fontFamily: AppConstants.metropolis,
                       ),
@@ -752,20 +752,97 @@ void showEnrollmentDialog(BuildContext context) {
                 ),
               ),
               SizedBox(height: 20.h),
-
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
+                decoration: BoxDecoration(
+                  color: AppColors.greyF7,
+                  border: Border.all(color: AppColors.greyE4),
+                  borderRadius: BorderRadius.circular(12.sp),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    commonRowForEnrollDialog(
+                      title: AppStrings.coursePrice,
+                      amount: "280,000 IQD",
+                    ),
+                    SizedBox(height: 2.h),
+                    dottedLine(),
+                    SizedBox(height: 2.h),
+                    commonRowForEnrollDialog(
+                      title: "${AppStrings.discountOfCourse} (25%)",
+                      amount: "-120,000 IQD",
+                    ),
+                    SizedBox(height: 2.h),
+                    dottedLine(),
+                    SizedBox(height: 2.h),
+                    commonRowForEnrollDialog(
+                      title: AppStrings.yourCurrentBalance,
+                      amount: "-100,000 IQD",
+                    ),
+                    // SizedBox(height: 2.h),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                child: commonRowForEnrollDialog(
+                  title: AppStrings.pendingToPay,
+                  fontSizeTitle: 14.sp,
+                  fontWeightTitle: FontWeight.w600,
+                  titleColor: AppColors.grey73,
+                  fontSizeAmount: 14.sp,
+                  fontWeightAmount: FontWeight.w700,
+                  amountColor: AppColors.blue34,
+                  amount: "60,000 IQD",
+                ),
+              ),
+              SizedBox(height: 30.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Container(
+                        width: 150.w,
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 30.w, vertical: 15.h),
+                        decoration: BoxDecoration(
+                          color: AppColors.greyF7,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: CustomText(
+                          AppStrings.cancel,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.blue34,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 15.w),
+                  Expanded(
+                    child: CustomUpdateBtn(
+                      onTap: () {
+                        Get.to(const SelectPaymentMethodScreen());
+                      },
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16.sp,
+                      radius: 10,
+                      title: AppStrings.payNow,
+                      width: 150.w,
+                    ),
+                  ),
+                ],
+              ),
               SizedBox(height: 20.h),
-              // const CustomText('This is a dialog with a local image.')
             ],
           ),
         ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text('Close'),
-          ),
-        ],
       );
     },
   );
@@ -809,6 +886,49 @@ void showEnrollmentDialog(BuildContext context) {
                                               ? const Icon(Icons.pause_circle, size: 50, color: Colors.white)
                                               : const Icon(Icons.play_circle, size: 50, color: Colors.white),
                                         ),*/
+
+Widget dottedLine() {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: List.generate(
+      30,
+      (index) => CustomText(
+        '-',
+        color: AppColors.greyE4,
+      ),
+    ),
+  );
+}
+
+Widget commonRowForEnrollDialog({
+  required String title,
+  required String amount,
+  Color? titleColor,
+  Color? amountColor,
+  double? fontSizeTitle,
+  double? fontSizeAmount,
+  FontWeight? fontWeightTitle,
+  FontWeight? fontWeightAmount,
+}) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      CustomText(
+        title,
+        fontSize: fontSizeTitle ?? 12.sp,
+        fontWeight: fontWeightTitle ?? FontWeight.w500,
+        color: titleColor ?? AppColors.grey73,
+      ),
+      CustomText(
+        amount,
+        fontSize: fontSizeAmount ?? 12.sp,
+        fontWeight: fontWeightAmount ?? FontWeight.w600,
+        color: amountColor ?? AppColors.blue34,
+      )
+    ],
+  );
+}
+
 // Helper method to build course details rows
 Widget _buildCourseDetailRow(String icon, String text) {
   return Row(
