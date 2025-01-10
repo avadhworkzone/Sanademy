@@ -40,7 +40,7 @@ class _ProfileScreenState extends State<NewProfileScreen> {
   }
 
   getUserDataApiCall() async {
-    await profileScreenViewModel.getProfileData();
+    // await profileScreenViewModel.getProfileData();
   }
 
   @override
@@ -408,6 +408,7 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                         fillColor: Colors.transparent,
                         style: TextStyle(
                           fontSize: 16.sp,
+                          color: AppColors.blue34,
                           fontFamily: AppConstants.metropolis,
                           fontWeight: FontWeight.w500,
                         ),

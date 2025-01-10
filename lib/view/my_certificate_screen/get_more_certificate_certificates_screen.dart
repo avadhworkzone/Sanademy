@@ -262,7 +262,9 @@ class _GetMoreCertificatesScreenState extends State<GetMoreCertificatesScreen> {
           const SizedBox(width: 12),
           InkWell(
             onTap: () {
-              showDisabledDialog(context, "IELTS Mock Test");
+              // showDisabledDialog(context, "IELTS Mock Test");
+              showEnrollmentDialog(context, "Artificial Intelligence Course");
+
             },
             child: Container(
               height: 40,
@@ -284,7 +286,88 @@ class _GetMoreCertificatesScreenState extends State<GetMoreCertificatesScreen> {
   }
 }
 
-void showDisabledDialog(BuildContext context, String courseTitle) {
+// void showDisabledDialog(BuildContext context, String courseTitle) {
+//   showDialog(
+//     context: context,
+//     barrierDismissible: true,
+//     builder: (BuildContext context) {
+//       return Dialog(
+//         shape: RoundedRectangleBorder(
+//           borderRadius: BorderRadius.circular(16.0),
+//         ),
+//         child: Container(
+//           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+//           child: Column(
+//             mainAxisSize: MainAxisSize.min,
+//             children: [
+//               // SizedBox(height: 10.h),
+//               // Close Icon
+//               Align(
+//                 alignment: Alignment.topRight,
+//                 child: InkWell(
+//                   onTap: () => Navigator.of(context).pop(),
+//                   child: Icon(
+//                     Icons.close,
+//                     size: 24,
+//                     color: Colors.black.withOpacity(0.6),
+//                   ),
+//                 ),
+//               ),
+//               LocalAssets(
+//                 imagePath: AppImageAssets.warning,
+//                 height: 116.sp,
+//                 width: 122.sp,
+//               ),
+//               const SizedBox(height: 16),
+//               // Title
+//               CustomNewText(
+//                 "We are Sorry",
+//                 fontSize: 24.sp,
+//                 fontWeight: FontWeight.w700,
+//                 textAlign: TextAlign.center,
+//               ),
+//               const SizedBox(height: 16),
+//               // Message
+//               RichText(
+//                 textAlign: TextAlign.center,
+//                 text: TextSpan(
+//                   style: TextStyle(
+//                     fontSize: 16.sp,
+//                     fontFamily: AppConstants.metropolis,
+//                     fontWeight: FontWeight.w400,
+//                     height: 1.4,
+//                     color: Colors.black,
+//                   ),
+//                   children: [
+//                     const TextSpan(
+//                       text: "Sorry for the Test & Certificate for ",
+//                     ),
+//                     TextSpan(
+//                       text: courseTitle,
+//                       style: TextStyle(
+//                         fontSize: 16.sp,
+//                         fontFamily: AppConstants.metropolis,
+//                         fontWeight: FontWeight.w600,
+//                         color: Colors.black,
+//                       ),
+//                     ),
+//                     const TextSpan(
+//                       text: " is disabled for now, it will come back soon.",
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//               const SizedBox(height: 24),
+//             ],
+//           ),
+//         ),
+//       );
+//     },
+//   );
+// }
+
+
+void showEnrollmentDialog(BuildContext context, String courseTitle) {
   showDialog(
     context: context,
     barrierDismissible: true,
@@ -294,11 +377,10 @@ void showDisabledDialog(BuildContext context, String courseTitle) {
           borderRadius: BorderRadius.circular(16.0),
         ),
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // SizedBox(height: 10.h),
               // Close Icon
               Align(
                 alignment: Alignment.topRight,
@@ -311,48 +393,132 @@ void showDisabledDialog(BuildContext context, String courseTitle) {
                   ),
                 ),
               ),
-              LocalAssets(
-                imagePath: AppImageAssets.warning,
-                height: 116.sp,
-                width: 122.sp,
+              // Course Image
+              // Image.asset(
+              //   'assets/course_image.png', // Replace with your image path
+              //   height: 100,
+              // ),
+              const SizedBox(height: 16),
+              // Title
+              Text(
+                "Do you want to Enroll in $courseTitle for 150000 IQD amount?",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(height: 24),
+              // Payment Details
+              Column(
+                children: [
+                  _buildPaymentRow("Course Price", "280,000 IQD"),
+                  _buildPaymentRow("Discount of Course (25%)", "-120,000 IQD"),
+                  _buildPaymentRow("Your Current Balance", "-100,000 IQD"),
+                  const Divider(),
+                  _buildPaymentRow("Pending to Pay", "60,000 IQD"),
+                ],
+              ),
+              const SizedBox(height: 24),
+              // Action Buttons
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text("Cancel"),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        showSuccessDialog(context, courseTitle);
+                      },
+                      child: const Text("Pay Now"),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
+
+Widget _buildPaymentRow(String title, String amount) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 4.0),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+        ),
+        Text(
+          amount,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        ),
+      ],
+    ),
+  );
+}
+
+void showSuccessDialog(BuildContext context, String courseTitle) {
+  showDialog(
+    context: context,
+    barrierDismissible: true,
+    builder: (BuildContext context) {
+      return Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Close Icon
+              Align(
+                alignment: Alignment.topRight,
+                child: InkWell(
+                  onTap: () => Navigator.of(context).pop(),
+                  child: Icon(
+                    Icons.close,
+                    size: 24,
+                    color: Colors.black.withOpacity(0.6),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              // Success Icon
+              Icon(
+                Icons.check_circle,
+                size: 60,
+                color: Colors.green,
               ),
               const SizedBox(height: 16),
               // Title
-              CustomNewText(
-                "We are Sorry",
-                fontSize: 24.sp,
-                fontWeight: FontWeight.w700,
+              Text(
+                "Enrolled Successfully",
                 textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
               const SizedBox(height: 16),
               // Message
-              RichText(
+              Text(
+                "You have successfully enrolled in \"$courseTitle\"",
                 textAlign: TextAlign.center,
-                text: TextSpan(
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontFamily: AppConstants.metropolis,
-                    fontWeight: FontWeight.w400,
-                    height: 1.4,
-                    color: Colors.black,
-                  ),
-                  children: [
-                    const TextSpan(
-                      text: "Sorry for the Test & Certificate for ",
-                    ),
-                    TextSpan(
-                      text: courseTitle,
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontFamily: AppConstants.metropolis,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black,
-                      ),
-                    ),
-                    const TextSpan(
-                      text: " is disabled for now, it will come back soon.",
-                    ),
-                  ],
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
               const SizedBox(height: 24),

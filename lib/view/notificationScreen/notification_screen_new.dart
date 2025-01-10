@@ -43,6 +43,7 @@ class _NotificationScreenNewState extends State<NotificationScreenNew> {
           children: [
             commonOnlyTitleAppBar(
               context: context,
+              isBackBtn: true,
               paddingLeft: 18.w,
               actionWidget: SizeConfig.sW40,
               title: AppStrings.notifications,

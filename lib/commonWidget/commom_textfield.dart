@@ -87,102 +87,106 @@ class CommonTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: Get.width,
-      child: TextFormField(
-        controller: textEditController,
-        maxLength: maxLength,
-        style: style ??
-            TextStyle(
+      child: GestureDetector(
+        onTap: onTap,
+        child: TextFormField(
+          controller: textEditController,
+          maxLength: maxLength,
+          style: style ??
+              TextStyle(
+                  fontSize: 14.sp,
+                  color: AppColors.black,
+                  fontFamily: AppConstants.metropolis,
+                  fontWeight: FontWeight.w400),
+          onTap: onTap,
+          /*?? underLineBorder!
+              ? CustomTextStyle.textStyleInputField
+              .copyWith(color: AppColors.black)
+              : CustomTextStyle.textStyleInputField,*/
+          keyboardType: keyBoardType ?? TextInputType.text,
+          maxLines: maxLine ?? 1,
+          textCapitalization: isCapitalize!
+              ? TextCapitalization.characters
+              : TextCapitalization.sentences,
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(inputLength),
+            FilteringTextInputFormatter.allow(RegExp(regularExpression.tr)),
+            NoLeadingSpaceFormatter(),
+          ],
+          obscureText: validationType == ValidationTypeEnum.password
+              ? obscureValue!
+              : false,
+          onChanged: onChange,
+          enabled: !readOnly!,
+          readOnly: readOnly!,
+          validator: (value) {
+            return isValidate == false
+                ? null
+                : value!.isEmpty
+                    ? validationMessage?.tr ?? AppStrings.isRequired.tr
+                    : validationType == ValidationTypeEnum.email
+                        ? ValidationMethod.validateEmail(value)
+                        : validationType == ValidationTypeEnum.name
+                            ? ValidationMethod.validateName(value)
+                            : validationType == ValidationTypeEnum.address
+                                ? ValidationMethod.validateAddress(value)
+                                : null;
+          },
+          textInputAction: textInputAction,
+          obscuringCharacter: obscuringCharacter ?? "*",
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          cursorColor: cursorColor ?? AppColors.black,
+          decoration: InputDecoration(
+            isDense: true,
+            fillColor: fillColor ?? AppColors.white,
+            filled: true,
+            contentPadding: contentPadding ??
+                EdgeInsets.symmetric(horizontal: 15.w, vertical: 17.h),
+            hintText: hintText?.tr,
+            errorBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: AppColors.red),
+                borderRadius: BorderRadius.circular(10.r)),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.r),
+                borderSide: BorderSide(
+                    color: borderColor ?? AppColors.black.withOpacity(0.10))),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                  width: borderWidth ?? 1.0,
+                  color: borderColor ?? AppColors.black.withOpacity(0.10)),
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                  width: borderWidth ?? 1.0,
+                  color: borderColor ?? AppColors.black.withOpacity(0.10)),
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              borderSide: BorderSide(
+                color: borderColor ?? AppColors.black.withOpacity(0.10),
+                width: borderWidth ?? 1.0,
+              ),
+            ),
+            prefixIcon: pIcon,
+            suffixIcon: sIcon,
+            counterText: ''.tr,
+            // filled: true,
+            // fillColor: ColorUtils.greyE7,
+            labelStyle: TextStyle(
                 fontSize: 14.sp,
                 color: AppColors.black,
                 fontFamily: AppConstants.metropolis,
-                fontWeight: FontWeight.w400),
-        /*?? underLineBorder!
-            ? CustomTextStyle.textStyleInputField
-            .copyWith(color: AppColors.black)
-            : CustomTextStyle.textStyleInputField,*/
-        keyboardType: keyBoardType ?? TextInputType.text,
-        maxLines: maxLine ?? 1,
-        textCapitalization: isCapitalize!
-            ? TextCapitalization.characters
-            : TextCapitalization.sentences,
-        inputFormatters: [
-          LengthLimitingTextInputFormatter(inputLength),
-          FilteringTextInputFormatter.allow(RegExp(regularExpression.tr)),
-          NoLeadingSpaceFormatter(),
-        ],
-        obscureText: validationType == ValidationTypeEnum.password
-            ? obscureValue!
-            : false,
-        onChanged: onChange,
-        enabled: !readOnly!,
-        readOnly: readOnly!,
-        validator: (value) {
-          return isValidate == false
-              ? null
-              : value!.isEmpty
-                  ? validationMessage?.tr ?? AppStrings.isRequired.tr
-                  : validationType == ValidationTypeEnum.email
-                      ? ValidationMethod.validateEmail(value)
-                      : validationType == ValidationTypeEnum.name
-                          ? ValidationMethod.validateName(value)
-                          : validationType == ValidationTypeEnum.address
-                              ? ValidationMethod.validateAddress(value)
-                              : null;
-        },
-        textInputAction: textInputAction,
-        obscuringCharacter: obscuringCharacter ?? "*",
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        cursorColor: cursorColor ?? AppColors.black,
-        decoration: InputDecoration(
-          isDense: true,
-          fillColor: fillColor ?? AppColors.white,
-          filled: true,
-          contentPadding: contentPadding ??
-              EdgeInsets.symmetric(horizontal: 15.w, vertical: 17.h),
-          hintText: hintText?.tr,
-          errorBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: AppColors.red),
-              borderRadius: BorderRadius.circular(10.r)),
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.r),
-              borderSide: BorderSide(
-                  color: borderColor ?? AppColors.black.withOpacity(0.10))),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-                width: borderWidth ?? 1.0,
-                color: borderColor ?? AppColors.black.withOpacity(0.10)),
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
-          ),
-          disabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-                width: borderWidth ?? 1.0,
-                color: borderColor ?? AppColors.black.withOpacity(0.10)),
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
-            borderSide: BorderSide(
-              color: borderColor ?? AppColors.black.withOpacity(0.10),
-              width: borderWidth ?? 1.0,
-            ),
-          ),
-          prefixIcon: pIcon,
-          suffixIcon: sIcon,
-          counterText: ''.tr,
-          // filled: true,
-          // fillColor: ColorUtils.greyE7,
-          labelStyle: TextStyle(
+                fontWeight: FontWeight.w600),
+            hintStyle: TextStyle(
+              color: hintTextColor ?? AppColors.black12,
               fontSize: 14.sp,
-              color: AppColors.black,
               fontFamily: AppConstants.metropolis,
-              fontWeight: FontWeight.w600),
-          hintStyle: TextStyle(
-            color: hintTextColor ?? AppColors.black12,
-            fontSize: 14.sp,
-            fontFamily: AppConstants.metropolis,
-            fontWeight: hintFontWeight ?? FontWeight.normal,
+              fontWeight: hintFontWeight ?? FontWeight.normal,
+            ),
+            errorMaxLines: 2,
           ),
-          errorMaxLines: 2,
         ),
       ),
     );
