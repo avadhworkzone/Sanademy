@@ -56,14 +56,19 @@ class _SelectPaymentMethodScreenState extends State<SelectPaymentMethodScreen> {
         scrolledUnderElevation: 0,
         leading: Padding(
           padding: EdgeInsets.only(left: 10.w, top: 5.h, bottom: 5.h),
-          child: const CircleAvatar(
-            // radius: 5,
-            backgroundColor: AppColors.greyF7,
-            child: Icon(
-              // weight: 7,
-              size: 18,
-              Icons.arrow_back_ios_new,
-              color: AppColors.blue34,
+          child: InkWell(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: const CircleAvatar(
+              // radius: 5,
+              backgroundColor: AppColors.greyF7,
+              child: Icon(
+                // weight: 7,
+                size: 18,
+                Icons.arrow_back_ios_new,
+                color: AppColors.blue34,
+              ),
             ),
           ),
         ),
