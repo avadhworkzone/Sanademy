@@ -16,6 +16,7 @@ import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view/profile_screen/demo_profile.dart';
 import 'package:sanademy/view_model/profile_screen_view_model.dart';
 
 class NewProfileScreen extends StatefulWidget {
@@ -125,26 +126,31 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                       ),
                       Positioned(
                         right: 7,
-                        child: Container(
-                          // height: 35.h,
-                          // width: 35.w,
-                          padding: EdgeInsets.all(6.w),
-                          decoration: BoxDecoration(
-                            color: AppColors.borderColor,
-                            shape: BoxShape.circle,
-                            border: Border.all(color: AppColors.white),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                blurRadius: 5,
-                              ),
-                            ],
-                          ),
-                          child: LocalAssets(
-                            imagePath: AppImageAssets.cameraIcon,
-                            // ,
-                            scaleSize: 3.w,
-                            // color: AppColors.white,
+                        child: InkWell(
+                          onTap: () {
+                            Get.to(() => const DemoProfile());
+                          },
+                          child: Container(
+                            // height: 35.h,
+                            // width: 35.w,
+                            padding: EdgeInsets.all(6.w),
+                            decoration: BoxDecoration(
+                              color: AppColors.borderColor,
+                              shape: BoxShape.circle,
+                              border: Border.all(color: AppColors.white),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 5,
+                                ),
+                              ],
+                            ),
+                            child: LocalAssets(
+                              imagePath: AppImageAssets.cameraIcon,
+                              // ,
+                              scaleSize: 3.w,
+                              // color: AppColors.white,
+                            ),
                           ),
                         ),
                       )
@@ -195,11 +201,6 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                       SizedBox(height: 20.h),
 
                       ///FULL NAME ENG
-                      // CustomText(
-                      //   AppStrings.fullNameEng,
-                      //   fontWeight: FontWeight.w500,
-                      //   color: AppColors.grey73,
-                      // ),
                       RichText(
                         text: TextSpan(
                           children: [
