@@ -119,7 +119,7 @@ class _SolutionsScreenState extends State<SolutionsScreen> {
                                   child: CustomBtn(
                                     onTap: () {},
                                     title:
-                                        '${AppStrings.questions} ${index + 1} ${AppStrings.of} ${questionsDetail.length}',
+                                        '${AppStrings.questions} ${index + 1} ${AppStrings.ofText} ${questionsDetail.length}',
                                     textColor: AppColors.primaryColor,
                                     bgColor: AppColors.greyFD,
                                     borderColor: AppColors.primaryColor,

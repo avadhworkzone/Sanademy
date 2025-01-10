@@ -17,7 +17,8 @@ import 'package:sanademy/view/examScreen/congratulations_screen.dart';
 import 'package:sanademy/view_model/question_answer_view_model.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({super.key, required this.examTitle, required this.examId});
+  const QuestionsScreen(
+      {super.key, required this.examTitle, required this.examId});
 
   final String examTitle;
   final String examId;
@@ -39,7 +40,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   }
 
   questionDetailAPiCall() async {
-    await questionsAnswerViewModel.getQuestionsViewModel(examId: widget.examId, isFromQuestion: true);
+    await questionsAnswerViewModel.getQuestionsViewModel(
+        examId: widget.examId, isFromQuestion: true);
   }
 
   @override
@@ -66,11 +68,13 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     return WillPopScope(
         onWillPop: _onWillPop,
         child: Obx(() {
-          if (questionsAnswerViewModel.responseStatus.value == ResponseStatus.Loading ||
-              questionsAnswerViewModel.responseStatus.value == ResponseStatus.INITIAL) {
-          }
-          if (questionsAnswerViewModel.responseStatus.value == ResponseStatus.Error) {
-            return  Center(child: CustomText(AppStrings.somethingWantWrong));
+          if (questionsAnswerViewModel.responseStatus.value ==
+                  ResponseStatus.Loading ||
+              questionsAnswerViewModel.responseStatus.value ==
+                  ResponseStatus.INITIAL) {}
+          if (questionsAnswerViewModel.responseStatus.value ==
+              ResponseStatus.Error) {
+            return Center(child: CustomText(AppStrings.somethingWantWrong));
           }
           final questionsDetail = questionsAnswerViewModel.questionsDetail;
           return SafeArea(
@@ -104,16 +108,19 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                           fontWeight: FontWeight.w700,
                         ),
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.w),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20.w, vertical: 10.w),
                           decoration: BoxDecoration(
                               color: AppColors.color8B.withOpacity(0.10),
                               borderRadius: BorderRadius.circular(5.w)),
                           child: Row(
                             children: [
-                              const LocalAssets(imagePath: AppImageAssets.clockIcon),
+                              const LocalAssets(
+                                  imagePath: AppImageAssets.clockIcon),
                               SizeConfig.sW5,
                               CustomText(
-                                formatDuration(questionsAnswerViewModel.duration.value.inSeconds),
+                                formatDuration(questionsAnswerViewModel
+                                    .duration.value.inSeconds),
                                 color: AppColors.primaryColor,
                                 fontWeight: FontWeight.w700,
                               ),
@@ -125,9 +132,11 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                     SizeConfig.sH25,
                     Expanded(
                       child: PageView(
-                        controller: questionsAnswerViewModel.pageController.value,
+                        controller:
+                            questionsAnswerViewModel.pageController.value,
                         physics: const NeverScrollableScrollPhysics(),
-                        children: List.generate(questionsDetail.length, (index) {
+                        children:
+                            List.generate(questionsDetail.length, (index) {
                           final question = questionsDetail[index];
                           return Column(
                             children: [
@@ -138,18 +147,23 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                     borderRadius: BorderRadius.circular(18.r),
                                     onTap: () {
                                       if (index > 0) {
-                                        questionsAnswerViewModel.pageController.value.previousPage(
-                                          duration: const Duration(milliseconds: 500),
+                                        questionsAnswerViewModel
+                                            .pageController.value
+                                            .previousPage(
+                                          duration:
+                                              const Duration(milliseconds: 500),
                                           curve: Curves.ease,
                                         );
                                         isSelectedOption = false;
                                       }
                                     },
                                     child: Container(
-                                      padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 13.w),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 13.w, vertical: 13.w),
                                       decoration: BoxDecoration(
                                           color: AppColors.primaryColor,
-                                          borderRadius: BorderRadius.circular(18.r)),
+                                          borderRadius:
+                                              BorderRadius.circular(18.r)),
                                       child: const Icon(
                                         Icons.arrow_back,
                                         color: AppColors.white,
@@ -161,7 +175,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                     child: CustomBtn(
                                       onTap: () {},
                                       title:
-                                          '${AppStrings.questions} ${index + 1} ${AppStrings.of} ${questionsDetail.length}',
+                                          '${AppStrings.questions} ${index + 1} ${AppStrings.ofText} ${questionsDetail.length}',
                                       textColor: AppColors.primaryColor,
                                       bgColor: AppColors.greyFD,
                                       borderColor: AppColors.primaryColor,
@@ -174,39 +188,56 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                     onTap: () async {
                                       if (isSelectedOption != true) {
                                         (question.type == 'Audio')
-                                            ? showErrorSnackBar('', AppStrings.pleaseEnterAnswer)
-                                            : showErrorSnackBar('', AppStrings.pleaseSelectAnyOption);
+                                            ? showErrorSnackBar('',
+                                                AppStrings.pleaseEnterAnswer)
+                                            : showErrorSnackBar(
+                                                '',
+                                                AppStrings
+                                                    .pleaseSelectAnyOption);
                                       } else {
-                                        if (questionsDetail.length - 1 > index) {
-                                          questionsAnswerViewModel.pageController.value.nextPage(
-                                              duration: const Duration(milliseconds: 500),
-                                              curve: Curves.ease);
+                                        if (questionsDetail.length - 1 >
+                                            index) {
+                                          questionsAnswerViewModel
+                                              .pageController.value
+                                              .nextPage(
+                                                  duration: const Duration(
+                                                      milliseconds: 500),
+                                                  curve: Curves.ease);
                                           isSelectedOption = false;
-                                        }
-                                        else if (index == questionsDetail.length - 1) {
+                                        } else if (index ==
+                                            questionsDetail.length - 1) {
                                           /// CALL SAVE QUESTIONS API
                                           List saveQuestionsIdList = [];
                                           List saveAnswerIdList = [];
-                                          for (var item in questionsAnswerViewModel.selectedAnswerList) {
-                                            saveQuestionsIdList.add(item['questionId'].toString());
-                                            saveAnswerIdList.add(item['answerId'].toString());
+                                          for (var item
+                                              in questionsAnswerViewModel
+                                                  .selectedAnswerList) {
+                                            saveQuestionsIdList.add(
+                                                item['questionId'].toString());
+                                            saveAnswerIdList.add(
+                                                item['answerId'].toString());
                                           }
                                           final formattedTime = formatDuration(
-                                              questionsAnswerViewModel.duration.value.inSeconds);
-                                          await questionsAnswerViewModel.saveQuestionsViewModel(
-                                              widget.examTitle,
-                                              examId: widget.examId,
-                                              answers: saveAnswerIdList,
-                                              questionIds: saveQuestionsIdList,
-                                              time: formattedTime);
+                                              questionsAnswerViewModel
+                                                  .duration.value.inSeconds);
+                                          await questionsAnswerViewModel
+                                              .saveQuestionsViewModel(
+                                                  widget.examTitle,
+                                                  examId: widget.examId,
+                                                  answers: saveAnswerIdList,
+                                                  questionIds:
+                                                      saveQuestionsIdList,
+                                                  time: formattedTime);
                                         }
                                       }
                                     },
                                     child: Container(
-                                      padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 13.w),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 13.w, vertical: 13.w),
                                       decoration: BoxDecoration(
                                           color: AppColors.primaryColor,
-                                          borderRadius: BorderRadius.circular(18.r)),
+                                          borderRadius:
+                                              BorderRadius.circular(18.r)),
                                       child: const Icon(
                                         Icons.arrow_forward,
                                         color: AppColors.white,
@@ -230,10 +261,13 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                     question.type == "Audio"
                                         ? AudioWaveForm(
                                             videoUrl: question.audio.toString(),
-                                            controller: questionsAnswerViewModel.controllers.isNotEmpty
-                                                ? questionsAnswerViewModel.controllers[index]
+                                            controller: questionsAnswerViewModel
+                                                    .controllers.isNotEmpty
+                                                ? questionsAnswerViewModel
+                                                    .controllers[index]
                                                 : null,
-                                            onTap: questionsAnswerViewModel.controllers.isEmpty
+                                            onTap: questionsAnswerViewModel
+                                                    .controllers.isEmpty
                                                 ? () {
                                                     setState(() {
                                                       isAnswer = true;
@@ -244,16 +278,23 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                         : ListView.builder(
                                             shrinkWrap: true,
                                             itemCount: 4,
-                                            itemBuilder: (context, optionIndex) {
-                                             bool isSelected = false;
-                                              final option = question.toJson()['option_${optionIndex + 1}'];
-                                              final containIndex = questionsAnswerViewModel.selectedAnswerList
-                                                  .indexWhere(
-                                                      (element) => element['questionId'] == question.id);
+                                            itemBuilder:
+                                                (context, optionIndex) {
+                                              bool isSelected = false;
+                                              final option = question.toJson()[
+                                                  'option_${optionIndex + 1}'];
+                                              final containIndex =
+                                                  questionsAnswerViewModel
+                                                      .selectedAnswerList
+                                                      .indexWhere((element) =>
+                                                          element[
+                                                              'questionId'] ==
+                                                          question.id);
 
                                               if (containIndex > -1) {
-                                                if (questionsAnswerViewModel.selectedAnswerList[containIndex]
-                                                        ['option'] ==
+                                                if (questionsAnswerViewModel
+                                                            .selectedAnswerList[
+                                                        containIndex]['option'] ==
                                                     option) {
                                                   isSelected = true;
                                                 }
@@ -261,46 +302,65 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                               return GestureDetector(
                                                 onTap: () {
                                                   if (containIndex == -1) {
-                                                    questionsAnswerViewModel.selectedAnswerList.add({
+                                                    questionsAnswerViewModel
+                                                        .selectedAnswerList
+                                                        .add({
                                                       "questionId": question.id,
                                                       "option": option,
-                                                      "answerId": optionIndex + 1,
+                                                      "answerId":
+                                                          optionIndex + 1,
                                                     });
                                                   } else {
-                                                    questionsAnswerViewModel.selectedAnswerList[containIndex]
+                                                    questionsAnswerViewModel
+                                                                .selectedAnswerList[
+                                                            containIndex]
                                                         ['option'] = option;
-                                                    questionsAnswerViewModel.selectedAnswerList[containIndex]
-                                                        ['answerId'] = optionIndex + 1;
+                                                    questionsAnswerViewModel
+                                                                    .selectedAnswerList[
+                                                                containIndex]
+                                                            ['answerId'] =
+                                                        optionIndex + 1;
                                                   }
                                                   // onOptionSelected();
                                                 },
                                                 child: Container(
-                                                  padding:
-                                                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.w),
-                                                  margin: EdgeInsets.symmetric(vertical: 10.w),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10.w,
+                                                      vertical: 15.w),
+                                                  margin: EdgeInsets.symmetric(
+                                                      vertical: 10.w),
                                                   decoration: BoxDecoration(
                                                       border: Border.all(
                                                           color: isSelected
-                                                              ? AppColors.primaryColor
-                                                              : AppColors.greyEE),
+                                                              ? AppColors
+                                                                  .primaryColor
+                                                              : AppColors
+                                                                  .greyEE),
                                                       color: AppColors.greyFD,
-                                                      borderRadius: BorderRadius.circular(10)),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10)),
                                                   child: Row(
                                                     children: [
                                                       Icon(
                                                         isSelected
-                                                            ? Icons.radio_button_checked
-                                                            : Icons.radio_button_off,
+                                                            ? Icons
+                                                                .radio_button_checked
+                                                            : Icons
+                                                                .radio_button_off,
                                                         color: isSelected
-                                                            ? AppColors.primaryColor
+                                                            ? AppColors
+                                                                .primaryColor
                                                             : AppColors.black,
                                                       ),
                                                       SizeConfig.sW10,
                                                       CustomText(
                                                         option,
-                                                        fontWeight: FontWeight.w500,
+                                                        fontWeight:
+                                                            FontWeight.w500,
                                                         color: isSelected
-                                                            ? AppColors.primaryColor
+                                                            ? AppColors
+                                                                .primaryColor
                                                             : AppColors.black,
                                                       )
                                                     ],
@@ -312,44 +372,64 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                   ],
                                 ),
                               ),
-                              question.type == 'Audio' ? SizeConfig.sH30 : SizeConfig.sH10,
+                              question.type == 'Audio'
+                                  ? SizeConfig.sH30
+                                  : SizeConfig.sH10,
                               Row(
                                 children: [
                                   SizeConfig.sW5,
                                   Expanded(
                                     child: CustomBtn(
                                       onTap: () async {
-                                        final containIndex = questionsAnswerViewModel.selectedAnswerList
-                                            .indexWhere((element) => element['questionId'] == question.id);
+                                        final containIndex =
+                                            questionsAnswerViewModel
+                                                .selectedAnswerList
+                                                .indexWhere((element) =>
+                                                    element['questionId'] ==
+                                                    question.id);
                                         if (containIndex == -1) {
-                                          questionsAnswerViewModel.selectedAnswerList.add({
+                                          questionsAnswerViewModel
+                                              .selectedAnswerList
+                                              .add({
                                             "questionId": question.id,
                                             "option": "",
                                           });
                                         }
-                                        if (questionsDetail.length - 1 > index) {
-                                          questionsAnswerViewModel.pageController.value.nextPage(
-                                              duration: const Duration(milliseconds: 500),
-                                              curve: Curves.ease);
-                                        } else if (index == questionsDetail.length - 1) {
+                                        if (questionsDetail.length - 1 >
+                                            index) {
+                                          questionsAnswerViewModel
+                                              .pageController.value
+                                              .nextPage(
+                                                  duration: const Duration(
+                                                      milliseconds: 500),
+                                                  curve: Curves.ease);
+                                        } else if (index ==
+                                            questionsDetail.length - 1) {
                                           questionsAnswerViewModel.stopTimer();
                                           final formattedTime = formatDuration(
-                                              questionsAnswerViewModel.duration.value.inSeconds);
+                                              questionsAnswerViewModel
+                                                  .duration.value.inSeconds);
 
                                           /// CALL SAVE QUESTIONS API
                                           List saveQuestionsIdList = [];
                                           List saveAnswerIdList = [];
-                                          for (var item in questionsAnswerViewModel.selectedAnswerList) {
-                                            saveQuestionsIdList.add(item['questionId'].toString());
-                                            saveAnswerIdList.add(item['answerId'].toString());
+                                          for (var item
+                                              in questionsAnswerViewModel
+                                                  .selectedAnswerList) {
+                                            saveQuestionsIdList.add(
+                                                item['questionId'].toString());
+                                            saveAnswerIdList.add(
+                                                item['answerId'].toString());
                                           }
 
-                                          await questionsAnswerViewModel.saveQuestionsViewModel(
-                                              widget.examTitle,
-                                              examId: widget.examId,
-                                              answers: saveAnswerIdList,
-                                              questionIds: saveQuestionsIdList,
-                                              time: formattedTime);
+                                          await questionsAnswerViewModel
+                                              .saveQuestionsViewModel(
+                                                  widget.examTitle,
+                                                  examId: widget.examId,
+                                                  answers: saveAnswerIdList,
+                                                  questionIds:
+                                                      saveQuestionsIdList,
+                                                  time: formattedTime);
                                         }
                                       },
                                       title: AppStrings.skip,
@@ -364,41 +444,71 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                     child: CustomBtn(
                                       onTap: () async {
                                         if (question.type == 'Audio') {
-                                          questionsAnswerViewModel.selectedAnswerList.add({
+                                          questionsAnswerViewModel
+                                              .selectedAnswerList
+                                              .add({
                                             "questionId": question.id,
-                                            "answerId": questionsAnswerViewModel.controllers[index].text
+                                            "answerId": questionsAnswerViewModel
+                                                .controllers[index].text
                                           });
                                         }
-                                       final indexIs = questionsAnswerViewModel.selectedAnswerList.indexWhere((element) => element['questionId'] == question.id);
-                                        if (question.type == 'Option' && indexIs == -1 ){
-                                         showErrorSnackBar('', AppStrings.pleaseSelectAnyOption);
-                                        }else if(question.type == 'Audio' && questionsAnswerViewModel.controllers[index].text.isEmpty){
-                                          showErrorSnackBar('', AppStrings.pleaseEnterAnswer);
-                                        }else{
-                                          if (questionsDetail.length - 1 > index) {
-                                            questionsAnswerViewModel.pageController.value.nextPage(
-                                                duration: const Duration(milliseconds: 500),
-                                                curve: Curves.ease);
-                                          }
-                                          else if (index == questionsDetail.length - 1) {
-                                            questionsAnswerViewModel.stopTimer();
-                                            final formattedTime = formatDuration(
-                                                questionsAnswerViewModel.duration.value.inSeconds);
+                                        final indexIs = questionsAnswerViewModel
+                                            .selectedAnswerList
+                                            .indexWhere((element) =>
+                                                element['questionId'] ==
+                                                question.id);
+                                        if (question.type == 'Option' &&
+                                            indexIs == -1) {
+                                          showErrorSnackBar('',
+                                              AppStrings.pleaseSelectAnyOption);
+                                        } else if (question.type == 'Audio' &&
+                                            questionsAnswerViewModel
+                                                .controllers[index]
+                                                .text
+                                                .isEmpty) {
+                                          showErrorSnackBar(
+                                              '', AppStrings.pleaseEnterAnswer);
+                                        } else {
+                                          if (questionsDetail.length - 1 >
+                                              index) {
+                                            questionsAnswerViewModel
+                                                .pageController.value
+                                                .nextPage(
+                                                    duration: const Duration(
+                                                        milliseconds: 500),
+                                                    curve: Curves.ease);
+                                          } else if (index ==
+                                              questionsDetail.length - 1) {
+                                            questionsAnswerViewModel
+                                                .stopTimer();
+                                            final formattedTime =
+                                                formatDuration(
+                                                    questionsAnswerViewModel
+                                                        .duration
+                                                        .value
+                                                        .inSeconds);
 
                                             /// CALL SAVE QUESTIONS API
                                             List saveQuestionsIdList = [];
                                             List saveAnswerIdList = [];
-                                            for (var item in questionsAnswerViewModel.selectedAnswerList) {
-                                              saveQuestionsIdList.add(item['questionId'].toString());
-                                              saveAnswerIdList.add(item['answerId'].toString());
+                                            for (var item
+                                                in questionsAnswerViewModel
+                                                    .selectedAnswerList) {
+                                              saveQuestionsIdList.add(
+                                                  item['questionId']
+                                                      .toString());
+                                              saveAnswerIdList.add(
+                                                  item['answerId'].toString());
                                             }
                                             isSelectedOption = false;
-                                            await questionsAnswerViewModel.saveQuestionsViewModel(
-                                                widget.examTitle,
-                                                examId: widget.examId,
-                                                answers: saveAnswerIdList,
-                                                questionIds: saveQuestionsIdList,
-                                                time: formattedTime);
+                                            await questionsAnswerViewModel
+                                                .saveQuestionsViewModel(
+                                                    widget.examTitle,
+                                                    examId: widget.examId,
+                                                    answers: saveAnswerIdList,
+                                                    questionIds:
+                                                        saveQuestionsIdList,
+                                                    time: formattedTime);
                                           }
                                         }
                                       },

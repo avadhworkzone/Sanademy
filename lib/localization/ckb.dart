@@ -139,7 +139,7 @@ Map<String, String> ckb = {
   /// questions screen
   AppStrings.finishExam: "تاقیکردنەوەی تەواوکردن",
   AppStrings.questions: "پرسیارەکان",
-  AppStrings.of: "لە",
+  AppStrings.ofText: "لە",
   AppStrings.q: "پ",
   AppStrings.skip: "بازدان",
   AppStrings.next: "داهاتوو",

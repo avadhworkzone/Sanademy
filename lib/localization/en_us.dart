@@ -139,7 +139,7 @@ Map<String, String> en = {
   /// questions screen
   AppStrings.finishExam: "Finish Exam",
   AppStrings.questions: "Questions",
-  AppStrings.of: "of",
+  AppStrings.ofText: "of",
   AppStrings.q: "Q",
   AppStrings.skip: "Skip",
   AppStrings.next: "Next",

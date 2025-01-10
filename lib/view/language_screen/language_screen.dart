@@ -49,7 +49,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
               if (selectedLanguage == 0) {
                 Get.updateLocale(const Locale('en', 'US'));
               } else if (selectedLanguage == 1) {
-                Get.updateLocale(const Locale('ckb'));
+                Get.updateLocale(const Locale('ar'));
+                // Get.updateLocale(const Locale('ckb'));
               }
             });
             Get.offAll(() => const BottomBar());
