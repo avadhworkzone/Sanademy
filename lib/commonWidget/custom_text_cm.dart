@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
+import 'package:sanademy/utils/shared_preference_utils.dart';
 
 class CustomText extends StatelessWidget {
   final String title;
@@ -46,7 +47,7 @@ class CustomText extends StatelessWidget {
       maxLines: maxLines,
       style: TextStyle(
         color: color ?? AppColors.black,
-        fontFamily: fontFamily ?? AppConstants.metropolis,
+        fontFamily: fontFamily ?? (SharedPreferenceUtils.getLangCode()=='ar'?AppConstants.NotoNaskhArabic:AppConstants.metropolis),
         // fontFamily: fontFamily ?? AppConstants.quicksand,
         fontWeight: fontWeight ?? FontWeight.w400,
         fontSize: fontSize ?? 14.sp,
@@ -104,7 +105,8 @@ class CustomNewText extends StatelessWidget {
       maxLines: maxLines,
       style: TextStyle(
         color: color ?? AppColors.black,
-        fontFamily: fontFamily ?? AppConstants.metropolis,
+        fontFamily: fontFamily ?? (SharedPreferenceUtils.getLangCode()=='ar'?AppConstants.NotoNaskhArabic:AppConstants.metropolis),
+
         fontWeight: fontWeight ?? FontWeight.w400,
         fontSize: fontSize ?? 14.sp,
         height: height,

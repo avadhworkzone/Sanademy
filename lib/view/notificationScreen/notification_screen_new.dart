@@ -34,9 +34,9 @@ class _NotificationScreenNewState extends State<NotificationScreenNew> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(() {
-        if (notificationViewModel.notifications.isEmpty) {
-          return const Center(child: CircularProgressIndicator());
-        }
+        // if (notificationViewModel.notifications.isEmpty) {
+        //   return const Center(child: CircularProgressIndicator());
+        // }
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,

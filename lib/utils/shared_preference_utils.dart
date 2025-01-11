@@ -25,7 +25,7 @@ class SharedPreferenceUtils {
   }
 
   static String getLangCode() {
-    return getStorage.read(langCode) ?? "en".toUpperCase();
+    return getStorage.read(langCode) ?? "";
   }
 
   /// is login

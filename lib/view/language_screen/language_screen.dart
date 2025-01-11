@@ -7,13 +7,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/common_appbar.dart';
 import 'package:sanademy/commonWidget/common_scrollable_appbar_widget.dart';
+import 'package:sanademy/commonWidget/common_snackbar.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
+import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
+import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
 
@@ -25,7 +28,7 @@ class LanguageScreen extends StatefulWidget {
 }
 
 class _LanguageScreenState extends State<LanguageScreen> {
-  int selectedLanguage = 0;
+  int selectedLanguage = -1;
 
   List<LanguageSelection> languageList = [
     LanguageSelection(
@@ -44,16 +47,24 @@ class _LanguageScreenState extends State<LanguageScreen> {
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(horizontal: 19.w, vertical: 30.w),
         child: CustomUpdateBtn(
-          onTap: () {
-            setState(() {
-              if (selectedLanguage == 0) {
-                Get.updateLocale(const Locale('en', 'US'));
-              } else if (selectedLanguage == 1) {
-                Get.updateLocale(const Locale('ar'));
-                // Get.updateLocale(const Locale('ckb'));
-              }
-            });
-            Get.offAll(() => const BottomBar());
+          onTap: () async {
+            if(selectedLanguage==-1){
+              showSussesSnackBar('','Please Select Your Language\nتکایە زمانەکەت هەڵبژێرە');
+            }else {
+              setState(()  {
+                if (selectedLanguage == 0) {
+                  Get.updateLocale(const Locale('en', 'US'));
+                    SharedPreferenceUtils.setLangCode('en');
+                } else if (selectedLanguage == 1) {
+                  Get.updateLocale(const Locale('ar'));
+
+                  // Get.updateLocale(const Locale('ckb'));
+                }
+              });
+             await SharedPreferenceUtils.setLangCode(selectedLanguage == 0?'en':'ar');
+              Get.offAll(() => const BottomBar());
+            }
+
           },
           title: AppStrings.continues,
         ),

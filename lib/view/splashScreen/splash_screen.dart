@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/utils/app_colors.dart';
+import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/view/language_screen/language_screen.dart';
 import 'package:video_player/video_player.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
@@ -30,8 +31,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
     // Navigate to the next screen after 5 seconds
     Future.delayed(const Duration(seconds: 5),
-        () => Get.offAll(() => const ConnectivityWrapper(child: LanguageScreen()
-        // BottomBar()
+        () => Get.offAll(() =>  ConnectivityWrapper(child: SharedPreferenceUtils.getLangCode()==""?LanguageScreen()
+        :BottomBar()
         )));
   }
 

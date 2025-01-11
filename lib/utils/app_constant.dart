@@ -13,6 +13,7 @@ class AppConstants {
   static const String quicksand = "Metropolis";
   // static const String quicksand = "Quicksand";
   static const String metropolis = "Metropolis";
+  static const String NotoNaskhArabic = "NotoNaskhArabic";
 }
 
 RxBool isCallApi = false.obs;

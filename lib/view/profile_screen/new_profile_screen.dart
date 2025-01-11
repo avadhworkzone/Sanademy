@@ -182,7 +182,7 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                                 text: AppStrings.profileCompletion,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  fontFamily: AppConstants.metropolis,
+                                  
                                   fontSize: 14.sp,
                                 ),
                               ),
@@ -191,7 +191,7 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                                 style: TextStyle(
                                     fontSize: 16.sp,
                                     color: AppColors.blue34,
-                                    fontFamily: AppConstants.metropolis,
+                                    
                                     fontWeight: FontWeight.w700),
                               ),
                             ],
@@ -211,7 +211,7 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                                 fontWeight: FontWeight.w500,
                                 color: AppColors.grey73,
                                 fontSize: 14.sp,
-                                fontFamily: AppConstants.metropolis,
+                                
                               ),
                             ),
                             TextSpan(
@@ -220,7 +220,7 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                                 fontWeight: FontWeight.w500,
                                 color: Colors.red,
                                 fontSize: 14.sp,
-                                fontFamily: AppConstants.metropolis,
+                                
                               ),
                             ),
                           ],
@@ -233,7 +233,7 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                         fillColor: Colors.transparent,
                         style: TextStyle(
                           fontSize: 16.sp,
-                          fontFamily: AppConstants.metropolis,
+                          
                           fontWeight: FontWeight.w500,
                         ),
                         validator: ValidationMethod.validateName,
@@ -261,7 +261,7 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                                 fontWeight: FontWeight.w500,
                                 color: AppColors.grey73,
                                 fontSize: 14.sp,
-                                fontFamily: AppConstants.metropolis,
+                                
                               ),
                             ),
                             TextSpan(
@@ -270,7 +270,7 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                                 fontWeight: FontWeight.w500,
                                 color: Colors.red,
                                 fontSize: 14.sp,
-                                fontFamily: AppConstants.metropolis,
+                                
                               ),
                             ),
                           ],
@@ -284,7 +284,7 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                         fillColor: Colors.transparent,
                         style: TextStyle(
                           fontSize: 16.sp,
-                          fontFamily: AppConstants.metropolis,
+                          
                           fontWeight: FontWeight.w500,
                         ),
                         regularExpression: RegularExpressionUtils.text,
@@ -311,7 +311,7 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                                 fontWeight: FontWeight.w500,
                                 color: AppColors.grey73,
                                 fontSize: 14.sp,
-                                fontFamily: AppConstants.metropolis,
+                                
                               ),
                             ),
                             TextSpan(
@@ -320,7 +320,7 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                                 fontWeight: FontWeight.w500,
                                 color: Colors.red,
                                 fontSize: 14.sp,
-                                fontFamily: AppConstants.metropolis,
+                                
                               ),
                             ),
                           ],
@@ -337,7 +337,7 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                           hintText: AppStrings.selectGender.tr,
                           hintStyle: const TextStyle(
                             fontSize: 14,
-                            fontFamily: AppConstants.metropolis,
+                            
                             color: AppColors.black12,
                             fontWeight: FontWeight.w400,
                           ),
@@ -410,7 +410,7 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                         style: TextStyle(
                           fontSize: 16.sp,
                           color: AppColors.blue34,
-                          fontFamily: AppConstants.metropolis,
+                          
                           fontWeight: FontWeight.w500,
                         ),
                         // onTap: () => profileScreenViewModel.selectDate(context),
@@ -437,7 +437,7 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                                 fontWeight: FontWeight.w500,
                                 color: AppColors.grey73,
                                 fontSize: 14.sp,
-                                fontFamily: AppConstants.metropolis,
+                                
                               ),
                             ),
                             TextSpan(
@@ -446,7 +446,7 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                                 fontWeight: FontWeight.w500,
                                 color: Colors.red,
                                 fontSize: 14.sp,
-                                fontFamily: AppConstants.metropolis,
+                                
                               ),
                             ),
                           ],
@@ -486,7 +486,7 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                         style: TextStyle(
                             fontSize: 14.sp,
                             color: AppColors.black,
-                            fontFamily: AppConstants.metropolis,
+                            
                             fontWeight: FontWeight.w400),
                         flagsButtonPadding:
                             const EdgeInsets.symmetric(horizontal: 15),
@@ -511,7 +511,7 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                           hintStyle: TextStyle(
                             color: AppColors.black12,
                             fontSize: 14.sp,
-                            fontFamily: AppConstants.metropolis,
+                            
                             fontWeight: FontWeight.w400,
                           ),
                           errorText: (profileScreenViewModel.isValidate.value ==

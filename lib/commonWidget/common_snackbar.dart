@@ -11,6 +11,7 @@ commonSnackBar(
     int? sec}) {
   return Get.snackbar(
     title,
+    titleText: null,
     subTitle,
     snackPosition: SnackPosition.BOTTOM,
     backgroundColor: backGroundColor ?? AppColors.primaryColor,

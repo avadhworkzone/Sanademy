@@ -13,6 +13,7 @@ import 'package:sanademy/utils/app_class.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_theme.dart';
+import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/view/general/no_internet_screen.dart';
 import 'package:sanademy/view/splashScreen/splash_screen.dart';
 
@@ -77,8 +78,8 @@ class _MyAppState extends State<MyApp> {
                   pageTransitionsTheme: const PageTransitionsTheme()),
               transitionDuration: const Duration(milliseconds: 100),
               translations: Translation(),
-              locale: const Locale('en', 'US'),
-              fallbackLocale: const Locale('en', 'US'),
+              locale: SharedPreferenceUtils.getLangCode()=='en'?const Locale('en', 'US'):const Locale('ar', 'SA'),
+              fallbackLocale: SharedPreferenceUtils.getLangCode()=='en'?const Locale('en', 'US'):const Locale('ar', 'SA'),
               // locale:  Locale(myLan),
               // fallbackLocale:  Locale(myLan,),
               builder: (context, widget) => ColoredBox(
