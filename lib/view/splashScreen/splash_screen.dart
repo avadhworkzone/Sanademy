@@ -31,9 +31,15 @@ class _SplashScreenState extends State<SplashScreen> {
 
     // Navigate to the next screen after 5 seconds
     Future.delayed(const Duration(seconds: 5),
+<<<<<<< HEAD
         () => Get.offAll(() =>  ConnectivityWrapper(child: SharedPreferenceUtils.getLangCode()==""?LanguageScreen()
         :BottomBar()
         )));
+=======
+        () => Get.offAll(() => const ConnectivityWrapper(child: LanguageScreen()
+            // BottomBar()
+            )));
+>>>>>>> origin/dhani_dev
   }
 
   @override
@@ -46,25 +52,25 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: AppColors.primaryColor,
-      body:  _videoController.value.isInitialized
+      body: _videoController.value.isInitialized
           ? Stack(
-        fit: StackFit.expand,
-        children: [
-          FittedBox(
-            fit: BoxFit.cover, // Ensures the video covers the screen
-            child: SizedBox(
-              width: _videoController.value.size.width,
-              height: _videoController.value.size.height,
-              child: VideoPlayer(_videoController),
-            ),
-          ),
-        ],
-      )
+              fit: StackFit.expand,
+              children: [
+                FittedBox(
+                  fit: BoxFit.cover, // Ensures the video covers the screen
+                  child: SizedBox(
+                    width: _videoController.value.size.width,
+                    height: _videoController.value.size.height,
+                    child: VideoPlayer(_videoController),
+                  ),
+                ),
+              ],
+            )
           : const Center(
-        child: CircularProgressIndicator(
-          color: AppColors.primaryColor,
-        ),
-      ),
+              child: CircularProgressIndicator(
+                color: AppColors.primaryColor,
+              ),
+            ),
     );
   }
 }
