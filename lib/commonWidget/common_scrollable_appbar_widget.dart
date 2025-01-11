@@ -66,13 +66,17 @@ class _CommonScrollableAppbarWidgetState
           return Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              LocalAssets(
-                imagePath: AppImageAssets.animationImage,
-                imgColor: AppColors.white.withOpacity(0.4),
-                boxFix: BoxFit.cover,
-                width: Get.width,
-                height: 28.h,
-              ),
+              Image.asset(
+                AppImageAssets.animationImage,
+                color: AppColors.white.withOpacity(0.4),
+              )
+              // LocalAssets(
+              //   imagePath: AppImageAssets.animationImage,
+              //   imgColor: AppColors.white.withOpacity(0.4),
+              //   // boxFix: BoxFit.cover,
+              //   // width: Get.width,
+              //   // height: 28.h,
+              // ),
             ],
           );
         },

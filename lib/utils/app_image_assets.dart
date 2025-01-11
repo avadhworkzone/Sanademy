@@ -186,6 +186,8 @@ class AppImageAssets {
   static String appLogo = "${AppConstants.baseImageAssetsPath}Background.png";
   static String animationImage =
       "${AppConstants.baseImageAssetsPath}animationImage.png";
+  // static String animationImage =
+  //     "${AppConstants.baseImageAssetsPath}animation_image.png";
 
   /// ICONS
 
