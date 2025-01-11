@@ -360,7 +360,6 @@ class _MyCoursesWidgetState extends State<MyCoursesWidget> {
             color: AppColors.black,
             fontWeight: FontWeight.w600,
             fontSize: 16.sp,
-            fontFamily: AppConstants.metropolis,
           ),
           SizeConfig.sH10,
           SizedBox(
@@ -391,7 +390,6 @@ class _MyCoursesWidgetState extends State<MyCoursesWidget> {
                             child: CustomText(
                               course.title ?? "",
                               color: AppColors.white,
-                              fontFamily: AppConstants.metropolis,
                               fontWeight: FontWeight.w600,
                               letterSpacing: 0.sp,
                               fontSize: 16.sp,

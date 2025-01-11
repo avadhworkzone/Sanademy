@@ -359,7 +359,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.black,
-                                    fontFamily: AppConstants.metropolis,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),

@@ -140,14 +140,12 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                                   color: AppColors.white,
                                   fontWeight: FontWeight.w400,
                                   fontSize: 12.sp,
-                                  fontFamily: AppConstants.metropolis,
                                 ),
                                 CustomText(
                                   'Hey, Kuproy Jane 💥',
                                   color: AppColors.white,
                                   fontWeight: FontWeight.w500,
                                   fontSize: 14.sp,
-                                  fontFamily: AppConstants.metropolis,
                                 ),
                                 SizeConfig.sH15,
                                 Padding(
@@ -161,7 +159,6 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                                     letterSpacing: -1.sp,
                                     height: 1,
                                     textAlign: TextAlign.center,
-                                    fontFamily: AppConstants.metropolis,
                                   ),
                                 ),
                                 SizeConfig.sH35,
@@ -175,7 +172,6 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                           //     color: AppColors.black,
                           //     fontWeight: FontWeight.w600,
                           //     fontSize: 16.sp,
-                          //     fontFamily: AppConstants.metropolis,),
                           // ),
                           // SizeConfig.sH15,
 

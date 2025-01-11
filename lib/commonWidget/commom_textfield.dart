@@ -98,7 +98,6 @@ class CommonTextField extends StatelessWidget {
               TextStyle(
                   fontSize: 14.sp,
                   color: AppColors.black,
-                  fontFamily: AppConstants.metropolis,
                   fontWeight: FontWeight.w400),
           onTap: onTap,
           /*?? underLineBorder!
@@ -179,12 +178,10 @@ class CommonTextField extends StatelessWidget {
             labelStyle: TextStyle(
                 fontSize: 14.sp,
                 color: AppColors.black,
-                fontFamily: AppConstants.metropolis,
                 fontWeight: FontWeight.w600),
             hintStyle: TextStyle(
               color: hintTextColor ?? AppColors.black12,
               fontSize: hintFontSize ?? 14.sp,
-              fontFamily: AppConstants.metropolis,
               fontWeight: hintFontWeight ?? FontWeight.normal,
             ),
             errorMaxLines: 2,

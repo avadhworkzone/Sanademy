@@ -30,16 +30,16 @@ class _SplashScreenState extends State<SplashScreen> {
           });
 
     // Navigate to the next screen after 5 seconds
-    Future.delayed(const Duration(seconds: 5),
-<<<<<<< HEAD
-        () => Get.offAll(() =>  ConnectivityWrapper(child: SharedPreferenceUtils.getLangCode()==""?LanguageScreen()
-        :BottomBar()
-        )));
-=======
-        () => Get.offAll(() => const ConnectivityWrapper(child: LanguageScreen()
-            // BottomBar()
-            )));
->>>>>>> origin/dhani_dev
+    Future.delayed(
+      const Duration(seconds: 4),
+      () => Get.offAll(
+        () => ConnectivityWrapper(
+          child: SharedPreferenceUtils.getLangCode() == ""
+              ? const LanguageScreen()
+              : const BottomBar(),
+        ),
+      ),
+    );
   }
 
   @override

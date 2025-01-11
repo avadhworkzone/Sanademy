@@ -150,8 +150,7 @@ class _MyCertificateNewScreenState extends State<MyCertificateNewScreen> {
                                               style: TextStyle(
                                                 color: AppColors.white,
                                                 fontSize: 14.sp,
-                                                fontFamily:
-                                                    AppConstants.metropolis,
+
                                                 fontWeight: FontWeight.w600,
                                               ),
                                               children: [
@@ -160,8 +159,7 @@ class _MyCertificateNewScreenState extends State<MyCertificateNewScreen> {
                                                   style: TextStyle(
                                                     color: AppColors.white,
                                                     fontSize: 18.sp,
-                                                    fontFamily:
-                                                        AppConstants.metropolis,
+
                                                     fontWeight: FontWeight.w600,
                                                   ),
                                                 ),
@@ -169,8 +167,7 @@ class _MyCertificateNewScreenState extends State<MyCertificateNewScreen> {
                                                   text: ' for completing the ',
                                                   style: TextStyle(
                                                     color: AppColors.white,
-                                                    fontFamily:
-                                                        AppConstants.metropolis,
+
                                                     fontSize: 14.sp,
                                                     fontWeight: FontWeight.w600,
                                                   ),
@@ -179,8 +176,7 @@ class _MyCertificateNewScreenState extends State<MyCertificateNewScreen> {
                                                   text: '“English Language”',
                                                   style: TextStyle(
                                                     color: AppColors.white,
-                                                    fontFamily:
-                                                        AppConstants.metropolis,
+
                                                     fontSize: 18.sp,
                                                     fontWeight: FontWeight.w600,
                                                   ),
@@ -190,8 +186,7 @@ class _MyCertificateNewScreenState extends State<MyCertificateNewScreen> {
                                                   style: TextStyle(
                                                     color: AppColors.white,
                                                     fontSize: 14.sp,
-                                                    fontFamily:
-                                                        AppConstants.metropolis,
+
                                                     fontWeight: FontWeight.w600,
                                                   ),
                                                 ),

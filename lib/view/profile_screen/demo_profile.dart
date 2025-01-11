@@ -75,7 +75,6 @@ class DemoProfile extends StatelessWidget {
                           text: AppStrings.profileCompletion,
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
-                            fontFamily: AppConstants.metropolis,
                             fontSize: 14.sp,
                           ),
                         ),
@@ -84,7 +83,6 @@ class DemoProfile extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 16.sp,
                             color: AppColors.blue34,
-                            fontFamily: AppConstants.metropolis,
                             fontWeight: FontWeight.w700,
                           ),
                         ),

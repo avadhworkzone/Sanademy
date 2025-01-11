@@ -71,15 +71,15 @@ class _MyAppState extends State<MyApp> {
               enableLog: true,
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
-                  fontFamily: AppConstants.metropolis,
+                  // fontFamily: AppConstants.metropolis,
                   // useMaterial3: true,
                   // scaffoldBackgroundColor: AppColors.whitef7,
                   // scaffoldBackgroundColor: AppColors.white,
                   pageTransitionsTheme: const PageTransitionsTheme()),
               transitionDuration: const Duration(milliseconds: 100),
               translations: Translation(),
-              locale: SharedPreferenceUtils.getLangCode()=='en'?const Locale('en', 'US'):const Locale('ar', 'SA'),
-              fallbackLocale: SharedPreferenceUtils.getLangCode()=='en'?const Locale('en', 'US'):const Locale('ar', 'SA'),
+              locale: SharedPreferenceUtils.getLangCode()=='ar'? const Locale('ar', 'SA'):const Locale('en', 'US'),
+              fallbackLocale: SharedPreferenceUtils.getLangCode()=='ar'? const Locale('ar', 'SA'):const Locale('en', 'US'),
               // locale:  Locale(myLan),
               // fallbackLocale:  Locale(myLan,),
               builder: (context, widget) => ColoredBox(

@@ -238,7 +238,6 @@ class _SelectPaymentMethodScreenState extends State<SelectPaymentMethodScreen> {
                     style: TextStyle(
                       fontSize: 16.sp,
                       color: AppColors.blue34,
-                      fontFamily: AppConstants.metropolis,
                       fontWeight: FontWeight.w500,
                     ),
                     hintFontWeight: FontWeight.w500,
@@ -676,7 +675,6 @@ void showPaymentProcessBottomSheet(BuildContext context) {
                                 fillColor: Colors.transparent,
                                 style: TextStyle(
                                   fontSize: 16.sp,
-                                  fontFamily: AppConstants.metropolis,
                                   fontWeight: FontWeight.w500,
                                 ),
                                 keyBoardType: TextInputType.number,
@@ -818,7 +816,6 @@ void showPaymentProcessBottomSheet(BuildContext context) {
                                         fontWeight: FontWeight.w500,
                                         color: AppColors.grey73,
                                         fontSize: 14.sp,
-                                        fontFamily: AppConstants.metropolis,
                                       ),
                                     ),
                                     TextSpan(
@@ -827,7 +824,6 @@ void showPaymentProcessBottomSheet(BuildContext context) {
                                         fontWeight: FontWeight.w500,
                                         color: Colors.red,
                                         fontSize: 14.sp,
-                                        fontFamily: AppConstants.metropolis,
                                       ),
                                     ),
                                   ],
@@ -867,7 +863,6 @@ void showPaymentProcessBottomSheet(BuildContext context) {
                                 style: TextStyle(
                                     fontSize: 14.sp,
                                     color: AppColors.black,
-                                    fontFamily: AppConstants.metropolis,
                                     fontWeight: FontWeight.w400),
                                 flagsButtonPadding:
                                 const EdgeInsets.symmetric(horizontal: 15),
@@ -884,7 +879,6 @@ void showPaymentProcessBottomSheet(BuildContext context) {
                                   hintStyle: TextStyle(
                                     color: AppColors.black12,
                                     fontSize: 14.sp,
-                                    fontFamily: AppConstants.metropolis,
                                     fontWeight: FontWeight.w400,
                                   ),
                                   errorText: (Get.put(ProfileScreenViewModel()).isValidate.value ==

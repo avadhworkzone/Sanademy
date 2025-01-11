@@ -725,7 +725,6 @@ void showEnrollmentDialog(BuildContext context) {
                               color: AppColors.blue34,
                               fontSize: 20.sp,
                               fontWeight: FontWeight.w600,
-                              fontFamily: AppConstants.metropolis,
                             ),
                           ),
                           TextSpan(
@@ -734,7 +733,6 @@ void showEnrollmentDialog(BuildContext context) {
                               color: AppColors.blue34,
                               fontSize: 20.sp,
                               fontWeight: FontWeight.w600,
-                              fontFamily: AppConstants.metropolis,
                             ),
                           ),
                           TextSpan(
@@ -743,7 +741,6 @@ void showEnrollmentDialog(BuildContext context) {
                               color: AppColors.blue34,
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w600,
-                              fontFamily: AppConstants.metropolis,
                             ),
                           ),
                           TextSpan(
@@ -752,7 +749,6 @@ void showEnrollmentDialog(BuildContext context) {
                               color: AppColors.blue34,
                               fontSize: 20.sp,
                               fontWeight: FontWeight.w600,
-                              fontFamily: AppConstants.metropolis,
                             ),
                           ),
                         ],

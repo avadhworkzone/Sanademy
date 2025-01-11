@@ -307,7 +307,6 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                   color: AppColors.white,
                   fontWeight: FontWeight.w700,
                   fontSize: 20.sp,
-                  fontFamily: AppConstants.metropolis,
                 ),
                 SizeConfig.sH35,
                 const CommonScrollableAppbarWidget()

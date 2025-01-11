@@ -90,7 +90,6 @@ class _MyProgressNewScreenState extends State<MyProgressNewScreen> {
                                     child: CustomText(
                                       course["title"],
                                       color: AppColors.white,
-                                      fontFamily: AppConstants.metropolis,
                                       fontWeight: FontWeight.w600,
                                       letterSpacing: 0.sp,
                                       fontSize: 16.sp,
@@ -124,7 +123,6 @@ class _MyProgressNewScreenState extends State<MyProgressNewScreen> {
                                         "${course["completed"]}/${course["total"]}",
                                         color: AppColors.white,
                                         fontWeight: FontWeight.w500,
-                                        fontFamily: AppConstants.metropolis,
                                         fontSize: 14.sp,
                                       ),
                                     ],

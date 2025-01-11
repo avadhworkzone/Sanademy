@@ -246,7 +246,6 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                                     course["teacher_name"] ?? '',
                                                     fontSize: 12.sp,
                                                     fontWeight: FontWeight.w600,
-                                                    fontFamily: AppConstants.metropolis,
                                                     color: Colors.grey[700],
                                                   ),
                                                 ],
@@ -281,14 +280,12 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                                         fontWeight:
                                                         FontWeight
                                                             .w700,
-                                                        fontFamily: AppConstants.metropolis,
                                                       ), CustomText(
                                                         ' IQD',
                                                         fontSize: 14.sp,
                                                         fontWeight:
                                                         FontWeight
                                                             .w500,
-                                                        fontFamily: AppConstants.metropolis,
                                                       ),
                                                     ],
                                                   ),
@@ -302,14 +299,12 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                                         TextDecoration
                                                             .lineThrough,
                                                         color: AppColors.grey74,
-                                                        fontFamily: AppConstants.metropolis,
                                                       ),
                                                       SizedBox(width: 5.w),
                                                       CustomText(
                                                         '-40%',
                                                         fontSize: 12.sp,
                                                         color: AppColors.borderColor,
-                                                        fontFamily: AppConstants.metropolis,
                                                       ),
                                                     ],
                                                   ),
@@ -328,7 +323,6 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                             CustomText(
                                               course["course_name"] ?? '',
                                               fontSize: 20.sp,
-                                              fontFamily: AppConstants.metropolis,
                                               fontWeight: FontWeight.w600,
                                             ),
                                             SizedBox(height: 6.h),
@@ -349,7 +343,6 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                                         '${course["hours"] ?? 0}h ${course["minutes"] ?? 0}m',
                                                         fontSize: 12.sp,
                                                         color: Colors.grey[600],
-                                                        fontFamily: AppConstants.metropolis,
                                                       ),
                                                     ],
                                                   ),
@@ -372,7 +365,6 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                                         '${course["no_of_lectures"] ?? 0} Lectures',
                                                         fontSize: 12.sp,
                                                         color: Colors.grey[600],
-                                                        fontFamily: AppConstants.metropolis,
                                                       ),
                                                     ],
                                                   ),
@@ -498,7 +490,6 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                         //                                   '',
                         //                               fontSize: 12.sp,
                         //                               fontWeight: FontWeight.w600,
-                        //                               fontFamily: AppConstants.metropolis,
                         //                               color: Colors
                         //                                   .grey[700],
                         //                             ),
@@ -535,7 +526,6 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                         //                                   fontWeight:
                         //                                   FontWeight
                         //                                       .w700,
-                        //                                   fontFamily: AppConstants.metropolis,
                         //                                 ), CustomText(
                         //                                   ' IQD',
                         //                                   fontSize: 14.sp,
@@ -664,7 +654,6 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                             fontSize: 20.sp,
                             fontWeight: FontWeight.w700,
                             color: Colors.black,
-                          fontFamily: AppConstants.metropolis,
                         ),
                       ),
                 SizeConfig.sH30,

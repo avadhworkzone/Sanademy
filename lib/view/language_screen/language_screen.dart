@@ -48,23 +48,24 @@ class _LanguageScreenState extends State<LanguageScreen> {
         padding: EdgeInsets.symmetric(horizontal: 19.w, vertical: 30.w),
         child: CustomUpdateBtn(
           onTap: () async {
-            if(selectedLanguage==-1){
-              showSussesSnackBar('','Please Select Your Language\nتکایە زمانەکەت هەڵبژێرە');
-            }else {
-              setState(()  {
+            if (selectedLanguage == -1) {
+              showSussesSnackBar(
+                  '', 'Please Select Your Language\nتکایە زمانەکەت هەڵبژێرە');
+            } else {
+              setState(() {
                 if (selectedLanguage == 0) {
                   Get.updateLocale(const Locale('en', 'US'));
-                    SharedPreferenceUtils.setLangCode('en');
+                  SharedPreferenceUtils.setLangCode('en');
                 } else if (selectedLanguage == 1) {
                   Get.updateLocale(const Locale('ar'));
 
                   // Get.updateLocale(const Locale('ckb'));
                 }
               });
-             await SharedPreferenceUtils.setLangCode(selectedLanguage == 0?'en':'ar');
+              await SharedPreferenceUtils.setLangCode(
+                  selectedLanguage == 0 ? 'en' : 'ar');
               Get.offAll(() => const BottomBar());
             }
-
           },
           title: AppStrings.continues,
         ),
@@ -157,9 +158,10 @@ class _LanguageScreenState extends State<LanguageScreen> {
                               height: 16.w,
                               width: 16.w,
                               decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: AppColors.blackE0, width: 2),
-                                  shape: BoxShape.circle),
+                                border: Border.all(
+                                    color: AppColors.blackE0, width: 2),
+                                shape: BoxShape.circle,
+                              ),
                             )
                     ],
                   ),

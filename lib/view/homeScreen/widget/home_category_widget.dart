@@ -208,7 +208,6 @@ class _HomeCategoryWidgetState extends State<HomeCategoryWidget> {
                     widget.categories[index].name ?? "",
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
-                    fontFamily: AppConstants.metropolis,
                     color: isSelected
                         ? AppColors.blue34
                         : AppColors.blue34, // Text color

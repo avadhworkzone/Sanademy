@@ -99,7 +99,6 @@ void showLoginBottomSheet(BuildContext context) {
                       style: TextStyle(
                         color: AppColors.black,
                         fontSize: 16.sp,
-                        fontFamily: AppConstants.metropolis,
                         fontWeight: FontWeight.w400,
                       ),
                       decoration: InputDecoration(
@@ -108,7 +107,6 @@ void showLoginBottomSheet(BuildContext context) {
                         hintText: AppStrings.enterYourPhoneNumber.tr,
                         hintStyle: TextStyle(
                           fontSize: 14.sp,
-                          fontFamily: AppConstants.metropolis,
                           fontWeight: FontWeight.w400,
                         ),
                         border: OutlineInputBorder(
