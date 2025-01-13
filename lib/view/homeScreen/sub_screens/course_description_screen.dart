@@ -100,7 +100,8 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                                         child: LocalAssets(
                                       imagePath: AppImageAssets.sanademaylogo,
                                       imgColor: AppColors.primaryColor,
-                                    )),
+                                    ),
+                                    ),
                                   )
                                 : SizedBox(
                                     // height: 300.h,
@@ -669,6 +670,7 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
     );
   }
 }
+
 void showEnrollmentDialog(BuildContext context) {
   showDialog(
     context: context,
@@ -852,7 +854,6 @@ void showEnrollmentDialog(BuildContext context) {
     },
   );
 }
-
 
 // void showEnrollmentDialog(BuildContext context) {
 //   showDialog(

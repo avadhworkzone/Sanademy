@@ -256,4 +256,6 @@ class AppStrings {
   static String payNow = 'Pay Now';
   static String whatsApp = 'WhatsApp';
   static String telegram = 'Telegram';
+  static String takeAPhoto = 'Take a Photo';
+  static String chooseFromGallery = 'Choose from Gallery';
 }

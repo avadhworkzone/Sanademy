@@ -3,15 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/common_appbar.dart';
 import 'package:sanademy/commonWidget/common_scrollable_appbar_widget.dart';
-import 'package:sanademy/commonWidget/common_snackbar.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/utils/app_colors.dart';
-import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/app_string.dart';
@@ -77,6 +74,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
             isBack: true,
             context: context,
             paddingLeft: 18.w,
+            isLogoRequired: true,
             actionWidget: SizeConfig.sW40,
             otherWidget: Column(
               mainAxisSize: MainAxisSize.min,
@@ -105,65 +103,78 @@ class _LanguageScreenState extends State<LanguageScreen> {
             padding: EdgeInsets.zero,
             itemCount: languageList.length,
             itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  selectedLanguage = index;
-                  setState(() {});
-                },
-                child: Container(
-                  margin:
-                      EdgeInsets.symmetric(horizontal: 19.w, vertical: 10.w),
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.w),
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          color: selectedLanguage == index
-                              ? AppColors.borderColor
-                              : AppColors.blackE0),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Row(
-                    children: [
-                      LocalAssets(
-                        imagePath: languageList[index].image,
-                        height: 35.w,
-                        width: 35.w,
+              return AnimatedScale(
+                duration: const Duration(milliseconds: 300),
+                scale: selectedLanguage == index ? 1.05 : 1.0,
+                child: AnimatedOpacity(
+                  duration: const Duration(milliseconds: 300),
+                  opacity: selectedLanguage == index ? 1.0 : 0.8,
+                  child: GestureDetector(
+                    onTap: () {
+                      selectedLanguage = index;
+                      setState(() {});
+                    },
+                    child: Container(
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 19.w, vertical: 10.w),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.w),
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              color: selectedLanguage == index
+                                  ? AppColors.borderColor
+                                  : AppColors.blackE0),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Row(
+                        children: [
+                          // LocalAssets(
+                          //   imagePath: languageList[index].image,
+                          //   height: 35.w,
+                          //   width: 35.w,
+                          // ),
+                          AnimatedLocalAssets(
+                            imagePath: languageList[index].image,
+                            height: 35.w,
+                            width: 35.w,
+                          ),
+                          SizeConfig.sW10,
+                          CustomNewText(
+                            languageList[index].name,
+                            color: AppColors.blue34,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          const Spacer(),
+                          CustomNewText(
+                            '(${languageList[index].subName})',
+                            color: AppColors.black73,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          SizeConfig.sW10,
+                          selectedLanguage == index
+                              ? CircleAvatar(
+                                  radius: 8.w,
+                                  backgroundColor: AppColors.borderColor,
+                                  child: Icon(
+                                    Icons.done,
+                                    color: AppColors.white,
+                                    size: 10.w,
+                                    weight: 100.w,
+                                  ),
+                                )
+                              : Container(
+                                  height: 16.w,
+                                  width: 16.w,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: AppColors.blackE0, width: 2),
+                                    shape: BoxShape.circle,
+                                  ),
+                                )
+                        ],
                       ),
-                      SizeConfig.sW10,
-                      CustomNewText(
-                        languageList[index].name,
-                        color: AppColors.blue34,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      const Spacer(),
-                      CustomNewText(
-                        '(${languageList[index].subName})',
-                        color: AppColors.black73,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      SizeConfig.sW10,
-                      selectedLanguage == index
-                          ? CircleAvatar(
-                              radius: 8.w,
-                              backgroundColor: AppColors.borderColor,
-                              child: Icon(
-                                Icons.done,
-                                color: AppColors.white,
-                                size: 10.w,
-                                weight: 100.w,
-                              ),
-                            )
-                          : Container(
-                              height: 16.w,
-                              width: 16.w,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: AppColors.blackE0, width: 2),
-                                shape: BoxShape.circle,
-                              ),
-                            )
-                    ],
+                    ),
                   ),
                 ),
               );
@@ -182,4 +193,61 @@ class LanguageSelection {
 
   LanguageSelection(
       {required this.image, required this.name, required this.subName});
+}
+
+
+class AnimatedLocalAssets extends StatefulWidget {
+  final String imagePath;
+  final double height;
+  final double width;
+
+  const AnimatedLocalAssets({
+    Key? key,
+    required this.imagePath,
+    required this.height,
+    required this.width,
+  }) : super(key: key);
+
+  @override
+  State<AnimatedLocalAssets> createState() => _AnimatedLocalAssetsState();
+}
+
+class _AnimatedLocalAssetsState extends State<AnimatedLocalAssets>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    )..repeat(reverse: true);
+
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.1).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeInOut,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ScaleTransition(
+      scale: _scaleAnimation,
+      child: LocalAssets(
+        imagePath: widget.imagePath,
+        height: widget.height,
+        width: widget.width,
+      ),
+    );
+  }
 }

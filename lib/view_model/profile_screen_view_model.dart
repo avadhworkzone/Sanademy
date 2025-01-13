@@ -28,15 +28,82 @@ class ProfileScreenViewModel extends GetxController {
   Rx<TextEditingController> dateController = TextEditingController().obs;
   Rx<TextEditingController> phoneController = TextEditingController().obs;
   Rx<TextEditingController> addressController = TextEditingController().obs;
+
   final Rx<GlobalKey<FormState>> formKey = GlobalKey<FormState>().obs;
   Rx<ResponseStatus> responseStatus = ResponseStatus.INITIAL.obs;
   HomeScreenViewModel homeScreenViewModel = Get.find();
   Rx<DateTime> selectedDate = DateTime.now().obs;
   RxBool isValidate = false.obs;
+  Rx<double> completionPercentage = 0.0.obs;
   Rx<File> imgFile = File('').obs;
   RxString phoneCode = ''.obs;
   RxString countryCode = ''.obs;
   RxString newImage = ''.obs;
+  RxString selectedGender = ''.obs;
+  RxString selectedCity = ''.obs;
+  RxString selectedProvince = ''.obs;
+  final Rx<XFile?> selectedImage = Rx<XFile?>(null);
+
+  void updateCompletion() {
+    double totalPercentage = 0;
+
+    if (nameController.value.text.isNotEmpty) totalPercentage += 10;
+    if (nameKurdishController.value.text.isNotEmpty) totalPercentage += 10;
+    if (selectedGender.isNotEmpty) totalPercentage += 5;
+    if (dateController.value.text.isNotEmpty) totalPercentage += 5;
+    if (phoneController.value.text.isNotEmpty) totalPercentage += 20;
+    if (selectedCity.value.isNotEmpty && selectedProvince.value.isNotEmpty) totalPercentage += 25;
+    if (selectedImage.value != null) totalPercentage += 25;
+
+    // Ensure the total percentage doesn't exceed 100
+    totalPercentage = totalPercentage > 100 ? 100 : totalPercentage;
+
+    completionPercentage.value = totalPercentage;
+
+  }
+
+  Future<void> showImagePicker(BuildContext context) async {
+    final ImagePicker picker = ImagePicker();
+
+    await showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.all(16.w),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.camera_alt),
+                title:  CustomText(AppStrings.takeAPhoto),
+                onTap: () async {
+                  final XFile? image = await picker.pickImage(source: ImageSource.camera);
+                  if (image != null) {
+                    selectedImage.value = image;
+                  }
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title:  CustomText(AppStrings.chooseFromGallery),
+                onTap: () async {
+                  final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+                  if (image != null) {
+                    selectedImage.value = image;
+                  }
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
   /// DATE PICKER
   Future<void> selectDate(BuildContext context) async {

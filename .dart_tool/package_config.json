@@ -608,6 +608,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "percent_indicator",
+      "rootUri": "file:///Users/avadhkatrodiya/.pub-cache/hosted/pub.dev/percent_indicator-4.2.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "petitparser",
       "rootUri": "file:///Users/avadhkatrodiya/.pub-cache/hosted/pub.dev/petitparser-6.0.2",
       "packageUri": "lib/",
@@ -884,7 +890,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2025-01-11T07:29:35.088663Z",
+  "generated": "2025-01-13T07:09:02.540416Z",
   "generator": "pub",
   "generatorVersion": "3.5.1",
   "flutterRoot": "file:///Users/avadhkatrodiya/Downloads/flutter3.24.1",

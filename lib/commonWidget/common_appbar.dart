@@ -245,9 +245,11 @@ commonUpdateAppBar(
                 //   ),
                 isLogoRequired == true
                     ? Flexible(
-                        child: LocalAssets(
-                          imagePath: 'assets/images/sanademyLogo.png',
-                          scaleSize: 4.w,
+                        child: Center(
+                          child: LocalAssets(
+                            imagePath: 'assets/images/sanademyLogo.png',
+                            scaleSize: 4.w,
+                          ),
                         ),
                       )
                     : CustomText(

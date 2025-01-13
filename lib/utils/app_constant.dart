@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
+import 'package:sanademy/utils/shared_preference_utils.dart';
 
 class AppConstants {
   static const String baseImageAssetsPath = "assets/images/";
@@ -14,6 +15,12 @@ class AppConstants {
   // static const String quicksand = "Quicksand";
   static const String metropolis = "Metropolis";
   static const String NotoNaskhArabic = "NotoNaskhArabic";
+}
+
+ String getFontFamily() {
+return SharedPreferenceUtils.getLangCode() == 'ar'
+? AppConstants.NotoNaskhArabic
+    : AppConstants.metropolis;
 }
 
 RxBool isCallApi = false.obs;
