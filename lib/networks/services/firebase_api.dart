@@ -1,6 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
-import 'package:sanademy/view/homeScreen/home_screen.dart';
+import 'package:sanademy/view/homeScreen/widget/home_screen_new.dart';
 
 
 Future<void> handleBackgroundMessage(RemoteMessage message)async {
@@ -9,7 +9,7 @@ Future<void> handleBackgroundMessage(RemoteMessage message)async {
 }
 Future<void> handleMessage(RemoteMessage? message) async {
   if(message == null) return;
-  Get.to(const HomeScreen());
+  Get.to(const HomeScreenNew());
 }
 
 Future<void> initPushNotification()async {

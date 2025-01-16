@@ -8,7 +8,7 @@ import 'package:sanademy/networks/services/apiService/contact_us_api_service.dar
 import 'package:sanademy/networks/services/apiService/write_us_directly_api_service.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/enum_utils.dart';
-import 'package:sanademy/view/homeScreen/home_screen.dart';
+import 'package:sanademy/view/homeScreen/widget/home_screen_new.dart';
 
 class ContactUsViewModel extends GetxController {
   Rx<TextEditingController> contactUsNameController = TextEditingController().obs;
@@ -58,7 +58,7 @@ class ContactUsViewModel extends GetxController {
       if (writeUsDirectlyResModel.success!) {
         if (writeUsDirectlyResModel.data != null) {
           await showSussesSnackBar('', writeUsDirectlyResModel.message ?? 'SUCCESS');
-          Get.to(()=>const HomeScreen());
+          Get.to(()=>const HomeScreenNew());
         }else {
           showSussesSnackBar('', writeUsDirectlyResModel.message ?? 'ERROR');
         }

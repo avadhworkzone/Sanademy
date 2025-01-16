@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sanademy/commonWidget/commom_textfield.dart';
 import 'package:sanademy/commonWidget/common_appbar.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
+import 'package:sanademy/networks/model/new_api_models/get_home_screen_data_res_model.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
@@ -29,6 +29,7 @@ class HomeScreenNew extends StatefulWidget {
 class _HomeScreenNewState extends State<HomeScreenNew> {
   HomeScreenViewModel homeScreenViewModel = Get.put(HomeScreenViewModel());
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
   // GlobalKey<ScaffoldState> homeDrawerKey = GlobalKey();
 
   @override
@@ -39,8 +40,9 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
   }
 
   homeApiCall() async {
-    await homeScreenViewModel.homeViewModel(
-        search: homeScreenViewModel.searchController.value.text);
+    // await homeScreenViewModel.homeViewModel(
+    //     search: homeScreenViewModel.searchController.value.text);
+    await homeScreenViewModel.getHomeScreenData();
   }
 
   @override
@@ -56,12 +58,13 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
               child: const MenuScreen()),
         ),
         body: Obx(
-          () => homeScreenViewModel.responseStatus.value == ResponseStatus.Error
+          () => homeScreenViewModel.homeResponseStatus.value ==
+                  ResponseStatus.Error
               ? CustomText(
                   AppStrings.error,
                   fontSize: 20.sp,
                 )
-              : homeScreenViewModel.responseStatus.value ==
+              : homeScreenViewModel.homeResponseStatus.value ==
                       ResponseStatus.Completed
                   ? SingleChildScrollView(
                       child: Column(
@@ -176,16 +179,12 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                           // SizeConfig.sH15,
 
                           /// CAROUSAL SLIDER VIEW....
-                          MyCoursesWidget(
-                            courses: homeScreenViewModel.courses,
-                          ),
+                          MyCoursesWidget(),
                           SizeConfig.sH20,
                           // HomeSliderWidget(),
                           //
                           /// CATEGORIES VIEW
-                          HomeCategoryWidget(
-                            categories: homeScreenViewModel.categoriesData,
-                          ),
+                          HomeCategoryWidget(),
                           SizeConfig.sH15,
                           //
                           /// RECOMMENDED

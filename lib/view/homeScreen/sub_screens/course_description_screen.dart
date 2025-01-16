@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/common_appbar.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
+import 'package:sanademy/networks/model/new_api_models/get_home_screen_data_res_model.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
@@ -26,13 +27,14 @@ import 'package:sanademy/view_model/lectures_videos_view_model.dart';
 import 'select_payment_method_screen.dart';
 
 class CourseDescriptionScreen extends StatefulWidget {
-  const CourseDescriptionScreen({
+   CourseDescriptionScreen({
     super.key,
-    required this.courseId,
-    required this.videoUrl,
+    required this.homeCourse,
+    required this.videoUrl, required this.courseId,
   });
 
-  final String courseId;
+  final int courseId;
+  HomeCourse homeCourse;
   final String videoUrl;
 
   @override
@@ -54,7 +56,7 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
 
   descriptionApiCall() async {
     // await descriptionViewModel.courseDetailViewModel(courseId: widget.courseId);
-    descriptionViewModel.chewiePlayer(widget.videoUrl);
+    descriptionViewModel.chewiePlayer(widget.homeCourse.videoUrl ?? "");
   }
 
   @override
@@ -66,12 +68,14 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var courses = homeScreenViewModel.courses;
     return Scaffold(
       backgroundColor: AppColors.white,
       body: Obx(() =>
               // descriptionViewModel.courseDetailResponseStatus.value ==
               //         ResponseStatus.Completed
               //     ?
+
               SingleChildScrollView(
                 child: Column(
                   children: [
@@ -233,7 +237,7 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               CustomNewText(
-                                'Artificial Intelligence \nCourse ',
+                                widget.homeCourse.title ?? "",
                                 color: AppColors.blue34,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16.sp,
@@ -245,7 +249,7 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                                     text: TextSpan(
                                       children: [
                                         TextSpan(
-                                          text: '150,000', // Main amount
+                                          text:  widget.homeCourse.price.toString() ?? "", // Main amount
                                           style: TextStyle(
                                             fontSize: 16.sp,
                                             color: AppColors.blue34,
@@ -306,7 +310,7 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CustomText(
-                                'AI Course.doc',
+                                '${widget.homeCourse.title ?? ""}.doc',
                                 color: AppColors.blue34,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 12.sp,
@@ -339,7 +343,7 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                       ),
                     ),
                     SizeConfig.sH15,
-                    buildDescriptionSection(),
+                    buildDescriptionSection(homeCourse: widget.homeCourse),
                     SizeConfig.sH15,
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -396,7 +400,20 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                                 child: _buildExpandableSection(
                                   title: "Requirements",
-                                  content: Column(
+                                  content:Html(
+                                    data: widget.homeCourse.requirements ?? "",
+                                    shrinkWrap: true,
+                                    style: {
+                                      "body": Style(
+                                        fontSize: FontSize(14.sp),
+                                        fontWeight: FontWeight.w500,
+                                        color: AppColors.grey73,
+                                        fontFamily: AppConstants.metropolis,
+                                      ),
+                                    },
+                                  )
+
+                                  /* Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -407,7 +424,7 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                                       _buildBulletPoint(
                                           "How to optimize daily marketing routine"),
                                     ],
-                                  ),
+                                  ),*/
                                 ),
                               ),
                               const Divider(color: AppColors.greyE0),
@@ -415,7 +432,18 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                                 child: _buildExpandableSection(
                                   title: "What will you learn?",
-                                  content: Column(
+                                  content:Html(
+                                    data: widget.homeCourse.whatWillYouLearn ?? "",
+                                    shrinkWrap: true,
+                                    style: {
+                                      "body": Style(
+                                        fontSize: FontSize(14.sp),
+                                        fontWeight: FontWeight.w500,
+                                        color: AppColors.grey73,
+                                        fontFamily: AppConstants.metropolis,
+                                      ),
+                                    },
+                                  ) /*Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -425,7 +453,7 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                                       _buildBulletPoint(
                                           "Build your own AI-powered applications"),
                                     ],
-                                  ),
+                                  ),*/
                                 ),
                               ),
                               const Divider(color: AppColors.greyE0),
@@ -433,7 +461,18 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                                 child: _buildExpandableSection(
                                   title: "Who this course is for?",
-                                  content: Column(
+                                  content:Html(
+                                    data: widget.homeCourse.whoThisCourseIsFor ?? "",
+                                    shrinkWrap: true,
+                                    style: {
+                                      "body": Style(
+                                        fontSize: FontSize(14.sp),
+                                        fontWeight: FontWeight.w500,
+                                        color: AppColors.grey73,
+                                        fontFamily: AppConstants.metropolis,
+                                      ),
+                                    },
+                                  ) /* Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -444,7 +483,7 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                                       _buildBulletPoint(
                                           "Anyone curious about AI applications"),
                                     ],
-                                  ),
+                                  ),*/
                                 ),
                               ),
                               SizedBox(height: 10.h),
@@ -1184,7 +1223,7 @@ Widget _buildBulletPoint(String text) {
   );
 }
 
-Widget buildDescriptionSection() {
+Widget buildDescriptionSection({required HomeCourse homeCourse}) {
   return Padding(
     padding: EdgeInsets.symmetric(horizontal: 20.w),
     child: Column(
@@ -1196,12 +1235,24 @@ Widget buildDescriptionSection() {
           fontSize: 14.sp,
         ),
         SizeConfig.sH4,
-        CustomNewText(
-          "Ultimate ChatGPT, MJ, Gemini course for digital marketers. Gain a grasp of AI to delegate your marketing activities.",
-          fontSize: 14.sp,
-          color: AppColors.grey73,
-          fontWeight: FontWeight.w400,
+        Html(
+          data: homeCourse.description ?? "",
+          shrinkWrap: true,
+          style: {
+            "body": Style(
+              fontSize: FontSize(14.sp),
+              fontWeight: FontWeight.w400,
+              color: AppColors.grey73,
+              fontFamily: AppConstants.metropolis,
+            ),
+          },
         ),
+        // CustomNewText(
+        //   homeCourse.description ?? "",
+        //   fontSize: 14.sp,
+        //   color: AppColors.grey73,
+        //   fontWeight: FontWeight.w400,
+        // ),
         SizeConfig.sH10,
         Row(
           children: [
@@ -1219,11 +1270,22 @@ Widget buildDescriptionSection() {
               ), // Replace with your image path
             ),
             SizeConfig.sW3,
-            CustomNewText(
-              "Devid Jonson",
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w500,
-            ),
+            Html(
+              data: homeCourse.instructor ?? "",
+              shrinkWrap: true,
+              style: {
+                "body": Style(
+                  fontSize: FontSize(14.sp),
+                  fontWeight: FontWeight.w500,
+                  fontFamily: AppConstants.metropolis,
+                ),
+              },
+            )
+            // CustomNewText(
+            //   homeCourse.instructor ?? "",
+            //   fontSize: 14.sp,
+            //   fontWeight: FontWeight.w500,
+            // ),
           ],
         ),
       ],

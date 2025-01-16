@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
+import 'package:sanademy/commonWidget/network_assets.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
@@ -125,38 +127,38 @@ class HomeRecommendedWidget extends StatefulWidget {
 class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
   HomeScreenViewModel homeScreenViewModel = Get.find<HomeScreenViewModel>();
 
-  List<Map<String, dynamic>> courseDetails = [
-    {
-      "image_url": AppImageAssets.image1,
-      "teacher_name": "Devid Jonson",
-      "course_name": "Artificial Intelligence Course",
-      "hours": 12,
-      "minutes": 40,
-      "no_of_lectures": 12
-    },
-    {
-      "image_url": AppImageAssets.image2,
-      "teacher_name": "Devid Jonson",
-      "course_name": "Solar Panel Installation",
-      "hours": 12,
-      "minutes": 40,
-      "no_of_lectures": 12
-    },
-    {
-      "image_url": AppImageAssets.image3,
-      "teacher_name": "Devid Jonson",
-      "course_name": "CCTV Installation",
-      "hours": 12,
-      "minutes": 40,
-      "no_of_lectures": 12
-    },
-  ];
+  // List<Map<String, dynamic>> courseDetails = [
+  //   {
+  //     "image_url": AppImageAssets.image1,
+  //     "teacher_name": "Devid Jonson",
+  //     "course_name": "Artificial Intelligence Course",
+  //     "hours": 12,
+  //     "minutes": 40,
+  //     "no_of_lectures": 12
+  //   },
+  //   {
+  //     "image_url": AppImageAssets.image2,
+  //     "teacher_name": "Devid Jonson",
+  //     "course_name": "Solar Panel Installation",
+  //     "hours": 12,
+  //     "minutes": 40,
+  //     "no_of_lectures": 12
+  //   },
+  //   {
+  //     "image_url": AppImageAssets.image3,
+  //     "teacher_name": "Devid Jonson",
+  //     "course_name": "CCTV Installation",
+  //     "hours": 12,
+  //     "minutes": 40,
+  //     "no_of_lectures": 12
+  //   },
+  // ];
 
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      return homeScreenViewModel.responseStatus.value ==
+      return homeScreenViewModel.homeResponseStatus.value ==
               ResponseStatus.Completed
           ? Column(
               children: [
@@ -168,16 +170,19 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: courseDetails.length,
+                          itemCount: homeScreenViewModel.courses.length,
                           itemBuilder: (context, index) {
-                            final course = courseDetails[index];
+                            final course = homeScreenViewModel.courses[index];
                             return Padding(
                               padding: EdgeInsets.only(bottom: 15.h, top: 10.h),
                               child: GestureDetector(
                                 onTap: () {
                                   Get.to(() => CourseDescriptionScreen(
-                                    courseId: "course_$index", // Example ID for demonstration
-                                    videoUrl: "https://codeyesinfotech.com/sana_academy/public/videos/49041718343861.mp4", // Add a placeholder for video URL
+                                    homeCourse: course,
+                                    courseId: course.id ?? 0, // Example ID for demonstration
+                                    // courseId: "course_$index", // Example ID for demonstration
+                                    // videoUrl: "https://codeyesinfotech.com/sana_academy/public/videos/49041718343861.mp4", // Add a placeholder for video URL
+                                    videoUrl: course.videoUrl ?? "",
                                   ));
                                 },
                                 child: Container(
@@ -205,11 +210,11 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                                 bottom: Radius.circular(16.r),
                                               ),
                                               child:
-                                              Image.asset(
-                                                course["image_url"] ?? '',
-                                                // height: 120.w,
-                                                // width: 120.w,
-                                                fit: BoxFit.contain,
+                                              NetWorkOcToAssets(
+                                                height: 120.h,
+                                                width: Get.width,
+                                               imgUrl: course.banner ?? '',
+                                                boxFit: BoxFit.contain,
                                               ),
 
                                             ),
@@ -242,12 +247,24 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                                     ),
                                                   ),
                                                   SizedBox(width: 8.w),
-                                                  CustomText(
-                                                    course["teacher_name"] ?? '',
-                                                    fontSize: 12.sp,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Colors.grey[700],
+                                                  Html(
+                                                    data:  course.instructor ?? '',
+                                                    shrinkWrap: true,
+                                                    style: {
+                                                      "body": Style(
+                                                        fontSize: FontSize(12.sp),
+                                                        fontWeight: FontWeight.w600,
+                                                        color: Colors.grey[700],
+                                                        fontFamily: AppConstants.metropolis,
+                                                      ),
+                                                    },
                                                   ),
+                                                  // CustomText(
+                                                  //   course.instructor ?? '',
+                                                  //   fontSize: 12.sp,
+                                                  //   fontWeight: FontWeight.w600,
+                                                  //   color: Colors.grey[700],
+                                                  // ),
                                                 ],
                                               ),
                                             ),
@@ -275,7 +292,7 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                                   Row(
                                                     children: [
                                                       CustomText(
-                                                        '123456',
+                                                        (course.price ?? 0).toString(),
                                                         fontSize: 14.sp,
                                                         fontWeight:
                                                         FontWeight
@@ -321,7 +338,7 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                           children: [
                                             SizedBox(height: 6.h),
                                             CustomText(
-                                              course["course_name"] ?? '',
+                                              course.title ?? '',
                                               fontSize: 20.sp,
                                               fontWeight: FontWeight.w600,
                                             ),
@@ -340,7 +357,7 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                                       Icon(Icons.watch_later_outlined, size: 18.sp),
                                                       SizedBox(width: 5.w),
                                                       CustomText(
-                                                        '${course["hours"] ?? 0}h ${course["minutes"] ?? 0}m',
+                                                        '${course.hours ?? 0}h ${course.minutes ?? 0}m',
                                                         fontSize: 12.sp,
                                                         color: Colors.grey[600],
                                                       ),
@@ -362,7 +379,7 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                                       ),
                                                       SizedBox(width: 5.w),
                                                       CustomText(
-                                                        '${course["no_of_lectures"] ?? 0} Lectures',
+                                                        '${course.numberOfLecture ?? 0} Lectures',
                                                         fontSize: 12.sp,
                                                         color: Colors.grey[600],
                                                       ),
@@ -660,6 +677,7 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
               ],
             )
           : const CircularProgressIndicator();
-    });
+    },
+  );
   }
 }

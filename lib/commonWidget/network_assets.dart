@@ -10,6 +10,7 @@ class NetWorkOcToAssets extends StatelessWidget {
   const NetWorkOcToAssets(
       {Key? key,
       this.height = 0,
+      this.width = 0,
       required this.imgUrl,
       this.boxFit,
       this.scale})
@@ -18,11 +19,14 @@ class NetWorkOcToAssets extends StatelessWidget {
   final BoxFit? boxFit;
   final double? scale;
   final double? height;
+  final double? width;
   @override
   Widget build(BuildContext context) {
     return OctoImage(
       fit: boxFit ?? BoxFit.cover,
-      image: NetworkImage("$imgUrl", scale: scale ?? 1),
+      height: height,
+      width: width,
+      image: NetworkImage("$imgUrl", scale: scale ?? 1,),
       // progressIndicatorBuilder: (context, progress) {
       //   return showShimmer(height: height);
       // },

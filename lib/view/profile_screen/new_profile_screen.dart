@@ -75,7 +75,7 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                   Padding(
                     padding: EdgeInsets.only(bottom: 70.h),
                     child: commonUpdateAppBar(
-                      isBack: true,
+                      isBack: false,
                       isLogoRequired: false,
                       replaceLogoText: AppStrings.profile,
                       context: context,

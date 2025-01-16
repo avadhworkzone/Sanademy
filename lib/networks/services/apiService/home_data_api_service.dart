@@ -11,7 +11,7 @@ class HomeDataService{
     final response = await ApiBaseHelper().postHTTP(
       ApiUrls.home,
       params: mapData,
-      showProgress: (isCallApi.value)?false:true,
+      showProgress: (isCallApi.value) ? false : true,
       onError: (error) {
         Utils.validationCheck(message: error.message);
       },
@@ -27,6 +27,32 @@ class HomeDataService{
           Utils.validationCheck(
               message: data.response?.data['message'], isError: true);
         }
+      },
+    );
+    return response;
+  }
+
+
+  ///New APIS
+
+  Future<ResponseModel?> homeScreenRepo() {
+    final response =  ApiBaseHelper().getHTTP(
+      ApiUrls.homeScreen,
+      onError: (error) {
+        Utils.validationCheck(message: error.message);
+      },
+      onSuccess: (data) {
+        // if (data.statusCode! >= 200 && data.statusCode! <= 299) {
+        //   if (kDebugMode) {
+        //     print('success ::: ${data.response?.data['message']}');
+        //   }
+        // } else {
+        //   if (kDebugMode) {
+        //     print('error ::: ${data.response?.data['message']}');
+        //   }
+        //   Utils.validationCheck(
+        //       message: data.response?.data['message'], isError: true);
+        // }
       },
     );
     return response;

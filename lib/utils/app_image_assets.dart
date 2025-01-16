@@ -83,6 +83,8 @@ class AppImageAssets {
       '${AppConstants.baseImageAssetsPath}callIcon.png';
   static const String blankBackground =
       '${AppConstants.baseImageAssetsPath}blanck_Background.png';
+  static const String placeHolder =
+      '${AppConstants.baseImageAssetsPath}place_holder.svg';
   static const String whatAppIcon =
       '${AppConstants.baseImageAssetsPath}whatsappLogo.png';
   static const String telegramIcon =

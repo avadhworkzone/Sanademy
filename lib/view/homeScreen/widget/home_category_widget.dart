@@ -5,11 +5,13 @@ import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/commonWidget/network_assets.dart';
 import 'package:sanademy/networks/model/home_res_model.dart';
+import 'package:sanademy/networks/model/new_api_models/get_home_screen_data_res_model.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/enum_utils.dart';
+import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/homeScreen/sub_screens/categories_screen.dart';
 import 'package:sanademy/view_model/home_screen_view_model.dart';
@@ -127,32 +129,17 @@ import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 
 class HomeCategoryWidget extends StatefulWidget {
-  RxList<Categories> categories;
-  HomeCategoryWidget({super.key, required this.categories});
+  HomeCategoryWidget({
+    super.key,
+  });
 
   @override
   State<HomeCategoryWidget> createState() => _HomeCategoryWidgetState();
 }
 
 class _HomeCategoryWidgetState extends State<HomeCategoryWidget> {
-  int selectedIndex = 0; // To track the selected category
-
-  // final List<Map<String, dynamic>> categories = [
-  //   {
-  //     "name": "Featured",
-  //     "icon": AppImageAssets.featured,
-  //     "isSelected": true,
-  //   },
-  //   {
-  //     "name": "Technology",
-  //     "icon": AppImageAssets.technology,
-  //   },
-  //   {
-  //     "name": "Media & Arts",
-  //     "icon": AppImageAssets.mediaArts,
-  //   },
-  //   // Add more categories as needed
-  // ];
+  int selectedIndex = 0;
+  HomeScreenViewModel homeScreenViewModel = Get.put(HomeScreenViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -161,9 +148,9 @@ class _HomeCategoryWidgetState extends State<HomeCategoryWidget> {
       child: ListView.builder(
         padding: EdgeInsets.zero,
         scrollDirection: Axis.horizontal,
-        itemCount: widget.categories.length,
+        itemCount: homeScreenViewModel.categoriesData.length,
         itemBuilder: (context, index) {
-          final category = widget.categories[index];
+          final category = homeScreenViewModel.categoriesData[index];
           final isSelected = selectedIndex == index;
 
           return GestureDetector(
@@ -194,18 +181,30 @@ class _HomeCategoryWidgetState extends State<HomeCategoryWidget> {
                           isSelected ? AppColors.yellow700 : AppColors.whitef7,
                     ),
                     child: Image.network(
-                      widget.categories[index].image ?? "",
+                      homeScreenViewModel.categoriesData[index].image ?? "",
                       height: 20.sp,
                       width: 20.sp,
                       fit: BoxFit.contain,
                       color: isSelected
                           ? AppColors.red00 // Selected background
                           : AppColors.black,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: LocalAssets(
+                            height: 20.sp,
+                            width: 20.sp,
+                            imagePath: AppImageAssets.noImageFound,
+                          ),
+                        );
+                      },
                     ),
                   ),
                   SizedBox(width: 8.w),
                   CustomText(
-                    widget.categories[index].name ?? "",
+                    homeScreenViewModel.categoriesData[index].name ?? "",
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
                     color: isSelected

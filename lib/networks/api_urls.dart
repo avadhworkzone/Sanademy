@@ -4,7 +4,8 @@ class ApiUrls {
   /// ----------------- BASE URL START -----------------------
   // static const String baseURL = 'https://reqres.in';
   static const String baseURL =
-      'https://codeyesinfotech.com/sana_academy/public/api/';
+      'https://sanademy.net/sanacademy/';
+      // 'https://codeyesinfotech.com/sana_academy/public/api/';
 
   static Map<String, String> getHeaders() {
     final headers = {
@@ -40,4 +41,9 @@ class ApiUrls {
   static const String getCertificate = 'get_certificates';
   static const String requestHardCopy = 'request_hard_copy';
   static const String deleteUser = 'delete_user';
+
+
+
+  ///NEW APIS
+  static const String homeScreen = 'home-page.php';
 }

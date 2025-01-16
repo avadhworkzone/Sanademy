@@ -8,6 +8,7 @@ import 'package:sanademy/commonWidget/commom_textfield.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/commonWidget/network_assets.dart';
 import 'package:sanademy/networks/model/home_res_model.dart';
+import 'package:sanademy/networks/model/new_api_models/get_home_screen_data_res_model.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
@@ -309,9 +310,8 @@ final List<Map<String, dynamic>> courses = [
 
 class MyCoursesWidget extends StatefulWidget {
   Axis? scrollDirection;
-  RxList<Courses> courses;
   MyCoursesWidget(
-      {Key? key, this.scrollDirection = Axis.horizontal, required this.courses})
+      {Key? key, this.scrollDirection = Axis.horizontal})
       : super(key: key);
 
   @override
@@ -319,6 +319,8 @@ class MyCoursesWidget extends StatefulWidget {
 }
 
 class _MyCoursesWidgetState extends State<MyCoursesWidget> {
+  HomeScreenViewModel homeScreenViewModel = Get.put(HomeScreenViewModel());
+
   late Timer _timer;
 
   @override
@@ -366,10 +368,10 @@ class _MyCoursesWidgetState extends State<MyCoursesWidget> {
             height: 150.h,
             child: ListView.builder(
               scrollDirection: widget.scrollDirection ?? Axis.horizontal,
-              itemCount: widget.courses.length,
+              itemCount: homeScreenViewModel.courses.length,
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                final course = widget.courses[index];
+                final course = homeScreenViewModel.courses[index];
                 return Container(
                   width: 300.w,
                   margin: EdgeInsets.only(right: 16.w),
