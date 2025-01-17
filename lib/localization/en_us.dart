@@ -188,6 +188,7 @@ Map<String, String> en = {
 
   ///New
   AppStrings.logIn: 'Log In',
+  AppStrings.togetherWeLearn: 'Together; We Learn, Grow, and Excel.',
   AppStrings.enterYourPassword: 'Enter your password',
   AppStrings.loginOrRegisterToEnrollThisCourse:
       'Login or Register to enroll this course',
@@ -228,7 +229,10 @@ Map<String, String> en = {
   AppStrings.telegram: 'Telegram',
   AppStrings.takeAPhoto: 'Take a Photo',
   AppStrings.chooseFromGallery: 'Choose from Gallery',
+  AppStrings.hey: 'Hey,',
+  AppStrings.download: 'Download',
   AppStrings.whatsApp: 'WhatsApp',
+  AppStrings.theCourseIncludes: 'The course includes:',
 
   ///-------------///
   AppStrings.myBalance: 'My Balance',

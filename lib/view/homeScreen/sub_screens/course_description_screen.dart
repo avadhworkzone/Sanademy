@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sanademy/commonWidget/common_appbar.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/networks/model/new_api_models/get_home_screen_data_res_model.dart';
@@ -12,13 +11,8 @@ import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
-import 'package:sanademy/utils/enum_utils.dart';
 import 'package:sanademy/utils/local_assets.dart';
-import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
-import 'package:sanademy/view/auth/sign_up_screen.dart';
-import 'package:sanademy/view/dialog/payment_option_dialog.dart';
-import 'package:sanademy/view/homeScreen/sub_screens/lectures_videos_screen.dart';
 import 'package:sanademy/view_model/bottom_bar_view_model.dart';
 import 'package:sanademy/view_model/description_view_model.dart';
 import 'package:sanademy/view_model/home_screen_view_model.dart';
@@ -27,10 +21,11 @@ import 'package:sanademy/view_model/lectures_videos_view_model.dart';
 import 'select_payment_method_screen.dart';
 
 class CourseDescriptionScreen extends StatefulWidget {
-   CourseDescriptionScreen({
+  CourseDescriptionScreen({
     super.key,
     required this.homeCourse,
-    required this.videoUrl, required this.courseId,
+    required this.videoUrl,
+    required this.courseId,
   });
 
   final int courseId;
@@ -56,7 +51,7 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
 
   descriptionApiCall() async {
     // await descriptionViewModel.courseDetailViewModel(courseId: widget.courseId);
-    descriptionViewModel.chewiePlayer(widget.homeCourse.videoUrl ?? "");
+    await descriptionViewModel.chewiePlayer(widget.homeCourse.videoUrl ?? "");
   }
 
   @override
@@ -84,10 +79,8 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                       alignment: Alignment.topCenter,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(AppImageAssets
-                              .appLogo), // Replace with your image path
-                          fit: BoxFit
-                              .cover, // Adjusts how the image fits the container
+                          image: AssetImage(AppImageAssets.appLogo),
+                          fit: BoxFit.cover,
                         ),
                       ),
                       child: Padding(
@@ -97,31 +90,43 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                           fit: StackFit.loose,
                           children: [
                             descriptionViewModel.isLoader.value == true
-                                ? const Center(
+                                ?  Center(
                                     child: SizedBox(
-                                        // height: 50.h,
-                                        // width: 50.h,
-                                        child: LocalAssets(
-                                      imagePath: AppImageAssets.sanademaylogo,
-                                      imgColor: AppColors.primaryColor,
-                                    ),
+                                      height: 263.sp,
+                                      width: double.infinity,
+                                      child: const LocalAssets(
+                                        imagePath: AppImageAssets.sanademaylogo,
+                                        imgColor: AppColors.primaryColor,
+                                      ),
                                     ),
                                   )
-                                : SizedBox(
-                                    // height: 300.h,
-                                    // width: 430.w,
+                                :  SizedBox(
+                                    // height: 263.sp,
+                                    // width: Get.width,
                                     child: AspectRatio(
                                       aspectRatio: descriptionViewModel
                                           .chewieControllers
                                           .videoPlayerController
                                           .value
                                           .aspectRatio,
+
                                       child: Chewie(
                                         controller: descriptionViewModel
                                             .chewieControllers,
+
                                       ),
                                     ),
                                   ),
+                            // SizedBox(
+                            //   height: 263.sp, // Desired height for the video
+                            //   width: double.infinity, // Full-screen width
+                            //   child: Chewie(
+                            //     controller: descriptionViewModel.chewieControllers,
+                            //   ),
+                            // ),
+
+
+
                             Padding(
                               padding: EdgeInsets.only(top: 8.w),
                               child: Row(
@@ -249,7 +254,9 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                                     text: TextSpan(
                                       children: [
                                         TextSpan(
-                                          text:  widget.homeCourse.price.toString() ?? "", // Main amount
+                                          text: widget.homeCourse.price
+                                                  .toString() ??
+                                              "", // Main amount
                                           style: TextStyle(
                                             fontSize: 16.sp,
                                             color: AppColors.blue34,
@@ -334,7 +341,7 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                           ),
                           SizeConfig.sW10,
                           CustomText(
-                            'Download',
+                            AppStrings.download,
                             color: AppColors.borderColor,
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w600,
@@ -357,8 +364,8 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            CustomNewText(
-                              "The course includes:",
+                            CustomText(
+                              AppStrings.theCourseIncludes,
                               fontWeight: FontWeight.w700,
                               fontSize: 16.sp,
                             ),
@@ -384,6 +391,7 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                     SizeConfig.sH15,
 
                     /// Requirements Section
+                    if((widget.homeCourse.requirements?.isNotEmpty ??  false) || (widget.homeCourse.whoThisCourseIsFor?.isNotEmpty ??  false) || (widget.homeCourse.whatWillYouLearn?.isNotEmpty ??  false))
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20.w),
                       child: Container(
@@ -396,24 +404,26 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(height: 10.h),
+                              if(widget.homeCourse.requirements?.isNotEmpty ??  false)
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                                 child: _buildExpandableSection(
-                                  title: "Requirements",
-                                  content:Html(
-                                    data: widget.homeCourse.requirements ?? "",
-                                    shrinkWrap: true,
-                                    style: {
-                                      "body": Style(
-                                        fontSize: FontSize(14.sp),
-                                        fontWeight: FontWeight.w500,
-                                        color: AppColors.grey73,
-                                        fontFamily: AppConstants.metropolis,
-                                      ),
-                                    },
-                                  )
+                                    title: AppStrings.requirements,
+                                    content: Html(
+                                      data:
+                                          widget.homeCourse.requirements ?? "",
+                                      shrinkWrap: true,
+                                      style: {
+                                        "body": Style(
+                                          fontSize: FontSize(14.sp),
+                                          fontWeight: FontWeight.w500,
+                                          color: AppColors.grey73,
+                                          fontFamily: AppConstants.metropolis,
+                                        ),
+                                      },
+                                    )
 
-                                  /* Column(
+                                    /* Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -425,25 +435,30 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                                           "How to optimize daily marketing routine"),
                                     ],
                                   ),*/
-                                ),
+                                    ),
                               ),
-                              const Divider(color: AppColors.greyE0),
+                              if ((widget.homeCourse.requirements?.isNotEmpty ?? false) &&
+                                  ((widget.homeCourse.whatWillYouLearn?.isNotEmpty ?? false) ||
+                                      (widget.homeCourse.whoThisCourseIsFor?.isNotEmpty ?? false)))                              const Divider(color: AppColors.greyE0),
+                              if(widget.homeCourse.whatWillYouLearn?.isNotEmpty ??  false)
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                                 child: _buildExpandableSection(
-                                  title: "What will you learn?",
-                                  content:Html(
-                                    data: widget.homeCourse.whatWillYouLearn ?? "",
-                                    shrinkWrap: true,
-                                    style: {
-                                      "body": Style(
-                                        fontSize: FontSize(14.sp),
-                                        fontWeight: FontWeight.w500,
-                                        color: AppColors.grey73,
-                                        fontFamily: AppConstants.metropolis,
-                                      ),
-                                    },
-                                  ) /*Column(
+                                    title: AppStrings.whatWillYouLearn,
+                                    content: Html(
+                                      data:
+                                          widget.homeCourse.whatWillYouLearn ??
+                                              "",
+                                      shrinkWrap: true,
+                                      style: {
+                                        "body": Style(
+                                          fontSize: FontSize(14.sp),
+                                          fontWeight: FontWeight.w500,
+                                          color: AppColors.grey73,
+                                          fontFamily: AppConstants.metropolis,
+                                        ),
+                                      },
+                                    ) /*Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -454,25 +469,29 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                                           "Build your own AI-powered applications"),
                                     ],
                                   ),*/
-                                ),
+                                    ),
                               ),
+                              if(widget.homeCourse.whatWillYouLearn?.isNotEmpty ??  false)
                               const Divider(color: AppColors.greyE0),
+                              if(widget.homeCourse.whoThisCourseIsFor?.isNotEmpty ??  false)
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                                 child: _buildExpandableSection(
-                                  title: "Who this course is for?",
-                                  content:Html(
-                                    data: widget.homeCourse.whoThisCourseIsFor ?? "",
-                                    shrinkWrap: true,
-                                    style: {
-                                      "body": Style(
-                                        fontSize: FontSize(14.sp),
-                                        fontWeight: FontWeight.w500,
-                                        color: AppColors.grey73,
-                                        fontFamily: AppConstants.metropolis,
-                                      ),
-                                    },
-                                  ) /* Column(
+                                    title: AppStrings.whoThisCourseIsFor,
+                                    content: Html(
+                                      data: widget
+                                              .homeCourse.whoThisCourseIsFor ??
+                                          "",
+                                      shrinkWrap: true,
+                                      style: {
+                                        "body": Style(
+                                          fontSize: FontSize(14.sp),
+                                          fontWeight: FontWeight.w500,
+                                          color: AppColors.grey73,
+                                          fontFamily: AppConstants.metropolis,
+                                        ),
+                                      },
+                                    ) /* Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -484,8 +503,9 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                                           "Anyone curious about AI applications"),
                                     ],
                                   ),*/
-                                ),
+                                    ),
                               ),
+                              if(widget.homeCourse.whoThisCourseIsFor?.isNotEmpty ??  false)
                               SizedBox(height: 10.h),
                             ],
                           )),
@@ -499,7 +519,7 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomNewText(
-                            "Course content",
+                            AppStrings.courseContent,
                             fontWeight: FontWeight.w700,
                             fontSize: 16.sp,
                           ),
@@ -690,14 +710,21 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                     SizeConfig.sH15,
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20.w),
-                      child: CustomUpdateBtn(
+                      child:CustomUpdateBtn(
                         onTap: () {
                           showEnrollmentDialog(context);
                         },
                         title: AppStrings.enrollTheCourse,
                         radius: 15,
                         fontSize: 16.sp,
-                      ),
+                      ), /*CustomUpdateBtn(
+                        onTap: () {
+                          showEnrollmentDialog(context);
+                        },
+                        title: AppStrings.enrollTheCourse,
+                        radius: 15,
+                        fontSize: 16.sp,
+                      ),*/
                     ),
 
                     SizeConfig.sH40,
@@ -719,7 +746,7 @@ void showEnrollmentDialog(BuildContext context) {
         child: Center(
           child: Container(
             width:
-            MediaQuery.of(context).size.width * 0.90, // Almost full width
+                MediaQuery.of(context).size.width * 0.90, // Almost full width
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(12),
@@ -797,7 +824,8 @@ void showEnrollmentDialog(BuildContext context) {
                     ),
                     SizedBox(height: 20.h),
                     Container(
-                      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
+                      padding: EdgeInsets.symmetric(
+                          vertical: 10.h, horizontal: 15.w),
                       decoration: BoxDecoration(
                         color: AppColors.greyF7,
                         border: Border.all(color: AppColors.greyE4),
@@ -1187,7 +1215,7 @@ Widget _buildExpandableSection(
       childrenPadding: EdgeInsets.zero,
       tilePadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
       initiallyExpanded: true,
-      title: CustomNewText(
+      title: CustomText(
         title,
         fontWeight: FontWeight.w600,
         fontSize: 14.sp,
@@ -1330,3 +1358,4 @@ class CircularProgressWithText extends StatelessWidget {
     );
   }
 }
+

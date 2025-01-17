@@ -45,6 +45,7 @@ dependencies:
   flutter_native_splash:
   easy_stepper: ^0.8.5+1
   percent_indicator: ^4.2.4
+  shimmer: ^3.0.0
 
 
 dev_dependencies:

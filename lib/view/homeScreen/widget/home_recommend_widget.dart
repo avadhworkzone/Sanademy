@@ -8,6 +8,7 @@ import 'package:sanademy/commonWidget/network_assets.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_image_assets.dart';
+import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/enum_utils.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
@@ -166,7 +167,7 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                     ? SingleChildScrollView(
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20.w),
-                        child:ListView.builder(
+                        child: ListView.builder(
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
@@ -211,10 +212,10 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                               ),
                                               child:
                                               NetWorkOcToAssets(
-                                                height: 120.h,
+                                                height: 185.h,
                                                 width: Get.width,
-                                               imgUrl: course.banner ?? '',
-                                                boxFit: BoxFit.contain,
+                                                imgUrl: course.banner ?? '',
+                                                boxFit: BoxFit.cover,
                                               ),
 
                                             ),
@@ -223,7 +224,8 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                             bottom: 0.h,
                                             left: 20.w,
                                             child: Container(
-                                              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                                              padding: EdgeInsets.only(left: 7.w, right: 2.w),
+                                              // padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 0.h),
                                               decoration: BoxDecoration(
                                                 color: Colors.white,
                                                 borderRadius: BorderRadius.circular(8),
@@ -241,12 +243,12 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                                     borderRadius: BorderRadius.circular(30) ,
                                                     child: Image.asset(
                                                       AppImageAssets.teacherImage,
-                                                      height: 25.sp,
-                                                      width: 25.sp,
+                                                      height: 20.sp,
+                                                      width: 20.sp,
                                                       fit: BoxFit.contain,
                                                     ),
                                                   ),
-                                                  SizedBox(width: 8.w),
+                                                  // SizedBox(width: 1.w),
                                                   Html(
                                                     data:  course.instructor ?? '',
                                                     shrinkWrap: true,
@@ -254,7 +256,7 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                                       "body": Style(
                                                         fontSize: FontSize(12.sp),
                                                         fontWeight: FontWeight.w600,
-                                                        color: Colors.grey[700],
+                                                        color: AppColors.blue34,
                                                         fontFamily: AppConstants.metropolis,
                                                       ),
                                                     },
@@ -270,7 +272,7 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                             ),
                                           ),
                                           Positioned(
-                                            bottom: 3.h,
+                                            bottom: 0.h,
                                             right: 20.w,
                                             child: Container(
                                               padding: EdgeInsets.symmetric(
@@ -302,7 +304,7 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                                         fontSize: 14.sp,
                                                         fontWeight:
                                                         FontWeight
-                                                            .w500,
+                                                            .w400,
                                                       ),
                                                     ],
                                                   ),
@@ -340,51 +342,128 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                             CustomText(
                                               course.title ?? '',
                                               fontSize: 20.sp,
+                                              letterSpacing: -1.sp,
                                               fontWeight: FontWeight.w600,
                                             ),
                                             SizedBox(height: 6.h),
                                             Row(
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
-                                                Container(
-                                                  padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(15),
-                                                    border: Border.all(color: AppColors.grey74.withOpacity(0.1)),
-                                                  ),
-                                                  child: Row(
-                                                    children: [
-                                                      Icon(Icons.watch_later_outlined, size: 18.sp),
-                                                      SizedBox(width: 5.w),
-                                                      CustomText(
-                                                        '${course.hours ?? 0}h ${course.minutes ?? 0}m',
-                                                        fontSize: 12.sp,
-                                                        color: Colors.grey[600],
+                                                Row(
+                                                  children: [
+                                                    Container(
+                                                      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(15),
+                                                        border: Border.all(color: AppColors.greyF7),
                                                       ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Container(
-                                                  padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(15),
-                                                    border: Border.all(color: AppColors.grey74.withOpacity(0.1)),
-                                                  ),
-                                                  child: Row(
-                                                    children: [
-                                                      LocalAssets(
-                                                        imagePath: AppImageAssets.bookOutlined,
-                                                        height: 18.sp,
-                                                        width: 18.sp,
+                                                      child: Row(
+                                                        children: [
+                                                          LocalAssets(
+                                                            imagePath: AppImageAssets.clock,
+                                                            height: 14.sp,
+                                                            width: 14.sp,
+                                                          ),
+                                                          SizedBox(width: 5.w),
+                                                          RichText(
+                                                            text: TextSpan(
+                                                              style: TextStyle(
+                                                                fontSize: 12.sp,
+                                                                color: AppColors.grey74,
+                                                              ),
+                                                              children: [
+                                                                TextSpan(
+                                                                  text: '${course.hours ?? 0}',
+                                                                  style: TextStyle(
+                                                                    fontSize: 12.sp,
+                                                                    color:AppColors.blue34,
+                                                                    fontFamily: AppConstants.metropolis,
+                                                                    fontWeight: FontWeight.w400,
+                                                                  ),
+                                                                ),
+                                                                TextSpan(
+                                                                  text: 'h ',
+                                                                  style: TextStyle(
+                                                                    fontSize: 12.sp,
+                                                                    color: AppColors.grey74,
+                                                                    fontFamily: AppConstants.metropolis,
+                                                                    fontWeight: FontWeight.w400,
+                                                                  ),
+                                                                ),
+                                                                TextSpan(
+                                                                  text: '${course.minutes ?? 0}',
+                                                                  style: TextStyle(
+                                                                    fontSize: 12.sp,
+                                                                    color:AppColors.blue34,
+                                                                    fontFamily: AppConstants.metropolis,
+                                                                    fontWeight: FontWeight.w400,
+                                                                  ),
+                                                                ),
+                                                                TextSpan(
+                                                                  text: 'm',
+                                                                  style: TextStyle(
+                                                                    fontSize: 12.sp,
+                                                                    color:AppColors.grey74,
+                                                                    fontFamily: AppConstants.metropolis,
+                                                                    fontWeight: FontWeight.w400,
+
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          )
+
+                                                        ],
                                                       ),
-                                                      SizedBox(width: 5.w),
-                                                      CustomText(
-                                                        '${course.numberOfLecture ?? 0} Lectures',
-                                                        fontSize: 12.sp,
-                                                        color: Colors.grey[600],
+                                                    ),
+                                                    SizedBox(width: 10.w),
+                                                    Container(
+                                                      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(15),
+                                                        border: Border.all(color: AppColors.greyF7),
                                                       ),
-                                                    ],
-                                                  ),
+                                                      child: Row(
+                                                        children: [
+                                                          LocalAssets(
+                                                            imagePath: AppImageAssets.bookOutlined,
+                                                            height: 14.sp,
+                                                            width: 14.sp,
+                                                          ),
+                                                          SizedBox(width: 5.w),
+                                                          RichText(
+                                                            text: TextSpan(
+                                                              style: TextStyle(
+                                                                fontSize: 12.sp,
+                                                                color: AppColors.grey74,
+                                                              ),
+                                                              children: [
+                                                                TextSpan(
+                                                                  text: '${course.numberOfLecture ?? 0} ',
+                                                                  style: TextStyle(
+                                                                    fontSize: 12.sp,
+                                                                    color: AppColors.blue34,
+                                                                    fontFamily: AppConstants.metropolis,
+                                                                    fontWeight: FontWeight.w400,
+                                                                  ),
+                                                                ),
+                                                                TextSpan(
+                                                                  text: AppStrings.courseContentLectures.tr,
+                                                                  style: TextStyle(
+                                                                    fontSize: 12.sp,
+                                                                    color: AppColors.grey74,
+                                                                    fontFamily: AppConstants.metropolis,
+                                                                    fontWeight: FontWeight.w400,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                                 LocalAssets(
                                                   imagePath: AppImageAssets.playIcon,
@@ -667,7 +746,7 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                     : Padding(
                         padding: EdgeInsets.only(top: 40.h),
                         child: CustomText(
-                          'No Data Found',
+                          AppStrings.noDataFound,
                             fontSize: 20.sp,
                             fontWeight: FontWeight.w700,
                             color: Colors.black,

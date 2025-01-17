@@ -195,7 +195,7 @@ class AppStrings {
   static String english = 'English';
   static String kurdish = 'Kurdish';
   static String welcomeBack = 'Welcome Back';
-  static String whatDoYouWantToLearnToday = 'What do you want\nto learn today?';
+  static String togetherWeLearn = 'Together; We Learn, Grow, and Excel.';
   static String myCourses = 'My Courses';
   static String sanaAcademyAboutUsDes =
       'Sana Academy is an online and in-person educational institution dedicated to empowering the youth in Iraq. We offer affordable courses and access to top tutors, helping individuals shape their lives through quality education. Our mission is to make learning accessible and transformative for the community. ';
@@ -255,7 +255,11 @@ class AppStrings {
   static String enrollTheCourse = 'Enroll The Course';
   static String payNow = 'Pay Now';
   static String whatsApp = 'WhatsApp';
+  static String theCourseIncludes = 'The course includes:';
   static String telegram = 'Telegram';
   static String takeAPhoto = 'Take a Photo';
   static String chooseFromGallery = 'Choose from Gallery';
+  static String hey = 'Hey,';
+  static String download = 'Download';
+
 }

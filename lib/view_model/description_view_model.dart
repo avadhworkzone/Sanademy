@@ -1,4 +1,5 @@
 import 'package:chewie/chewie.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/networks/api_base_helper.dart';
 import 'package:sanademy/networks/api_keys.dart';
@@ -6,8 +7,12 @@ import 'package:sanademy/networks/model/course_detail_res_model.dart';
 import 'package:sanademy/networks/model/course_enroll_res_model.dart';
 import 'package:sanademy/networks/services/apiService/course_detail_api_service.dart';
 import 'package:sanademy/networks/services/apiService/course_enroll_api_service.dart';
+import 'package:sanademy/utils/app_colors.dart';
+import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_snackbar.dart';
 import 'package:sanademy/utils/enum_utils.dart';
+import 'package:sanademy/utils/local_assets.dart';
+import 'package:sanademy/view/homeScreen/sub_screens/course_description_screen.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -29,16 +34,38 @@ class DescriptionViewModel extends GetxController {
 
   /// CHEWIE VIDEO PLAYER
   Future<void> chewiePlayer(String videoUrl) async {
-    var videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(
+     videoPlayerController =VideoPlayerController.networkUrl(Uri.parse(
       videoUrl,
-    ));
+    ), );
     await videoPlayerController.initialize();
+    // chewieControllers = ChewieController(
+    //     videoPlayerController: videoPlayerController,
+    //     // aspectRatio: 16 / 9,
+    //     looping: true,
+    //     autoInitialize: true,
+    //     showOptions: false);
     chewieControllers = ChewieController(
-        videoPlayerController: videoPlayerController,
-        // aspectRatio: 16 / 9,
-        looping: true,
-        autoInitialize: true,
-        showOptions: false);
+      videoPlayerController: videoPlayerController,
+      looping: true,
+      autoInitialize: true,
+      showOptions: false,
+      materialProgressColors: ChewieProgressColors(
+        playedColor: AppColors.borderColor,
+        handleColor: AppColors.borderColor,
+        bufferedColor: Colors.white, // Buffered part color
+        backgroundColor: Colors.white, // Remaining part color
+      ),
+
+      cupertinoProgressColors: ChewieProgressColors(
+        playedColor: AppColors.borderColor,
+        handleColor: AppColors.borderColor,
+        bufferedColor: Colors.white,
+        backgroundColor: Colors.white,
+
+      ),
+
+    );
+
     Future.delayed(const Duration(seconds: 1), () {
       isLoader.value = false;
     });

@@ -427,27 +427,27 @@ class _MyCoursesWidgetState extends State<MyCoursesWidget> {
                               // ),
                             ],
                           ),
-                          Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              // SizedBox(
-                              //   width: 38.w,
-                              //   height: 38.w,
-                              //   child: CircularProgressIndicator(
-                              //     value: course["progress"] / 100,
-                              //     color: AppColors.yellow,
-                              //     backgroundColor: AppColors.white,
-                              //     strokeWidth: 4.w,
-                              //   ),
-                              // ),
-                              // CustomText(
-                              //   "${course["progress"]}%",
-                              //   color: AppColors.white,
-                              //   fontWeight: FontWeight.w600,
-                              //   fontSize: 10.sp,
-                              // ),
-                            ],
-                          ),
+                          // Stack(
+                          //   alignment: Alignment.center,
+                          //   children: [
+                          //     // SizedBox(
+                          //     //   width: 38.w,
+                          //     //   height: 38.w,
+                          //     //   child: CircularProgressIndicator(
+                          //     //     value: course["progress"] / 100,
+                          //     //     color: AppColors.yellow,
+                          //     //     backgroundColor: AppColors.white,
+                          //     //     strokeWidth: 4.w,
+                          //     //   ),
+                          //     // ),
+                          //     // CustomText(
+                          //     //   "${course["progress"]}%",
+                          //     //   color: AppColors.white,
+                          //     //   fontWeight: FontWeight.w600,
+                          //     //   fontSize: 10.sp,
+                          //     // ),
+                          //   ],
+                          // ),
                         ],
                       ),
                       SizedBox(height: 13.h),

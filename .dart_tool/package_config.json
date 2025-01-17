@@ -644,6 +644,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "shimmer",
+      "rootUri": "file:///Users/avadhkatrodiya/.pub-cache/hosted/pub.dev/shimmer-3.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///Users/avadhkatrodiya/Downloads/flutter3.24.1/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -890,7 +896,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2025-01-16T12:13:03.304894Z",
+  "generated": "2025-01-17T12:04:56.270485Z",
   "generator": "pub",
   "generatorVersion": "3.5.1",
   "flutterRoot": "file:///Users/avadhkatrodiya/Downloads/flutter3.24.1",

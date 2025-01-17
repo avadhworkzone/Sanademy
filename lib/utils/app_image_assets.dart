@@ -61,6 +61,8 @@ class AppImageAssets {
       '${AppConstants.baseImageAssetsPath}recommendedBgImg.png';
   static const String bookOutlined =
       '${AppConstants.baseIconAssetsPath}book_outlined.png';
+  static const String clock =
+      '${AppConstants.baseIconAssetsPath}clock.png';
   static const String profileImage =
       '${AppConstants.baseImageAssetsPath}profileImage.png';
   static const String bookIcon = '${AppConstants.baseIconAssetsPath}book.png';

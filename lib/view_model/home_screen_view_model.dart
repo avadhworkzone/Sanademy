@@ -116,6 +116,8 @@ class HomeScreenViewModel extends GetxController {
   Rx<ResponseStatus> homeResponseStatus = ResponseStatus.INITIAL.obs;
 
   Future<void> getHomeScreenData() async {
+    homeResponseStatus.value = ResponseStatus.Loading;
+
     final response = await HomeDataService().homeScreenRepo();
 
     if (response != null && checkStatusCode(response.statusCode ?? 0)) {

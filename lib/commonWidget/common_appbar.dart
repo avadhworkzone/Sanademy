@@ -269,6 +269,108 @@ commonUpdateAppBar(
   );
 }
 
+commonUpdateShimmerAppBar(
+    {required BuildContext context,
+    Widget? actionWidget,
+    bool? isBack,
+    bool? isHomeScreen,
+    bool? isLogoRequired,
+    bool? isOnlyTitleRequired,
+    Widget? otherWidget,
+    Widget? homeScreenLeading,
+    String? title,
+    VoidCallback? onTap,
+    String? replaceLogoText,
+    double? paddingLeft}) {
+  return Container(
+    width: Get.width,
+    alignment: Alignment.topCenter,
+    decoration: BoxDecoration(
+      image: DecorationImage(
+        image: AssetImage(AppImageAssets.appLogo),
+        fit: BoxFit.cover,
+      ),
+    ),
+    child: Padding(
+      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizeConfig.sH8,
+          Padding(
+            padding: EdgeInsets.only(left: paddingLeft ?? 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                (isBack ?? false)
+                    ? InkWell(
+                        onTap: onTap ??
+                            () {
+                              Get.back();
+                            },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 13.w, vertical: 13.w),
+                          // alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              color: AppColors.white.withOpacity(0.2),
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  color: AppColors.white.withOpacity(0.5))),
+                          child: Icon(
+                              weight: 10.w,
+                              size: 12.w,
+                              Icons.arrow_back_ios_new,
+                              color: AppColors.white),
+                        ),
+                      )
+                    : const SizedBox(),
+                if (isOnlyTitleRequired ?? false)
+                  Center(
+                    child: CustomText(
+                      title ?? "",
+                      color: AppColors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20.sp,
+                    ),
+                  ),
+                (isHomeScreen ?? false)
+                    ? (homeScreenLeading ?? const SizedBox())
+                    : const SizedBox(),
+                // if (isLogoRequired ?? true)
+                //   Flexible(
+                //     child: LocalAssets(
+                //       imagePath: 'assets/images/sanademyLogo.png',
+                //       scaleSize: 4.w,
+                //     ),
+                //   ),
+                isLogoRequired == true
+                    ? Flexible(
+                        child: Center(
+                          child: LocalAssets(
+                            imagePath: 'assets/images/sanademyLogo.png',
+                            scaleSize: 4.w,
+                          ),
+                        ),
+                      )
+                    : CustomText(
+                        replaceLogoText ?? "",
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.white,
+                        fontSize: 20.sp,
+                      ),
+                actionWidget ?? const SizedBox()
+              ],
+            ),
+          ),
+          otherWidget ?? const SizedBox()
+        ],
+      ),
+    ),
+  );
+}
+
 commonOnlyTitleAppBar(
     {required BuildContext context,
     Widget? actionWidget,

@@ -16,6 +16,7 @@ import 'package:sanademy/view/homeScreen/widget/home_slider_widget.dart';
 import 'package:sanademy/view/menu_screen/menu_screen.dart';
 import 'package:sanademy/view/notificationScreen/notification_screen_new.dart';
 import 'package:sanademy/view_model/home_screen_view_model.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../utils/size_config_utils.dart';
 
@@ -82,11 +83,23 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  LocalAssets(
-                                    imagePath: AppImageAssets.infoIcon,
-                                    height: 24.sp,
-                                    width: 24.sp,
-                                  ),
+                                  homeScreenViewModel
+                                              .homeResponseStatus.value ==
+                                          ResponseStatus.Loading
+                                      ? Shimmer.fromColors(
+                                          baseColor: Colors.grey[300]!,
+                                          highlightColor: Colors.grey[100]!,
+                                          child: LocalAssets(
+                                            imagePath: AppImageAssets.infoIcon,
+                                            height: 24.sp,
+                                            width: 24.sp,
+                                          ),
+                                        )
+                                      : LocalAssets(
+                                          imagePath: AppImageAssets.infoIcon,
+                                          height: 24.sp,
+                                          width: 24.sp,
+                                        ),
                                   GestureDetector(
                                     onTap: () {
                                       Get.to(
@@ -145,7 +158,8 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                                   fontSize: 12.sp,
                                 ),
                                 CustomText(
-                                  'Hey, Kuproy Jane 💥',
+                                  // homeScreenViewModel.userData.value?.name ?? "",
+                                  '${AppStrings.hey.tr} ${homeScreenViewModel.userData.value?.name ?? ""} 💥',
                                   color: AppColors.white,
                                   fontWeight: FontWeight.w500,
                                   fontSize: 14.sp,
@@ -153,9 +167,9 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                                 SizeConfig.sH15,
                                 Padding(
                                   padding:
-                                      EdgeInsets.symmetric(horizontal: 70.w),
+                                      EdgeInsets.symmetric(horizontal: 40.w),
                                   child: CustomText(
-                                    AppStrings.whatDoYouWantToLearnToday,
+                                    AppStrings.togetherWeLearn,
                                     color: AppColors.white,
                                     fontWeight: FontWeight.w600,
                                     fontSize: 32.sp,
@@ -191,8 +205,32 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                           const HomeRecommendedWidget(),
                         ],
                       ),
-                    )
-                  : const Material(),
+                    ) : const SizedBox()
+                  // : Shimmer.fromColors(
+                  //     baseColor: Colors.grey[300]!,
+                  //     highlightColor: Colors.grey[100]!,
+                  //     child: Column(
+                  //       children: [
+                  //         Container(
+                  //           width: double.infinity,
+                  //           height: 200.h,
+                  //           color: Colors.white,
+                  //         ),
+                  //         SizeConfig.sH15,
+                  //         Container(
+                  //           width: double.infinity,
+                  //           height: 200.h,
+                  //           color: Colors.white,
+                  //         ),
+                  //         SizeConfig.sH15,
+                  //         Container(
+                  //           width: double.infinity,
+                  //           height: 200.h,
+                  //           color: Colors.white,
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
         ));
   }
 }

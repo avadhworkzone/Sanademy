@@ -190,9 +190,8 @@ class _HomeCategoryWidgetState extends State<HomeCategoryWidget> {
                           : AppColors.black,
                       errorBuilder: (context, error, stackTrace) {
                         return Container(
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                          ),
+                          decoration:
+                              const BoxDecoration(shape: BoxShape.circle),
                           child: LocalAssets(
                             height: 20.sp,
                             width: 20.sp,
