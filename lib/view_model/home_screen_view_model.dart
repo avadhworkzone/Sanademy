@@ -114,40 +114,94 @@ class HomeScreenViewModel extends GetxController {
 
   ///New APIS
   Rx<ResponseStatus> homeResponseStatus = ResponseStatus.INITIAL.obs;
-
+  // Future<void> getHomeScreenData() async {
+  //   homeResponseStatus.value = ResponseStatus.Loading;
+  //
+  //   final response = await HomeDataService().homeScreenRepo();
+  //
+  //   if (response != null && checkStatusCode(response.statusCode ?? 0)) {
+  //     try {
+  //       GetHomeScreenDataResModel getHomeScreenDataResModel =
+  //       getHomeScreenDataResModelFromJson(response.response.toString());
+  //
+  //       // Check if the response contains valid data
+  //       if ((getHomeScreenDataResModel.success ?? false) &&
+  //           ((getHomeScreenDataResModel.categories?.isNotEmpty ?? false) ||
+  //               (getHomeScreenDataResModel.courses?.isNotEmpty ?? false))) {
+  //         categoriesData.value = getHomeScreenDataResModel.categories ?? [];
+  //         userData.value = getHomeScreenDataResModel.user;
+  //         // bannerData.value = homeResModel.data!.banners!;
+  //         courses.value = getHomeScreenDataResModel.courses ?? [];
+  //         userImage.value = userData.value?.image ?? '';
+  //         homeResponseStatus.value = ResponseStatus.Completed;
+  //       } else {
+  //         // showErrorSnackBar('Error', getHomeScreenDataResModel.message ?? 'No data found');
+  //         showErrorSnackBar('Error',  'No data found');
+  //         homeResponseStatus.value = ResponseStatus.Error;
+  //       }
+  //     } catch (e) {
+  //       // Handle JSON parsing or other errors
+  //       showErrorSnackBar('Error', 'Failed to parse response');
+  //       homeResponseStatus.value = ResponseStatus.Error;
+  //     }
+  //   } else {
+  //     showErrorSnackBar('Error', 'Failed to fetch data from server');
+  //     homeResponseStatus.value = ResponseStatus.Error;
+  //   }
+  // }
   Future<void> getHomeScreenData() async {
     homeResponseStatus.value = ResponseStatus.Loading;
 
-    final response = await HomeDataService().homeScreenRepo();
+    // Try to load cached data first
+    HomeScreenCache? cachedData = await HomeScreenCache.loadCache();
 
-    if (response != null && checkStatusCode(response.statusCode ?? 0)) {
-      try {
-        GetHomeScreenDataResModel getHomeScreenDataResModel =
-        getHomeScreenDataResModelFromJson(response.response.toString());
+    if (cachedData != null && cachedData.lastUpdated.isAfter(DateTime.now().subtract(const Duration(hours: 1)))) {
+      // Use cached data if it's less than 1 hour old
+      categoriesData.value = cachedData.categories;
+      userData.value = cachedData.userData;
+      courses.value = cachedData.courses;
+      userImage.value = cachedData.userImage;
+      homeResponseStatus.value = ResponseStatus.Completed;
+    } else {
+      // Fetch fresh data from the API
+      final response = await HomeDataService().homeScreenRepo();
+      if (response != null && checkStatusCode(response.statusCode ?? 0)) {
+        try {
+          GetHomeScreenDataResModel getHomeScreenDataResModel =
+          getHomeScreenDataResModelFromJson(response.response.toString());
 
-        // Check if the response contains valid data
-        if ((getHomeScreenDataResModel.success ?? false) &&
-            ((getHomeScreenDataResModel.categories?.isNotEmpty ?? false) ||
-                (getHomeScreenDataResModel.courses?.isNotEmpty ?? false))) {
-          categoriesData.value = getHomeScreenDataResModel.categories ?? [];
-          userData.value = getHomeScreenDataResModel.user;
-          // bannerData.value = homeResModel.data!.banners!;
-          courses.value = getHomeScreenDataResModel.courses ?? [];
-          userImage.value = userData.value?.image ?? '';
-          homeResponseStatus.value = ResponseStatus.Completed;
-        } else {
-          // showErrorSnackBar('Error', getHomeScreenDataResModel.message ?? 'No data found');
-          showErrorSnackBar('Error',  'No data found');
+          if ((getHomeScreenDataResModel.success ?? false) &&
+              ((getHomeScreenDataResModel.categories?.isNotEmpty ?? false) ||
+                  (getHomeScreenDataResModel.courses?.isNotEmpty ?? false))) {
+
+            // Store the API response in the cache
+            categoriesData.value = getHomeScreenDataResModel.categories ?? [];
+            userData.value = getHomeScreenDataResModel.user;
+            courses.value = getHomeScreenDataResModel.courses ?? [];
+            userImage.value = userData.value?.image ?? '';
+
+            // Save to cache
+            await HomeScreenCache.saveCache(HomeScreenCache(
+              categories: getHomeScreenDataResModel.categories ?? [],
+              userData: getHomeScreenDataResModel.user ?? HomeUser(),
+              courses: getHomeScreenDataResModel.courses ?? [],
+              userImage: userImage.value ?? '',
+              lastUpdated: DateTime.now(),
+            ));
+
+            homeResponseStatus.value = ResponseStatus.Completed;
+          } else {
+            showErrorSnackBar('Error', 'No data found');
+            homeResponseStatus.value = ResponseStatus.Error;
+          }
+        } catch (e) {
+          showErrorSnackBar('Error', 'Failed to parse response');
           homeResponseStatus.value = ResponseStatus.Error;
         }
-      } catch (e) {
-        // Handle JSON parsing or other errors
-        showErrorSnackBar('Error', 'Failed to parse response');
+      } else {
+        showErrorSnackBar('Error', 'Failed to fetch data from server');
         homeResponseStatus.value = ResponseStatus.Error;
       }
-    } else {
-      showErrorSnackBar('Error', 'Failed to fetch data from server');
-      homeResponseStatus.value = ResponseStatus.Error;
     }
   }
 

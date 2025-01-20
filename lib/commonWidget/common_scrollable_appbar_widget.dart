@@ -83,4 +83,5 @@ class _CommonScrollableAppbarWidgetState
       ),
     );
   }
+
 }

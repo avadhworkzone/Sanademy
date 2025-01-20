@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 GetHomeScreenDataResModel getHomeScreenDataResModelFromJson(String str) => GetHomeScreenDataResModel.fromJson(json.decode(str));
 
 String getHomeScreenDataResModelToJson(GetHomeScreenDataResModel data) => json.encode(data.toJson());
@@ -242,4 +244,64 @@ class HomeUser {
     "created_at": createdAt?.toIso8601String(),
     "updated_at": updatedAt?.toIso8601String(),
   };
+}
+
+class HomeScreenCache {
+  final List<HomeCategory> categories;
+  final HomeUser userData;
+  final List<HomeCourse> courses;
+  final String userImage;
+  final DateTime lastUpdated;
+
+  HomeScreenCache({
+    required this.categories,
+    required this.userData,
+    required this.courses,
+    required this.userImage,
+    required this.lastUpdated,
+  });
+
+  // Convert to JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'categories': categories.map((category) => category.toJson()).toList(),
+      'userData': userData.toJson(),
+      'courses': courses.map((course) => course.toJson()).toList(),
+      'userImage': userImage,
+      'lastUpdated': lastUpdated.toIso8601String(),
+    };
+  }
+
+  // Convert from JSON with null checks
+  factory HomeScreenCache.fromJson(Map<String, dynamic> json) {
+    return HomeScreenCache(
+      categories: (json['categories'] as List?)
+          ?.map((categoryJson) => HomeCategory.fromJson(categoryJson))
+          .toList() ??
+          [], // Default to empty list if null
+      userData: HomeUser.fromJson(json['userData'] ?? {}),
+      courses: (json['courses'] as List?)
+          ?.map((courseJson) => HomeCourse.fromJson(courseJson))
+          .toList() ??
+          [], // Default to empty list if null
+      userImage: json['userImage'] ?? '', // Default to empty string if null
+      lastUpdated: DateTime.parse(json['lastUpdated'] ?? DateTime.now().toIso8601String()), // Default to current date if null
+    );
+  }
+
+  // Save cache to SharedPreferences
+  static Future<void> saveCache(HomeScreenCache cache) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('home_screen_cache', jsonEncode(cache.toJson()));
+  }
+
+  // Load cache from SharedPreferences
+  static Future<HomeScreenCache?> loadCache() async {
+    final prefs = await SharedPreferences.getInstance();
+    final cacheData = prefs.getString('home_screen_cache');
+    if (cacheData != null) {
+      return HomeScreenCache.fromJson(jsonDecode(cacheData));
+    }
+    return null;
+  }
 }

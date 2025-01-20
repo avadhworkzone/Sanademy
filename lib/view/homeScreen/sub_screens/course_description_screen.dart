@@ -13,10 +13,12 @@ import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view/homeScreen/widget/home_screen_new.dart';
 import 'package:sanademy/view_model/bottom_bar_view_model.dart';
 import 'package:sanademy/view_model/description_view_model.dart';
 import 'package:sanademy/view_model/home_screen_view_model.dart';
 import 'package:sanademy/view_model/lectures_videos_view_model.dart';
+import 'package:shimmer/shimmer.dart';
 
 import 'select_payment_method_screen.dart';
 
@@ -66,31 +68,26 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
     var courses = homeScreenViewModel.courses;
     return Scaffold(
       backgroundColor: AppColors.white,
-      body: Obx(() =>
-              // descriptionViewModel.courseDetailResponseStatus.value ==
-              //         ResponseStatus.Completed
-              //     ?
-
-              SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Container(
-                      width: Get.width,
-                      alignment: Alignment.topCenter,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(AppImageAssets.appLogo),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                            top: MediaQuery.of(context).padding.top),
-                        child: Stack(
-                          fit: StackFit.loose,
-                          children: [
-                            descriptionViewModel.isLoader.value == true
-                                ?  Center(
+      body: Obx(() => SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  width: Get.width,
+                  alignment: Alignment.topCenter,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(AppImageAssets.appLogo),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).padding.top),
+                    child: Stack(
+                      fit: StackFit.loose,
+                      children: [
+                        descriptionViewModel.isLoader.value == true
+                            ? /*Center(
                                     child: SizedBox(
                                       height: 263.sp,
                                       width: double.infinity,
@@ -99,312 +96,325 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                                         imgColor: AppColors.primaryColor,
                                       ),
                                     ),
-                                  )
-                                :  SizedBox(
-                                    // height: 263.sp,
-                                    // width: Get.width,
-                                    child: AspectRatio(
-                                      aspectRatio: descriptionViewModel
-                                          .chewieControllers
-                                          .videoPlayerController
-                                          .value
-                                          .aspectRatio,
-
-                                      child: Chewie(
-                                        controller: descriptionViewModel
-                                            .chewieControllers,
-
-                                      ),
-                                    ),
+                                  )*/
+                            Shimmer.fromColors(
+                                baseColor: Colors.grey[300]!,
+                                highlightColor: Colors.grey[100]!,
+                                child: Container(
+                                  color: Colors.grey[300],
+                                  // Placeholder color
+                                  width: double.infinity,
+                                  // Full width
+                                  height: 263.sp,
+                                  // Set the height you need for the video player
+                                  child: const AspectRatio(
+                                    aspectRatio: 16 /
+                                        9,
                                   ),
-                            // SizedBox(
-                            //   height: 263.sp, // Desired height for the video
-                            //   width: double.infinity, // Full-screen width
-                            //   child: Chewie(
-                            //     controller: descriptionViewModel.chewieControllers,
-                            //   ),
-                            // ),
-
-
-
-                            Padding(
-                              padding: EdgeInsets.only(top: 8.w),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      Get.back();
-                                    },
-                                    child: Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 13.w, vertical: 13.w),
-                                      margin: EdgeInsets.only(left: 15.w),
-                                      decoration: BoxDecoration(
-                                          color:
-                                              AppColors.white.withOpacity(0.2),
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                              color: AppColors.white
-                                                  .withOpacity(0.5))),
-                                      child: Icon(
-                                          weight: 10.w,
-                                          size: 12.w,
-                                          Icons.arrow_back_ios_new,
-                                          color: AppColors.white),
-                                    ),
+                                ),
+                              )
+                            : SizedBox(
+                                // height: 263.sp,
+                                // width: Get.width,
+                                child: AspectRatio(
+                                  aspectRatio: descriptionViewModel
+                                      .chewieControllers
+                                      .videoPlayerController
+                                      .value
+                                      .aspectRatio,
+                                  child: Chewie(
+                                    controller:
+                                        descriptionViewModel.chewieControllers,
                                   ),
-                                  Container(
-                                    margin: EdgeInsets.only(right: 15.w),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 11.w, vertical: 11.w),
-                                    // alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                        color: AppColors.white.withOpacity(0.2),
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                            color: AppColors.white
-                                                .withOpacity(0.5))),
-                                    child: Icon(
-                                        weight: 10.w,
-                                        size: 15.w,
-                                        Icons.more_vert_rounded,
-                                        color: AppColors.white),
-                                  ),
-                                ],
+                                ),
                               ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+                        // SizedBox(
+                        //   height: 263.sp, // Desired height for the video
+                        //   width: double.infinity, // Full-screen width
+                        //   child: Chewie(
+                        //     controller: descriptionViewModel.chewieControllers,
+                        //   ),
+                        // ),
 
-                    /// VIDEO VIEW
-                    // Stack(
-                    //   children: [
-                    //     SizedBox(
-                    //       height: Get.width * 0.7,
-                    //       width: Get.width,
-                    //       child: descriptionViewModel.isLoader.value == true
-                    //           ? Center(
-                    //         child: SizedBox(
-                    //             height: 50.h,
-                    //             width: 50.h,
-                    //             child: const LocalAssets(
-                    //               imagePath: AppImageAssets.sanademaylogo,
-                    //               imgColor: AppColors.primaryColor,
-                    //             )),
-                    //       )
-                    //           : SizedBox(
-                    //         height: 300.h,
-                    //         width: 430.w,
-                    //         child: AspectRatio(
-                    //           aspectRatio: descriptionViewModel
-                    //               .chewieControllers.videoPlayerController.value.aspectRatio,
-                    //           child: Stack(
-                    //             alignment: Alignment.center,
-                    //             children: [
-                    //               Chewie(
-                    //                 controller: descriptionViewModel.chewieControllers,
-                    //               ),
-                    //             ],
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     Positioned(
-                    //       child: GestureDetector(
-                    //           onTap: () {
-                    //             Get.back();
-                    //           },
-                    //           child: Container(
-                    //             margin: EdgeInsets.only(left: 10.w, top: 10.w, right: 10.w),
-                    //             padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
-                    //             decoration: BoxDecoration(
-                    //                 color: AppColors.black.withOpacity(0.20),
-                    //                 borderRadius: BorderRadius.circular(17)),
-                    //             child: const Icon(
-                    //               Icons.arrow_back,
-                    //               color: AppColors.white,
-                    //             ),
-                    //           )),
-                    //     ),
-                    //   ],
-                    // ),
-                    SizeConfig.sH16,
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.w),
-                      child: Column(
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                        Padding(
+                          padding: EdgeInsets.only(top: 8.w),
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              CustomNewText(
-                                widget.homeCourse.title ?? "",
-                                color: AppColors.blue34,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 16.sp,
+                              InkWell(
+                                onTap: () {
+                                  Get.back();
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 13.w, vertical: 13.w),
+                                  margin: EdgeInsets.only(left: 15.w),
+                                  decoration: BoxDecoration(
+                                      color: AppColors.white.withOpacity(0.2),
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          color: AppColors.white
+                                              .withOpacity(0.5))),
+                                  child: Icon(
+                                      weight: 10.w,
+                                      size: 12.w,
+                                      Icons.arrow_back_ios_new,
+                                      color: AppColors.white),
+                                ),
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  RichText(
-                                    text: TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text: widget.homeCourse.price
-                                                  .toString() ??
-                                              "", // Main amount
-                                          style: TextStyle(
-                                            fontSize: 16.sp,
-                                            color: AppColors.blue34,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                          text: ' IQD', // Currency
-                                          style: TextStyle(
-                                            fontSize:
-                                                16.sp, // Slightly smaller font
-                                            color: AppColors
-                                                .blue34, // Same color as the amount
-                                            fontWeight: FontWeight
-                                                .w400, // Normal weight for currency
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      CustomText('280,000 IQD',
-                                          fontSize: 12.sp,
-                                          color: AppColors.grey74),
-                                      SizeConfig.sW5,
-                                      CustomText('-40%',
-                                          fontSize: 12.sp,
-                                          color: AppColors.borderColor),
-                                    ],
-                                  ),
-                                ],
+                              Container(
+                                margin: EdgeInsets.only(right: 15.w),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 11.w, vertical: 11.w),
+                                // alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    color: AppColors.white.withOpacity(0.2),
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                        color:
+                                            AppColors.white.withOpacity(0.5))),
+                                child: Icon(
+                                    weight: 10.w,
+                                    size: 15.w,
+                                    Icons.more_vert_rounded,
+                                    color: AppColors.white),
                               ),
-                              SizeConfig.sH10,
                             ],
                           ),
-                        ],
-                      ),
+                        )
+                      ],
                     ),
-                    SizeConfig.sH15,
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 15.w),
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 10.w, vertical: 15.w),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: AppColors.borderColor),
-                          color: AppColors.borderColor.withOpacity(0.1)),
-                      child: Row(
+                  ),
+                ),
+
+                /// VIDEO VIEW
+                // Stack(
+                //   children: [
+                //     SizedBox(
+                //       height: Get.width * 0.7,
+                //       width: Get.width,
+                //       child: descriptionViewModel.isLoader.value == true
+                //           ? Center(
+                //         child: SizedBox(
+                //             height: 50.h,
+                //             width: 50.h,
+                //             child: const LocalAssets(
+                //               imagePath: AppImageAssets.sanademaylogo,
+                //               imgColor: AppColors.primaryColor,
+                //             )),
+                //       )
+                //           : SizedBox(
+                //         height: 300.h,
+                //         width: 430.w,
+                //         child: AspectRatio(
+                //           aspectRatio: descriptionViewModel
+                //               .chewieControllers.videoPlayerController.value.aspectRatio,
+                //           child: Stack(
+                //             alignment: Alignment.center,
+                //             children: [
+                //               Chewie(
+                //                 controller: descriptionViewModel.chewieControllers,
+                //               ),
+                //             ],
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //     Positioned(
+                //       child: GestureDetector(
+                //           onTap: () {
+                //             Get.back();
+                //           },
+                //           child: Container(
+                //             margin: EdgeInsets.only(left: 10.w, top: 10.w, right: 10.w),
+                //             padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
+                //             decoration: BoxDecoration(
+                //                 color: AppColors.black.withOpacity(0.20),
+                //                 borderRadius: BorderRadius.circular(17)),
+                //             child: const Icon(
+                //               Icons.arrow_back,
+                //               color: AppColors.white,
+                //             ),
+                //           )),
+                //     ),
+                //   ],
+                // ),
+                SizeConfig.sH16,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  child: Column(
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          LocalAssets(
-                            imagePath: 'assets/images/doc_file_icon.png',
-                            scaleSize: 3.w,
+                          CustomNewText(
+                            widget.homeCourse.title ?? "",
+                            color: AppColors.blue34,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16.sp,
                           ),
-                          SizeConfig.sW10,
                           Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              CustomText(
-                                '${widget.homeCourse.title ?? ""}.doc',
-                                color: AppColors.blue34,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 12.sp,
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text:
+                                          widget.homeCourse.price.toString() ??
+                                              "", // Main amount
+                                      style: TextStyle(
+                                        fontSize: 16.sp,
+                                        color: AppColors.blue34,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: ' IQD', // Currency
+                                      style: TextStyle(
+                                        fontSize:
+                                            16.sp, // Slightly smaller font
+                                        color: AppColors
+                                            .blue34, // Same color as the amount
+                                        fontWeight: FontWeight
+                                            .w400, // Normal weight for currency
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              CustomText(
-                                '12.00 MB',
-                                color: AppColors.blue34,
-                                fontSize: 12.sp,
+                              Row(
+                                children: [
+                                  CustomText('280,000 IQD',
+                                      fontSize: 12.sp, color: AppColors.grey74),
+                                  SizeConfig.sW5,
+                                  CustomText('-40%',
+                                      fontSize: 12.sp,
+                                      color: AppColors.borderColor),
+                                ],
                               ),
                             ],
                           ),
-                          const Spacer(),
-                          CircleAvatar(
-                            radius: 15.w,
-                            backgroundColor: AppColors.borderColor,
-                            child: Icon(
-                              Icons.download,
-                              color: AppColors.white,
-                              size: 15.w,
-                            ),
-                          ),
-                          SizeConfig.sW10,
-                          CustomText(
-                            AppStrings.download,
-                            color: AppColors.borderColor,
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w600,
-                          )
+                          SizeConfig.sH10,
                         ],
                       ),
+                    ],
+                  ),
+                ),
+                SizeConfig.sH15,
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 15.w),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.w),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: AppColors.borderColor),
+                      color: AppColors.borderColor.withOpacity(0.1)),
+                  child: Row(
+                    children: [
+                      LocalAssets(
+                        imagePath: 'assets/images/doc_file_icon.png',
+                        scaleSize: 3.w,
+                      ),
+                      SizeConfig.sW10,
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomText(
+                            '${widget.homeCourse.title ?? ""}.doc',
+                            color: AppColors.blue34,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12.sp,
+                          ),
+                          CustomText(
+                            '12.00 MB',
+                            color: AppColors.blue34,
+                            fontSize: 12.sp,
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      CircleAvatar(
+                        radius: 15.w,
+                        backgroundColor: AppColors.borderColor,
+                        child: Icon(
+                          Icons.download,
+                          color: AppColors.white,
+                          size: 15.w,
+                        ),
+                      ),
+                      SizeConfig.sW10,
+                      CustomText(
+                        AppStrings.download,
+                        color: AppColors.borderColor,
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w600,
+                      )
+                    ],
+                  ),
+                ),
+                SizeConfig.sH15,
+                buildDescriptionSection(homeCourse: widget.homeCourse),
+                SizeConfig.sH15,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  child: Container(
+                    padding: EdgeInsets.all(20.w),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12.0),
+                        border: Border.all(
+                          color: AppColors.greyE0,
+                        )),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          AppStrings.theCourseIncludes,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 16.sp,
+                        ),
+                        SizedBox(height: 5.h),
+                        _buildCourseDetailRow(AppImageAssets.videoPlay,
+                            "8.5 hours on-demand video"),
+                        SizedBox(height: 9.h),
+                        _buildCourseDetailRow(
+                            AppImageAssets.list, "2 articles"),
+                        SizedBox(height: 9.h),
+                        _buildCourseDetailRow(AppImageAssets.downloadCircle,
+                            "1 downloadable resource"),
+                        SizedBox(height: 9.h),
+                        _buildCourseDetailRow(AppImageAssets.certificate,
+                            "Certificate of completion"),
+                        SizedBox(height: 9.h),
+                        _buildCourseDetailRow(
+                            AppImageAssets.tv, "Access on mobile and TV"),
+                      ],
                     ),
-                    SizeConfig.sH15,
-                    buildDescriptionSection(homeCourse: widget.homeCourse),
-                    SizeConfig.sH15,
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.w),
-                      child: Container(
-                        padding: EdgeInsets.all(20.w),
+                  ),
+                ),
+                SizeConfig.sH15,
+
+                /// Requirements Section
+                if ((widget.homeCourse.requirements?.isNotEmpty ?? false) ||
+                    (widget.homeCourse.whoThisCourseIsFor?.isNotEmpty ??
+                        false) ||
+                    (widget.homeCourse.whatWillYouLearn?.isNotEmpty ?? false))
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    child: Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.0),
+                            borderRadius: BorderRadius.circular(12),
                             border: Border.all(
                               color: AppColors.greyE0,
                             )),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            CustomText(
-                              AppStrings.theCourseIncludes,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16.sp,
-                            ),
-                            SizedBox(height: 5.h),
-                            _buildCourseDetailRow(AppImageAssets.videoPlay,
-                                "8.5 hours on-demand video"),
-                            SizedBox(height: 9.h),
-                            _buildCourseDetailRow(
-                                AppImageAssets.list, "2 articles"),
-                            SizedBox(height: 9.h),
-                            _buildCourseDetailRow(AppImageAssets.downloadCircle,
-                                "1 downloadable resource"),
-                            SizedBox(height: 9.h),
-                            _buildCourseDetailRow(AppImageAssets.certificate,
-                                "Certificate of completion"),
-                            SizedBox(height: 9.h),
-                            _buildCourseDetailRow(
-                                AppImageAssets.tv, "Access on mobile and TV"),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizeConfig.sH15,
-
-                    /// Requirements Section
-                    if((widget.homeCourse.requirements?.isNotEmpty ??  false) || (widget.homeCourse.whoThisCourseIsFor?.isNotEmpty ??  false) || (widget.homeCourse.whatWillYouLearn?.isNotEmpty ??  false))
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.w),
-                      child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(
-                                color: AppColors.greyE0,
-                              )),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(height: 10.h),
-                              if(widget.homeCourse.requirements?.isNotEmpty ??  false)
+                            SizedBox(height: 10.h),
+                            if (widget.homeCourse.requirements?.isNotEmpty ??
+                                false)
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                                 child: _buildExpandableSection(
@@ -437,10 +447,18 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                                   ),*/
                                     ),
                               ),
-                              if ((widget.homeCourse.requirements?.isNotEmpty ?? false) &&
-                                  ((widget.homeCourse.whatWillYouLearn?.isNotEmpty ?? false) ||
-                                      (widget.homeCourse.whoThisCourseIsFor?.isNotEmpty ?? false)))                              const Divider(color: AppColors.greyE0),
-                              if(widget.homeCourse.whatWillYouLearn?.isNotEmpty ??  false)
+                            if ((widget.homeCourse.requirements?.isNotEmpty ??
+                                    false) &&
+                                ((widget.homeCourse.whatWillYouLearn
+                                            ?.isNotEmpty ??
+                                        false) ||
+                                    (widget.homeCourse.whoThisCourseIsFor
+                                            ?.isNotEmpty ??
+                                        false)))
+                              const Divider(color: AppColors.greyE0),
+                            if (widget
+                                    .homeCourse.whatWillYouLearn?.isNotEmpty ??
+                                false)
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                                 child: _buildExpandableSection(
@@ -471,9 +489,13 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                                   ),*/
                                     ),
                               ),
-                              if(widget.homeCourse.whatWillYouLearn?.isNotEmpty ??  false)
+                            if (widget
+                                    .homeCourse.whatWillYouLearn?.isNotEmpty ??
+                                false)
                               const Divider(color: AppColors.greyE0),
-                              if(widget.homeCourse.whoThisCourseIsFor?.isNotEmpty ??  false)
+                            if (widget.homeCourse.whoThisCourseIsFor
+                                    ?.isNotEmpty ??
+                                false)
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                                 child: _buildExpandableSection(
@@ -505,219 +527,216 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                                   ),*/
                                     ),
                               ),
-                              if(widget.homeCourse.whoThisCourseIsFor?.isNotEmpty ??  false)
+                            if (widget.homeCourse.whoThisCourseIsFor
+                                    ?.isNotEmpty ??
+                                false)
                               SizedBox(height: 10.h),
-                            ],
-                          )),
-                    ),
-                    SizeConfig.sH15,
+                          ],
+                        )),
+                  ),
+                SizeConfig.sH15,
 
-                    /// Course Content Section
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.w),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomNewText(
-                            AppStrings.courseContent,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 16.sp,
-                          ),
-                          SizeConfig.sH10,
-                          ListView.builder(
-                            itemCount: 2,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      border:
-                                          Border.all(color: AppColors.greyE0),
-                                    ),
-                                    child: Theme(
-                                      data: Theme.of(Get.context!).copyWith(
-                                          dividerColor: Colors.transparent),
-                                      child: ExpansionTile(
-                                        initiallyExpanded: true,
-                                        title: Padding(
-                                          padding: EdgeInsets.only(bottom: 7.h),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                /// Course Content Section
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomNewText(
+                        AppStrings.courseContent,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16.sp,
+                      ),
+                      SizeConfig.sH10,
+                      ListView.builder(
+                        itemCount: 2,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(color: AppColors.greyE0),
+                                ),
+                                child: Theme(
+                                  data: Theme.of(Get.context!).copyWith(
+                                      dividerColor: Colors.transparent),
+                                  child: ExpansionTile(
+                                    initiallyExpanded: true,
+                                    title: Padding(
+                                      padding: EdgeInsets.only(bottom: 7.h),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                              CustomNewText(
+                                                "Introduction to Mathematics",
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 14.sp,
+                                              ),
+                                              SizedBox(height: 5.h),
+                                              Row(
                                                 children: [
-                                                  CustomNewText(
-                                                    "Introduction to Mathematics",
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 14.sp,
-                                                  ),
-                                                  SizedBox(height: 5.h),
                                                   Row(
                                                     children: [
-                                                      Row(
-                                                        children: [
-                                                          LocalAssets(
-                                                            imagePath:
-                                                                AppImageAssets
-                                                                    .bookOutlined,
-                                                            height: 18.sp,
-                                                            width: 18.sp,
-                                                          ),
-                                                          SizedBox(width: 5.w),
-                                                          CustomNewText(
-                                                            "3 Lectures",
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            fontSize: 12.sp,
-                                                          ),
-                                                        ],
+                                                      LocalAssets(
+                                                        imagePath:
+                                                            AppImageAssets
+                                                                .bookOutlined,
+                                                        height: 18.sp,
+                                                        width: 18.sp,
                                                       ),
-                                                      SizedBox(width: 20.w),
-                                                      Row(
-                                                        children: [
-                                                          LocalAssets(
-                                                            imagePath:
-                                                                AppImageAssets
-                                                                    .clockIcon,
-                                                            height: 18.sp,
-                                                            width: 18.sp,
-                                                            imgColor: AppColors
-                                                                .blue34,
-                                                          ),
-                                                          SizedBox(width: 5.w),
-                                                          CustomNewText(
-                                                            "15 Mins",
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            fontSize: 12.sp,
-                                                          ),
-                                                        ],
+                                                      SizedBox(width: 5.w),
+                                                      CustomNewText(
+                                                        "3 Lectures",
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 12.sp,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  SizedBox(width: 20.w),
+                                                  Row(
+                                                    children: [
+                                                      LocalAssets(
+                                                        imagePath:
+                                                            AppImageAssets
+                                                                .clockIcon,
+                                                        height: 18.sp,
+                                                        width: 18.sp,
+                                                        imgColor:
+                                                            AppColors.blue34,
+                                                      ),
+                                                      SizedBox(width: 5.w),
+                                                      CustomNewText(
+                                                        "15 Mins",
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 12.sp,
                                                       ),
                                                     ],
                                                   ),
                                                 ],
                                               ),
-                                              CircularProgressWithText(
-                                                progress: 0.6,
-                                                size: 30.h,
-                                              ),
                                             ],
                                           ),
-                                        ),
-                                        children: [
-                                          const Divider(
-                                              color: AppColors.greyE0),
-                                          ListView.separated(
-                                            separatorBuilder: (context,
-                                                    index) =>
-                                                const Divider(
-                                                    color: AppColors.greyE0),
-                                            padding: EdgeInsets.zero,
-                                            shrinkWrap: true,
-                                            physics:
-                                                const NeverScrollableScrollPhysics(),
-                                            itemCount: 4,
-                                            itemBuilder: (context, index) {
-                                              String icon;
-                                              switch (index) {
-                                                case 0:
-                                                case 1:
-                                                  icon =
-                                                      AppImageAssets.checkmark;
-                                                  break;
-                                                case 2:
-                                                  icon = AppImageAssets
-                                                      .yellowPlay; // Yellow circle (play icon)
-                                                  break;
-                                                case 3:
-                                                  icon = AppImageAssets
-                                                      .lock; // Lock icon
-                                                  break;
-                                                default:
-                                                  icon = AppImageAssets
-                                                      .lock; // Default fallback
-                                              }
-                                              return Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 20.w,
-                                                    vertical: 9.h),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        Image.asset(
-                                                          icon,
-                                                          height: 16.sp,
-                                                          width: 16.sp,
-                                                          fit: BoxFit.contain,
-                                                        ),
-                                                        SizedBox(width: 10.w),
-                                                        CustomNewText(
-                                                          "Introduction to Mathematics",
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 12.sp,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        LocalAssets(
-                                                          imagePath:
-                                                              AppImageAssets
-                                                                  .clockIcon,
-                                                          height: 14.sp,
-                                                          width: 14.sp,
-                                                          imgColor:
-                                                              AppColors.blue34,
-                                                        ),
-                                                        SizedBox(width: 5.w),
-                                                        CustomNewText(
-                                                          "5 Mins",
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 12.sp,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              );
-                                            },
+                                          CircularProgressWithText(
+                                            progress: 0.6,
+                                            size: 30.h,
                                           ),
-                                          SizedBox(height: 10.h),
                                         ],
                                       ),
                                     ),
+                                    children: [
+                                      const Divider(color: AppColors.greyE0),
+                                      ListView.separated(
+                                        separatorBuilder: (context, index) =>
+                                            const Divider(
+                                                color: AppColors.greyE0),
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        itemCount: 4,
+                                        itemBuilder: (context, index) {
+                                          String icon;
+                                          switch (index) {
+                                            case 0:
+                                            case 1:
+                                              icon = AppImageAssets.checkmark;
+                                              break;
+                                            case 2:
+                                              icon = AppImageAssets
+                                                  .yellowPlay; // Yellow circle (play icon)
+                                              break;
+                                            case 3:
+                                              icon = AppImageAssets
+                                                  .lock; // Lock icon
+                                              break;
+                                            default:
+                                              icon = AppImageAssets
+                                                  .lock; // Default fallback
+                                          }
+                                          return Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 20.w,
+                                                vertical: 9.h),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Image.asset(
+                                                      icon,
+                                                      height: 16.sp,
+                                                      width: 16.sp,
+                                                      fit: BoxFit.contain,
+                                                    ),
+                                                    SizedBox(width: 10.w),
+                                                    CustomNewText(
+                                                      "Introduction to Mathematics",
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 12.sp,
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    LocalAssets(
+                                                      imagePath: AppImageAssets
+                                                          .clockIcon,
+                                                      height: 14.sp,
+                                                      width: 14.sp,
+                                                      imgColor:
+                                                          AppColors.blue34,
+                                                    ),
+                                                    SizedBox(width: 5.w),
+                                                    CustomNewText(
+                                                      "5 Mins",
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 12.sp,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                      SizedBox(height: 10.h),
+                                    ],
                                   ),
-                                  SizedBox(height: 15.h),
-                                ],
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizeConfig.sH15,
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.w),
-                      child:CustomUpdateBtn(
-                        onTap: () {
-                          showEnrollmentDialog(context);
+                                ),
+                              ),
+                              SizedBox(height: 15.h),
+                            ],
+                          );
                         },
-                        title: AppStrings.enrollTheCourse,
-                        radius: 15,
-                        fontSize: 16.sp,
-                      ), /*CustomUpdateBtn(
+                      ),
+                    ],
+                  ),
+                ),
+                SizeConfig.sH15,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  child: CustomUpdateBtn(
+                    onTap: () {
+                      showEnrollmentDialog(context);
+                    },
+                    title: AppStrings.enrollTheCourse,
+                    radius: 15,
+                    fontSize: 16.sp,
+                  ), /*CustomUpdateBtn(
                         onTap: () {
                           showEnrollmentDialog(context);
                         },
@@ -725,14 +744,12 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                         radius: 15,
                         fontSize: 16.sp,
                       ),*/
-                    ),
-
-                    SizeConfig.sH40,
-                  ],
                 ),
-              )
-          // : const Material()
-          ),
+
+                SizeConfig.sH40,
+              ],
+            ),
+          )),
     );
   }
 }
@@ -1359,3 +1376,99 @@ class CircularProgressWithText extends StatelessWidget {
   }
 }
 
+Widget buildShimmerEffect() {
+  return Padding(
+    padding: EdgeInsets.symmetric(horizontal: 20.w),
+    child: Column(
+      children: [
+        // Shimmer for the image or video placeholder
+        Container(
+          width: Get.width,
+          height: 263.sp,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(AppImageAssets.appLogo),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Shimmer.fromColors(
+            baseColor: Colors.grey[300]!,
+            highlightColor: Colors.grey[100]!,
+            child: Container(
+              color: Colors.grey[300],
+            ),
+          ),
+        ),
+        SizeConfig.sH16,
+
+        // Shimmer for the course title and price
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          child: Column(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  buildShimmerLine(100.w, 20.h), // Shimmer for title
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      buildShimmerLine(80.w, 15.h), // Shimmer for price
+                      Row(
+                        children: [
+                          buildShimmerLine(60.w, 12.h),
+                          // Shimmer for discounted price
+                          SizeConfig.sW5,
+                          buildShimmerLine(30.w, 12.h),
+                          // Shimmer for percentage off
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizeConfig.sH10,
+                ],
+              ),
+            ],
+          ),
+        ),
+        SizeConfig.sH15,
+
+        // Shimmer for document section
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 15.w),
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.w),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: AppColors.borderColor),
+            color: AppColors.borderColor.withOpacity(0.1),
+          ),
+          child: Row(
+            children: [
+              buildShimmerCircle(30.w), // Shimmer for the file icon
+              SizeConfig.sW10,
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  buildShimmerLine(100.w, 12.h), // Shimmer for file title
+                  buildShimmerLine(60.w, 12.h), // Shimmer for file size
+                ],
+              ),
+              const Spacer(),
+              buildShimmerCircle(15.w), // Shimmer for download button
+              SizeConfig.sW10,
+              buildShimmerLine(80.w, 12.h), // Shimmer for download text
+            ],
+          ),
+        ),
+        SizeConfig.sH15,
+
+        // Shimmer for the description section
+        buildShimmerLine(200.w, 15.h), // Shimmer for description title
+        SizeConfig.sH15,
+        buildShimmerLine(Get.width, 100.h), // Shimmer for the long description
+      ],
+    ),
+  );
+}

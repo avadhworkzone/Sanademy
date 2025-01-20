@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:sanademy/commonWidget/common_appbar.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
 import 'package:sanademy/commonWidget/network_assets.dart';
 import 'package:sanademy/utils/app_colors.dart';
@@ -14,6 +15,7 @@ import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/homeScreen/sub_screens/course_description_screen.dart';
 import 'package:sanademy/view_model/home_screen_view_model.dart';
+import 'package:shimmer/shimmer.dart';
 
 // class HomeRecommendedWidget extends StatefulWidget {
 //   const HomeRecommendedWidget({super.key});

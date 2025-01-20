@@ -126,7 +126,7 @@ class ApiBaseHelper {
       ..interceptors.add(
         DIO.InterceptorsWrapper(
           onRequest: (DIO.RequestOptions options, handler) {
-            if (showProgressDialog) ProgressDialog.showProgressDialog(true);
+            // if (showProgressDialog) ProgressDialog.showProgressDialog(true);
             Logger.printLog(
                 tag:
                     '|---------------> ${options.method} JSON METHOD <---------------|\n\n REQUEST_URL :',

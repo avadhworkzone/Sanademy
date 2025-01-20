@@ -171,6 +171,7 @@ commonUpdateAppBar(
     {required BuildContext context,
     Widget? actionWidget,
     bool? isBack,
+    bool? isLoading,
     bool? isHomeScreen,
     bool? isLogoRequired,
     bool? isOnlyTitleRequired,
@@ -184,10 +185,10 @@ commonUpdateAppBar(
     width: Get.width,
     alignment: Alignment.topCenter,
     decoration: BoxDecoration(
-      image: DecorationImage(
+      image: (isLoading ?? false) ? null :DecorationImage(
         image: AssetImage(AppImageAssets.appLogo),
         fit: BoxFit.cover,
-      ),
+      ) ,
     ),
     child: Padding(
       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),

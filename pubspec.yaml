@@ -46,6 +46,7 @@ dependencies:
   easy_stepper: ^0.8.5+1
   percent_indicator: ^4.2.4
   shimmer: ^3.0.0
+  shared_preferences: ^2.3.5
 
 
 dev_dependencies:
