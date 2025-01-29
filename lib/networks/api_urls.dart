@@ -4,7 +4,8 @@ class ApiUrls {
   /// ----------------- BASE URL START -----------------------
   // static const String baseURL = 'https://reqres.in';
   static const String baseURL =
-      'https://sanademy.net/sanacademy/';
+      'https://sa.kurdios.com/';
+      // 'https://sanademy.net/sanacademy/';
       // 'https://codeyesinfotech.com/sana_academy/public/api/';
 
   static Map<String, String> getHeaders() {
