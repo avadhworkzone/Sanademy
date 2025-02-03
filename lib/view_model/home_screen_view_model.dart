@@ -113,7 +113,7 @@ class HomeScreenViewModel extends GetxController {
   }
 
   ///New APIS
-  Rx<ResponseStatus> homeResponseStatus = ResponseStatus.INITIAL.obs;
+  Rx<ResponseStatus> coursesResponseStatus = ResponseStatus.INITIAL.obs;
   // Future<void> getHomeScreenData() async {
   //   homeResponseStatus.value = ResponseStatus.Loading;
   //
@@ -150,30 +150,32 @@ class HomeScreenViewModel extends GetxController {
   //   }
   // }
   Future<void> getHomeScreenData() async {
-    homeResponseStatus.value = ResponseStatus.Loading;
+    coursesResponseStatus.value = ResponseStatus.Loading;
+    print('Loading data...');
 
     // Try to load cached data first
     HomeScreenCache? cachedData = await HomeScreenCache.loadCache();
 
-    if (cachedData != null && cachedData.lastUpdated.isAfter(DateTime.now().subtract(const Duration(hours: 1)))) {
-      // Use cached data if it's less than 1 hour old
+    if (cachedData != null &&
+        cachedData.lastUpdated
+            .isAfter(DateTime.now().subtract(const Duration(hours: 1)))) {
       categoriesData.value = cachedData.categories;
       userData.value = cachedData.userData;
       courses.value = cachedData.courses;
       userImage.value = cachedData.userImage;
-      homeResponseStatus.value = ResponseStatus.Completed;
+      coursesResponseStatus.value = ResponseStatus.Completed;
     } else {
       // Fetch fresh data from the API
+      print('Fetching fresh data from the API...');
       final response = await HomeDataService().homeScreenRepo();
       if (response != null && checkStatusCode(response.statusCode ?? 0)) {
         try {
           GetHomeScreenDataResModel getHomeScreenDataResModel =
-          getHomeScreenDataResModelFromJson(response.response.toString());
+              getHomeScreenDataResModelFromJson(response.response.toString());
 
           if ((getHomeScreenDataResModel.success ?? false) &&
               ((getHomeScreenDataResModel.categories?.isNotEmpty ?? false) ||
                   (getHomeScreenDataResModel.courses?.isNotEmpty ?? false))) {
-
             // Store the API response in the cache
             categoriesData.value = getHomeScreenDataResModel.categories ?? [];
             userData.value = getHomeScreenDataResModel.user;
@@ -189,20 +191,21 @@ class HomeScreenViewModel extends GetxController {
               lastUpdated: DateTime.now(),
             ));
 
-            homeResponseStatus.value = ResponseStatus.Completed;
+            coursesResponseStatus.value = ResponseStatus.Completed;
           } else {
-            showErrorSnackBar('Error', 'No data found');
-            homeResponseStatus.value = ResponseStatus.Error;
+            showErrorSnackBar('Error', 'No data found-----');
+            coursesResponseStatus.value = ResponseStatus.Error;
           }
         } catch (e) {
-          showErrorSnackBar('Error', 'Failed to parse response');
-          homeResponseStatus.value = ResponseStatus.Error;
+          print('Error parsing response: $e');
+          showErrorSnackBar('Error', 'Failed to parse response  123');
+          coursesResponseStatus.value = ResponseStatus.Error;
         }
       } else {
+        print('Error fetching data from the server or invalid response');
         showErrorSnackBar('Error', 'Failed to fetch data from server');
-        homeResponseStatus.value = ResponseStatus.Error;
+        coursesResponseStatus.value = ResponseStatus.Error;
       }
     }
   }
-
 }

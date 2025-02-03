@@ -3,10 +3,10 @@ import 'package:sanademy/utils/shared_preference_utils.dart';
 class ApiUrls {
   /// ----------------- BASE URL START -----------------------
   // static const String baseURL = 'https://reqres.in';
-  static const String baseURL =
-      'https://sa.kurdios.com/';
-      // 'https://sanademy.net/sanacademy/';
-      // 'https://codeyesinfotech.com/sana_academy/public/api/';
+  static const String baseURL = 'http://sanademy.net/api/';
+  // 'https://sa.kurdios.com/';
+  // 'https://sanademy.net/sanacademy/';
+  // 'https://codeyesinfotech.com/sana_academy/public/api/';
 
   static Map<String, String> getHeaders() {
     final headers = {
@@ -25,7 +25,7 @@ class ApiUrls {
   static const String register = 'register';
   static const String getProfile = 'get_profile';
   static const String updateProfile = 'update_profile';
-  static const String   aboutUs = 'about_us';
+  static const String aboutUs = 'about_us';
   static const String getInTouch = 'get_in_touch';
   static const String home = 'home';
   static const String contact = 'contact';
@@ -43,8 +43,7 @@ class ApiUrls {
   static const String requestHardCopy = 'request_hard_copy';
   static const String deleteUser = 'delete_user';
 
-
-
   ///NEW APIS
-  static const String homeScreen = 'home-page.php';
+  static const String homeScreen = 'home-page';
+  static const String courses = 'courses';
 }
