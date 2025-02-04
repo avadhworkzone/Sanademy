@@ -18,6 +18,7 @@ import 'package:sanademy/view/general/no_internet_screen.dart';
 import 'package:sanademy/view/splashScreen/splash_screen.dart';
 
 import 'view_model/profile_screen_view_model.dart';
+import 'view_model/sign_up_view_model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -78,8 +79,12 @@ class _MyAppState extends State<MyApp> {
                   pageTransitionsTheme: const PageTransitionsTheme()),
               transitionDuration: const Duration(milliseconds: 100),
               translations: Translation(),
-              locale: SharedPreferenceUtils.getLangCode()=='ar'? const Locale('ar', 'SA'):const Locale('en', 'US'),
-              fallbackLocale: SharedPreferenceUtils.getLangCode()=='ar'? const Locale('ar', 'SA'):const Locale('en', 'US'),
+              locale: SharedPreferenceUtils.getLangCode() == 'ar'
+                  ? const Locale('ar', 'SA')
+                  : const Locale('en', 'US'),
+              fallbackLocale: SharedPreferenceUtils.getLangCode() == 'ar'
+                  ? const Locale('ar', 'SA')
+                  : const Locale('en', 'US'),
               // locale:  Locale(myLan),
               // fallbackLocale:  Locale(myLan,),
               builder: (context, widget) => ColoredBox(
@@ -95,13 +100,14 @@ class _MyAppState extends State<MyApp> {
                       child: getMainAppViewBuilder(context, widget)),
                 ),
               ),
-              home: Obx(() => connectivityViewModel.isOnline != null
-                  ? connectivityViewModel.isOnline!.value
-                      ? const SplashScreen()
-                      // ? const LanguageScreen()
-                      // ? const BottomBar()
-                      : const NoInterNetScreen()
-                  : const SizedBox()),
+              // home: Obx(() => connectivityViewModel.isOnline != null
+              //     ? connectivityViewModel.isOnline!.value
+              //         ? const SplashScreen()
+              //         // ? const LanguageScreen()
+              //         // ? const BottomBar()
+              //         : const NoInterNetScreen()
+              //     : const SizedBox()),
+              home: SplashScreen(),
             ),
           );
         },
@@ -110,6 +116,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   final connectivityViewModel = Get.put(ConnectivityViewModel());
+  final signUpViewModel = Get.put(SignUpViewModel());
 }
 
 /// Create main app view builder
@@ -124,7 +131,7 @@ Widget getMainAppViewBuilder(BuildContext context, Widget? widget) {
               widget ?? const Offstage(),
               if (AppClass().isShowLoading.isTrue)
                 ColoredBox(
-                  color: AppColors.white.withOpacity(0.3),
+                  color: AppColors.red.withOpacity(0.6),
                   child: const Center(
                     child: LoadingSpinner(),
                   ),

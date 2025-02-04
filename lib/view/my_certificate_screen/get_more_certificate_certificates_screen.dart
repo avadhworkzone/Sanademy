@@ -168,13 +168,18 @@ class _GetMoreCertificatesScreenState extends State<GetMoreCertificatesScreen> {
               ),
             ),
             SizeConfig.sH15,
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 10.h),
-              child: Column(
-                children:
-                    courses.map((course) => buildCourseCard(course)).toList(),
-              ),
+            const SizedBox(
+              height: 200,
             ),
+            CustomText(AppStrings.noDataFound)
+
+            // Padding(
+            //   padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 10.h),
+            //   child: Column(
+            //     children:
+            //         courses.map((course) => buildCourseCard(course)).toList(),
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -264,7 +269,6 @@ class _GetMoreCertificatesScreenState extends State<GetMoreCertificatesScreen> {
             onTap: () {
               // showDisabledDialog(context, "IELTS Mock Test");
               showEnrollmentDialog(context, "Artificial Intelligence Course");
-
             },
             child: Container(
               height: 40,
@@ -366,7 +370,6 @@ class _GetMoreCertificatesScreenState extends State<GetMoreCertificatesScreen> {
 //   );
 // }
 
-
 void showEnrollmentDialog(BuildContext context, String courseTitle) {
   showDialog(
     context: context,
@@ -403,7 +406,7 @@ void showEnrollmentDialog(BuildContext context, String courseTitle) {
               Text(
                 "Do you want to Enroll in $courseTitle for 150000 IQD amount?",
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
                 ),
@@ -496,14 +499,14 @@ void showSuccessDialog(BuildContext context, String courseTitle) {
               ),
               const SizedBox(height: 16),
               // Success Icon
-              Icon(
+              const Icon(
                 Icons.check_circle,
                 size: 60,
                 color: Colors.green,
               ),
               const SizedBox(height: 16),
               // Title
-              Text(
+              const Text(
                 "Enrolled Successfully",
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -516,7 +519,7 @@ void showSuccessDialog(BuildContext context, String courseTitle) {
               Text(
                 "You have successfully enrolled in \"$courseTitle\"",
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                 ),

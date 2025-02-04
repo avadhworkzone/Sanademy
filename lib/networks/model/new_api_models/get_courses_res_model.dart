@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 GetCoursesResModel getCoursesResModelFromJson(String str) =>
     GetCoursesResModel.fromJson(json.decode(str));
 String getCoursesResModelToJson(GetCoursesResModel data) =>
@@ -42,7 +44,7 @@ String dataToJson(Data data) => json.encode(data.toJson());
 class Data {
   Data({
     this.currentPage,
-    this.data,
+    this.courses,
     this.firstPageUrl,
     this.from,
     this.lastPage,
@@ -59,9 +61,9 @@ class Data {
   Data.fromJson(dynamic json) {
     currentPage = json['current_page'];
     if (json['data'] != null) {
-      data = [];
+      courses = [];
       json['data'].forEach((v) {
-        data?.add(Data.fromJson(v));
+        courses?.add(HomeCourse.fromJson(v));
       });
     }
     firstPageUrl = json['first_page_url'];
@@ -82,7 +84,7 @@ class Data {
     total = json['total'];
   }
   num? currentPage;
-  List<Data>? data;
+  List<HomeCourse>? courses;
   String? firstPageUrl;
   num? from;
   num? lastPage;
@@ -98,8 +100,8 @@ class Data {
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['current_page'] = currentPage;
-    if (data != null) {
-      map['data'] = data?.map((v) => v.toJson()).toList();
+    if (courses != null) {
+      map['data'] = courses?.map((v) => v.toJson()).toList();
     }
     map['first_page_url'] = firstPageUrl;
     map['from'] = from;
@@ -149,8 +151,8 @@ class Links {
 // Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 // String dataToJson(Data data) => json.encode(data.toJson());
 
-class LinkData {
-  LinkData({
+class HomeCourse {
+  HomeCourse({
     this.id,
     this.categoryId,
     this.teacherId,
@@ -177,7 +179,7 @@ class LinkData {
     this.category,
   });
 
-  LinkData.fromJson(dynamic json) {
+  HomeCourse.fromJson(dynamic json) {
     id = json['id'];
     categoryId = json['category_id'];
     teacherId = json['teacher_id'];
@@ -345,5 +347,51 @@ class Teacher {
     map['created_at'] = createdAt;
     map['updated_at'] = updatedAt;
     return map;
+  }
+}
+
+class HomeScreenCourseCache {
+  final List<HomeCourse> courses;
+  final DateTime lastUpdated;
+
+  HomeScreenCourseCache({
+    required this.courses,
+    required this.lastUpdated,
+  });
+
+  // Convert to JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'courses': courses.map((course) => course.toJson()).toList(),
+      'lastUpdated': lastUpdated.toIso8601String(),
+    };
+  }
+
+  // Convert from JSON with null checks
+  factory HomeScreenCourseCache.fromJson(Map<String, dynamic> json) {
+    return HomeScreenCourseCache(
+      courses: (json['courses'] as List?)
+              ?.map((courseJson) => HomeCourse.fromJson(courseJson))
+              .toList() ??
+          [], // Default to empty string if null
+      lastUpdated: DateTime.parse(json['lastUpdated'] ??
+          DateTime.now().toIso8601String()), // Default to current date if null
+    );
+  }
+
+  // Save cache to SharedPreferences
+  static Future<void> saveCache(HomeScreenCourseCache cache) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('home_screen_course_cache', jsonEncode(cache.toJson()));
+  }
+
+  // Load cache from SharedPreferences
+  static Future<HomeScreenCourseCache?> loadCache() async {
+    final prefs = await SharedPreferences.getInstance();
+    final cacheData = prefs.getString('home_screen_course_cache');
+    if (cacheData != null) {
+      return HomeScreenCourseCache.fromJson(jsonDecode(cacheData));
+    }
+    return null;
   }
 }

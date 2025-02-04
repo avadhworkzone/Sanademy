@@ -17,8 +17,11 @@ import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/regex.dart';
+import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
+import 'package:sanademy/view/myProgressScreen/progess_bottom_sheet.dart';
 import 'package:sanademy/view_model/profile_screen_view_model.dart';
+import 'package:sanademy/view_model/sign_up_view_model.dart';
 
 class NewProfileScreen extends StatefulWidget {
   const NewProfileScreen({super.key});
@@ -31,6 +34,7 @@ class _ProfileScreenState extends State<NewProfileScreen> {
   ProfileScreenViewModel profileScreenViewModel =
       Get.put(ProfileScreenViewModel());
   final List<String> _genders = ['Male', 'Female', 'Other'];
+  SignUpViewModel signUpViewModel = Get.find();
 
   // Selected gender
 
@@ -38,6 +42,17 @@ class _ProfileScreenState extends State<NewProfileScreen> {
   void initState() {
     getUserDataApiCall();
     super.initState();
+
+    /// Check User Is Login Or Not
+    if (SharedPreferenceUtils.getIsLogin() == false) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        /// Open The Register Dialog
+        showLoginBottomSheet(context);
+      });
+    }
+
+    /// Get Token Api Call
+    signUpViewModel.getToken();
   }
 
   getUserDataApiCall() async {
@@ -87,21 +102,27 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                         padding: EdgeInsets.only(
                             right: 18.w, left: 8.w, bottom: 10.h),
                         child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 12.w, vertical: 8.w),
-                          // alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: AppColors.white.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(25.r),
-                              border: Border.all(
-                                  color: AppColors.white.withOpacity(0.5))),
-                          child: CustomText(
-                            AppStrings.logOut,
-                            color: AppColors.red00,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 12.w, vertical: 8.w),
+                            // alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                color: AppColors.white.withOpacity(0.24),
+                                borderRadius: BorderRadius.circular(100.r),
+                                border: Border.all(
+                                    color: AppColors.white.withOpacity(0.24))),
+                            child: !SharedPreferenceUtils.getIsLogin() == false
+                                ? CustomText(
+                                    AppStrings.logOut,
+                                    color: AppColors.red00,
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w600,
+                                  )
+                                : CustomText(
+                                    AppStrings.logIn,
+                                    color: AppColors.red00,
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w600,
+                                  )),
                       ),
                       otherWidget: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -160,10 +181,10 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                             child: Padding(
                               padding: EdgeInsets.only(bottom: 20.h),
                               child: InkWell(
-                                onTap: ()  async{
-                                 await profileScreenViewModel
+                                onTap: () async {
+                                  await profileScreenViewModel
                                       .showImagePicker(context);
-                                 profileScreenViewModel.updateCompletion();
+                                  profileScreenViewModel.updateCompletion();
                                 },
                                 child: Container(
                                   // height: 35.h,
@@ -217,7 +238,7 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                                   TextSpan(
                                     text: AppStrings.profileCompletion,
                                     style: TextStyle(
-                                      fontWeight: FontWeight.w500,
+                                      fontWeight: FontWeight.w600,
                                       color: AppColors.blue34,
                                       fontFamily: getFontFamily(),
                                       fontSize: 14.sp,
@@ -560,9 +581,10 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                               suffixIcon: Padding(
                                 padding: const EdgeInsets.all(12),
                                 child: LocalAssets(
-                                  height: 20.sp,
-                                  width: 20.sp,
+                                  height: 20.h,
+                                  width: 20.w,
                                   imagePath: AppImageAssets.edit,
+                                  imgColor: AppColors.blue34,
                                 ),
                               ),
                               hintStyle: TextStyle(
@@ -586,15 +608,15 @@ class _ProfileScreenState extends State<NewProfileScreen> {
                                   ? OutlineInputBorder(
                                       borderSide: const BorderSide(
                                           color: AppColors.red),
-                                      borderRadius: BorderRadius.circular(10.r))
+                                      borderRadius: BorderRadius.circular(12.r))
                                   : OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
+                                      borderRadius: BorderRadius.circular(12),
                                       borderSide: BorderSide(
                                         color:
                                             AppColors.black.withOpacity(0.10),
                                       )),
                               border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(12),
                                   borderSide: BorderSide(
                                     color: AppColors.black.withOpacity(0.10),
                                   )),

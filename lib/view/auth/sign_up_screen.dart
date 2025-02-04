@@ -32,7 +32,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  SignUpViewModel signUpViewModel = Get.put(SignUpViewModel());
+  SignUpViewModel signUpViewModel = Get.find();
 
   @override
   void initState() {
@@ -315,5 +315,4 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
-
 }

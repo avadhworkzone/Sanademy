@@ -124,7 +124,8 @@ class _MenuScreenState extends State<MenuScreen> {
           contactUsMethod(
               preIconBgColor: AppColors.yellow00,
               preIcon: AppImageAssets.emailIdIcon,
-              title: AppStrings.aboutUs,
+              preIconColor: AppColors.yellow00,
+              title: AppStrings.contactUs,
               postIcon: AppImageAssets.arrowRightIcon,
               onTap: () {
                 Get.to(() => const AboutUsScreen());

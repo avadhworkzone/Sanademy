@@ -23,13 +23,14 @@ class SignUpViewModel extends GetxController {
   Rx<TextEditingController> signUpNameController = TextEditingController().obs;
   Rx<TextEditingController> signUpDateController = TextEditingController().obs;
   Rx<TextEditingController> signUpPhoneController = TextEditingController().obs;
-  Rx<TextEditingController> signUpPasswordController = TextEditingController().obs;
+  Rx<TextEditingController> signUpPasswordController =
+      TextEditingController().obs;
   Rx<TextEditingController> pinPutController = TextEditingController().obs;
 
   final Rx<GlobalKey<FormState>> signUpFormKey = GlobalKey<FormState>().obs;
   Rx<DateTime> signUpSelectedDate = DateTime.now().obs;
   RxBool signUpIsValidate = false.obs;
-  RxBool isPasswordVisible = false.obs;
+  Rx<bool> isPasswordVisible = false.obs;
   RxBool isPasswordFieldShow = false.obs;
   RxBool isPhoneNumberValid = false.obs;
   RxBool isPasswordValid = false.obs;

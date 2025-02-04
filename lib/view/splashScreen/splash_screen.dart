@@ -51,26 +51,27 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: AppColors.primaryColor,
-      body: _videoController.value.isInitialized
-          ? Stack(
-              fit: StackFit.expand,
-              children: [
-                FittedBox(
-                  fit: BoxFit.cover, // Ensures the video covers the screen
-                  child: SizedBox(
-                    width: _videoController.value.size.width,
-                    height: _videoController.value.size.height,
-                    child: VideoPlayer(_videoController),
-                  ),
-                ),
-              ],
-            )
-          : const Center(
+        backgroundColor: AppColors.primaryColor,
+        body: /*_videoController.value.isInitialized
+          ? */
+            Stack(
+          fit: StackFit.expand,
+          children: [
+            FittedBox(
+              fit: BoxFit.cover, // Ensures the video covers the screen
+              child: SizedBox(
+                width: _videoController.value.size.width,
+                height: _videoController.value.size.height,
+                child: VideoPlayer(_videoController),
+              ),
+            ),
+          ],
+        )
+        /*  : const Center(
               child: CircularProgressIndicator(
                 color: AppColors.primaryColor,
               ),
-            ),
-    );
+            ),*/
+        );
   }
 }

@@ -51,7 +51,7 @@ class CustomBtn extends StatelessWidget {
         height: height ?? 50.h,
         width: width ?? Get.width,
         decoration: BoxDecoration(
-          // color: bgColor ?? AppColors.primaryColor,
+          color: bgColor ?? AppColors.primaryColor,
           border: Border.all(color: borderColor ?? Colors.transparent),
           borderRadius: BorderRadius.circular(radius ?? 5),
           image: DecorationImage(
@@ -76,7 +76,6 @@ class CustomBtn extends StatelessWidget {
     );
   }
 }
-
 
 class CustomUpdateBtn extends StatefulWidget {
   final VoidCallback? onTap;
@@ -139,7 +138,8 @@ class _CustomUpdateBtnState extends State<CustomUpdateBtn>
             width: widget.width ?? Get.width,
             decoration: BoxDecoration(
               color: widget.bgColor ?? AppColors.primaryColor,
-              border: Border.all(color: widget.borderColor ?? Colors.transparent),
+              border:
+                  Border.all(color: widget.borderColor ?? Colors.transparent),
               borderRadius: BorderRadius.circular(widget.radius ?? 15),
               gradient: LinearGradient(
                 colors: [
@@ -250,8 +250,3 @@ class _CustomUpdateBtnState extends State<CustomUpdateBtn>
 //     );
 //   }
 // }
-
-
-
-
-

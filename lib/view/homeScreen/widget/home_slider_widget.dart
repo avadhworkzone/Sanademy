@@ -310,8 +310,7 @@ final List<Map<String, dynamic>> courses = [
 
 class MyCoursesWidget extends StatefulWidget {
   Axis? scrollDirection;
-  MyCoursesWidget(
-      {Key? key, this.scrollDirection = Axis.horizontal})
+  MyCoursesWidget({Key? key, this.scrollDirection = Axis.horizontal})
       : super(key: key);
 
   @override
@@ -352,7 +351,7 @@ class _MyCoursesWidgetState extends State<MyCoursesWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsets.only(left: 16.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -414,17 +413,18 @@ class _MyCoursesWidgetState extends State<MyCoursesWidget> {
                             children: [
                               LocalAssets(
                                 imagePath: AppImageAssets.bookIcon,
-                                height: 14.sp,
-                                width: 14.sp,
+                                height: 16.sp,
+                                width: 16.sp,
                               ),
                               SizedBox(width: 8.w),
-                              // CustomText(
-                              //   "${course["completed"]}/${course["total"]}",
-                              //   color: AppColors.white,
-                              //   fontWeight: FontWeight.w500,
-                              //   fontFamily: AppConstants.metropolis,
-                              //   fontSize: 14.sp,
-                              // ),
+                              CustomText(
+                                // "${course["completed"]}/${course["total"]}",
+                                course.numberOfLecture.toString(),
+                                color: AppColors.white,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: AppConstants.metropolis,
+                                fontSize: 14.sp,
+                              ),
                             ],
                           ),
                           // Stack(
@@ -451,36 +451,46 @@ class _MyCoursesWidgetState extends State<MyCoursesWidget> {
                         ],
                       ),
                       SizedBox(height: 13.h),
-                      // Row(
-                      //   children: [
-                      //     Expanded(
-                      //       child: Row(
-                      //         children: List.generate(10, (i) {
-                      //           bool isActiveSegment = i == course["completed"];
-                      //           return Expanded(
-                      //             child: Container(
-                      //               margin:
-                      //                   EdgeInsets.symmetric(horizontal: 3.w),
-                      //               height: 4.5.h,
-                      //               decoration: BoxDecoration(
-                      //                 color: i < course["completed"]
-                      //                     ? AppColors.yellow
-                      //                     : AppColors.white,
-                      //                 border: isActiveSegment
-                      //                     ? Border.all(
-                      //                         color: AppColors.yellow,
-                      //                         width: 1.5.w)
-                      //                     : null,
-                      //                 borderRadius: BorderRadius.circular(5),
-                      //               ),
-                      //             ),
-                      //           );
-                      //         }),
-                      //       ),
-                      //     ),
-                      //     SizedBox(width: 8.w),
-                      //   ],
-                      // ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Row(
+                              children: List.generate(
+                                  course.numberOfLecture != null
+                                      ? int.parse(course.numberOfLecture!)
+                                      : 0, (i) {
+                                bool isActiveSegment = i ==
+                                    (course.numberOfLecture != null
+                                        ? int.parse(course.numberOfLecture!)
+                                        : 0);
+                                return Expanded(
+                                  child: Container(
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 3.w),
+                                    height: 4.5.h,
+                                    decoration: BoxDecoration(
+                                      color: i <
+                                              (course.numberOfLecture != null
+                                                  ? int.parse(
+                                                      course.numberOfLecture!)
+                                                  : 0)
+                                          ? AppColors.yellow
+                                          : AppColors.white,
+                                      border: isActiveSegment
+                                          ? Border.all(
+                                              color: AppColors.yellow,
+                                              width: 1.5.w)
+                                          : null,
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                  ),
+                                );
+                              }),
+                            ),
+                          ),
+                          SizedBox(width: 8.w),
+                        ],
+                      ),
                     ],
                   ),
                 );

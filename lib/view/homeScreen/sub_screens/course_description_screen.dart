@@ -6,6 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
 import 'package:sanademy/commonWidget/custom_text_cm.dart';
+import 'package:sanademy/commonWidget/network_assets.dart';
+import 'package:sanademy/networks/model/new_api_models/get_courses_res_model.dart';
 import 'package:sanademy/networks/model/new_api_models/get_home_screen_data_res_model.dart';
 import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
@@ -108,8 +110,7 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                                   height: 263.sp,
                                   // Set the height you need for the video player
                                   child: const AspectRatio(
-                                    aspectRatio: 16 /
-                                        9,
+                                    aspectRatio: 16 / 9,
                                   ),
                                 ),
                               )
@@ -284,16 +285,18 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                                   ],
                                 ),
                               ),
-                              Row(
-                                children: [
-                                  CustomText('280,000 IQD',
-                                      fontSize: 12.sp, color: AppColors.grey74),
-                                  SizeConfig.sW5,
-                                  CustomText('-40%',
-                                      fontSize: 12.sp,
-                                      color: AppColors.borderColor),
-                                ],
-                              ),
+
+                              /// Discount Price And Percent
+                              // Row(
+                              //   children: [
+                              //     CustomText('280,000 IQD',
+                              //         fontSize: 12.sp, color: AppColors.grey74),
+                              //     SizeConfig.sW5,
+                              //     CustomText('-40%',
+                              //         fontSize: 12.sp,
+                              //         color: AppColors.borderColor),
+                              //   ],
+                              // ),
                             ],
                           ),
                           SizeConfig.sH10,
@@ -377,7 +380,7 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                         ),
                         SizedBox(height: 5.h),
                         _buildCourseDetailRow(AppImageAssets.videoPlay,
-                            "8.5 hours on-demand video"),
+                            "${widget.homeCourse.hours}.${widget.homeCourse.minutes} hours on-demand video"),
                         SizedBox(height: 9.h),
                         _buildCourseDetailRow(
                             AppImageAssets.list, "2 articles"),
@@ -546,10 +549,12 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                         AppStrings.courseContent,
                         fontWeight: FontWeight.w700,
                         fontSize: 16.sp,
+                        color: AppColors.blue34,
                       ),
                       SizeConfig.sH10,
                       ListView.builder(
                         itemCount: 2,
+                        padding: EdgeInsets.zero,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
@@ -1236,6 +1241,7 @@ Widget _buildExpandableSection(
         title,
         fontWeight: FontWeight.w600,
         fontSize: 14.sp,
+        color: AppColors.blue34,
       ),
       children: [
         content,
@@ -1308,24 +1314,35 @@ Widget buildDescriptionSection({required HomeCourse homeCourse}) {
               fontWeight: FontWeight.w400,
             ),
             SizeConfig.sW5,
-            const CircleAvatar(
-              radius: 12.0,
-              backgroundImage: AssetImage(
-                AppImageAssets.teacherImage,
-              ), // Replace with your image path
+            ClipRRect(
+              borderRadius: BorderRadius.circular(30),
+              child: NetWorkOcToAssets(
+                height: 22.h,
+                width: 22.w,
+                // width: Get.width,
+                imgUrl: homeCourse.teacher?.image ?? '',
+                boxFit: BoxFit.cover,
+              ),
             ),
             SizeConfig.sW3,
-            Html(
-              data: homeCourse.instructor ?? "",
-              shrinkWrap: true,
-              style: {
-                "body": Style(
-                  fontSize: FontSize(14.sp),
-                  fontWeight: FontWeight.w500,
-                  fontFamily: AppConstants.metropolis,
-                ),
-              },
-            )
+            CustomText(
+              homeCourse.teacher!.name.toString(),
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w500,
+              color: AppColors.blue34,
+              fontFamily: AppConstants.metropolis,
+            ),
+            // Html(
+            //   data: homeCourse.instructor ?? "",
+            //   shrinkWrap: true,
+            //   style: {
+            //     "body": Style(
+            //       fontSize: FontSize(14.sp),
+            //       fontWeight: FontWeight.w500,
+            //       fontFamily: AppConstants.metropolis,
+            //     ),
+            //   },
+            // )
             // CustomNewText(
             //   homeCourse.instructor ?? "",
             //   fontSize: 14.sp,

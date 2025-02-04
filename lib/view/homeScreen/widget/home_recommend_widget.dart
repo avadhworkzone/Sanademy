@@ -191,8 +191,8 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                     onTap: () {
                                       Get.to(() => CourseDescriptionScreen(
                                             homeCourse: course,
-                                            courseId: course.id ??
-                                                0, // Example ID for demonstration
+                                            courseId: (course.id ?? 0).toInt(),
+                                            // Example ID for demonstration
                                             // courseId: "course_$index", // Example ID for demonstration
                                             // videoUrl: "https://codeyesinfotech.com/sana_academy/public/videos/49041718343861.mp4", // Add a placeholder for video URL
                                             videoUrl: course.videoUrl ?? "",
@@ -241,6 +241,8 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                                 bottom: 0.h,
                                                 left: 20.w,
                                                 child: Container(
+                                                  height: 32.h,
+                                                  // width: 118.w,
                                                   padding: EdgeInsets.only(
                                                       left: 7.w, right: 2.w),
                                                   // padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 0.h),
@@ -265,34 +267,53 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(30),
-                                                        child: Image.asset(
-                                                          AppImageAssets
-                                                              .teacherImage,
-                                                          height: 20.sp,
-                                                          width: 20.sp,
-                                                          fit: BoxFit.contain,
+                                                        child:
+                                                            NetWorkOcToAssets(
+                                                          height: 22.h,
+                                                          width: 22.w,
+                                                          // width: Get.width,
+                                                          imgUrl: course.teacher
+                                                                  ?.image ??
+                                                              '',
+                                                          boxFit: BoxFit.cover,
                                                         ),
                                                       ),
                                                       // SizedBox(width: 1.w),
-                                                      Html(
-                                                        data:
-                                                            course.instructor ??
-                                                                '',
-                                                        shrinkWrap: true,
-                                                        style: {
-                                                          "body": Style(
-                                                            fontSize:
-                                                                FontSize(12.sp),
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            color: AppColors
-                                                                .blue34,
-                                                            fontFamily:
-                                                                AppConstants
-                                                                    .metropolis,
-                                                          ),
-                                                        },
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal:
+                                                                    8.0),
+                                                        child: CustomText(
+                                                          course.teacher!.name
+                                                              .toString(),
+                                                          fontSize: 12.sp,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color:
+                                                              AppColors.blue34,
+                                                        ),
                                                       ),
+                                                      // Html(
+                                                      //   data:
+                                                      //       course.instructor ??
+                                                      //           '',
+                                                      //   shrinkWrap: true,
+                                                      //   style: {
+                                                      //     "body": Style(
+                                                      //       fontSize:
+                                                      //           FontSize(12.sp),
+                                                      //       fontWeight:
+                                                      //           FontWeight.w600,
+                                                      //       color: AppColors
+                                                      //           .blue34,
+                                                      //       fontFamily:
+                                                      //           AppConstants
+                                                      //               .metropolis,
+                                                      //     ),
+                                                      //   },
+                                                      // ),
                                                       // CustomText(
                                                       //   course.instructor ?? '',
                                                       //   fontSize: 12.sp,
@@ -326,6 +347,9 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                                     ],
                                                   ),
                                                   child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       Row(
                                                         children: [
@@ -344,29 +368,31 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                                           ),
                                                         ],
                                                       ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          CustomText(
-                                                            '123456 IQD',
-                                                            fontSize: 12.sp,
-                                                            decoration:
-                                                                TextDecoration
-                                                                    .lineThrough,
-                                                            color: AppColors
-                                                                .grey74,
-                                                          ),
-                                                          SizedBox(width: 5.w),
-                                                          CustomText(
-                                                            '-40%',
-                                                            fontSize: 12.sp,
-                                                            color: AppColors
-                                                                .borderColor,
-                                                          ),
-                                                        ],
-                                                      ),
+
+                                                      /// Discount Amount And Percent
+                                                      // Row(
+                                                      //   mainAxisAlignment:
+                                                      //       MainAxisAlignment
+                                                      //           .spaceBetween,
+                                                      //   children: [
+                                                      //     CustomText(
+                                                      //       '123456 IQD',
+                                                      //       fontSize: 12.sp,
+                                                      //       decoration:
+                                                      //           TextDecoration
+                                                      //               .lineThrough,
+                                                      //       color: AppColors
+                                                      //           .grey74,
+                                                      //     ),
+                                                      //     SizedBox(width: 5.w),
+                                                      //     CustomText(
+                                                      //       '-40%',
+                                                      //       fontSize: 12.sp,
+                                                      //       color: AppColors
+                                                      //           .borderColor,
+                                                      //     ),
+                                                      //   ],
+                                                      // ),
                                                     ],
                                                   ),
                                                 ),
@@ -385,6 +411,7 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                                   course.title ?? '',
                                                   fontSize: 20.sp,
                                                   letterSpacing: -1.sp,
+                                                  color: AppColors.blue34,
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                                 SizedBox(height: 6.h),
@@ -407,7 +434,7 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
-                                                                        15),
+                                                                        18),
                                                             border: Border.all(
                                                                 color: AppColors
                                                                     .greyF7),
@@ -418,8 +445,11 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                                                 imagePath:
                                                                     AppImageAssets
                                                                         .clock,
-                                                                height: 14.sp,
-                                                                width: 14.sp,
+                                                                height: 14.h,
+                                                                imgColor:
+                                                                    AppColors
+                                                                        .blue34,
+                                                                width: 14.w,
                                                               ),
                                                               SizedBox(
                                                                   width: 5.w),
@@ -522,8 +552,11 @@ class _HomeRecommendedWidgetState extends State<HomeRecommendedWidget> {
                                                                 imagePath:
                                                                     AppImageAssets
                                                                         .bookOutlined,
-                                                                height: 14.sp,
-                                                                width: 14.sp,
+                                                                height: 14.h,
+                                                                width: 14.w,
+                                                                imgColor:
+                                                                    AppColors
+                                                                        .blue34,
                                                               ),
                                                               SizedBox(
                                                                   width: 5.w),

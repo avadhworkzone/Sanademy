@@ -12,6 +12,7 @@ import 'package:sanademy/utils/app_image_assets.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/enum_utils.dart';
 import 'package:sanademy/utils/local_assets.dart';
+import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/view/homeScreen/widget/home_category_widget.dart';
 import 'package:sanademy/view/homeScreen/widget/home_recommend_widget.dart';
 import 'package:sanademy/view/homeScreen/widget/home_slider_widget.dart';
@@ -45,7 +46,8 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
     // await homeScreenViewModel.homeViewModel(
     //     search: homeScreenViewModel.searchController.value.text);
     // await homeScreenViewModel.getHomeScreenData();
-    await homeScreenViewModel.getHomeScreenData();
+    // await homeScreenViewModel.getHomeScreenData();
+    await homeScreenViewModel.getCoursesData();
   }
 
   @override
@@ -60,146 +62,157 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
               },
               child: const MenuScreen()),
         ),
-        body: /*Obx(
-          () => homeScreenViewModel.homeResponseStatus.value ==
+        body: Obx(
+          () => homeScreenViewModel.coursesResponseStatus.value ==
                   ResponseStatus.Loading
               ? _buildShimmerView(context)
-              : homeScreenViewModel.homeResponseStatus.value ==
+              : homeScreenViewModel.coursesResponseStatus.value ==
                       ResponseStatus.Completed
-                  ?*/
-            SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              commonUpdateAppBar(
-                paddingLeft: 15.w,
-                context: context,
-                isHomeScreen: true,
-                isLogoRequired: true,
-                actionWidget: Padding(
-                  padding: EdgeInsets.only(left: 15.w),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      homeScreenViewModel.coursesResponseStatus.value ==
-                              ResponseStatus.Loading
-                          ? Shimmer.fromColors(
-                              baseColor: Colors.grey[300]!,
-                              highlightColor: Colors.grey[100]!,
-                              child: LocalAssets(
-                                imagePath: AppImageAssets.infoIcon,
-                                height: 24.sp,
-                                width: 24.sp,
+                  ? SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          commonUpdateAppBar(
+                            paddingLeft: 15.w,
+                            context: context,
+                            isHomeScreen: true,
+                            isLogoRequired: true,
+                            actionWidget: Padding(
+                              padding: EdgeInsets.only(left: 15.w),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  homeScreenViewModel
+                                              .coursesResponseStatus.value ==
+                                          ResponseStatus.Loading
+                                      ? Shimmer.fromColors(
+                                          baseColor: Colors.grey[300]!,
+                                          highlightColor: Colors.grey[100]!,
+                                          child: LocalAssets(
+                                            imagePath: AppImageAssets.infoIcon,
+                                            height: 24.sp,
+                                            width: 24.sp,
+                                          ),
+                                        )
+                                      : LocalAssets(
+                                          imagePath: AppImageAssets.infoIcon,
+                                          height: 24.sp,
+                                          width: 24.sp,
+                                        ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.to(
+                                          () => const NotificationScreenNew());
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.only(
+                                          left: 8.w, right: 8.w),
+                                      padding: EdgeInsets.all(12.w),
+                                      decoration: BoxDecoration(
+                                          // color: AppColors.white.withOpacity(0.20),
+                                          borderRadius:
+                                              BorderRadius.circular(30)),
+                                      child: LocalAssets(
+                                        imagePath:
+                                            AppImageAssets.notificationNew,
+                                        height: 40.sp,
+                                        width: 40.sp,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            )
-                          : LocalAssets(
-                              imagePath: AppImageAssets.infoIcon,
-                              height: 24.sp,
-                              width: 24.sp,
                             ),
-                      GestureDetector(
-                        onTap: () {
-                          Get.to(() => const NotificationScreenNew());
-                        },
-                        child: Container(
-                          margin: EdgeInsets.only(left: 8.w, right: 8.w),
-                          padding: EdgeInsets.all(12.w),
-                          decoration: BoxDecoration(
-                              // color: AppColors.white.withOpacity(0.20),
-                              borderRadius: BorderRadius.circular(30)),
-                          child: LocalAssets(
-                            imagePath: AppImageAssets.notificationNew,
-                            height: 40.sp,
-                            width: 40.sp,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                homeScreenLeading: Padding(
-                  padding: EdgeInsets.only(right: 40.w),
-                  child: GestureDetector(
-                    onTap: () {
-                      // homeDrawerKey.currentState?.openDrawer();
-                      scaffoldKey.currentState?.openDrawer();
-                    },
-                    child: Container(
-                      // margin: EdgeInsets.all(8.w),
-                      // padding: EdgeInsets.all(12.w),
-                      decoration: BoxDecoration(
-                        // color: AppColors.white.withOpacity(0.20),
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: LocalAssets(
-                        imagePath: AppImageAssets.categoryIcon,
-                        height: 40.sp,
-                        width: 40.sp,
-                      ),
-                    ),
-                  ),
-                ),
-                otherWidget: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    // SizeConfig.sH15,
-                    CustomText(
-                      AppStrings.welcomeBack,
-                      color: AppColors.white,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12.sp,
-                    ),
-                    CustomText(
-                      // homeScreenViewModel.userData.value?.name ?? "",
-                      '${AppStrings.hey.tr} ${homeScreenViewModel.userData.value?.name ?? ""} 💥',
-                      color: AppColors.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14.sp,
-                    ),
-                    SizeConfig.sH15,
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 40.w),
-                      child: CustomText(
-                        AppStrings.togetherWeLearn,
-                        color: AppColors.white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 32.sp,
-                        letterSpacing: -1.sp,
-                        height: 1,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    SizeConfig.sH35,
-                  ],
-                ),
-              ),
-              SizeConfig.sH15,
-              // Padding(
-              //   padding:  EdgeInsets.symmetric(horizontal: 15.w),
-              //   child: CustomText(AppStrings.myCourses,
-              //     color: AppColors.black,
-              //     fontWeight: FontWeight.w600,
-              //     fontSize: 16.sp,
-              // ),
-              // SizeConfig.sH15,
+                            homeScreenLeading: Padding(
+                              padding: EdgeInsets.only(right: 40.w),
+                              child: GestureDetector(
+                                onTap: () {
+                                  // homeDrawerKey.currentState?.openDrawer();
+                                  scaffoldKey.currentState?.openDrawer();
+                                },
+                                child: Container(
+                                  // margin: EdgeInsets.all(8.w),
+                                  // padding: EdgeInsets.all(12.w),
+                                  decoration: BoxDecoration(
+                                    // color: AppColors.white.withOpacity(0.20),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  child: LocalAssets(
+                                    imagePath: AppImageAssets.categoryIcon,
+                                    height: 40.sp,
+                                    width: 40.sp,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            otherWidget: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                // SizeConfig.sH15,
+                                /// Check User Is Login Or Not
+                                if (SharedPreferenceUtils.getIsLogin() == true)
 
-              /// CAROUSAL SLIDER VIEW....
-              MyCoursesWidget(),
-              SizeConfig.sH20,
-              // HomeSliderWidget(),
-              //
-              /// CATEGORIES VIEW
-              HomeCategoryWidget(),
-              SizeConfig.sH15,
-              //
-              /// RECOMMENDED
-              const HomeRecommendedWidget(),
-            ],
-          ),
-        )
-        /* : homeScreenViewModel.homeResponseStatus.value ==
+                                  /// If User Is Login Then Show This Text Other Wise Not Show
+                                  CustomText(
+                                    AppStrings.welcomeBack,
+                                    color: AppColors.white,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12.sp,
+                                  ),
+
+                                CustomText(
+                                  // homeScreenViewModel.userData.value?.name ?? "",
+                                  '${AppStrings.hey.tr} ${homeScreenViewModel.userData.value?.name ?? ""} 💥',
+                                  color: AppColors.white,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14.sp,
+                                ),
+                                SizeConfig.sH15,
+                                Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 40.w),
+                                  child: CustomText(
+                                    AppStrings.togetherWeLearn,
+                                    color: AppColors.white,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 32.sp,
+                                    letterSpacing: -1.sp,
+                                    height: 1,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                SizeConfig.sH35,
+                              ],
+                            ),
+                          ),
+                          SizeConfig.sH15,
+                          // Padding(
+                          //   padding:  EdgeInsets.symmetric(horizontal: 15.w),
+                          //   child: CustomText(AppStrings.myCourses,
+                          //     color: AppColors.black,
+                          //     fontWeight: FontWeight.w600,
+                          //     fontSize: 16.sp,
+                          // ),
+                          // SizeConfig.sH15,
+
+                          /// CAROUSAL SLIDER VIEW....
+                          MyCoursesWidget(),
+                          SizeConfig.sH20,
+                          // HomeSliderWidget(),
+                          //
+                          /// CATEGORIES VIEW
+                          // HomeCategoryWidget(),
+                          // SizeConfig.sH15,
+                          //
+                          /// RECOMMENDED
+                          const HomeRecommendedWidget(),
+                        ],
+                      ),
+                    )
+                  : homeScreenViewModel.coursesResponseStatus.value ==
                           ResponseStatus.Error
                       ? Center(
                           child: CustomText(
@@ -207,8 +220,8 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                             fontSize: 20.sp,
                           ),
                         )
-                      : const SizedBox(),*/
-        /*homeScreenViewModel.homeResponseStatus.value ==
+                      : const SizedBox(),
+          /*homeScreenViewModel.homeResponseStatus.value ==
                   ResponseStatus.Error
               ? CustomText(
                   AppStrings.error,
@@ -357,10 +370,10 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                     )
               :*/
 
-        ///
-        // homeScreenViewModel.homeResponseStatus.value ==
-        //     ResponseStatus.Completed ?_buildShimmerView(context): const SizedBox(),
-        );
+          ///
+          // homeScreenViewModel.homeResponseStatus.value ==
+          //     ResponseStatus.Completed ?_buildShimmerView(context): const SizedBox(),
+        ));
   }
 }
 

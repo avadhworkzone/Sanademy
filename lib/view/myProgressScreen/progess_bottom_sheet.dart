@@ -11,43 +11,41 @@ import 'package:sanademy/utils/app_colors.dart';
 import 'package:sanademy/utils/app_constant.dart';
 import 'package:sanademy/utils/app_string.dart';
 import 'package:sanademy/utils/regex.dart';
+import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
 import 'package:sanademy/view_model/otp_view_model.dart';
 import 'package:sanademy/view_model/sign_up_view_model.dart';
 
 void showLoginBottomSheet(BuildContext context) {
-  SignUpViewModel signUpViewModel = Get.put(SignUpViewModel());
+  SignUpViewModel signUpViewModel = Get.find();
 
   showModalBottomSheet(
     backgroundColor: AppColors.white,
     context: context,
     isScrollControlled: true,
-    // isDismissible: SharedPreferenceUtils.getIsLogin() == true ? true : false,
     shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
     ),
     builder: (context) {
       return Obx(() {
         return WillPopScope(
           onWillPop: () async {
-            // Navigate to OTP screen when back button is pressed
-            // Get.offAll(() => const BottomBar());
-            return true; // Prevent the bottom sheet from being closed
-            // return false; // Prevent the bottom sheet from being closed
+            return true; // Allow back button to close
           },
           child: SizedBox(
             height: MediaQuery.of(context).size.height * 0.75,
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: 20.w,
-                  right: 20.w,
-                  top: 20.h,
-                  bottom: MediaQuery.of(context).viewInsets.bottom + 20.h,
-                ),
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: 20.w,
+                right: 20.w,
+                top: 20.h,
+                bottom: MediaQuery.of(context).viewInsets.bottom + 20.h,
+              ),
+              child: SingleChildScrollView(
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize:
+                      MainAxisSize.min, // Prevent column from expanding
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(
@@ -62,11 +60,16 @@ void showLoginBottomSheet(BuildContext context) {
                     ),
                     SizedBox(height: 10.h),
                     Center(
-                      child: CustomNewText(
-                        AppStrings.loginOrRegisterToEnrollThisCourse,
-                        fontSize: 26.sp,
-                        fontWeight: FontWeight.w600,
-                        textAlign: TextAlign.center,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 50.0, right: 50.0),
+                        child: CustomNewText(
+                          AppStrings.loginOrRegisterToEnrollThisCourse,
+                          fontSize: 26.sp,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.blue34,
+                          letterSpacing: -1,
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ),
                     SizedBox(height: 30.h),
@@ -80,7 +83,7 @@ void showLoginBottomSheet(BuildContext context) {
                         ),
                         CustomNewText(
                           "*",
-                          color: AppColors.red,
+                          color: AppColors.red2A,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
                         ),
@@ -110,7 +113,7 @@ void showLoginBottomSheet(BuildContext context) {
                           fontWeight: FontWeight.w400,
                         ),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(
                               color: AppColors.black.withOpacity(0.10),
                             )),
@@ -136,7 +139,6 @@ void showLoginBottomSheet(BuildContext context) {
                             value.isValidNumber();
                       },
                     ),
-                    SizeConfig.sH10,
                     if (signUpViewModel.isPasswordFieldShow.value) ...[
                       Row(
                         children: [
@@ -154,46 +156,59 @@ void showLoginBottomSheet(BuildContext context) {
                           ),
                         ],
                       ),
-                      SizedBox(height: 4.h),
-                      CommonTextField(
-                        textInputAction: TextInputAction.done,
-                        textEditController:
-                            signUpViewModel.signUpPasswordController.value,
-                        validator: ValidationMethod.validatePassword,
-                        obscureValue: !signUpViewModel.isPasswordVisible.value,
-                        regularExpression:
-                            RegularExpressionUtils.onlyNumbersPattern,
-                        hintText: AppStrings.enterYourPassword,
-                        maxLength: 6,
-                        obscuringCharacter: '*',
-                        hintFontWeight: FontWeight.w400,
-                        sIcon: GestureDetector(
-                          onTap: () {
-                            signUpViewModel.isPasswordVisible.value =
-                                !signUpViewModel.isPasswordVisible.value;
-                          },
-                          child: Icon(
-                            signUpViewModel.isPasswordVisible.value
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            color: AppColors.black.withOpacity(0.5),
-                          ),
-                        ),
-                        keyBoardType: TextInputType.number,
-                        borderColor: AppColors.black.withOpacity(0.10),
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          color: AppColors.black,
-                          fontFamily: AppConstants.quicksand,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        onChange: (value) {
-                          signUpViewModel.isPasswordValid.value =
-                              value.isNotEmpty; // Update password validity
+                      SizedBox(height: 6.h),
+                      Obx(
+                        () {
+                          return CommonTextField(
+                            textInputAction: TextInputAction.done,
+                            textEditController:
+                                signUpViewModel.signUpPasswordController.value,
+                            validator: ValidationMethod.validatePassword,
+                            obscureValue: signUpViewModel.isPasswordVisible
+                                .value, // Toggle visibility based on the value of isPasswordVisible
+                            regularExpression:
+                                RegularExpressionUtils.onlyNumbersPattern,
+                            hintText: AppStrings.enterYourPassword,
+                            maxLength: 6,
+                            obscuringCharacter: '*',
+                            hintFontWeight: FontWeight.w400,
+                            sIcon: GestureDetector(
+                              onTap: () {
+                                print(
+                                    "Toggling password visibility"); // Check if this is called
+
+                                // Toggle password visibility
+                                signUpViewModel.isPasswordVisible.value =
+                                    !signUpViewModel.isPasswordVisible
+                                        .value; // Toggle the value
+                              },
+                              child: Icon(
+                                signUpViewModel.isPasswordVisible.value
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: AppColors.black.withOpacity(0.5),
+                              ),
+                            ),
+                            keyBoardType: TextInputType.number,
+                            borderColor: AppColors.black.withOpacity(0.10),
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: AppColors.black,
+                              fontFamily: AppConstants.quicksand,
+                              fontWeight: FontWeight.w400,
+                            ),
+                            onChange: (value) {
+                              signUpViewModel.isPasswordValid.value =
+                                  value.isNotEmpty; // Update password validity
+                            },
+                          );
                         },
                       ),
                       SizeConfig.sH20,
                     ],
+                    SizedBox(
+                      height: 260.h,
+                    ),
                     CustomBtn(
                       onTap: (signUpViewModel.isPasswordFieldShow.value &&
                               signUpViewModel.isPasswordValid.value)
@@ -210,9 +225,8 @@ void showLoginBottomSheet(BuildContext context) {
                                   return Obx(() {
                                     return WillPopScope(
                                       onWillPop: () async {
-                                        // Navigate to OTP screen when back button is pressed
                                         Get.offAll(() => const BottomBar());
-                                        return false; // Prevent the bottom sheet from being closed
+                                        return false;
                                       },
                                       child: SizedBox(
                                         height:
@@ -220,7 +234,6 @@ void showLoginBottomSheet(BuildContext context) {
                                                 0.75,
                                         child:
                                             otpVerifyWidget(context: context),
-                                        // child: otpVerifyWidget(),
                                       ),
                                     );
                                   });
@@ -244,7 +257,7 @@ void showLoginBottomSheet(BuildContext context) {
                                 }
                               : null,
                       fontSize: 16.sp,
-                      radius: 10.r,
+                      radius: 12.r,
                       bgColor: signUpViewModel.isPhoneNumberValid.value ||
                               (signUpViewModel.isPasswordFieldShow.value &&
                                   signUpViewModel.isPasswordValid.value)
@@ -275,6 +288,11 @@ Widget otpVerifyWidget({required BuildContext context}) {
   OtpViewModel otpViewModel = Get.put(OtpViewModel());
   SignUpViewModel signUpController = Get.find<SignUpViewModel>();
 
+  /// Timer Will Start When You Come On This Screen
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    otpViewModel.startTimer();
+  });
+
   return SingleChildScrollView(
     child: Form(
       key: otpViewModel.formKey.value,
@@ -303,22 +321,25 @@ Widget otpVerifyWidget({required BuildContext context}) {
               fontSize: 26.sp,
               fontWeight: FontWeight.w600,
               textAlign: TextAlign.center,
+              color: AppColors.blue34,
             ),
-            SizedBox(height: 10.h),
+            SizedBox(height: 12.h),
             CustomNewText(
               AppStrings.otpHasBeenSetToYourPhone,
               fontSize: 14.sp,
               fontWeight: FontWeight.w400,
               textAlign: TextAlign.center,
+              color: AppColors.blue34,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomNewText(
-                  "(0000)",
+                  "(0000) ",
                   fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w600,
                   textAlign: TextAlign.center,
+                  color: AppColors.blue34,
                 ),
                 CustomNewText(
                   AppStrings.onWhatsApp,
@@ -328,7 +349,7 @@ Widget otpVerifyWidget({required BuildContext context}) {
                 ),
               ],
             ),
-            SizedBox(height: 20.h),
+            SizedBox(height: 15.h),
             Obx(() {
               return Column(
                 children: [
@@ -342,13 +363,16 @@ Widget otpVerifyWidget({required BuildContext context}) {
                     showCursor: true,
                     keyboardType: TextInputType.number,
                     defaultPinTheme: PinTheme(
-                      height: 50.h,
-                      width: 50.w,
-                      textStyle: TextStyle(fontSize: 15.sp),
+                      height: 48.h,
+                      width: 48.w,
+                      textStyle: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.blue34),
                       decoration: BoxDecoration(
                         color: AppColors.white,
                         border: Border.all(color: AppColors.borderColor),
-                        borderRadius: BorderRadius.circular(10.r),
+                        borderRadius: BorderRadius.circular(12.r),
                       ),
                     ),
                     onChanged: (val) {
@@ -364,9 +388,10 @@ Widget otpVerifyWidget({required BuildContext context}) {
                     CustomText(
                       '${otpViewModel.strDigits(otpViewModel.myDuration.value.inMinutes.remainder(60))}:${otpViewModel.strDigits(otpViewModel.myDuration.value.inSeconds.remainder(60))}',
                       fontWeight: FontWeight.w600,
+                      fontSize: 16.sp,
                       // decorationColor: AppColors.primaryColor,
                       decoration: TextDecoration.underline,
-                      color: AppColors.black0E,
+                      color: AppColors.blue34,
                     ),
                   SizeConfig.sH25,
                   int.parse(otpViewModel
@@ -377,19 +402,14 @@ Widget otpVerifyWidget({required BuildContext context}) {
                       ? CustomText(
                           AppStrings.resendOtp.tr,
                           fontWeight: FontWeight.w600,
+                          fontSize: 16.sp,
                           decoration: TextDecoration.underline,
                           decorationColor: AppColors.primaryColor,
-                          color: AppColors.primaryColor.withOpacity(0.4),
+                          color: AppColors.primaryColor,
                         )
                       : InkWell(
                           onTap: () {
                             otpViewModel.resetTimer();
-                            // sendOtp(
-                            //   phoneNumber: "9999999999",
-                            //   context: context,
-                            //   countryCode: "+ 91",
-                            //   countryTxtCode: "IN",
-                            // );
                           },
                           child: CustomText(
                             AppStrings.resendOtp.tr,
@@ -419,9 +439,9 @@ Widget otpVerifyWidget({required BuildContext context}) {
                         //       verificationIDFinal: "0000");
                         // }
                       },
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w700,
-                radius: 10.r,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w600,
+                radius: 12.r,
                 title: AppStrings.verifyYourPhone,
                 bgColor: otpViewModel.pinPutController.value.text.length < 6
                     ? AppColors.primaryColor.withOpacity(0.5)

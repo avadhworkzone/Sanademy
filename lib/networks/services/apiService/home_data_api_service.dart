@@ -34,7 +34,7 @@ class HomeDataService {
 
   ///New APIS
 
-  Future<ResponseModel?> homeScreenRepo() {
+  Future<ResponseModel?> homeScreenCoursesRepo() {
     final response = ApiBaseHelper().getHTTP(
       ApiUrls.courses,
       onError: (error) {

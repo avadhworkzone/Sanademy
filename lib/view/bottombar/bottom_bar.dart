@@ -54,7 +54,7 @@ class _BottomBarState extends State<BottomBar> {
                   index: 2,
                   icon: AppImageAssets.certificateUnselected,
                   selectedIcon: AppImageAssets.certificateSelected,
-                  title: AppStrings.myCertificate),
+                  title: AppStrings.testCertificate),
               navItem(
                   index: 3,
                   icon: AppImageAssets.profileUnselected,

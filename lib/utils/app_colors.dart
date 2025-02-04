@@ -9,6 +9,7 @@ class AppColors {
   static const Color black12 = Color(0xff131412);
   static const Color black13 = Color(0xff131313);
   static const Color red = Color(0xffD00303);
+  static const Color red2A = Color(0xffFF2A2A);
   static const Color red90 = Color(0xffC90202);
   static const Color redB2 = Color(0xffB22234);
   static const Color pinputColor = Color(0xffF2F2F2);
@@ -48,5 +49,4 @@ class AppColors {
   static const Color coffee100 = Color(0xff793100);
   static const Color lightYellowD3 = Color(0xffFFF2D3);
   static const Color greyF2 = Color(0xFFF2F2F2); // Very light grey
-
 }

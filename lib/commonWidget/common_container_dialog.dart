@@ -9,7 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'common_snackbar.dart';
 
-Container contactUsMethod(
+Widget contactUsMethod(
     {required String preIcon,
     required String title,
     String? postIcon1,
@@ -30,78 +30,77 @@ Container contactUsMethod(
     }
   }
 
-  return Container(
-    decoration: BoxDecoration(
-        border: Border.all(color: AppColors.greyE0),
-        borderRadius: BorderRadius.circular(12.r)),
-    child: Padding(
-      padding: EdgeInsets.all(12.w),
-      child: Row(
-        children: [
-          CircleAvatar(
-            backgroundColor: preIconBgColor ?? AppColors.whitef7,
-            child: LocalAssets(
-              imagePath: preIcon,
-              height: 20.h,
-              width: 20.w,
-              imgColor:preIconColor,
+  return InkWell(
+    onTap: onTap ??
+        () {
+          Clipboard.setData(ClipboardData(text: title));
+          commonSnackBar(
+              title: 'Copied!', subTitle: '$title copied to clipboard');
+        },
+    child: Container(
+      decoration: BoxDecoration(
+          border: Border.all(color: AppColors.greyE0),
+          borderRadius: BorderRadius.circular(12.r)),
+      child: Padding(
+        padding: EdgeInsets.all(12.w),
+        child: Row(
+          children: [
+            CircleAvatar(
+              backgroundColor: preIconBgColor ?? AppColors.whitef7,
+              child: LocalAssets(
+                imagePath: preIcon,
+                height: 20.h,
+                width: 20.w,
+                imgColor: preIconColor,
+              ),
             ),
-          ),
-          SizedBox(width: 5.w),
-          Expanded(
-            child: CustomNewText(title,
-                fontWeight: FontWeight.w500,
-                fontSize: 16.sp,
-                color: AppColors.blue34),
-          ),
-          // const Spacer(),
-          Row(
-            children: [
-              if (postIcon1 != null)
-                GestureDetector(
-                  onTap: () {
-                    launchWhatsApp(
-                        phone: title,
-                        urlString: 'https://wa.me',
-                        subTitleMsg: 'Could not launch WhatsApp');
-                  },
-                  child: CircleAvatar(
-                    backgroundColor: AppColors.whitef7,
-                    child: LocalAssets(
-                      imagePath: postIcon1,
-                      height: 20.h,
-                      width: 20.w,
-                    ),
-                  ),
-                ),
-              SizedBox(width: 5.w),
-              if (postIcon2 != null)
-                GestureDetector(
-                  onTap: () {
-                    launchWhatsApp(
-                        urlString: 'https://t.me',
-                        phone: "+91$title",
-                        subTitleMsg: 'Could not launch Telegram');
-                  },
-                  child: CircleAvatar(
-                    backgroundColor: AppColors.whitef7,
-                    child: LocalAssets(
-                      imagePath: postIcon2,
-                      height: 20.h,
-                      width: 20.w,
-                    ),
-                  ),
-                ),
-              SizedBox(width: 5.w),
-              GestureDetector(
-                onTap: onTap ??
-                    () {
-                      Clipboard.setData(ClipboardData(text: title));
-                      commonSnackBar(
-                          title: 'Copied!',
-                          subTitle: '$title copied to clipboard');
+            SizedBox(width: 5.w),
+            Expanded(
+              child: CustomNewText(title,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16.sp,
+                  color: AppColors.blue34),
+            ),
+            // const Spacer(),
+            Row(
+              children: [
+                if (postIcon1 != null)
+                  GestureDetector(
+                    onTap: () {
+                      launchWhatsApp(
+                          phone: title,
+                          urlString: 'https://wa.me',
+                          subTitleMsg: 'Could not launch WhatsApp');
                     },
-                child: CircleAvatar(
+                    child: CircleAvatar(
+                      backgroundColor: AppColors.whitef7,
+                      child: LocalAssets(
+                        imagePath: postIcon1,
+                        height: 20.h,
+                        width: 20.w,
+                      ),
+                    ),
+                  ),
+                SizedBox(width: 5.w),
+                if (postIcon2 != null)
+                  GestureDetector(
+                    onTap: () {
+                      launchWhatsApp(
+                          urlString: 'https://t.me',
+                          phone: "+91$title",
+                          subTitleMsg: 'Could not launch Telegram');
+                    },
+                    child: CircleAvatar(
+                      backgroundColor: AppColors.whitef7,
+                      child: LocalAssets(
+                        imagePath: postIcon2,
+                        height: 20.h,
+                        width: 20.w,
+                      ),
+                    ),
+                  ),
+                SizedBox(width: 5.w),
+                CircleAvatar(
                   backgroundColor: AppColors.whitef7,
                   child: LocalAssets(
                     imagePath: postIcon ?? AppImageAssets.copyIcon,
@@ -110,10 +109,10 @@ Container contactUsMethod(
                     width: 16.w,
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     ),
   );

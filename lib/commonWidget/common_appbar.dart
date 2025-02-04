@@ -185,10 +185,12 @@ commonUpdateAppBar(
     width: Get.width,
     alignment: Alignment.topCenter,
     decoration: BoxDecoration(
-      image: (isLoading ?? false) ? null :DecorationImage(
-        image: AssetImage(AppImageAssets.appLogo),
-        fit: BoxFit.cover,
-      ) ,
+      image: (isLoading ?? false)
+          ? null
+          : DecorationImage(
+              image: AssetImage(AppImageAssets.appLogo),
+              fit: BoxFit.cover,
+            ),
     ),
     child: Padding(
       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
@@ -253,11 +255,14 @@ commonUpdateAppBar(
                           ),
                         ),
                       )
-                    : CustomText(
-                        replaceLogoText ?? "",
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.white,
-                        fontSize: 20.sp,
+                    : Padding(
+                        padding: const EdgeInsets.only(left: 12.0),
+                        child: CustomText(
+                          replaceLogoText ?? "",
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.white,
+                          fontSize: 20.sp,
+                        ),
                       ),
                 actionWidget ?? const SizedBox()
               ],
