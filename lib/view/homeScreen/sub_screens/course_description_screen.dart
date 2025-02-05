@@ -61,7 +61,7 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
   @override
   void dispose() {
     descriptionViewModel.videoPlayerController.dispose();
-    descriptionViewModel.chewieControllers.dispose();
+    descriptionViewModel.chewieControllers?.dispose();
     super.dispose();
   }
 
@@ -119,13 +119,13 @@ class _DescriptionScreenState extends State<CourseDescriptionScreen> {
                                 // width: Get.width,
                                 child: AspectRatio(
                                   aspectRatio: descriptionViewModel
-                                      .chewieControllers
+                                      .chewieControllers!
                                       .videoPlayerController
                                       .value
                                       .aspectRatio,
                                   child: Chewie(
                                     controller:
-                                        descriptionViewModel.chewieControllers,
+                                        descriptionViewModel.chewieControllers!,
                                   ),
                                 ),
                               ),

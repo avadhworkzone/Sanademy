@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:glowy_borders/glowy_borders.dart';
+
 import 'package:sanademy/commonWidget/common_appbar.dart';
 import 'package:sanademy/commonWidget/common_scrollable_appbar_widget.dart';
 import 'package:sanademy/commonWidget/custom_btn.dart';
@@ -16,6 +18,8 @@ import 'package:sanademy/utils/local_assets.dart';
 import 'package:sanademy/utils/shared_preference_utils.dart';
 import 'package:sanademy/utils/size_config_utils.dart';
 import 'package:sanademy/view/bottombar/bottom_bar.dart';
+import 'package:sanademy/view/general/internet_connecation_bottomsheet.dart';
+import 'package:sanademy/view/homeScreen/widget/button_animation.dart';
 
 class LanguageScreen extends StatefulWidget {
   const LanguageScreen({super.key});
@@ -93,7 +97,10 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   fontSize: 16.sp,
                 ),
                 SizeConfig.sH35,
-                const CommonScrollableAppbarWidget()
+                const CommonScrollableAppbarWidget(),
+                SizedBox(
+                  height: 5.h,
+                )
               ],
             ),
           ),
@@ -115,10 +122,10 @@ class _LanguageScreenState extends State<LanguageScreen> {
                       setState(() {});
                     },
                     child: Container(
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 19.w, vertical: 10.w),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.w),
+                      margin: EdgeInsets.symmetric(
+                          horizontal: 19.w, vertical: 10.w),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 10.w, vertical: 15.w),
                       decoration: BoxDecoration(
                           border: Border.all(
                               color: selectedLanguage == index
@@ -182,6 +189,12 @@ class _LanguageScreenState extends State<LanguageScreen> {
           ),
         ],
       ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     // Get.to(MyHomePage());
+      //     showConnectivityBottomSheet(context);
+      //   },
+      // ),
     );
   }
 }
@@ -194,7 +207,6 @@ class LanguageSelection {
   LanguageSelection(
       {required this.image, required this.name, required this.subName});
 }
-
 
 class AnimatedLocalAssets extends StatefulWidget {
   final String imagePath;

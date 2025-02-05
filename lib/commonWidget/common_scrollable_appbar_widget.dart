@@ -56,8 +56,40 @@ class _CommonScrollableAppbarWidgetState
 
   @override
   Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      controller: _scrollController,
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          Image.asset(
+            AppImageAssets.animationImage,
+            color: AppColors.white.withOpacity(0.4),
+            fit: BoxFit.fitHeight,
+            // width: Get.width,
+            height: 32.h,
+            // height: 30.6.h,
+          ),
+          // Image.asset(
+          //   AppImageAssets.animationImage,
+          //   color: AppColors.white.withOpacity(0.4),
+          //   fit: BoxFit.fitHeight,
+          //   // width: Get.width,
+          //   height: 32.h,
+          //   // height: 30.6.h,
+          // ),
+          // Image.asset(
+          //   AppImageAssets.animationImage,
+          //   color: AppColors.white.withOpacity(0.4),
+          //   fit: BoxFit.fitHeight,
+          //   // width: Get.width,
+          //   height: 32.h,
+          //   // height: 30.6.h,
+          // ),
+        ],
+      ),
+    );
     return SizedBox(
-      height: 39.w,
+      height: 35.w,
       child: ListView.builder(
         controller: _scrollController,
         scrollDirection: Axis.horizontal,
@@ -70,12 +102,13 @@ class _CommonScrollableAppbarWidgetState
               //   AppImageAssets.animationImage,
               //   color: AppColors.white.withOpacity(0.4),
               // )
-              LocalAssets(
-                imagePath: AppImageAssets.animationImage,
-                imgColor: AppColors.white.withOpacity(0.4),
-                boxFix: BoxFit.cover,
+              Image.asset(
+                AppImageAssets.animationImage,
+                color: AppColors.white.withOpacity(0.4),
+                fit: BoxFit.cover,
                 width: Get.width,
-                height: 28.h,
+                height: 32.h,
+                // height: 30.6.h,
               ),
             ],
           );

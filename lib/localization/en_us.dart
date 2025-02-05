@@ -233,6 +233,8 @@ Map<String, String> en = {
   AppStrings.download: 'Download',
   AppStrings.whatsApp: 'WhatsApp',
   AppStrings.theCourseIncludes: 'The course includes:',
+  AppStrings.internetConnectionNotAvailable:
+      'Internet connection not available',
 
   ///-------------///
   AppStrings.myBalance: 'My Balance',

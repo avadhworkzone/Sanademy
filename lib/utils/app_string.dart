@@ -261,5 +261,8 @@ class AppStrings {
   static String chooseFromGallery = 'Choose from Gallery';
   static String hey = 'Hey,';
   static String download = 'Download';
-
+  static String internetConnectionNotAvailable =
+      'Internet connection not available';
+  static String retryingIn = 'Retrying in';
+  static String retryNow = 'Retry now';
 }

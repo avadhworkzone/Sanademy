@@ -29,14 +29,16 @@ class DescriptionViewModel extends GetxController {
   int remainingMinutes = 0;
   Rx<ResponseStatus> responseStatus = ResponseStatus.INITIAL.obs;
   Rx<YoutubePlayerController>? youtubePlayerController;
-  late ChewieController chewieControllers;
+  ChewieController? chewieControllers;
   bool videoStartedPlaying = false;
 
   /// CHEWIE VIDEO PLAYER
   Future<void> chewiePlayer(String videoUrl) async {
-     videoPlayerController =VideoPlayerController.networkUrl(Uri.parse(
-      videoUrl,
-    ), );
+    videoPlayerController = VideoPlayerController.networkUrl(
+      Uri.parse(
+        videoUrl,
+      ),
+    );
     await videoPlayerController.initialize();
     // chewieControllers = ChewieController(
     //     videoPlayerController: videoPlayerController,
@@ -55,15 +57,12 @@ class DescriptionViewModel extends GetxController {
         bufferedColor: Colors.white, // Buffered part color
         backgroundColor: Colors.white, // Remaining part color
       ),
-
       cupertinoProgressColors: ChewieProgressColors(
         playedColor: AppColors.borderColor,
         handleColor: AppColors.borderColor,
         bufferedColor: Colors.white,
         backgroundColor: Colors.white,
-
       ),
-
     );
 
     Future.delayed(const Duration(seconds: 1), () {
@@ -82,19 +81,21 @@ class DescriptionViewModel extends GetxController {
     Map<String, String> queryParams = {
       ApiKeys.courseId: courseId.toString(),
     };
-    final response = await CourseDetailApiService().courseDetailRepo(mapData: queryParams);
+    final response =
+        await CourseDetailApiService().courseDetailRepo(mapData: queryParams);
     if (checkStatusCode(response!.statusCode ?? 0)) {
-      courseDetailResModel = courseDetailResModelFromJson(response.response.toString());
+      courseDetailResModel =
+          courseDetailResModelFromJson(response.response.toString());
       if (courseDetailResModel.success!) {
         if (courseDetailResModel.data != null) {
           courseDetailResponseStatus.value = ResponseStatus.Completed;
         } else {
           showErrorSnackBar('', courseDetailResModel.message ?? 'Error');
-          }
-      }  else {
-         showErrorSnackBar('', courseDetailResModel.message ?? 'Error');
-         courseDetailResponseStatus.value = ResponseStatus.Error;
-         }
+        }
+      } else {
+        showErrorSnackBar('', courseDetailResModel.message ?? 'Error');
+        courseDetailResponseStatus.value = ResponseStatus.Error;
+      }
     }
   }
 
@@ -112,16 +113,18 @@ class DescriptionViewModel extends GetxController {
       ApiKeys.paymentId: paymentId.toString(),
       ApiKeys.paymentStatus: paymentStatus.toString(),
     };
-    final response = await CourseEnrollApiService().courseEnrollRepo(mapData: queryParams);
+    final response =
+        await CourseEnrollApiService().courseEnrollRepo(mapData: queryParams);
     if (checkStatusCode(response!.statusCode ?? 0)) {
-      CourseEnrollResModel courseEnrollResModel = courseEnrollResModelFromJson(response.response.toString());
+      CourseEnrollResModel courseEnrollResModel =
+          courseEnrollResModelFromJson(response.response.toString());
       if (courseEnrollResModel.success!) {
         if (courseEnrollResModel.data != null) {
           courseEnrollResponseStatus.value = ResponseStatus.Completed;
         } else {
           showErrorSnackBar('', courseEnrollResModel.message ?? 'Error');
         }
-      }else {
+      } else {
         showErrorSnackBar('', courseEnrollResModel.message ?? 'Error');
         courseEnrollResponseStatus.value = ResponseStatus.Error;
       }

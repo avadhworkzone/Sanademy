@@ -35,6 +35,7 @@ void showLoginBottomSheet(BuildContext context) {
           },
           child: SizedBox(
             height: MediaQuery.of(context).size.height * 0.75,
+            width: Get.width,
             child: Padding(
               padding: EdgeInsets.only(
                 left: 20.w,

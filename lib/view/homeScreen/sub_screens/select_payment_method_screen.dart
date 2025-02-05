@@ -19,6 +19,7 @@ import 'package:sanademy/utils/regex.dart';
 import 'package:sanademy/view/homeScreen/sub_screens/course_description_screen.dart';
 import 'package:sanademy/view_model/description_view_model.dart';
 import 'package:sanademy/view_model/profile_screen_view_model.dart';
+
 TextEditingController amountController = TextEditingController();
 
 class SelectPaymentMethodScreen extends StatefulWidget {
@@ -670,7 +671,7 @@ void showPaymentProcessBottomSheet(BuildContext context) {
                               //   ),
                               // ),
                               CommonTextField(
-                                textEditController:amountController,
+                                textEditController: amountController,
                                 // validator: ValidationMethod.validateName,
                                 fillColor: Colors.transparent,
                                 style: TextStyle(
@@ -680,15 +681,16 @@ void showPaymentProcessBottomSheet(BuildContext context) {
                                 keyBoardType: TextInputType.number,
                                 cursorColor: AppColors.borderColor,
                                 sIcon: CustomText(
-                                        "IQD",
-                                        height: 3.3.h,
-                                        fontSize: 14.sp,
-                                        textAlign: TextAlign.center,
-                                        fontWeight: FontWeight.w600,
-                                        color: AppColors.grey73,
-                                      ),
+                                  "IQD",
+                                  height: 3.3.h,
+                                  fontSize: 14.sp,
+                                  textAlign: TextAlign.center,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.grey73,
+                                ),
 
-                                regularExpression: RegularExpressionUtils.onlyNumbersPattern,
+                                regularExpression:
+                                    RegularExpressionUtils.onlyNumbersPattern,
                                 // hintText: AppStrings.enterYourName,
                                 hintFontWeight: FontWeight.w400,
                                 // validationType: ValidationTypeEnum.name,
@@ -744,7 +746,6 @@ void showPaymentProcessBottomSheet(BuildContext context) {
                                 title: "750 991 0444",
                                 postIcon: AppImageAssets.copyIcon,
                               ),
-
                             ],
                           ),
                         ),
@@ -835,24 +836,41 @@ void showPaymentProcessBottomSheet(BuildContext context) {
                                 inputFormatters: [
                                   FilteringTextInputFormatter.digitsOnly
                                 ],
-                                controller:
-                                Get.put(ProfileScreenViewModel()).phoneController.value,
+                                controller: Get.put(ProfileScreenViewModel())
+                                    .phoneController
+                                    .value,
                                 initialCountryCode:
-                                Get.put(ProfileScreenViewModel()).countryCode.value == ''
-                                    ? 'IQ'
-                                    : Get.put(ProfileScreenViewModel()).countryCode.value,
-                                autovalidateMode: AutovalidateMode.onUserInteraction,
+                                    Get.put(ProfileScreenViewModel())
+                                                .countryCode
+                                                .value ==
+                                            ''
+                                        ? 'IQ'
+                                        : Get.put(ProfileScreenViewModel())
+                                            .countryCode
+                                            .value,
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
                                 onChanged: (val) {
                                   if (val.toString().isNotEmpty) {
-                                    Get.put(ProfileScreenViewModel()).isValidate.value = false;
+                                    Get.put(ProfileScreenViewModel())
+                                        .isValidate
+                                        .value = false;
                                     var countryCode =
-                                    Get.put(ProfileScreenViewModel()).countryCode.value == ''
-                                        ? 'IQ'
-                                        : Get.put(ProfileScreenViewModel()).countryCode.value;
+                                        Get.put(ProfileScreenViewModel())
+                                                    .countryCode
+                                                    .value ==
+                                                ''
+                                            ? 'IQ'
+                                            : Get.put(ProfileScreenViewModel())
+                                                .countryCode
+                                                .value;
                                     if (countryCode == 'IQ') {
                                       if (val.number.startsWith('0')) {
-                                        Get.put(ProfileScreenViewModel()).phoneController.value
-                                            .text = val.number.replaceFirst('0', '');
+                                        Get.put(ProfileScreenViewModel())
+                                                .phoneController
+                                                .value
+                                                .text =
+                                            val.number.replaceFirst('0', '');
                                         // profileScreenViewModel.phoneController.value.selection =
                                         // TextSelection.fromPosition(TextPosition(
                                         // offset: profileScreenViewModel.phoneController.value.text.length));
@@ -865,11 +883,11 @@ void showPaymentProcessBottomSheet(BuildContext context) {
                                     color: AppColors.black,
                                     fontWeight: FontWeight.w400),
                                 flagsButtonPadding:
-                                const EdgeInsets.symmetric(horizontal: 15),
+                                    const EdgeInsets.symmetric(horizontal: 15),
                                 dropdownIconPosition: IconPosition.trailing,
                                 disableLengthCheck: true,
-                                dropdownIcon:
-                                const Icon(Icons.keyboard_arrow_down_rounded),
+                                dropdownIcon: const Icon(
+                                    Icons.keyboard_arrow_down_rounded),
                                 decoration: InputDecoration(
                                   fillColor: Colors.transparent,
                                   filled: true,
@@ -881,47 +899,62 @@ void showPaymentProcessBottomSheet(BuildContext context) {
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w400,
                                   ),
-                                  errorText: (Get.put(ProfileScreenViewModel()).isValidate.value ==
-                                      true &&
-                                      Get.put(ProfileScreenViewModel())
-                                          .phoneController.value.text.isEmpty)
+                                  errorText: (Get.put(ProfileScreenViewModel())
+                                                  .isValidate
+                                                  .value ==
+                                              true &&
+                                          Get.put(ProfileScreenViewModel())
+                                              .phoneController
+                                              .value
+                                              .text
+                                              .isEmpty)
                                       ? AppStrings.isRequired.tr
                                       : null,
-                                  errorBorder: (Get.put(ProfileScreenViewModel())
-                                      .isValidate.value ==
-                                      true &&
-                                      Get.put(ProfileScreenViewModel())
-                                          .phoneController.value.text.isEmpty)
-                                      ? OutlineInputBorder(
-                                      borderSide:
-                                      const BorderSide(color: AppColors.red),
-                                      borderRadius: BorderRadius.circular(10.r))
-                                      : OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: BorderSide(
-                                        color: AppColors.black.withOpacity(0.10),
-                                      )),
+                                  errorBorder:
+                                      (Get.put(ProfileScreenViewModel())
+                                                      .isValidate
+                                                      .value ==
+                                                  true &&
+                                              Get.put(ProfileScreenViewModel())
+                                                  .phoneController
+                                                  .value
+                                                  .text
+                                                  .isEmpty)
+                                          ? OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: AppColors.red),
+                                              borderRadius:
+                                                  BorderRadius.circular(10.r))
+                                          : OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              borderSide: BorderSide(
+                                                color: AppColors.black
+                                                    .withOpacity(0.10),
+                                              )),
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10),
                                       borderSide: BorderSide(
-                                        color: AppColors.black.withOpacity(0.10),
+                                        color:
+                                            AppColors.black.withOpacity(0.10),
                                       )),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       width: 1.0,
                                       color: AppColors.black.withOpacity(0.10),
                                     ),
-                                    borderRadius:
-                                    const BorderRadius.all(Radius.circular(10)),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(10)),
                                   ),
                                   disabledBorder: const OutlineInputBorder(
-                                    borderSide:
-                                    BorderSide(width: 1.0, color: AppColors.black),
-                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                    borderSide: BorderSide(
+                                        width: 1.0, color: AppColors.black),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
                                   ),
                                   enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    const BorderRadius.all(Radius.circular(10)),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(10)),
                                     borderSide: BorderSide(
                                       color: AppColors.black.withOpacity(0.10),
                                       width: 1.0,
@@ -944,33 +977,33 @@ void showPaymentProcessBottomSheet(BuildContext context) {
                   width: Get.width,
                   child: Get.find<DescriptionViewModel>().isLoader.value
                       ? Center(
-                    child: SizedBox(
-                      height: 50.h,
-                      width: 50.h,
-                      child: const LocalAssets(
-                        imagePath: AppImageAssets.sanademaylogo,
-                        imgColor: AppColors.primaryColor,
-                      ),
-                    ),
-                  )
+                          child: SizedBox(
+                            height: 50.h,
+                            width: 50.h,
+                            child: const LocalAssets(
+                              imagePath: AppImageAssets.sanademaylogo,
+                              imgColor: AppColors.primaryColor,
+                            ),
+                          ),
+                        )
                       : SizedBox(
-                    height: 300.h,
-                    width: 430.w,
-                    child: AspectRatio(
-                      aspectRatio: Get.find<DescriptionViewModel>()
-                          .chewieControllers
-                          .videoPlayerController
-                          .value
-                          .aspectRatio,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Chewie(
-                          controller: Get.find<DescriptionViewModel>()
-                              .chewieControllers,
+                          height: 300.h,
+                          width: 430.w,
+                          child: AspectRatio(
+                            aspectRatio: Get.find<DescriptionViewModel>()
+                                .chewieControllers!
+                                .videoPlayerController
+                                .value
+                                .aspectRatio,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Chewie(
+                                controller: Get.find<DescriptionViewModel>()
+                                    .chewieControllers!,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
                 ),
                 // SizedBox(height: 20.h),
                 SizedBox(height: 20.h),
@@ -1196,7 +1229,7 @@ void showSendMessageDialog(BuildContext context) {
                             width: 430.w,
                             child: AspectRatio(
                               aspectRatio: Get.find<DescriptionViewModel>()
-                                  .chewieControllers
+                                  .chewieControllers!
                                   .videoPlayerController
                                   .value
                                   .aspectRatio,
@@ -1204,7 +1237,7 @@ void showSendMessageDialog(BuildContext context) {
                                 borderRadius: BorderRadius.circular(12),
                                 child: Chewie(
                                   controller: Get.find<DescriptionViewModel>()
-                                      .chewieControllers,
+                                      .chewieControllers!,
                                 ),
                               ),
                             ),

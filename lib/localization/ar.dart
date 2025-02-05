@@ -431,4 +431,7 @@ Map<String, String> ar = {
   AppStrings.select: 'دەسنیاشنکردن',
   AppStrings.saveDetails: 'وردەکارییەکان پاشەکەوت بکە',
   AppStrings.enrollTheCourse: 'ناوت تۆمار بکە لە کۆرسەکە',
+  AppStrings.internetConnectionNotAvailable: 'الاتصال بالإنترنت غير متوفر',
+  AppStrings.retryingIn: 'إعادة المحاولة في',
+  AppStrings.retryNow: 'أعد المحاولة الآن',
 };

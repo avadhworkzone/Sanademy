@@ -386,6 +386,12 @@
       "languageVersion": "2.16"
     },
     {
+      "name": "glowy_borders",
+      "rootUri": "file:///C:/Users/PRENEEL/AppData/Local/Pub/Cache/hosted/pub.dev/glowy_borders-1.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "html",
       "rootUri": "file:///C:/Users/PRENEEL/AppData/Local/Pub/Cache/hosted/pub.dev/html-0.15.4",
       "packageUri": "lib/",
@@ -944,7 +950,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2025-02-04T12:51:29.000647Z",
+  "generated": "2025-02-05T13:14:55.024223Z",
   "generator": "pub",
   "generatorVersion": "3.5.0",
   "flutterRoot": "file:///D:/FlutterSDK/flutter%203.24.0",

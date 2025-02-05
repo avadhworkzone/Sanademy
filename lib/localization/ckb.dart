@@ -186,6 +186,9 @@ Map<String, String> ckb = {
   AppStrings.error: "هەڵە",
   AppStrings.userCreatedSuccessfully: "بەکارهێنەر بە سەرکەوتوویی دروستکراوە",
   AppStrings.otpMismatch: "تکایە Otp ی ڕەوا دابنێ",
+  AppStrings.internetConnectionNotAvailable: "هێڵی ئینتەرنێت بەردەست نییە",
+  AppStrings.retryingIn: "دووبارە هەوڵدان بۆ ناو",
+  AppStrings.retryNow: "ئێستا هەوڵبدەرەوە",
 
   ///---------------///
   AppStrings.myBalance: 'باڵانسی من',

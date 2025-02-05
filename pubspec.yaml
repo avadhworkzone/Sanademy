@@ -47,6 +47,7 @@ dependencies:
   percent_indicator: ^4.2.4
   shimmer: ^3.0.0
   shared_preferences: ^2.3.5
+  glowy_borders: ^1.0.2
 
 
 dev_dependencies:

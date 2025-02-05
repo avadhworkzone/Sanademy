@@ -25,12 +25,10 @@ class DescriptionScreen extends StatefulWidget {
     super.key,
     required this.courseId,
     required this.videoUrl,
-
   });
 
   final String courseId;
   final String videoUrl;
-
 
   @override
   State<DescriptionScreen> createState() => _DescriptionScreenState();
@@ -39,7 +37,8 @@ class DescriptionScreen extends StatefulWidget {
 class _DescriptionScreenState extends State<DescriptionScreen> {
   DescriptionViewModel descriptionViewModel = Get.put(DescriptionViewModel());
   BottomBarViewModel bottomBarViewModel = Get.find<BottomBarViewModel>();
-  LecturesVideosViewModel lecturesVideosViewModel = Get.put(LecturesVideosViewModel());
+  LecturesVideosViewModel lecturesVideosViewModel =
+      Get.put(LecturesVideosViewModel());
   HomeScreenViewModel homeScreenViewModel = Get.find<HomeScreenViewModel>();
 
   @override
@@ -56,7 +55,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   @override
   void dispose() {
     descriptionViewModel.videoPlayerController.dispose();
-    descriptionViewModel.chewieControllers.dispose();
+    descriptionViewModel.chewieControllers!.dispose();
     super.dispose();
   }
 
@@ -64,7 +63,9 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Material(
-        child: Obx(() => descriptionViewModel.courseDetailResponseStatus.value == ResponseStatus.Completed
+        child: Obx(() => descriptionViewModel
+                    .courseDetailResponseStatus.value ==
+                ResponseStatus.Completed
             ? SingleChildScrollView(
                 child: Column(
                   children: [
@@ -89,12 +90,16 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                   width: 430.w,
                                   child: AspectRatio(
                                     aspectRatio: descriptionViewModel
-                                        .chewieControllers.videoPlayerController.value.aspectRatio,
+                                        .chewieControllers!
+                                        .videoPlayerController
+                                        .value
+                                        .aspectRatio,
                                     child: Stack(
                                       alignment: Alignment.center,
                                       children: [
                                         Chewie(
-                                          controller: descriptionViewModel.chewieControllers,
+                                          controller: descriptionViewModel
+                                              .chewieControllers!,
                                         ),
                                       ],
                                     ),
@@ -107,8 +112,10 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                 Get.back();
                               },
                               child: Container(
-                                margin: EdgeInsets.only(left: 10.w, top: 10.w, right: 10.w),
-                                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
+                                margin: EdgeInsets.only(
+                                    left: 10.w, top: 10.w, right: 10.w),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10.w, vertical: 10.w),
                                 decoration: BoxDecoration(
                                     color: AppColors.black.withOpacity(0.20),
                                     borderRadius: BorderRadius.circular(17)),
@@ -129,12 +136,19 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                         onTap: () {
                           SharedPreferenceUtils.getIsLogin() == true
                               ?
+
                               /// payment Option dialog
-                              paymentOptionDialog(context: context,
-                                  userMobileNumber: homeScreenViewModel.homeResModel.data!.user!.phoneNumber.toString(),
-                                userPhoneCode: homeScreenViewModel.homeResModel.data!.user!.countryCode.toString(),
-                                userId: homeScreenViewModel.homeResModel.data!.user!.id.toString()
-                              )
+                              paymentOptionDialog(
+                                  context: context,
+                                  userMobileNumber: homeScreenViewModel
+                                      .homeResModel.data!.user!.phoneNumber
+                                      .toString(),
+                                  userPhoneCode: homeScreenViewModel
+                                      .homeResModel.data!.user!.countryCode
+                                      .toString(),
+                                  userId: homeScreenViewModel
+                                      .homeResModel.data!.user!.id
+                                      .toString())
                               : Get.offAll(() => const SignUpScreen());
 
                           /// Enrollment successfully dialog
@@ -165,7 +179,9 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 10.w),
                             child: Html(
-                              data: descriptionViewModel.courseDetailResModel.data!.description ?? '',
+                              data: descriptionViewModel
+                                      .courseDetailResModel.data!.description ??
+                                  '',
                               shrinkWrap: true,
                             ),
                           ),
@@ -198,13 +214,18 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                       Row(
                                         children: [
                                           LocalAssets(
-                                            imagePath: AppImageAssets.languageIcn,
+                                            imagePath:
+                                                AppImageAssets.languageIcn,
                                             height: 24.h,
                                             width: 24.w,
                                           ),
                                           SizeConfig.sW8,
                                           CustomText(
-                                            descriptionViewModel.courseDetailResModel.data!.language ?? '',
+                                            descriptionViewModel
+                                                    .courseDetailResModel
+                                                    .data!
+                                                    .language ??
+                                                '',
                                             fontWeight: FontWeight.w400,
                                             fontSize: 14.sp,
                                             color: AppColors.black0E,
@@ -212,22 +233,27 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                         ],
                                       ),
                                       SizeConfig.sH8,
-                                      if(descriptionViewModel.courseDetailResModel.data!.taskIncluded == 1)Row(
-                                        children: [
-                                          LocalAssets(
-                                            imagePath: AppImageAssets.taskIcn,
-                                            height: 24.h,
-                                            width: 24.w,
-                                          ),
-                                          SizeConfig.sW8,
-                                        CustomText(
-                                           AppStrings.taskIncluded,
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 14.sp,
-                                            color: AppColors.black0E,
-                                          ),
-                                        ],
-                                      )
+                                      if (descriptionViewModel
+                                              .courseDetailResModel
+                                              .data!
+                                              .taskIncluded ==
+                                          1)
+                                        Row(
+                                          children: [
+                                            LocalAssets(
+                                              imagePath: AppImageAssets.taskIcn,
+                                              height: 24.h,
+                                              width: 24.w,
+                                            ),
+                                            SizeConfig.sW8,
+                                            CustomText(
+                                              AppStrings.taskIncluded,
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 14.sp,
+                                              color: AppColors.black0E,
+                                            ),
+                                          ],
+                                        )
                                     ],
                                   ),
                                 ),
@@ -255,7 +281,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                       Row(
                                         children: [
                                           LocalAssets(
-                                            imagePath: AppImageAssets.educationIcn,
+                                            imagePath:
+                                                AppImageAssets.educationIcn,
                                             height: 24.h,
                                             width: 24.w,
                                           ),
@@ -269,22 +296,28 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                         ],
                                       ),
                                       SizeConfig.sH8,
-                                      if(descriptionViewModel.courseDetailResModel.data!.certificate == 1)Row(
-                                        children: [
-                                          LocalAssets(
-                                            imagePath: AppImageAssets.certificates,
-                                            height: 24.h,
-                                            width: 24.w,
-                                          ),
-                                          SizeConfig.sW8,
-                                          CustomText(
-                                            AppStrings.certificates,
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 14.sp,
-                                            color: AppColors.black0E,
-                                          ),
-                                        ],
-                                      )
+                                      if (descriptionViewModel
+                                              .courseDetailResModel
+                                              .data!
+                                              .certificate ==
+                                          1)
+                                        Row(
+                                          children: [
+                                            LocalAssets(
+                                              imagePath:
+                                                  AppImageAssets.certificates,
+                                              height: 24.h,
+                                              width: 24.w,
+                                            ),
+                                            SizeConfig.sW8,
+                                            CustomText(
+                                              AppStrings.certificates,
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 14.sp,
+                                              color: AppColors.black0E,
+                                            ),
+                                          ],
+                                        )
                                     ],
                                   ),
                                 ),
@@ -297,7 +330,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 15.w),
                             child: Theme(
-                              data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                              data: Theme.of(context)
+                                  .copyWith(dividerColor: Colors.transparent),
                               child: ExpansionTile(
                                   tilePadding: EdgeInsets.only(left: 5.w),
                                   title: CustomText(
@@ -308,8 +342,11 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                   ),
                                   children: [
                                     Html(
-                                      data:
-                                          descriptionViewModel.courseDetailResModel.data!.requirements ?? '',
+                                      data: descriptionViewModel
+                                              .courseDetailResModel
+                                              .data!
+                                              .requirements ??
+                                          '',
                                       shrinkWrap: true,
                                     )
                                   ]),
@@ -323,7 +360,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 15.w),
                             child: Theme(
-                              data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                              data: Theme.of(context)
+                                  .copyWith(dividerColor: Colors.transparent),
                               child: ExpansionTile(
                                   tilePadding: EdgeInsets.only(left: 5.w),
                                   //childrenPadding: EdgeInsets.only(left: 20.w),
@@ -335,9 +373,11 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                   ),
                                   children: [
                                     Html(
-                                      data:
-                                          descriptionViewModel.courseDetailResModel.data!.whatWillYouLearn ??
-                                              '',
+                                      data: descriptionViewModel
+                                              .courseDetailResModel
+                                              .data!
+                                              .whatWillYouLearn ??
+                                          '',
                                       shrinkWrap: true,
                                     )
                                   ]),
@@ -351,7 +391,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 15.w),
                             child: Theme(
-                              data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                              data: Theme.of(context)
+                                  .copyWith(dividerColor: Colors.transparent),
                               child: ExpansionTile(
                                   tilePadding: EdgeInsets.only(left: 5.w),
                                   title: CustomText(
@@ -364,7 +405,9 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                     Html(
                                       shrinkWrap: true,
                                       data: descriptionViewModel
-                                              .courseDetailResModel.data!.whoThisCourseIsFor ??
+                                              .courseDetailResModel
+                                              .data!
+                                              .whoThisCourseIsFor ??
                                           '',
                                     )
                                   ]),
@@ -392,30 +435,43 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                               decoration: BoxDecoration(
                                   color: AppColors.white,
                                   boxShadow: const [
-                                    BoxShadow(color: Colors.black26, offset: Offset(0, 1), blurRadius: 4.0)
+                                    BoxShadow(
+                                        color: Colors.black26,
+                                        offset: Offset(0, 1),
+                                        blurRadius: 4.0)
                                   ],
                                   borderRadius: BorderRadius.circular(20.r)),
                               child: Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 10.h),
                                 child: Theme(
-                                  data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                                  data: Theme.of(context).copyWith(
+                                      dividerColor: Colors.transparent),
                                   child: ExpansionTile(
-                                      tilePadding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.h),
+                                      tilePadding: EdgeInsets.symmetric(
+                                          horizontal: 5.w, vertical: 10.h),
                                       title: Row(
                                         children: [
                                           CircleAvatar(
                                             radius: 40.r,
-                                            backgroundImage: NetworkImage(descriptionViewModel
-                                                    .courseDetailResModel.data!.teacher!.image ??
-                                                ''),
+                                            backgroundImage: NetworkImage(
+                                                descriptionViewModel
+                                                        .courseDetailResModel
+                                                        .data!
+                                                        .teacher!
+                                                        .image ??
+                                                    ''),
                                           ),
                                           SizeConfig.sW8,
                                           Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               CustomText(
                                                 descriptionViewModel
-                                                        .courseDetailResModel.data!.teacher!.name ??
+                                                        .courseDetailResModel
+                                                        .data!
+                                                        .teacher!
+                                                        .name ??
                                                     '',
                                                 fontWeight: FontWeight.w700,
                                                 fontSize: 15.sp,
@@ -433,14 +489,19 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                       ),
                                       children: [
                                         Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Divider(
-                                              color: AppColors.black0E.withOpacity(0.2),
+                                              color: AppColors.black0E
+                                                  .withOpacity(0.2),
                                             ),
                                             Html(
                                               data: descriptionViewModel
-                                                      .courseDetailResModel.data!.teacher!.description ??
+                                                      .courseDetailResModel
+                                                      .data!
+                                                      .teacher!
+                                                      .description ??
                                                   '',
                                               shrinkWrap: true,
                                             ),
@@ -480,30 +541,42 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                               ),
                               child: ListView.builder(
                                 shrinkWrap: true,
-                                itemCount:
-                                    descriptionViewModel.courseDetailResModel.data!.courseContents!.length,
+                                itemCount: descriptionViewModel
+                                    .courseDetailResModel
+                                    .data!
+                                    .courseContents!
+                                    .length,
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
-                                  var courseContent =
-                                      descriptionViewModel.courseDetailResModel.data!.courseContents![index];
-                                  var courseId = descriptionViewModel.courseDetailResModel.data!.id;
+                                  var courseContent = descriptionViewModel
+                                      .courseDetailResModel
+                                      .data!
+                                      .courseContents![index];
+                                  var courseId = descriptionViewModel
+                                      .courseDetailResModel.data!.id;
                                   return Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 20.w),
                                     child: Column(
                                       children: [
                                         Theme(
-                                          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                                          data: Theme.of(context).copyWith(
+                                              dividerColor: Colors.transparent),
                                           child: ExpansionTile(
                                             tilePadding:
-                                                const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                                                const EdgeInsets.symmetric(
+                                                    horizontal: 5,
+                                                    vertical: 10),
                                             title: Row(
                                               children: [
                                                 Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     CustomText(
                                                       courseContent.title ?? '',
-                                                      fontWeight: FontWeight.w700,
+                                                      fontWeight:
+                                                          FontWeight.w700,
                                                       fontSize: 15,
                                                       color: AppColors.black,
                                                     ),
@@ -511,26 +584,39 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                                       children: [
                                                         InkWell(
                                                           onTap: () {
-                                                            Get.to(() => LecturesVideoScreen(
-                                                                  lectureVideoUrls: courseContent.lectures!,
-                                                                  contentId: courseContent.id.toString(),
-                                                                  courseId: courseId.toString(),
+                                                            Get.to(() =>
+                                                                LecturesVideoScreen(
+                                                                  lectureVideoUrls:
+                                                                      courseContent
+                                                                          .lectures!,
+                                                                  contentId:
+                                                                      courseContent
+                                                                          .id
+                                                                          .toString(),
+                                                                  courseId: courseId
+                                                                      .toString(),
                                                                 ));
                                                           },
                                                           child: CustomText(
                                                             "${courseContent.numberOfLecture ?? ''} ${AppStrings.courseContentLectures}",
-                                                            fontWeight: FontWeight.w400,
+                                                            fontWeight:
+                                                                FontWeight.w400,
                                                             fontSize: 15,
-                                                            color: AppColors.primaryColor,
-                                                            decoration: TextDecoration.underline,
+                                                            color: AppColors
+                                                                .primaryColor,
+                                                            decoration:
+                                                                TextDecoration
+                                                                    .underline,
                                                           ),
                                                         ),
                                                         SizeConfig.sW10,
                                                         CustomText(
                                                           "• ${courseContent.minutes ?? ''} ${AppStrings.mins}",
-                                                          fontWeight: FontWeight.w400,
+                                                          fontWeight:
+                                                              FontWeight.w400,
                                                           fontSize: 15,
-                                                          color: AppColors.black,
+                                                          color:
+                                                              AppColors.black,
                                                         ),
                                                       ],
                                                     ),
@@ -540,7 +626,9 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                             ),
                                             children: [
                                               Html(
-                                                data: courseContent.description ?? '',
+                                                data:
+                                                    courseContent.description ??
+                                                        '',
                                                 shrinkWrap: true,
                                               )
                                             ],
@@ -548,10 +636,14 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                                         ),
                                         if (index !=
                                             descriptionViewModel
-                                                    .courseDetailResModel.data!.courseContents!.length -
+                                                    .courseDetailResModel
+                                                    .data!
+                                                    .courseContents!
+                                                    .length -
                                                 1)
                                           Divider(
-                                            color: AppColors.black0E.withOpacity(0.2),
+                                            color: AppColors.black0E
+                                                .withOpacity(0.2),
                                           ),
                                       ],
                                     ),
