@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage>
           builder: (context, child) {
             return AnimatedGradientBorder(
               borderSize: 2.0, // Border width
-              glowSize: 8.0, // Glow spread size
+              glowSize: 0.0, // Glow spread size
               gradientColors: [
                 Colors.red.shade400, // First color (Glow effect)
                 Colors.amber.shade300

@@ -189,12 +189,12 @@ class _LanguageScreenState extends State<LanguageScreen> {
           ),
         ],
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     // Get.to(MyHomePage());
-      //     showConnectivityBottomSheet(context);
-      //   },
-      // ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.to(MyHomePage());
+          // showConnectivityBottomSheet(context);
+        },
+      ),
     );
   }
 }
